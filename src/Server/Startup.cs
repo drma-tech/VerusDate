@@ -23,17 +23,21 @@ namespace VerusDate.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //EF CORE
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("SQL")));
+                options.UseSqlServer(Configuration.GetConnectionString("SQL"))
+            );
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            services.AddIdentityServer(opt =>
+            {
+                opt.IssuerUri = "https://verusdate.com/"; //necessário para funcionar no ambiente linux
+            })
+            .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
@@ -41,13 +45,13 @@ namespace VerusDate.Server
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    options.ClientId = Configuration.GetValue<string>("Authentication:Google:ClientId");
-                    options.ClientSecret = Configuration.GetValue<string>("Authentication:Google:ClientSecret");
+                    options.ClientId = Configuration.GetValue<string>("Authentication_Google_ClientId");
+                    options.ClientSecret = Configuration.GetValue<string>("Authentication_Google_ClientSecret");
                 })
                 .AddFacebook(options =>
                 {
-                    options.AppId = Configuration.GetValue<string>("Authentication:Facebook:AppId");
-                    options.AppSecret = Configuration.GetValue<string>("Authentication:Facebook:AppSecret");
+                    options.AppId = Configuration.GetValue<string>("Authentication_Facebook_AppId");
+                    options.AppSecret = Configuration.GetValue<string>("Authentication_Facebook_AppSecret");
                 });
 
             services.AddControllersWithViews();
@@ -84,6 +88,7 @@ namespace VerusDate.Server
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                //endpoints.MapHub<ChatHub>("/chathub");
                 endpoints.MapFallbackToFile("index.html");
             });
         }

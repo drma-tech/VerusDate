@@ -12,8 +12,11 @@ namespace VerusDate.Server.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "varchar(256)", unicode: false, maxLength: 256, nullable: false),
-                    Validated = table.Column<bool>(type: "bit", nullable: false),
-                    Popular = table.Column<bool>(type: "bit", nullable: false)
+                    Rank_Level = table.Column<int>(type: "int", nullable: true),
+                    Seniority_Level = table.Column<int>(type: "int", nullable: true),
+                    CompletedProfile_Level = table.Column<int>(type: "int", nullable: true),
+                    VerifiedProfile_Level = table.Column<int>(type: "int", nullable: true),
+                    Popular_Level = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,10 +45,10 @@ namespace VerusDate.Server.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "varchar(256)", unicode: false, maxLength: 256, nullable: false),
+                    Rank = table.Column<int>(type: "int", nullable: false),
                     XP = table.Column<int>(type: "int", nullable: false),
-                    Level = table.Column<int>(type: "int", nullable: false),
-                    Diamond = table.Column<int>(type: "int", nullable: false),
-                    Food = table.Column<int>(type: "int", nullable: false)
+                    Food = table.Column<int>(type: "int", nullable: false),
+                    Diamond = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

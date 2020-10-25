@@ -381,7 +381,7 @@ namespace VerusDate.Server.Data.Migrations
                     b.Property<int>("Food")
                         .HasColumnType("int");
 
-                    b.Property<int>("Level")
+                    b.Property<int>("Rank")
                         .HasColumnType("int");
 
                     b.Property<int>("XP")

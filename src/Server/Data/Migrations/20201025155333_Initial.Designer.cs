@@ -10,7 +10,7 @@ using VerusDate.Server.Data;
 namespace VerusDate.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201025135339_Initial")]
+    [Migration("20201025155333_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -331,12 +331,6 @@ namespace VerusDate.Server.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<bool>("Popular")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Validated")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("Badge");
@@ -389,7 +383,7 @@ namespace VerusDate.Server.Data.Migrations
                     b.Property<int>("Food")
                         .HasColumnType("int");
 
-                    b.Property<int>("Level")
+                    b.Property<int>("Rank")
                         .HasColumnType("int");
 
                     b.Property<int>("XP")
@@ -771,6 +765,109 @@ namespace VerusDate.Server.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("VerusDate.Shared.Entity.Badge", b =>
+                {
+                    b.OwnsOne("VerusDate.Shared.ValueType.BadgeType", "CompletedProfile", b1 =>
+                        {
+                            b1.Property<string>("BadgeId")
+                                .HasMaxLength(256)
+                                .IsUnicode(false)
+                                .HasColumnType("varchar(256)");
+
+                            b1.Property<int>("Level")
+                                .HasColumnType("int");
+
+                            b1.HasKey("BadgeId");
+
+                            b1.ToTable("Badge");
+
+                            b1.WithOwner()
+                                .HasForeignKey("BadgeId");
+                        });
+
+                    b.OwnsOne("VerusDate.Shared.ValueType.BadgeType", "Popular", b1 =>
+                        {
+                            b1.Property<string>("BadgeId")
+                                .HasMaxLength(256)
+                                .IsUnicode(false)
+                                .HasColumnType("varchar(256)");
+
+                            b1.Property<int>("Level")
+                                .HasColumnType("int");
+
+                            b1.HasKey("BadgeId");
+
+                            b1.ToTable("Badge");
+
+                            b1.WithOwner()
+                                .HasForeignKey("BadgeId");
+                        });
+
+                    b.OwnsOne("VerusDate.Shared.ValueType.BadgeType", "Rank", b1 =>
+                        {
+                            b1.Property<string>("BadgeId")
+                                .HasMaxLength(256)
+                                .IsUnicode(false)
+                                .HasColumnType("varchar(256)");
+
+                            b1.Property<int>("Level")
+                                .HasColumnType("int");
+
+                            b1.HasKey("BadgeId");
+
+                            b1.ToTable("Badge");
+
+                            b1.WithOwner()
+                                .HasForeignKey("BadgeId");
+                        });
+
+                    b.OwnsOne("VerusDate.Shared.ValueType.BadgeType", "Seniority", b1 =>
+                        {
+                            b1.Property<string>("BadgeId")
+                                .HasMaxLength(256)
+                                .IsUnicode(false)
+                                .HasColumnType("varchar(256)");
+
+                            b1.Property<int>("Level")
+                                .HasColumnType("int");
+
+                            b1.HasKey("BadgeId");
+
+                            b1.ToTable("Badge");
+
+                            b1.WithOwner()
+                                .HasForeignKey("BadgeId");
+                        });
+
+                    b.OwnsOne("VerusDate.Shared.ValueType.BadgeType", "VerifiedProfile", b1 =>
+                        {
+                            b1.Property<string>("BadgeId")
+                                .HasMaxLength(256)
+                                .IsUnicode(false)
+                                .HasColumnType("varchar(256)");
+
+                            b1.Property<int>("Level")
+                                .HasColumnType("int");
+
+                            b1.HasKey("BadgeId");
+
+                            b1.ToTable("Badge");
+
+                            b1.WithOwner()
+                                .HasForeignKey("BadgeId");
+                        });
+
+                    b.Navigation("CompletedProfile");
+
+                    b.Navigation("Popular");
+
+                    b.Navigation("Rank");
+
+                    b.Navigation("Seniority");
+
+                    b.Navigation("VerifiedProfile");
                 });
 
             modelBuilder.Entity("VerusDate.Shared.Entity.Interaction", b =>

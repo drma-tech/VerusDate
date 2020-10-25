@@ -23,7 +23,7 @@ namespace VerusDate.Server.App
 
         public async Task<IEnumerable<TicketVM>> GetList(CancellationToken cancellationToken)
         {
-            return await _repos.GetAll<TicketVM>(cancellationToken);
+            return await _repos.Query<TicketVM>("SELECT * FROM TicketVote", null, cancellationToken);
         }
 
         public async Task<IEnumerable<TicketVoteVM>> GetMyVotes(string IdUser, CancellationToken cancellationToken)

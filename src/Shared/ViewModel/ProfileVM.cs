@@ -131,8 +131,6 @@ namespace VerusDate.Shared.ViewModel
 
         #endregion PHOTOS
 
-        public ActivityStatus ActivityStatus { get; set; } = ActivityStatus.Disabled;
-
         /// <summary>
         /// Indicates that extra data will be displayed (for long-term intentions)
         /// </summary>
@@ -141,6 +139,15 @@ namespace VerusDate.Shared.ViewModel
         {
             return Intent.Any(x => x == Enum.Intent.Relationship) || Intent.Any(x => x == Enum.Intent.Married);
         }
+    }
+
+    /// <summary>
+    /// view other profile users
+    /// </summary>
+    [Table("Profile")]
+    public class ProfileViewVM : ProfileBaseVM
+    {
+        public ActivityStatus ActivityStatus { get; set; } = ActivityStatus.Disabled;
     }
 
     /// <summary>

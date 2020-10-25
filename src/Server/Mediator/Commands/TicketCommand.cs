@@ -26,7 +26,7 @@ namespace VerusDate.Server.Mediator.Commands
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
 
-            return await _app.Add(request, cancellationToken);
+            return await _app.Add(request);
         }
     }
 

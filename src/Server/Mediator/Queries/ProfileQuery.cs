@@ -7,6 +7,30 @@ using VerusDate.Shared.ViewModel;
 
 namespace VerusDate.Server.Mediator.Queries
 {
+    #region GET
+
+    public class ProfileLookingGetCommand : IRequest<ProfileLookingVM>
+    {
+        public string IdUser { get; set; }
+    }
+
+    public class ProfileLookingGetHandler : IRequestHandler<ProfileLookingGetCommand, ProfileLookingVM>
+    {
+        private readonly IProfileLookingApp _app;
+
+        public ProfileLookingGetHandler(IProfileLookingApp app)
+        {
+            _app = app;
+        }
+
+        public async Task<ProfileLookingVM> Handle(ProfileLookingGetCommand request, CancellationToken cancellationToken)
+        {
+            return await _app.Get(request.IdUser, cancellationToken);
+        }
+    }
+
+    #endregion GET
+
     #region GET_USER
 
     public class ProfileUserGetCommand : IRequest<ProfileUserVM>
@@ -25,7 +49,7 @@ namespace VerusDate.Server.Mediator.Queries
 
         public async Task<ProfileUserVM> Handle(ProfileUserGetCommand request, CancellationToken cancellationToken)
         {
-            return await _app.GetUser(request.IdUser, cancellationToken);
+            return await _app.GetUser(request.IdUser);
         }
     }
 
@@ -50,7 +74,7 @@ namespace VerusDate.Server.Mediator.Queries
 
         public async Task<ProfileViewVM> Handle(ProfileViewGetCommand request, CancellationToken cancellationToken)
         {
-            return await _app.GetView(request.IdUser, request.IdUserView, cancellationToken);
+            return await _app.GetView(request.IdUser, request.IdUserView);
         }
     }
 

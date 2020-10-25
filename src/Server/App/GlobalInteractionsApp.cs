@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
 using VerusDate.Shared.Interface.App;
@@ -7,17 +6,16 @@ using VerusDate.Shared.ViewModel;
 
 namespace VerusDate.Server.App
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Critical Code Smell", "S2479:Whitespace and control characters in string literals should be explicit", Justification = "<Pending>")]
     public class GlobalInteractionsApp : IGlobalInteractionsApp
     {
-        private readonly IRepositoryRead repRead;
+        private readonly IRepository _repos;
 
-        public GlobalInteractionsApp(IRepositoryRead repRead)
+        public GlobalInteractionsApp(IRepository repos)
         {
-            this.repRead = repRead;
+            _repos = repos;
         }
 
-        public async Task<GlobalInteractionsVM> Get(string Id, CancellationToken cancellationToken)
+        public async Task<GlobalInteractionsVM> Get(string Id)
         {
             var SQL = new StringBuilder();
 
@@ -32,7 +30,7 @@ namespace VerusDate.Server.App
             SQL.Append("	I.Id                   = @Id ");
             SQL.Append("	AND I.IdChat IS NOT NULL");
 
-            return await repRead.GetCustom<GlobalInteractionsVM>(SQL.ToString(), new { Id }, cancellationToken);
+            return await _repos.Get<GlobalInteractionsVM>(SQL.ToString(), new { Id });
         }
     }
 }

@@ -23,7 +23,7 @@ namespace RealDate.Data.App
         {
             if (Id == IdUserInteraction) throw new InvalidOperationException();
 
-            var obj = await _repos.GetCustom<InteractionVM>("SELECT * FROM Interaction WHERE Id = @Id AND IdUserInteraction = @IdUserInteraction", new { Id, IdUserInteraction });
+            var obj = await _repos.Get<InteractionVM>("SELECT * FROM Interaction WHERE Id = @Id AND IdUserInteraction = @IdUserInteraction", new { Id, IdUserInteraction });
 
             if (obj == null)
             {
@@ -36,7 +36,7 @@ namespace RealDate.Data.App
 
         public async Task<IEnumerable<InteractionVM>> GetList(string Id, CancellationToken cancellationToken)
         {
-            return await _repos.Query<InteractionVM>("SELECT * FROM Interaction WHERE Id = @Id", new { Id });
+            return await _repos.Query<InteractionVM>("SELECT * FROM Interaction WHERE Id = @Id", new { Id }, cancellationToken);
         }
 
         public async Task<IEnumerable<ProfileBasicVM>> GetLikes(string Id, CancellationToken cancellationToken)
@@ -107,7 +107,7 @@ namespace RealDate.Data.App
             SQL.Append("	AND I.Matched          = 1 ");
             SQL.Append("	AND I.IdChat IS NULL");
 
-            return await _repos.Query<ProfileBasicVM>(SQL.ToString(), new { Id });
+            return await _repos.Query<ProfileBasicVM>(SQL.ToString(), new { Id }, cancellationToken);
         }
 
         public async Task<IEnumerable<ProfileChatListVM>> GetChatList(string Id, CancellationToken cancellationToken)
@@ -144,14 +144,14 @@ namespace RealDate.Data.App
             SQL.Append("	AND I.Matched          = 1 ");
             SQL.Append("	AND I.IdChat IS NOT NULL");
 
-            return await _repos.Query<ProfileChatListVM>(SQL.ToString(), new { Id });
+            return await _repos.Query<ProfileChatListVM>(SQL.ToString(), new { Id }, cancellationToken);
         }
 
         public async Task<bool> Blink(string Id, string IdUserInteraction, CancellationToken cancellationToken)
         {
             var obj = await Get(Id, IdUserInteraction, cancellationToken);
 
-            obj.Blink();
+            obj.ExecuteBlink();
 
             return await _repos.Update(obj);
         }
@@ -166,7 +166,7 @@ namespace RealDate.Data.App
             }
             else
             {
-                obj.Block();
+                obj.ExecuteBlock();
                 return await Update(obj);
             }
         }
@@ -178,12 +178,12 @@ namespace RealDate.Data.App
             if (obj == null)
             {
                 obj = new InteractionVM(Id, IdUserInteraction);
-                obj.Deslike();
+                obj.ExecuteDeslike();
                 return await _repos.Insert(obj);
             }
             else
             {
-                obj.Deslike();
+                obj.ExecuteDeslike();
                 return await Update(obj);
             }
         }
@@ -192,17 +192,17 @@ namespace RealDate.Data.App
         {
             var obj = await Get(Id, IdUserInteraction, cancellationToken);
 
-            obj.Like();
+            obj.ExecuteLike();
 
             var mergeLike = await _repos.Update(obj);
 
             var matched = await Get(IdUserInteraction, Id, cancellationToken);
 
-            if (matched != null && matched.Liked) //se o outro tbm deu like, gera o match para os dois
+            if (matched != null && matched.Like.Value) //se o outro tbm deu like, gera o match para os dois
             {
-                obj.Match();
+                obj.ExecuteMatch();
 
-                matched.Match();
+                matched.ExecuteMatch();
 
                 var mergeUser1 = await _repos.Update(obj);
 
@@ -222,7 +222,7 @@ namespace RealDate.Data.App
 
             var obj = await Get(Id, IdUserInteraction, cancellationToken);
 
-            if (!obj.Matched)
+            if (!obj.Match.Value)
             {
                 throw new NotificationException("Match ainda não ocorreu nesta interação");
             }
@@ -239,7 +239,7 @@ namespace RealDate.Data.App
                 sql.AppendLine("UPDATE Interaction SET IdChat = @IdChat WHERE Id = @IdUserInteraction AND IdUserInteraction = @Id; ");
                 sql.AppendLine("INSERT INTO Chat (IdChat) VALUES (@IdChat); ");
 
-                return await _repos.Update(sql.ToString(), new { IdChat, Id, IdUserInteraction });
+                return await _repos.Execute(sql.ToString(), new { IdChat, Id, IdUserInteraction }, cancellationToken);
             }
         }
 

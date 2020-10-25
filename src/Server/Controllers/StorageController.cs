@@ -14,27 +14,6 @@ namespace VerusDate.Server.Controllers
     [Route("[controller]")]
     public class StorageController : BaseController<InteractionController>
     {
-        [HttpPost("UploadPhotoFace")]
-        public async Task<IActionResult> UploadPhotoFace([FromBody] UploadPhotoFaceCommand command)
-        {
-            try
-            {
-                command.Id = HttpContext.GetUserId();
-
-                var result = await Mediator.Send(command);
-
-                if (result)
-                    return Ok();
-                else
-                    return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError("UploadPhotoFace", ex);
-                return BadRequest(ex.Message);
-            }
-        }
-
         [HttpPost("UploadPhotoGallery")]
         public async Task<IActionResult> UploadPhotoGallery([FromBody] UploadPhotoGalleryCommand command)
         {

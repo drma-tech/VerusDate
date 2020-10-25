@@ -6,12 +6,6 @@ namespace VerusDate.Shared.ViewModel
     [Table("Badge")]
     public class BadgeVM : ViewModelType
     {
-        [ExplicitKey]
-        public string Id { get; set; }
-
-        public bool Validated { get; set; }
-        public bool Popular { get; set; }
-
         /// <summary>
         /// Use for API
         /// </summary>
@@ -27,5 +21,14 @@ namespace VerusDate.Shared.ViewModel
         {
             Id = id;
         }
+
+        [ExplicitKey]
+        public string Id { get; private set; }
+
+        public ValueType.BadgeType Rank { get; private set; } = new ValueType.BadgeType(10);
+        public ValueType.BadgeType Seniority { get; private set; } = new ValueType.BadgeType(10);
+        public ValueType.BadgeType CompletedProfile { get; private set; } = new ValueType.BadgeType(1);
+        public ValueType.BadgeType VerifiedProfile { get; private set; } = new ValueType.BadgeType(3);
+        public ValueType.BadgeType Popular { get; private set; } = new ValueType.BadgeType(1);
     }
 }

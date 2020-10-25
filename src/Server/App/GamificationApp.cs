@@ -9,23 +9,21 @@ namespace RealDate.Data.App
 {
     public class GamificationApp : IGamificationApp
     {
-        private readonly IRepositoryRead repRead;
-        private readonly IRepositoryWrite repWrite;
+        private readonly IRepository _repos;
 
-        public GamificationApp(IRepositoryRead repRead, IRepositoryWrite repWrite)
+        public GamificationApp(IRepository repos)
         {
-            this.repRead = repRead;
-            this.repWrite = repWrite;
+            _repos = repos;
         }
 
         public async Task<GamificationVM> Get(string profileId, CancellationToken cancellationToken)
         {
-            var obj = await repRead.Get<GamificationVM>(profileId);
+            var obj = await _repos.Get<GamificationVM>(profileId);
 
             if (obj == null)
             {
                 obj = new GamificationVM(profileId);
-                await repWrite.Insert(obj);
+                await _repos.Insert(obj);
             }
 
             return obj;
@@ -33,7 +31,7 @@ namespace RealDate.Data.App
 
         private async Task<bool> Update(GamificationVM gamification)
         {
-            return await repWrite.Update(gamification);
+            return await _repos.Update(gamification);
         }
 
         public async Task<bool> AddXP(string profileId, EventAddXP eventoXP, CancellationToken cancellationToken)

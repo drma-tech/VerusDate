@@ -9,10 +9,13 @@ namespace VerusDate.Shared.ViewModel
     public class GamificationVM : ViewModelType
     {
         [Computed]
-        private static int MaxLevelXP => 100;
+        private static int MaxRankXP => 100;
 
         [Computed]
-        public int MaxFood => Level == 0 ? 0 : Level * 20;
+        private static int MaxRankFood => 20;
+
+        [Computed]
+        public int MaxFood => Rank == 0 ? MaxRankFood : Rank * MaxRankFood;
 
         /// <summary>
         /// Use for API
@@ -33,24 +36,24 @@ namespace VerusDate.Shared.ViewModel
         [ExplicitKey]
         public string Id { get; set; }
 
+        [Display(Name = "Rank")]
+        public int Rank { get; set; } = 1;
+
         [Display(Name = "XP")]
         public int XP { get; set; } = 0;
-
-        [Display(Name = "Level")]
-        public int Level { get; set; } = 1;
-
-        [Display(Name = "Diamond")]
-        public int Diamond { get; set; } = 0;
 
         [Display(Name = "Food")]
         public int Food { get; set; } = 20;
 
+        [Display(Name = "Diamond")]
+        public int Diamond { get; set; } = 1;
+
         public void AddXP(int qtd)
         {
-            if (XP + qtd >= MaxLevelXP) //se passar de 100, sobe um nivel
+            if (XP + qtd >= MaxRankXP) //se passar de 100, sobe um nivel
             {
-                AddLevel();
-                XP = XP + qtd - MaxLevelXP;
+                AddRank();
+                XP = XP + qtd - MaxRankXP;
             }
             else
             {
@@ -62,7 +65,7 @@ namespace VerusDate.Shared.ViewModel
         {
             var NovoXP = XP - qtd;
 
-            if (Level <= 1) //LEVEL 1
+            if (Rank <= 1) //RANK 1
             {
                 if (NovoXP >= 0)
                 {
@@ -73,7 +76,7 @@ namespace VerusDate.Shared.ViewModel
                     XP = 0;
                 }
             }
-            else //LEVEL 2 EM DIANTE
+            else //RANK 2 EM DIANTE
             {
                 if (NovoXP >= 0)
                 {
@@ -81,28 +84,28 @@ namespace VerusDate.Shared.ViewModel
                 }
                 else
                 {
-                    RemoveLevel();
-                    XP = MaxLevelXP + NovoXP;
+                    RemoveRank();
+                    XP = MaxRankXP + NovoXP;
                 }
             }
         }
 
-        private void AddLevel(int qtd = 1)
+        private void AddRank(int qtd = 1)
         {
-            Level += qtd;
+            Rank += qtd;
         }
 
-        private void RemoveLevel(int qtd = 1)
+        private void RemoveRank(int qtd = 1)
         {
-            var NovoLevel = Level - qtd;
+            var NovoLevel = Rank - qtd;
 
             if (NovoLevel <= 1)
             {
-                Level = 1;
+                Rank = 1;
             }
             else
             {
-                Level -= qtd;
+                Rank -= qtd;
             }
         }
 

@@ -24,7 +24,7 @@ namespace VerusDate.Server.Mediator.Queries
 
         public async Task<BadgeVM> Handle(BadgeGetCommand request, CancellationToken cancellationToken)
         {
-            return await _app.Get(request.IdUser, cancellationToken);
+            return await _app.Get(request.IdUser);
         }
     }
 

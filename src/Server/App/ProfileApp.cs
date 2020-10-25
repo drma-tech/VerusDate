@@ -20,37 +20,23 @@ namespace RealDate.Data.App
             _repos = repos;
         }
 
-        public async Task<ProfileUserVM> GetUser(string ProfileId, CancellationToken cancellationToken)
+        public async Task<bool> Add(ProfileLookingVM obj)
         {
-            return await repRead.Get<ProfileUserVM>(ProfileId, cancellationToken);
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+
+            return await _repos.Insert(obj);
         }
 
-        public async Task<ProfileViewVM> GetView(string IdUser, string IdUserView, CancellationToken cancellationToken)
+        public async Task<bool> Add(ProfileUserVM obj)
         {
-            var SQL = new StringBuilder();
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
-            var typeDistance = DistanceType.Km;
-            var valueCalDistance = typeDistance == DistanceType.Km ? 1000 : 1609;
+            return await _repos.Insert(obj);
+        }
 
-            SQL.Append("SELECT ");
-            SQL.Append("	P.* ");
-            SQL.Append($"  , ROUND(geography::Point(P.Latitude, P.Longitude, 4326).STDistance(geography::Point(PV.Latitude, PV.Longitude, 4326)) / {valueCalDistance}, 1) Distance ");
-            SQL.Append("  , PP.PhotoFace ");
-            SQL.Append("  , CASE ");
-            SQL.Append("		WHEN CAST(P.DtLastLogin AS DATE)  = CAST(GETDATE() AS DATE) THEN 0 ");
-            SQL.Append("		WHEN CAST(P.DtLastLogin AS DATE) >= CAST(GETDATE()-7 AS DATE) THEN 1 ");
-            SQL.Append("		WHEN CAST(P.DtLastLogin AS DATE) >= CAST(GETDATE()-30 AS DATE) THEN 2 ");
-            SQL.Append("		ELSE 3 ");
-            SQL.Append("	END ActivityStatus ");
-            SQL.Append("FROM ");
-            SQL.Append("	Profile                  P ");
-            SQL.Append("	INNER JOIN ProfilePhotos PP ON P.Id  = PP.Id ");
-            SQL.Append("	INNER JOIN Profile       PV ON PV.Id = @IdUser ");
-            SQL.Append("WHERE ");
-            SQL.Append("    P.ID = @IdUserView");
-
-            return await repRead.GetCustom<ProfileViewVM>(SQL.ToString(), new { IdUser, IdUserView }, cancellationToken);
-            //return await repRead.GetCustom<ProfileVM>("SELECT @p.Serialize() as location", new { p = new Point(47, 52) { SRID = 4326 } });
+        public async Task<ProfileLookingVM> Get(string ProfileId)
+        {
+            return await _repos.Get<ProfileLookingVM>(ProfileId);
         }
 
         public async Task<IEnumerable<ProfileViewVM>> GetListMatch(ProfileLookingVM looking, CancellationToken cancellationToken)
@@ -191,10 +177,10 @@ namespace RealDate.Data.App
                 SQL.Append("	AND P.MoneyPersonality = @MoneyPersonality ");
                 param.MoneyPersonality = (int)looking.MoneyPersonality.Value;
             }
-            if (looking.PersonalityTraits.HasValue)
+            if (looking.MyersBriggsTypeIndicator.HasValue)
             {
-                SQL.Append("	AND P.PersonalityTraits = @PersonalityTraits ");
-                param.PersonalityTraits = (int)looking.PersonalityTraits.Value;
+                SQL.Append("	AND P.MyersBriggsTypeIndicator = @MyersBriggsTypeIndicator ");
+                param.MyersBriggsTypeIndicator = (int)looking.MyersBriggsTypeIndicator.Value;
             }
             if (looking.RelationshipPersonality.HasValue)
             {
@@ -206,7 +192,7 @@ namespace RealDate.Data.App
             SQL.Append("ORDER BY ");
             SQL.Append("	P.DtTopList DESC");
 
-            return await repRead.Query<ProfileViewVM>(SQL.ToString(), param);
+            return await _repos.Query<ProfileViewVM>(SQL.ToString(), param, cancellationToken);
         }
 
         public async Task<IEnumerable<ProfileViewVM>> GetListSearch(ProfileLookingVM looking, CancellationToken cancellationToken)
@@ -347,10 +333,10 @@ namespace RealDate.Data.App
                 SQL.Append("	AND P.MoneyPersonality = @MoneyPersonality ");
                 param.MoneyPersonality = (int)looking.MoneyPersonality.Value;
             }
-            if (looking.PersonalityTraits.HasValue)
+            if (looking.MyersBriggsTypeIndicator.HasValue)
             {
-                SQL.Append("	AND P.PersonalityTraits = @PersonalityTraits ");
-                param.PersonalityTraits = (int)looking.PersonalityTraits.Value;
+                SQL.Append("	AND P.MyersBriggsTypeIndicator = @MyersBriggsTypeIndicator ");
+                param.MyersBriggsTypeIndicator = (int)looking.MyersBriggsTypeIndicator.Value;
             }
             if (looking.RelationshipPersonality.HasValue)
             {
@@ -362,28 +348,59 @@ namespace RealDate.Data.App
             SQL.Append("ORDER BY ");
             SQL.Append("	P.DtTopList DESC");
 
-            return await repRead.Query<ProfileViewVM>(SQL.ToString(), param, cancellationToken);
+            return await _repos.Query<ProfileViewVM>(SQL.ToString(), param, cancellationToken);
         }
 
-        public async Task<bool> Add(ProfileUserVM obj, CancellationToken cancellationToken)
+        public async Task<ProfileUserVM> GetUser(string ProfileId)
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-
-            return await _repos.Insert(obj);
+            return await _repos.Get<ProfileUserVM>(ProfileId);
         }
 
-        public async Task<bool> Update(ProfileUserVM obj, CancellationToken cancellationToken)
+        public async Task<ProfileViewVM> GetView(string IdUser, string IdUserView)
+        {
+            var SQL = new StringBuilder();
+
+            var typeDistance = DistanceType.Km;
+            var valueCalDistance = typeDistance == DistanceType.Km ? 1000 : 1609;
+
+            SQL.Append("SELECT ");
+            SQL.Append("	P.* ");
+            SQL.Append($"  , ROUND(geography::Point(P.Latitude, P.Longitude, 4326).STDistance(geography::Point(PV.Latitude, PV.Longitude, 4326)) / {valueCalDistance}, 1) Distance ");
+            SQL.Append("  , PP.PhotoFace ");
+            SQL.Append("  , CASE ");
+            SQL.Append("		WHEN CAST(P.DtLastLogin AS DATE)  = CAST(GETDATE() AS DATE) THEN 0 ");
+            SQL.Append("		WHEN CAST(P.DtLastLogin AS DATE) >= CAST(GETDATE()-7 AS DATE) THEN 1 ");
+            SQL.Append("		WHEN CAST(P.DtLastLogin AS DATE) >= CAST(GETDATE()-30 AS DATE) THEN 2 ");
+            SQL.Append("		ELSE 3 ");
+            SQL.Append("	END ActivityStatus ");
+            SQL.Append("FROM ");
+            SQL.Append("	Profile                  P ");
+            SQL.Append("	INNER JOIN ProfilePhotos PP ON P.Id  = PP.Id ");
+            SQL.Append("	INNER JOIN Profile       PV ON PV.Id = @IdUser ");
+            SQL.Append("WHERE ");
+            SQL.Append("    P.ID = @IdUserView");
+
+            return await _repos.Get<ProfileViewVM>(SQL.ToString(), new { IdUser, IdUserView });
+            //return await repRead.GetCustom<ProfileVM>("SELECT @p.Serialize() as location", new { p = new Point(47, 52) { SRID = 4326 } });
+        }
+
+        public async Task RegisterLogin(string ProfileId, CancellationToken cancellationToken)
+        {
+            await _repos.Execute("UPDATE Profile SET DtLastLogin = @DtLastLogin WHERE Id = @ProfileId", new { DtLastLogin = DateTime.Now, ProfileId }, cancellationToken);
+        }
+
+        public async Task<bool> Update(ProfileLookingVM obj)
+        {
+            return await _repos.Update(obj);
+        }
+
+        public async Task<bool> Update(ProfileUserVM obj)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
 
             obj.DtUpdate = DateTimeOffset.UtcNow;
 
-            return await repWrite.Update(obj);
-        }
-
-        public async Task RegisterLogin(string ProfileId, CancellationToken cancellationToken)
-        {
-            await repWrite.Update("UPDATE Profile SET DtLastLogin = @DtLastLogin WHERE Id = @ProfileId", new { DtLastLogin = DateTime.Now, ProfileId });
+            return await _repos.Update(obj);
         }
     }
 }

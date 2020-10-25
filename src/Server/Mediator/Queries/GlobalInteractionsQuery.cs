@@ -24,7 +24,7 @@ namespace VerusDate.Server.Mediator.Queries
 
         public async Task<GlobalInteractionsVM> Handle(GlobalInteractionsGetCommand request, CancellationToken cancellationToken)
         {
-            return await _app.Get(request.Id, cancellationToken);
+            return await _app.Get(request.Id);
         }
     }
 

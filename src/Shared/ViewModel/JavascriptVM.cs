@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace VerusDate.Shared.ViewModel
 {
@@ -14,10 +15,15 @@ namespace VerusDate.Shared.ViewModel
     /// </summary>
     public class HereAddress
     {
-        public string countryCode { get; set; }
         public string countryName { get; set; }
         public string state { get; set; }
+        public string county { get; set; }
         public string city { get; set; }
+
+        public string GetLocation()
+        {
+            return string.Join(" - ", new[] { countryName, state, county, city }.Where(w => !string.IsNullOrEmpty(w)));
+        }
     }
 
     public class HereRoot

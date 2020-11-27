@@ -1,0 +1,19 @@
+﻿@switch (EnumActivityStatus)
+{
+    case VerusDate.Shared.Enum.ActivityStatus.Today:
+        <span class="label label-primary">Online hoje</span>
+        break;
+    case VerusDate.Shared.Enum.ActivityStatus.Week:
+        <span class="label label-warning">Online essa semana</span>
+        break;
+    case VerusDate.Shared.Enum.ActivityStatus.Month:
+        <span class="label label-warning">Online esse mês</span>
+        break;
+    default:
+        <span class="label label-danger">Usuário inativo</span>
+        break;
+}
+
+@code {
+    [Parameter] public VerusDate.Shared.Enum.ActivityStatus EnumActivityStatus { get; set; }
+}

@@ -8,11 +8,9 @@ namespace VerusDate.Shared.Entity
     public class Chat : EntityType
     {
         [Key]
-        [Required]
         public string IdChat { get; set; }
 
         [Key]
-        [Required]
         public DateTimeOffset DtMessage { get; set; }
 
         public string IdUserSender { get; set; }

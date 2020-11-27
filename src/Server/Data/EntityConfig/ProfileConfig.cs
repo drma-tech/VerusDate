@@ -19,10 +19,6 @@ namespace VerusDate.Server.Data.EntityConfig
                 .IsRequired()
                 .HasMaxLength(512);
 
-            builder.Property(p => p.Hobbies)
-                .IsRequired(false)
-                .HasMaxLength(512);
-
             builder.Property(p => p.BirthDate)
                .IsRequired();
 
@@ -81,6 +77,18 @@ namespace VerusDate.Server.Data.EntityConfig
             builder.Property(p => p.Hobbies)
                 .IsUnicode(false)
                 .HasMaxLength(1024)
+                .HasConversion(ArrayConverter.String())
+                .Metadata.SetValueComparer(ArrayComparer.String());
+
+            builder.Property(p => p.MainPhoto)
+                .HasMaxLength(512);
+
+            builder.Property(p => p.MainPhotoValidation)
+               .HasMaxLength(512);
+
+            builder.Property(p => p.PhotoGallery)
+                .IsUnicode(false)
+                .HasMaxLength(4000)
                 .HasConversion(ArrayConverter.String())
                 .Metadata.SetValueComparer(ArrayComparer.String());
         }

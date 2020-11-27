@@ -1,0 +1,23 @@
+﻿<Modal @ref="modal">
+    <ModalBackdrop />
+    <ModalContent IsCentered="true">
+        <ModalHeader>
+            <ModalTitle>@Title</ModalTitle>
+            <CloseButton Clicked="@modal.Hide" />
+        </ModalHeader>
+        <ModalBody>
+            @ChildContent
+        </ModalBody>
+    </ModalContent>
+</Modal>
+
+@code {
+    private Modal modal;
+    [Parameter] public string Title { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    public void ShowModal()
+    {
+        modal.Show();
+    }
+}

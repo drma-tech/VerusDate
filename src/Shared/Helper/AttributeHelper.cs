@@ -15,7 +15,7 @@ namespace VerusDate.Shared.Helper
 
             if (isMultiple)
             {
-                dic.Add("rows", 6);
+                dic.Add("rows", 7);
             }
 
             if (showDescription)
@@ -47,10 +47,9 @@ namespace VerusDate.Shared.Helper
         {
             if (expression == null) return null;
 
-            var body = expression.Body as MemberExpression;
-            if (body != null)
+            if (expression.Body is MemberExpression body)
             {
-                return ((MemberExpression)expression.Body).Member.Name;
+                return body.Member.Name;
             }
             else
             {
@@ -71,10 +70,9 @@ namespace VerusDate.Shared.Helper
 
         private static DisplayAttribute GetDisplayAttribute(Expression<Func<object>> expression)
         {
-            var body = expression.Body as MemberExpression;
-            if (body != null)
+            if (expression.Body is MemberExpression body)
             {
-                return ((MemberExpression)expression.Body).Member.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
+                return body.Member.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
             }
             else
             {

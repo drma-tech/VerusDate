@@ -14,9 +14,12 @@ namespace VerusDate.Shared.ValueType
         {
         }
 
-        public BadgeType(int MaxLevel)
+        public BadgeType(int MaxLevel, string ClassIcon, string Title, string Description)
         {
             this.MaxLevel = MaxLevel;
+            this.ClassIcon = ClassIcon;
+            this.Title = Title;
+            this.Description = Description;
         }
 
         public int Level { get; private set; }
@@ -24,6 +27,18 @@ namespace VerusDate.Shared.ValueType
         [Computed]
         [NotMapped]
         public int MaxLevel { get; private set; }
+
+        [Computed]
+        [NotMapped]
+        public string ClassIcon { get; private set; }
+
+        [Computed]
+        [NotMapped]
+        public string Title { get; private set; }
+
+        [Computed]
+        [NotMapped]
+        public string Description { get; private set; }
 
         public void IncreaseLevel()
         {

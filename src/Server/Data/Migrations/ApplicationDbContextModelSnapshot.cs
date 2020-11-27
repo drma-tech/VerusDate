@@ -17,7 +17,7 @@ namespace VerusDate.Server.Data.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0-rc.2.20475.6");
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
                 {
@@ -438,16 +438,6 @@ namespace VerusDate.Server.Data.Migrations
                     b.Property<int?>("CareerCluster")
                         .HasColumnType("int");
 
-                    b.Property<string>("City")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("CountryName")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(512)
@@ -504,8 +494,23 @@ namespace VerusDate.Server.Data.Migrations
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
 
+                    b.Property<string>("Location")
+                        .HasMaxLength(256)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
+
                     b.Property<double>("Longitude")
                         .HasColumnType("float");
+
+                    b.Property<string>("MainPhoto")
+                        .HasMaxLength(512)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(512)");
+
+                    b.Property<string>("MainPhotoValidation")
+                        .HasMaxLength(512)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(512)");
 
                     b.Property<int>("MaritalStatus")
                         .HasColumnType("int");
@@ -522,35 +527,10 @@ namespace VerusDate.Server.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(20)");
 
-                    b.Property<string>("PhotoFaceValidation")
-                        .HasMaxLength(256)
+                    b.Property<string>("PhotoGallery")
+                        .HasMaxLength(4000)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PhotoFileName1")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PhotoFileName2")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PhotoFileName3")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PhotoFileName4")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PhotoFileName5")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("varchar(4000)");
 
                     b.Property<int>("RaceCategory")
                         .HasColumnType("int");
@@ -566,11 +546,6 @@ namespace VerusDate.Server.Data.Migrations
 
                     b.Property<int>("Smoke")
                         .HasColumnType("int");
-
-                    b.Property<string>("State")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
 
                     b.Property<int?>("WantChildren")
                         .HasColumnType("int");

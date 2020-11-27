@@ -172,13 +172,5 @@ namespace VerusDate.Shared.Helper
                 _ => $"null",
             };
         }
-
-        public static string GetPhotoFace(this string PhotoFileName)
-        {
-            if (string.IsNullOrEmpty(PhotoFileName))
-                return "/img/nouser.jpg";
-            else
-                return $"https://verusdatedev.blob.core.windows.net/photo-face/{PhotoFileName}";
-        }
     }
 }

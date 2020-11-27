@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 
 namespace VerusDate.Server.Controllers
 {
@@ -16,11 +18,25 @@ namespace VerusDate.Server.Controllers
 
         public IClientRequestParametersProvider ClientRequestParametersProvider { get; }
 
+        /// <summary>
+        /// Recupera os parâmetros do cliente
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
         [HttpGet("_configuration/{clientId}")]
+        [ProducesResponseType(typeof(IDictionary<string, string>), 200)]
         public IActionResult GetClientRequestParameters([FromRoute] string clientId)
         {
-            var parameters = ClientRequestParametersProvider.GetClientParameters(HttpContext, clientId);
-            return Ok(parameters);
+            try
+            {
+                var parameters = ClientRequestParametersProvider.GetClientParameters(HttpContext, clientId);
+                return Ok(parameters);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, null, clientId);
+                throw;
+            }
         }
     }
 }

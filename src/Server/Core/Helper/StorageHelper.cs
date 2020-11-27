@@ -20,20 +20,13 @@ namespace VerusDate.Server.Core.Helper
 
         private static string getContainer(PhotoType type)
         {
-            switch (type)
+            return type switch
             {
-                case PhotoType.PhotoFace:
-                    return "photo-face";
-
-                case PhotoType.PhotoGallery:
-                    return "photo-gallery";
-
-                case PhotoType.PhotoValidation:
-                    return "photo-validation";
-
-                default:
-                    throw new InvalidOperationException(nameof(PhotoType));
-            }
+                PhotoType.PhotoFace => "photo-face",
+                PhotoType.PhotoGallery => "photo-gallery",
+                PhotoType.PhotoValidation => "photo-validation",
+                _ => throw new InvalidOperationException(nameof(PhotoType)),
+            };
         }
 
         public StorageHelper(IConfiguration configuration)
@@ -43,8 +36,6 @@ namespace VerusDate.Server.Core.Helper
 
         public async Task UploadPhoto(PhotoType type, Stream stream, string id)
         {
-            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException(nameof(id));
-
             var container = new BlobContainerClient(Configuration.GetConnectionString("AzureStorage"), getContainer(type));
             var blob = container.GetBlobClient(id + ".jpg");
 

@@ -1,0 +1,42 @@
+﻿@using System.Linq.Expressions;
+
+<Modal @ref="modal">
+    <ModalBackdrop />
+    <ModalContent IsCentered="true">
+        <ModalHeader>
+            <ModalTitle>@label</ModalTitle>
+            <CloseButton Clicked="@modal.Hide" />
+        </ModalHeader>
+        <ModalBody>
+            @if (TypeEnum != null)
+            {
+                @foreach (var item in EnumHelper.GetList(TypeEnum))
+                {
+                    <p>
+                        <Badge Color="Color.Primary">@item.Name</Badge> @item.Description
+                    </p>
+                }
+            }
+        </ModalBody>
+    </ModalContent>
+</Modal>
+
+@code {
+    private Modal modal;
+    private Expression<Func<object>> For;
+    private System.Type TypeEnum;
+
+    private string label => VerusDate.Shared.Helper.AttributeHelper.GetName(For);
+
+    public void ShowModal()
+    {
+        modal.Show();
+    }
+
+    public void ChangeContent(Expression<Func<object>> For, System.Type TypeEnum)
+    {
+        this.For = For;
+        this.TypeEnum = TypeEnum;
+        StateHasChanged();
+    }
+}

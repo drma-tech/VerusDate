@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using VerusDate.Shared.ViewModel;
 
 namespace VerusDate.Shared.Interface.App

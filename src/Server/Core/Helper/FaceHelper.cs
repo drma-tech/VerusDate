@@ -1,5 +1,6 @@
 ﻿using Microsoft.Azure.CognitiveServices.Vision.Face;
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,9 +19,9 @@ namespace VerusDate.Server.Core.Helper
 
         public static async Task<bool> IsPhotoValid(string idPhotoFace, Stream StreamPhotoCamera)
         {
-            IFaceClient client = Authenticate("https://face-verus.cognitiveservices.azure.com", "efdaf276808c4adb83778efeec621ba0");
+            IFaceClient client = Authenticate(Startup.Configuration.GetValue<string>("CognitivePath"), "efdaf276808c4adb83778efeec621ba0");
 
-            var similar = await client.FindSimilar("https://verusdatedev.blob.core.windows.net", idPhotoFace, StreamPhotoCamera);
+            var similar = await client.FindSimilar(Startup.Configuration.GetValue<string>("BlobPath"), idPhotoFace, StreamPhotoCamera);
 
             return similar.Confidence > 0.6;
         }

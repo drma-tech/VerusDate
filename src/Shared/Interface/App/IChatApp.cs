@@ -9,6 +9,6 @@ namespace VerusDate.Shared.Interface.App
     {
         Task<IEnumerable<ChatVM>> Get(string IdChat, string IdUser, CancellationToken cancellationToken);
 
-        Task<bool> Insert(List<ChatVM> lstChat, CancellationToken cancellationToken);
+        Task<int> Insert(List<ChatVM> lstChat, CancellationToken cancellationToken);
     }
 }

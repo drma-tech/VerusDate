@@ -1,0 +1,152 @@
+﻿@page "/EventList"
+@attribute [Authorize]
+@inherits PageCore<EventList>
+@inject HttpClient Http
+@*https://www.ehow.co.uk/12106705/types-of-dating*@
+@*https://www.cupidolouco.com.br/index.php?option=com_content&view=article&id=14&Itemid=174*@
+@*https://www.regain.us/advice/dating/7-types-of-dating-different-ways-to-meet-your-new-match/*@
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="contact-box">
+            <div class="row">
+                <div class="col-4">
+                    <div class="text-center">
+                        <i class="fas fa-eye-slash fa-3x"></i>
+                        <div class="m-t-xs font-bold">Encontro às cegas</div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <p>Conheça alguem por sua essência, não sua aparência</p>
+                    <a class="btn btn-primary btn-xs" href="/EventList" @onclick="FeatureUnavailable">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="contact-box">
+            <div class="row">
+                <div class="col-3">
+                    <div class="text-center">
+                        <i class="fas fa-user-clock fa-3x"></i>
+                        <div class="m-t-xs font-bold">Encontro Rápido</div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <p>Conheça várias pessoas em encontros rápidos</p>
+                    <a class="btn btn-primary btn-xs" href="/EventList" @onclick="FeatureUnavailable">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="contact-box">
+            <div class="row">
+                <div class="col-3">
+                    <div class="text-center">
+                        <i class="fas fa-users fa-3x"></i>
+                        <div class="m-t-xs font-bold">Encontro em grupo</div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <p>Muitos participantes com interesses parecidos e com livre interação</p>
+                    <a class="btn btn-primary btn-xs" href="/EventList" @onclick="FeatureUnavailable">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>Meus Eventos</h5>
+    </div>
+    <div class="ibox-content">
+        <div class="alert alert-primary">
+            <i class="fas fa-exclamation-triangle"></i> Não há dados para mostrar
+        </div>
+    </div>
+</div>
+<div class="ibox">
+    <div class="ibox-title">
+        <h5>Eventos disponíveis na sua localidade (@ProfileUserVM?.Location)</h5>
+        <div class="ibox-tools">
+            <a class="btn btn-primary btn-xs" @onclick="FeatureUnavailable"><i class="fas fa-plus-circle"></i> Novo</a>
+        </div>
+    </div>
+    <div class="ibox-content" style="padding: 10px;">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Início</th>
+                        <th>Cidade</th>
+                        <th>Idade</th>
+                        <th>Orientação</th>
+                        <th>Intenção</th>
+                        <th>Disponibilidade</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <i class="fas fa-user-clock"></i> Encontro às cegas
+                        </td>
+                        <td>17/07/2020</td>
+                        <td>São Paulo</td>
+                        <td>20-35</td>
+                        <td>Bissexuais</td>
+                        <td>Morar juntos / Casar</td>
+                        <td>
+                            <span class="badge badge-primary">10</span>
+                        </td>
+                        <td><a><i class="fas fa-sign-in-alt"></i> Inscrever</a></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fas fa-eye-slash"></i> Encontro Rápido
+                        </td>
+                        <td>17/07/2020</td>
+                        <td>São Paulo</td>
+                        <td>20-35</td>
+                        <td>Homossexual</td>
+                        <td>Relacionamento sério</td>
+                        <td>
+                            <span class="badge badge-primary"><i class="fas fa-male"></i> 10</span>
+                        </td>
+                        <td><a><i class="fas fa-sign-in-alt"></i> Inscrever</a></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="fas fa-users"></i> Encontro em grupo
+                        </td>
+                        <td>17/07/2020</td>
+                        <td>São Paulo</td>
+                        <td>20-35</td>
+                        <td>Heterossexual</td>
+                        <td>-</td>
+                        <td>
+                            <span class="badge badge-primary"><i class="fas fa-male"></i> 5</span>
+                            <span class="badge badge-danger"><i class="fas fa-female"></i> 0</span>
+                        </td>
+                        <td><a><i class="fas fa-sign-in-alt"></i> Inscrever</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    private ProfileVM ProfileUserVM { get; set; }
+    private List<EventVM> MyEvents { get; set; }
+    private List<EventVM> AvailableEvents { get; set; }
+
+    protected override async Task LoadData()
+    {
+        ProfileUserVM = await Http.Profile_Get(LocalStorage);
+    }
+}

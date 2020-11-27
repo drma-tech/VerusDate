@@ -4,7 +4,7 @@ using VerusDate.Shared.ViewModel;
 
 namespace VerusDate.Shared.Validation
 {
-    public class ProfileValidation : AbstractValidator<ProfileUserVM>
+    public class ProfileValidation : AbstractValidator<ProfileVM>
     {
         public ProfileValidation()
         {

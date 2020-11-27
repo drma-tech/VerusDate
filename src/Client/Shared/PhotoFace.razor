@@ -1,0 +1,34 @@
+﻿@if (isCircle)
+{
+    <div class="embed-responsive embed-responsive-1by1 img-fluid img-circle divPhoto">
+        <img alt="..." class="imgPhoto" src="@GetPhotoFace()" />
+    </div>
+}
+else
+{
+    <div class="embed-responsive embed-responsive-1by1 divPhoto" style="background-color: black;">
+        <img alt="..." class="imgPhoto" src="@GetPhotoFace()" />
+        @if (!string.IsNullOrEmpty(Label))
+        {
+            <span style="position: absolute; left: 10px; bottom: 10px;">
+                <i class="badge badge-secondary">@Label</i>
+            </span>
+        }
+    </div>
+}
+
+@code {
+    [Parameter] public string IdFace { get; set; }
+    [Parameter] public bool isCircle { get; set; }
+    [Parameter] public string Label { get; set; }
+
+    private string GetPhotoFace()
+    {
+        if (string.IsNullOrEmpty(IdFace))
+            return "/img/nouser.jpg";
+        else if (IdFace.StartsWith("data:"))
+            return IdFace;
+        else
+            return $"https://verusdatedev.blob.core.windows.net/photo-face/{IdFace}";
+    }
+}

@@ -1,0 +1,416 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VerusDate.Server</name>
+    </assembly>
+    <members>
+        <member name="M:VerusDate.Server.Controllers.BadgeController.Get(VerusDate.Server.Mediator.Queries.Badge.BadgeGetCommand)">
+            <summary>
+            Recupera os badges do usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.BadgeController.Insert(VerusDate.Server.Mediator.Commands.Badge.BadgeInsertCommand)">
+            <summary>
+            Insere um novo badge
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.ChatController.Get(VerusDate.Server.Mediator.Queries.Chat.ChatGetCommand)">
+            <summary>
+            Lista todas as conversas de um determinado chat e marca como lidas todas as conversas do usuário logado deste chat
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.ChatController.Insert(VerusDate.Server.Mediator.Commands.Chat.ChatInsertCommand)">
+            <summary>
+            Atualiza o chat no servidor
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.GamificationController.Get(VerusDate.Server.Mediator.Queries.Gamification.GamificationGetCommand)">
+            <summary>
+            Recupera o gamification do usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.GamificationController.ExchangeFood(VerusDate.Server.Mediator.Commands.Gamification.GamificationExchangeFoodCommand)">
+            <summary>
+            Troca maças por diamante
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.GlobalInteractionsController.Get(VerusDate.Server.Mediator.Queries.GlobalInteraction.GlobalInteractionsGetCommand)">
+            <summary>
+            Recupera um resumo (totais) de todas as interações feitas pelo usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.InteractionController.Get(VerusDate.Server.Mediator.Queries.Interaction.InteractionGetCommand)">
+            <summary>
+            Recupera a interação entre o usuário logado e um usuário específico
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.InteractionController.GetList(VerusDate.Server.Mediator.Queries.Interaction.InteractionGetListCommand)">
+            <summary>
+            Recupera todas as interações do usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.InteractionController.GetLikes(VerusDate.Server.Mediator.Queries.Interaction.InteractionGetLikesCommand)">
+            <summary>
+            Recupera uma lista de perfis do qual o usuário logado deu like
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.InteractionController.GetBlinks(VerusDate.Server.Mediator.Queries.Interaction.InteractionGetBlinksCommand)">
+            <summary>
+            Recupera uma lista de perfis do qual o usuário logado deu blink
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.InteractionController.GetNewMatches(VerusDate.Server.Mediator.Queries.Interaction.InteractionGetNewMatchesCommand)">
+            <summary>
+            Recupera uma lista de perfis do qual o usuário logado deu match
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.InteractionController.GetChatList(VerusDate.Server.Mediator.Queries.Interaction.InteractionGetChatListCommand)">
+            <summary>
+            Recupera lista de chats disponíveis
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.InteractionController.Blink(VerusDate.Server.Mediator.Commands.Interaction.InteractionBlinkCommand)">
+            <summary>
+            Interage com outro usuário com um blink
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.InteractionController.Block(VerusDate.Server.Mediator.Commands.Interaction.InteractionBlockCommand)">
+            <summary>
+            Interage com outro usuário com um block
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.InteractionController.Deslike(VerusDate.Server.Mediator.Commands.Interaction.InteractionDeslikeCommand)">
+            <summary>
+            Interage com outro usuário com um deslike
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.InteractionController.Like(VerusDate.Server.Mediator.Commands.Interaction.InteractionLikeCommand)">
+            <summary>
+            Interage com outro usuário com um block
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.InteractionController.GenerateChat(VerusDate.Server.Mediator.Commands.Interaction.InteractionGenerateChatCommand)">
+            <summary>
+            Gera um chat entre dois usuários
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.OidcConfigurationController.GetClientRequestParameters(System.String)">
+            <summary>
+            Recupera os parâmetros do cliente
+            </summary>
+            <param name="clientId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.ProfileController.Add(VerusDate.Server.Mediator.Commands.Profile.ProfileAddCommand)">
+            <summary>
+            Adiciona um novo perfil
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.ProfileController.Get(VerusDate.Server.Mediator.Queries.Profile.ProfileUserGetCommand)">
+            <summary>
+            Recupera o perfil do usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.ProfileController.GetView(VerusDate.Server.Mediator.Queries.Profile.ProfileViewGetCommand)">
+            <summary>
+            Recupera o perfil de um usuário específico
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.ProfileController.ListMatch(VerusDate.Server.Mediator.Queries.Profile.ProfileListMatchCommand)">
+            <summary>
+            Lista os perfis que deram match com o usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.ProfileController.ListSearch(VerusDate.Server.Mediator.Queries.Profile.ProfileListSearchCommand)">
+            <summary>
+            Lista os perfis que batem com a pesquisa do usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.ProfileController.Update(VerusDate.Server.Mediator.Commands.Profile.ProfileUpdateCommand)">
+            <summary>
+            Atualiza o perfil do usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.ProfileLookingController.Add(VerusDate.Server.Mediator.Commands.ProfileLooking.ProfileLookingAddCommand)">
+            <summary>
+            Adiciona um novo perfil de busca do usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.ProfileLookingController.Get(VerusDate.Server.Mediator.Queries.ProfileLooking.ProfileLookingGetCommand)">
+            <summary>
+            Recupera o perfil de busca do usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.ProfileLookingController.Update(VerusDate.Server.Mediator.Commands.ProfileLooking.ProfileLookingUpdateCommand)">
+            <summary>
+            Atualiza o perfil de busca do usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.StorageController.UploadPhotoGallery(VerusDate.Server.Mediator.Commands.Profile.UploadPhotoGalleryCommand)">
+            <summary>
+            Atualiza a galeria de fotos do usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.StorageController.UploadPhotoValidation(VerusDate.Server.Mediator.Commands.Profile.UploadPhotoValidationCommand)">
+            <summary>
+            Atualiza foto de validação do usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.TicketController.GetList(VerusDate.Server.Mediator.Queries.Ticket.TicketGetListCommand)">
+            <summary>
+            Recupera uma lista com todos os tickets existentes
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.TicketController.GetMyVotes(VerusDate.Server.Mediator.Queries.Ticket.TicketGetMyVotesCommand)">
+            <summary>
+            Recupera uma lista com os votos de tickets dados pelo usuário logado
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.TicketController.Insert(VerusDate.Server.Mediator.Commands.Ticket.TicketInsertCommand)">
+            <summary>
+            Insere um novo ticket
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Controllers.TicketController.Vote(VerusDate.Server.Mediator.Commands.Ticket.TicketVoteCommand)">
+            <summary>
+            Voto do usuário logado em um ticket específico
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Helper.DapperExtensions.GetDynamicQuery``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Monta uma query com 1000 comandos de insert
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="lst"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Helper.DapperExtensions.TableName(System.Type)">
+            <summary>
+            Pega o atributo 'Dapper.Contrib.Extensions.Table' da classe
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Helper.TypeExtensions.GetColumns(System.Type)">
+            <summary>
+            Recupera todas as propriedades públicas - ignora os que tem o atributo 'Computed'
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.BeginTransaction">
+            <summary>
+            Inicia uma nova transação
+            </summary>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.Commit">
+            <summary>
+            Confirma todas as operações no banco de dados
+            </summary>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.Rollback">
+            <summary>
+            Desfaz todas as operações no banco de dados
+            </summary>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.GetValue``1(System.Text.StringBuilder,System.Object)">
+            <summary>
+            Retorna um único valor
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="sb"></param>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.Get``1(System.Object)">
+            <summary>
+            Retorna um único objeto (campo chave única)
+            </summary>
+            <typeparam name="V"></typeparam>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.Get``1(System.Text.StringBuilder,System.Object)">
+            <summary>
+            Retorna um único objeto
+            </summary>
+            <typeparam name="V"></typeparam>
+            <param name="sb"></param>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.Query``1(System.Text.StringBuilder,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            Retorna uma lista de objetos
+            </summary>
+            <typeparam name="E"></typeparam>
+            <param name="sb"></param>
+            <param name="param"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.Insert``1(``0)">
+            <summary>
+            Insere um registro na tabela
+            </summary>
+            <typeparam name="V"></typeparam>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.Update``1(``0)">
+            <summary>
+            Atualiza um registro na tabela
+            </summary>
+            <typeparam name="V"></typeparam>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.Delete``1(``0)">
+            <summary>
+            Deleta um registro na tabela
+            </summary>
+            <typeparam name="V"></typeparam>
+            <param name="vm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.Execute(System.Text.StringBuilder,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            Executa um comando/script no banco de dados
+            </summary>
+            <param name="sb"></param>
+            <param name="param"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VerusDate.Server.Core.Interface.IRepository.BulkInsert``1(System.Collections.Generic.IEnumerable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Insere vários registros na tabela. (Não é seguro para trabalhar com dados vindos diretamente do usuário)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="lst"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="P:VerusDate.Server.Mediator.BaseCommandQuery`1.IdUser">
+            <summary>
+            Id do Usuário (Recuperado do Token)
+            </summary>
+        </member>
+        <member name="P:VerusDate.Server.Mediator.IBaseCommand`1.Id">
+            <summary>
+            Id com mesmo valor do IdUser (Recuperado do Token)
+            </summary>
+        </member>
+        <member name="P:VerusDate.Server.Mediator.Commands.Chat.ChatInsertCommand.LstChat">
+            <summary>
+            Chat (lista de conversas) realizado entre dois usuários
+            </summary>
+        </member>
+        <member name="P:VerusDate.Server.Mediator.Commands.Gamification.GamificationExchangeFoodCommand.QtdDiamond">
+            <summary>
+            Quatidade de diamantes desejados para a troca
+            </summary>
+        </member>
+        <member name="P:VerusDate.Server.Mediator.Commands.Interaction.InteractionBlinkCommand.IdUserInteraction">
+            <summary>
+            ID do usuário alvo
+            </summary>
+        </member>
+        <member name="P:VerusDate.Server.Mediator.Commands.Interaction.InteractionBlockCommand.IdUserInteraction">
+            <summary>
+            ID do usuário alvo
+            </summary>
+        </member>
+        <member name="P:VerusDate.Server.Mediator.Commands.Interaction.InteractionDeslikeCommand.IdUserInteraction">
+            <summary>
+            ID do usuário alvo
+            </summary>
+        </member>
+        <member name="P:VerusDate.Server.Mediator.Commands.Interaction.InteractionGenerateChatCommand.IdUserInteraction">
+            <summary>
+            ID do usuário alvo
+            </summary>
+        </member>
+        <member name="P:VerusDate.Server.Mediator.Commands.Interaction.InteractionLikeCommand.IdUserInteraction">
+            <summary>
+            ID do usuário alvo
+            </summary>
+        </member>
+        <member name="P:VerusDate.Server.Mediator.Queries.Interaction.InteractionGetCommand.IdUserInteraction">
+            <summary>
+            ID do usuário que o usuário logado interagiu
+            </summary>
+        </member>
+        <member name="P:VerusDate.Server.Mediator.Queries.Profile.ProfileViewGetCommand.IdUserView">
+            <summary>
+            ID do usuário desejado
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -5,33 +5,25 @@ using VerusDate.Shared.Enum;
 using VerusDate.Shared.Interface.App;
 using VerusDate.Shared.ViewModel;
 
-namespace RealDate.Data.App
+namespace VerusDate.Server.App
 {
     public class GamificationApp : IGamificationApp
     {
-        private readonly IRepository _repos;
+        private readonly IRepository _repo;
 
-        public GamificationApp(IRepository repos)
+        public GamificationApp(IRepository repo)
         {
-            _repos = repos;
+            _repo = repo;
         }
 
         public async Task<GamificationVM> Get(string profileId, CancellationToken cancellationToken)
         {
-            var obj = await _repos.Get<GamificationVM>(profileId);
-
-            if (obj == null)
-            {
-                obj = new GamificationVM(profileId);
-                await _repos.Insert(obj);
-            }
-
-            return obj;
+            return null;
         }
 
         private async Task<bool> Update(GamificationVM gamification)
         {
-            return await _repos.Update(gamification);
+            return await _repo.Update(gamification);
         }
 
         public async Task<bool> AddXP(string profileId, EventAddXP eventoXP, CancellationToken cancellationToken)
@@ -99,11 +91,7 @@ namespace RealDate.Data.App
 
         public async Task<bool> ExchangeFood(string profileId, int qtdDiamond, CancellationToken cancellationToken)
         {
-            var obj = await Get(profileId, cancellationToken);
-
-            obj.ExchangeFood(qtdDiamond);
-
-            return await Update(obj);
+            return true;
         }
 
         public async Task<bool> RemoveFood(string profileId, int qtd, CancellationToken cancellationToken)

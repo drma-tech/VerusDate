@@ -1,0 +1,192 @@
+﻿@page "/Store"
+@attribute [Authorize]
+@inherits PageCore<Store>
+@inject HttpClient Http
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="ibox">
+            <div class="ibox-content product-box">
+                <div class="product-imitation" style="padding: 45px;">
+                    <i class="fas fa-gem fa-4x" style="color: #5c7cfa;"></i>
+                </div>
+                <div class="product-desc">
+                    <span class="product-price">
+                        Grátis
+                    </span>
+                    <span class="product-name">10 Diamantes</span>
+                    <div class="m-t text-righ">
+                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => BuyDiamond(10)"><i class="far fa-credit-card"></i> Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="ibox">
+            <div class="ibox-content product-box">
+                <div class="product-imitation" style="padding: 45px;">
+                    <i class="fas fa-gem fa-4x" style="color: #5c7cfa;"></i>
+                </div>
+                <div class="product-desc">
+                    <span class="product-price">
+                        Grátis
+                    </span>
+                    <span class="product-name">20 Diamantes</span>
+                    <div class="m-t text-righ">
+                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => BuyDiamond(20)"><i class="fa fa-credit-card"></i> Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="ibox">
+            <div class="ibox-content product-box">
+                <div class="product-imitation" style="padding: 45px;">
+                    <i class="fas fa-gem fa-4x" style="color: #5c7cfa;"></i>
+                </div>
+                <div class="product-desc">
+                    <span class="product-price">
+                        Grátis
+                    </span>
+                    <span class="product-name">50 Diamantes</span>
+                    <div class="m-t text-righ">
+                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => BuyDiamond(50)"><i class="fa fa-credit-card"></i> Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="ibox">
+            <div class="ibox-content product-box">
+                <div class="product-imitation" style="padding: 45px;">
+                    <i class="fas fa-gem fa-4x" style="color: #5c7cfa;"></i>
+                </div>
+                <div class="product-desc">
+                    <span class="product-price">
+                        Grátis
+                    </span>
+                    <span class="product-name">100 Diamantes</span>
+                    <div class="m-t text-righ">
+                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => BuyDiamond(100)"><i class="fa fa-credit-card"></i> Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="ibox">
+            <div class="ibox-content product-box">
+                <div class="product-imitation" style="padding: 45px;">
+                    <i class="fas fa-apple-alt fa-4x" style="color: #dc3545;"></i>
+                </div>
+                <div class="product-desc">
+                    <span class="product-price">
+                        1 Diamante
+                    </span>
+                    <span class="product-name">10 Maças</span>
+                    <div class="m-t text-righ">
+                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => ExchangeFood(1)"><i class="fas fa-exchange-alt"></i> Trocar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="ibox">
+            <div class="ibox-content product-box">
+                <div class="product-imitation" style="padding: 45px;">
+                    <i class="fas fa-apple-alt fa-4x" style="color: #dc3545;"></i>
+                </div>
+                <div class="product-desc">
+                    <span class="product-price">
+                        2 Diamantes
+                    </span>
+                    <span class="product-name">20 Maças</span>
+                    <div class="m-t text-righ">
+                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => ExchangeFood(2)"><i class="fa fa-exchange-alt"></i> Trocar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="ibox">
+            <div class="ibox-content product-box">
+                <div class="product-imitation" style="padding: 45px;">
+                    <i class="fas fa-apple-alt fa-4x" style="color: #dc3545;"></i>
+                </div>
+                <div class="product-desc">
+                    <span class="product-price">
+                        3 Diamantes
+                    </span>
+                    <span class="product-name">30 Maças</span>
+                    <div class="m-t text-righ">
+                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => ExchangeFood(3)"><i class="fa fa-exchange-alt"></i> Trocar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="ibox">
+            <div class="ibox-content product-box">
+                <div class="product-imitation" style="padding: 45px;">
+                    <i class="fas fa-apple-alt fa-4x" style="color: #dc3545;"></i>
+                </div>
+                <div class="product-desc">
+                    <span class="product-price">
+                        4 Diamantes
+                    </span>
+                    <span class="product-name">40 Maças</span>
+                    <div class="m-t text-righ">
+                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => ExchangeFood(4)"><i class="fa fa-exchange-alt"></i> Trocar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    protected override async Task LoadData()
+    {
+        //ignore
+    }
+
+    private async Task BuyDiamond(int qtd)
+    {
+        try
+        {
+            var result = await Http.Gamification_AddDiamond(LocalStorage, qtd);
+
+            await result.ProcessResponse(Toast, "Compra realizada com sucesso!");
+
+            RefreshCore.RefreshHead();
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+
+    private async Task ExchangeFood(int qtdDiamond)
+    {
+        try
+        {
+            var result = await Http.Gamification_ExchangeFood(LocalStorage, qtdDiamond);
+
+            await result.ProcessResponse(Toast, "Troca realizada com sucesso!");
+
+            RefreshCore.RefreshHead();
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+}

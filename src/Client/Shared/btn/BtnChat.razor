@@ -1,0 +1,21 @@
+﻿@inherits ComponenteCore<BtnChat>
+@inject HttpClient Http
+
+@if (IsVisible)
+{
+    <button class="btn btn-outline btn-warning btn-circle btn-lg" type="button" title="Conversar" @onclick="GoChat">
+        <i class="far fa-comments"></i>
+    </button>
+}
+
+@code {
+    [Parameter] public string IdUserView { get; set; }
+    [Parameter] public string IdChat { get; set; }
+
+    private bool IsVisible => !string.IsNullOrEmpty(IdChat);
+
+    private void GoChat()
+    {
+        NavigationManager.NavigateTo($"ProfileChat/{IdUserView}");
+    }
+}

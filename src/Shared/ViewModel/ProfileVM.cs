@@ -15,8 +15,16 @@ namespace VerusDate.Shared.ViewModel
         public string NickName { get; set; }
         public DateTime BirthDate { get; set; }
         public double? Distance { get; set; }
-        public string PhotoFace { get; set; }
+        public string MainPhoto { get; set; }
         public ActivityStatus ActivityStatus { get; set; }
+
+        public string GetPhotoFace()
+        {
+            if (string.IsNullOrEmpty(MainPhoto))
+                return "/img/nouser.jpg";
+            else
+                return MainPhoto;
+        }
     }
 
     public class ProfileChatListVM : ProfileBasicVM
@@ -24,10 +32,16 @@ namespace VerusDate.Shared.ViewModel
         public int QtdUnread { get; set; }
     }
 
-    public abstract class ProfileBaseVM : ViewModelType
+    [Table("Profile")]
+    public class ProfileVM : ViewModelType
     {
         [ExplicitKey]
         public string Id { get; set; }
+
+        public DateTimeOffset? DtInsert { get; set; }
+        public DateTimeOffset? DtUpdate { get; set; }
+        public DateTimeOffset? DtTopList { get; set; }
+        public DateTimeOffset? DtLastLogin { get; set; }
 
         [Display(Name = "Nome / Apelido", Prompt = "Ex: Paulo ou Paulinho")]
         public string NickName { get; set; }
@@ -36,7 +50,7 @@ namespace VerusDate.Shared.ViewModel
         public string Description { get; set; }
 
         [Display(Name = "Nascimento")]
-        public DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-18);
+        public DateTime BirthDate { get; set; }
 
         [Display(Name = "Sexo Biológico")]
         public BiologicalSex BiologicalSex { get; set; }
@@ -45,28 +59,28 @@ namespace VerusDate.Shared.ViewModel
         public MaritalStatus MaritalStatus { get; set; }
 
         [Display(Name = "Intenção")]
-        public Intent[] Intent { get; set; }
+        public Intent[] Intent { get; set; } = Array.Empty<Intent>();
 
         [Display(Name = "Identidade de Gênero")]
         [SensitiveData]
-        public GenderIdentity GenderIdentity { get; set; } = GenderIdentity.Cisgender;
+        public GenderIdentity GenderIdentity { get; set; }
 
         [Display(Name = "Orientação Sexual")]
         [SensitiveData]
-        public SexualOrientation SexualOrientation { get; set; } = SexualOrientation.Heteressexual;
+        public SexualOrientation SexualOrientation { get; set; }
+
+        [Display(Name = "Localização")]
+        public double? Longitude { get; set; }
+
+        [Display(Name = "Localização")]
+        public double? Latitude { get; set; }
 
         [Write(false)]
         [Display(Name = "Distância")]
         public double? Distance { get; set; }
 
-        [Display(Name = "País")]
-        public string CountryName { get; set; }
-
-        [Display(Name = "Estado")]
-        public string State { get; set; }
-
-        [Display(Name = "Cidade")]
-        public string City { get; set; }
+        [Display(Name = "Localidade")]
+        public string Location { get; set; }
 
         [Display(Name = "Fuma")]
         public Smoke Smoke { get; set; }
@@ -75,7 +89,7 @@ namespace VerusDate.Shared.ViewModel
         public Drink Drink { get; set; }
 
         [Display(Name = "Dieta")]
-        public Diet Diet { get; set; } = Diet.Omnivore;
+        public Diet Diet { get; set; }
 
         [Display(Name = "Altura")]
         public Height Height { get; set; }
@@ -86,6 +100,9 @@ namespace VerusDate.Shared.ViewModel
         [Display(Name = "Raça", Description = "Classificação da Raça")]
         [SensitiveData]
         public RaceCategory RaceCategory { get; set; }
+
+        [Write(false)]
+        public ActivityStatus ActivityStatus { get; set; }
 
         #region Data visible only to those with long-term intentions
 
@@ -117,19 +134,13 @@ namespace VerusDate.Shared.ViewModel
         public MyersBriggsTypeIndicator? MyersBriggsTypeIndicator { get; set; }
 
         [Display(Name = "Hobbies")]
-        public string[] Hobbies { get; set; }
+        public string[] Hobbies { get; set; } = Array.Empty<string>();
 
         #endregion Data visible only to those with long-term intentions
 
-        #region PHOTOS
+        public string MainPhoto { get; set; }
 
-        public string PhotoFileName1 { get; set; }
-        public string PhotoFileName2 { get; set; }
-        public string PhotoFileName3 { get; set; }
-        public string PhotoFileName4 { get; set; }
-        public string PhotoFileName5 { get; set; }
-
-        #endregion PHOTOS
+        public string[] PhotoGallery { get; set; } = Array.Empty<string>();
 
         /// <summary>
         /// Indicates that extra data will be displayed (for long-term intentions)
@@ -139,31 +150,22 @@ namespace VerusDate.Shared.ViewModel
         {
             return Intent.Any(x => x == Enum.Intent.Relationship) || Intent.Any(x => x == Enum.Intent.Married);
         }
-    }
 
-    /// <summary>
-    /// view other profile users
-    /// </summary>
-    [Table("Profile")]
-    public class ProfileViewVM : ProfileBaseVM
-    {
-        public ActivityStatus ActivityStatus { get; set; } = ActivityStatus.Disabled;
-    }
+        public string GetPhotoFace()
+        {
+            if (string.IsNullOrEmpty(MainPhoto))
+                return "/img/nouser.jpg";
+            else
+                return MainPhoto;
+        }
 
-    /// <summary>
-    /// Visible only for the logged user
-    /// </summary>
-    [Table("Profile")]
-    public class ProfileUserVM : ProfileBaseVM
-    {
-        public DateTimeOffset? DtUpdate { get; set; } //update everytime the user edits the profile
-        public DateTimeOffset DtLastLogin { get; set; } //filter to ensure only active users
-
-        [Display(Name = "Localização")]
-        public double? Longitude { get; set; }
-
-        [Display(Name = "Localização")]
-        public double? Latitude { get; set; }
+        public void LoadDefatultData()
+        {
+            BirthDate = DateTime.Now.AddYears(-18);
+            GenderIdentity = GenderIdentity.Cisgender;
+            SexualOrientation = SexualOrientation.Heteressexual;
+            Diet = Diet.Omnivore;
+        }
 
         public void ClearSimpleView()
         {

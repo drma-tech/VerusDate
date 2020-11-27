@@ -1,4 +1,5 @@
 ﻿using Dapper.Contrib.Extensions;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
@@ -13,8 +14,9 @@ namespace VerusDate.Shared.ViewModel
 
         #region BASIC - REQUIRED FIELDS
 
+        //TODO: LIMITAÇÃO DO BLAZOR
         [Display(Name = "Intenção")]
-        public Intent[] Intent { get; set; }
+        public IReadOnlyList<Intent> Intent { get; set; } = new List<Intent>();
 
         [Display(Name = "Distância (KM)")]
         public double Distance { get; set; }
@@ -80,15 +82,6 @@ namespace VerusDate.Shared.ViewModel
 
         [Display(Name = "Carreira")]
         public CareerCluster? CareerCluster { get; set; }
-
-        [Display(Name = "Personalidade Financeira")]
-        public MoneyPersonality? MoneyPersonality { get; set; }
-
-        [Display(Name = "Personalidade no Relacionamento")]
-        public RelationshipPersonality? RelationshipPersonality { get; set; }
-
-        [Display(Name = "Personalidade MBTI")]
-        public MyersBriggsTypeIndicator? MyersBriggsTypeIndicator { get; set; }
 
         #endregion EXTRA - ONLY FOR WHO LOOKING FOR LONG TERM RELATIONSHIP
     }

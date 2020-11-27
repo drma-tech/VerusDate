@@ -4,8 +4,9 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
 using System.Threading.Tasks;
+using VerusDate.Shared.Helper;
 
-namespace VerusDate.Shared.Helper
+namespace VerusDate.Server.Core.Helper
 {
     public class AuthMessageSenderOptions
     {

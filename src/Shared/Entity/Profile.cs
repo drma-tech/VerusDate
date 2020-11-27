@@ -27,9 +27,7 @@ namespace VerusDate.Shared.Entity
         public SexualOrientation SexualOrientation { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
-        public string CountryName { get; set; }
-        public string State { get; set; }
-        public string City { get; set; }
+        public string Location { get; set; }
         public Height Height { get; set; }
         public BodyMass BodyMass { get; set; }
         public RaceCategory RaceCategory { get; set; }
@@ -55,16 +53,14 @@ namespace VerusDate.Shared.Entity
 
         #region PHOTOS
 
-        public string PhotoFileName1 { get; set; }
-        public string PhotoFileName2 { get; set; }
-        public string PhotoFileName3 { get; set; }
-        public string PhotoFileName4 { get; set; }
-        public string PhotoFileName5 { get; set; }
+        public string MainPhoto { get; set; }
 
         /// <summary>
         /// conteúdo privado. usado apenas para denúncias
         /// </summary>
-        public string PhotoFaceValidation { get; set; }
+        public string MainPhotoValidation { get; set; }
+
+        public string[] PhotoGallery { get; set; }
 
         #endregion PHOTOS
     }

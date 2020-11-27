@@ -7,9 +7,7 @@ namespace VerusDate.Shared.Interface.App
 {
     public interface ITicketApp
     {
-        Task<IEnumerable<TicketVM>> GetList(CancellationToken cancellationToken);
-
-        Task<IEnumerable<TicketVoteVM>> GetMyVotes(string IdUser, CancellationToken cancellationToken);
+      
 
         Task<bool> Add(TicketVM obj);
 

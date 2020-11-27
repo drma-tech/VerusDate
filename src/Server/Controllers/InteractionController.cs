@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VerusDate.Server.Core;
-using VerusDate.Server.Core.Helper;
-using VerusDate.Server.Mediator.Commands;
-using VerusDate.Server.Mediator.Queries;
+using VerusDate.Server.Mediator.Commands.Interaction;
+using VerusDate.Server.Mediator.Queries.Interaction;
+using VerusDate.Shared.ViewModel;
 
 namespace VerusDate.Server.Controllers
 {
@@ -15,200 +16,147 @@ namespace VerusDate.Server.Controllers
     [Route("[controller]")]
     public class InteractionController : BaseController<InteractionController>
     {
-        [HttpGet("Get/{IdUserInteraction}")]
-        public async Task<IActionResult> Get([FromRoute] InteractionGetCommand command)
+        /// <summary>
+        /// Recupera a interação entre o usuário logado e um usuário específico
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpGet("Get")]
+        [ProducesResponseType(typeof(InteractionVM), 200)]
+        public async Task<IActionResult> Get([FromQuery] InteractionGetCommand command)
         {
             try
             {
-                command.IdUser = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                Logger.LogError("Get", ex);
+                Logger.LogError(ex, null, command);
                 return BadRequest(ex.Message);
             }
         }
 
+        /// <summary>
+        /// Recupera todas as interações do usuário logado
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpGet("GetList")]
-        public async Task<IActionResult> GetList([FromRoute] InteractionGetListCommand command)
+        [ProducesResponseType(typeof(IEnumerable<InteractionVM>), 200)]
+        public async Task<IActionResult> GetList([FromQuery] InteractionGetListCommand command)
         {
             try
             {
-                command.IdUser = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                Logger.LogError("GetList", ex);
+                Logger.LogError(ex, null, command);
                 return BadRequest(ex.Message);
             }
         }
 
+        /// <summary>
+        /// Recupera uma lista de perfis do qual o usuário logado deu like
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpGet("GetLikes")]
-        public async Task<IActionResult> GetLikes([FromRoute] InteractionGetLikesCommand command)
+        [ProducesResponseType(typeof(IEnumerable<ProfileBasicVM>), 200)]
+        public async Task<IActionResult> GetLikes([FromQuery] InteractionGetLikesCommand command)
         {
             try
             {
-                command.IdUser = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                Logger.LogError("GetLikes", ex);
+                Logger.LogError(ex, null, command);
                 return BadRequest(ex.Message);
             }
         }
 
+        /// <summary>
+        /// Recupera uma lista de perfis do qual o usuário logado deu blink
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpGet("GetBlinks")]
-        public async Task<IActionResult> GetBlinks([FromRoute] InteractionGetBlinksCommand command)
+        [ProducesResponseType(typeof(IEnumerable<ProfileBasicVM>), 200)]
+        public async Task<IActionResult> GetBlinks([FromQuery] InteractionGetBlinksCommand command)
         {
             try
             {
-                command.IdUser = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                Logger.LogError("GetBlinks", ex);
+                Logger.LogError(ex, null, command);
                 return BadRequest(ex.Message);
             }
         }
 
+        /// <summary>
+        /// Recupera uma lista de perfis do qual o usuário logado deu match
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpGet("GetNewMatches")]
-        public async Task<IActionResult> GetNewMatches([FromRoute] InteractionGetNewMatchesCommand command)
+        [ProducesResponseType(typeof(IEnumerable<ProfileBasicVM>), 200)]
+        public async Task<IActionResult> GetNewMatches([FromQuery] InteractionGetNewMatchesCommand command)
         {
             try
             {
-                command.IdUser = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                Logger.LogError("GetNewMatches", ex);
+                Logger.LogError(ex, null, command);
                 return BadRequest(ex.Message);
             }
         }
 
+        /// <summary>
+        /// Recupera lista de chats disponíveis
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpGet("GetChatList")]
-        public async Task<IActionResult> GetChatList([FromRoute] InteractionGetChatListCommand command)
+        [ProducesResponseType(typeof(IEnumerable<ProfileChatListVM>), 200)]
+        public async Task<IActionResult> GetChatList([FromQuery] InteractionGetChatListCommand command)
         {
             try
             {
-                command.IdUser = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                Logger.LogError("GetChatList", ex);
+                Logger.LogError(ex, null, command);
                 return BadRequest(ex.Message);
             }
         }
 
-        [HttpPost("Blink")]
-        public async Task<IActionResult> Blink([FromBody] InteractionBlinkCommand command)
-        {
-            try
-            {
-                command.IdUser = HttpContext.GetUserId();
-
-                var result = await Mediator.Send(command);
-
-                if (result)
-                    return Ok();
-                else
-                    return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError("Blink", ex);
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPost("Block")]
-        public async Task<IActionResult> Block([FromBody] InteractionBlockCommand command)
-        {
-            try
-            {
-                command.IdUser = HttpContext.GetUserId();
-
-                var result = await Mediator.Send(command);
-
-                if (result)
-                    return Ok();
-                else
-                    return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError("Block", ex);
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPost("Deslike")]
-        public async Task<IActionResult> Deslike([FromBody] InteractionDeslikeCommand command)
-        {
-            try
-            {
-                command.IdUser = HttpContext.GetUserId();
-
-                var result = await Mediator.Send(command);
-
-                if (result)
-                    return Ok();
-                else
-                    return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError("Deslike", ex);
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPost("Like")]
-        public async Task<IActionResult> Like([FromBody] InteractionLikeCommand command)
-        {
-            try
-            {
-                command.IdUser = HttpContext.GetUserId();
-
-                var result = await Mediator.Send(command);
-
-                if (result)
-                    return Ok();
-                else
-                    return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                Logger.LogError("Like", ex);
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPost("GenerateChat")]
-        public async Task<IActionResult> GenerateChat([FromBody] InteractionGenerateChatCommand command)
+        /// <summary>
+        /// Interage com outro usuário com um blink
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPatch("Blink")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> Blink([FromQuery] InteractionBlinkCommand command)
         {
             try
             {
@@ -221,7 +169,111 @@ namespace VerusDate.Server.Controllers
             }
             catch (Exception ex)
             {
-                Logger.LogError("GenerateChat", ex);
+                Logger.LogError(ex, null, command);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Interage com outro usuário com um block
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPatch("Block")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> Block([FromQuery] InteractionBlockCommand command)
+        {
+            try
+            {
+                var result = await Mediator.Send(command);
+
+                if (result)
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, null, command);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Interage com outro usuário com um deslike
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPatch("Deslike")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> Deslike([FromQuery] InteractionDeslikeCommand command)
+        {
+            try
+            {
+                var result = await Mediator.Send(command);
+
+                if (result)
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, null, command);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Interage com outro usuário com um block
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPatch("Like")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> Like([FromQuery] InteractionLikeCommand command)
+        {
+            try
+            {
+                var result = await Mediator.Send(command);
+
+                if (result)
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, null, command);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Gera um chat entre dois usuários
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPatch("GenerateChat")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GenerateChat([FromQuery] InteractionGenerateChatCommand command)
+        {
+            try
+            {
+                var result = await Mediator.Send(command);
+
+                if (result)
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, null, command);
                 return BadRequest(ex.Message);
             }
         }

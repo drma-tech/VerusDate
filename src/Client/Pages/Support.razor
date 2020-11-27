@@ -1,0 +1,217 @@
+﻿@page "/Support"
+@attribute [Authorize]
+@inherits PageCore<Support>
+@inject HttpClient Http
+@*@inject IModalService Modal*@
+
+<div class="alert alert-secondary">
+    <a href="Terms/pt">Termos de Uso</a> ▪ <a href="Privacy/pt">Políticas de Privacidade</a> ▪ <a href="Faq">Dúvidas / Perguntas</a>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Erros</h5>
+                <div class="ibox-tools">
+                    <a class="btn btn-primary btn-xs" @onclick="() => ShowModal(TicketType.Bug)"><i class="fas fa-plus-circle"></i> Novo</a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" @bind="@TicketStatusBug">
+                            <option value=""></option>
+                            @foreach (var item in EnumHelper.GetArray<TicketStatus>())
+                            {
+                                <option value="@item">@item.GetName()</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                @if (OptionsBug.HasCustomVisibility)
+                {
+                    <CustomVisibility Options="@OptionsBug"></CustomVisibility>
+                }
+                else
+                {
+                    <div style="max-height: 350px; overflow:auto;">
+                        <ul class="sortable-list connectList agile-list ui-sortable" style="padding: 0;">
+                            @foreach (var item in GetTicketList(TicketType.Bug))
+                            {
+                                <li class="info-element ui-sortable-handle">
+                                    @item.Description
+                                    <div class="agile-detail">
+                                        <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.Id)" disabled="@anyVote(item.Id)">
+                                            <i class="fas fa-check"></i> Votar
+                                        </button>
+                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtTicket.GetElapsedTime()</span>
+                                        <span class="badge"><i class="fas fa-vote-yea"></i> @item.TotalVotes</span>
+                                        @if (item.TicketStatus == TicketStatus.Published)
+                                        {
+                                            <span class="badge badge-success">@item.TicketStatus.GetName()</span>
+                                        }
+                                        else if (item.TicketStatus == TicketStatus.Progress)
+                                        {
+                                            <span class="badge badge-warning">@item.TicketStatus.GetName()</span>
+                                        }
+                                        else if (item.TicketStatus == TicketStatus.Done)
+                                        {
+                                            <span class="badge badge-primary">@item.TicketStatus.GetName()</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">@item.TicketStatus.GetName()</span>
+                                        }
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Sugestões de Melhorias</h5>
+                <div class="ibox-tools">
+                    <a class="btn btn-primary btn-xs" @onclick="() => ShowModal(TicketType.FeatureRequest)"><i class="fas fa-plus-circle"></i> Novo</a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" @bind="@TicketStatusFeature">
+                            <option value=""></option>
+                            @foreach (var item in EnumHelper.GetArray<TicketStatus>())
+                            {
+                                <option value="@item">@item.GetName()</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                @if (OptionsFeature.HasCustomVisibility)
+                {
+                    <CustomVisibility Options="@OptionsFeature"></CustomVisibility>
+                }
+                else
+                {
+                    <div style="max-height: 350px; overflow:auto;">
+                        <ul class="sortable-list connectList agile-list ui-sortable" style="padding: 0;">
+                            @foreach (var item in GetTicketList(TicketType.FeatureRequest))
+                            {
+                                <li class="info-element ui-sortable-handle">
+                                    @item.Description
+                                    <div class="agile-detail">
+                                        <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.Id)" disabled="@anyVote(item.Id)">
+                                            <i class="fas fa-check"></i> Votar
+                                        </button>
+                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtTicket.GetElapsedTime()</span>
+                                        <span class="badge"><i class="fas fa-vote-yea"></i> @item.TotalVotes</span>
+                                        @if (item.TicketStatus == TicketStatus.Published)
+                                        {
+                                            <span class="badge badge-success">@item.TicketStatus.GetName()</span>
+                                        }
+                                        else if (item.TicketStatus == TicketStatus.Progress)
+                                        {
+                                            <span class="badge badge-warning">@item.TicketStatus.GetName()</span>
+                                        }
+                                        else if (item.TicketStatus == TicketStatus.Done)
+                                        {
+                                            <span class="badge badge-primary">@item.TicketStatus.GetName()</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">@item.TicketStatus.GetName()</span>
+                                        }
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<TicketVM> tickets;
+    private List<TicketVoteVM> myVotes;
+
+    public TicketStatus? TicketStatusBug { get; set; }
+    public TicketStatus? TicketStatusFeature { get; set; }
+
+    private VisibilityOptions OptionsBug => new VisibilityOptions()
+    {
+        Loading = tickets == null && myVotes == null,
+        NoData = (tickets != null && !GetTicketList(TicketType.Bug).Any())
+    };
+
+    private VisibilityOptions OptionsFeature => new VisibilityOptions()
+    {
+        Loading = tickets == null && myVotes == null,
+        NoData = (tickets != null && !GetTicketList(TicketType.FeatureRequest).Any())
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        Toast.ShowWarning("Olá, como ainda estamos em uma versão beta, é provável que alguns erros ocorram ou que alguns recursos precisem de melhorias.");
+    }
+
+    protected override async Task LoadData()
+    {
+        tickets = await Http.Ticket_GetList();
+        myVotes = await Http.Ticket_GetMyVotes();
+    }
+
+    private List<TicketVM> GetTicketList(TicketType ticketType)
+    {
+        if (ticketType == TicketType.Bug && TicketStatusBug.HasValue)
+            return tickets.Where(w => w.TicketType == ticketType & w.TicketStatus == TicketStatusBug).OrderByDescending(o => o.DtTicket).ToList();
+        else if (ticketType == TicketType.FeatureRequest && TicketStatusFeature.HasValue)
+            return tickets.Where(w => w.TicketType == ticketType & w.TicketStatus == TicketStatusFeature).OrderByDescending(o => o.DtTicket).ToList();
+        else
+            return tickets.Where(w => w.TicketType == ticketType).OrderByDescending(o => o.DtTicket).ToList();
+    }
+
+    async Task ShowModal(TicketType ticketType)
+    {
+        //var parameters = new ModalParameters();
+        //parameters.Add(nameof(TicketType), ticketType);
+
+        //var messageForm = Modal.Show<NewTicket>("Novo Ticket", parameters);
+        //var result = await messageForm.Result;
+
+        //if (!result.Cancelled)
+        //{
+        //    await Http.Ticket_Insert((TicketVM)result.Data);
+        //    tickets.Add((TicketVM)result.Data);
+        //}
+    }
+
+    private async Task Vote(string IdTicket)
+    {
+        if (anyVote(IdTicket))
+        {
+            Toast.ShowError("Você já votou neste ticket");
+        }
+        else
+        {
+            await Http.Ticket_Vote(IdTicket);
+            tickets.Single(s => s.Id == IdTicket).Vote();
+            myVotes.Add(new TicketVoteVM(IdTicket, ComponenteUtils.IdUser));
+            Toast.ShowSuccess("Voto registrado com sucesso");
+        }
+    }
+
+    private bool anyVote(string IdTicket)
+    {
+        return myVotes.Any(a => a.IdTicket == IdTicket & a.IdUser == ComponenteUtils.IdUser);
+    }
+}

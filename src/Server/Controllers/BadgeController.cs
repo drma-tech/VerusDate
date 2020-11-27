@@ -4,8 +4,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using VerusDate.Server.Core;
-using VerusDate.Server.Core.Helper;
-using VerusDate.Server.Mediator.Queries;
+using VerusDate.Server.Mediator.Commands.Badge;
+using VerusDate.Server.Mediator.Queries.Badge;
+using VerusDate.Shared.ViewModel;
 
 namespace VerusDate.Server.Controllers
 {
@@ -14,26 +15,39 @@ namespace VerusDate.Server.Controllers
     [Route("[controller]")]
     public class BadgeController : BaseController<BadgeController>
     {
+        /// <summary>
+        /// Recupera os badges do usuário logado
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpGet("Get")]
-        public async Task<IActionResult> Get([FromRoute] BadgeGetCommand command)
+        [ProducesResponseType(typeof(BadgeVM), 200)]
+        public async Task<IActionResult> Get([FromQuery] BadgeGetCommand command)
         {
             try
             {
-                command.IdUser = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
-                return Ok(result);
+                if (result == null)
+                    return NotFound();
+                else
+                    return Ok(result);
             }
             catch (Exception ex)
             {
-                Logger.LogError("Get", ex);
+                Logger.LogError(ex, null, command);
                 return BadRequest(ex.Message);
             }
         }
 
-        [HttpGet("GetView/{IdUser}")]
-        public async Task<IActionResult> GetView([FromRoute] BadgeGetCommand command)
+        /// <summary>
+        /// Insere um novo badge
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost("Insert")]
+        [ProducesResponseType(typeof(BadgeVM), 200)]
+        public async Task<IActionResult> Insert([FromBody] BadgeInsertCommand command)
         {
             try
             {
@@ -43,7 +57,7 @@ namespace VerusDate.Server.Controllers
             }
             catch (Exception ex)
             {
-                Logger.LogError("Get", ex);
+                Logger.LogError(ex, null, command);
                 return BadRequest(ex.Message);
             }
         }

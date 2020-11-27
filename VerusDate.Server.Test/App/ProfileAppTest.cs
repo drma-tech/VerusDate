@@ -21,7 +21,7 @@ namespace VerusDate.Server.Test.App
         {
             var settings = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("ConnectionStrings:SQL", "Server=tcp:db-verusdate.database.windows.net,1433;Initial Catalog=db-verusdate-dev;Persist Security Info=False;User ID=adm_drma;Password=E2515790-4A2A-4177-88C7-C72395606575;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"),
+                new KeyValuePair<string, string>("ConnectionStrings:SQL", ""),
             };
 
             var builder = new ConfigurationBuilder().AddInMemoryCollection(settings);

@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Mediator.Queries.Gamification
 {
@@ -23,7 +23,7 @@ namespace VerusDate.Server.Mediator.Queries.Gamification
 
             if (obj == null)
             {
-                obj = new GamificationVM(request.IdUser);
+                obj = new GamificationVM() { Id = request.IdUser };
                 await _repo.Insert(obj);
             }
 

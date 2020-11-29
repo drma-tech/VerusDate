@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Helper;
 
-namespace VerusDate.Shared.ViewModel
+namespace VerusDate.Shared.ViewModel.Command
 {
     [Table("Gamification")]
-    public class GamificationVM : ViewModelType
+    public class GamificationVM : ViewModelCommand
     {
         [Computed]
         private static int MaxRankXP => 100;
@@ -17,36 +17,28 @@ namespace VerusDate.Shared.ViewModel
         [Computed]
         public int MaxFood => Rank == 0 ? MaxRankFood : Rank * MaxRankFood;
 
-        /// <summary>
-        /// Use for API
-        /// </summary>
-        public GamificationVM()
-        {
-        }
-
-        /// <summary>
-        /// Use for insert
-        /// </summary>
-        /// <param name="id"></param>
-        public GamificationVM(string id)
-        {
-            Id = id;
-        }
-
         [ExplicitKey]
-        public string Id { get; set; }
+        public string Id { get; init; }
 
         [Display(Name = "Rank")]
-        public int Rank { get; set; } = 1;
+        public int Rank { get; private set; }
 
         [Display(Name = "XP")]
-        public int XP { get; set; } = 0;
+        public int XP { get; private set; }
 
         [Display(Name = "Food")]
-        public int Food { get; set; } = 20;
+        public int Food { get; private set; }
 
         [Display(Name = "Diamond")]
-        public int Diamond { get; set; } = 1;
+        public int Diamond { get; private set; }
+
+        public override void LoadDefatultData()
+        {
+            Rank = 1;
+            XP = 0;
+            Food = MaxFood;
+            Diamond = 0;
+        }
 
         public void AddXP(int qtd)
         {

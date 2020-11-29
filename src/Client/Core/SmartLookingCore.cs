@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Client.Core
 {
@@ -68,15 +68,15 @@ namespace VerusDate.Client.Core
 
         private static MaritalStatus? GetMaritalStatus(ProfileVM profile)
         {
-            if (!profile.IsLongTerm()) //short-term
-            {
-                return null;
-            }
-            else //long-term
+            if (profile.Intent.IsLongTerm())
             {
                 if (profile.MaritalStatus == MaritalStatus.Polyamorous) return null;
                 else if (profile.MaritalStatus == MaritalStatus.Monogamous) return null;
                 else return MaritalStatus.Single;
+            }
+            else
+            {
+                return null;
             }
         }
 

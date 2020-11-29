@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Mediator.Commands.Profile
 {
@@ -22,7 +21,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
         {
             //await _gamificationApp.RemoveXP(request.Id, EventRemoveXP.UpdateProfile, cancellationToken);
 
-            request.DtUpdate = DateTimeOffset.UtcNow;
+            request.Update();
 
             return await _repo.Update(request);
         }

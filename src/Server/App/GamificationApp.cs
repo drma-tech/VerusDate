@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Interface.App;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.App
 {

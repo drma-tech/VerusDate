@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace VerusDate.Shared.ViewModel
+namespace VerusDate.Shared
 {
     public class GeoLocation
     {

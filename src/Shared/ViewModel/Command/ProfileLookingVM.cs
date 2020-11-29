@@ -4,32 +4,26 @@ using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.ViewModel
+namespace VerusDate.Shared.ViewModel.Command
 {
     [Table("ProfileLooking")]
-    public class ProfileLookingVM : ViewModelType
+    public class ProfileLookingVM : ViewModelCommand
     {
         [ExplicitKey]
         public string Id { get; set; }
 
-        #region BASIC - REQUIRED FIELDS
-
         //TODO: LIMITAÇÃO DO BLAZOR
-        [Display(Name = "Intenção")]
+        [Display(Name = "Intenções")]
         public IReadOnlyList<Intent> Intent { get; set; } = new List<Intent>();
 
         [Display(Name = "Distância (KM)")]
         public double Distance { get; set; }
 
         [Display(Name = "Idade (Min - Máx)")]
-        public int MinimalAge { get; set; } = 18;
+        public int MinimalAge { get; set; }
 
         [Display(Name = "Idade (Min - Máx)")]
         public int MaxAge { get; set; }
-
-        #endregion BASIC - REQUIRED FIELDS
-
-        #region EXTRA - OPTIONAL FIELDS
 
         [Display(Name = "Sexo Biológico")]
         public BiologicalSex? BiologicalSex { get; set; }
@@ -64,10 +58,6 @@ namespace VerusDate.Shared.ViewModel
         [Display(Name = "Raça")]
         public RaceCategory? RaceCategory { get; set; }
 
-        #endregion EXTRA - OPTIONAL FIELDS
-
-        #region EXTRA - ONLY FOR WHO LOOKING FOR LONG TERM RELATIONSHIP
-
         [Display(Name = "Tem Filho(s)")]
         public HaveChildren? HaveChildren { get; set; }
 
@@ -83,6 +73,12 @@ namespace VerusDate.Shared.ViewModel
         [Display(Name = "Carreira")]
         public CareerCluster? CareerCluster { get; set; }
 
-        #endregion EXTRA - ONLY FOR WHO LOOKING FOR LONG TERM RELATIONSHIP
+        public override void LoadDefatultData()
+        {
+            MinimalAge = 18;
+            MaxAge = 40;
+            MinimalHeight = Height._155;
+            MaxHeight = Height._185;
+        }
     }
 }

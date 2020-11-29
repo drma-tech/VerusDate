@@ -1,7 +1,6 @@
 ﻿using Bogus;
-using System;
 using VerusDate.Shared.Enum;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Shared.Seed
 {
@@ -12,7 +11,7 @@ namespace VerusDate.Shared.Seed
             return new Faker<ProfileVM>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.Id = id ?? Guid.NewGuid().ToString();
+                    //p.Id = id ?? Guid.NewGuid().ToString();
                     p.NickName = s.Internet.UserName();
                     p.Description = s.Lorem.Word();
                     p.BirthDate = s.Date.Past(18).Date;
@@ -28,7 +27,6 @@ namespace VerusDate.Shared.Seed
                     p.Height = s.PickRandom<Height>();
                     p.BodyMass = s.PickRandom<BodyMass>();
                     p.RaceCategory = s.PickRandom<RaceCategory>();
-                    if (view) p.Distance = 0.0;
                     p.Latitude = s.Address.Latitude(-3.220192, -34.316614);
                     p.Longitude = s.Address.Longitude(-35.039519, -69.421414);
                     //p.Latitude = s.Address.Latitude();
@@ -41,10 +39,10 @@ namespace VerusDate.Shared.Seed
                     p.RelationshipPersonality = s.PickRandom<RelationshipPersonality>();
                     p.Religion = s.PickRandom<Religion>();
                     p.WantChildren = s.PickRandom<WantChildren>();
-                    p.MainPhoto = s.Image.PicsumUrl();
-                    p.PhotoGallery = new[] { s.Image.PicsumUrl() };
+                    p.UpdateMainPhoto(s.Image.PicsumUrl());
+                    p.UpdatePhotoGallery(new[] { s.Image.PicsumUrl() });
                     p.Hobbies = s.Random.WordsArray(1, 8);
-                    if (view) p.ActivityStatus = ActivityStatus.Today;
+                    p.ActivityStatus = s.PickRandom<ActivityStatus>();
                 });
         }
 
@@ -53,7 +51,7 @@ namespace VerusDate.Shared.Seed
             return new Faker<ProfileLookingVM>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.Id = id ?? Guid.NewGuid().ToString();
+                    //p.Id = id ?? Guid.NewGuid().ToString();
                     p.MinimalAge = s.Random.Int(18, 120);
                     p.MaxAge = s.Random.Int(18, 120);
                     p.BiologicalSex = s.PickRandom<BiologicalSex>();

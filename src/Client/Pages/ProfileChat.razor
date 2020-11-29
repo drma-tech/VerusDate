@@ -195,8 +195,8 @@
                     try
                     {
                         if (user == CurrentUser.Id) //só recebe se quem mandou for o mesmo do chat
-                        {
-                            ListChat.Add(new ChatVM(InteractionVM.IdChat, user, TypeContent.Message, message));
+                    {
+                            ListChat.Add(new ChatVM() { IdChat = InteractionVM.IdChat, IdUserSender = user, TypeContent = TypeContent.Message, Content = message });
                             StateHasChanged();
                         }
                     }
@@ -245,7 +245,7 @@
         try
         {
             await hubConnection.SendAsync("SendPrivateMessage", ComponenteUtils.IdUser, Message, CurrentUser.Id);
-            ListChat.Add(new ChatVM(InteractionVM.IdChat, ComponenteUtils.IdUser, TypeContent.Message, Message));
+            ListChat.Add(new ChatVM() { IdChat = InteractionVM.IdChat, IdUserSender = ComponenteUtils.IdUser, TypeContent = TypeContent.Message, Content = Message });
             Message = "";
             await Http.Chat_Insert(ListChat.Where(w => w.IsSync == false).ToList()); //TODO: encontrar maneira mais eficiente de salvar
         }

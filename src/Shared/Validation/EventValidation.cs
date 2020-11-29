@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Shared.Validation
 {
@@ -16,13 +16,7 @@ namespace VerusDate.Shared.Validation
             RuleFor(x => x.EventType)
                 .NotEmpty();
 
-            RuleFor(x => x.CountryName)
-               .NotEmpty();
-
-            RuleFor(x => x.State)
-               .NotEmpty();
-
-            RuleFor(x => x.City)
+            RuleFor(x => x.Location)
                .NotEmpty();
 
             RuleFor(x => x.MinimalAge)

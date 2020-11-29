@@ -65,17 +65,17 @@ namespace VerusDate.Server.Data.Repository
             return await _conn.ExecuteScalarAsync<T>(sb.ToString(), param, _trans);
         }
 
-        public async Task<T> Get<T>(object id) where T : ViewModelType
+        public async Task<T> Get<T>(object id) where T : ViewModelQuery
         {
             return await _conn.GetAsync<T>(id, _trans);
         }
 
-        public async Task<T> Get<T>(StringBuilder sb, object param = null) where T : ViewModelType
+        public async Task<T> Get<T>(StringBuilder sb, object param = null) where T : ViewModelQuery
         {
             return await _conn.QuerySingleOrDefaultAsync<T>(sb.ToString(), param, _trans);
         }
 
-        public async Task<IEnumerable<T>> Query<T>(StringBuilder sb, object param = null, CancellationToken cancellationToken = default) where T : ViewModelType
+        public async Task<IEnumerable<T>> Query<T>(StringBuilder sb, object param = null, CancellationToken cancellationToken = default) where T : ViewModelQuery
         {
             return await _conn.QueryAsync<T>(new CommandDefinition(sb.ToString(), param, _trans, cancellationToken: cancellationToken));
         }
@@ -84,18 +84,18 @@ namespace VerusDate.Server.Data.Repository
 
         #region COMMANDS
 
-        public async Task<bool> Insert<E>(E vm) where E : ViewModelType
+        public async Task<bool> Insert<E>(E vm) where E : ViewModelCommand
         {
             await _conn.InsertAsync(vm, _trans);
             return true;
         }
 
-        public async Task<bool> Update<E>(E vm) where E : ViewModelType
+        public async Task<bool> Update<E>(E vm) where E : ViewModelCommand
         {
             return await _conn.UpdateAsync(vm, _trans);
         }
 
-        public async Task<bool> Delete<E>(E vm) where E : ViewModelType
+        public async Task<bool> Delete<E>(E vm) where E : ViewModelCommand
         {
             return await _conn.DeleteAsync(vm, _trans);
         }
@@ -105,7 +105,7 @@ namespace VerusDate.Server.Data.Repository
             return await _conn.ExecuteAsync(new CommandDefinition(sb.ToString(), param, _trans, cancellationToken: cancellationToken));
         }
 
-        public async Task<int> BulkInsert<T>(IEnumerable<T> lst, CancellationToken cancellationToken = default) where T : ViewModelType
+        public async Task<int> BulkInsert<T>(IEnumerable<T> lst, CancellationToken cancellationToken = default) where T : ViewModelCommand
         {
             var sqls = new DapperExtensions().GetDynamicQuery(lst);
             int total = 0;

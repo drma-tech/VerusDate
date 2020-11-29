@@ -45,7 +45,7 @@ namespace VerusDate.Server.Core.Interface
         /// <typeparam name="V"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<V> Get<V>(object id) where V : ViewModelType;
+        Task<V> Get<V>(object id) where V : ViewModelQuery;
 
         /// <summary>
         /// Retorna um único objeto
@@ -54,7 +54,7 @@ namespace VerusDate.Server.Core.Interface
         /// <param name="sb"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        Task<V> Get<V>(StringBuilder sb, object param = null) where V : ViewModelType;
+        Task<V> Get<V>(StringBuilder sb, object param = null) where V : ViewModelQuery;
 
         /// <summary>
         /// Retorna uma lista de objetos
@@ -64,7 +64,7 @@ namespace VerusDate.Server.Core.Interface
         /// <param name="param"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<IEnumerable<E>> Query<E>(StringBuilder sb, object param = null, CancellationToken cancellationToken = default) where E : ViewModelType;
+        Task<IEnumerable<E>> Query<E>(StringBuilder sb, object param = null, CancellationToken cancellationToken = default) where E : ViewModelQuery;
 
         #endregion QUERIES
 
@@ -76,7 +76,7 @@ namespace VerusDate.Server.Core.Interface
         /// <typeparam name="V"></typeparam>
         /// <param name="vm"></param>
         /// <returns></returns>
-        Task<bool> Insert<V>(V vm) where V : ViewModelType;
+        Task<bool> Insert<V>(V vm) where V : ViewModelCommand;
 
         /// <summary>
         /// Atualiza um registro na tabela
@@ -84,7 +84,7 @@ namespace VerusDate.Server.Core.Interface
         /// <typeparam name="V"></typeparam>
         /// <param name="vm"></param>
         /// <returns></returns>
-        Task<bool> Update<V>(V vm) where V : ViewModelType;
+        Task<bool> Update<V>(V vm) where V : ViewModelCommand;
 
         /// <summary>
         /// Deleta um registro na tabela
@@ -92,7 +92,7 @@ namespace VerusDate.Server.Core.Interface
         /// <typeparam name="V"></typeparam>
         /// <param name="vm"></param>
         /// <returns></returns>
-        Task<bool> Delete<V>(V vm) where V : ViewModelType;
+        Task<bool> Delete<V>(V vm) where V : ViewModelCommand;
 
         /// <summary>
         /// Executa um comando/script no banco de dados
@@ -110,7 +110,7 @@ namespace VerusDate.Server.Core.Interface
         /// <param name="lst"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<int> BulkInsert<T>(IEnumerable<T> lst, CancellationToken cancellationToken = default) where T : ViewModelType;
+        Task<int> BulkInsert<T>(IEnumerable<T> lst, CancellationToken cancellationToken = default) where T : ViewModelCommand;
 
         #endregion COMMANDS
     }

@@ -9,9 +9,6 @@ namespace VerusDate.Server.Data.EntityConfig
         public void Configure(EntityTypeBuilder<TicketVote> builder)
         {
             builder.HasKey(c => new { c.IdTicket, c.IdUser });
-
-            builder.Property(c => c.DtVote)
-                .HasDefaultValueSql("SYSDATETIMEOFFSET()");
         }
     }
 }

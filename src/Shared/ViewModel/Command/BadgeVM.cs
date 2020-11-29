@@ -2,13 +2,13 @@
 using VerusDate.Shared.Core;
 using VerusDate.Shared.ValueType;
 
-namespace VerusDate.Shared.ViewModel
+namespace VerusDate.Shared.ViewModel.Command
 {
     [Table("Badge")]
-    public class BadgeVM : ViewModelType
+    public class BadgeVM : ViewModelCommand
     {
         [ExplicitKey]
-        public string Id { get; init; }
+        public string Id { get; set; }
 
         [Write(false)]
         public BadgeType Rank { get; private set; } = new BadgeType(10, "fas fa-crown", "Rank", "Nível alcançado");
@@ -24,5 +24,10 @@ namespace VerusDate.Shared.ViewModel
 
         [Write(false)]
         public BadgeType Popular { get; private set; } = new BadgeType(1, "far fa-grin-stars", "Popular", "Tem uma relação de 70% ou mais de likes");
+
+        public override void LoadDefatultData()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

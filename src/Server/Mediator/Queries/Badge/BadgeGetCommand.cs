@@ -1,10 +1,8 @@
-﻿using Dapper.FluentMap;
-using MediatR;
+﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
-using VerusDate.Shared.Mapper;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Mediator.Queries.Badge
 {

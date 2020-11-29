@@ -1,5 +1,5 @@
 ﻿using Dapper.FluentMap.Mapping;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Shared.Mapper
 {

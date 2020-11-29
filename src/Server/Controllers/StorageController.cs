@@ -26,8 +26,6 @@ namespace VerusDate.Server.Controllers
         {
             try
             {
-                command.Id = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
                 if (result)
@@ -54,8 +52,6 @@ namespace VerusDate.Server.Controllers
         {
             try
             {
-                command.Id = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
                 if (result)

@@ -6,7 +6,7 @@ namespace VerusDate.Shared.Entity
     public class Badge : EntityType
     {
         [Key]
-        public string Id { get; private set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// 1 = Bronze
@@ -20,7 +20,7 @@ namespace VerusDate.Shared.Entity
         /// 9 = Obsidiana
         /// 10 = Diamante
         /// </summary>
-        public ValueType.BadgeType Rank { get; private set; } //aumenta pelo xp
+        public ValueType.BadgeType Rank { get; set; } //aumenta pelo xp
 
         /// <summary>
         /// 1 mês de aniversário
@@ -34,23 +34,23 @@ namespace VerusDate.Shared.Entity
         /// 9 meses de aniversário
         /// 10 meses de aniversário
         /// </summary>
-        public ValueType.BadgeType Seniority { get; private set; } //aumenta com a passagem do tempo
+        public ValueType.BadgeType Seniority { get; set; } //aumenta com a passagem do tempo
 
         /// <summary>
         /// completou todos os campos existentes (de acordo com a intenção escolhida)
         /// </summary>
-        public ValueType.BadgeType CompletedProfile { get; private set; } //aumenta com ações do usuário
+        public ValueType.BadgeType CompletedProfile { get; set; } //aumenta com ações do usuário
 
         /// <summary>
         /// 1 = foto
         /// 2 = redes sociais
         /// 3 = avaliação pessoal
         /// </summary>
-        public ValueType.BadgeType VerifiedProfile { get; private set; } //aumenta com ações do usuário
+        public ValueType.BadgeType VerifiedProfile { get; set; } //aumenta com ações do usuário
 
         /// <summary>
         /// likes acima de 70%
         /// </summary>
-        public ValueType.BadgeType Popular { get; private set; } //aumenta com ações de outros usuários
+        public ValueType.BadgeType Popular { get; set; } //aumenta com ações de outros usuários
     }
 }

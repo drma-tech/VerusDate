@@ -1,14 +1,11 @@
 ﻿using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
 using VerusDate.Shared.Helper;
-using VerusDate.Shared.Interface.App;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 using static VerusDate.Shared.Helper.ProfileHelper;
 
 namespace VerusDate.Server.Mediator.Queries.Profile
@@ -26,7 +23,7 @@ namespace VerusDate.Server.Mediator.Queries.Profile
 
         public async Task<IEnumerable<ProfileVM>> Handle(ProfileListMatchCommand request, CancellationToken cancellationToken)
         {
-            var looking =  await _repo.Get<ProfileLookingVM>(request.IdUser);
+            var looking = await _repo.Get<ProfileLookingVM>(request.IdUser);
 
             if (looking == null) throw new NotificationException("Critérios de busca ainda não definidos");
 

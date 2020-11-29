@@ -10,12 +10,12 @@ namespace VerusDate.Server.Data.EntityConfig
         {
             builder.HasKey(c => c.Id);
 
+            builder.Property(c => c.Id)
+                .HasDefaultValueSql("NEWID()");
+
             builder.Property(c => c.Description)
                 .IsRequired()
                 .HasMaxLength(512);
-
-            builder.Property(c => c.DtTicket)
-                .HasDefaultValueSql("SYSDATETIMEOFFSET()");
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using VerusDate.Client.Core;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Query;
 
 namespace VerusDate.Client.Api
 {

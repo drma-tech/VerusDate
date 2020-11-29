@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using VerusDate.Server.Core;
 using VerusDate.Server.Mediator.Commands.Gamification;
 using VerusDate.Server.Mediator.Queries.Gamification;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Controllers
 {

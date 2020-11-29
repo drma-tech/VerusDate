@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using VerusDate.Server.Core;
 using VerusDate.Server.Mediator.Commands.Chat;
 using VerusDate.Server.Mediator.Queries.Chat;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Controllers
 {

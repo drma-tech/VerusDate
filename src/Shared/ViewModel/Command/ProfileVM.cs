@@ -1,47 +1,19 @@
 ﻿using Dapper.Contrib.Extensions;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.ViewModel
+namespace VerusDate.Shared.ViewModel.Command
 {
-    public class ProfileBasicVM : ViewModelType
-    {
-        [ExplicitKey]
-        public string Id { get; set; }
-
-        public string NickName { get; set; }
-        public DateTime BirthDate { get; set; }
-        public double? Distance { get; set; }
-        public string MainPhoto { get; set; }
-        public ActivityStatus ActivityStatus { get; set; }
-
-        public string GetPhotoFace()
-        {
-            if (string.IsNullOrEmpty(MainPhoto))
-                return "/img/nouser.jpg";
-            else
-                return MainPhoto;
-        }
-    }
-
-    public class ProfileChatListVM : ProfileBasicVM
-    {
-        public int QtdUnread { get; set; }
-    }
-
     [Table("Profile")]
-    public class ProfileVM : ViewModelType
+    public class ProfileVM : ViewModelCommand
     {
         [ExplicitKey]
         public string Id { get; set; }
 
-        public DateTimeOffset? DtInsert { get; set; }
-        public DateTimeOffset? DtUpdate { get; set; }
-        public DateTimeOffset? DtTopList { get; set; }
-        public DateTimeOffset? DtLastLogin { get; set; }
+        public DateTimeOffset? DtTopList { get; private set; }
+        public DateTimeOffset? DtLastLogin { get; private set; }
 
         [Display(Name = "Nome / Apelido", Prompt = "Ex: Paulo ou Paulinho")]
         public string NickName { get; set; }
@@ -69,17 +41,13 @@ namespace VerusDate.Shared.ViewModel
         [SensitiveData]
         public SexualOrientation SexualOrientation { get; set; }
 
-        [Display(Name = "Localização")]
+        [Display(Name = "Longitude")]
         public double? Longitude { get; set; }
 
-        [Display(Name = "Localização")]
+        [Display(Name = "Latitude")]
         public double? Latitude { get; set; }
 
-        [Write(false)]
-        [Display(Name = "Distância")]
-        public double? Distance { get; set; }
-
-        [Display(Name = "Localidade")]
+        [Display(Name = "Localização")]
         public string Location { get; set; }
 
         [Display(Name = "Fuma")]
@@ -103,8 +71,6 @@ namespace VerusDate.Shared.ViewModel
 
         [Write(false)]
         public ActivityStatus ActivityStatus { get; set; }
-
-        #region Data visible only to those with long-term intentions
 
         [Display(Name = "Tem Filho(s)")]
         public HaveChildren? HaveChildren { get; set; }
@@ -136,19 +102,46 @@ namespace VerusDate.Shared.ViewModel
         [Display(Name = "Hobbies")]
         public string[] Hobbies { get; set; } = Array.Empty<string>();
 
-        #endregion Data visible only to those with long-term intentions
+        public string MainPhoto { get; private set; }
 
-        public string MainPhoto { get; set; }
+        public string[] PhotoGallery { get; private set; } = Array.Empty<string>();
 
-        public string[] PhotoGallery { get; set; } = Array.Empty<string>();
+        [Write(false)]
+        [Display(Name = "Distância")]
+        public double? Distance { get; set; }
 
-        /// <summary>
-        /// Indicates that extra data will be displayed (for long-term intentions)
-        /// </summary>
-        /// <returns></returns>
-        public bool IsLongTerm()
+        public override void LoadDefatultData()
         {
-            return Intent.Any(x => x == Enum.Intent.Relationship) || Intent.Any(x => x == Enum.Intent.Married);
+            DtTopList = DateTimeOffset.UtcNow;
+            DtLastLogin = DateTimeOffset.UtcNow;
+            BirthDate = DateTime.Now.AddYears(-18);
+            GenderIdentity = GenderIdentity.Cisgender;
+            SexualOrientation = SexualOrientation.Heteressexual;
+            Diet = Diet.Omnivore;
+        }
+
+        public void UpList()
+        {
+            DtTopList = DateTimeOffset.UtcNow;
+        }
+
+        public void Login()
+        {
+            DtLastLogin = DateTimeOffset.UtcNow;
+        }
+
+        public void UpdateMainPhoto(string MainPhoto)
+        {
+            this.MainPhoto = MainPhoto;
+
+            base.Update();
+        }
+
+        public void UpdatePhotoGallery(string[] PhotoGallery)
+        {
+            this.PhotoGallery = PhotoGallery;
+
+            base.Update();
         }
 
         public string GetPhotoFace()
@@ -159,17 +152,9 @@ namespace VerusDate.Shared.ViewModel
                 return MainPhoto;
         }
 
-        public void LoadDefatultData()
-        {
-            BirthDate = DateTime.Now.AddYears(-18);
-            GenderIdentity = GenderIdentity.Cisgender;
-            SexualOrientation = SexualOrientation.Heteressexual;
-            Diet = Diet.Omnivore;
-        }
-
         public void ClearSimpleView()
         {
-            if (!IsLongTerm())
+            if (Intent.IsShortTerm())
             {
                 EducationLevel = null;
                 HaveChildren = null;

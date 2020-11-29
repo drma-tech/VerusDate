@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Mediator.Commands.Chat
 {
-    public class ChatInsertCommand : IRequest<int>
+    public class ChatInsertCommand : IBaseCommand<int>
     {
         /// <summary>
         /// Chat (lista de conversas) realizado entre dois usuários
         /// </summary>
         public List<ChatVM> LstChat { get; private set; }
+        public string Id { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 
     public class ChatInsertChatHandler : IRequestHandler<ChatInsertCommand, int>

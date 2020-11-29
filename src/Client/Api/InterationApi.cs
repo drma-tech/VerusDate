@@ -5,7 +5,8 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using VerusDate.Client.Core;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
+using VerusDate.Shared.ViewModel.Query;
 
 namespace VerusDate.Client.Api
 {

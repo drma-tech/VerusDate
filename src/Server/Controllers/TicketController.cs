@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using VerusDate.Server.Core;
 using VerusDate.Server.Mediator.Commands.Ticket;
 using VerusDate.Server.Mediator.Queries.Ticket;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Controllers
 {

@@ -8,7 +8,7 @@ using VerusDate.Server.Core;
 using VerusDate.Server.Core.Helper;
 using VerusDate.Server.Mediator.Commands.Profile;
 using VerusDate.Server.Mediator.Queries.Profile;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Controllers
 {
@@ -97,8 +97,6 @@ namespace VerusDate.Server.Controllers
         {
             try
             {
-                command.IdUser = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
                 return Ok(result);
@@ -121,8 +119,6 @@ namespace VerusDate.Server.Controllers
         {
             try
             {
-                command.IdUser = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
                 return Ok(result);
@@ -145,8 +141,6 @@ namespace VerusDate.Server.Controllers
         {
             try
             {
-                command.Id = HttpContext.GetUserId();
-
                 var result = await Mediator.Send(command);
 
                 if (result)

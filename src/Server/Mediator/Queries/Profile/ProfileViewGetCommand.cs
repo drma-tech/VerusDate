@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 using static VerusDate.Shared.Helper.ProfileHelper;
 
 namespace VerusDate.Server.Mediator.Queries.Profile

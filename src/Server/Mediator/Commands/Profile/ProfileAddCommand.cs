@@ -1,12 +1,9 @@
-﻿using Dapper;
-using Dapper.Contrib.Extensions;
+﻿using Dapper.Contrib.Extensions;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
-using VerusDate.Shared.Handles;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Mediator.Commands.Profile
 {
@@ -32,10 +29,6 @@ namespace VerusDate.Server.Mediator.Commands.Profile
             //}
 
             //await _profileValidationApp.ValidateProfileData(request.Id, true, cancellationToken);
-
-            request.DtInsert = DateTimeOffset.UtcNow;
-            request.DtTopList = DateTimeOffset.UtcNow;
-            request.DtLastLogin = DateTimeOffset.UtcNow;
 
             return await _repo.Insert(request);
         }

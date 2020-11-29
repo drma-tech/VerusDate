@@ -5,7 +5,7 @@ using System;
 using System.Threading.Tasks;
 using VerusDate.Server.Core;
 using VerusDate.Server.Mediator.Queries.GlobalInteraction;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Query;
 
 namespace VerusDate.Server.Controllers
 {

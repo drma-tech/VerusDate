@@ -1,9 +1,9 @@
 ﻿using Dapper.Contrib.Extensions;
 using VerusDate.Shared.Core;
 
-namespace VerusDate.Shared.ViewModel
+namespace VerusDate.Shared.ViewModel.Query
 {
-    public class GlobalInteractionsVM : ViewModelType
+    public class GlobalInteractionsVM : ViewModelQuery
     {
         [ExplicitKey]
         public string Id { get; set; }

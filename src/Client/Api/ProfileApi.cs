@@ -6,8 +6,9 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using VerusDate.Client.Core;
+using VerusDate.Shared;
 using VerusDate.Shared.Enum;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Client.Api
 {
@@ -61,7 +62,7 @@ namespace VerusDate.Client.Api
                 new AffinityVM(nameof(profView.RaceCategory), CheckEnum((int)profView.RaceCategory, (int?)profUser.RaceCategory))
             };
 
-            if (profView.IsLongTerm())
+            if (profView.Intent.IsLongTerm())
             {
                 obj.Add(new AffinityVM(nameof(profView.HaveChildren), CheckEnum((int)profView.HaveChildren.Value, (int?)profUser.HaveChildren)));
                 obj.Add(new AffinityVM(nameof(profView.WantChildren), CheckEnum((int)profView.WantChildren.Value, (int?)profUser.WantChildren)));

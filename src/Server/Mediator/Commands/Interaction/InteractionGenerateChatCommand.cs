@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
 using VerusDate.Shared.Helper;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Mediator.Commands.Interaction
 {

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace VerusDate.Shared.Enum
 {
@@ -19,5 +20,18 @@ namespace VerusDate.Shared.Enum
 
         [Display(Name = "Morar juntos / Casar", Description = "quem tem a intenção de casar ou morar juntos em um curto período de tempo")]
         Married = 22
+    }
+
+    public static class Extension
+    {
+        public static bool IsShortTerm(this Intent[] intent)
+        {
+            return intent.Any(a => a == Intent.OneNightStand || a == Intent.FriendsWithBenefits);
+        }
+
+        public static bool IsLongTerm(this Intent[] intent)
+        {
+            return intent.Any(a => a == Intent.Relationship || a == Intent.Married);
+        }
     }
 }

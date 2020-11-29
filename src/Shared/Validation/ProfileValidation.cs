@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using System;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.Enum;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Shared.Validation
 {
@@ -49,31 +50,31 @@ namespace VerusDate.Shared.Validation
 
             RuleFor(x => x.EducationLevel)
                 .NotEmpty()
-                .When(w => w.IsLongTerm());
+                .When(w => w.Intent.IsLongTerm());
 
             RuleFor(x => x.HaveChildren)
                .NotEmpty()
-               .When(w => w.IsLongTerm());
+               .When(w => w.Intent.IsLongTerm());
 
             RuleFor(x => x.WantChildren)
                 .NotEmpty()
-                .When(w => w.IsLongTerm());
+                .When(w => w.Intent.IsLongTerm());
 
             RuleFor(x => x.CareerCluster)
                .NotEmpty()
-               .When(w => w.IsLongTerm());
+               .When(w => w.Intent.IsLongTerm());
 
             RuleFor(x => x.Religion)
               .NotEmpty()
-              .When(w => w.IsLongTerm());
+              .When(w => w.Intent.IsLongTerm());
 
             RuleFor(x => x.MoneyPersonality)
                 .NotEmpty()
-                .When(w => w.IsLongTerm());
+                .When(w => w.Intent.IsLongTerm());
 
             RuleFor(x => x.RelationshipPersonality)
                .NotEmpty()
-               .When(w => w.IsLongTerm());
+               .When(w => w.Intent.IsLongTerm());
         }
     }
 }

@@ -9,7 +9,7 @@ namespace VerusDate.Client.Core
 {
     public static class ApiCore
     {
-        public static async Task<T> GetCustom<T>(this HttpClient http, string requestUri) where T : ViewModelType
+        public static async Task<T> GetCustom<T>(this HttpClient http, string requestUri) where T : ViewModelQuery
         {
             var response = await http.GetAsync(requestUri);
 
@@ -23,7 +23,7 @@ namespace VerusDate.Client.Core
             }
         }
 
-        public static async Task<List<T>> ListCustom<T>(this HttpClient http, string requestUri) where T : ViewModelType
+        public static async Task<List<T>> ListCustom<T>(this HttpClient http, string requestUri) where T : ViewModelQuery
         {
             var response = await http.GetAsync(requestUri);
 

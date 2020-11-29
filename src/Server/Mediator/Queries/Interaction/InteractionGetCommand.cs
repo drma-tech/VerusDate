@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Mediator.Queries.Interaction
 {
@@ -29,11 +29,11 @@ namespace VerusDate.Server.Mediator.Queries.Interaction
         {
             if (request.IdUser == request.IdUserInteraction) throw new InvalidOperationException();
 
-            var obj = await _repo.Get<InteractionVM>(new StringBuilder("SELECT * FROM Interaction WHERE IdUser = @Id AND IdUserInteraction = @IdUserInteraction"), request);
+            var obj = await _repo.Get<InteractionVM>(new StringBuilder("SELECT * FROM Interaction WHERE IdUser = @IdUser AND IdUserInteraction = @IdUserInteraction"), request);
 
             if (obj == null)
             {
-                obj = new InteractionVM(request.IdUser, request.IdUserInteraction);
+                obj = new InteractionVM() { Id = request.IdUser, IdUserInteraction = request.IdUserInteraction };
                 await _repo.Insert(obj);
             }
 

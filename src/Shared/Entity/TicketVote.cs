@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Entity
@@ -11,7 +10,5 @@ namespace VerusDate.Shared.Entity
 
         [Key]
         public string IdUser { get; set; }
-
-        public DateTimeOffset DtVote { get; set; }
     }
 }

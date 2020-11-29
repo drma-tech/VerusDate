@@ -10,12 +10,8 @@ namespace VerusDate.Shared.Entity
         [Key]
         public string Id { get; set; }
 
-        public DateTimeOffset DtInsert { get; set; }
-        public DateTimeOffset? DtUpdate { get; set; } //update everytime the user edits the profile
         public DateTimeOffset DtTopList { get; set; } //main index for sorting
         public DateTimeOffset DtLastLogin { get; set; } //filter to ensure only active users
-
-        #region BASIC - REQUIRED FIELDS
 
         public string NickName { get; set; }
         public string Description { get; set; }
@@ -35,10 +31,6 @@ namespace VerusDate.Shared.Entity
         public Drink Drink { get; set; }
         public Diet Diet { get; set; }
 
-        #endregion BASIC - REQUIRED FIELDS
-
-        #region EXTRA - LIFESTYLE
-
         public HaveChildren? HaveChildren { get; set; }
         public WantChildren? WantChildren { get; set; }
         public EducationLevel? EducationLevel { get; set; }
@@ -49,10 +41,6 @@ namespace VerusDate.Shared.Entity
         public MyersBriggsTypeIndicator? MyersBriggsTypeIndicator { get; set; }
         public string[] Hobbies { get; set; }
 
-        #endregion EXTRA - LIFESTYLE
-
-        #region PHOTOS
-
         public string MainPhoto { get; set; }
 
         /// <summary>
@@ -61,7 +49,5 @@ namespace VerusDate.Shared.Entity
         public string MainPhotoValidation { get; set; }
 
         public string[] PhotoGallery { get; set; }
-
-        #endregion PHOTOS
     }
 }

@@ -45,7 +45,7 @@
                                         <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.Id)" disabled="@anyVote(item.Id)">
                                             <i class="fas fa-check"></i> Votar
                                         </button>
-                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtTicket.GetElapsedTime()</span>
+                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtInsert.GetElapsedTime()</span>
                                         <span class="badge"><i class="fas fa-vote-yea"></i> @item.TotalVotes</span>
                                         @if (item.TicketStatus == TicketStatus.Published)
                                         {
@@ -109,7 +109,7 @@
                                         <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.Id)" disabled="@anyVote(item.Id)">
                                             <i class="fas fa-check"></i> Votar
                                         </button>
-                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtTicket.GetElapsedTime()</span>
+                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtInsert.GetElapsedTime()</span>
                                         <span class="badge"><i class="fas fa-vote-yea"></i> @item.TotalVotes</span>
                                         @if (item.TicketStatus == TicketStatus.Published)
                                         {
@@ -173,11 +173,11 @@
     private List<TicketVM> GetTicketList(TicketType ticketType)
     {
         if (ticketType == TicketType.Bug && TicketStatusBug.HasValue)
-            return tickets.Where(w => w.TicketType == ticketType & w.TicketStatus == TicketStatusBug).OrderByDescending(o => o.DtTicket).ToList();
+            return tickets.Where(w => w.TicketType == ticketType & w.TicketStatus == TicketStatusBug).OrderByDescending(o => o.DtInsert).ToList();
         else if (ticketType == TicketType.FeatureRequest && TicketStatusFeature.HasValue)
-            return tickets.Where(w => w.TicketType == ticketType & w.TicketStatus == TicketStatusFeature).OrderByDescending(o => o.DtTicket).ToList();
+            return tickets.Where(w => w.TicketType == ticketType & w.TicketStatus == TicketStatusFeature).OrderByDescending(o => o.DtInsert).ToList();
         else
-            return tickets.Where(w => w.TicketType == ticketType).OrderByDescending(o => o.DtTicket).ToList();
+            return tickets.Where(w => w.TicketType == ticketType).OrderByDescending(o => o.DtInsert).ToList();
     }
 
     async Task ShowModal(TicketType ticketType)
@@ -205,7 +205,7 @@
         {
             await Http.Ticket_Vote(IdTicket);
             tickets.Single(s => s.Id == IdTicket).Vote();
-            myVotes.Add(new TicketVoteVM(IdTicket, ComponenteUtils.IdUser));
+            myVotes.Add(new TicketVoteVM() { IdTicket = IdTicket, IdUser = ComponenteUtils.IdUser });
             Toast.ShowSuccess("Voto registrado com sucesso");
         }
     }

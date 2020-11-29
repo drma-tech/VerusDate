@@ -1,8 +1,6 @@
-﻿using VerusDate.Shared.Core;
-
-namespace VerusDate.Shared.ViewModel
+﻿namespace VerusDate.Shared
 {
-    public class AffinityVM : ViewModelType
+    public class AffinityVM
     {
         public AffinityVM(string AttributeName, bool HaveAffinity)
         {

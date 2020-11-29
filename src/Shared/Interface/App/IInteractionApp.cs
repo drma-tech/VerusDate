@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
+using VerusDate.Shared.ViewModel.Query;
 
 namespace VerusDate.Shared.Interface.App
 {

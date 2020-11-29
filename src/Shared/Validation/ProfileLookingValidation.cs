@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Shared.Validation
 {

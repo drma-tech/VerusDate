@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
-using VerusDate.Shared.ViewModel;
+using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Mediator.Commands.Interaction
 {
@@ -34,7 +34,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 
             if (obj == null)
             {
-                obj = new InteractionVM(request.Id, request.IdUserInteraction);
+                obj = new InteractionVM() { Id = request.Id, IdUserInteraction = request.IdUserInteraction };
                 obj.ExecuteDeslike();
                 return await _repo.Insert(obj);
             }

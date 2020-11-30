@@ -10,7 +10,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 {
     public class InteractionDeslikeCommand : IBaseCommand<bool>
     {
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
         /// <summary>
         /// ID do usuário alvo
@@ -34,7 +34,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 
             if (obj == null)
             {
-                obj = new InteractionVM() { Id = request.Id, IdUserInteraction = request.IdUserInteraction };
+                obj = new InteractionVM() { IdUser = request.IdUser, IdUserInteraction = request.IdUserInteraction };
                 obj.ExecuteDeslike();
                 return await _repo.Insert(obj);
             }

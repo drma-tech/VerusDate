@@ -18,7 +18,7 @@ namespace VerusDate.Shared.ViewModel.Command
         public int MaxFood => Rank == 0 ? MaxRankFood : Rank * MaxRankFood;
 
         [ExplicitKey]
-        public string Id { get; init; }
+        public string IdUser { get; set; }
 
         [Display(Name = "Rank")]
         public int Rank { get; private set; }

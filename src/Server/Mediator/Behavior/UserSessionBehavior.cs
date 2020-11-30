@@ -24,7 +24,7 @@ namespace VerusDate.Server.Mediator.Behavior
 
             if (request is IBaseCommand<TResponse> bc)
             {
-                bc.Id = httpContext.GetUserId();
+                bc.IdUser = httpContext.GetUserId();
             }
 
             return await next();

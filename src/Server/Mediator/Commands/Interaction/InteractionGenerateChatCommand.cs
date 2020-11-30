@@ -12,7 +12,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 {
     public class InteractionGenerateChatCommand : IBaseCommand<bool>
     {
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
         /// <summary>
         /// ID do usuário alvo
@@ -32,7 +32,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 
         public async Task<bool> Handle(InteractionGenerateChatCommand request, CancellationToken cancellationToken)
         {
-            if (request.Id == request.IdUserInteraction) throw new InvalidOperationException();
+            if (request.IdUser == request.IdUserInteraction) throw new InvalidOperationException();
 
             var obj = await _repo.Get<InteractionVM>(new StringBuilder("SELECT * FROM Interaction WHERE Id = @Id AND IdUserInteraction = @IdUserInteraction"), request);
 
@@ -49,11 +49,11 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
                 var IdChat = Guid.NewGuid();
                 var sql = new StringBuilder();
 
-                sql.AppendLine("UPDATE Interaction SET IdChat = @IdChat WHERE Id = @Id AND IdUserInteraction = @IdUserInteraction; ");
-                sql.AppendLine("UPDATE Interaction SET IdChat = @IdChat WHERE Id = @IdUserInteraction AND IdUserInteraction = @Id; ");
+                sql.AppendLine("UPDATE Interaction SET IdChat = @IdChat WHERE Id = @IdUser AND IdUserInteraction = @IdUserInteraction; ");
+                sql.AppendLine("UPDATE Interaction SET IdChat = @IdChat WHERE Id = @IdUserInteraction AND IdUserInteraction = @IdUser; ");
                 sql.AppendLine("INSERT INTO Chat (IdChat) VALUES (@IdChat); ");
 
-                return await _repo.Execute(sql, new { IdChat, request.Id, request.IdUserInteraction }, cancellationToken) > 0;
+                return await _repo.Execute(sql, new { IdChat, request.IdUser, request.IdUserInteraction }, cancellationToken) > 0;
             }
         }
     }

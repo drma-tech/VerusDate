@@ -8,7 +8,7 @@ namespace VerusDate.Server.Data.EntityConfig
     {
         public void Configure(EntityTypeBuilder<Badge> builder)
         {
-            builder.HasKey(c => c.Id);
+            builder.HasKey(c => c.IdUser);
         }
     }
 }

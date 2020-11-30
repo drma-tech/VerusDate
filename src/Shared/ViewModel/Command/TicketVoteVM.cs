@@ -8,10 +8,10 @@ namespace VerusDate.Shared.ViewModel.Command
     public class TicketVoteVM : ViewModelCommand
     {
         [ExplicitKey]
-        public string IdTicket { get; init; }
+        public string IdTicket { get; set; }
 
         [ExplicitKey]
-        public string IdUser { get; init; }
+        public string IdUser { get; set; }
 
         public override void LoadDefatultData()
         {

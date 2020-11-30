@@ -9,7 +9,7 @@ namespace VerusDate.Server.Data.EntityConfig
     {
         public void Configure(EntityTypeBuilder<ProfileLooking> builder)
         {
-            builder.HasKey(c => c.Id);
+            builder.HasKey(c => c.IdUser);
 
             builder.Property(p => p.Intent)
                .IsRequired()
@@ -17,15 +17,6 @@ namespace VerusDate.Server.Data.EntityConfig
                .HasMaxLength(256)
                .HasConversion(ArrayConverter.Intent())
                .Metadata.SetValueComparer(ArrayComparer.Intent());
-
-            builder.Property(p => p.Distance)
-               .IsRequired();
-
-            builder.Property(p => p.MinimalAge)
-               .IsRequired();
-
-            builder.Property(p => p.MaxAge)
-               .IsRequired();
         }
     }
 }

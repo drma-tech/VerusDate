@@ -8,7 +8,7 @@ namespace VerusDate.Shared.ViewModel.Command
     public class BadgeVM : ViewModelCommand
     {
         [ExplicitKey]
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
         [Write(false)]
         public BadgeType Rank { get; private set; } = new BadgeType(10, "fas fa-crown", "Rank", "Nível alcançado");

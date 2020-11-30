@@ -20,5 +20,12 @@ namespace VerusDate.Server.Data.EntityConfigHelper
                 v => string.Join(";", v),
                 v => v.Split(";", StringSplitOptions.RemoveEmptyEntries).Select(val => (Intent)int.Parse(val)).ToArray());
         }
+
+        public static ValueConverter SexualOrientation()
+        {
+            return new ValueConverter<SexualOrientation[], string>(
+                v => string.Join(";", v),
+                v => v.Split(";", StringSplitOptions.RemoveEmptyEntries).Select(val => (SexualOrientation)int.Parse(val)).ToArray());
+        }
     }
 }

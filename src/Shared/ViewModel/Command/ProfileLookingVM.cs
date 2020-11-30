@@ -10,7 +10,7 @@ namespace VerusDate.Shared.ViewModel.Command
     public class ProfileLookingVM : ViewModelCommand
     {
         [ExplicitKey]
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
         //TODO: LIMITAÇÃO DO BLAZOR
         [Display(Name = "Intenções")]

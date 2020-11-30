@@ -17,6 +17,6 @@ namespace VerusDate.Server.Mediator
         /// <summary>
         /// Id com mesmo valor do IdUser (Recuperado do Token)
         /// </summary>
-        public string Id { get; set; }
+        public string IdUser { get; set; }
     }
 }

@@ -11,7 +11,9 @@ namespace VerusDate.Shared.ViewModel.Command
     public class EventVM : ViewModelCommand
     {
         [ExplicitKey]
-        public string Id { get; set; }
+        public string IdEvent { get; set; }
+
+        public string IdUser { get; set; }
 
         [Display(Name = "Data Início")]
         public DateTimeOffset DtStart { get; private set; }

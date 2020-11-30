@@ -37,7 +37,7 @@ namespace VerusDate.Client.Api
 
             if (response.IsSuccessStatusCode)
             {
-                obj.Id = id; //TODO: descobrir outra maneira de saber se é insert ou update, pq depende desse campo
+                obj.IdUser = id; //TODO: descobrir outra maneira de saber se é insert ou update, pq depende desse campo
                 await storage.SetItemAsync(StorageKey, obj);
                 //await ProfileValidationApi.ClearCache(storage);
                 await GamificationApi.ClearCache(storage);

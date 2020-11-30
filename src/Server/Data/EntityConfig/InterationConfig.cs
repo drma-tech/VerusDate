@@ -9,10 +9,7 @@ namespace VerusDate.Server.Data.EntityConfig
     {
         public void Configure(EntityTypeBuilder<Interaction> builder)
         {
-            builder.HasKey(c => new { c.Id, c.IdUserInteraction });
-
-            builder.Property(c => c.DtInsert)
-                .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+            builder.HasKey(c => new { c.IdUser, c.IdUserInteraction });
 
             builder.OwnsOne(typeof(Action), "Like");
 

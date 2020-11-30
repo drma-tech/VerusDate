@@ -10,7 +10,7 @@ namespace VerusDate.Shared.ViewModel.Command
     public class ProfileVM : ViewModelCommand
     {
         [ExplicitKey]
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
         public DateTimeOffset? DtTopList { get; private set; }
         public DateTimeOffset? DtLastLogin { get; private set; }

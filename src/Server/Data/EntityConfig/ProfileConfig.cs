@@ -9,7 +9,7 @@ namespace VerusDate.Server.Data.EntityConfig
     {
         public void Configure(EntityTypeBuilder<Profile> builder)
         {
-            builder.HasKey(c => c.Id);
+            builder.HasKey(c => c.IdUser);
 
             builder.Property(p => p.NickName)
                 .IsRequired()
@@ -19,26 +19,8 @@ namespace VerusDate.Server.Data.EntityConfig
                 .IsRequired()
                 .HasMaxLength(512);
 
-            builder.Property(p => p.BirthDate)
+            builder.Property(c => c.Location)
                .IsRequired();
-
-            builder.Property(p => p.DtInsert)
-                .IsRequired()
-                .HasDefaultValueSql("SYSDATETIMEOFFSET()");
-
-            builder.Property(p => p.DtTopList)
-                .IsRequired()
-                .HasDefaultValueSql("SYSDATETIMEOFFSET()");
-
-            builder.Property(p => p.DtLastLogin)
-                .IsRequired()
-                .HasDefaultValueSql("SYSDATETIMEOFFSET()");
-
-            builder.Property(p => p.BiologicalSex)
-                .IsRequired();
-
-            builder.Property(p => p.MaritalStatus)
-                .IsRequired();
 
             builder.Property(p => p.Intent)
                 .IsRequired()
@@ -46,33 +28,6 @@ namespace VerusDate.Server.Data.EntityConfig
                 .HasMaxLength(256)
                 .HasConversion(ArrayConverter.Intent())
                 .Metadata.SetValueComparer(ArrayComparer.Intent());
-
-            builder.Property(p => p.GenderIdentity)
-                .IsRequired();
-
-            builder.Property(p => p.SexualOrientation)
-                .IsRequired();
-
-            builder.Property(p => p.Latitude)
-                .IsRequired();
-
-            builder.Property(p => p.Longitude)
-                .IsRequired();
-
-            builder.Property(p => p.Smoke)
-                .IsRequired();
-
-            builder.Property(p => p.Drink)
-                .IsRequired();
-
-            builder.Property(p => p.Height)
-                .IsRequired();
-
-            builder.Property(p => p.BodyMass)
-                .IsRequired();
-
-            builder.Property(p => p.RaceCategory)
-                .IsRequired();
 
             builder.Property(p => p.Hobbies)
                 .IsUnicode(false)
@@ -91,6 +46,18 @@ namespace VerusDate.Server.Data.EntityConfig
                 .HasMaxLength(4000)
                 .HasConversion(ArrayConverter.String())
                 .Metadata.SetValueComparer(ArrayComparer.String());
+
+            builder.HasOne(p => p.ProfileLooking).WithOne(p => p.Profile).HasForeignKey<ProfileLooking>(p => p.IdUser);
+
+            builder.HasOne(p => p.Gamification).WithOne(p => p.Profile).HasForeignKey<Gamification>(p => p.IdUser);
+
+            builder.HasOne(p => p.Badge).WithOne(p => p.Profile).HasForeignKey<Badge>(p => p.IdUser);
+
+            builder.HasMany(p => p.Events).WithOne(p => p.Profile).HasForeignKey(p => p.IdUser).OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasMany(p => p.Tickets).WithOne(p => p.Profile).HasForeignKey(p => p.IdUser).OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasMany(p => p.TicketVotes).WithOne(p => p.Profile).HasForeignKey(p => p.IdUser).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

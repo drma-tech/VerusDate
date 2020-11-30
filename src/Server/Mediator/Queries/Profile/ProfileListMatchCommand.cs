@@ -32,7 +32,7 @@ namespace VerusDate.Server.Mediator.Queries.Profile
 
             dynamic param = new System.Dynamic.ExpandoObject();
 
-            param.Id = looking.Id;
+            param.Id = looking.IdUser;
             param.Distance = looking.Distance;
             param.MinimalAge = looking.MinimalAge;
             param.MaxAge = looking.MaxAge;

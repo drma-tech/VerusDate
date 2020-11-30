@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
@@ -8,7 +9,7 @@ namespace VerusDate.Shared.Entity
     public class Profile : EntityType
     {
         [Key]
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
         public DateTimeOffset DtTopList { get; set; } //main index for sorting
         public DateTimeOffset DtLastLogin { get; set; } //filter to ensure only active users
@@ -49,5 +50,12 @@ namespace VerusDate.Shared.Entity
         public string MainPhotoValidation { get; set; }
 
         public string[] PhotoGallery { get; set; }
+
+        public ProfileLooking ProfileLooking { get; set; }
+        public Gamification Gamification { get; set; }
+        public Badge Badge { get; set; }
+        public IEnumerable<Event> Events { get; set; }
+        public IEnumerable<Ticket> Tickets { get; set; }
+        public IEnumerable<TicketVote> TicketVotes { get; set; }
     }
 }

@@ -10,8 +10,12 @@ namespace VerusDate.Server.Data.EntityConfig
         {
             builder.HasKey(c => new { c.IdChat, c.DtMessage });
 
+            builder.Property(c => c.IdUserSender)
+                .IsRequired();
+
             builder.Property(c => c.Content)
-                .HasMaxLength(4000);
+                .HasMaxLength(4000)
+                .IsRequired();
         }
     }
 }

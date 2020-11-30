@@ -6,7 +6,7 @@ namespace VerusDate.Shared.Entity
     public class Badge : EntityType
     {
         [Key]
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
         /// <summary>
         /// 1 = Bronze
@@ -52,5 +52,7 @@ namespace VerusDate.Shared.Entity
         /// likes acima de 70%
         /// </summary>
         public ValueType.BadgeType Popular { get; set; } //aumenta com ações de outros usuários
+
+        public Profile Profile { get; set; }
     }
 }

@@ -362,7 +362,7 @@
             Id do Usuário (Recuperado do Token)
             </summary>
         </member>
-        <member name="P:VerusDate.Server.Mediator.IBaseCommand`1.Id">
+        <member name="P:VerusDate.Server.Mediator.IBaseCommand`1.IdUser">
             <summary>
             Id com mesmo valor do IdUser (Recuperado do Token)
             </summary>

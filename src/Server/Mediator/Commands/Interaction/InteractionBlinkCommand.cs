@@ -10,7 +10,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 {
     public class InteractionBlinkCommand : IBaseCommand<bool>
     {
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
         /// <summary>
         /// ID do usuário alvo

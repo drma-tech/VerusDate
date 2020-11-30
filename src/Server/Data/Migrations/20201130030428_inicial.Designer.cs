@@ -10,8 +10,8 @@ using VerusDate.Server.Data;
 namespace VerusDate.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201025155333_Initial")]
-    partial class Initial
+    [Migration("20201130030428_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace VerusDate.Server.Data.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0-rc.2.20475.6");
+                .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
                 {
@@ -326,12 +326,18 @@ namespace VerusDate.Server.Data.Migrations
 
             modelBuilder.Entity("VerusDate.Shared.Entity.Badge", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("IdUser")
                         .HasMaxLength(256)
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
 
-                    b.HasKey("Id");
+                    b.Property<DateTimeOffset>("DtInsert")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DtUpdate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("IdUser");
 
                     b.ToTable("Badge");
                 });
@@ -347,11 +353,25 @@ namespace VerusDate.Server.Data.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Content")
+                        .IsRequired()
                         .HasMaxLength(4000)
                         .IsUnicode(false)
                         .HasColumnType("varchar(4000)");
 
+                    b.Property<DateTimeOffset>("DtInsert")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DtRead")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DtSync")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DtUpdate")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("IdUserSender")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
@@ -370,15 +390,84 @@ namespace VerusDate.Server.Data.Migrations
                     b.ToTable("Chat");
                 });
 
+            modelBuilder.Entity("VerusDate.Shared.Entity.Event", b =>
+                {
+                    b.Property<string>("IdEvent")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(256)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<DateTimeOffset>("DtEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("DtInsert")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("DtStart")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DtUpdate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("EventType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("GenderDivision")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("IdUser")
+                        .HasMaxLength(256)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("Intent")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<int>("MaxAge")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinimalAge")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SexualOrientation")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
+
+                    b.HasKey("IdEvent");
+
+                    b.HasIndex("IdUser");
+
+                    b.ToTable("Event");
+                });
+
             modelBuilder.Entity("VerusDate.Shared.Entity.Gamification", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("IdUser")
                         .HasMaxLength(256)
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
 
                     b.Property<int>("Diamond")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("DtInsert")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DtUpdate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("Food")
                         .HasColumnType("int");
@@ -389,14 +478,14 @@ namespace VerusDate.Server.Data.Migrations
                     b.Property<int>("XP")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdUser");
 
                     b.ToTable("Gamification");
                 });
 
             modelBuilder.Entity("VerusDate.Shared.Entity.Interaction", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("IdUser")
                         .HasMaxLength(256)
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
@@ -407,23 +496,24 @@ namespace VerusDate.Server.Data.Migrations
                         .HasColumnType("varchar(256)");
 
                     b.Property<DateTimeOffset>("DtInsert")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetimeoffset")
-                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DtUpdate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("IdChat")
                         .HasMaxLength(256)
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
 
-                    b.HasKey("Id", "IdUserInteraction");
+                    b.HasKey("IdUser", "IdUserInteraction");
 
                     b.ToTable("Interaction");
                 });
 
             modelBuilder.Entity("VerusDate.Shared.Entity.Profile", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("IdUser")
                         .HasMaxLength(256)
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
@@ -440,16 +530,6 @@ namespace VerusDate.Server.Data.Migrations
                     b.Property<int?>("CareerCluster")
                         .HasColumnType("int");
 
-                    b.Property<string>("City")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("CountryName")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(512)
@@ -463,19 +543,13 @@ namespace VerusDate.Server.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("DtInsert")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetimeoffset")
-                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset>("DtLastLogin")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetimeoffset")
-                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset>("DtTopList")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetimeoffset")
-                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset?>("DtUpdate")
                         .HasColumnType("datetimeoffset");
@@ -506,8 +580,24 @@ namespace VerusDate.Server.Data.Migrations
                     b.Property<double>("Latitude")
                         .HasColumnType("float");
 
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(256)");
+
                     b.Property<double>("Longitude")
                         .HasColumnType("float");
+
+                    b.Property<string>("MainPhoto")
+                        .HasMaxLength(512)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(512)");
+
+                    b.Property<string>("MainPhotoValidation")
+                        .HasMaxLength(512)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(512)");
 
                     b.Property<int>("MaritalStatus")
                         .HasColumnType("int");
@@ -524,35 +614,10 @@ namespace VerusDate.Server.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(20)");
 
-                    b.Property<string>("PhotoFaceValidation")
-                        .HasMaxLength(256)
+                    b.Property<string>("PhotoGallery")
+                        .HasMaxLength(4000)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PhotoFileName1")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PhotoFileName2")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PhotoFileName3")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PhotoFileName4")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
-                    b.Property<string>("PhotoFileName5")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("varchar(4000)");
 
                     b.Property<int>("RaceCategory")
                         .HasColumnType("int");
@@ -569,22 +634,17 @@ namespace VerusDate.Server.Data.Migrations
                     b.Property<int>("Smoke")
                         .HasColumnType("int");
 
-                    b.Property<string>("State")
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
-
                     b.Property<int?>("WantChildren")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdUser");
 
                     b.ToTable("Profile");
                 });
 
             modelBuilder.Entity("VerusDate.Shared.Entity.ProfileLooking", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("IdUser")
                         .HasMaxLength(256)
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
@@ -606,6 +666,12 @@ namespace VerusDate.Server.Data.Migrations
 
                     b.Property<int?>("Drink")
                         .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("DtInsert")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DtUpdate")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int?>("EducationLevel")
                         .HasColumnType("int");
@@ -652,17 +718,19 @@ namespace VerusDate.Server.Data.Migrations
                     b.Property<int?>("WantChildren")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdUser");
 
                     b.ToTable("ProfileLooking");
                 });
 
             modelBuilder.Entity("VerusDate.Shared.Entity.Ticket", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("IdTicket")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(256)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("varchar(256)")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -670,12 +738,14 @@ namespace VerusDate.Server.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(512)");
 
-                    b.Property<DateTimeOffset>("DtTicket")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetimeoffset")
-                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+                    b.Property<DateTimeOffset>("DtInsert")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("IdUserOwner")
+                    b.Property<DateTimeOffset?>("DtUpdate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("IdUser")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
@@ -689,7 +759,9 @@ namespace VerusDate.Server.Data.Migrations
                     b.Property<int>("TotalVotes")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdTicket");
+
+                    b.HasIndex("IdUser");
 
                     b.ToTable("Ticket");
                 });
@@ -706,12 +778,15 @@ namespace VerusDate.Server.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<DateTimeOffset>("DtVote")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetimeoffset")
-                        .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+                    b.Property<DateTimeOffset>("DtInsert")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DtUpdate")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("IdTicket", "IdUser");
+
+                    b.HasIndex("IdUser");
 
                     b.ToTable("TicketVote");
                 });
@@ -769,9 +844,15 @@ namespace VerusDate.Server.Data.Migrations
 
             modelBuilder.Entity("VerusDate.Shared.Entity.Badge", b =>
                 {
+                    b.HasOne("VerusDate.Shared.Entity.Profile", "Profile")
+                        .WithOne("Badge")
+                        .HasForeignKey("VerusDate.Shared.Entity.Badge", "IdUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("VerusDate.Shared.ValueType.BadgeType", "CompletedProfile", b1 =>
                         {
-                            b1.Property<string>("BadgeId")
+                            b1.Property<string>("BadgeIdUser")
                                 .HasMaxLength(256)
                                 .IsUnicode(false)
                                 .HasColumnType("varchar(256)");
@@ -779,17 +860,17 @@ namespace VerusDate.Server.Data.Migrations
                             b1.Property<int>("Level")
                                 .HasColumnType("int");
 
-                            b1.HasKey("BadgeId");
+                            b1.HasKey("BadgeIdUser");
 
                             b1.ToTable("Badge");
 
                             b1.WithOwner()
-                                .HasForeignKey("BadgeId");
+                                .HasForeignKey("BadgeIdUser");
                         });
 
                     b.OwnsOne("VerusDate.Shared.ValueType.BadgeType", "Popular", b1 =>
                         {
-                            b1.Property<string>("BadgeId")
+                            b1.Property<string>("BadgeIdUser")
                                 .HasMaxLength(256)
                                 .IsUnicode(false)
                                 .HasColumnType("varchar(256)");
@@ -797,17 +878,17 @@ namespace VerusDate.Server.Data.Migrations
                             b1.Property<int>("Level")
                                 .HasColumnType("int");
 
-                            b1.HasKey("BadgeId");
+                            b1.HasKey("BadgeIdUser");
 
                             b1.ToTable("Badge");
 
                             b1.WithOwner()
-                                .HasForeignKey("BadgeId");
+                                .HasForeignKey("BadgeIdUser");
                         });
 
                     b.OwnsOne("VerusDate.Shared.ValueType.BadgeType", "Rank", b1 =>
                         {
-                            b1.Property<string>("BadgeId")
+                            b1.Property<string>("BadgeIdUser")
                                 .HasMaxLength(256)
                                 .IsUnicode(false)
                                 .HasColumnType("varchar(256)");
@@ -815,17 +896,17 @@ namespace VerusDate.Server.Data.Migrations
                             b1.Property<int>("Level")
                                 .HasColumnType("int");
 
-                            b1.HasKey("BadgeId");
+                            b1.HasKey("BadgeIdUser");
 
                             b1.ToTable("Badge");
 
                             b1.WithOwner()
-                                .HasForeignKey("BadgeId");
+                                .HasForeignKey("BadgeIdUser");
                         });
 
                     b.OwnsOne("VerusDate.Shared.ValueType.BadgeType", "Seniority", b1 =>
                         {
-                            b1.Property<string>("BadgeId")
+                            b1.Property<string>("BadgeIdUser")
                                 .HasMaxLength(256)
                                 .IsUnicode(false)
                                 .HasColumnType("varchar(256)");
@@ -833,17 +914,17 @@ namespace VerusDate.Server.Data.Migrations
                             b1.Property<int>("Level")
                                 .HasColumnType("int");
 
-                            b1.HasKey("BadgeId");
+                            b1.HasKey("BadgeIdUser");
 
                             b1.ToTable("Badge");
 
                             b1.WithOwner()
-                                .HasForeignKey("BadgeId");
+                                .HasForeignKey("BadgeIdUser");
                         });
 
                     b.OwnsOne("VerusDate.Shared.ValueType.BadgeType", "VerifiedProfile", b1 =>
                         {
-                            b1.Property<string>("BadgeId")
+                            b1.Property<string>("BadgeIdUser")
                                 .HasMaxLength(256)
                                 .IsUnicode(false)
                                 .HasColumnType("varchar(256)");
@@ -851,17 +932,19 @@ namespace VerusDate.Server.Data.Migrations
                             b1.Property<int>("Level")
                                 .HasColumnType("int");
 
-                            b1.HasKey("BadgeId");
+                            b1.HasKey("BadgeIdUser");
 
                             b1.ToTable("Badge");
 
                             b1.WithOwner()
-                                .HasForeignKey("BadgeId");
+                                .HasForeignKey("BadgeIdUser");
                         });
 
                     b.Navigation("CompletedProfile");
 
                     b.Navigation("Popular");
+
+                    b.Navigation("Profile");
 
                     b.Navigation("Rank");
 
@@ -870,11 +953,32 @@ namespace VerusDate.Server.Data.Migrations
                     b.Navigation("VerifiedProfile");
                 });
 
+            modelBuilder.Entity("VerusDate.Shared.Entity.Event", b =>
+                {
+                    b.HasOne("VerusDate.Shared.Entity.Profile", "Profile")
+                        .WithMany("Events")
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("VerusDate.Shared.Entity.Gamification", b =>
+                {
+                    b.HasOne("VerusDate.Shared.Entity.Profile", "Profile")
+                        .WithOne("Gamification")
+                        .HasForeignKey("VerusDate.Shared.Entity.Gamification", "IdUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("VerusDate.Shared.Entity.Interaction", b =>
                 {
                     b.OwnsOne("VerusDate.Shared.ValueType.Action", "Blink", b1 =>
                         {
-                            b1.Property<string>("InteractionId")
+                            b1.Property<string>("InteractionIdUser")
                                 .HasMaxLength(256)
                                 .IsUnicode(false)
                                 .HasColumnType("varchar(256)");
@@ -890,17 +994,17 @@ namespace VerusDate.Server.Data.Migrations
                             b1.Property<bool>("Value")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("InteractionId", "InteractionIdUserInteraction");
+                            b1.HasKey("InteractionIdUser", "InteractionIdUserInteraction");
 
                             b1.ToTable("Interaction");
 
                             b1.WithOwner()
-                                .HasForeignKey("InteractionId", "InteractionIdUserInteraction");
+                                .HasForeignKey("InteractionIdUser", "InteractionIdUserInteraction");
                         });
 
                     b.OwnsOne("VerusDate.Shared.ValueType.Action", "Block", b1 =>
                         {
-                            b1.Property<string>("InteractionId")
+                            b1.Property<string>("InteractionIdUser")
                                 .HasMaxLength(256)
                                 .IsUnicode(false)
                                 .HasColumnType("varchar(256)");
@@ -916,17 +1020,17 @@ namespace VerusDate.Server.Data.Migrations
                             b1.Property<bool>("Value")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("InteractionId", "InteractionIdUserInteraction");
+                            b1.HasKey("InteractionIdUser", "InteractionIdUserInteraction");
 
                             b1.ToTable("Interaction");
 
                             b1.WithOwner()
-                                .HasForeignKey("InteractionId", "InteractionIdUserInteraction");
+                                .HasForeignKey("InteractionIdUser", "InteractionIdUserInteraction");
                         });
 
                     b.OwnsOne("VerusDate.Shared.ValueType.Action", "Deslike", b1 =>
                         {
-                            b1.Property<string>("InteractionId")
+                            b1.Property<string>("InteractionIdUser")
                                 .HasMaxLength(256)
                                 .IsUnicode(false)
                                 .HasColumnType("varchar(256)");
@@ -942,17 +1046,17 @@ namespace VerusDate.Server.Data.Migrations
                             b1.Property<bool>("Value")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("InteractionId", "InteractionIdUserInteraction");
+                            b1.HasKey("InteractionIdUser", "InteractionIdUserInteraction");
 
                             b1.ToTable("Interaction");
 
                             b1.WithOwner()
-                                .HasForeignKey("InteractionId", "InteractionIdUserInteraction");
+                                .HasForeignKey("InteractionIdUser", "InteractionIdUserInteraction");
                         });
 
                     b.OwnsOne("VerusDate.Shared.ValueType.Action", "Like", b1 =>
                         {
-                            b1.Property<string>("InteractionId")
+                            b1.Property<string>("InteractionIdUser")
                                 .HasMaxLength(256)
                                 .IsUnicode(false)
                                 .HasColumnType("varchar(256)");
@@ -968,17 +1072,17 @@ namespace VerusDate.Server.Data.Migrations
                             b1.Property<bool>("Value")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("InteractionId", "InteractionIdUserInteraction");
+                            b1.HasKey("InteractionIdUser", "InteractionIdUserInteraction");
 
                             b1.ToTable("Interaction");
 
                             b1.WithOwner()
-                                .HasForeignKey("InteractionId", "InteractionIdUserInteraction");
+                                .HasForeignKey("InteractionIdUser", "InteractionIdUserInteraction");
                         });
 
                     b.OwnsOne("VerusDate.Shared.ValueType.Action", "Match", b1 =>
                         {
-                            b1.Property<string>("InteractionId")
+                            b1.Property<string>("InteractionIdUser")
                                 .HasMaxLength(256)
                                 .IsUnicode(false)
                                 .HasColumnType("varchar(256)");
@@ -994,12 +1098,12 @@ namespace VerusDate.Server.Data.Migrations
                             b1.Property<bool>("Value")
                                 .HasColumnType("bit");
 
-                            b1.HasKey("InteractionId", "InteractionIdUserInteraction");
+                            b1.HasKey("InteractionIdUser", "InteractionIdUserInteraction");
 
                             b1.ToTable("Interaction");
 
                             b1.WithOwner()
-                                .HasForeignKey("InteractionId", "InteractionIdUserInteraction");
+                                .HasForeignKey("InteractionIdUser", "InteractionIdUserInteraction");
                         });
 
                     b.Navigation("Blink");
@@ -1011,6 +1115,67 @@ namespace VerusDate.Server.Data.Migrations
                     b.Navigation("Like");
 
                     b.Navigation("Match");
+                });
+
+            modelBuilder.Entity("VerusDate.Shared.Entity.ProfileLooking", b =>
+                {
+                    b.HasOne("VerusDate.Shared.Entity.Profile", "Profile")
+                        .WithOne("ProfileLooking")
+                        .HasForeignKey("VerusDate.Shared.Entity.ProfileLooking", "IdUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("VerusDate.Shared.Entity.Ticket", b =>
+                {
+                    b.HasOne("VerusDate.Shared.Entity.Profile", "Profile")
+                        .WithMany("Tickets")
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("VerusDate.Shared.Entity.TicketVote", b =>
+                {
+                    b.HasOne("VerusDate.Shared.Entity.Ticket", "Ticket")
+                        .WithMany("TicketVotes")
+                        .HasForeignKey("IdTicket")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VerusDate.Shared.Entity.Profile", "Profile")
+                        .WithMany("TicketVotes")
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+
+                    b.Navigation("Ticket");
+                });
+
+            modelBuilder.Entity("VerusDate.Shared.Entity.Profile", b =>
+                {
+                    b.Navigation("Badge");
+
+                    b.Navigation("Events");
+
+                    b.Navigation("Gamification");
+
+                    b.Navigation("ProfileLooking");
+
+                    b.Navigation("Tickets");
+
+                    b.Navigation("TicketVotes");
+                });
+
+            modelBuilder.Entity("VerusDate.Shared.Entity.Ticket", b =>
+                {
+                    b.Navigation("TicketVotes");
                 });
 #pragma warning restore 612, 618
         }

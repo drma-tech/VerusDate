@@ -7,7 +7,7 @@ namespace VerusDate.Shared.Entity
     public class ProfileLooking : EntityType
     {
         [Key]
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
         public Intent[] Intent { get; set; }
         public double Distance { get; set; }
@@ -29,5 +29,7 @@ namespace VerusDate.Shared.Entity
         public Religion? Religion { get; set; }
         public EducationLevel? EducationLevel { get; set; }
         public CareerCluster? CareerCluster { get; set; }
+
+        public Profile Profile { get; set; }
     }
 }

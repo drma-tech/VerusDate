@@ -8,10 +8,13 @@ namespace VerusDate.Server.Data.EntityConfig
     {
         public void Configure(EntityTypeBuilder<Ticket> builder)
         {
-            builder.HasKey(c => c.Id);
+            builder.HasKey(c => c.IdTicket);
 
-            builder.Property(c => c.Id)
+            builder.Property(c => c.IdTicket)
                 .HasDefaultValueSql("NEWID()");
+
+            builder.Property(c => c.IdUser)
+                .IsRequired();
 
             builder.Property(c => c.Description)
                 .IsRequired()

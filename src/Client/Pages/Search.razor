@@ -14,7 +14,7 @@ else
         {
             <div class="col mb-2">
                 <div class="contact-box" style="padding: 0px;">
-                    <a class="embed-responsive embed-responsive-1by1 divPhoto" href="/ProfileView/@item.Id" style="background-color: black;">
+                    <a class="embed-responsive embed-responsive-1by1 divPhoto" href="/ProfileView/@item.IdUser" style="background-color: black;">
                         <img alt="..." class="imgPhoto" src="@item.GetPhotoFace()" />
                     </a>
                     <p style="position: absolute; margin: 10px; bottom: 100px;">
@@ -39,7 +39,7 @@ else
                             </div>
                         }*@
                     <div class="contact-box-footer">
-                        <button class="btn btn-primary btn-circle btn-lg" style="position: relative;" type="button" title="Blink" @onclick="() => Blink(item.Id)">
+                        <button class="btn btn-primary btn-circle btn-lg" style="position: relative;" type="button" title="Blink" @onclick="() => Blink(item.IdUser)">
                             <span class="badge badge-warning" style="position: absolute; top: -8px; right: -10px;" title="-1 Diamante"><i class="fas fa-gem"></i></span>
                             <i class="far fa-kiss-wink-heart"></i>
                         </button>

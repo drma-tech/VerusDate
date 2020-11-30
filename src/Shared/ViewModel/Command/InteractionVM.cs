@@ -8,10 +8,10 @@ namespace VerusDate.Shared.ViewModel.Command
     public class InteractionVM : ViewModelCommand
     {
         [ExplicitKey]
-        public string Id { get; init; }
+        public string IdUser { get; set; }
 
         [ExplicitKey]
-        public string IdUserInteraction { get; init; }
+        public string IdUserInteraction { get; set; }
 
         public ValueType.Action Like { get; set; }
         public ValueType.Action Deslike { get; set; }

@@ -10,5 +10,8 @@ namespace VerusDate.Shared.Entity
 
         [Key]
         public string IdUser { get; set; }
+
+        public Ticket Ticket { get; set; }
+        public Profile Profile { get; set; }
     }
 }

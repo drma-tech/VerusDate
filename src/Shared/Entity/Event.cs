@@ -8,8 +8,9 @@ namespace VerusDate.Shared.Entity
     public class Event : EntityType
     {
         [Key]
-        public string Id { get; set; }
+        public string IdEvent { get; set; }
 
+        public string IdUser { get; set; }
         public DateTimeOffset DtStart { get; set; }
         public DateTimeOffset DtEnd { get; set; }
         public EventType EventType { get; set; }
@@ -19,5 +20,7 @@ namespace VerusDate.Shared.Entity
         public Intent[] Intent { get; set; }
         public SexualOrientation[] SexualOrientation { get; set; }
         public bool GenderDivision { get; set; }
+
+        public Profile Profile { get; set; }
     }
 }

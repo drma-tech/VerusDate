@@ -12,7 +12,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 {
     public class UploadPhotoValidationCommand : IBaseCommand<bool>
     {
-        public string Id { get; set; }
+        public string IdUser { get; set; }
         public byte[] Stream { get; set; }
     }
 
@@ -29,7 +29,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
         public async Task<bool> Handle(UploadPhotoValidationCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ProfileVM>(request.Id);
+            var obj = await _repo.Get<ProfileVM>(request.IdUser);
             if (obj == null || string.IsNullOrEmpty(obj.MainPhoto)) throw new NotificationException("Foto para validação não encontrada. Favor, inserir primeiro sua foto de rosto.");
 
             var NewPhotoId = Guid.NewGuid().ToString();

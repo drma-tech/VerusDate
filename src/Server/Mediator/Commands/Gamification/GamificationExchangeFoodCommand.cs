@@ -9,7 +9,7 @@ namespace VerusDate.Server.Mediator.Commands.Gamification
 {
     public class GamificationExchangeFoodCommand : IBaseCommand<bool>
     {
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
         /// <summary>
         /// Quatidade de diamantes desejados para a troca
@@ -29,7 +29,7 @@ namespace VerusDate.Server.Mediator.Commands.Gamification
 
         public async Task<bool> Handle(GamificationExchangeFoodCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<GamificationVM>(request.Id);
+            var obj = await _repo.Get<GamificationVM>(request.IdUser);
 
             obj.ExchangeFood(request.QtdDiamond);
 

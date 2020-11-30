@@ -8,7 +8,7 @@ namespace VerusDate.Server.Data.EntityConfig
     {
         public void Configure(EntityTypeBuilder<Gamification> builder)
         {
-            builder.HasKey(c => c.Id);
+            builder.HasKey(c => c.IdUser);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace VerusDate.Server.Mediator.Commands.Chat
         /// Chat (lista de conversas) realizado entre dois usuários
         /// </summary>
         public List<ChatVM> LstChat { get; private set; }
-        public string Id { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public string IdUser { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 
     public class ChatInsertChatHandler : IRequestHandler<ChatInsertCommand, int>

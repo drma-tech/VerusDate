@@ -25,7 +25,7 @@ namespace VerusDate.Server.Mediator.Queries.Badge
 
             if (obj == null)
             {
-                obj = new BadgeVM { Id = request.IdUser };
+                obj = new BadgeVM { IdUser = request.IdUser };
                 await _repo.Insert(obj);
             }
 

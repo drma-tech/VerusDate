@@ -436,7 +436,7 @@ else
         {
             HttpResponseMessage response;
 
-            if (string.IsNullOrEmpty(looking.Id))
+            if (string.IsNullOrEmpty(looking.IdUser))
             {
                 response = await Http.ProfileLooking_Add(LocalStorage, looking, ComponenteUtils.IdUser);
                 Toast.ShowWarning("+30 XP");

@@ -23,7 +23,7 @@ namespace VerusDate.Server.Mediator.Queries.Gamification
 
             if (obj == null)
             {
-                obj = new GamificationVM() { Id = request.IdUser };
+                obj = new GamificationVM() { IdUser = request.IdUser };
                 await _repo.Insert(obj);
             }
 

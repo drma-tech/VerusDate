@@ -13,7 +13,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 {
     public class UploadPhotoGalleryCommand : IBaseCommand<bool>
     {
-        public string Id { get; set; }
+        public string IdUser { get; set; }
         public List<byte[]> Streams { get; set; }
     }
 
@@ -30,7 +30,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
         public async Task<bool> Handle(UploadPhotoGalleryCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ProfileVM>(request.Id);
+            var obj = await _repo.Get<ProfileVM>(request.IdUser);
             if (obj == null) throw new NotificationException("Perfil não encontrado");
 
             foreach (var bytes in request.Streams)

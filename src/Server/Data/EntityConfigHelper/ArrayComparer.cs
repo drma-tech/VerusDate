@@ -22,5 +22,13 @@ namespace VerusDate.Server.Data.EntityConfigHelper
                 c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
                 c => c.ToArray());
         }
+
+        public static ValueComparer SexualOrientation()
+        {
+            return new ValueComparer<SexualOrientation[]>(
+                (c1, c2) => c1.SequenceEqual(c2),
+                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+                c => c.ToArray());
+        }
     }
 }

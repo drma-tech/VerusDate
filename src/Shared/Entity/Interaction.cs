@@ -6,7 +6,7 @@ namespace VerusDate.Shared.Entity
     public class Interaction : EntityType
     {
         [Key]
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
         [Key]
         public string IdUserInteraction { get; set; }

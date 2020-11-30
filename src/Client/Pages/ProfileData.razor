@@ -410,7 +410,7 @@ else
                 <Button Type="ButtonType.Submit" Color="Color.Primary">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
                 </Button>
-                @if (!string.IsNullOrEmpty(profile?.Id))
+                @if (!string.IsNullOrEmpty(profile?.IdUser))
                 {
                     <Badge Color="Color.Danger">
                         <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon> -100 XP
@@ -501,7 +501,7 @@ else
 
             profile.ClearSimpleView();
 
-            if (string.IsNullOrEmpty(profile?.Id))
+            if (string.IsNullOrEmpty(profile?.IdUser))
             {
                 response = await Http.Profile_Add(LocalStorage, profile, ComponenteUtils.IdUser);
                 Toast.ShowWarning("+30 XP");

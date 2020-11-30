@@ -9,7 +9,7 @@ namespace VerusDate.Server.Mediator.Commands.Ticket
     public class TicketVoteCommand : IBaseCommand<bool>
     {
         public string IdTicket { get; set; }
-        public string Id { get; set; }
+        public string IdUser { get; set; }
     }
 
     public class TicketVoteHandler : IRequestHandler<TicketVoteCommand, bool>

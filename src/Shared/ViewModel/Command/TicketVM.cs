@@ -9,9 +9,9 @@ namespace VerusDate.Shared.ViewModel.Command
     public class TicketVM : ViewModelCommand
     {
         [ExplicitKey]
-        public string Id { get; set; }
+        public string IdTicket { get; set; }
 
-        public string IdUserOwner { get; private set; }
+        public string IdUser { get; set; }
 
         [Display(Name = "Tipo")]
         public TicketType TicketType { get; set; }

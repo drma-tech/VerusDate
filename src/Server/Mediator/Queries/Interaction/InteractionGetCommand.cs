@@ -33,7 +33,7 @@ namespace VerusDate.Server.Mediator.Queries.Interaction
 
             if (obj == null)
             {
-                obj = new InteractionVM() { Id = request.IdUser, IdUserInteraction = request.IdUserInteraction };
+                obj = new InteractionVM() { IdUser = request.IdUser, IdUserInteraction = request.IdUserInteraction };
                 await _repo.Insert(obj);
             }
 

@@ -18,6 +18,7 @@ namespace VerusDate.Server.Data
         public virtual DbSet<Chat> Chat { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<TicketVote> TicketVote { get; set; }
+        public virtual DbSet<Event> Event { get; set; }
 
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)

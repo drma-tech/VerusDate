@@ -42,7 +42,7 @@
                                 <li class="info-element ui-sortable-handle">
                                     @item.Description
                                     <div class="agile-detail">
-                                        <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.Id)" disabled="@anyVote(item.Id)">
+                                        <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.IdTicket)" disabled="@anyVote(item.IdTicket)">
                                             <i class="fas fa-check"></i> Votar
                                         </button>
                                         <span class="badge"><i class="fa fa-clock-o"></i> @item.DtInsert.GetElapsedTime()</span>
@@ -106,7 +106,7 @@
                                 <li class="info-element ui-sortable-handle">
                                     @item.Description
                                     <div class="agile-detail">
-                                        <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.Id)" disabled="@anyVote(item.Id)">
+                                        <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.IdTicket)" disabled="@anyVote(item.IdTicket)">
                                             <i class="fas fa-check"></i> Votar
                                         </button>
                                         <span class="badge"><i class="fa fa-clock-o"></i> @item.DtInsert.GetElapsedTime()</span>
@@ -204,7 +204,7 @@
         else
         {
             await Http.Ticket_Vote(IdTicket);
-            tickets.Single(s => s.Id == IdTicket).Vote();
+            tickets.Single(s => s.IdTicket == IdTicket).Vote();
             myVotes.Add(new TicketVoteVM() { IdTicket = IdTicket, IdUser = ComponenteUtils.IdUser });
             Toast.ShowSuccess("Voto registrado com sucesso");
         }

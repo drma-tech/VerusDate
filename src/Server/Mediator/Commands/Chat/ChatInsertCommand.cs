@@ -7,13 +7,12 @@ using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Mediator.Commands.Chat
 {
-    public class ChatInsertCommand : IBaseCommand<int>
+    public class ChatInsertCommand : IRequest<int>
     {
         /// <summary>
         /// Chat (lista de conversas) realizado entre dois usuários
         /// </summary>
         public List<ChatVM> LstChat { get; private set; }
-        public string IdUser { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 
     public class ChatInsertChatHandler : IRequestHandler<ChatInsertCommand, int>

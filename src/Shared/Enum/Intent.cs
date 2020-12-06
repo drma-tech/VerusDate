@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace VerusDate.Shared.Enum
@@ -24,14 +25,38 @@ namespace VerusDate.Shared.Enum
 
     public static class Extension
     {
-        public static bool IsShortTerm(this Intent[] intent)
+        public static bool IsShortTerm(this Intent[] intent, bool exclusive = false)
         {
-            return intent.Any(a => a == Intent.OneNightStand || a == Intent.FriendsWithBenefits);
+            if (exclusive)
+            {
+                return intent.Any(a => a == Intent.OneNightStand || a == Intent.FriendsWithBenefits) && !intent.IsLongTerm();
+            }
+            else
+            {
+                return intent.Any(a => a == Intent.OneNightStand || a == Intent.FriendsWithBenefits);
+            }
         }
 
-        public static bool IsLongTerm(this Intent[] intent)
+        public static bool IsShortTerm(this IReadOnlyList<Intent> intent, bool exclusive = false)
         {
-            return intent.Any(a => a == Intent.Relationship || a == Intent.Married);
+            return intent.ToArray().IsShortTerm(exclusive);
+        }
+
+        public static bool IsLongTerm(this Intent[] intent, bool exclusive = false)
+        {
+            if (exclusive)
+            {
+                return intent.Any(a => a == Intent.Relationship || a == Intent.Married) && !intent.IsShortTerm();
+            }
+            else
+            {
+                return intent.Any(a => a == Intent.Relationship || a == Intent.Married);
+            }
+        }
+
+        public static bool IsLongTerm(this IReadOnlyList<Intent> intent, bool exclusive = false)
+        {
+            return intent.ToArray().IsLongTerm(exclusive);
         }
     }
 }

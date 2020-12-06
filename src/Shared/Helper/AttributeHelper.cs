@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -8,42 +7,14 @@ namespace VerusDate.Shared.Helper
 {
     public static class AttributeHelper
     {
-        public static Dictionary<string, object> GetAttributes(Expression<Func<object>> expression, bool showDescription = false, bool showPrompt = false, bool isMultiple = false,
-            bool disabled = false)
-        {
-            var dic = new Dictionary<string, object>() { { "class", "form-control" } };
-
-            if (isMultiple)
-            {
-                dic.Add("rows", 7);
-            }
-
-            if (showDescription)
-            {
-                dic.Add("title", GetDescription(expression)); //tooltip
-            }
-
-            if (showPrompt)
-            {
-                dic.Add("placeholder", GetPrompt(expression)); //componente body
-            }
-
-            if (disabled)
-            {
-                dic.Add("disabled", "disabled");
-            }
-
-            return dic;
-        }
-
-        public static string GetName(Expression<Func<object>> expression)
+        public static string GetName<T>(Expression<Func<T>> expression)
         {
             if (expression == null) return null;
 
             return GetDisplayAttribute(expression)?.Name;
         }
 
-        public static string GetNameOf(Expression<Func<object>> expression)
+        public static string GetNameOf<T>(Expression<Func<T>> expression)
         {
             if (expression == null) return null;
 
@@ -58,17 +29,17 @@ namespace VerusDate.Shared.Helper
             }
         }
 
-        public static string GetDescription(Expression<Func<object>> expression)
+        public static string GetDescription<T>(Expression<Func<T>> expression)
         {
             return GetDisplayAttribute(expression)?.Description;
         }
 
-        public static string GetPrompt(Expression<Func<object>> expression)
+        public static string GetPrompt<T>(Expression<Func<T>> expression)
         {
             return GetDisplayAttribute(expression)?.Prompt;
         }
 
-        private static DisplayAttribute GetDisplayAttribute(Expression<Func<object>> expression)
+        private static DisplayAttribute GetDisplayAttribute<T>(Expression<Func<T>> expression)
         {
             if (expression.Body is MemberExpression body)
             {

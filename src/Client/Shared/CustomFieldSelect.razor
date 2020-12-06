@@ -1,0 +1,58 @@
+﻿@inherits BaseCustomField<TValue>
+@typeparam TValue
+@typeparam TEnum
+
+<Field Horizontal="true">
+    <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+        <Icon Name="@CssIcon"></Icon> @Label
+        @if (!string.IsNullOrEmpty(AttributeHelper.GetDescription(For)))
+        {
+            <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(For)</FieldHelp>
+        }
+    </FieldLabel>
+
+    <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
+        @switch (Type)
+        {
+            case FieldType.Select:
+                <div class="input-group">
+                    <InputSelect TValue="TValue" Value="@SelectedValue" ValueChanged="@SetValue" ValueExpression="@For" @attributes="@GetAttributes(For, disabled: Disabled)">
+                        @foreach (var item in EnumHelper.GetArray<TEnum>())
+                        {
+                            <option value="@item">@item.GetName()</option>
+                        }
+                    </InputSelect>
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-outline btn-primary" @onclick="() => UpdateDataHelp(For, typeof(TEnum))" disabled="@DisableHelp">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Question"></Icon>
+                        </button>
+                    </span>
+                </div>
+
+                break;
+
+            case FieldType.SelectMultiple:
+                <div class="input-group">
+                    <Select TValue="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SetValues" Multiple="true">
+                        @foreach (var item in EnumHelper.GetArray<TEnum>())
+                        {
+                            <SelectItem Value="@item">@item.GetName()</SelectItem>
+                        }
+                    </Select>
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-outline btn-primary" @onclick="() => UpdateDataHelp(For, typeof(TEnum))" disabled="@DisableHelp">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Question"></Icon>
+                        </button>
+                    </span>
+                </div>
+
+                break;
+
+            default:
+                break;
+        }
+        <ValidationMessage For="@For"></ValidationMessage>
+    </FieldBody>
+</Field>
+
+<ProfileDataHelp TValue="TValue" @ref="dataHelp"></ProfileDataHelp>

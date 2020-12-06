@@ -1,4 +1,5 @@
 ﻿@using System.Linq.Expressions;
+@typeparam TValue
 
 <Modal @ref="modal">
     <ModalBackdrop />
@@ -23,7 +24,7 @@
 
 @code {
     private Modal modal;
-    private Expression<Func<object>> For;
+    private Expression<Func<TValue>> For;
     private System.Type TypeEnum;
 
     private string label => VerusDate.Shared.Helper.AttributeHelper.GetName(For);
@@ -33,7 +34,7 @@
         modal.Show();
     }
 
-    public void ChangeContent(Expression<Func<object>> For, System.Type TypeEnum)
+    public void ChangeContent(Expression<Func<TValue>> For, System.Type TypeEnum)
     {
         this.For = For;
         this.TypeEnum = TypeEnum;

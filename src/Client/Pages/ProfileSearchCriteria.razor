@@ -30,7 +30,7 @@ else
                         <div class="form-group row">
                             <CustomLabel For="@(() => looking.Distance)" CssIcon="fas fa-map-marker-alt" Comment="Campo obrigatório"></CustomLabel>
                             <div class="col-sm-8">
-                                <InputNumber @bind-Value="@looking.Distance" @attributes="@AttributeHelper.GetAttributes((() => looking.Distance))"></InputNumber>
+                                <InputNumber @bind-Value="@looking.Distance" ></InputNumber>
                                 <ValidationMessage For="@(()=>looking.Distance)"></ValidationMessage>
                             </div>
                         </div>
@@ -38,7 +38,7 @@ else
                             <CustomLabel For="@(() => looking.MaritalStatus)" CssIcon="far fa-heart"></CustomLabel>
                             <div class="col-sm-8">
                                 <div class="input-group">
-                                    <InputSelect TValue="MaritalStatus?" @bind-Value="@looking.MaritalStatus" @attributes="@AttributeHelper.GetAttributes((() => looking.MaritalStatus))">
+                                    <InputSelect TValue="MaritalStatus?" @bind-Value="@looking.MaritalStatus" >
                                         <option></option>
                                         @foreach (var item in EnumHelper.GetArray<MaritalStatus>())
                                         {
@@ -79,7 +79,7 @@ else
                             <CustomLabel For="@(() => looking.BiologicalSex)" CssIcon="fas fa-neuter"></CustomLabel>
                             <div class="col-sm-8">
                                 <div class="input-group">
-                                    <InputSelect TValue="BiologicalSex?" @bind-Value="@looking.BiologicalSex" @attributes="@AttributeHelper.GetAttributes((() => looking.BiologicalSex))">
+                                    <InputSelect TValue="BiologicalSex?" @bind-Value="@looking.BiologicalSex" >
                                         <option></option>
                                         @foreach (var item in EnumHelper.GetArray<BiologicalSex>())
                                         {
@@ -99,7 +99,7 @@ else
                             <CustomLabel For="@(() => looking.GenderIdentity)" CssIcon="fas fa-neuter"></CustomLabel>
                             <div class="col-sm-8">
                                 <div class="input-group">
-                                    <InputSelect TValue="GenderIdentity?" @bind-Value="@looking.GenderIdentity" @attributes="@AttributeHelper.GetAttributes((() => looking.GenderIdentity))">
+                                    <InputSelect TValue="GenderIdentity?" @bind-Value="@looking.GenderIdentity" >
                                         <option></option>
                                         <optgroup label="Binário">
                                             <option value="@GenderIdentity.Cisgender">@GenderIdentity.Cisgender.GetName()</option>
@@ -127,7 +127,7 @@ else
                             <CustomLabel For="@(() => looking.SexualOrientation)" CssIcon="fas fa-neuter"></CustomLabel>
                             <div class="col-sm-8">
                                 <div class="input-group">
-                                    <InputSelect TValue="SexualOrientation?" @bind-Value="@looking.SexualOrientation" @attributes="@AttributeHelper.GetAttributes((() => looking.SexualOrientation))">
+                                    <InputSelect TValue="SexualOrientation?" @bind-Value="@looking.SexualOrientation" >
                                         <option></option>
                                         @foreach (var item in EnumHelper.GetArray<SexualOrientation>())
                                         {
@@ -154,18 +154,18 @@ else
                         <div class="form-group row">
                             <CustomLabel For="@(() => looking.MinimalAge)" CssIcon="fas fa-birthday-cake" Comment="Campo obrigatório"></CustomLabel>
                             <div class="col-sm-4">
-                                <InputNumber @bind-Value="@looking.MinimalAge" @attributes="@AttributeHelper.GetAttributes((() => looking.MinimalAge))"></InputNumber>
+                                <InputNumber @bind-Value="@looking.MinimalAge" ></InputNumber>
                                 <ValidationMessage For="@(()=>looking.MinimalAge)"></ValidationMessage>
                             </div>
                             <div class="col-sm-4">
-                                <InputNumber @bind-Value="@looking.MaxAge" @attributes="@AttributeHelper.GetAttributes((() => looking.MaxAge))"></InputNumber>
+                                <InputNumber @bind-Value="@looking.MaxAge" ></InputNumber>
                                 <ValidationMessage For="@(()=>looking.MaxAge)"></ValidationMessage>
                             </div>
                         </div>
                         <div class="form-group row">
                             <CustomLabel For="@(() => looking.MinimalHeight)" CssIcon="fas fa-ruler"></CustomLabel>
                             <div class="col-sm-4">
-                                <InputSelect TValue="Height?" @bind-Value="@looking.MinimalHeight" @attributes="@AttributeHelper.GetAttributes((() => looking.MinimalHeight))">
+                                <InputSelect TValue="Height?" @bind-Value="@looking.MinimalHeight" >
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Height>())
                                     {
@@ -175,7 +175,7 @@ else
                                 <ValidationMessage For="@(()=>looking.MinimalHeight)"></ValidationMessage>
                             </div>
                             <div class="col-sm-4">
-                                <InputSelect TValue="Height?" @bind-Value="@looking.MaxHeight" @attributes="@AttributeHelper.GetAttributes((() => looking.MaxHeight))">
+                                <InputSelect TValue="Height?" @bind-Value="@looking.MaxHeight" >
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Height>())
                                     {
@@ -191,7 +191,7 @@ else
                             <CustomLabel For="@(() => looking.RaceCategory)" CssIcon="fas fa-globe"></CustomLabel>
                             <div class="col-sm-8">
                                 <div class="input-group">
-                                    <InputSelect TValue="RaceCategory?" @bind-Value="@looking.RaceCategory" @attributes="@AttributeHelper.GetAttributes((() => looking.RaceCategory))">
+                                    <InputSelect TValue="RaceCategory?" @bind-Value="@looking.RaceCategory">
                                         <option></option>
                                         @foreach (var item in EnumHelper.GetArray<RaceCategory>())
                                         {
@@ -210,7 +210,7 @@ else
                         <div class="form-group row">
                             <CustomLabel For="@(() => looking.BodyMass)" CssIcon="fas fa-weight"></CustomLabel>
                             <div class="col-sm-8">
-                                <InputSelect TValue="BodyMass?" @bind-Value="@looking.BodyMass" @attributes="@AttributeHelper.GetAttributes((() => looking.BodyMass))">
+                                <InputSelect TValue="BodyMass?" @bind-Value="@looking.BodyMass" >
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<BodyMass>())
                                     {
@@ -231,7 +231,7 @@ else
                         <div class="form-group row">
                             <CustomLabel For="@(() => looking.Drink)" CssIcon="fas fa-glass-cheers"></CustomLabel>
                             <div class="col-sm-8">
-                                <InputSelect TValue="Drink?" @bind-Value="@looking.Drink" @attributes="@AttributeHelper.GetAttributes((() => looking.Drink))">
+                                <InputSelect TValue="Drink?" @bind-Value="@looking.Drink" >
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Drink>())
                                     {
@@ -244,7 +244,7 @@ else
                         <div class="form-group row">
                             <CustomLabel For="@(() => looking.Smoke)" CssIcon="fas fa-smoking"></CustomLabel>
                             <div class="col-sm-8">
-                                <InputSelect TValue="Smoke?" @bind-Value="@looking.Smoke" @attributes="@AttributeHelper.GetAttributes((() => looking.Smoke))">
+                                <InputSelect TValue="Smoke?" @bind-Value="@looking.Smoke" >
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Smoke>())
                                     {
@@ -258,7 +258,7 @@ else
                             <CustomLabel For="@(() => looking.Diet)" CssIcon="fas fa-briefcase"></CustomLabel>
                             <div class="col-sm-8">
                                 <div class="input-group">
-                                    <InputSelect TValue="Diet?" @bind-Value="@looking.Diet" @attributes="@AttributeHelper.GetAttributes((() => looking.Diet))">
+                                    <InputSelect TValue="Diet?" @bind-Value="@looking.Diet">
                                         <option></option>
                                         @foreach (var item in EnumHelper.GetArray<Diet>())
                                         {
@@ -277,7 +277,7 @@ else
                         <div class="form-group row">
                             <CustomLabel For="@(() => looking.HaveChildren)" CssIcon="fas fa-child"></CustomLabel>
                             <div class="col-sm-8">
-                                <InputSelect TValue="HaveChildren?" @bind-Value="@looking.HaveChildren" @attributes="@AttributeHelper.GetAttributes((() => looking.HaveChildren))">
+                                <InputSelect TValue="HaveChildren?" @bind-Value="@looking.HaveChildren" >
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<HaveChildren>())
                                     {
@@ -290,7 +290,7 @@ else
                         <div class="form-group row">
                             <CustomLabel For="@(() => looking.WantChildren)" CssIcon="fas fa-baby"></CustomLabel>
                             <div class="col-sm-8">
-                                <InputSelect TValue="WantChildren?" @bind-Value="@looking.WantChildren" @attributes="@AttributeHelper.GetAttributes((() => looking.WantChildren))">
+                                <InputSelect TValue="WantChildren?" @bind-Value="@looking.WantChildren" >
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<WantChildren>())
                                     {
@@ -305,7 +305,7 @@ else
                         <div class="form-group row">
                             <CustomLabel For="@(() => looking.EducationLevel)" CssIcon="fas fa-graduation-cap"></CustomLabel>
                             <div class="col-sm-8">
-                                <InputSelect TValue="EducationLevel?" @bind-Value="@looking.EducationLevel" @attributes="@AttributeHelper.GetAttributes((() => looking.EducationLevel))">
+                                <InputSelect TValue="EducationLevel?" @bind-Value="@looking.EducationLevel" >
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<EducationLevel>())
                                     {
@@ -318,7 +318,7 @@ else
                         <div class="form-group row">
                             <CustomLabel For="@(() => looking.Religion)" CssIcon="fas fa-praying-hands"></CustomLabel>
                             <div class="col-sm-8">
-                                <InputSelect TValue="Religion?" @bind-Value="@looking.Religion" @attributes="@AttributeHelper.GetAttributes((() => looking.Religion))">
+                                <InputSelect TValue="Religion?" @bind-Value="@looking.Religion" >
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Religion>())
                                     {
@@ -398,7 +398,7 @@ else
             </div>
         </div>
     </EditForm>
-    <ProfileDataHelp @ref="ProfileDataHelp"></ProfileDataHelp>
+    <ProfileDataHelp TValue="object" @ref="ProfileDataHelp"></ProfileDataHelp>
 }
 
 @code {
@@ -406,7 +406,7 @@ else
     ProfileLookingVM looking;
     ProfileVM profile;
 
-    private ProfileDataHelp ProfileDataHelp;
+    private ProfileDataHelp<object> ProfileDataHelp;
 
     private VisibilityOptions Options => new VisibilityOptions()
     {

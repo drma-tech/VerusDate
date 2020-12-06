@@ -12,7 +12,6 @@ else
 {
     <EditForm Model="@profile" OnValidSubmit="HandleValidSubmit">
         <FluentValidationValidator />
-
         <Card>
             <CardHeader>
                 Perfil
@@ -24,146 +23,25 @@ else
                 <Divider DividerType="DividerType.TextContent" Text="Básico"></Divider>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <Field Horizontal="true">
-                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnTablet.Is4.OnDesktop"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.User"></Icon> Nome / Apelido</FieldLabel>
-                            <FieldBody ColumnSize="ColumnSize.IsFull.OnTablet.Is8.OnDesktop">
-                                <InputText @bind-Value="@profile.NickName" @attributes="@AttributeHelper.GetAttributes((() => profile.NickName), false, true)"></InputText>
-                                <ValidationMessage For="@(() => profile.NickName)"></ValidationMessage>
-                            </FieldBody>
-                        </Field>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.Description)" CssIcon="fas fa-quote-left"></CustomLabel>
-                            <div class="col-sm-8">
-                                <InputTextArea @bind-Value="@profile.Description" @attributes="@AttributeHelper.GetAttributes((() => profile.Description), false, true, true)"></InputTextArea>
-                                <ValidationMessage For="@(()=>profile.Description)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <CustomLabel For="@(() => profile.Location)" CssIcon="fas fa-map-marker-alt" Comment="Informação automática (deve-se liberar a opção de GPS)"></CustomLabel>
-                            <div class="col-sm-8">
-                                <div class="form-group">
-                                    <input class="form-control" value="@profile.Location" disabled />
-                                </div>
-                            </div>
-                        </div>
+                        <CustomField Type="FieldType.TextEdit" For="@(() => profile.NickName)" @bind-Value="@profile.NickName"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User"></CustomField>
+                        <CustomField Type="FieldType.MemoEdit" For="@(() => profile.Description)" @bind-Value="@profile.Description"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.QuoteLeft" Rows="7"></CustomField>
+                        <CustomField Type="FieldType.TextEdit" For="@(() => profile.Location)" @bind-Value="@profile.Location"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkerAlt" Disabled="true"></CustomField>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.MaritalStatus)" CssIcon="far fa-heart"></CustomLabel>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <InputSelect TValue="MaritalStatus" @bind-Value="@profile.MaritalStatus" @attributes="@AttributeHelper.GetAttributes((() => profile.MaritalStatus))">
-                                        @foreach (var item in EnumHelper.GetArray<MaritalStatus>())
-                                        {
-                                            <option value="@item">@item.GetName()</option>
-                                        }
-                                    </InputSelect>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-outline btn-primary" @onclick="() => UpdateDataHelp(() => profile.MaritalStatus, typeof(MaritalStatus))">
-                                            <i class="fas fa-question"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <ValidationMessage For="@(()=>profile.MaritalStatus)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.Intent)" CssIcon="fas fa-search" Comment="Poderá escolher mais de uma opção. O match só ocorrerá se a intenção for a mesma."></CustomLabel>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <Select TValue="Intent" Multiple="true" SelectedValues="@profile.Intent">
-                                        @foreach (var item in EnumHelper.GetArray<Intent>())
-                                        {
-                                            <SelectItem Value="@item">@item.GetName()</SelectItem>
-                                        }
-                                    </Select>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="#modalDataHelp" @onclick="() => UpdateDataHelp(() => profile.Intent, typeof(Intent))">
-                                            <i class="fas fa-question"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <ValidationMessage For="@(()=>profile.Intent)"></ValidationMessage>
-                            </div>
-                            @*<div class="col-sm-4">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" @bind-value="@sex" class="custom-control-input" id="chksex">
-                                        <label class="custom-control-label" for="chksex">@Intent.OneNightStand.GetName()</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" @bind-value="@friend" class="custom-control-input" id="chkfriend" />
-                                        <label class="custom-control-label" for="chkfriend">@Intent.FriendsWithBenefits.GetName()</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" @bind-value="@relationship" class="custom-control-input" id="chkrelationship" />
-                                        <label class="custom-control-label" for="chkrelationship">@Intent.Relationship.GetName()</label>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" @bind-value="@marrie" class="custom-control-input" id="chkmarrie" />
-                                        <label class="custom-control-label" for="chkmarrie">@Intent.Married.GetName()</label>
-                                    </div>
-                                </div>*@
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.BiologicalSex)" CssIcon="fas fa-neuter"></CustomLabel>
-                            <div class="col-sm-8">
-                                <InputSelect TValue="BiologicalSex" @bind-Value="@profile.BiologicalSex" @attributes="@AttributeHelper.GetAttributes((() => profile.BiologicalSex))">
-                                    @foreach (var item in EnumHelper.GetArray<BiologicalSex>())
-                                    {
-                                        <option value="@item">@item.GetName()</option>
-                                    }
-                                </InputSelect>
-                                <ValidationMessage For="@(()=>profile.BiologicalSex)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.GenderIdentity)" CssIcon="fas fa-neuter" Comment="Este campo é opcional"></CustomLabel>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <InputSelect TValue="GenderIdentity" @bind-Value="@profile.GenderIdentity" @attributes="@AttributeHelper.GetAttributes((() => profile.GenderIdentity))">
-                                        <optgroup label="Binário">
-                                            <option value="@GenderIdentity.Cisgender">@GenderIdentity.Cisgender.GetName()</option>
-                                        </optgroup>
-                                        <optgroup label="Não-Binário">
-                                            <option value="@GenderIdentity.Transgender">@GenderIdentity.Transgender.GetName()</option>
-                                            <option value="@GenderIdentity.Transexuais">@GenderIdentity.Transexuais.GetName()</option>
-                                            <option value="@GenderIdentity.Travestis">@GenderIdentity.Travestis.GetName()</option>
-                                            <option value="@GenderIdentity.Intergenero">@GenderIdentity.Intergenero.GetName()</option>
-                                            <option value="@GenderIdentity.Androgenos">@GenderIdentity.Androgenos.GetName()</option>
-                                            <option value="@GenderIdentity.Intersexual">@GenderIdentity.Intersexual.GetName()</option>
-                                            <option value="@GenderIdentity.Other">@GenderIdentity.Other.GetName()</option>
-                                        </optgroup>
-                                    </InputSelect>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="#modalDataHelp" @onclick="() => UpdateDataHelp(() => profile.GenderIdentity, typeof(GenderIdentity))">
-                                            <i class="fas fa-question"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <ValidationMessage For="@(()=>profile.GenderIdentity)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.SexualOrientation)" CssIcon="fas fa-neuter" Comment="Este campo é opcional"></CustomLabel>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <InputSelect TValue="SexualOrientation" @bind-Value="@profile.SexualOrientation" @attributes="@AttributeHelper.GetAttributes((() => profile.SexualOrientation))">
-                                        @foreach (var item in EnumHelper.GetArray<SexualOrientation>())
-                                        {
-                                            <option value="@item">@item.GetName()</option>
-                                        }
-                                    </InputSelect>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="#modalDataHelp" @onclick="() => UpdateDataHelp(() => profile.SexualOrientation, typeof(SexualOrientation))">
-                                            <i class="fas fa-question"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <ValidationMessage For="@(()=>profile.SexualOrientation)"></ValidationMessage>
-                            </div>
-                        </div>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.MaritalStatus)" TValue="MaritalStatus" TEnum="MaritalStatus" @bind-SelectedValue="@profile.MaritalStatus"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart"></CustomFieldSelect>
+                        @profile.Intent.Count()
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Intent)" TValue="IReadOnlyList<Intent>" TEnum="Intent" @bind-SelectedValues="@profile.Intent"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.BiologicalSex)" TValue="BiologicalSex" TEnum="BiologicalSex" @bind-SelectedValue="@profile.BiologicalSex"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.GenderIdentity)" TValue="GenderIdentity" TEnum="GenderIdentity" @bind-SelectedValue="@profile.GenderIdentity"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.SexualOrientation)" TValue="SexualOrientation" TEnum="SexualOrientation" @bind-SelectedValue="@profile.SexualOrientation"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Divider DividerType="DividerType.TextContent" Text="Bio"></Divider>
@@ -172,7 +50,7 @@ else
                         <div class="form-group row">
                             <CustomLabel For="@(() => profile.BirthDate)" CssIcon="fas fa-birthday-cake"></CustomLabel>
                             <div class="col-sm-8">
-                                <InputDate @bind-Value="@profile.BirthDate" @attributes="@AttributeHelper.GetAttributes((() => profile.BirthDate))"></InputDate>
+                                <InputDate @bind-Value="@profile.BirthDate" @attributes='new Dictionary<string, object>() { { "class", "form-control" } }'></InputDate>
                                 <ValidationMessage For="@(()=>profile.BirthDate)"></ValidationMessage>
                             </div>
                         </div>
@@ -186,223 +64,41 @@ else
                         </div>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.RaceCategory)" CssIcon="fas fa-globe"></CustomLabel>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <InputSelect TValue="RaceCategory" @bind-Value="@profile.RaceCategory" @attributes="@AttributeHelper.GetAttributes((() => profile.RaceCategory))">
-                                        @foreach (var item in EnumHelper.GetArray<RaceCategory>())
-                                        {
-                                            <option value="@item">@item.GetName()</option>
-                                        }
-                                    </InputSelect>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="#modalDataHelp" @onclick="() => UpdateDataHelp(() => profile.RaceCategory, typeof(RaceCategory))">
-                                            <i class="fas fa-question"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <ValidationMessage For="@(()=>profile.RaceCategory)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.Height)" CssIcon="fas fa-ruler"></CustomLabel>
-                            <div class="col-sm-8">
-                                <InputSelect TValue="Height" @bind-Value="@profile.Height" @attributes="@AttributeHelper.GetAttributes((() => profile.Height))">
-                                    @foreach (var item in EnumHelper.GetArray<Height>())
-                                    {
-                                        <option value="@item">@item.GetName()</option>
-                                    }
-                                </InputSelect>
-                                <ValidationMessage For="@(()=>profile.Height)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.BodyMass)" CssIcon="fas fa-weight"></CustomLabel>
-                            <div class="col-sm-8">
-                                <InputSelect TValue="BodyMass" @bind-Value="@profile.BodyMass" @attributes="@AttributeHelper.GetAttributes((() => profile.BodyMass))">
-                                    @foreach (var item in EnumHelper.GetArray<BodyMass>())
-                                    {
-                                        <option value="@item">@item.GetName()</option>
-                                    }
-                                </InputSelect>
-                                <ValidationMessage For="@(()=>profile.BodyMass)"></ValidationMessage>
-                            </div>
-                        </div>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.RaceCategory)" TValue="RaceCategory" TEnum="RaceCategory" @bind-SelectedValue="@profile.RaceCategory"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Globe"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Height)" TValue="Height" TEnum="Height" @bind-SelectedValue="@profile.Height"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.BodyMass)" TValue="BodyMass" TEnum="BodyMass" @bind-SelectedValue="@profile.BodyMass"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight" DisableHelp="true"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Divider DividerType="DividerType.TextContent" Text="Lifestyle"></Divider>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.Drink)" CssIcon="fas fa-glass-cheers"></CustomLabel>
-                            <div class="col-sm-8">
-                                <InputSelect TValue="Drink" @bind-Value="@profile.Drink" @attributes="@AttributeHelper.GetAttributes((() => profile.Drink))">
-                                    @foreach (var item in EnumHelper.GetArray<Drink>())
-                                    {
-                                        <option value="@item">@item.GetName()</option>
-                                    }
-                                </InputSelect>
-                                <ValidationMessage For="@(()=>profile.Drink)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.Smoke)" CssIcon="fas fa-smoking"></CustomLabel>
-                            <div class="col-sm-8">
-                                <InputSelect TValue="Smoke" @bind-Value="@profile.Smoke" @attributes="@AttributeHelper.GetAttributes((() => profile.Smoke))">
-                                    @foreach (var item in EnumHelper.GetArray<Smoke>())
-                                    {
-                                        <option value="@item">@item.GetName()</option>
-                                    }
-                                </InputSelect>
-                                <ValidationMessage For="@(()=>profile.Smoke)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.Diet)" CssIcon="fas fa-utensils" Comment="Este campo é opcional"></CustomLabel>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <InputSelect TValue="Diet" @bind-Value="@profile.Diet" @attributes="@AttributeHelper.GetAttributes((() => profile.Diet), disabled: IsShortTerm)">
-                                        @foreach (var item in EnumHelper.GetArray<Diet>())
-                                        {
-                                            <option value="@item">@item.GetName()</option>
-                                        }
-                                    </InputSelect>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="#modalDataHelp" @onclick="() => UpdateDataHelp(() => profile.Diet, typeof(Diet))">
-                                            <i class="fas fa-question"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <ValidationMessage For="@(()=>profile.CareerCluster)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.HaveChildren)" CssIcon="fas fa-child"></CustomLabel>
-                            <div class="col-sm-8">
-                                <InputSelect TValue="HaveChildren?" @bind-Value="@profile.HaveChildren" @attributes="@AttributeHelper.GetAttributes((() => profile.HaveChildren), disabled: IsShortTerm)">
-                                    @foreach (var item in EnumHelper.GetArray<HaveChildren>())
-                                    {
-                                        <option value="@item">@item.GetName()</option>
-                                    }
-                                </InputSelect>
-                                <ValidationMessage For="@(()=>profile.HaveChildren)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.WantChildren)" CssIcon="fas fa-baby"></CustomLabel>
-                            <div class="col-sm-8">
-                                <InputSelect TValue="WantChildren?" @bind-Value="@profile.WantChildren" @attributes="@AttributeHelper.GetAttributes((() => profile.WantChildren), disabled: IsShortTerm)">
-                                    @foreach (var item in EnumHelper.GetArray<WantChildren>())
-                                    {
-                                        <option value="@item">@item.GetName()</option>
-                                    }
-                                </InputSelect>
-                                <ValidationMessage For="@(()=>profile.WantChildren)"></ValidationMessage>
-                            </div>
-                        </div>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Drink)" TValue="Drink" TEnum="Drink" @bind-SelectedValue="@profile.Drink"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GlassCheers" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Smoke)" TValue="Smoke" TEnum="Smoke" @bind-SelectedValue="@profile.Smoke"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smoking" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Diet)" TValue="Diet" TEnum="Diet" @bind-SelectedValue="@profile.Diet"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Utensils" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.HaveChildren)" TValue="HaveChildren?" TEnum="HaveChildren" @bind-SelectedValue="@profile.HaveChildren"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Child" Disabled="@profile.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.WantChildren)" TValue="WantChildren?" TEnum="WantChildren" @bind-SelectedValue="@profile.WantChildren"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Baby" Disabled="@profile.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.EducationLevel)" CssIcon="fas fa-graduation-cap"></CustomLabel>
-                            <div class="col-sm-8">
-                                <InputSelect TValue="EducationLevel?" @bind-Value="@profile.EducationLevel" @attributes="@AttributeHelper.GetAttributes((() => profile.EducationLevel), disabled: IsShortTerm)">
-                                    @foreach (var item in EnumHelper.GetArray<EducationLevel>())
-                                    {
-                                        <option value="@item">@item.GetName()</option>
-                                    }
-                                </InputSelect>
-                                <ValidationMessage For="@(()=>profile.EducationLevel)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.CareerCluster)" CssIcon="fas fa-briefcase"></CustomLabel>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <InputSelect TValue="CareerCluster?" @bind-Value="@profile.CareerCluster" @attributes="@AttributeHelper.GetAttributes((() => profile.CareerCluster), disabled: IsShortTerm)">
-                                        @foreach (var item in EnumHelper.GetArray<CareerCluster>())
-                                        {
-                                            <option value="@item">@item.GetName()</option>
-                                        }
-                                    </InputSelect>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="#modalDataHelp" @onclick="() => UpdateDataHelp(() => profile.CareerCluster, typeof(CareerCluster))">
-                                            <i class="fas fa-question"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <ValidationMessage For="@(()=>profile.CareerCluster)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.Religion)" CssIcon="fas fa-praying-hands"></CustomLabel>
-                            <div class="col-sm-8">
-                                <InputSelect TValue="Religion?" @bind-Value="@profile.Religion" @attributes="@AttributeHelper.GetAttributes((() => profile.Religion), disabled: IsShortTerm)">
-                                    @foreach (var item in EnumHelper.GetArray<Religion>())
-                                    {
-                                        <option value="@item">@item.GetName()</option>
-                                    }
-                                </InputSelect>
-                                <ValidationMessage For="@(()=>profile.Religion)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.MoneyPersonality)" CssIcon="fas fa-wallet"></CustomLabel>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <InputSelect TValue="MoneyPersonality?" @bind-Value="@profile.MoneyPersonality" @attributes="@AttributeHelper.GetAttributes((() => profile.MoneyPersonality), disabled: IsShortTerm)">
-                                        @foreach (var item in EnumHelper.GetArray<MoneyPersonality>())
-                                        {
-                                            <option value="@item">@item.GetName()</option>
-                                        }
-                                    </InputSelect>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="#modalDataHelp" @onclick="() => UpdateDataHelp(() => profile.MoneyPersonality, typeof(MoneyPersonality))">
-                                            <i class="fas fa-question"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <ValidationMessage For="@(()=>profile.MoneyPersonality)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.MyersBriggsTypeIndicator)" CssIcon="fas fa-user"></CustomLabel>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <InputSelect TValue="MyersBriggsTypeIndicator?" @bind-Value="@profile.MyersBriggsTypeIndicator" @attributes="@AttributeHelper.GetAttributes((() => profile.MyersBriggsTypeIndicator), disabled: IsShortTerm)">
-                                        @foreach (var item in EnumHelper.GetArray<MyersBriggsTypeIndicator>())
-                                        {
-                                            <option value="@item">@item.GetName()</option>
-                                        }
-                                    </InputSelect>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="#modalDataHelp" @onclick="() => UpdateDataHelp(() => profile.MyersBriggsTypeIndicator, typeof(MyersBriggsTypeIndicator))">
-                                            <i class="fas fa-question"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <ValidationMessage For="@(()=>profile.MyersBriggsTypeIndicator)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.RelationshipPersonality)" CssIcon="fas fa-people-arrows"></CustomLabel>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <InputSelect TValue="RelationshipPersonality?" @bind-Value="@profile.RelationshipPersonality" @attributes="@AttributeHelper.GetAttributes((() => profile.RelationshipPersonality), disabled: IsShortTerm)">
-                                        @foreach (var item in EnumHelper.GetArray<RelationshipPersonality>())
-                                        {
-                                            <option value="@item">@item.GetName()</option>
-                                        }
-                                    </InputSelect>
-                                    <span class="input-group-append">
-                                        <button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="#modalDataHelp" @onclick="() => UpdateDataHelp(() => profile.RelationshipPersonality, typeof(RelationshipPersonality))">
-                                            <i class="fas fa-question"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <ValidationMessage For="@(()=>profile.RelationshipPersonality)"></ValidationMessage>
-                            </div>
-                        </div>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.EducationLevel)" TValue="EducationLevel?" TEnum="EducationLevel" @bind-SelectedValue="@profile.EducationLevel"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GraduationCap" Disabled="@profile.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.CareerCluster)" TValue="CareerCluster?" TEnum="CareerCluster" @bind-SelectedValue="@profile.CareerCluster"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Briefcase" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Religion)" TValue="Religion?" TEnum="Religion" @bind-SelectedValue="@profile.Religion"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PrayingHands" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.MoneyPersonality)" TValue="MoneyPersonality?" TEnum="MoneyPersonality" @bind-SelectedValue="@profile.MoneyPersonality"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@profile.MyersBriggsTypeIndicator"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@profile.RelationshipPersonality"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
                     </Column>
                 </Row>
             </CardBody>
@@ -419,7 +115,7 @@ else
             </CardFooter>
         </Card>
     </EditForm>
-    <ProfileDataHelp @ref="dataHelp"></ProfileDataHelp>
+
     <BasicModal @ref="privacy" Title="Termos de privacidade">
         <ul>
             <li>Pedimos que leia nosso '<a href="/Terms/pt" target="_blank">Termos de Uso</a>' para ficar ciente de como seus dados serão tratados;</li>
@@ -432,9 +128,14 @@ else
 
     private ProfileVM profile;
     private GeoLocation GPS;
-    protected bool IsShortTerm { get { return profile.Intent.IsShortTerm(); } }
+    protected bool IsShortTerm { get { return !profile.Intent.IsLongTerm(); } }
     private BasicModal privacy;
-    private ProfileDataHelp dataHelp;
+
+    private void SetValues(IReadOnlyList<Intent> value)
+    {
+        profile.Intent = value.ToArray();
+        //await SelectedValuesChanged.InvokeAsync(SelectedValue);
+    }
 
     private VisibilityOptions Options => new VisibilityOptions()
     {
@@ -485,12 +186,6 @@ else
                 }
             }
         }
-    }
-
-    protected void UpdateDataHelp(System.Linq.Expressions.Expression<Func<object>> For, System.Type TypeEnum)
-    {
-        dataHelp.ChangeContent(For, TypeEnum);
-        dataHelp.ShowModal();
     }
 
     private async Task HandleValidSubmit()

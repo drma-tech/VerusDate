@@ -1,5 +1,6 @@
 ﻿using Dapper.Contrib.Extensions;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
@@ -31,13 +32,13 @@ namespace VerusDate.Shared.ViewModel.Command
         public MaritalStatus MaritalStatus { get; set; }
 
         [Display(Name = "Intenção")]
-        public Intent[] Intent { get; set; } = Array.Empty<Intent>();
+        public IReadOnlyList<Intent> Intent { get; set; } = Array.Empty<Intent>();
 
-        [Display(Name = "Identidade de Gênero")]
+        [Display(Name = "Identidade de Gênero", Description = "Este campo é opcional")]
         [SensitiveData]
         public GenderIdentity GenderIdentity { get; set; }
 
-        [Display(Name = "Orientação Sexual")]
+        [Display(Name = "Orientação Sexual", Description = "Este campo é opcional")]
         [SensitiveData]
         public SexualOrientation SexualOrientation { get; set; }
 
@@ -47,7 +48,7 @@ namespace VerusDate.Shared.ViewModel.Command
         [Display(Name = "Latitude")]
         public double? Latitude { get; set; }
 
-        [Display(Name = "Localização")]
+        [Display(Name = "Localização", Prompt = "Favor, liberar o GPS do seu aparelho", Description = "Informação automática (deve-se liberar a opção de GPS)")]
         public string Location { get; set; }
 
         [Display(Name = "Fuma")]
@@ -56,7 +57,7 @@ namespace VerusDate.Shared.ViewModel.Command
         [Display(Name = "Bebe")]
         public Drink Drink { get; set; }
 
-        [Display(Name = "Dieta")]
+        [Display(Name = "Dieta", Description = "Este campo é opcional")]
         public Diet Diet { get; set; }
 
         [Display(Name = "Altura")]
@@ -154,7 +155,7 @@ namespace VerusDate.Shared.ViewModel.Command
 
         public void ClearSimpleView()
         {
-            if (Intent.IsShortTerm())
+            if (Intent.IsShortTerm(true))
             {
                 EducationLevel = null;
                 HaveChildren = null;

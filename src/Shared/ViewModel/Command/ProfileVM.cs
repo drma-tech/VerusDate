@@ -113,8 +113,6 @@ namespace VerusDate.Shared.ViewModel.Command
 
         public override void LoadDefatultData()
         {
-            DtTopList = DateTimeOffset.UtcNow;
-            DtLastLogin = DateTimeOffset.UtcNow;
             BirthDate = DateTime.Now.AddYears(-18);
             GenderIdentity = GenderIdentity.Cisgender;
             SexualOrientation = SexualOrientation.Heteressexual;
@@ -129,6 +127,39 @@ namespace VerusDate.Shared.ViewModel.Command
         public void Login()
         {
             DtLastLogin = DateTimeOffset.UtcNow;
+        }
+
+        public void UpdateProfile(ProfileVM vm)
+        {
+            NickName = vm.NickName;
+            Description = vm.Description;
+            BirthDate = vm.BirthDate;
+            BiologicalSex = vm.BiologicalSex;
+            MaritalStatus = vm.MaritalStatus;
+            Intent = vm.Intent;
+            GenderIdentity = vm.GenderIdentity;
+            SexualOrientation = vm.SexualOrientation;
+            Longitude = vm.Longitude;
+            Latitude = vm.Latitude;
+            Location = vm.Location;
+            Height = vm.Height;
+            BodyMass = vm.BodyMass;
+            RaceCategory = vm.RaceCategory;
+            Smoke = vm.Smoke;
+            Drink = vm.Drink;
+            Diet = vm.Diet;
+
+            HaveChildren = vm.HaveChildren;
+            WantChildren = vm.WantChildren;
+            EducationLevel = vm.EducationLevel;
+            CareerCluster = vm.CareerCluster;
+            Religion = vm.Religion;
+            MoneyPersonality = vm.MoneyPersonality;
+            RelationshipPersonality = vm.RelationshipPersonality;
+            MyersBriggsTypeIndicator = vm.MyersBriggsTypeIndicator;
+            Hobbies = vm.Hobbies;
+
+            base.Update();
         }
 
         public void UpdateMainPhoto(string MainPhoto)

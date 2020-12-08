@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Dapper.Contrib.Extensions;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Server.Core.Interface;
@@ -6,6 +7,7 @@ using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.Mediator.Commands.Profile
 {
+    [Table("Profile")]
     public class ProfileUpdateCommand : ProfileVM, IBaseCommand<bool> { }
 
     public class ProfileUpdateHandler : IRequestHandler<ProfileUpdateCommand, bool>
@@ -21,9 +23,11 @@ namespace VerusDate.Server.Mediator.Commands.Profile
         {
             //await _gamificationApp.RemoveXP(request.Id, EventRemoveXP.UpdateProfile, cancellationToken);
 
-            request.Update();
+            var profile = await _repo.Get<ProfileVM>(request.IdUser);
 
-            return await _repo.Update(request);
+            profile.UpdateProfile(request);
+
+            return await _repo.Update(profile);
         }
     }
 }

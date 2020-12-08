@@ -30,6 +30,9 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
             //await _profileValidationApp.ValidateProfileData(request.Id, true, cancellationToken);
 
+            request.UpList();
+            request.Login();
+
             return await _repo.Insert(request);
         }
     }

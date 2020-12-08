@@ -3,19 +3,19 @@
 
 <Modal @ref="modal">
     <ModalBackdrop />
-    <ModalContent IsCentered="true">
+    <ModalContent Centered="true" Size="ModalSize.Large">
         <ModalHeader>
             <ModalTitle>@label</ModalTitle>
             <CloseButton Clicked="@modal.Hide" />
         </ModalHeader>
-        <ModalBody>
+        <ModalBody MaxHeight="80">
             @if (TypeEnum != null)
             {
                 @foreach (var item in EnumHelper.GetList(TypeEnum))
                 {
-                    <p>
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is2.FromBottom">
                         <Badge Color="Color.Primary">@item.Name</Badge> @item.Description
-                    </p>
+                    </Paragraph>
                 }
             }
         </ModalBody>

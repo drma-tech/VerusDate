@@ -23,28 +23,30 @@
                         }
                     </InputSelect>
                     <span class="input-group-append">
-                        <button type="button" class="btn btn-outline btn-primary" @onclick="() => UpdateDataHelp(For, typeof(TEnum))" disabled="@DisableHelp">
+                        <Button Color="Color.Primary" Outline="true" Disabled="@DisableHelp" Clicked="() => UpdateDataHelp(For, typeof(TEnum))">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Question"></Icon>
-                        </button>
+                        </Button>
                     </span>
                 </div>
 
                 break;
 
             case FieldType.SelectMultiple:
-                <div class="input-group">
-                    <Select TValue="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SetValues" Multiple="true">
-                        @foreach (var item in EnumHelper.GetArray<TEnum>())
-                        {
-                            <SelectItem Value="@item">@item.GetName()</SelectItem>
-                        }
-                    </Select>
-                    <span class="input-group-append">
-                        <button type="button" class="btn btn-outline btn-primary" @onclick="() => UpdateDataHelp(For, typeof(TEnum))" disabled="@DisableHelp">
+                <Addons>
+                    <Addon AddonType="AddonType.Body">
+                        <Select TValue="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SetValues" Multiple="true">
+                            @foreach (var item in EnumHelper.GetArray<TEnum>())
+                            {
+                                <SelectItem Value="@item">@item.GetName()</SelectItem>
+                            }
+                        </Select>
+                    </Addon>
+                    <Addon AddonType="AddonType.End">
+                        <Button Color="Color.Primary" Outline="true" Disabled="@DisableHelp" Clicked="() => UpdateDataHelp(For, typeof(TEnum))">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Question"></Icon>
-                        </button>
-                    </span>
-                </div>
+                        </Button>
+                    </Addon>
+                </Addons>
 
                 break;
 

@@ -114,7 +114,7 @@ namespace VerusDate.Server
                 // add auth header for [Authorize] endpoints
                 c.OperationFilter<AddAuthHeaderOperationFilter>();
 
-                c.IncludeXmlComments(Path.Combine(System.AppContext.BaseDirectory, "VerusDate.Server.xml"));
+                //c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "VerusDate.Server.xml"));
             });
 
             services.AddResponseCompression(opts =>
@@ -146,6 +146,13 @@ namespace VerusDate.Server
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
                 app.UseWebAssemblyDebugging();
+
+                //app.UseSwagger();
+
+                //app.UseSwaggerUI(c =>
+                //{
+                //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Verus Date API V1");
+                //});
             }
             else
             {
@@ -159,13 +166,6 @@ namespace VerusDate.Server
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Verus Date API V1");
-            });
 
             app.UseIdentityServer();
             app.UseAuthentication();

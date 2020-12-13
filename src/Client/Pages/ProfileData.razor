@@ -102,15 +102,12 @@ else
                 </Row>
             </CardBody>
             <CardFooter>
-                <Button Type="ButtonType.Submit" Color="Color.Primary">
+                <Button Type="ButtonType.Submit" Color="Color.Primary" Disabled="@(profile.DaysUpdate() < 7)">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
                 </Button>
-                @if (!string.IsNullOrEmpty(profile?.IdUser))
-                {
-                    <Badge Color="Color.Danger">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon> -100 XP
-                    </Badge>
-                }
+                <Badge Color="Color.Danger" Margin="Margin.Is3.FromLeft">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationTriangle"></Icon> Só poderá atualizar seu perfil a cada uma semana e perderá um nível a cada atualização
+                </Badge>
             </CardFooter>
         </Card>
     </EditForm>

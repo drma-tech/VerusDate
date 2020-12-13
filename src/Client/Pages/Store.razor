@@ -3,154 +3,122 @@
 @inherits PageCore<Store>
 @inject HttpClient Http
 
-<div class="row">
-    <div class="col-md-3">
-        <div class="ibox">
-            <div class="ibox-content product-box">
-                <div class="product-imitation" style="padding: 45px;">
-                    <i class="fas fa-gem fa-4x" style="color: #5c7cfa;"></i>
-                </div>
-                <div class="product-desc">
-                    <span class="product-price">
-                        Grátis
-                    </span>
-                    <span class="product-name">10 Diamantes</span>
-                    <div class="m-t text-righ">
-                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => BuyDiamond(10)"><i class="far fa-credit-card"></i> Comprar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="ibox">
-            <div class="ibox-content product-box">
-                <div class="product-imitation" style="padding: 45px;">
-                    <i class="fas fa-gem fa-4x" style="color: #5c7cfa;"></i>
-                </div>
-                <div class="product-desc">
-                    <span class="product-price">
-                        Grátis
-                    </span>
-                    <span class="product-name">20 Diamantes</span>
-                    <div class="m-t text-righ">
-                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => BuyDiamond(20)"><i class="fa fa-credit-card"></i> Comprar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="ibox">
-            <div class="ibox-content product-box">
-                <div class="product-imitation" style="padding: 45px;">
-                    <i class="fas fa-gem fa-4x" style="color: #5c7cfa;"></i>
-                </div>
-                <div class="product-desc">
-                    <span class="product-price">
-                        Grátis
-                    </span>
-                    <span class="product-name">50 Diamantes</span>
-                    <div class="m-t text-righ">
-                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => BuyDiamond(50)"><i class="fa fa-credit-card"></i> Comprar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="ibox">
-            <div class="ibox-content product-box">
-                <div class="product-imitation" style="padding: 45px;">
-                    <i class="fas fa-gem fa-4x" style="color: #5c7cfa;"></i>
-                </div>
-                <div class="product-desc">
-                    <span class="product-price">
-                        Grátis
-                    </span>
-                    <span class="product-name">100 Diamantes</span>
-                    <div class="m-t text-righ">
-                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => BuyDiamond(100)"><i class="fa fa-credit-card"></i> Comprar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-3">
-        <div class="ibox">
-            <div class="ibox-content product-box">
-                <div class="product-imitation" style="padding: 45px;">
-                    <i class="fas fa-apple-alt fa-4x" style="color: #dc3545;"></i>
-                </div>
-                <div class="product-desc">
-                    <span class="product-price">
-                        1 Diamante
-                    </span>
-                    <span class="product-name">10 Maças</span>
-                    <div class="m-t text-righ">
-                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => ExchangeFood(1)"><i class="fas fa-exchange-alt"></i> Trocar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="ibox">
-            <div class="ibox-content product-box">
-                <div class="product-imitation" style="padding: 45px;">
-                    <i class="fas fa-apple-alt fa-4x" style="color: #dc3545;"></i>
-                </div>
-                <div class="product-desc">
-                    <span class="product-price">
-                        2 Diamantes
-                    </span>
-                    <span class="product-name">20 Maças</span>
-                    <div class="m-t text-righ">
-                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => ExchangeFood(2)"><i class="fa fa-exchange-alt"></i> Trocar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="ibox">
-            <div class="ibox-content product-box">
-                <div class="product-imitation" style="padding: 45px;">
-                    <i class="fas fa-apple-alt fa-4x" style="color: #dc3545;"></i>
-                </div>
-                <div class="product-desc">
-                    <span class="product-price">
-                        3 Diamantes
-                    </span>
-                    <span class="product-name">30 Maças</span>
-                    <div class="m-t text-righ">
-                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => ExchangeFood(3)"><i class="fa fa-exchange-alt"></i> Trocar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="ibox">
-            <div class="ibox-content product-box">
-                <div class="product-imitation" style="padding: 45px;">
-                    <i class="fas fa-apple-alt fa-4x" style="color: #dc3545;"></i>
-                </div>
-                <div class="product-desc">
-                    <span class="product-price">
-                        4 Diamantes
-                    </span>
-                    <span class="product-name">40 Maças</span>
-                    <div class="m-t text-righ">
-                        <a class="btn btn-xs btn-outline btn-primary btn-block" @onclick="() => ExchangeFood(4)"><i class="fa fa-exchange-alt"></i> Trocar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<CardDeck>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Success" Display="Display.InlineBlock" Float="Float.Right">
+                Grátis
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">10 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => BuyDiamond(10)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.CreditCard"></Icon> Comprar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Success" Display="Display.InlineBlock" Float="Float.Right">
+                Grátis
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">20 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => BuyDiamond(20)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.CreditCard"></Icon> Comprar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Success" Display="Display.InlineBlock" Float="Float.Right">
+                Grátis
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">50 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => BuyDiamond(50)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.CreditCard"></Icon> Comprar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Success" Display="Display.InlineBlock" Float="Float.Right">
+                Grátis
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">100 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => BuyDiamond(100)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.CreditCard"></Icon> Comprar
+            </Button>
+        </CardBody>
+    </Card>
+</CardDeck>
+<CardDeck Margin="Margin.Is3.FromTop">
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Danger" Display="Display.InlineBlock" Float="Float.Right">
+                10 Maças
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">1 Diamante</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => ExchangeFood(1)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExchangeAlt"></Icon> Trocar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Danger" Display="Display.InlineBlock" Float="Float.Right">
+                20 Maças
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">2 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => ExchangeFood(2)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExchangeAlt"></Icon> Trocar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Danger" Display="Display.InlineBlock" Float="Float.Right">
+                30 Maças
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">3 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => ExchangeFood(3)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExchangeAlt"></Icon> Trocar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Danger" Display="Display.InlineBlock" Float="Float.Right">
+                40 Maças
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">4 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => ExchangeFood(4)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExchangeAlt"></Icon> Trocar
+            </Button>
+        </CardBody>
+    </Card>
+</CardDeck>
 
 @code {
     protected override async Task LoadData()

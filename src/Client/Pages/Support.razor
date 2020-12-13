@@ -4,31 +4,37 @@
 @inject HttpClient Http
 @*@inject IModalService Modal*@
 
-<div class="alert alert-secondary">
-    <a href="Terms/pt">Termos de Uso</a> ▪ <a href="Privacy/pt">Políticas de Privacidade</a> ▪ <a href="Faq">Dúvidas / Perguntas</a>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <div class="ibox">
-            <div class="ibox-title">
-                <h5>Erros</h5>
-                <div class="ibox-tools">
-                    <a class="btn btn-primary btn-xs" @onclick="() => ShowModal(TicketType.Bug)"><i class="fas fa-plus-circle"></i> Novo</a>
-                </div>
-            </div>
-            <div class="ibox-content">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Status</label>
-                    <div class="col-sm-4">
-                        <select class="form-control" @bind="@TicketStatusBug">
-                            <option value=""></option>
-                            @foreach (var item in EnumHelper.GetArray<TicketStatus>())
-                            {
-                                <option value="@item">@item.GetName()</option>
-                            }
-                        </select>
-                    </div>
-                </div>
+<Alert Color="Color.Secondary" Visible="true">
+    <Link To="Terms/pt">Termos de Uso</Link> ▪ <Link To="Privacy/pt">Políticas de Privacidade</Link> ▪ <Link To="Faq">Dúvidas / Perguntas</Link>
+</Alert>
+
+<Row>
+    <Column ColumnSize="ColumnSize.Is6">
+        <Card>
+            <CardHeader>
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug"></Icon> Erros
+                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => ShowModal(TicketType.Bug)">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
+                </Button>
+            </CardHeader>
+            <CardBody>
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <Field Horizontal="true">
+                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                                Status
+                            </FieldLabel>
+                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
+                                <Select TValue="TicketStatus?" @bind-SelectedValue="@TicketStatusBug">
+                                    @foreach (var item in EnumHelper.GetArray<TicketStatus>())
+                                    {
+                                        <SelectItem Value="@item">@item.GetName()</SelectItem>
+                                    }
+                                </Select>
+                            </FieldBody>
+                        </Field>
+                    </Column>
+                </Row>
                 @if (OptionsBug.HasCustomVisibility)
                 {
                     <CustomVisibility Options="@OptionsBug"></CustomVisibility>
@@ -69,30 +75,35 @@
                         </ul>
                     </div>
                 }
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="ibox">
-            <div class="ibox-title">
-                <h5>Sugestões de Melhorias</h5>
-                <div class="ibox-tools">
-                    <a class="btn btn-primary btn-xs" @onclick="() => ShowModal(TicketType.FeatureRequest)"><i class="fas fa-plus-circle"></i> Novo</a>
-                </div>
-            </div>
-            <div class="ibox-content">
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Status</label>
-                    <div class="col-sm-4">
-                        <select class="form-control" @bind="@TicketStatusFeature">
-                            <option value=""></option>
-                            @foreach (var item in EnumHelper.GetArray<TicketStatus>())
-                            {
-                                <option value="@item">@item.GetName()</option>
-                            }
-                        </select>
-                    </div>
-                </div>
+            </CardBody>
+        </Card>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is6">
+        <Card>
+            <CardHeader>
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smile"></Icon> Sugestões de Melhorias
+                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => ShowModal(TicketType.FeatureRequest)">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
+                </Button>
+            </CardHeader>
+            <CardBody>
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <Field Horizontal="true">
+                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                                Status
+                            </FieldLabel>
+                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
+                                <Select TValue="TicketStatus?" @bind-SelectedValue="@TicketStatusFeature">
+                                    @foreach (var item in EnumHelper.GetArray<TicketStatus>())
+                                    {
+                                        <SelectItem Value="@item">@item.GetName()</SelectItem>
+                                    }
+                                </Select>
+                            </FieldBody>
+                        </Field>
+                    </Column>
+                </Row>
                 @if (OptionsFeature.HasCustomVisibility)
                 {
                     <CustomVisibility Options="@OptionsFeature"></CustomVisibility>
@@ -133,10 +144,10 @@
                         </ul>
                     </div>
                 }
-            </div>
-        </div>
-    </div>
-</div>
+            </CardBody>
+        </Card>
+    </Column>
+</Row>
 
 @code {
     private List<TicketVM> tickets;

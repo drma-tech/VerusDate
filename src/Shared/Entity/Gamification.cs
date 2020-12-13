@@ -8,7 +8,7 @@ namespace VerusDate.Shared.Entity
         [Key]
         public string IdUser { get; set; }
 
-        public int Rank { get; set; }
+        public int Ranking { get; set; }
         public int XP { get; set; }
         public int Food { get; set; }
         public int Diamond { get; set; }

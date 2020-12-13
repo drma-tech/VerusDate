@@ -13,16 +13,16 @@ namespace VerusDate.Shared.ViewModel.Command
         public string IdUser { get; set; }
 
         //TODO: LIMITAÇÃO DO BLAZOR
-        [Display(Name = "Intenções")]
+        [Display(Name = "Intenções", Description = "Campo obrigatório")]
         public IReadOnlyList<Intent> Intent { get; set; } = new List<Intent>();
 
-        [Display(Name = "Distância (KM)")]
+        [Display(Name = "Distância (KM)", Description = "Campo obrigatório")]
         public double Distance { get; set; }
 
-        [Display(Name = "Idade (Min - Máx)")]
+        [Display(Name = "Idade (Min - Máx)", Description = "Campo obrigatório")]
         public int MinimalAge { get; set; }
 
-        [Display(Name = "Idade (Min - Máx)")]
+        [Display(Name = "Idade (Min - Máx)", Description = "Campo obrigatório")]
         public int MaxAge { get; set; }
 
         [Display(Name = "Sexo Biológico")]

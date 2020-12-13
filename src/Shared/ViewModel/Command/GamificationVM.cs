@@ -15,13 +15,13 @@ namespace VerusDate.Shared.ViewModel.Command
         private static int MaxRankFood => 20;
 
         [Computed]
-        public int MaxFood => Rank == 0 ? MaxRankFood : Rank * MaxRankFood;
+        public int MaxFood => Ranking == 0 ? MaxRankFood : Ranking * MaxRankFood;
 
         [ExplicitKey]
         public string IdUser { get; set; }
 
-        [Display(Name = "Rank")]
-        public int Rank { get; private set; }
+        [Display(Name = "Ranking")]
+        public int Ranking { get; private set; }
 
         [Display(Name = "XP")]
         public int XP { get; private set; }
@@ -34,7 +34,7 @@ namespace VerusDate.Shared.ViewModel.Command
 
         public override void LoadDefatultData()
         {
-            Rank = 1;
+            Ranking = 1;
             XP = 0;
             Food = MaxFood;
             Diamond = 0;
@@ -57,7 +57,7 @@ namespace VerusDate.Shared.ViewModel.Command
         {
             var NovoXP = XP - qtd;
 
-            if (Rank <= 1) //RANK 1
+            if (Ranking <= 1) //RANK 1
             {
                 if (NovoXP >= 0)
                 {
@@ -84,20 +84,20 @@ namespace VerusDate.Shared.ViewModel.Command
 
         private void AddRank(int qtd = 1)
         {
-            Rank += qtd;
+            Ranking += qtd;
         }
 
         private void RemoveRank(int qtd = 1)
         {
-            var NovoLevel = Rank - qtd;
+            var NovoLevel = Ranking - qtd;
 
             if (NovoLevel <= 1)
             {
-                Rank = 1;
+                Ranking = 1;
             }
             else
             {
-                Rank -= qtd;
+                Ranking -= qtd;
             }
         }
 

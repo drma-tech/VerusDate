@@ -150,6 +150,24 @@ namespace VerusDate.Shared.Helper
             }
         }
 
+        public static int GetDaysPassed(this DateTimeOffset date)
+        {
+            const int SECOND = 1;
+            const int MINUTE = 60 * SECOND;
+            const int HOUR = 60 * MINUTE;
+
+            var ts = new TimeSpan(DateTime.UtcNow.Ticks - date.UtcDateTime.Ticks);
+            double delta = Math.Abs(ts.TotalSeconds);
+
+            if (delta < 24 * HOUR)
+                return 0;
+
+            if (delta < 48 * HOUR)
+                return 1;
+
+            return ts.Days;
+        }
+
         public enum DistanceType
         {
             Km,

@@ -19,7 +19,7 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Educação e treinamento", Description = "planejar, gerenciar e fornecer serviços de educação e treinamento e serviços de suporte à aprendizagem relacionados, incluindo serviços de administração e biblioteca")]
         Education_Training = 5,
 
-        [Display(Name = "Finançias", Description = "planejamento financeiro e de investimentos, bancos, seguros e gestão financeira de negócios")]
+        [Display(Name = "Finanças", Description = "planejamento financeiro e de investimentos, bancos, seguros e gestão financeira de negócios")]
         Finance = 6,
 
         [Display(Name = "Governo e Administração Pública", Description = "planejar e fornecer serviços governamentais nos níveis federal, estadual e local, incluindo serviços relacionados à segurança nacional, legislação, serviço externo, receita e tributação e regulamentos")]

@@ -6,138 +6,131 @@
 @*https://www.cupidolouco.com.br/index.php?option=com_content&view=article&id=14&Itemid=174*@
 @*https://www.regain.us/advice/dating/7-types-of-dating-different-ways-to-meet-your-new-match/*@
 
-<div class="row">
-    <div class="col-lg-4">
-        <div class="contact-box">
-            <div class="row">
-                <div class="col-4">
-                    <div class="text-center">
-                        <i class="fas fa-eye-slash fa-3x"></i>
-                        <div class="m-t-xs font-bold">Encontro às cegas</div>
-                    </div>
-                </div>
-                <div class="col-8">
-                    <p>Conheça alguem por sua essência, não sua aparência</p>
-                    <a class="btn btn-primary btn-xs" href="/EventList" @onclick="FeatureUnavailable">Saiba mais</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="contact-box">
-            <div class="row">
-                <div class="col-3">
-                    <div class="text-center">
-                        <i class="fas fa-user-clock fa-3x"></i>
-                        <div class="m-t-xs font-bold">Encontro Rápido</div>
-                    </div>
-                </div>
-                <div class="col-8">
-                    <p>Conheça várias pessoas em encontros rápidos</p>
-                    <a class="btn btn-primary btn-xs" href="/EventList" @onclick="FeatureUnavailable">Saiba mais</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="contact-box">
-            <div class="row">
-                <div class="col-3">
-                    <div class="text-center">
-                        <i class="fas fa-users fa-3x"></i>
-                        <div class="m-t-xs font-bold">Encontro em grupo</div>
-                    </div>
-                </div>
-                <div class="col-8">
-                    <p>Muitos participantes com interesses parecidos e com livre interação</p>
-                    <a class="btn btn-primary btn-xs" href="/EventList" @onclick="FeatureUnavailable">Saiba mais</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<Row>
+    <Column ColumnSize="ColumnSize.Is4">
+        <Card>
+            <CardBody Padding="Padding.Is2">
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is4">
+                        <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash" Class="fa-3x"></Icon>
+                            Encontro às cegas
+                        </Paragraph>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is8">
+                        <Paragraph Alignment="TextAlignment.Justified">Conheça alguem por sua essência, não sua aparência</Paragraph>
+                        <Button Color="Color.Primary" Block="true" Size="Size.ExtraSmall" Clicked="FeatureUnavailable">Saiba mais</Button>
+                    </Column>
+                </Row>
+            </CardBody>
+        </Card>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is4">
+        <Card>
+            <CardBody Padding="Padding.Is2">
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is4">
+                        <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserClock" Class="fa-3x"></Icon>
+                            Encontro Rápido
+                        </Paragraph>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is8">
+                        <Paragraph Alignment="TextAlignment.Justified">Conheça várias pessoas em encontros rápidos</Paragraph>
+                        <Button Color="Color.Primary" Block="true" Size="Size.ExtraSmall" Clicked="FeatureUnavailable">Saiba mais</Button>
+                    </Column>
+                </Row>
+            </CardBody>
+        </Card>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is4">
+        <Card>
+            <CardBody Padding="Padding.Is2">
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is4">
+                        <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Users" Class="fa-3x"></Icon>
+                            Encontro em grupo
+                        </Paragraph>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is8">
+                        <Paragraph Alignment="TextAlignment.Justified">Muitos participantes com mesmos interesses e com livre interação</Paragraph>
+                        <Button Color="Color.Primary" Block="true" Size="Size.ExtraSmall" Clicked="FeatureUnavailable">Saiba mais</Button>
+                    </Column>
+                </Row>
+            </CardBody>
+        </Card>
+    </Column>
+</Row>
 
-<div class="ibox">
-    <div class="ibox-title">
-        <h5>Meus Eventos</h5>
-    </div>
-    <div class="ibox-content">
-        <div class="alert alert-primary">
-            <i class="fas fa-exclamation-triangle"></i> Não há dados para mostrar
-        </div>
-    </div>
-</div>
-<div class="ibox">
-    <div class="ibox-title">
-        <h5>Eventos disponíveis na sua localidade (@ProfileUserVM?.Location)</h5>
-        <div class="ibox-tools">
-            <a class="btn btn-primary btn-xs" @onclick="FeatureUnavailable"><i class="fas fa-plus-circle"></i> Novo</a>
-        </div>
-    </div>
-    <div class="ibox-content" style="padding: 10px;">
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Início</th>
-                        <th>Cidade</th>
-                        <th>Idade</th>
-                        <th>Orientação</th>
-                        <th>Intenção</th>
-                        <th>Disponibilidade</th>
-                        <th>#</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <i class="fas fa-user-clock"></i> Encontro às cegas
-                        </td>
-                        <td>17/07/2020</td>
-                        <td>São Paulo</td>
-                        <td>20-35</td>
-                        <td>Bissexuais</td>
-                        <td>Morar juntos / Casar</td>
-                        <td>
-                            <span class="badge badge-primary">10</span>
-                        </td>
-                        <td><a><i class="fas fa-sign-in-alt"></i> Inscrever</a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="fas fa-eye-slash"></i> Encontro Rápido
-                        </td>
-                        <td>17/07/2020</td>
-                        <td>São Paulo</td>
-                        <td>20-35</td>
-                        <td>Homossexual</td>
-                        <td>Relacionamento sério</td>
-                        <td>
-                            <span class="badge badge-primary"><i class="fas fa-male"></i> 10</span>
-                        </td>
-                        <td><a><i class="fas fa-sign-in-alt"></i> Inscrever</a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <i class="fas fa-users"></i> Encontro em grupo
-                        </td>
-                        <td>17/07/2020</td>
-                        <td>São Paulo</td>
-                        <td>20-35</td>
-                        <td>Heterossexual</td>
-                        <td>-</td>
-                        <td>
-                            <span class="badge badge-primary"><i class="fas fa-male"></i> 5</span>
-                            <span class="badge badge-danger"><i class="fas fa-female"></i> 0</span>
-                        </td>
-                        <td><a><i class="fas fa-sign-in-alt"></i> Inscrever</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<Card Margin="Margin.Is3.FromTop">
+    <CardHeader>Meus Eventos</CardHeader>
+    <CardBody>
+        <Alert Color="Color.Primary" Visible="true" Margin="Margin.Is0.FromBottom"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationTriangle"></Icon> Não há dados para mostrar</Alert>
+    </CardBody>
+</Card>
+
+<Card Margin="Margin.Is3.FromTop">
+    <CardHeader>
+        Eventos disponíveis na sua localidade (@ProfileUserVM?.Location)
+        <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="FeatureUnavailable" title="Preencher automaticamente">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
+        </Button>
+    </CardHeader>
+    <CardBody>
+        <Table Hoverable="true" Responsive="true" Narrow="true" FullWidth="true" Margin="Margin.Is0.FromBottom">
+            <TableHeader ThemeContrast="ThemeContrast.Light">
+                <TableRow>
+                    <TableHeaderCell>Tipo</TableHeaderCell>
+                    <TableHeaderCell>Início</TableHeaderCell>
+                    <TableHeaderCell>Cidade</TableHeaderCell>
+                    <TableHeaderCell>Idade</TableHeaderCell>
+                    <TableHeaderCell>Orientação</TableHeaderCell>
+                    <TableHeaderCell>Intenção</TableHeaderCell>
+                    <TableHeaderCell>Disponibilidade</TableHeaderCell>
+                    <TableHeaderCell>#</TableHeaderCell>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                <TableRow>
+                    <TableRowCell><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserClock"></Icon> Encontro às cegas</TableRowCell>
+                    <TableRowCell>17/07/2020</TableRowCell>
+                    <TableRowCell>São Paulo</TableRowCell>
+                    <TableRowCell>20-35</TableRowCell>
+                    <TableRowCell>Bissexuais</TableRowCell>
+                    <TableRowCell>Morar juntos / Casar</TableRowCell>
+                    <TableRowCell><Badge Color="Color.Primary">10</Badge></TableRowCell>
+                    <TableRowCell><Button Size="Size.ExtraSmall" Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt"></Icon> Inscrever</Button></TableRowCell>
+                </TableRow>
+                <TableRow>
+                    <TableRowCell><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash"></Icon> Encontro Rápido</TableRowCell>
+                    <TableRowCell>17/07/2020</TableRowCell>
+                    <TableRowCell>São Paulo</TableRowCell>
+                    <TableRowCell>20-35</TableRowCell>
+                    <TableRowCell>Homossexual</TableRowCell>
+                    <TableRowCell>Relacionamento sério</TableRowCell>
+                    <TableRowCell>
+                        <Badge Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Male"></Icon> 10</Badge>
+                    </TableRowCell>
+                    <TableRowCell><Button Size="Size.ExtraSmall" Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt"></Icon> Inscrever</Button></TableRowCell>
+                </TableRow>
+                <TableRow>
+                    <TableRowCell><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Users"></Icon> Encontro em grupo</TableRowCell>
+                    <TableRowCell>17/07/2020</TableRowCell>
+                    <TableRowCell>São Paulo</TableRowCell>
+                    <TableRowCell>20-35</TableRowCell>
+                    <TableRowCell>Heterossexual</TableRowCell>
+                    <TableRowCell>-</TableRowCell>
+                    <TableRowCell>
+                        <Badge Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Male"></Icon> 5</Badge>
+                        <Badge Color="Color.Danger"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Female"></Icon> 0</Badge>
+                    </TableRowCell>
+                    <TableRowCell><Button Size="Size.ExtraSmall" Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt"></Icon> Inscrever</Button></TableRowCell>
+                </TableRow>
+            </TableBody>
+        </Table>
+    </CardBody>
+</Card>
 
 @code {
 

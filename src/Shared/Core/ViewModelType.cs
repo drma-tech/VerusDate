@@ -1,4 +1,5 @@
 ﻿using System;
+using VerusDate.Shared.Helper;
 
 namespace VerusDate.Shared.Core
 {
@@ -30,6 +31,18 @@ namespace VerusDate.Shared.Core
         public virtual void Update()
         {
             DtUpdate = DateTimeOffset.UtcNow;
+        }
+
+        public int DaysInsert()
+        {
+            return ProfileHelper.GetDaysPassed(DtInsert);
+        }
+
+        public int DaysUpdate()
+        {
+            if (!DtUpdate.HasValue) return DaysInsert();
+
+            return ProfileHelper.GetDaysPassed(DtUpdate.Value);
         }
     }
 }

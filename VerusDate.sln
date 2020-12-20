@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VerusDate.Web", "src\VerusDate.Web\VerusDate.Web.csproj", "{BE7700D4-9B69-4034-B6DA-0E441BD252DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1", "BlazorApp1\BlazorApp1.csproj", "{2DB2956F-2793-4E3B-8E93-799DA340DD74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp1", "BlazorApp1\BlazorApp1.csproj", "{2DB2956F-2793-4E3B-8E93-799DA340DD74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

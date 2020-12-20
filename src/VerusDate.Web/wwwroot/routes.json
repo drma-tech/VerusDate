@@ -5,14 +5,14 @@
       "serve": "/index.html",
       "statusCode": 200
     },
-    {
-      "route": "/.auth/login/aad",
-      "statusCode": "404"
-    },
-    {
-      "route": "/.auth/login/github",
-      "statusCode": "404"
-    }
+    //{
+    //  "route": "/.auth/login/aad",
+    //  "statusCode": "404"
+    //},
+    //{
+    //  "route": "/.auth/login/github",
+    //  "statusCode": "404"
+    //}
   ],
   "platformErrorOverrides": [
     //{

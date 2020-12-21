@@ -1,18 +1,18 @@
 ﻿{
   "routes": [
     {
+      "route": "/.auth/login/aad",
+      "statusCode": "404"
+    },
+    {
+      "route": "/.auth/login/github",
+      "statusCode": "404"
+    },
+    {
       "route": "/*",
       "serve": "/index.html",
       "statusCode": 200
-    },
-    //{
-    //  "route": "/.auth/login/aad",
-    //  "statusCode": "404"
-    //},
-    //{
-    //  "route": "/.auth/login/github",
-    //  "statusCode": "404"
-    //}
+    }
   ],
   "platformErrorOverrides": [
     //{
@@ -24,7 +24,7 @@
       "statusCode": "302",
       "serve": "/login-providers"
     }
-  ],
+  ]
   //"defaultHeaders": {
   //  "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
   //},

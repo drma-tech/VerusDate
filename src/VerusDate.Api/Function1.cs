@@ -16,15 +16,15 @@ namespace VerusDate.Api
         [FunctionName("weather")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+            ILogger log, ClaimsPrincipal claimsPrincipal)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             //string name = req.Query["name"];
 
-            var auth = StaticWebAppsAuth.Parse(req);
+            //var auth = StaticWebAppsAuth.Parse(req);
 
-            //var auth = claimsPrincipal;
+            var auth = claimsPrincipal;
 
             if (!auth.Identity.IsAuthenticated) throw new Exception("não autorizado");
 

@@ -4,6 +4,8 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,18 +22,24 @@ namespace VerusDate.Api
 
             //string name = req.Query["name"];
 
+            var auth = StaticWebAppsAuth.Parse(req);
+
+            //var auth = claimsPrincipal;
+
+            if (!auth.Identity.IsAuthenticated) throw new Exception("não autorizado");
+
             var sb = new StringBuilder();
 
             sb.Append("[");
             sb.Append("{");
             sb.Append("  'date': '2018-05-06',");
             sb.Append("  'temperatureC': 1,");
-            sb.Append("  'summary': 'Freezing'");
+            sb.Append("  'summary': '" + auth.Identity.Name + "'");
             sb.Append("},");
             sb.Append("{");
             sb.Append("  'date': '2018-05-07',");
             sb.Append("  'temperatureC': 14,");
-            sb.Append("  'summary': 'Bracing'");
+            sb.Append("  'summary': '" + "" + "'");
             sb.Append("},");
             sb.Append("]");
 

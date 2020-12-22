@@ -1,17 +1,17 @@
 ﻿using Bogus;
 using VerusDate.Shared.Enum;
-using VerusDate.Shared.ViewModel.Command;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Shared.Seed
 {
     public static class ProfileLookingSeed
     {
-        public static Faker<ProfileLookingVM> GetProfileLookingVM(string IdUser = null)
+        public static Faker<ProfileLooking> GetProfileLookingVM(string IdUser = null)
         {
-            return new Faker<ProfileLookingVM>("pt_BR")
+            return new Faker<ProfileLooking>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.IdUser = IdUser ?? s.Random.Guid().ToString();
+                    p.Id = IdUser ?? s.Random.Guid().ToString();
                     p.MinimalAge = s.Random.Int(18, 120);
                     p.MaxAge = s.Random.Int(18, 120);
                     p.BiologicalSex = s.PickRandom<BiologicalSex>();

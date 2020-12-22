@@ -1,17 +1,17 @@
 ﻿using Bogus;
 using VerusDate.Shared.Enum;
-using VerusDate.Shared.ViewModel.Command;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Shared.Seed
 {
     public static class ProfileSeed
     {
-        public static Faker<ProfileVM> GetProfileVM(string IdUser = null)
+        public static Faker<Profile> GetProfileVM(string IdUser = null)
         {
-            return new Faker<ProfileVM>("pt_BR")
+            return new Faker<Profile>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.IdUser = IdUser ?? s.Random.Guid().ToString();
+                    p.Id = IdUser ?? s.Random.Guid().ToString();
                     p.NickName = s.Internet.UserName();
                     p.Description = s.Lorem.Word();
                     p.BirthDate = s.Date.Past(18).Date;
@@ -42,7 +42,7 @@ namespace VerusDate.Shared.Seed
                     p.UpdateMainPhoto(s.Image.PicsumUrl());
                     p.UpdatePhotoGallery(new[] { s.Image.PicsumUrl() });
                     p.Hobbies = s.Random.WordsArray(1, 8);
-                    p.ActivityStatus = s.PickRandom<ActivityStatus>();
+                    //p.ActivityStatus = s.PickRandom<ActivityStatus>();
                 });
         }
     }

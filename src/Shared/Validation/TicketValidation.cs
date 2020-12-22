@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using VerusDate.Shared.ViewModel.Command;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Shared.Validation
 {
-    public class TicketValidation : AbstractValidator<TicketVM>
+    public class TicketValidation : AbstractValidator<Ticket>
     {
         public TicketValidation()
         {

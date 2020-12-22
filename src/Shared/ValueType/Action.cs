@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 
 namespace VerusDate.Shared.ValueType
 {
-    [Owned]
     public class Action
     {
         public bool Value { get; set; }

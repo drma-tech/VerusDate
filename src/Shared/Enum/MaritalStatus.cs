@@ -8,9 +8,9 @@ namespace VerusDate.Shared.Enum
         Single = 1,
 
         [Display(Name = "Relacionamento monogâmico (fechado)", Description = "quem está em um relacionamento amoroso/sexual de forma exclusiva")]
-        Monogamous = 12,
+        Monogamous = 2,
 
         [Display(Name = "Relacionamento não monogâmico (aberto)", Description = "onde há abertura para outros envolvimentos, tais como: relacionamento aberto, híbrido, múltiplo, amor livre, poliamor, swing, etc")]
-        Polyamorous = 13
+        Polyamorous = 3
     }
 }

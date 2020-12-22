@@ -1,15 +1,15 @@
 ﻿using Bogus;
 using System.Linq;
 using VerusDate.Shared.Enum;
-using VerusDate.Shared.ViewModel.Command;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Shared.Seed
 {
     public static class EventSeed
     {
-        public static Faker<EventVM> GetEventVM(string IdEvent = null, string IdUser = null)
+        public static Faker<Event> GetEventVM(string IdEvent = null, string IdUser = null)
         {
-            var fakeBD = new Faker<EventVM>("pt_BR")
+            var fakeBD = new Faker<Event>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.NewBlindDate(
@@ -23,7 +23,7 @@ namespace VerusDate.Shared.Seed
                         );
                 }).Generate();
 
-            return new Faker<EventVM>("pt_BR")
+            return new Faker<Event>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.LoadDefatultData();

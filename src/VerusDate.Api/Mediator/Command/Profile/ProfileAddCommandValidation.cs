@@ -1,13 +1,13 @@
 ﻿using FluentValidation;
 using System;
+using VerusDate.Api.Mediator.Command.Profile;
 using VerusDate.Shared.Enum;
-using VerusDate.Shared.Model;
 
 namespace VerusDate.Shared.Validation
 {
-    public class ProfileValidation : AbstractValidator<Profile>
+    public class ProfileAddCommandValidation : AbstractValidator<ProfileAddCommand>
     {
-        public ProfileValidation()
+        public ProfileAddCommandValidation()
         {
             RuleFor(x => x.NickName)
                 .NotEmpty()

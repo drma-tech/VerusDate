@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using VerusDate.Shared.ViewModel.Command;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Shared.Validation
 {
-    public class EventValidation : AbstractValidator<EventVM>
+    public class EventValidation : AbstractValidator<Event>
     {
         public EventValidation()
         {

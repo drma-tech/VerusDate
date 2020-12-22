@@ -29,6 +29,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
             request.UpList();
             request.Login();
+            request.Type = "Profile";
 
             return await _repo.CreateAsync(request, cancellationToken);
         }

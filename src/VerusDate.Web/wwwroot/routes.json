@@ -24,10 +24,12 @@
       "statusCode": "302",
       "serve": "/login-providers"
     }
-  ]
-  //"defaultHeaders": {
-  //  "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'"
-  //},
+  ],
+  "defaultHeaders": {
+    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'",
+    "cache-control": "must-revalidate, max-age=6000",
+    "x-dns-prefetch-control": ""
+  }
   //"mimeTypes": {
   //  "custom": "text/html"
   //}

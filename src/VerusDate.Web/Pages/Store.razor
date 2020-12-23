@@ -1,0 +1,160 @@
+﻿@page "/Store"
+@attribute [Authorize]
+@inherits PageCore<Store>
+@inject HttpClient Http
+
+<CardDeck>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Success" Display="Display.InlineBlock" Float="Float.Right">
+                Grátis
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">10 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => BuyDiamond(10)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.CreditCard"></Icon> Comprar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Success" Display="Display.InlineBlock" Float="Float.Right">
+                Grátis
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">20 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => BuyDiamond(20)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.CreditCard"></Icon> Comprar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Success" Display="Display.InlineBlock" Float="Float.Right">
+                Grátis
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">50 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => BuyDiamond(50)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.CreditCard"></Icon> Comprar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Success" Display="Display.InlineBlock" Float="Float.Right">
+                Grátis
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">100 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => BuyDiamond(100)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.CreditCard"></Icon> Comprar
+            </Button>
+        </CardBody>
+    </Card>
+</CardDeck>
+<CardDeck Margin="Margin.Is3.FromTop">
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Danger" Display="Display.InlineBlock" Float="Float.Right">
+                10 Maças
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">1 Diamante</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => ExchangeFood(1)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExchangeAlt"></Icon> Trocar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Danger" Display="Display.InlineBlock" Float="Float.Right">
+                20 Maças
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">2 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => ExchangeFood(2)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExchangeAlt"></Icon> Trocar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Danger" Display="Display.InlineBlock" Float="Float.Right">
+                30 Maças
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">3 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => ExchangeFood(3)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExchangeAlt"></Icon> Trocar
+            </Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader Padding="Padding.Is1.FromBottom.Is1.FromTop">
+            <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" Style="color: #5c7cfa;"></Icon>
+            <Text Color="TextColor.Danger" Display="Display.InlineBlock" Float="Float.Right">
+                40 Maças
+            </Text>
+        </CardHeader>
+        <CardBody>
+            <CardTitle Size="5">4 Diamantes</CardTitle>
+            <Button Color="Color.Primary" Outline="true" Block="true" Size="Size.ExtraSmall" Clicked="() => ExchangeFood(4)">
+                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExchangeAlt"></Icon> Trocar
+            </Button>
+        </CardBody>
+    </Card>
+</CardDeck>
+
+@code {
+    protected override async Task LoadData()
+    {
+        //ignore
+    }
+
+    private async Task BuyDiamond(int qtd)
+    {
+        try
+        {
+            var result = await Http.Gamification_AddDiamond(LocalStorage, qtd);
+
+            await result.ProcessResponse(Toast, "Compra realizada com sucesso!");
+
+            RefreshCore.RefreshHead();
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+
+    private async Task ExchangeFood(int qtdDiamond)
+    {
+        try
+        {
+            var result = await Http.Gamification_ExchangeFood(LocalStorage, qtdDiamond);
+
+            await result.ProcessResponse(Toast, "Troca realizada com sucesso!");
+
+            RefreshCore.RefreshHead();
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+}

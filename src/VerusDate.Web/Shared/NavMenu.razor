@@ -1,37 +1,68 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">VerusDate.Web</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </li>
-    </ul>
-</div>
+﻿<Sidebar @ref="sidebar">
+    <SidebarContent>
+        <SidebarBrand Style="text-align: center;">
+            <a href="">Verus Date</a>
+            <AuthorizeView>
+                <Authorized>
+                    <Figure Size="FigureSize.Is128x128">
+                        <FigureImage Source="img/nouser.jpg" Rounded="true" />
+                    </Figure>
+                    <Link To="Identity/Account/Manage" Title="Gerenciar Perfil" style="font-size: 0.80rem; padding: 0.70rem;">
+                        @context.User.Identity.Name
+                    </Link>
+                </Authorized>
+                <NotAuthorized>
+                    <Figure Size="FigureSize.Is128x128">
+                        <FigureImage Source="img/nouser.jpg" Rounded="true" />
+                    </Figure>
+                </NotAuthorized>
+            </AuthorizeView>            
+        </SidebarBrand>
+        <SidebarNavigation>
+            <SidebarItem>
+                <SidebarLink To="" Title="Home">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThLarge" Margin="Margin.Is3.FromRight" />Home
+                </SidebarLink>
+            </SidebarItem>
+            <SidebarItem>
+                <SidebarLink To="Profile" Title="Profile">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AddressCard" Margin="Margin.Is3.FromRight" />Perfil
+                </SidebarLink>
+            </SidebarItem>
+            <SidebarItem>
+                <SidebarLink To="Match" Title="Match">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Fire" Margin="Margin.Is3.FromRight" />Match
+                </SidebarLink>
+            </SidebarItem>
+            <SidebarItem>
+                <SidebarLink To="Search" Title="Search">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" Margin="Margin.Is3.FromRight" />Search
+                </SidebarLink>
+            </SidebarItem>
+            <SidebarItem>
+                <SidebarLink To="EventList" Title="EventList">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.CalendarAlt" Margin="Margin.Is3.FromRight" />EventList
+                </SidebarLink>
+            </SidebarItem>
+            <SidebarItem>
+                <SidebarLink To="Store" Title="Store">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ShoppingCart" Margin="Margin.Is3.FromRight" />Store
+                </SidebarLink>
+            </SidebarItem>
+            <SidebarItem>
+                <SidebarLink To="Support" Title="Support">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug" Margin="Margin.Is3.FromRight" />Support
+                </SidebarLink>
+            </SidebarItem>
+        </SidebarNavigation>
+    </SidebarContent>
+</Sidebar>
 
 @code {
-    private bool collapseNavMenu = true;
+    Sidebar sidebar;
 
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
+    void ToggleSidebar()
     {
-        collapseNavMenu = !collapseNavMenu;
+        sidebar.Toggle();
     }
 }

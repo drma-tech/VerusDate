@@ -1,0 +1,95 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inherits ComponenteCore<HeadLayout>
+@inject HttpClient Http
+@inject SignOutSessionStateManager SignOutManager
+
+<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0; background-color: #fff;">
+    <div class="navbar-header">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        @*<form role="search" class="navbar-form-custom" action="search_results.html">
+                <div class="form-group">
+                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                </div>
+            </form>*@
+    </div>
+    <ul class="nav navbar-top-links navbar-right">
+        <AuthorizeView>
+            <Authorized>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="color: #D4AF37;">
+                        <i class="fas fa-crown"></i>  <span class="label label-primary" style="padding: 2px;">@gamification?.Ranking</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts list-group clear-list m-t">
+                        <li class="list-group-item fist-item">
+                            <span class="badge">Subir de nível irá liberar mais recursos</span>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="color: #5c7cfa;">
+                        <i class="fas fa-gem"></i>  <span class="label label-primary" style="padding: 2px;">@gamification?.Diamond</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts list-group clear-list m-t">
+                        <li class="list-group-item fist-item">
+                            <span class="float-right">3h restantes</span>
+                            <span class="label label-primary">+ 05</span> A cada 24h
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="color: #dc3545;">
+                        <i class="fas fa-apple-alt"></i>  <span class="label label-primary" style="padding: 2px;">@gamification?.Food</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts list-group clear-list m-t">
+                        <li class="list-group-item fist-item">
+                            <span class="float-right">3h restantes</span>
+                            <span class="label label-primary">+ 20</span> A cada 24h
+                        </li>
+                        <li class="list-group-item">
+                            <span class="float-right" style="top: -4px; position: inherit;">
+                                <button class="btn btn-primary btn-xs" title="Ver propaganda"><i class="far fa-eye"></i></button>
+                            </span>
+                            <span class="label label-primary">+ 05</span> Por propaganda (0/3)
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="right-sidebar-toggle">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                </li>
+            </Authorized>
+        </AuthorizeView>
+    </ul>
+</nav>
+
+@code{
+    private Gamification gamification;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        await LoadData();
+
+        RefreshCore.RefreshRequestedHead += Refresh;
+    }
+
+    private async Task Refresh()
+    {
+        await LoadData();
+        StateHasChanged();
+    }
+
+    protected async Task LoadData()
+    {
+        gamification = await Http.Gamification_Get(LocalStorage);
+    }
+
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        NavigationManager.NavigateTo("authentication/logout");
+    }
+}

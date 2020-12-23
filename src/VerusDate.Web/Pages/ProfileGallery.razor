@@ -1,0 +1,90 @@
+﻿@page "/ProfileGallery"
+@attribute [Authorize]
+@inherits PageCore<ProfileGallery>
+@inject HttpClient Http
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Foto Principal</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="text-center">
+                    <PhotoFace IdFace="@imageDataUri" isCircle="true"></PhotoFace>
+                </div>
+                <br />
+                <div class="custom-file">
+                    <BlazorInputFile.InputFile @*OnChange="HandleFileSelected"*@ @attributes="@GetAttributes()"></BlazorInputFile.InputFile>
+                    <label for="logo" class="custom-file-label">Escolher arquivo...</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Galeria de Fotos</h5>
+            </div>
+            <div class="ibox-content ">
+                <FeatureUnavailable></FeatureUnavailable>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code
+{
+    private VerusDate.Shared.Model.Profile _profile;
+
+    string imageDataUri = null;
+
+    protected override async Task LoadData()
+    {
+        _profile = await Http.Profile_Get(LocalStorage);
+        imageDataUri = _profile?.MainPhoto;
+    }
+
+    //async Task HandleFileSelected(IFileListEntry[] files)
+    //{
+    //    try
+    //    {
+    //        var rawFile = files.FirstOrDefault();
+    //        if (rawFile != null)
+    //        {
+    //            // Load as an image file in memory
+    //            var format = "image/jpeg";
+    //            var imageFile = await rawFile.ToImageFileAsync(format, 480, 480);
+    //            var ms = new System.IO.MemoryStream();
+    //            await imageFile.Data.CopyToAsync(ms);
+
+    //            // Make a data URL so we can display it
+    //            imageDataUri = $"data:{format};base64,{Convert.ToBase64String(ms.ToArray())}";
+
+    //            if (ImageHelper.ValidImage(ms))
+    //            {
+    //                var response = await Http.Storage_UploadPhotoFace(LocalStorage, ms.ToArray());
+
+    //                await response.ProcessResponse(Toast, "Foto atualizada com sucesso!");
+    //            }
+    //            else
+    //            {
+    //                imageDataUri = null;
+    //                Toast.ShowError("Foto inválida, favor tentar novamente");
+    //            }
+
+    //            RefreshCore.RefreshMenu();
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        imageDataUri = null;
+    //        ex.ProcessException(Toast, Logger);
+    //    }
+    //}
+
+    public static Dictionary<string, object> GetAttributes()
+    {
+        return new Dictionary<string, object>() { { "class", "custom-file-input" }, { "accept", "image/*" } };
+    }
+}

@@ -1,26 +1,67 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <div class="main">
-        <div class="top-row px-4 auth">
-            <AuthorizeView>
-                <Authorized>
-                    Hello, @context.User.Identity.Name!
-                    <a href="/.auth/logout?post_logout_redirect_uri=/">Log out</a>
-                </Authorized>
-                <NotAuthorized>
-                    <a href="/login-providers">Log in</a>
-                </NotAuthorized>
-            </AuthorizeView>
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
-</div>
+<Layout Sider="true">
+    <LayoutSider>
+        <LayoutSiderContent>
+            <NavMenu />
+        </LayoutSiderContent>
+    </LayoutSider>
+    <Layout>
+        <LayoutHeader Fixed="true">
+            <Bar Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
+                <BarBrand Display="Display.Always">
+                    <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #D4AF37; color: #fff !important;">
+                        <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown" /> 2
+                    </Badge>
+                    <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #5c7cfa; color: #fff !important;">
+                        <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" /> 2
+                    </Badge>
+                    <Badge Color="Color.Secondary" Float="Float.Left" Style="background-color: #dc3545; color: #fff !important;">
+                        <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt" /> 2
+                    </Badge>
+                </BarBrand>
+                <BarMenu Display="Display.InlineBlock" Style="flex-basis: unset !important;">
+                    <BarEnd Display="Display.Block">
+                        <LoginDisplay />
+                    </BarEnd>
+                </BarMenu>
+            </Bar>
+        </LayoutHeader>
+        <LayoutContent>
+            <Container Fluid="true" Padding="Padding.Is3.FromTop">
+                @Body
+            </Container>
+        </LayoutContent>
+        <LayoutFooter Margin="Margin.Is2" Display="Display.None.Block.OnDesktop">
+            <Badge Color="Color.Secondary" Float="Float.Left">©2020 DRMA Technologies. All rights reserved.</Badge>
+            <Badge Color="Color.Secondary" Float="Float.Right">Versão 2020.11</Badge>
+        </LayoutFooter>
+        <LayoutFooter Fixed="true" Display="Display.Block.None.OnDesktop">
+            <Bar Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
+                <BarBrand Display="Display.None.OnDesktop">
+                    <Button Color="Color.Secondary" To="/" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThLarge" />
+                    </Button>
+                    <Button Color="Color.Secondary" To="Profile" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AddressCard" />
+                    </Button>
+                    <Button Color="Color.Secondary" To="Match" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Fire" />
+                    </Button>
+                    <Button Color="Color.Secondary" To="Search" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" />
+                    </Button>
+                    <Button Color="Color.Secondary" To="EventList" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.CalendarAlt" />
+                    </Button>
+                    <Button Color="Color.Secondary" To="Store" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ShoppingCart" />
+                    </Button>
+                    <Button Color="Color.Secondary" To="Support" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug" />
+                    </Button>
+                </BarBrand>
+            </Bar>
+        </LayoutFooter>
+    </Layout>
+</Layout>

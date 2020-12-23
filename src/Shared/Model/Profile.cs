@@ -97,8 +97,8 @@ namespace VerusDate.Shared.Model
         public string[] PhotoGallery { get; private set; } = Array.Empty<string>();
 
         //[JsonIgnore]
-        //[Display(Name = "Distância")]
-        //public double? Distance { get; set; }
+        [Display(Name = "Distância")]
+        public double? Distance { get; set; }
 
         public override void LoadDefatultData()
         {

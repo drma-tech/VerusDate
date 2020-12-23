@@ -1,0 +1,28 @@
+﻿@if (Options.Premium)
+{
+    <div class="alert alert-danger">
+        <i class="fas fa-user-lock"></i> Recurso disponível apenas para usuário premium
+    </div>
+}
+else if (Options.Invalid)
+{
+    <div class="alert alert-danger">
+        <i class="fas fa-bug"></i> Operação inválida. Favor, tentar novamente.
+    </div>
+}
+else if (Options.Loading)
+{
+    <div class="alert alert-warning">
+        <i class="spinner-border spinner-border-sm"></i> Carregando...
+    </div>
+}
+else if (Options.NoData)
+{
+    <div class="alert alert-primary">
+        <i class="fas fa-exclamation-triangle"></i> Não há dados para mostrar
+    </div>
+}
+
+@code {
+    [Parameter] public VisibilityOptions Options { get; set; }
+}

@@ -1,0 +1,15 @@
+﻿@using VerusDate.Shared.ValueType;
+
+<button class="btn @CssClassButton() dim btn-large-dim" type="button" title="@Type.Description">
+    <i class="@Type.ClassIcon"></i>
+    <span class="badge badge-light" style="top: -40px;">@Type.Title</span>
+</button>
+
+@code {
+    [Parameter] public BadgeType Type { get; set; }
+
+    private string CssClassButton()
+    {
+        return Type.Completed() ? "btn-primary" : "btn-default";
+    }
+}

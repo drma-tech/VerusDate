@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager Navigation
+@*@inject SignOutSessionStateManager SignOutManager*@
+
+<AuthorizeView>
+    <Authorized>
+        @*<a href="authentication/profile">@context.User.Identity.Name!</a>*@
+        <Button Color="Color.Danger" Clicked="@BeginSignOut" Float="Float.Right" Size="Size.ExtraSmall">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignOutAlt" /> Sair
+        </Button>
+    </Authorized>
+    <NotAuthorized>
+        <Button Color="Color.Primary" Type="ButtonType.Link" To="/login-providers" Float="Float.Right" Size="Size.ExtraSmall">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt" /> Entrar
+        </Button>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code{
+    private async Task BeginSignOut()
+    {
+        //await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("/.auth/logout?post_logout_redirect_uri=/");
+    }
+}

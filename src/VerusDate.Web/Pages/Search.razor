@@ -1,0 +1,94 @@
+﻿@page "/Search"
+@attribute [Authorize]
+@inherits PageCore<Search>
+@inject HttpClient Http
+
+@if (Options.HasCustomVisibility)
+{
+    <CustomVisibility Options="Options"></CustomVisibility>
+}
+else
+{
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6">
+        @foreach (var item in listaUsers)
+        {
+            <div class="col mb-2">
+                <div class="contact-box" style="padding: 0px;">
+                    <a class="embed-responsive embed-responsive-1by1 divPhoto" href="/ProfileView/@item.Id" style="background-color: black;">
+                        <img alt="..." class="imgPhoto" src="@item.GetPhotoFace()" />
+                    </a>
+                    <p style="position: absolute; margin: 10px; bottom: 100px;">
+                        <span class="badge badge-secondary">@item.NickName, @item.BirthDate.GetAge(), @item.Distance.Value.GetDistance(ProfileHelper.DistanceType.Km)</span>
+                    </p>
+                    @*@if (item.DtLastLogin.Date >= DateTime.Now.Date.AddDays(-7))
+                        {
+                            <div style="color: green; position: absolute; margin-left: 10px; margin-top: 6px; top: 0px;" title="Recently logged in">
+                                <i class="fas fa-dot-circle" style="font-size: 12px;"></i>
+                            </div>
+                        }
+                        else if (item.DtLastLogin.Date >= DateTime.Now.Date.AddDays(-30))
+                        {
+                            <div style="color: yellow; position: absolute; margin-left: 10px; margin-top: 6px; top: 0px;" title="Login done in a while">
+                                <i class="fas fa-dot-circle" style="font-size: 12px;"></i>
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="color: red; position: absolute; margin-left: 10px; margin-top: 6px; top: 0px;" title="User with inactive status">
+                                <i class="fas fa-dot-circle" style="font-size: 12px;"></i>
+                            </div>
+                        }*@
+                    <div class="contact-box-footer">
+                        <button class="btn btn-primary btn-circle btn-lg" style="position: relative;" type="button" title="Blink" @onclick="() => Blink(item.Id)">
+                            <span class="badge badge-warning" style="position: absolute; top: -8px; right: -10px;" title="-1 Diamante"><i class="fas fa-gem"></i></span>
+                            <i class="far fa-kiss-wink-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code
+{
+    private VerusDate.Shared.Model.Profile profile;
+    private VerusDate.Shared.Model.Gamification gamification;
+    private List<VerusDate.Shared.Model.Profile> listaUsers;
+    private List<VerusDate.Shared.Model.Interaction> interactions;
+
+    private VisibilityOptions Options => new VisibilityOptions()
+    {
+        Loading = listaUsers == null || interactions == null,
+        NoData = listaUsers != null && !listaUsers.Any()
+    };
+
+    protected override async Task LoadData()
+    {
+        profile = await Http.Profile_Get(LocalStorage);
+        gamification = await Http.Gamification_Get(LocalStorage);
+        listaUsers = await Http.Profile_ListSearch();
+        interactions = await Http.Interation_GetList();
+    }
+
+    private Interaction getCurrentInteraction(string IdUserInteraction)
+    {
+        return interactions.SingleOrDefault(s => s.IdInteraction == IdUserInteraction);
+    }
+
+    private async Task Blink(string IdUserInteraction)
+    {
+        try
+        {
+            var result = await Http.Interation_Blink(LocalStorage, IdUserInteraction);
+
+            await result.ProcessResponse(Toast, msgInfo: "-1 Diamante");
+
+            RefreshCore.RefreshHead();
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+}

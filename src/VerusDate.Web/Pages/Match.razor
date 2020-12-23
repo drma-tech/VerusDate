@@ -1,0 +1,75 @@
+﻿@page "/Match"
+@attribute [Authorize]
+@inherits PageCore<Match>
+@inject HttpClient Http
+
+@if (Options.HasCustomVisibility)
+{
+    <CustomVisibility Options="Options"></CustomVisibility>
+}
+else
+{
+    <div class="row">
+        <div class="col-sm-4 col-lg-3">
+            <div class="contact-box" style="padding: 0px;">
+                <a href="/ProfileView/@getCurrentProfile().Id">
+                    <PhotoFace IdFace="@getCurrentProfile().MainPhoto" Label="@labelPhoto"></PhotoFace>
+                    @*<ActivityStatus EnumActivityStatus="@getCurrentProfile().ActivityStatus"></ActivityStatus>*@
+                </a>
+                <div class="contact-box-footer">
+                    <BtnDeslike IdUserView="getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnDeslike>
+                    <BtnBlink IdUserView="getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnBlink>
+                    <BtnLike IdUserView="getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnLike>
+                </div>
+                <div class="contact-box-footer" style="padding: 10px; text-align: unset;">
+                    <Affinity @ref="objAffinity" ProfView="getCurrentProfile()" Looking="looking"></Affinity>
+                    <button type="button" class="btn btn-sm btn-danger text-right" style="float: right;" title="Reportar este perfil" data-toggle="modal" data-target="#modalReport">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Reportar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ProfileReport></ProfileReport>
+}
+
+@code {
+
+    private ProfileLooking looking;
+    private List<VerusDate.Shared.Model.Profile> matches;
+    private Affinity objAffinity;
+    private int pos;
+
+    private string labelPhoto => $"{getCurrentProfile().NickName}, {getCurrentProfile().BirthDate.GetAge()}, {getCurrentProfile().Distance.Value.GetDistance(ProfileHelper.DistanceType.Km)}";
+
+    private VisibilityOptions Options => new VisibilityOptions()
+    {
+        Loading = matches == null,
+        NoData = (matches != null && !matches.Any()) || pos >= matches?.Count
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task LoadData()
+    {
+        matches = await Http.Profile_ListMatch();
+        looking = await Http.ProfileLooking_Get(LocalStorage);
+    }
+
+    private VerusDate.Shared.Model.Profile getCurrentProfile()
+    {
+        if (pos >= matches.Count) return null;
+
+        return matches[pos];
+    }
+
+    private void ShowNextProfile()
+    {
+        pos++;
+        objAffinity.RefreshComponente(looking, getCurrentProfile());
+    }
+}

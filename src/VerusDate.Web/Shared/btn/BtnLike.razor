@@ -1,0 +1,32 @@
+﻿@inherits ComponenteCore<BtnLike>
+@inject HttpClient Http
+
+@if (IsVisible)
+{
+    <button class="btn btn-primary btn-circle btn-lg" style="position: relative; margin-left: 10px;" type="button" title="Like" @onclick="Like">
+        <span class="badge badge-warning" style="position: absolute; top: -8px; right: -10px;" title="-1 Maça"><i class="fas fa-apple-alt"></i></span>
+        <i class="far fa-thumbs-up"></i>
+    </button>
+}
+
+@code {
+    [Parameter] public string IdUserView { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+
+    private bool IsVisible => true;
+
+    private async Task Like()
+    {
+        try
+        {
+            var result = await Http.Interation_Like(LocalStorage, IdUserView);
+            await result.ProcessResponse(Toast, msgInfo: "-1 Maça");
+            await OnClick.InvokeAsync(null);
+            RefreshCore.RefreshHead(); //need uddate apples
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+}

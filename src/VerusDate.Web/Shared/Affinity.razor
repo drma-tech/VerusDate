@@ -1,0 +1,41 @@
+﻿@inherits ComponenteCore<Affinity>
+@inject HttpClient Http
+
+<button class="btn btn-sm btn-success" title="Percentual de afinidade entre este perfil e o que você está procurando">
+    Afinidade <span class="badge badge-light">@GetPercentAffinity()%</span>
+</button>
+
+@code {
+    [Parameter] public ProfileLooking Looking { get; set; }
+    [Parameter] public Profile ProfView { get; set; }
+
+    private List<AffinityVM> affinities;
+
+    protected override async Task OnInitializedAsync()
+    {
+        affinities = ProfileApi.GetAffinity(Looking, ProfView);
+    }
+
+    public double GetPercentAffinity()
+    {
+        if (affinities != null && affinities.Count > 0)
+        {
+            double totCheck = affinities.Count(w => w.HaveAffinity);
+            double totItens = affinities.Count;
+
+            return Math.Round((totCheck / totItens) * 100, 0);
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public void RefreshComponente(ProfileLooking Looking, Profile ProfView)
+    {
+        if (ProfView == null) return;
+
+        this.affinities = ProfileApi.GetAffinity(Looking, ProfView);
+        //StateHasChanged();
+    }
+}

@@ -1,0 +1,29 @@
+﻿<div style="width: 350px;">
+    <EditForm Model="@Ticket" OnValidSubmit="SubmitForm">
+        <FluentValidationValidator />
+        <div class="form-group">
+            <InputTextArea @bind-Value="@Ticket.Description" @attributes="@AttributeHelper.GetAttributes((() => Ticket.Description), false, true, true)"></InputTextArea>
+            <ValidationMessage For="@(()=>Ticket.Description)"></ValidationMessage>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button @onclick="Cancel" class="btn btn-secondary">Cancelar</button>
+    </EditForm>
+</div>
+
+@code {
+
+    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
+    [Parameter] public TicketType TicketType { get; set; }
+
+    public VerusDate.Shared.Model.Ticket Ticket { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        Ticket = new VerusDate.Shared.Model.Ticket(ComponenteUtils.IdUser, TicketType);
+    }
+
+    void SubmitForm() => BlazoredModal.Close(ModalResult.Ok<VerusDate.Shared.Model.Ticket>(Ticket));
+    void Cancel() => BlazoredModal.Cancel();
+}

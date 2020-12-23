@@ -1,0 +1,80 @@
+﻿@page "/ProfileInteractions"
+@attribute [Authorize]
+@inherits PageCore<ProfileInteractions>
+@inject HttpClient Http
+
+<div class="ibox">
+    <div class="ibox-title" style="padding-right: 15px;">
+        <h5>Likes</h5>
+    </div>
+    <div class="ibox-content" style="padding: 15px;">
+        @if (OptionsLikes.HasCustomVisibility)
+        {
+            <CustomVisibility Options="OptionsLikes"></CustomVisibility>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var item in Likes)
+                {
+                    <div class="col-lg-1 col-md-2 col-3 text-center">
+                        <div class="embed-responsive embed-responsive-1by1 img-fluid img-circle divPhoto">
+                            <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.GetPhotoFace()" />
+                        </div>
+                        <small>@item.NickName</small>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<div class="ibox">
+    <div class="ibox-title" style="padding-right: 15px;">
+        <h5>Piscadinhas</h5>
+    </div>
+    <div class="ibox-content" style="padding: 15px;">
+        @if (OptionsBlinks.HasCustomVisibility)
+        {
+            <CustomVisibility Options="OptionsBlinks"></CustomVisibility>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var item in Blinks)
+                {
+                    <div class="col-lg-1 col-md-2 col-3 text-center">
+                        <div class="embed-responsive embed-responsive-1by1 img-fluid img-circle divPhoto">
+                            <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.GetPhotoFace()" />
+                        </div>
+                        <small>@item.NickName</small>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private List<VerusDate.Shared.ModelQuery.ProfileBasic> Likes { get; set; }
+    private List<VerusDate.Shared.ModelQuery.ProfileBasic> Blinks { get; set; }
+
+    private VisibilityOptions OptionsLikes => new VisibilityOptions()
+    {
+        Premium = true,
+        Loading = Likes == null,
+        NoData = Likes != null && !Likes.Any()
+    };
+
+    private VisibilityOptions OptionsBlinks => new VisibilityOptions()
+    {
+        Loading = Blinks == null,
+        NoData = Blinks != null && !Blinks.Any()
+    };
+
+    protected override async Task LoadData()
+    {
+        Likes = await Http.Interation_GetLikes();
+        Blinks = await Http.Interation_GetBlinks();
+    }
+}

@@ -1,0 +1,213 @@
+﻿@page "/ProfileData"
+@attribute [Authorize]
+@inherits PageCore<ProfileData>
+@inject HttpClient Http
+@*@using Microsoft.AspNetCore.Components*@
+
+@if (Options.HasCustomVisibility)
+{
+    <CustomVisibility Options="Options"></CustomVisibility>
+}
+else
+{
+    <EditForm Model="@profile" OnValidSubmit="HandleValidSubmit">
+        <FluentValidationValidator />
+        <Card>
+            <CardHeader>
+                Perfil
+                <Button Size="Size.ExtraSmall" Color="Color.Danger" Float="Float.Right" Clicked="privacy.ShowModal" title="Termos de Privacidade">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserShield"></Icon>
+                </Button>
+            </CardHeader>
+            <CardBody>
+                <Divider DividerType="DividerType.TextContent" Text="Básico"></Divider>
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <CustomField Type="FieldType.TextEdit" For="@(() => profile.NickName)" @bind-Value="@profile.NickName"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User"></CustomField>
+                        <CustomField Type="FieldType.MemoEdit" For="@(() => profile.Description)" @bind-Value="@profile.Description"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.QuoteLeft" Rows="7"></CustomField>
+                        <CustomField Type="FieldType.TextEdit" For="@(() => profile.Location)" @bind-Value="@profile.Location"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkerAlt" Disabled="true"></CustomField>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.MaritalStatus)" TValue="MaritalStatus" TEnum="MaritalStatus" @bind-SelectedValue="@profile.MaritalStatus"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Intent)" TValue="IReadOnlyList<Intent>" TEnum="Intent" @bind-SelectedValues="@profile.Intent"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.BiologicalSex)" TValue="BiologicalSex" TEnum="BiologicalSex" @bind-SelectedValue="@profile.BiologicalSex"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.GenderIdentity)" TValue="GenderIdentity" TEnum="GenderIdentity" @bind-SelectedValue="@profile.GenderIdentity"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.SexualOrientation)" TValue="SexualOrientation" TEnum="SexualOrientation" @bind-SelectedValue="@profile.SexualOrientation"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                    </Column>
+                </Row>
+                <Divider DividerType="DividerType.TextContent" Text="Bio"></Divider>
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <div class="form-group row">
+                            <CustomLabel For="@(() => profile.BirthDate)" CssIcon="fas fa-birthday-cake"></CustomLabel>
+                            <div class="col-sm-8">
+                                <InputDate @bind-Value="@profile.BirthDate" @attributes='new Dictionary<string, object>() { { "class", "form-control" } }'></InputDate>
+                                <ValidationMessage For="@(()=>profile.BirthDate)"></ValidationMessage>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4 offset-sm-4">
+                                <input class="form-control" value="@profile.BirthDate.GetAge() Anos" disabled />
+                            </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" value="@profile.BirthDate.GetZodiac().GetName()" disabled />
+                            </div>
+                        </div>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.RaceCategory)" TValue="RaceCategory" TEnum="RaceCategory" @bind-SelectedValue="@profile.RaceCategory"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Globe"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Height)" TValue="Height" TEnum="Height" @bind-SelectedValue="@profile.Height"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.BodyMass)" TValue="BodyMass" TEnum="BodyMass" @bind-SelectedValue="@profile.BodyMass"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight" DisableHelp="true"></CustomFieldSelect>
+                    </Column>
+                </Row>
+                <Divider DividerType="DividerType.TextContent" Text="Lifestyle"></Divider>
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Drink)" TValue="Drink" TEnum="Drink" @bind-SelectedValue="@profile.Drink"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GlassCheers" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Smoke)" TValue="Smoke" TEnum="Smoke" @bind-SelectedValue="@profile.Smoke"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smoking" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Diet)" TValue="Diet" TEnum="Diet" @bind-SelectedValue="@profile.Diet"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Utensils" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.HaveChildren)" TValue="HaveChildren?" TEnum="HaveChildren" @bind-SelectedValue="@profile.HaveChildren"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Child" Disabled="@profile.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.WantChildren)" TValue="WantChildren?" TEnum="WantChildren" @bind-SelectedValue="@profile.WantChildren"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Baby" Disabled="@profile.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.EducationLevel)" TValue="EducationLevel?" TEnum="EducationLevel" @bind-SelectedValue="@profile.EducationLevel"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GraduationCap" Disabled="@profile.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.CareerCluster)" TValue="CareerCluster?" TEnum="CareerCluster" @bind-SelectedValue="@profile.CareerCluster"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Briefcase" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Religion)" TValue="Religion?" TEnum="Religion" @bind-SelectedValue="@profile.Religion"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PrayingHands" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.MoneyPersonality)" TValue="MoneyPersonality?" TEnum="MoneyPersonality" @bind-SelectedValue="@profile.MoneyPersonality"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@profile.MyersBriggsTypeIndicator"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@profile.RelationshipPersonality"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@profile.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                    </Column>
+                </Row>
+            </CardBody>
+            <CardFooter>
+                <Button Type="ButtonType.Submit" Color="Color.Primary" Disabled="@(profile.DaysUpdate() < 7)">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
+                </Button>
+                <Badge Color="Color.Danger" Margin="Margin.Is3.FromLeft">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationTriangle"></Icon> Só poderá atualizar seu perfil a cada uma semana e perderá um nível a cada atualização
+                </Badge>
+            </CardFooter>
+        </Card>
+    </EditForm>
+
+    <BasicModal @ref="privacy" Title="Termos de privacidade">
+        <ul>
+            <li>Pedimos que leia nosso '<a href="/Terms/pt" target="_blank">Termos de Uso</a>' para ficar ciente de como seus dados serão tratados;</li>
+            <li>Seja honesto nas respostas dadas neste formulário. Todas as informações aqui contidas estão abertas a denúncias e poderão ser avaliadas;</li>
+        </ul>
+    </BasicModal>
+}
+
+@code {
+
+    private VerusDate.Shared.Model.Profile profile;
+    private GeoLocation GPS;
+    protected bool IsShortTerm { get { return !profile.Intent.IsLongTerm(); } }
+    private BasicModal privacy;
+
+    private void SetValues(IReadOnlyList<Intent> value)
+    {
+        profile.Intent = value.ToArray();
+        //await SelectedValuesChanged.InvokeAsync(SelectedValue);
+    }
+
+    private VisibilityOptions Options => new VisibilityOptions()
+    {
+        Loading = profile == null,
+    };
+
+    protected override async Task LoadData()
+    {
+        profile = await Http.Profile_Get(LocalStorage);
+
+        if (profile == null)
+        {
+            profile = VerusDate.Shared.Seed.ProfileSeed.GetProfileVM();
+
+            profile.LoadDefatultData();
+
+            //if (profile != null && !profile.Longitude.HasValue)
+            //{
+            //    //GPS = await JsRuntime.InvokeAsync<GeoLocation>("RealDate.GPS.getCurrentPosition");
+            //    var fake = VerusDate.Shared.Seed.ProfileSeed.GetProfileVM();
+            //    GPS = new GeoLocation() { Latitude = fake.Latitude.Value, Longitude = fake.Longitude.Value, Accuracy = 20 };
+
+            //    //TODO: chamar código da api
+            //    var here = await Http.Map_GetLocation(GPS.Latitude, GPS.Longitude);
+            //    if (here.items.Any())
+            //    {
+            //        var address = here.items[0].address;
+            //        profile.Location = address.GetLocation();
+            //    }
+            //    else
+            //    {
+            //        profile.Location = "Localização Desconhecida";
+            //    }
+
+            //    if (GPS?.Latitude == 0 && GPS?.Longitude == 0 && GPS.Accuracy == 0)
+            //    {
+            //        Toast.ShowWarning($"Não foi possível detectar um sistema GPS no seu dispositivo. Favor, tentar novamente ou liberar acesso ao GPS do seu dispositivo.", "alerta");
+            //    }
+            //    else
+            //    {
+            //        profile.Longitude = GPS.Longitude;
+            //        profile.Latitude = GPS.Latitude;
+
+            //        if (GPS.Accuracy > 500)
+            //        {
+            //            Toast.ShowWarning($"A posição do GPS foi recuperada, mas a precisão é de apenas: {Math.Round(GPS.Accuracy / 1000, 1)} km. Tente novamente mais tarde ou use um dispositivo mais preciso.", "alerta");
+            //        }
+            //    }
+            //}
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            HttpResponseMessage response;
+
+            profile.ClearSimpleView();
+
+            if (string.IsNullOrEmpty(profile?.Id))
+            {
+                response = await Http.Profile_Add(LocalStorage, profile, ComponenteUtils.IdUser);
+                Toast.ShowWarning("+30 XP");
+            }
+            else
+            {
+                response = await Http.Profile_Update(LocalStorage, profile);
+                Toast.ShowWarning("-100 XP");
+            }
+
+            await response.ProcessResponse(Toast, "Salvo com sucesso!");
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+}

@@ -1,9 +1,0 @@
-diff a/src/VerusDate.Api/VerusDate.Api.csproj b/src/VerusDate.Api/VerusDate.Api.csproj	(rejected hunks)
-@@ -23,4 +23,7 @@
-       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-     </None>
-   </ItemGroup>
-+  <ItemGroup>
-+    <Folder Include="Function\" />
-+  </ItemGroup>
- </Project>

@@ -1,14 +1,5 @@
 ﻿@page "/login-providers"
 
-@{
-    var providers = new Dictionary<string, string>
-    {
-        { "google", "Google" },
-        { "facebook", "Facebook" },
-        { "twitter", "Twitter" }
-    };
-}
-
 <h1>Login</h1>
 
 <div class="container">
@@ -23,3 +14,12 @@
         </div>
     }
 </div>
+
+@code {
+    public Dictionary<string, string> providers = new Dictionary<string, string>
+    {
+        { "github", "GitHub" },
+        { "twitter", "Twitter" },
+        { "facebook", "Facebook" }
+    };
+}

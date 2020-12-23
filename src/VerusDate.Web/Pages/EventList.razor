@@ -1,0 +1,145 @@
+﻿@page "/EventList"
+@attribute [Authorize]
+@inherits PageCore<EventList>
+@inject HttpClient Http
+@*https://www.ehow.co.uk/12106705/types-of-dating*@
+@*https://www.cupidolouco.com.br/index.php?option=com_content&view=article&id=14&Itemid=174*@
+@*https://www.regain.us/advice/dating/7-types-of-dating-different-ways-to-meet-your-new-match/*@
+
+<Row>
+    <Column ColumnSize="ColumnSize.Is4">
+        <Card>
+            <CardBody Padding="Padding.Is2">
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is4">
+                        <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash" Class="fa-3x"></Icon>
+                            Encontro às cegas
+                        </Paragraph>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is8">
+                        <Paragraph Alignment="TextAlignment.Justified">Conheça alguem por sua essência, não sua aparência</Paragraph>
+                        <Button Color="Color.Primary" Block="true" Size="Size.ExtraSmall" Clicked="FeatureUnavailable">Saiba mais</Button>
+                    </Column>
+                </Row>
+            </CardBody>
+        </Card>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is4">
+        <Card>
+            <CardBody Padding="Padding.Is2">
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is4">
+                        <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserClock" Class="fa-3x"></Icon>
+                            Encontro Rápido
+                        </Paragraph>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is8">
+                        <Paragraph Alignment="TextAlignment.Justified">Conheça várias pessoas em encontros rápidos</Paragraph>
+                        <Button Color="Color.Primary" Block="true" Size="Size.ExtraSmall" Clicked="FeatureUnavailable">Saiba mais</Button>
+                    </Column>
+                </Row>
+            </CardBody>
+        </Card>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is4">
+        <Card>
+            <CardBody Padding="Padding.Is2">
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is4">
+                        <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Users" Class="fa-3x"></Icon>
+                            Encontro em grupo
+                        </Paragraph>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is8">
+                        <Paragraph Alignment="TextAlignment.Justified">Muitos participantes com mesmos interesses e com livre interação</Paragraph>
+                        <Button Color="Color.Primary" Block="true" Size="Size.ExtraSmall" Clicked="FeatureUnavailable">Saiba mais</Button>
+                    </Column>
+                </Row>
+            </CardBody>
+        </Card>
+    </Column>
+</Row>
+
+<Card Margin="Margin.Is3.FromTop">
+    <CardHeader>Meus Eventos</CardHeader>
+    <CardBody>
+        <Alert Color="Color.Primary" Visible="true" Margin="Margin.Is0.FromBottom"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationTriangle"></Icon> Não há dados para mostrar</Alert>
+    </CardBody>
+</Card>
+
+<Card Margin="Margin.Is3.FromTop">
+    <CardHeader>
+        Eventos disponíveis na sua localidade (@ProfileUserVM?.Location)
+        <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="FeatureUnavailable" title="Preencher automaticamente">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
+        </Button>
+    </CardHeader>
+    <CardBody>
+        <Table Hoverable="true" Responsive="true" Narrow="true" FullWidth="true" Margin="Margin.Is0.FromBottom">
+            <TableHeader ThemeContrast="ThemeContrast.Light">
+                <TableRow>
+                    <TableHeaderCell>Tipo</TableHeaderCell>
+                    <TableHeaderCell>Início</TableHeaderCell>
+                    <TableHeaderCell>Cidade</TableHeaderCell>
+                    <TableHeaderCell>Idade</TableHeaderCell>
+                    <TableHeaderCell>Orientação</TableHeaderCell>
+                    <TableHeaderCell>Intenção</TableHeaderCell>
+                    <TableHeaderCell>Disponibilidade</TableHeaderCell>
+                    <TableHeaderCell>#</TableHeaderCell>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                <TableRow>
+                    <TableRowCell><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserClock"></Icon> Encontro às cegas</TableRowCell>
+                    <TableRowCell>17/07/2020</TableRowCell>
+                    <TableRowCell>São Paulo</TableRowCell>
+                    <TableRowCell>20-35</TableRowCell>
+                    <TableRowCell>Bissexuais</TableRowCell>
+                    <TableRowCell>Morar juntos / Casar</TableRowCell>
+                    <TableRowCell><Badge Color="Color.Primary">10</Badge></TableRowCell>
+                    <TableRowCell><Button Size="Size.ExtraSmall" Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt"></Icon> Inscrever</Button></TableRowCell>
+                </TableRow>
+                <TableRow>
+                    <TableRowCell><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash"></Icon> Encontro Rápido</TableRowCell>
+                    <TableRowCell>17/07/2020</TableRowCell>
+                    <TableRowCell>São Paulo</TableRowCell>
+                    <TableRowCell>20-35</TableRowCell>
+                    <TableRowCell>Homossexual</TableRowCell>
+                    <TableRowCell>Relacionamento sério</TableRowCell>
+                    <TableRowCell>
+                        <Badge Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Male"></Icon> 10</Badge>
+                    </TableRowCell>
+                    <TableRowCell><Button Size="Size.ExtraSmall" Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt"></Icon> Inscrever</Button></TableRowCell>
+                </TableRow>
+                <TableRow>
+                    <TableRowCell><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Users"></Icon> Encontro em grupo</TableRowCell>
+                    <TableRowCell>17/07/2020</TableRowCell>
+                    <TableRowCell>São Paulo</TableRowCell>
+                    <TableRowCell>20-35</TableRowCell>
+                    <TableRowCell>Heterossexual</TableRowCell>
+                    <TableRowCell>-</TableRowCell>
+                    <TableRowCell>
+                        <Badge Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Male"></Icon> 5</Badge>
+                        <Badge Color="Color.Danger"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Female"></Icon> 0</Badge>
+                    </TableRowCell>
+                    <TableRowCell><Button Size="Size.ExtraSmall" Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt"></Icon> Inscrever</Button></TableRowCell>
+                </TableRow>
+            </TableBody>
+        </Table>
+    </CardBody>
+</Card>
+
+@code {
+
+    private VerusDate.Shared.Model.Profile ProfileUserVM { get; set; }
+    private List<VerusDate.Shared.Model.Event> MyEvents { get; set; }
+    private List<VerusDate.Shared.Model.Event> AvailableEvents { get; set; }
+
+    protected override async Task LoadData()
+    {
+        ProfileUserVM = await Http.Profile_Get(LocalStorage);
+    }
+}

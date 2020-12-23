@@ -1,4 +1,9 @@
 using AzureStaticWebApps.Blazor.Authentication;
+using Blazored.LocalStorage;
+using Blazored.Toast;
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,13 +17,36 @@ namespace VerusDate.Web
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+            builder.Services
+                .AddBlazorise(options =>
+                {
+                    options.ChangeTextOnKeyPress = true;
+                })
+                .AddBootstrapProviders()
+                .AddFontAwesomeIcons();
+
             builder.RootComponents.Add<App>("#app");
 
             builder.Services
                 .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
                 .AddStaticWebAppsAuthentication();
 
-            await builder.Build().RunAsync();
+            builder.Services.AddBlazoredToast();
+            builder.Services.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);
+
+            //builder.Services.AddLogging(builder => builder
+            //    .AddBrowserConsole()
+            //    .SetMinimumLevel(LogLevel.Error)
+            //);
+
+            var host = builder.Build();
+
+            host.Services
+              .UseBootstrapProviders()
+              .UseFontAwesomeIcons();
+
+            await host.RunAsync();
         }
     }
 }

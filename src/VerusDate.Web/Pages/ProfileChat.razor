@@ -1,0 +1,262 @@
+﻿@page "/ProfileChat/{IdUserView:guid}"
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.SignalR.Client
+@implements IDisposable
+@attribute [Authorize]
+@inherits PageCore<ProfileChat>
+@inject HttpClient Http
+@inject IAccessTokenProvider TokenProvider
+
+<div class="row">
+    <div class="col-sm-9">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Conversa com @CurrentUser?.NickName</h5>
+            </div>
+            <div class="ibox-content">
+                <div style="height: 265px; overflow:auto; display:flex; flex-direction:column-reverse;">
+                    <div class="chat-activity-list">
+                        @if (Options.HasCustomVisibility)
+                        {
+                            <CustomVisibility Options="Options"></CustomVisibility>
+                        }
+                        else
+                        {
+                            @foreach (var item in ListChat)
+                            {
+                                if (item.IdUserSender == ComponenteUtils.IdUser) //usuário logado como sender
+                                {
+                                    <div class="chat-element">
+                                        <a href="#" class="float-left" style="height: 38px; width: 38px;">
+                                            <PhotoFace IdFace="@profile?.MainPhoto" isCircle="true"></PhotoFace>
+                                        </a>
+                                        <div class="media-body">
+                                            <small class="float-right">@item.DtMessage.GetElapsedTime()</small>
+                                            <strong>Eu</strong>
+                                            <p class="m-b-xs">
+                                                @if (item.TypeContent == TypeContent.Message)
+                                                {
+                                                    @item.Content
+                                                }
+                                                else
+                                                {
+                                                    <span>item inválido</span>
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="chat-element right">
+                                        <a href="#" class="float-right" style="height: 38px; width: 38px;">
+                                            <PhotoFace IdFace="@CurrentUser.MainPhoto" isCircle="true"></PhotoFace>
+                                        </a>
+                                        <div class="media-body text-right">
+                                            <small class="float-left">@item.DtMessage.GetElapsedTime()</small>
+                                            <strong>@CurrentUser.NickName</strong>
+                                            <p class="m-b-xs">
+                                                @if (item.TypeContent == TypeContent.Message)
+                                                {
+                                                    @item.Content
+                                                }
+                                                else
+                                                {
+                                                    <span>item inválido</span>
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="chat-form">
+                    <form role="form">
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Mensagem" rows="2" @bind="@Message" @bind:event="oninput"></textarea>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-sm btn-primary m-t-n-xs" disabled="@BtnDisabled" @onclick="SendPrivateMessage"><i class="fas fa-share"></i> <strong>Enviar mensagem</strong></button>
+                            <button type="button" class="btn btn-sm btn-primary m-t-n-xs" title="Enviar Imagem" disabled><i class="fas fa-images"></i></button>
+                            <button type="button" class="btn btn-sm btn-primary m-t-n-xs" title="Enviar Celular" disabled><i class="fas fa-mobile-alt"></i></button>
+                            <button type="button" class="btn btn-sm btn-primary m-t-n-xs" title="Enviar Facebook" disabled><i class="fab fa-facebook"></i></button>
+                            <button type="button" class="btn btn-sm btn-primary m-t-n-xs" title="Enviar Instagram" disabled><i class="fab fa-instagram"></i></button>
+                            <button type="button" class="btn btn-sm btn-primary m-t-n-xs" title="Enviar Áudio" disabled><i class="fas fa-microphone-alt"></i></button>
+                            <span class="badge badge-danger" hidden="@(IsConnected)">Chat desconectado</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        @if (OptionsProfile.HasCustomVisibility)
+        {
+            <CustomVisibility Options="Options"></CustomVisibility>
+        }
+        else
+        {
+            <div class="contact-box" style="padding: 0px;">
+
+                <div class="embed-responsive embed-responsive-1by1 divPhoto" style="background-color: black;">
+                    <img alt="..." class="imgPhoto" src="@CurrentUser.MainPhoto" />
+                    <span style="position: absolute; left: 10px; top: 10px;">
+                        <i class="badge badge-secondary">@CurrentUser.NickName, @CurrentUser.BirthDate.GetAge(), @CurrentUser.Distance.Value.GetDistance(ProfileHelper.DistanceType.Km)</i>
+                    </span>
+                    <div class="text-center" style="position: absolute; bottom: 10px; width: 100%;">
+                        @*<BtnChat IdUserView="@IdUserView.ToString()" IdChat="@InteractionVM?.IdChat"></BtnChat>*@
+                    </div>
+                </div>
+                <div style="padding: 10px;">
+                    <h5>Sobre mim</h5>
+                    <p>@CurrentUser.Description</p>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h4>Básico</h4>
+
+                    <ItemDataProfile For="@(() => CurrentUser.BiologicalSex)" Value="@CurrentUser.BiologicalSex" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.MaritalStatus)" Value="@CurrentUser.MaritalStatus" ClassIcon="far fa-heart" Affinities="@affinities"></ItemDataProfile>
+                    @*<ItemDataProfile For="@(() => CurrentUser.Intent)" Value="@CurrentUser.Intent" ClassIcon="fas fa-search" Affinities="@affinities"></ItemDataProfile>*@
+                    <ItemDataProfile For="@(() => CurrentUser.GenderIdentity)" Value="@CurrentUser.GenderIdentity" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.SexualOrientation)" Value="@CurrentUser.SexualOrientation" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
+
+                    <h4>Bio</h4>
+
+                    <ItemDataProfile For="null" Value="@CurrentUser.BirthDate.GetZodiac()" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Height)" Value="@CurrentUser.Height" ClassIcon="fas fa-ruler" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.BodyMass)" Value="@CurrentUser.BodyMass" ClassIcon="fas fa-weight" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.RaceCategory)" Value="@CurrentUser.RaceCategory" ClassIcon="fas fa-globe" Affinities="@affinities"></ItemDataProfile>
+
+                    <h4>Lifestyle</h4>
+
+                    <ItemDataProfile For="@(() => CurrentUser.HaveChildren)" Value="@CurrentUser.HaveChildren" ClassIcon="fas fa-child" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.WantChildren)" Value="@CurrentUser.WantChildren" ClassIcon="fas fa-baby" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Drink)" Value="@CurrentUser.Drink" ClassIcon="fas fa-glass-cheers" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Smoke)" Value="@CurrentUser.Smoke" ClassIcon="fas fa-smoking" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.EducationLevel)" Value="@CurrentUser.EducationLevel" ClassIcon="fas fa-graduation-cap" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.CareerCluster)" Value="@CurrentUser.CareerCluster" ClassIcon="fas fa-briefcase" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Religion)" Value="@CurrentUser.Religion" ClassIcon="fas fa-praying-hands" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.MoneyPersonality)" Value="@CurrentUser.MoneyPersonality" ClassIcon="fas fa-wallet" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.RelationshipPersonality)" Value="@CurrentUser.RelationshipPersonality" ClassIcon="fas fa-people-arrows" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.MyersBriggsTypeIndicator)" Value="@CurrentUser.MyersBriggsTypeIndicator" ClassIcon="fas fa-user" Affinities="@affinities"></ItemDataProfile>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code
+{
+    [Parameter]
+    public Guid IdUserView { get; set; }
+
+    private VerusDate.Shared.Model.Profile profile { get; set; }
+    private VerusDate.Shared.Model.Profile CurrentUser { get; set; }
+    private VerusDate.Shared.Model.Interaction InteractionVM { get; set; }
+    private List<VerusDate.Shared.Model.Chat> ListChat { get; set; }
+    private List<AffinityVM> affinities;
+
+    [Required]
+    [StringLength(100)]
+    [Display(Name = "Message", Prompt = "Para sua própria segurança, favor não incluir seu nome completo, endereço, celular, email ou quaisquer informações pessoais")]
+    private string Message { get; set; }
+
+    private bool BtnDisabled { get { return string.IsNullOrEmpty(Message) || !IsConnected; } }
+
+    private HubConnection hubConnection;
+    public bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        try
+        {
+            var tokenResult = await TokenProvider.RequestAccessToken();
+
+            if (tokenResult.TryGetToken(out var token))
+            {
+                hubConnection = new HubConnectionBuilder()
+                .WithUrl(NavigationManager.ToAbsoluteUri("/chathub"), opt =>
+                {
+                    opt.AccessTokenProvider = () => Task.FromResult(token.Value);
+                })
+                .WithAutomaticReconnect()
+                .Build();
+
+                hubConnection.On<string, string>("ReceivePrivateMessage", (user, message) =>
+                {
+                    try
+                    {
+                        if (user == CurrentUser.Id) //só recebe se quem mandou for o mesmo do chat
+                    {
+                            ListChat.Add(new VerusDate.Shared.Model.Chat() { IdChat = InteractionVM.IdChat, IdUserSender = user, TypeContent = TypeContent.Message, Content = message });
+                            StateHasChanged();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.ProcessException(Toast, Logger);
+                    }
+                });
+
+                await hubConnection.StartAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException(nameof(tokenResult));
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+
+    private VisibilityOptions Options => new VisibilityOptions()
+    {
+        Loading = ListChat == null,
+        NoData = ListChat != null && !ListChat.Any()
+    };
+
+    private VisibilityOptions OptionsProfile => new VisibilityOptions()
+    {
+        Loading = CurrentUser == null || affinities == null
+    };
+
+    protected override async Task LoadData()
+    {
+        CurrentUser = await Http.Profile_GetView(IdUserView.ToString());
+
+        InteractionVM = await Http.Interation_Get(IdUserView.ToString());
+        ListChat = await Http.Chat_Get(InteractionVM.IdChat, ComponenteUtils.IdUser);
+        var looking = await Http.ProfileLooking_Get(LocalStorage);
+        affinities = ProfileApi.GetAffinity(looking, CurrentUser);
+    }
+
+    protected async Task SendPrivateMessage()
+    {
+        try
+        {
+            await hubConnection.SendAsync("SendPrivateMessage", ComponenteUtils.IdUser, Message, CurrentUser.Id);
+            ListChat.Add(new VerusDate.Shared.Model.Chat() { IdChat = InteractionVM.IdChat, IdUserSender = ComponenteUtils.IdUser, TypeContent = TypeContent.Message, Content = Message });
+            Message = "";
+            await Http.Chat_Insert(ListChat.Where(w => w.IsSync == false).ToList()); //TODO: encontrar maneira mais eficiente de salvar
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+
+    public void Dispose()
+    {
+        _ = hubConnection.DisposeAsync();
+    }
+}

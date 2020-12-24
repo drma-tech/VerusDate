@@ -9,21 +9,6 @@
     <DocumentationFile>VerusDate.Server.xml</DocumentationFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Controllers\**" />
-    <Compile Remove="Mediator\**" />
-    <Content Remove="Controllers\**" />
-    <Content Remove="Mediator\**" />
-    <EmbeddedResource Remove="Controllers\**" />
-    <EmbeddedResource Remove="Mediator\**" />
-    <None Remove="Controllers\**" />
-    <None Remove="Mediator\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Startup.cs" />
-  </ItemGroup>
-
   <ItemGroup>    
     <PackageReference Include="Dapper.FluentMap" Version="2.0.0" />    
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.1" />

@@ -3,7 +3,7 @@ using Microsoft.Azure.CosmosRepository;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace VerusDate.Api.Mediator.Queries.Profile
+namespace VerusDate.Server.Mediator.Queries.Profile
 {
     public class ProfileUserGetCommand : IRequest<Shared.Model.Profile>
     {

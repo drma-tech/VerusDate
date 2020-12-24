@@ -1,40 +1,70 @@
-﻿using System.Collections.Generic;
+﻿using Blazored.LocalStorage;
+using Blazored.SessionStorage;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using VerusDate.Shared.Core;
 using VerusDate.Shared.Helper;
 
 namespace VerusDate.Web.Core
 {
     public static class ApiCore
     {
-        public static async Task<T> GetCustom<T>(this HttpClient http, string requestUri) where T : class
+        /// <summary>
+        /// Retorna o valor do local storage (caso não exista, busca da api e armazena)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="http"></param>
+        /// <param name="local"></param>
+        /// <param name="StorageKey"></param>
+        /// <param name="requestUri"></param>
+        /// <returns></returns>
+        public async static Task<T> GetCustomLocal<T>(this HttpClient http, ILocalStorageService local, string StorageKey, string requestUri) where T : class
         {
-            var response = await http.GetAsync(requestUri);
+            if (!await local.ContainKeyAsync(StorageKey))
+            {
+                var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadFromJsonAsync<T>();
+                if (response.IsSuccessStatusCode)
+                {
+                    await local.SetItemAsync(StorageKey, await response.Content.ReadFromJsonAsync<T>());
+                }
+                else
+                {
+                    throw new NotificationException(response);
+                }
             }
-            else
-            {
-                throw new NotificationException(response);
-            }
+
+            return await local.GetItemAsync<T>(StorageKey);
         }
 
-        public static async Task<List<T>> ListCustom<T>(this HttpClient http, string requestUri) where T : class
+        /// <summary>
+        /// Retorna o valor da sessão do usuário (caso não exista, busca da api e armazena)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="http"></param>
+        /// <param name="session"></param>
+        /// <param name="StorageKey"></param>
+        /// <param name="requestUri"></param>
+        /// <returns></returns>
+        public async static Task<T> GetCustomSession<T>(this HttpClient http, ISessionStorageService session, string StorageKey, string requestUri) where T : class
         {
-            var response = await http.GetAsync(requestUri);
+            var result = await session.GetItemAsync<T>(StorageKey);
 
-            if (response.IsSuccessStatusCode)
+            if (result == null)
             {
-                return await response.Content.ReadFromJsonAsync<List<T>>();
+                var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await session.SetItemAsync(StorageKey, await response.Content.ReadFromJsonAsync<T>());
+                }
+                else
+                {
+                    throw new NotificationException(response);
+                }
             }
-            else
-            {
-                throw new NotificationException(response);
-            }
+
+            return result;
         }
     }
 }

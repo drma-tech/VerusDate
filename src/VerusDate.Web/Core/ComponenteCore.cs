@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using Blazored.SessionStorage;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -22,10 +23,14 @@ namespace VerusDate.Web.Core
     public static class ComponenteUtils
     {
         public static string IdUser { get; set; }
-
-        public static string GetStorageKey(string api) => string.IsNullOrEmpty(IdUser) ? "" : $"{api}/{IdUser}";
+        public static string GetStorageKey(string key) => string.IsNullOrEmpty(IdUser) ? throw new ArgumentException(IdUser) : $"{key}({IdUser})";
+        public static string BaseApi => "http://localhost:7071/api/";
     }
 
+    /// <summary>
+    /// if you implement the OnInitializedAsync method, call 'await base.OnInitializedAsync();'
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class ComponenteCore<T> : ComponentBase where T : class
     {
         [Inject]
@@ -41,12 +46,11 @@ namespace VerusDate.Web.Core
         protected ILocalStorageService LocalStorage { get; set; }
 
         [Inject]
+        protected ISessionStorageService SessionStorage { get; set; }
+
+        [Inject]
         protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
-        /// <summary>
-        /// Call 'await base.OnInitializedAsync();'
-        /// </summary>
-        /// <returns></returns>
         protected override async Task OnInitializedAsync()
         {
             try
@@ -54,7 +58,8 @@ namespace VerusDate.Web.Core
                 if (string.IsNullOrEmpty(ComponenteUtils.IdUser))
                 {
                     var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-                    ComponenteUtils.IdUser = authState.User.FindFirst(c => c.Type == "sub")?.Value;
+                    //ComponenteUtils.IdUser = authState.User.FindFirst(c => c.Type == "sub")?.Value;
+                    ComponenteUtils.IdUser = authState.User.FindFirst(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
                 }
             }
             catch (Exception ex)
@@ -64,6 +69,10 @@ namespace VerusDate.Web.Core
         }
     }
 
+    /// <summary>
+    /// if you implement the OnInitializedAsync method, call 'await base.OnInitializedAsync();'
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class PageCore<T> : ComponenteCore<T> where T : class
     {
         [Inject]
@@ -71,10 +80,6 @@ namespace VerusDate.Web.Core
 
         protected abstract Task LoadData();
 
-        /// <summary>
-        /// Call 'await base.OnInitializedAsync();'
-        /// </summary>
-        /// <returns></returns>
         protected override async Task OnInitializedAsync()
         {
             try

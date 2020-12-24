@@ -7,7 +7,7 @@ namespace VerusDate.Shared.Model
 {
     public class ProfileLooking : ModelBase
     {
-        //TODO: LIMITAÇÃO DO BLAZOR
+        //TODO: IReadOnlyList - LIMITAÇÃO DO BLAZOR
         [Display(Name = "Intenções", Description = "Campo obrigatório")]
         public IReadOnlyList<Intent> Intent { get; set; } = new List<Intent>();
 
@@ -74,6 +74,31 @@ namespace VerusDate.Shared.Model
             MaxAge = 40;
             MinimalHeight = Height._155;
             MaxHeight = Height._185;
+        }
+
+        public void UpdateData(ProfileLooking vm)
+        {
+            Intent = vm.Intent;
+            Distance = vm.Distance;
+            MinimalAge = vm.MinimalAge;
+            MaxAge = vm.MaxAge;
+            BiologicalSex = vm.BiologicalSex;
+            MaritalStatus = vm.MaritalStatus;
+            GenderIdentity = vm.GenderIdentity;
+            SexualOrientation = vm.SexualOrientation;
+            Smoke = vm.Smoke;
+            Drink = vm.Drink;
+            Diet = vm.Diet;
+            MinimalHeight = vm.MaxHeight;
+            BodyMass = vm.BodyMass;
+            RaceCategory = vm.RaceCategory;
+            HaveChildren = vm.HaveChildren;
+            WantChildren = vm.WantChildren;
+            Religion = vm.Religion;
+            EducationLevel = vm.EducationLevel;
+            CareerCluster = vm.CareerCluster;
+
+            base.Update();
         }
     }
 }

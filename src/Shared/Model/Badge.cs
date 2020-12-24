@@ -1,5 +1,5 @@
-﻿using VerusDate.Shared.Core;
-using VerusDate.Shared.ValueType;
+﻿using Newtonsoft.Json;
+using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Model
 {
@@ -19,5 +19,46 @@ namespace VerusDate.Shared.Model
         {
             throw new System.NotImplementedException();
         }
+    }
+
+    public class BadgeType
+    {
+        public BadgeType(int MaxLevel, string ClassIcon, string Title, string Description)
+        {
+            this.MaxLevel = MaxLevel;
+            this.ClassIcon = ClassIcon;
+            this.Title = Title;
+            this.Description = Description;
+        }
+
+        public int Level { get; private set; }
+
+        [JsonIgnore]
+        public int MaxLevel { get; private set; }
+
+        [JsonIgnore]
+        public string ClassIcon { get; private set; }
+
+        [JsonIgnore]
+        public string Title { get; private set; }
+
+        [JsonIgnore]
+        public string Description { get; private set; }
+
+        public void IncreaseLevel()
+        {
+            if (Level == MaxLevel) return;
+
+            Level++;
+        }
+
+        public void DecreaseLevel()
+        {
+            if (Level == 0) return;
+
+            Level--;
+        }
+
+        public bool Completed() => Level == MaxLevel;
     }
 }

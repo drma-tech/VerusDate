@@ -5,11 +5,20 @@ using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Model
 {
-    [PartitionKeyPath("idInteraction")]
+    [PartitionKeyPath("idPrimary")]
     public class Interaction : ModelBase
     {
-        [JsonPropertyName("idInteraction")]
-        public string IdInteraction { get; set; }
+        /// <summary>
+        /// Id do usuário logado
+        /// </summary>
+        [JsonPropertyName("idPrimary")]
+        public string IdPrimary { get; set; }
+
+        /// <summary>
+        /// Id do usuário que recebeu a interação
+        /// </summary>
+        [JsonPropertyName("idSecondary")]
+        public string IdSecondary { get; set; }
 
         public ValueType.Action Like { get; set; }
         public ValueType.Action Deslike { get; set; }
@@ -22,6 +31,18 @@ namespace VerusDate.Shared.Model
         public override void LoadDefatultData()
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Gera uma interação entre dois usuários
+        /// </summary>
+        /// <param name="IdPrimary">Id do usuário logado</param>
+        /// <param name="IdSecondary">Id do usuário que recebeu a interação</param>
+        public Interaction(string IdPrimary, string IdSecondary)
+        {
+            this.Id = $"{IdPrimary}-{IdSecondary}";
+            this.IdPrimary = IdPrimary;
+            this.IdSecondary = IdSecondary;
         }
 
         public void ExecuteLike()

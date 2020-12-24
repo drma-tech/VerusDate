@@ -1,5 +1,6 @@
 using AzureStaticWebApps.Blazor.Authentication;
 using Blazored.LocalStorage;
+using Blazored.SessionStorage;
 using Blazored.Toast;
 using Blazorise;
 using Blazorise.Bootstrap;
@@ -19,12 +20,10 @@ namespace VerusDate.Web
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
             builder.Services
-                .AddBlazorise(options =>
-                {
-                    options.ChangeTextOnKeyPress = true;
-                })
+                .AddBlazorise(options => options.ChangeTextOnKeyPress = true)
                 .AddBootstrapProviders()
-                .AddFontAwesomeIcons();
+                .AddFontAwesomeIcons()
+                .AddBlazoredToast();
 
             builder.RootComponents.Add<App>("#app");
 
@@ -34,6 +33,7 @@ namespace VerusDate.Web
 
             builder.Services.AddBlazoredToast();
             builder.Services.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);
+            builder.Services.AddBlazoredSessionStorage(config => config.JsonSerializerOptions.WriteIndented = true);
 
             //builder.Services.AddLogging(builder => builder
             //    .AddBrowserConsole()

@@ -142,46 +142,46 @@ else
     {
         profile = await Http.Profile_Get(LocalStorage);
 
-        if (profile == null)
-        {
-            profile = VerusDate.Shared.Seed.ProfileSeed.GetProfileVM();
+        //if (profile == null)
+        //{
+        //    profile = VerusDate.Shared.Seed.ProfileSeed.GetProfileVM();
 
-            profile.LoadDefatultData();
+        //    profile.LoadDefatultData();
 
-            //if (profile != null && !profile.Longitude.HasValue)
-            //{
-            //    //GPS = await JsRuntime.InvokeAsync<GeoLocation>("RealDate.GPS.getCurrentPosition");
-            //    var fake = VerusDate.Shared.Seed.ProfileSeed.GetProfileVM();
-            //    GPS = new GeoLocation() { Latitude = fake.Latitude.Value, Longitude = fake.Longitude.Value, Accuracy = 20 };
+        //    //if (profile != null && !profile.Longitude.HasValue)
+        //    //{
+        //    //    //GPS = await JsRuntime.InvokeAsync<GeoLocation>("RealDate.GPS.getCurrentPosition");
+        //    //    var fake = VerusDate.Shared.Seed.ProfileSeed.GetProfileVM();
+        //    //    GPS = new GeoLocation() { Latitude = fake.Latitude.Value, Longitude = fake.Longitude.Value, Accuracy = 20 };
 
-            //    //TODO: chamar código da api
-            //    var here = await Http.Map_GetLocation(GPS.Latitude, GPS.Longitude);
-            //    if (here.items.Any())
-            //    {
-            //        var address = here.items[0].address;
-            //        profile.Location = address.GetLocation();
-            //    }
-            //    else
-            //    {
-            //        profile.Location = "Localização Desconhecida";
-            //    }
+        //    //    //TODO: chamar código da api
+        //    //    var here = await Http.Map_GetLocation(GPS.Latitude, GPS.Longitude);
+        //    //    if (here.items.Any())
+        //    //    {
+        //    //        var address = here.items[0].address;
+        //    //        profile.Location = address.GetLocation();
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        profile.Location = "Localização Desconhecida";
+        //    //    }
 
-            //    if (GPS?.Latitude == 0 && GPS?.Longitude == 0 && GPS.Accuracy == 0)
-            //    {
-            //        Toast.ShowWarning($"Não foi possível detectar um sistema GPS no seu dispositivo. Favor, tentar novamente ou liberar acesso ao GPS do seu dispositivo.", "alerta");
-            //    }
-            //    else
-            //    {
-            //        profile.Longitude = GPS.Longitude;
-            //        profile.Latitude = GPS.Latitude;
+        //    //    if (GPS?.Latitude == 0 && GPS?.Longitude == 0 && GPS.Accuracy == 0)
+        //    //    {
+        //    //        Toast.ShowWarning($"Não foi possível detectar um sistema GPS no seu dispositivo. Favor, tentar novamente ou liberar acesso ao GPS do seu dispositivo.", "alerta");
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        profile.Longitude = GPS.Longitude;
+        //    //        profile.Latitude = GPS.Latitude;
 
-            //        if (GPS.Accuracy > 500)
-            //        {
-            //            Toast.ShowWarning($"A posição do GPS foi recuperada, mas a precisão é de apenas: {Math.Round(GPS.Accuracy / 1000, 1)} km. Tente novamente mais tarde ou use um dispositivo mais preciso.", "alerta");
-            //        }
-            //    }
-            //}
-        }
+        //    //        if (GPS.Accuracy > 500)
+        //    //        {
+        //    //            Toast.ShowWarning($"A posição do GPS foi recuperada, mas a precisão é de apenas: {Math.Round(GPS.Accuracy / 1000, 1)} km. Tente novamente mais tarde ou use um dispositivo mais preciso.", "alerta");
+        //    //        }
+        //    //    }
+        //    //}
+        //}
     }
 
     private async Task HandleValidSubmit()

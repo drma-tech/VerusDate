@@ -118,7 +118,7 @@ namespace VerusDate.Shared.Model
             DtLastLogin = DateTimeOffset.UtcNow;
         }
 
-        public void UpdateProfile(Profile vm)
+        public void UpdateData(Profile vm)
         {
             NickName = vm.NickName;
             Description = vm.Description;

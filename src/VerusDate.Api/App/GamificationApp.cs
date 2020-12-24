@@ -1,9 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using VerusDate.Server.Core.Interface;
 using VerusDate.Shared.Enum;
-using VerusDate.Shared.Interface.App;
-using VerusDate.Shared.ViewModel.Command;
 
 namespace VerusDate.Server.App
 {
@@ -16,11 +13,7 @@ namespace VerusDate.Server.App
             _repo = repo;
         }
 
-        public async Task<GamificationVM> Get(string profileId, CancellationToken cancellationToken)
-        {
-            return null;
-        }
-
+    
         private async Task<bool> Update(GamificationVM gamification)
         {
             return await _repo.Update(gamification);

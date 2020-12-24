@@ -23,6 +23,19 @@ namespace VerusDate.Api
             builder.Services.AddHandles();
             builder.Services.AddPipelines();
             builder.Services.AddValidations();
+
+            //services.AddTransient<IEmailSender, EmailHelper>();
+            //services.Configure<AuthMessageSenderOptions>(options =>
+            //{
+            //    options.SendGridUser = Configuration.GetValue<string>("Authentication:Sendgrid:SendGridUser");
+            //    options.SendGridKey = Configuration.GetValue<string>("Authentication:Sendgrid:SendGridKey");
+            //});
+
+            //services.AddLogging(options =>
+            //{
+            //    options.ClearProviders();
+            //    options.AddAzureWebAppDiagnostics();
+            //});
         }
     }
 }

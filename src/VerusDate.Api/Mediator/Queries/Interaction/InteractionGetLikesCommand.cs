@@ -1,26 +1,24 @@
 ﻿using MediatR;
+using Microsoft.Azure.CosmosRepository;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using VerusDate.Api.Mediator;
-using VerusDate.Server.Core.Interface;
-using VerusDate.Shared.ViewModel.Query;
 
-namespace VerusDate.Server.Mediator.Queries.Interaction
+namespace VerusDate.Api.Mediator.Queries.Interaction
 {
-    public class InteractionGetLikesCommand : BaseCommandQuery<IEnumerable<ProfileBasicVM>> { }
+    public class InteractionGetLikesCommand : IRequest<IEnumerable<Shared.ModelQuery.ProfileBasic>> { }
 
-    public class InteractionGetLikesHandler : IRequestHandler<InteractionGetLikesCommand, IEnumerable<ProfileBasicVM>>
+    public class InteractionGetLikesHandler : IRequestHandler<InteractionGetLikesCommand, IEnumerable<Shared.ModelQuery.ProfileBasic>>
     {
-        private readonly IRepository _repo;
+        //private readonly IRepository<Shared.ModelQuery.ProfileBasic> _repo;
 
-        public InteractionGetLikesHandler(IRepository repo)
+        public InteractionGetLikesHandler(IRepositoryFactory factory)
         {
-            _repo = repo;
+            //_repo = factory.RepositoryOf<Shared.ModelQuery.ProfileBasic>();
         }
 
-        public async Task<IEnumerable<ProfileBasicVM>> Handle(InteractionGetLikesCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Shared.ModelQuery.ProfileBasic>> Handle(InteractionGetLikesCommand request, CancellationToken cancellationToken)
         {
             var SQL = new StringBuilder();
 
@@ -38,7 +36,8 @@ namespace VerusDate.Server.Mediator.Queries.Interaction
             SQL.Append("	AND I.Liked         = 1 ");
             SQL.Append("	AND I.Matched       = 0");
 
-            return await _repo.Query<ProfileBasicVM>(SQL, request, cancellationToken);
+            //return await _repo.GetByQueryAsync(SQL.ToString(), cancellationToken);
+            return null;
         }
     }
 }

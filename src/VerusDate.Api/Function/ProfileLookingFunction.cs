@@ -10,7 +10,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.ProfileLooking;
-using VerusDate.Api.Mediator.Queries.Profile;
+using VerusDate.Api.Mediator.Queries.ProfileLooking;
 
 namespace VerusDate.Api.Function
 {

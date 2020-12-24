@@ -1,28 +1,28 @@
 ﻿using MediatR;
+using Microsoft.Azure.CosmosRepository;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using VerusDate.Api.Mediator;
-using VerusDate.Server.Core.Interface;
-using VerusDate.Shared.ViewModel.Command;
 
-namespace VerusDate.Server.Mediator.Queries.Interaction
+namespace VerusDate.Api.Mediator.Queries.Interaction
 {
-    public class InteractionGetListCommand : BaseCommandQuery<IEnumerable<InteractionVM>> { }
-
-    public class InteractionGetListHandler : IRequestHandler<InteractionGetListCommand, IEnumerable<InteractionVM>>
+    public class InteractionGetListCommand : IRequest<IEnumerable<Shared.Model.Interaction>>
     {
-        private readonly IRepository _repo;
+        public string Id { get; set; }
+    }
 
-        public InteractionGetListHandler(IRepository repo)
+    public class InteractionGetListHandler : IRequestHandler<InteractionGetListCommand, IEnumerable<Shared.Model.Interaction>>
+    {
+        private readonly IRepository<Shared.Model.Interaction> _repo;
+
+        public InteractionGetListHandler(IRepositoryFactory factory)
         {
-            _repo = repo;
+            _repo = factory.RepositoryOf<Shared.Model.Interaction>();
         }
 
-        public async Task<IEnumerable<InteractionVM>> Handle(InteractionGetListCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Shared.Model.Interaction>> Handle(InteractionGetListCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.Query<InteractionVM>(new StringBuilder("SELECT * FROM Interaction WHERE Id = @IdUser"), request, cancellationToken);
+            return await _repo.GetByQueryAsync("SELECT * FROM Interaction WHERE Id = @IdUser", cancellationToken: cancellationToken);
         }
     }
 }

@@ -1,44 +1,27 @@
 ﻿using MediatR;
-using System;
-using System.Text;
+using Microsoft.Azure.CosmosRepository;
 using System.Threading;
 using System.Threading.Tasks;
-using VerusDate.Api.Mediator;
-using VerusDate.Server.Core.Interface;
-using VerusDate.Shared.ViewModel.Command;
 
-namespace VerusDate.Server.Mediator.Queries.Interaction
+namespace VerusDate.Api.Mediator.Queries.Interaction
 {
-    public class InteractionGetCommand : BaseCommandQuery<InteractionVM>
+    public class InteractionGetCommand : IRequest<Shared.Model.Interaction>
     {
-        /// <summary>
-        /// ID do usuário que o usuário logado interagiu
-        /// </summary>
-        public string IdUserInteraction { get; set; }
+        public string Id { get; set; }
     }
 
-    public class InteractionGetHandler : IRequestHandler<InteractionGetCommand, InteractionVM>
+    public class InteractionGetHandler : IRequestHandler<InteractionGetCommand, Shared.Model.Interaction>
     {
-        private readonly IRepository _repo;
+        private readonly IRepository<Shared.Model.Interaction> _repo;
 
-        public InteractionGetHandler(IRepository repo)
+        public InteractionGetHandler(IRepositoryFactory factory)
         {
-            _repo = repo;
+            _repo = factory.RepositoryOf<Shared.Model.Interaction>();
         }
 
-        public async Task<InteractionVM> Handle(InteractionGetCommand request, CancellationToken cancellationToken)
+        public async Task<Shared.Model.Interaction> Handle(InteractionGetCommand request, CancellationToken cancellationToken)
         {
-            if (request.IdUser == request.IdUserInteraction) throw new InvalidOperationException();
-
-            var obj = await _repo.Get<InteractionVM>(new StringBuilder("SELECT * FROM Interaction WHERE IdUser = @IdUser AND IdUserInteraction = @IdUserInteraction"), request);
-
-            if (obj == null)
-            {
-                obj = new InteractionVM() { IdUser = request.IdUser, IdUserInteraction = request.IdUserInteraction };
-                await _repo.Insert(obj);
-            }
-
-            return obj;
+            return await _repo.GetAsync(request.Id, cancellationToken: cancellationToken);
         }
     }
 }

@@ -38,11 +38,9 @@ namespace VerusDate.Shared.Model
         /// </summary>
         /// <param name="IdPrimary">Id do usuário logado</param>
         /// <param name="IdSecondary">Id do usuário que recebeu a interação</param>
-        public Interaction(string IdPrimary, string IdSecondary)
+        public void SetId(string IdPrimary, string IdSecondary)
         {
             this.Id = $"{IdPrimary}-{IdSecondary}";
-            this.IdPrimary = IdPrimary;
-            this.IdSecondary = IdSecondary;
         }
 
         public void ExecuteLike()

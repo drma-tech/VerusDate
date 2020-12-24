@@ -4,24 +4,24 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace VerusDate.Api.Mediator.Command.Gamification
+namespace VerusDate.Api.Mediator.Command.Store
 {
-    public class GamificationExchangeFoodCommand : Shared.Model.Gamification, IRequest<Shared.Model.Gamification>
+    public class StoreExchangeFoodCommand : Shared.Model.Gamification, IRequest<Shared.Model.Gamification>
     {
         [Required]
         public int QtdDiamond { get; set; }
     }
 
-    public class GamificationExchangeFoodHandler : IRequestHandler<GamificationExchangeFoodCommand, Shared.Model.Gamification>
+    public class StoreExchangeFoodHandler : IRequestHandler<StoreExchangeFoodCommand, Shared.Model.Gamification>
     {
         private readonly IRepository<Shared.Model.Gamification> _repo;
 
-        public GamificationExchangeFoodHandler(IRepositoryFactory factory)
+        public StoreExchangeFoodHandler(IRepositoryFactory factory)
         {
             _repo = factory.RepositoryOf<Shared.Model.Gamification>();
         }
 
-        public async Task<Shared.Model.Gamification> Handle(GamificationExchangeFoodCommand request, CancellationToken cancellationToken)
+        public async Task<Shared.Model.Gamification> Handle(StoreExchangeFoodCommand request, CancellationToken cancellationToken)
         {
             var obj = await _repo.GetAsync(request.Id, cancellationToken: cancellationToken);
 

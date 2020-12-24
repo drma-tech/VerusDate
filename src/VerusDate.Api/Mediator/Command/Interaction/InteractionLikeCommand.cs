@@ -3,7 +3,7 @@ using Microsoft.Azure.CosmosRepository;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace VerusDate.Server.Mediator.Commands.Interaction
+namespace VerusDate.Api.Mediator.Command.Interaction
 {
     public class InteractionLikeCommand : Shared.Model.Interaction, IRequest<bool> { }
 
@@ -18,13 +18,13 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 
         public async Task<bool> Handle(InteractionLikeCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.GetAsync(request.Id, request.IdInteraction, cancellationToken);
+            var obj = await _repo.GetAsync(request.Id, request.IdPrimary, cancellationToken);
 
             obj.ExecuteLike();
 
             var mergeLike = await _repo.UpdateAsync(obj, cancellationToken) != null;
 
-            var matched = await _repo.GetAsync(request.IdInteraction, request.Id, cancellationToken);
+            var matched = await _repo.GetAsync(request.Id, request.IdSecondary, cancellationToken);
 
             if (matched != null && matched.Like.Value) //se o outro tbm deu like, gera o match para os dois
             {

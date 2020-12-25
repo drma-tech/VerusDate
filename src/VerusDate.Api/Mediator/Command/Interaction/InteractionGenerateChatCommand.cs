@@ -22,9 +22,9 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 
         public async Task<Shared.Model.Chat> Handle(InteractionGenerateChatCommand request, CancellationToken cancellationToken)
         {
-            if (request.Id == request.IdInteraction) throw new InvalidOperationException();
+            //if (request.Id == request.IdInteraction) throw new InvalidOperationException();
 
-            var obj1 = await _repo.GetAsync(request.Id, request.IdInteraction, cancellationToken);
+            var obj1 = await _repo.GetAsync(request.Id, request.IdPrimary, cancellationToken);
 
             if (!obj1.Match.Value)
             {
@@ -38,7 +38,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
             {
                 var IdChat = Guid.NewGuid().ToString();
 
-                var obj2 = await _repo.GetAsync(request.IdInteraction, request.Id, cancellationToken);
+                var obj2 = await _repo.GetAsync(request.Id, request.IdSecondary, cancellationToken);
 
                 obj1.IdChat = IdChat;
                 obj2.IdChat = IdChat;

@@ -9,12 +9,12 @@ namespace VerusDate.Api
 {
     internal class Startup : FunctionsStartup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        //public Startup(IConfiguration configuration)
+        //{
+        //    Configuration = configuration;
+        //}
 
-        public static IConfiguration Configuration { get; private set; }
+        //public static IConfiguration Configuration { get; private set; }
 
         public override void Configure(IFunctionsHostBuilder builder)
         {

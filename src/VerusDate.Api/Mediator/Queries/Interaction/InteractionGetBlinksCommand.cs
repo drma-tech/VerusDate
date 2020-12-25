@@ -8,7 +8,7 @@ using VerusDate.Shared.ModelQuery;
 
 namespace VerusDate.Api.Mediator.Queries.Interaction
 {
-    public class InteractionGetBlinksCommand : IRequest<IEnumerable<Shared.ModelQuery.ProfileBasic>> { }
+    public class InteractionGetBlinksCommand : IRequest<IEnumerable<ProfileBasic>> { }
 
     public class InteractionGetBlinksHandler : IRequestHandler<InteractionGetBlinksCommand, IEnumerable<ProfileBasic>>
     {

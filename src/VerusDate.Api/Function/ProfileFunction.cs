@@ -6,11 +6,11 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Profile;
 using VerusDate.Api.Mediator.Queries.Profile;
+using VerusDate.Shared.Seed;
 
 namespace VerusDate.Api.Function
 {
@@ -25,7 +25,7 @@ namespace VerusDate.Api.Function
 
         [FunctionName("ProfileGet")]
         public async Task<IActionResult> Get(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "profile/get")] HttpRequest req,
+           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/Get")] HttpRequest req,
            ILogger log)
         {
             try
@@ -41,14 +41,14 @@ namespace VerusDate.Api.Function
             }
         }
 
-        [FunctionName("ProfileListMatch")]
-        public async Task<IActionResult> ListMatch(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/ListMatch")] HttpRequest req,
+        [FunctionName("ProfileGetView")]
+        public async Task<IActionResult> GetView(
+           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/GetView")] HttpRequest req,
            ILogger log)
         {
             try
             {
-                var result = await _mediator.Send(new ProfileListMatchCommand() { Id = req.Query["Id"] }, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(new ProfileGetViewCommand() { Id = req.Query["Id"] }, req.HttpContext.RequestAborted);
 
                 return new OkObjectResult(result);
             }
@@ -59,32 +59,51 @@ namespace VerusDate.Api.Function
             }
         }
 
-        [FunctionName("ProfileListMatch")]
-        public async Task<IActionResult> ListSearch(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/ListMatch")] HttpRequest req,
-           ILogger log)
-        {
-            try
-            {
-                var result = await _mediator.Send(new ProfileListMatchCommand() { Id = req.Query["Id"] }, req.HttpContext.RequestAborted);
+        //[FunctionName("ProfileListMatch")]
+        //public async Task<IActionResult> ListMatch(
+        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/ListMatch")] HttpRequest req,
+        //   ILogger log)
+        //{
+        //    try
+        //    {
+        //        var result = await _mediator.Send(new ProfileListMatchCommand() { Id = req.Query["Id"] }, req.HttpContext.RequestAborted);
 
-                return new OkObjectResult(result);
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, null, req.Query.ToList());
-                return new BadRequestObjectResult(ex.Message);
-            }
-        }
+        //        return new OkObjectResult(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.LogError(ex, null, req.Query.ToList());
+        //        return new BadRequestObjectResult(ex.Message);
+        //    }
+        //}
 
-        [FunctionName("ProfilePost")]
-        public async Task<IActionResult> Post(
-            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "profile/post")] HttpRequest req,
+        //[FunctionName("ProfileListMatch")]
+        //public async Task<IActionResult> ListSearch(
+        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/ListMatch")] HttpRequest req,
+        //   ILogger log)
+        //{
+        //    try
+        //    {
+        //        var result = await _mediator.Send(new ProfileListMatchCommand() { Id = req.Query["Id"] }, req.HttpContext.RequestAborted);
+
+        //        return new OkObjectResult(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.LogError(ex, null, req.Query.ToList());
+        //        return new BadRequestObjectResult(ex.Message);
+        //    }
+        //}
+
+        [FunctionName("ProfileAdd")]
+        public async Task<IActionResult> Add(
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Profile/Add")] HttpRequest req,
             ILogger log)
         {
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<ProfileAddCommand>(req.Body);
+                //var command = await JsonSerializer.DeserializeAsync<ProfileAddCommand>(req.Body);
+                var command = ProfileSeed.GetProfile<ProfileAddCommand>(null).Generate();
 
                 var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 
@@ -97,14 +116,36 @@ namespace VerusDate.Api.Function
             }
         }
 
-        [FunctionName("ProfilePut")]
-        public async Task<IActionResult> Put(
-            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "profile/put")] HttpRequest req,
+        [FunctionName("ProfileUpdate")]
+        public async Task<IActionResult> Update(
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Profile/Update")] HttpRequest req,
             ILogger log)
         {
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<ProfileUpdateCommand>(req.Body);
+                //var command = await JsonSerializer.DeserializeAsync<ProfileUpdateCommand>(req.Body);
+                var command = ProfileSeed.GetProfile<ProfileUpdateCommand>(req.Query["Id"]).Generate();
+
+                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, null, req.Query.ToList());
+                return new BadRequestObjectResult(ex.Message);
+            }
+        }
+
+        [FunctionName("ProfileUpdateLooking")]
+        public async Task<IActionResult> UpdateLooking(
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Profile/UpdateLooking")] HttpRequest req,
+            ILogger log)
+        {
+            try
+            {
+                //var command = await JsonSerializer.DeserializeAsync<ProfileUpdateLookingCommand>(req.Body);
+                var command = ProfileSeed.GetProfile<ProfileUpdateLookingCommand>(req.Query["Id"]).Generate();
 
                 var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 

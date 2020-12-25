@@ -18,7 +18,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 
         public async Task<bool> Handle(InteractionBlinkCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.GetAsync(request.Id, request.IdInteraction, cancellationToken);
+            var obj = await _repo.GetAsync(request.Id, request.IdPrimary, cancellationToken);
 
             obj.ExecuteBlink();
 

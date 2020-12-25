@@ -3,7 +3,7 @@ using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http;
 using System.Threading.Tasks;
-using VerusDate.Shared.Model;
+using VerusDate.Shared.Model.Profile;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api

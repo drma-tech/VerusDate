@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.Model
+namespace VerusDate.Shared.Model.Profile
 {
-    public class ProfileLooking : ModelBase
+    public class ProfileLooking
     {
         //TODO: IReadOnlyList - LIMITAÇÃO DO BLAZOR
         [Display(Name = "Intenções", Description = "Campo obrigatório")]
@@ -68,14 +67,6 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Carreira")]
         public CareerCluster? CareerCluster { get; set; }
 
-        public override void LoadDefatultData()
-        {
-            MinimalAge = 18;
-            MaxAge = 40;
-            MinimalHeight = Height._155;
-            MaxHeight = Height._185;
-        }
-
         public void UpdateData(ProfileLooking vm)
         {
             Intent = vm.Intent;
@@ -97,8 +88,6 @@ namespace VerusDate.Shared.Model
             Religion = vm.Religion;
             EducationLevel = vm.EducationLevel;
             CareerCluster = vm.CareerCluster;
-
-            base.Update();
         }
     }
 }

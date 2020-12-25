@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using VerusDate.Api.Mediator.Behavior;
 using VerusDate.Api.Mediator.Command.Profile;
-using VerusDate.Shared.Validation;
 
 namespace VerusDate.Api.Core
 {

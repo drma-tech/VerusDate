@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using VerusDate.Shared.Core;
+﻿
+using Newtonsoft.Json;
 
-namespace VerusDate.Shared.Model
+namespace VerusDate.Shared.Model.Profile
 {
-    public class Badge : ModelBase
+    public class ProfileBadge
     {
         public BadgeType Rank { get; private set; } = new BadgeType(10, "fas fa-crown", "Rank", "Nível alcançado");
 
@@ -14,11 +14,6 @@ namespace VerusDate.Shared.Model
         public BadgeType VerifiedProfile { get; private set; } = new BadgeType(3, "fas fa-user-check", "Verified Profile", "Validação de todos os itens da lista de pendências");
 
         public BadgeType Popular { get; private set; } = new BadgeType(1, "far fa-grin-stars", "Popular", "Tem uma relação de 70% ou mais de likes");
-
-        public override void LoadDefatultData()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 
     public class BadgeType

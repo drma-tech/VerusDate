@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Blazored.SessionStorage;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -10,24 +9,21 @@ namespace VerusDate.Web.Api
 {
     public static class ChatApi
     {
-        public async static Task<List<Chat>> Chat_Get(this HttpClient http, string IdChat, string IdUser)
-        {
-            if (string.IsNullOrEmpty(IdChat)) throw new ArgumentNullException(nameof(IdChat));
-            if (string.IsNullOrEmpty(IdUser)) throw new ArgumentNullException(nameof(IdUser));
+        public static string StorageKey => ComponenteUtils.GetStorageKey("Chat");
 
-            return await http.ListCustom<Chat>($"Chat/Get/{IdChat}/{IdUser}");
+        public async static Task<Chat> Chat_Get(this HttpClient http, ISessionStorageService session, string IdChat, string IdUser)
+        {
+            return await http.GetCustomSession<Chat>(session, StorageKey, $"Chat/Get/{IdChat}/{IdUser}");
         }
 
-        public async static Task<HttpResponseMessage> Chat_Insert(this HttpClient http, List<Chat> LstChat)
+        public async static Task<HttpResponseMessage> Chat_Insert(this HttpClient http, Chat chat)
         {
-            if (LstChat == null) throw new ArgumentNullException(nameof(LstChat));
+            //foreach (var item in LstChat)
+            //{
+            //    item.SetSync();
+            //}
 
-            foreach (var item in LstChat)
-            {
-                item.SetSync();
-            }
-
-            return await http.PostAsJsonAsync("Chat/Insert", new { LstChat });
+            return await http.PostAsJsonAsync("Chat/Insert", chat);
         }
     }
 }

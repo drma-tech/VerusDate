@@ -18,12 +18,12 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
     public class UploadPhotoGalleryHandler : IRequestHandler<UploadPhotoGalleryCommand, bool>
     {
-        private readonly IRepository<Shared.Model.Profile> _repo;
+        private readonly IRepository<Shared.Model.Profile.Profile> _repo;
         private readonly StorageHelper storageHelper;
 
         public UploadPhotoGalleryHandler(IRepositoryFactory factory, StorageHelper storageHelper)
         {
-            _repo = factory.RepositoryOf<Shared.Model.Profile>();
+            _repo = factory.RepositoryOf<Shared.Model.Profile.Profile>();
             this.storageHelper = storageHelper;
         }
 

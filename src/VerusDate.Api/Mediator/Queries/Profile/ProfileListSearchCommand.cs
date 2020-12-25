@@ -9,23 +9,23 @@ using static VerusDate.Shared.Helper.ProfileHelper;
 
 namespace VerusDate.Api.Mediator.Queries.Profile
 {
-    public class ProfileListSearchCommand : IRequest<IEnumerable<Shared.Model.Profile>>
+    public class ProfileListSearchCommand : IRequest<IEnumerable<Shared.Model.Profile.Profile>>
     {
         public string Id { get; set; }
     }
 
-    public class ProfileListSearchHandler : IRequestHandler<ProfileListSearchCommand, IEnumerable<Shared.Model.Profile>>
+    public class ProfileListSearchHandler : IRequestHandler<ProfileListSearchCommand, IEnumerable<Shared.Model.Profile.Profile>>
     {
         private readonly IRepository<Shared.Model.ProfileLooking> _repo;
-        private readonly IRepository<Shared.Model.Profile> _repoProfile;
+        private readonly IRepository<Shared.Model.Profile.Profile> _repoProfile;
 
         public ProfileListSearchHandler(IRepositoryFactory factory)
         {
             _repo = factory.RepositoryOf<Shared.Model.ProfileLooking>();
-            _repoProfile = factory.RepositoryOf<Shared.Model.Profile>();
+            _repoProfile = factory.RepositoryOf<Shared.Model.Profile.Profile>();
         }
 
-        public async Task<IEnumerable<Shared.Model.Profile>> Handle(ProfileListSearchCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Shared.Model.Profile.Profile>> Handle(ProfileListSearchCommand request, CancellationToken cancellationToken)
         {
             var looking = await _repo.GetAsync(request.Id, cancellationToken: cancellationToken);
 

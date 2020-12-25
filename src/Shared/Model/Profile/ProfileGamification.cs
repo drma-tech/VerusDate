@@ -1,11 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using VerusDate.Shared.Core;
 using VerusDate.Shared.Helper;
 
-namespace VerusDate.Shared.Model
+namespace VerusDate.Shared.Model.Profile
 {
-    public class Gamification : ModelBase
+    public class ProfileGamification
     {
         [JsonIgnore]
         private static int MaxRankXP => 100;
@@ -27,14 +26,6 @@ namespace VerusDate.Shared.Model
 
         [Display(Name = "Diamond")]
         public int Diamond { get; private set; }
-
-        public override void LoadDefatultData()
-        {
-            Ranking = 1;
-            XP = 0;
-            Food = MaxFood;
-            Diamond = 0;
-        }
 
         public void AddXP(int qtd)
         {

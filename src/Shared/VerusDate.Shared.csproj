@@ -5,9 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Model\Chat.cs" />
+    <Compile Remove="Model\Event.cs" />
+    <Compile Remove="Model\Interaction.cs" />
+    <Compile Remove="Model\Ticket.cs" />
+    <Compile Remove="Model\TicketVote.cs" />
+    <Compile Remove="Seed\EventSeed.cs" />
+    <Compile Remove="Validation\EventValidation.cs" />
+    <Compile Remove="Validation\ProfileLookingValidation.cs" />
+    <Compile Remove="Validation\ProfileValidation.cs" />
+    <Compile Remove="Validation\TicketValidation.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.FluentValidation" Version="1.3.2" />
     <PackageReference Include="Bogus" Version="32.0.2" />
     <PackageReference Include="IEvangelist.Azure.CosmosRepository" Version="2.1.3" />
     <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Validation\" />
   </ItemGroup>
 </Project>

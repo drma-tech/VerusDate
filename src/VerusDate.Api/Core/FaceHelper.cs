@@ -20,11 +20,13 @@ namespace VerusDate.Server.Core.Helper
 
         public static async Task<bool> IsPhotoValid(string idPhotoFace, Stream StreamPhotoCamera)
         {
-            IFaceClient client = Authenticate(Startup.Configuration.GetValue<string>("CognitivePath"), "efdaf276808c4adb83778efeec621ba0");
+            //IFaceClient client = Authenticate(Startup.Configuration.GetValue<string>("CognitivePath"), "efdaf276808c4adb83778efeec621ba0");
 
-            var similar = await client.FindSimilar(Startup.Configuration.GetValue<string>("BlobPath"), idPhotoFace, StreamPhotoCamera);
+            //var similar = await client.FindSimilar(Startup.Configuration.GetValue<string>("BlobPath"), idPhotoFace, StreamPhotoCamera);
 
-            return similar.Confidence > 0.6;
+            //return similar.Confidence > 0.6;
+
+            return true;
         }
 
         public static async Task<SimilarFace> FindSimilar(this IFaceClient client, string url, string idPhotoFace, Stream StreamPhotoCamera)

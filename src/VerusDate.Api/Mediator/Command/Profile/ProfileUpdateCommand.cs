@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Microsoft.Azure.CosmosRepository;
 using System.Threading;
 using System.Threading.Tasks;
+using VerusDate.Api.Core.Interfaces;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
@@ -9,22 +9,22 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
     public class ProfileUpdateHandler : IRequestHandler<ProfileUpdateCommand, Shared.Model.Profile.Profile>
     {
-        private readonly IRepository<Shared.Model.Profile.Profile> _repo;
+        private readonly IRepository _repo;
 
-        public ProfileUpdateHandler(IRepositoryFactory factory)
+        public ProfileUpdateHandler(IRepository repo)
         {
-            _repo = factory.RepositoryOf<Shared.Model.Profile.Profile>();
+            _repo = repo;
         }
 
         public async Task<Shared.Model.Profile.Profile> Handle(ProfileUpdateCommand request, CancellationToken cancellationToken)
         {
             //await _gamificationApp.RemoveXP(request.Id, EventRemoveXP.UpdateProfile, cancellationToken);
 
-            var obj = await _repo.GetAsync(request.Id, cancellationToken: cancellationToken);
+            var obj = await _repo.Get<Shared.Model.Profile.Profile>(request.Id, request.Id, cancellationToken);
 
             obj.UpdateProfile(request.Basic, request.Bio, request.Lifestyle);
 
-            return await _repo.UpdateAsync(obj, cancellationToken);
+            return await _repo.Update(obj, request.Id, request.Id, cancellationToken);
         }
     }
 }

@@ -30,7 +30,9 @@ namespace VerusDate.Api.Function
         {
             try
             {
-                var result = await _mediator.Send(new ProfileGetCommand() { Id = req.Query["Id"] }, req.HttpContext.RequestAborted);
+                var command = new ProfileGetCommand() { Id = req.Query["Id"] };
+
+                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 
                 return new OkObjectResult(result);
             }

@@ -1,9 +1,11 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+using VerusDate.Api.Core.Interfaces;
 using VerusDate.Api.Mediator.Behavior;
 using VerusDate.Api.Mediator.Command.Profile;
+using VerusDate.Api.Repository;
 
 namespace VerusDate.Api.Core
 {
@@ -11,7 +13,15 @@ namespace VerusDate.Api.Core
     {
         public static void AddHandles(this IServiceCollection services)
         {
-            services.AddMediatR(Assembly.GetExecutingAssembly()); //needs only one class
+            services.AddMediatR(typeof(ProfileAddHandler)); //needs only one class
+        }
+
+        public static void AddRepositories(this IServiceCollection services, IConfiguration config)
+        {
+            services.AddScoped<IRepository>(func =>
+            {
+                return new CosmosRepository(config);
+            });
         }
 
         public static void AddPipelines(this IServiceCollection services)

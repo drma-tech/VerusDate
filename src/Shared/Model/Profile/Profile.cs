@@ -1,31 +1,28 @@
-﻿using Microsoft.Azure.CosmosRepository;
-using Newtonsoft.Json;
-using System;
+﻿using System;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
 
 namespace VerusDate.Shared.Model.Profile
 {
-    public class Profile : Item
+    public class Profile : CosmosBase
     {
-        [JsonProperty("type")]
-        public new string Type { get; } = "Profile";
+        public Profile() : base("Profile")
+        {
+        }
 
-        public DateTimeOffset? DtInsert { get; private set; } = DateTimeOffset.UtcNow;
-        public DateTimeOffset? DtUpdate { get; private set; }
-        public DateTimeOffset? DtTopList { get; private set; } = DateTimeOffset.UtcNow;
-        public DateTimeOffset? DtLastLogin { get; private set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset? DtInsert { get; set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset? DtUpdate { get; set; }
+        public DateTimeOffset? DtTopList { get; set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset? DtLastLogin { get; set; } = DateTimeOffset.UtcNow;
 
-        [JsonIgnore]
-        public ActivityStatus ActivityStatus => GetActivityStatus();
-
-        public ProfileBasic Basic { get; private set; }
-        public ProfileBio Bio { get; private set; }
-        public ProfileLifestyle Lifestyle { get; private set; }
-        public ProfileLooking Looking { get; private set; }
-        public ProfileGamification Gamification { get; private set; }
-        public ProfileBadge Badge { get; private set; }
-        public ProfilePhoto Photo { get; private set; }
+        public ProfileBasic Basic { get; set; }
+        public ProfileBio Bio { get; set; }
+        public ProfileLifestyle Lifestyle { get; set; }
+        public ProfileLooking Looking { get; set; }
+        public ProfileGamification Gamification { get; set; }
+        public ProfileBadge Badge { get; set; }
+        public ProfilePhoto Photo { get; set; }
 
         public void UpList()
         {
@@ -94,7 +91,7 @@ namespace VerusDate.Shared.Model.Profile
             return ProfileHelper.GetDaysPassed(DtUpdate.Value);
         }
 
-        private ActivityStatus GetActivityStatus()
+        public ActivityStatus GetActivityStatus()
         {
             if (DtLastLogin.Value.Date == DateTime.Now.Date) return ActivityStatus.Today;
             if (DtLastLogin.Value.Date >= DateTime.Now.Date.AddDays(-7)) return ActivityStatus.Week;
@@ -119,5 +116,11 @@ namespace VerusDate.Shared.Model.Profile
             Basic.Longitude = null;
             Basic.Latitude = null;
         }
+    }
+
+    public class ProfileView : Profile
+    {
+        public ActivityStatus ActivityStatus { get; set; }
+        public double Distance { get; set; }
     }
 }

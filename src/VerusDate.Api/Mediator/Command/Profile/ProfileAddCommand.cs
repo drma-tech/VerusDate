@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Microsoft.Azure.CosmosRepository;
 using System.Threading;
 using System.Threading.Tasks;
+using VerusDate.Api.Core.Interfaces;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
@@ -9,11 +9,11 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
     public class ProfileAddHandler : IRequestHandler<ProfileAddCommand, Shared.Model.Profile.Profile>
     {
-        private readonly IRepository<Shared.Model.Profile.Profile> _repo;
+        private readonly IRepository _repo;
 
-        public ProfileAddHandler(IRepositoryFactory factory)
+        public ProfileAddHandler(IRepository repo)
         {
-            _repo = factory.RepositoryOf<Shared.Model.Profile.Profile>();
+            _repo = repo;
         }
 
         public async Task<Shared.Model.Profile.Profile> Handle(ProfileAddCommand request, CancellationToken cancellationToken)
@@ -27,7 +27,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
             //await _profileValidationApp.ValidateProfileData(request.Id, true, cancellationToken);
 
-             return await _repo.CreateAsync(request, cancellationToken);
+            return await _repo.Add(request, request.Id, cancellationToken);
         }
     }
 }

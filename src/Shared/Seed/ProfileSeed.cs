@@ -12,7 +12,7 @@ namespace VerusDate.Shared.Seed
                 .Rules((s, p) =>
                 {
                     p.Id = Id ?? s.Random.Guid().ToString();
-                    if (profile) p.UpdateProfile(GetProfileBasic(), GetProfileBio(), GetProfileLifestyle());
+                    if (profile) p.UpdateProfile(GetProfileBasic<ProfileBasic>(), GetProfileBio(), GetProfileLifestyle());
                     if (looking) p.UpdateLooking(GetProfileLookingVM());
                     if (gamification) p.UpdateGamification(GetProfileGamification());
                     if (badge) p.UpdateBadge(GetProfileBadge());
@@ -21,9 +21,9 @@ namespace VerusDate.Shared.Seed
                 });
         }
 
-        public static Faker<ProfileBasic> GetProfileBasic()
+        public static Faker<T> GetProfileBasic<T>() where T : ProfileBasic
         {
-            return new Faker<ProfileBasic>("pt_BR")
+            return new Faker<T>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.NickName = s.Internet.UserName();

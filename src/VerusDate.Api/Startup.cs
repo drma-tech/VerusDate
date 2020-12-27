@@ -1,6 +1,4 @@
 ﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using VerusDate.Api.Core;
 
 [assembly: FunctionsStartup(typeof(VerusDate.Api.Startup))]
@@ -18,9 +16,10 @@ namespace VerusDate.Api
 
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            builder.Services.AddCosmosRepository();
+            var config = builder.GetContext().Configuration;
 
             builder.Services.AddHandles();
+            builder.Services.AddRepositories(config);
             builder.Services.AddPipelines();
             builder.Services.AddValidations();
 

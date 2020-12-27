@@ -1,27 +1,32 @@
 ﻿using MediatR;
-using Microsoft.Azure.CosmosRepository;
 using System.Threading;
 using System.Threading.Tasks;
+using VerusDate.Api.Core.Interfaces;
 
 namespace VerusDate.Api.Mediator.Queries.Profile
 {
-    public class ProfileGetViewCommand : IRequest<Shared.Model.Profile.Profile>
+    public class ProfileGetViewCommand : IRequest<Shared.Model.Profile.ProfileView>
     {
         public string Id { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 
-    public class ProfileGetViewHandler : IRequestHandler<ProfileGetViewCommand, Shared.Model.Profile.Profile>
+    public class ProfileGetViewHandler : IRequestHandler<ProfileGetViewCommand, Shared.Model.Profile.ProfileView>
     {
-        private readonly IRepository<Shared.Model.Profile.Profile> _repo;
+        private readonly IRepository _repo;
 
-        public ProfileGetViewHandler(IRepositoryFactory factory)
+        public ProfileGetViewHandler(IRepository repo)
         {
-            _repo = factory.RepositoryOf<Shared.Model.Profile.Profile>();
+            _repo = repo;
         }
 
-        public async Task<Shared.Model.Profile.Profile> Handle(ProfileGetViewCommand request, CancellationToken cancellationToken)
+        public async Task<Shared.Model.Profile.ProfileView> Handle(ProfileGetViewCommand request, CancellationToken cancellationToken)
         {
-            var result = await _repo.GetAsync(request.Id, cancellationToken: cancellationToken);
+            var result = await _repo.Get<Shared.Model.Profile.ProfileView>(request.Id, request.Id, cancellationToken);
+
+            result.ActivityStatus = result.GetActivityStatus();
+            result.Distance = result.GetDistance(request.Latitude, request.Longitude);
 
             result.ProtectSensitiveData();
 

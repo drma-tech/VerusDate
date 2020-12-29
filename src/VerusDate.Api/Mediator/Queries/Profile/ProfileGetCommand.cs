@@ -5,10 +5,7 @@ using VerusDate.Api.Core.Interfaces;
 
 namespace VerusDate.Api.Mediator.Queries.Profile
 {
-    public class ProfileGetCommand : IRequest<Shared.Model.Profile.Profile>
-    {
-        public string Id { get; set; }
-    }
+    public class ProfileGetCommand : MediatorQuery<Shared.Model.Profile.Profile> { }
 
     public class ProfileGetHandler : IRequestHandler<ProfileGetCommand, Shared.Model.Profile.Profile>
     {
@@ -21,7 +18,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 
         public async Task<Shared.Model.Profile.Profile> Handle(ProfileGetCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.Get<Shared.Model.Profile.Profile>(request.Id, request.Id, cancellationToken);
+            return await _repo.Get<Shared.Model.Profile.Profile>(request.IdLoggedUser, request.IdLoggedUser, cancellationToken);
         }
     }
 }

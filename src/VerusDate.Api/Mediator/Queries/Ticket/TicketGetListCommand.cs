@@ -6,7 +6,7 @@ using VerusDate.Api.Core.Interfaces;
 
 namespace VerusDate.Api.Mediator.Queries.Ticket
 {
-    public class TicketGetListCommand : IRequest<List<Shared.Model.Ticket.Ticket>> { }
+    public class TicketGetListCommand : MediatorQuery<List<Shared.Model.Ticket.Ticket>> { }
 
     public class TicketGetListHandler : IRequestHandler<TicketGetListCommand, List<Shared.Model.Ticket.Ticket>>
     {

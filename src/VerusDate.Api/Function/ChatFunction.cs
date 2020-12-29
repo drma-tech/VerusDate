@@ -30,7 +30,7 @@ namespace VerusDate.Api.Function
         {
             try
             {
-                var result = await _mediator.Send(new ChatGetCommand() { Id = req.Query["Id"] }, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(new ChatGetCommand() { IdUserInteraction = req.Query["Id"] }, req.HttpContext.RequestAborted);
 
                 if (result == null)
                     return new NotFoundResult();

@@ -5,9 +5,9 @@ using VerusDate.Api.Core.Interfaces;
 
 namespace VerusDate.Api.Mediator.Queries.Profile
 {
-    public class ProfileGetViewCommand : IRequest<Shared.Model.Profile.ProfileView>
+    public class ProfileGetViewCommand : MediatorQuery<Shared.Model.Profile.ProfileView>
     {
-        public string Id { get; set; }
+        public string IdUserView { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
     }
@@ -23,7 +23,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 
         public async Task<Shared.Model.Profile.ProfileView> Handle(ProfileGetViewCommand request, CancellationToken cancellationToken)
         {
-            var result = await _repo.Get<Shared.Model.Profile.ProfileView>(request.Id, request.Id, cancellationToken);
+            var result = await _repo.Get<Shared.Model.Profile.ProfileView>(request.IdUserView, request.IdUserView, cancellationToken);
 
             result.ActivityStatus = result.GetActivityStatus();
             result.Distance = result.GetDistance(request.Latitude, request.Longitude);

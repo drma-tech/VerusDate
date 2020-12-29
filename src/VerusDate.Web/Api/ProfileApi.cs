@@ -19,7 +19,7 @@ namespace VerusDate.Web.Api
 
         public async static Task<Profile> Profile_Get(this HttpClient http, ILocalStorageService local)
         {
-            return await http.GetCustomLocal<Profile>(local, StorageKey, $"Profile/Get?id={ComponenteUtils.IdUser}");
+            return await http.GetCustomLocal<Profile>(local, StorageKey, $"Profile/Get");
         }
 
         public async static Task<Profile> Profile_GetView(this HttpClient http, ISessionStorageService session, string IdUserView)

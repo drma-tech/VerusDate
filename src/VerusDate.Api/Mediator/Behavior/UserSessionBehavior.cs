@@ -11,6 +11,11 @@ namespace VerusDate.Api.Mediator.Behavior
         {
             var idUser = "b9a10c8be2f244c0a625b78f05e30812";
 
+            if (request is MediatorQuery<TResponse> query)
+            {
+                query.IdLoggedUser = idUser;
+            }
+
             if (request is CosmosBase baseCommand)
             {
                 baseCommand.SetIdLoggedUser(idUser);

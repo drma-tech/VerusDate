@@ -17,6 +17,11 @@ namespace VerusDate.Shared.Model.Interaction
             this.IdUserInteraction = IdUserInteraction;
         }
 
+        public static string GetId(string IdLoggedUser, string IdUserInteraction)
+        {
+            return $"{IdLoggedUser}-{IdUserInteraction}";
+        }
+
         public string GetInvertedId()
         {
             return $"{IdUserInteraction}-{IdLoggedUser}";

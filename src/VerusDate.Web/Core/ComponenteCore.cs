@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace VerusDate.Web.Core
@@ -23,8 +24,10 @@ namespace VerusDate.Web.Core
     public static class ComponenteUtils
     {
         public static string IdUser { get; set; }
+
         public static string GetStorageKey(string key) => string.IsNullOrEmpty(IdUser) ? throw new ArgumentException(IdUser) : $"{key}({IdUser})";
-        public static string BaseApi => "https://green-grass-0dbf41210.azurestaticapps.net/api/";
+
+        public static string BaseApi(this HttpClient http) => http.BaseAddress.ToString().Contains("localhost") ? "http://localhost:7071/api/" : http.BaseAddress.ToString()+ "api/";
     }
 
     /// <summary>

@@ -31,7 +31,7 @@ namespace VerusDate.Web.Api
 
         public async static Task<string> Profile_GetView2(this HttpClient http, ISessionStorageService session, string IdUserView)
         {
-            var response = await http.GetAsync(ComponenteUtils.BaseApi + $"Profile/GetView?id={IdUserView}");
+            var response = await http.GetAsync(http.BaseApi() + $"Profile/GetView?id={IdUserView}");
 
             return await response.Content.ReadAsStringAsync();
 

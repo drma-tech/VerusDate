@@ -36,7 +36,7 @@ namespace VerusDate.Web.Core
 
             //return await local.GetItemAsync<T>(StorageKey);
 
-            var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
+            var response = await http.GetAsync(http.BaseApi() + requestUri);
 
             if (response.IsSuccessStatusCode)
             {
@@ -77,7 +77,7 @@ namespace VerusDate.Web.Core
 
             //return result;
 
-            var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
+            var response = await http.GetAsync(http.BaseApi() + requestUri);
 
             if (response.IsSuccessStatusCode)
             {

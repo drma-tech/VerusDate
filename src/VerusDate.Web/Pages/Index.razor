@@ -394,8 +394,9 @@
 
     protected override async Task LoadData()
     {
-        profile = await Http.Profile_Get(LocalStorage);
+        //profile = await Http.Profile_Get(LocalStorage);
 
-        var iduser = await Http.Profile_GetView(SessionStorage, "123");
+        var iduser = await Http.Profile_GetView2(SessionStorage, "123");
+        Console.WriteLine(iduser);
     }
 }

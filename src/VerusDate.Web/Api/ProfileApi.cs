@@ -29,6 +29,13 @@ namespace VerusDate.Web.Api
             return await http.GetCustomSession<Profile>(session, StorageKey + IdUserView, $"Profile/GetView?id={IdUserView}");
         }
 
+        public async static Task<string> Profile_GetView2(this HttpClient http, ISessionStorageService session, string IdUserView)
+        {
+            if (string.IsNullOrEmpty(IdUserView)) return null;
+
+            return await http.GetCustomSession<string>(session, StorageKey + IdUserView, $"Profile/GetView?id={IdUserView}");
+        }
+
         //public List<AffinityVM> GetAffinity(ProfileLooking profUser, Profile profView)
         //{
         //    if (profUser == null) throw new ArgumentNullException(nameof(profUser));

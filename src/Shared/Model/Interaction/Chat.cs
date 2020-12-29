@@ -4,16 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.Model
+namespace VerusDate.Shared.Model.Interaction
 {
-    public class Chat : ModelBase
+    public class Chat : CosmosBase
     {
-        public List<ChatItem> Itens { get; set; } = new List<ChatItem>();
-
-        public override void LoadDefatultData()
+        public Chat() : base("Chat")
         {
-            throw new NotImplementedException();
         }
+
+        public List<ChatItem> Itens { get; set; } = new List<ChatItem>();
     }
 
     public class ChatItem

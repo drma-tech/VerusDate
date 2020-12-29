@@ -20,21 +20,25 @@ namespace VerusDate.Web.Core
         /// <returns></returns>
         public async static Task<T> GetCustomLocal<T>(this HttpClient http, ILocalStorageService local, string StorageKey, string requestUri) where T : class
         {
-            if (!await local.ContainKeyAsync(StorageKey))
-            {
-                var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
+            //if (!await local.ContainKeyAsync(StorageKey))
+            //{
+            //    var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    await local.SetItemAsync(StorageKey, await response.Content.ReadFromJsonAsync<T>());
-                }
-                else
-                {
-                    throw new NotificationException(response);
-                }
-            }
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        await local.SetItemAsync(StorageKey, await response.Content.ReadFromJsonAsync<T>());
+            //    }
+            //    else
+            //    {
+            //        throw new NotificationException(response);
+            //    }
+            //}
 
-            return await local.GetItemAsync<T>(StorageKey);
+            //return await local.GetItemAsync<T>(StorageKey);
+
+            var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
+
+            return await response.Content.ReadFromJsonAsync<T>();
         }
 
         /// <summary>
@@ -48,23 +52,27 @@ namespace VerusDate.Web.Core
         /// <returns></returns>
         public async static Task<T> GetCustomSession<T>(this HttpClient http, ISessionStorageService session, string StorageKey, string requestUri) where T : class
         {
-            var result = await session.GetItemAsync<T>(StorageKey);
+            //var result = await session.GetItemAsync<T>(StorageKey);
 
-            if (result == null)
-            {
-                var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
+            //if (result == null)
+            //{
+            //    var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    await session.SetItemAsync(StorageKey, await response.Content.ReadFromJsonAsync<T>());
-                }
-                else
-                {
-                    throw new NotificationException(response);
-                }
-            }
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        await session.SetItemAsync(StorageKey, await response.Content.ReadFromJsonAsync<T>());
+            //    }
+            //    else
+            //    {
+            //        throw new NotificationException(response);
+            //    }
+            //}
 
-            return result;
+            //return result;
+
+            var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
+
+            return await response.Content.ReadFromJsonAsync<T>();
         }
     }
 }

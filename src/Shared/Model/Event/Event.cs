@@ -4,19 +4,23 @@ using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.Model
+namespace VerusDate.Shared.Model.Event
 {
-    public class Event : ModelBase
+    public class Event : CosmosBase
     {
-        public string IdEvent { get; set; }
+        public Event() : base("Event")
+        {
+        }
 
-        public string IdUser { get; set; }
+        public DateTimeOffset? DtInsert { get; set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset? DtUpdate { get; set; }
+        public string IdUserOwner { get; set; }
 
         [Display(Name = "Data Início")]
-        public DateTimeOffset DtStart { get; private set; }
+        public DateTimeOffset DtStart { get; private set; } = DateTimeOffset.UtcNow.AddDays(7);
 
         [Display(Name = "Data Fim")]
-        public DateTimeOffset DtEnd { get; private set; }
+        public DateTimeOffset DtEnd { get; private set; } = DateTimeOffset.UtcNow.AddDays(7).AddHours(3);
 
         [Display(Name = "Tipo de Evento")]
         public EventType EventType { get; private set; }
@@ -25,10 +29,10 @@ namespace VerusDate.Shared.Model
         public string Location { get; private set; }
 
         [Display(Name = "Idade (Min - Máx)")]
-        public int MinimalAge { get; private set; }
+        public int MinimalAge { get; private set; } = 18;
 
         [Display(Name = "Idade (Min - Máx)")]
-        public int MaxAge { get; private set; }
+        public int MaxAge { get; private set; } = 40;
 
         [Display(Name = "Intenções")]
         public IReadOnlyList<Intent> Intent { get; private set; } = new List<Intent>();
@@ -39,20 +43,12 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Equilibrar os gêneros?")]
         public bool GenderDivision { get; private set; }
 
-        public override void LoadDefatultData()
-        {
-            DtStart = DateTimeOffset.UtcNow.AddDays(7);
-            DtEnd = DateTimeOffset.UtcNow.AddDays(7).AddHours(3);
-            MinimalAge = 18;
-            MaxAge = 40;
-        }
-
         public void NewBlindDate(DateTimeOffset DtStart, string Location, int MinimalAge, int MaxAge, Intent[] Intent,
             SexualOrientation[] SexualOrientation, bool GenderDivision)
         {
             this.DtStart = DtStart;
-            this.DtEnd = DtStart.AddDays(7);
-            this.EventType = EventType.BlindDate;
+            DtEnd = DtStart.AddDays(7);
+            EventType = EventType.BlindDate;
             this.Location = Location;
             this.MinimalAge = MinimalAge;
             this.MaxAge = MaxAge;
@@ -65,8 +61,8 @@ namespace VerusDate.Shared.Model
             SexualOrientation[] SexualOrientation, bool GenderDivision)
         {
             this.DtStart = DtStart;
-            this.DtEnd = DtStart.AddHours(1);
-            this.EventType = EventType.SpeedDating;
+            DtEnd = DtStart.AddHours(1);
+            EventType = EventType.SpeedDating;
             this.Location = Location;
             this.MinimalAge = MinimalAge;
             this.MaxAge = MaxAge;
@@ -80,7 +76,7 @@ namespace VerusDate.Shared.Model
         {
             this.DtStart = DtStart;
             this.DtEnd = DtEnd;
-            this.EventType = EventType.GroupDate;
+            EventType = EventType.GroupDate;
             this.Location = Location;
             this.MinimalAge = MinimalAge;
             this.MaxAge = MaxAge;

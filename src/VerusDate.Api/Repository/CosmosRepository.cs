@@ -36,14 +36,16 @@ namespace VerusDate.Api.Repository
 
         public async Task<T> Get<T>(string id, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase
         {
-            var response = await Container.ReadItemAsync<T>(id, new PartitionKey(partitionKeyValue), null, cancellationToken);
+            try
+            {
+                var response = await Container.ReadItemAsync<T>(id, new PartitionKey(partitionKeyValue), null, cancellationToken);
 
-            return response.Resource;
-        }
-
-        public async Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken) where T : CosmosBase
-        {
-            return await Query(predicate, null, cancellationToken);
+                return response.Resource;
+            }
+            catch (CosmosException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return null;
+            }
         }
 
         private QueryRequestOptions GetDefaultOptions(string partitionKeyValue)
@@ -52,6 +54,11 @@ namespace VerusDate.Api.Repository
                 return null;
             else
                 return new QueryRequestOptions() { PartitionKey = new PartitionKey(partitionKeyValue) };
+        }
+
+        public async Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken) where T : CosmosBase
+        {
+            return await Query(predicate, null, cancellationToken);
         }
 
         public async Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase

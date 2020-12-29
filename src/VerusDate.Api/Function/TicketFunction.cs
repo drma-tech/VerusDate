@@ -10,7 +10,6 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Ticket;
-using VerusDate.Api.Mediator.Queries.Ticket;
 
 namespace VerusDate.Api.Function
 {
@@ -23,45 +22,45 @@ namespace VerusDate.Api.Function
             _mediator = mediator;
         }
 
-        [FunctionName("TicketGetList")]
-        public async Task<IActionResult> GetList(
-            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Ticket/GetList")] HttpRequest req,
-            ILogger log)
-        {
-            try
-            {
-                var command = await JsonSerializer.DeserializeAsync<TicketGetListCommand>(req.Body);
+        //[FunctionName("TicketGetList")]
+        //public async Task<IActionResult> GetList(
+        //    [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Ticket/GetList")] HttpRequest req,
+        //    ILogger log)
+        //{
+        //    try
+        //    {
+        //        var command = await JsonSerializer.DeserializeAsync<TicketGetListCommand>(req.Body);
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 
-                return new OkObjectResult(result);
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, null, req.Query.ToList());
-                return new BadRequestObjectResult(ex.Message);
-            }
-        }
+        //        return new OkObjectResult(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.LogError(ex, null, req.Query.ToList());
+        //        return new BadRequestObjectResult(ex.Message);
+        //    }
+        //}
 
-        [FunctionName("TicketGetMyVotes")]
-        public async Task<IActionResult> GetMyVotes(
-            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Ticket/GetMyVotes")] HttpRequest req,
-            ILogger log)
-        {
-            try
-            {
-                var command = await JsonSerializer.DeserializeAsync<TicketGetMyVotesCommand>(req.Body);
+        //[FunctionName("TicketGetMyVotes")]
+        //public async Task<IActionResult> GetMyVotes(
+        //    [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Ticket/GetMyVotes")] HttpRequest req,
+        //    ILogger log)
+        //{
+        //    try
+        //    {
+        //        var command = await JsonSerializer.DeserializeAsync<TicketGetMyVotesCommand>(req.Body);
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 
-                return new OkObjectResult(result);
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, null, req.Query.ToList());
-                return new BadRequestObjectResult(ex.Message);
-            }
-        }
+        //        return new OkObjectResult(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.LogError(ex, null, req.Query.ToList());
+        //        return new BadRequestObjectResult(ex.Message);
+        //    }
+        //}
 
         [FunctionName("TicketInsert")]
         public async Task<IActionResult> Insert(

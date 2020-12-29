@@ -1,10 +1,11 @@
 ﻿using Blazored.LocalStorage;
+using Blazored.SessionStorage;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using VerusDate.Shared.Model;
+using VerusDate.Shared.Model.Interaction;
 using VerusDate.Shared.ModelQuery;
 using VerusDate.Web.Core;
 
@@ -12,36 +13,38 @@ namespace VerusDate.Web.Api
 {
     public static class InterationApi
     {
-        public async static Task<Interaction> Interation_Get(this HttpClient http, string IdUserInteraction)
+        public static string StorageKey => ComponenteUtils.GetStorageKey("Interation");
+
+        public async static Task<Interaction> Interation_Get(this HttpClient http, ISessionStorageService session, string IdUserInteraction)
         {
             if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
 
-            return await http.GetCustom<Interaction>($"Interaction/Get/{IdUserInteraction}");
+            return await http.GetCustomSession<Interaction>(session, StorageKey, $"Interaction/Get/{IdUserInteraction}");
         }
 
-        public async static Task<List<Interaction>> Interation_GetList(this HttpClient http)
+        public async static Task<List<Interaction>> Interation_GetList(this HttpClient http, ISessionStorageService session)
         {
-            return await http.ListCustom<Interaction>("Interaction/GetList");
+            return await http.GetCustomSession<List<Interaction>>(session, StorageKey, "Interaction/GetList");
         }
 
-        public async static Task<List<ProfileBasic>> Interation_GetLikes(this HttpClient http)
+        public async static Task<List<ProfileBasic>> Interation_GetLikes(this HttpClient http, ISessionStorageService session)
         {
-            return await http.ListCustom<ProfileBasic>("Interaction/GetLikes");
+            return await http.GetCustomSession<List<ProfileBasic>>(session, StorageKey, "Interaction/GetLikes");
         }
 
-        public async static Task<List<ProfileBasic>> Interation_GetBlinks(this HttpClient http)
+        public async static Task<List<ProfileBasic>> Interation_GetBlinks(this HttpClient http, ISessionStorageService session)
         {
-            return await http.ListCustom<ProfileBasic>("Interaction/GetBlinks");
+            return await http.GetCustomSession<List<ProfileBasic>>(session, StorageKey, "Interaction/GetBlinks");
         }
 
-        public async static Task<List<ProfileBasic>> Interation_GetNewMatches(this HttpClient http)
+        public async static Task<List<ProfileBasic>> Interation_GetNewMatches(this HttpClient http, ISessionStorageService session)
         {
-            return await http.ListCustom<ProfileBasic>("Interaction/GetNewMatches");
+            return await http.GetCustomSession<List<ProfileBasic>>(session, StorageKey, "Interaction/GetNewMatches");
         }
 
-        public async static Task<List<ProfileChatList>> Interation_GetChatList(this HttpClient http)
+        public async static Task<List<ProfileChatList>> Interation_GetChatList(this HttpClient http, ISessionStorageService session)
         {
-            return await http.ListCustom<ProfileChatList>("Interaction/GetChatList");
+            return await http.GetCustomSession<List<ProfileChatList>>(session, StorageKey, "Interaction/GetChatList");
         }
 
         public async static Task<HttpResponseMessage> Interation_Blink(this HttpClient http, ILocalStorageService storage, string IdUserInteraction)

@@ -25,7 +25,7 @@ namespace VerusDate.Api.Function
 
         [FunctionName("ChatGet")]
         public async Task<IActionResult> Get(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Chat/get")] HttpRequest req,
+           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Chat/Get")] HttpRequest req,
            ILogger log)
         {
             try
@@ -44,14 +44,14 @@ namespace VerusDate.Api.Function
             }
         }
 
-        [FunctionName("ChatPost")]
-        public async Task<IActionResult> Post(
-            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Chat/post")] HttpRequest req,
+        [FunctionName("ChatSync")]
+        public async Task<IActionResult> Sync(
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Chat/Sync")] HttpRequest req,
             ILogger log)
         {
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<ChatInsertCommand>(req.Body);
+                var command = await JsonSerializer.DeserializeAsync<ChatSyncCommand>(req.Body);
 
                 var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 

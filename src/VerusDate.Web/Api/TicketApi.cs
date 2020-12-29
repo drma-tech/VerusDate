@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using VerusDate.Shared.Model;
+using VerusDate.Shared.Model.Ticket;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api

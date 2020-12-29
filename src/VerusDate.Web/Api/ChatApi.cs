@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using VerusDate.Shared.Model;
+using VerusDate.Shared.Model.Interaction;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api

@@ -1,37 +1,34 @@
 ﻿using MediatR;
-using Microsoft.Azure.CosmosRepository;
 using System.Threading;
 using System.Threading.Tasks;
+using VerusDate.Api.Core.Interfaces;
 
 namespace VerusDate.Server.Mediator.Commands.Interaction
 {
-    public class InteractionDeslikeCommand : Shared.Model.Interaction, IRequest<bool> { }
+    public class InteractionDeslikeCommand : Shared.Model.Interaction.Interaction, IRequest<bool> { }
 
     public class InteractionDeslikeHandler : IRequestHandler<InteractionDeslikeCommand, bool>
     {
-        private readonly IRepository<Shared.Model.Interaction> _repo;
+        private readonly IRepository _repo;
 
-        public InteractionDeslikeHandler(IRepositoryFactory factory)
+        public InteractionDeslikeHandler(IRepository repo)
         {
-            _repo = factory.RepositoryOf<Shared.Model.Interaction>();
+            _repo = repo;
         }
 
         public async Task<bool> Handle(InteractionDeslikeCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.GetAsync(request.IdPrimary, request.IdSecondary, cancellationToken);
+            var obj = await _repo.Get<Shared.Model.Interaction.Interaction>(request.Id, request.Key, cancellationToken);
 
             if (obj == null)
             {
-                obj = new Shared.Model.Interaction() { IdPrimary = request.IdPrimary, IdSecondary = request.IdSecondary };
-                obj.SetId(request.IdPrimary, request.IdSecondary);
-                obj.ExecuteDeslike();
-                return await _repo.CreateAsync(obj, cancellationToken) != null;
+                request.SetId(request.IdLoggedUser, request.IdUserInteraction);
+                obj = await _repo.Add(request, request.Id, cancellationToken);
             }
-            else
-            {
-                obj.ExecuteDeslike();
-                return await _repo.UpdateAsync(obj, cancellationToken) != null;
-            }
+
+            obj.ExecuteLike();
+
+            return await _repo.Update(obj, request.Id, request.Id, cancellationToken) != null;
         }
     }
 }

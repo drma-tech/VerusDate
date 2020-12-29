@@ -1,33 +1,35 @@
 ﻿using MediatR;
-using Microsoft.Azure.CosmosRepository;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
+using VerusDate.Api.Core.Interfaces;
 
 namespace VerusDate.Api.Mediator.Command.Store
 {
-    public class StoreExchangeFoodCommand : Shared.Model.Gamification, IRequest<Shared.Model.Gamification>
+    public class StoreExchangeFoodCommand : IRequest<Shared.Model.Profile.Profile>
     {
+        public string Id { get; set; }
+
         [Required]
         public int QtdDiamond { get; set; }
     }
 
-    public class StoreExchangeFoodHandler : IRequestHandler<StoreExchangeFoodCommand, Shared.Model.Gamification>
+    public class StoreExchangeFoodHandler : IRequestHandler<StoreExchangeFoodCommand, Shared.Model.Profile.Profile>
     {
-        private readonly IRepository<Shared.Model.Gamification> _repo;
+        private readonly IRepository _repo;
 
-        public StoreExchangeFoodHandler(IRepositoryFactory factory)
+        public StoreExchangeFoodHandler(IRepository repo)
         {
-            _repo = factory.RepositoryOf<Shared.Model.Gamification>();
+            _repo = repo;
         }
 
-        public async Task<Shared.Model.Gamification> Handle(StoreExchangeFoodCommand request, CancellationToken cancellationToken)
+        public async Task<Shared.Model.Profile.Profile> Handle(StoreExchangeFoodCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.GetAsync(request.Id, cancellationToken: cancellationToken);
+            var obj = await _repo.Get<Shared.Model.Profile.Profile>(request.Id, request.Id, cancellationToken);
 
-            obj.ExchangeFood(request.QtdDiamond);
+            obj.Gamification.ExchangeFood(request.QtdDiamond);
 
-            return await _repo.UpdateAsync(obj, cancellationToken);
+            return await _repo.Update(obj, request.Id, request.Id, cancellationToken);
         }
     }
 }

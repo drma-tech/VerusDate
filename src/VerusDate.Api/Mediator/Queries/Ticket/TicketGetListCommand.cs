@@ -1,25 +1,25 @@
 ﻿using MediatR;
-using Microsoft.Azure.CosmosRepository;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using VerusDate.Api.Core.Interfaces;
 
 namespace VerusDate.Api.Mediator.Queries.Ticket
 {
-    public class TicketGetListCommand : IRequest<IEnumerable<Shared.Model.Ticket>> { }
+    public class TicketGetListCommand : IRequest<List<Shared.Model.Ticket.Ticket>> { }
 
-    public class TicketGetListHandler : IRequestHandler<TicketGetListCommand, IEnumerable<Shared.Model.Ticket>>
+    public class TicketGetListHandler : IRequestHandler<TicketGetListCommand, List<Shared.Model.Ticket.Ticket>>
     {
-        private readonly IRepository<Shared.Model.Ticket> _repo;
+        private readonly IRepository _repo;
 
-        public TicketGetListHandler(IRepositoryFactory factory)
+        public TicketGetListHandler(IRepository repo)
         {
-            _repo = factory.RepositoryOf<Shared.Model.Ticket>();
+            _repo = repo;
         }
 
-        public async Task<IEnumerable<Shared.Model.Ticket>> Handle(TicketGetListCommand request, CancellationToken cancellationToken)
+        public async Task<List<Shared.Model.Ticket.Ticket>> Handle(TicketGetListCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.GetByQueryAsync("SELECT * FROM Ticket", cancellationToken);
+            return await _repo.Query<Shared.Model.Ticket.Ticket>(null, cancellationToken);
         }
     }
 }

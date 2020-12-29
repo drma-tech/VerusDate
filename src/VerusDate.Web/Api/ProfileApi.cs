@@ -1,7 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using Blazored.SessionStorage;
-using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using VerusDate.Shared.Model.Profile;
 using VerusDate.Web.Core;
@@ -19,14 +19,14 @@ namespace VerusDate.Web.Api
 
         public async static Task<Profile> Profile_Get(this HttpClient http, ILocalStorageService local)
         {
-            return await http.GetCustomLocal<Profile>(local, StorageKey, $"profile/get?id={ComponenteUtils.IdUser}");
+            return await http.GetCustomLocal<Profile>(local, StorageKey, $"Profile/Get?id={ComponenteUtils.IdUser}");
         }
 
         public async static Task<Profile> Profile_GetView(this HttpClient http, ISessionStorageService session, string IdUserView)
         {
             if (string.IsNullOrEmpty(IdUserView)) return null;
 
-            return await http.GetCustomSession<Profile>(session, StorageKey + IdUserView, $"profile/get?id={IdUserView}");
+            return await http.GetCustomSession<Profile>(session, StorageKey + IdUserView, $"Profile/GetView?id={IdUserView}");
         }
 
         //public List<AffinityVM> GetAffinity(ProfileLooking profUser, Profile profView)
@@ -149,33 +149,47 @@ namespace VerusDate.Web.Api
         //    return await http.ListCustom<Profile>("Profile/ListSearch");
         //}
 
-        //public async static Task<HttpResponseMessage> Profile_Add(this HttpClient http, ILocalStorageService storage, Profile obj, string id)
-        //{
-        //    var response = await http.PostAsJsonAsync("profile/post", obj);
+        public async static Task<HttpResponseMessage> Profile_Add(this HttpClient http, ILocalStorageService storage, Profile obj, string id)
+        {
+            var response = await http.PostAsJsonAsync("Profile/Add", obj);
 
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        obj.Id = id; //TODO: descobrir outra maneira de saber se é insert ou update, pq depende desse campo
-        //        await storage.SetItemAsync(StorageKey, obj);
-        //        //await ProfileValidationApi.ClearCache(storage);
-        //        await GamificationApi.ClearCache(storage);
-        //    }
+            if (response.IsSuccessStatusCode)
+            {
+                obj.Id = id; //TODO: descobrir outra maneira de saber se é insert ou update, pq depende desse campo
+                await storage.SetItemAsync(StorageKey, obj);
+                //await ProfileValidationApi.ClearCache(storage);
+                await GamificationApi.ClearCache(storage);
+            }
 
-        //    return response;
-        //}
+            return response;
+        }
 
-        //public async Task<HttpResponseMessage> Profile_Update(this HttpClient http, ILocalStorageService storage, Profile obj)
-        //{
-        //    var response = await http.PostAsJsonAsync("Profile/Update", obj);
+        public async static Task<HttpResponseMessage> Profile_Update(this HttpClient http, ILocalStorageService storage, Profile obj)
+        {
+            var response = await http.PostAsJsonAsync("Profile/Update", obj);
 
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        await storage.SetItemAsync(StorageKey, obj);
-        //        //await ProfileValidationApi.ClearCache(storage);
-        //        await GamificationApi.ClearCache(storage);
-        //    }
+            if (response.IsSuccessStatusCode)
+            {
+                await storage.SetItemAsync(StorageKey, obj);
+                //await ProfileValidationApi.ClearCache(storage);
+                await GamificationApi.ClearCache(storage);
+            }
 
-        //    return response;
-        //}
+            return response;
+        }
+
+        public async static Task<HttpResponseMessage> Profile_UpdateLooking(this HttpClient http, ILocalStorageService storage, ProfileLooking obj)
+        {
+            var response = await http.PostAsJsonAsync("Profile/UpdateLooking", obj);
+
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    await storage.SetItemAsync(StorageKey, obj);
+            //}
+
+            return response;
+        }
+
+      
     }
 }

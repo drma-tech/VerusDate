@@ -1,12 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.Model
+namespace VerusDate.Shared.Model.Ticket
 {
-    public class Ticket : ModelBase
+    public class Ticket : CosmosBase
     {
-        public string IdOwner { get; set; }
+        public Ticket() : base("Ticket")
+        {
+        }
+
+        public DateTimeOffset? DtInsert { get; set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset? DtUpdate { get; set; }
+        public string IdUserOwner { get; set; }
 
         [Display(Name = "Tipo")]
         public TicketType TicketType { get; set; }
@@ -20,23 +27,18 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Total de Votos")]
         public int TotalVotes { get; private set; }
 
-        public override void LoadDefatultData()
-        {
-            TicketStatus = TicketStatus.Published;
-        }
-
         public void ChangeStatus(TicketStatus ticketStatus)
         {
             TicketStatus = ticketStatus;
 
-            base.Update();
+            DtUpdate = DateTimeOffset.UtcNow;
         }
 
         public void Vote()
         {
             TotalVotes++;
 
-            base.Update();
+            DtUpdate = DateTimeOffset.UtcNow;
         }
     }
 }

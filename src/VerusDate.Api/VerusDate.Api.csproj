@@ -9,57 +9,56 @@
     <Compile Remove="Mediator\Command\Interaction\**" />
     <Compile Remove="Mediator\Command\ProfileLooking\**" />
     <Compile Remove="Mediator\Command\Store\**" />
-    <Compile Remove="Mediator\Command\Ticket\**" />
     <Compile Remove="Mediator\Queries\Badge\**" />
     <Compile Remove="Mediator\Queries\Chat\**" />
     <Compile Remove="Mediator\Queries\Gamification\**" />
     <Compile Remove="Mediator\Queries\GlobalInteraction\**" />
     <Compile Remove="Mediator\Queries\Interaction\**" />
     <Compile Remove="Mediator\Queries\ProfileLooking\**" />
-    <Compile Remove="Mediator\Queries\Ticket\**" />
     <EmbeddedResource Remove="Mediator\Command\Badge\**" />
     <EmbeddedResource Remove="Mediator\Command\Chat\**" />
     <EmbeddedResource Remove="Mediator\Command\Interaction\**" />
     <EmbeddedResource Remove="Mediator\Command\ProfileLooking\**" />
     <EmbeddedResource Remove="Mediator\Command\Store\**" />
-    <EmbeddedResource Remove="Mediator\Command\Ticket\**" />
     <EmbeddedResource Remove="Mediator\Queries\Badge\**" />
     <EmbeddedResource Remove="Mediator\Queries\Chat\**" />
     <EmbeddedResource Remove="Mediator\Queries\Gamification\**" />
     <EmbeddedResource Remove="Mediator\Queries\GlobalInteraction\**" />
     <EmbeddedResource Remove="Mediator\Queries\Interaction\**" />
     <EmbeddedResource Remove="Mediator\Queries\ProfileLooking\**" />
-    <EmbeddedResource Remove="Mediator\Queries\Ticket\**" />
     <None Remove="Mediator\Command\Badge\**" />
     <None Remove="Mediator\Command\Chat\**" />
     <None Remove="Mediator\Command\Interaction\**" />
     <None Remove="Mediator\Command\ProfileLooking\**" />
     <None Remove="Mediator\Command\Store\**" />
-    <None Remove="Mediator\Command\Ticket\**" />
     <None Remove="Mediator\Queries\Badge\**" />
     <None Remove="Mediator\Queries\Chat\**" />
     <None Remove="Mediator\Queries\Gamification\**" />
     <None Remove="Mediator\Queries\GlobalInteraction\**" />
     <None Remove="Mediator\Queries\Interaction\**" />
     <None Remove="Mediator\Queries\ProfileLooking\**" />
-    <None Remove="Mediator\Queries\Ticket\**" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="App\GamificationApp.cs" />
     <Compile Remove="Core\Hubs\ChatHub.cs" />
     <Compile Remove="Function\BadgeFunction.cs" />
-    <Compile Remove="Function\ChatFunction.cs" />
     <Compile Remove="Function\GamificationFunction.cs" />
-    <Compile Remove="Function\InteractionFunction.cs" />
     <Compile Remove="Function\ProfileLookingFunction.cs" />
-    <Compile Remove="Function\StorageFunction.cs" />
-    <Compile Remove="Function\StoreFunction.cs" />
-    <Compile Remove="Function\TicketFunction.cs" />
     <Compile Remove="Mediator\Behavior\UserSessionBehavior.cs" />
-    <Compile Remove="Mediator\Command\Profile\UploadPhotoGalleryCommand.cs" />
-    <Compile Remove="Mediator\Command\Profile\UploadPhotoValidationCommand.cs" />
     <Compile Remove="Mediator\Queries\Profile\ProfileListMatchCommand.cs" />
     <Compile Remove="Mediator\Queries\Profile\ProfileListSearchCommand.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Mediator\Command\Chat\ChatSyncCommand.cs" />
+    <Compile Include="Mediator\Command\Interaction\InteractionBlinkCommand.cs" />
+    <Compile Include="Mediator\Command\Interaction\InteractionBlockCommand.cs" />
+    <Compile Include="Mediator\Command\Interaction\InteractionDeslikeCommand.cs" />
+    <Compile Include="Mediator\Command\Interaction\InteractionGenerateChatCommand.cs" />
+    <Compile Include="Mediator\Command\Interaction\InteractionLikeCommand.cs" />
+    <Compile Include="Mediator\Command\Store\StoreExchangeFoodCommand.cs" />
+    <Compile Include="Mediator\Queries\Chat\ChatGetCommand.cs" />
+    <Compile Include="Mediator\Queries\Interaction\InteractionGetCommand.cs" />
+    <Compile Include="Mediator\Queries\Interaction\InteractionGetListCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.7.0" />

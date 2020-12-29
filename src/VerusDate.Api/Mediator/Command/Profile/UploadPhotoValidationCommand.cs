@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using Microsoft.Azure.CosmosRepository;
 using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
+using VerusDate.Api.Core.Interfaces;
 using VerusDate.Server.Core.Helper;
 using VerusDate.Shared.Helper;
 
@@ -18,33 +18,33 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
     public class UploadPhotoVaildationHandler : IRequestHandler<UploadPhotoValidationCommand, bool>
     {
-        private readonly IRepository<Shared.Model.Profile.Profile> _repo;
+        private readonly IRepository _repo;
         private readonly StorageHelper storageHelper;
 
-        public UploadPhotoVaildationHandler(IRepositoryFactory factory, StorageHelper storageHelper)
+        public UploadPhotoVaildationHandler(IRepository repo, StorageHelper storageHelper)
         {
-            _repo = factory.RepositoryOf<Shared.Model.Profile.Profile>();
+            _repo = repo;
             this.storageHelper = storageHelper;
         }
 
         public async Task<bool> Handle(UploadPhotoValidationCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.GetAsync(request.Id, cancellationToken: cancellationToken);
-            if (obj == null || string.IsNullOrEmpty(obj.MainPhoto)) throw new NotificationException("Foto para validação não encontrada. Favor, inserir primeiro sua foto de rosto.");
+            var obj = await _repo.Get<Shared.Model.Profile.Profile>(request.Id, request.Id, cancellationToken);
+            if (obj == null || string.IsNullOrEmpty(obj.Photo.Main)) throw new NotificationException("Foto para validação não encontrada. Favor, inserir primeiro sua foto de rosto.");
 
             var NewPhotoId = Guid.NewGuid().ToString();
             //obj.PhotoFaceValidation = NewPhotoId + ".jpg";
 
             using (var ms = new MemoryStream(request.Stream))
             {
-                var validated = await FaceHelper.IsPhotoValid(obj.MainPhoto, ms);
+                var validated = await FaceHelper.IsPhotoValid(obj.Photo.Main, ms);
 
                 if (validated)
                 {
                     await storageHelper.UploadPhoto(StorageHelper.PhotoType.PhotoValidation, ms, NewPhotoId);
                     //await storageHelper.DeletePhoto(StorageHelper.PhotoType.PhotoValidation, obj.PhotoFaceValidation);
 
-                    await _repo.UpdateAsync(obj, cancellationToken);
+                    await _repo.Update(obj, request.Id, request.Id, cancellationToken);
                     //await _appValidation.ValidatePhotoFace(request.Id, true, cancellationToken);
 
                     return true;

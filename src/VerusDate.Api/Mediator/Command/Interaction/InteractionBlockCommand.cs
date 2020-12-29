@@ -1,25 +1,25 @@
 ﻿using MediatR;
-using Microsoft.Azure.CosmosRepository;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using VerusDate.Api.Core.Interfaces;
 
 namespace VerusDate.Server.Mediator.Commands.Interaction
 {
-    public class InteractionBlockCommand : Shared.Model.Interaction, IRequest<bool> { }
+    public class InteractionBlockCommand : Shared.Model.Interaction.Interaction, IRequest<bool> { }
 
     public class InteractionBlockHandler : IRequestHandler<InteractionBlockCommand, bool>
     {
-        private readonly IRepository<Shared.Model.Interaction> _repo;
+        private readonly IRepository _repo;
 
-        public InteractionBlockHandler(IRepositoryFactory factory)
+        public InteractionBlockHandler(IRepository repo)
         {
-            _repo = factory.RepositoryOf<Shared.Model.Interaction>();
+            _repo = repo;
         }
 
         public async Task<bool> Handle(InteractionBlockCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.GetAsync(request.Id, request.IdPrimary, cancellationToken);
+            var obj = await _repo.Get<Shared.Model.Interaction.Interaction>(request.Id, request.Key, cancellationToken);
 
             if (obj == null)
             {
@@ -28,7 +28,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
             else
             {
                 obj.ExecuteBlock();
-                return await _repo.UpdateAsync(obj, cancellationToken) != null;
+                return await _repo.Update(obj, request.Id, request.Key, cancellationToken) != null;
             }
         }
     }

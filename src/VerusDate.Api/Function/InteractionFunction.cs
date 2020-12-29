@@ -12,7 +12,7 @@ using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Interaction;
 using VerusDate.Api.Mediator.Queries.Interaction;
 using VerusDate.Server.Mediator.Commands.Interaction;
-using VerusDate.Server.Mediator.Queries.Interaction;
+using VerusDate.Shared.Seed;
 
 namespace VerusDate.Api.Function
 {
@@ -45,105 +45,105 @@ namespace VerusDate.Api.Function
             }
         }
 
-        [FunctionName("InteractionGetList")]
-        public async Task<IActionResult> GetList(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetList")] HttpRequest req,
-           ILogger log)
-        {
-            try
-            {
-                var command = await JsonSerializer.DeserializeAsync<InteractionGetListCommand>(req.Body);
+        //[FunctionName("InteractionGetList")]
+        //public async Task<IActionResult> GetList(
+        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetList")] HttpRequest req,
+        //   ILogger log)
+        //{
+        //    try
+        //    {
+        //        var command = await JsonSerializer.DeserializeAsync<InteractionGetListCommand>(req.Body);
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 
-                return new OkObjectResult(result);
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, null, req.Query.ToList());
-                return new BadRequestObjectResult(ex.Message);
-            }
-        }
+        //        return new OkObjectResult(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.LogError(ex, null, req.Query.ToList());
+        //        return new BadRequestObjectResult(ex.Message);
+        //    }
+        //}
 
-        [FunctionName("InteractionGetLikes")]
-        public async Task<IActionResult> GetLikes(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetLikes")] HttpRequest req,
-           ILogger log)
-        {
-            try
-            {
-                var command = await JsonSerializer.DeserializeAsync<InteractionGetLikesCommand>(req.Body);
+        //[FunctionName("InteractionGetLikes")]
+        //public async Task<IActionResult> GetLikes(
+        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetLikes")] HttpRequest req,
+        //   ILogger log)
+        //{
+        //    try
+        //    {
+        //        var command = await JsonSerializer.DeserializeAsync<InteractionGetLikesCommand>(req.Body);
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 
-                return new OkObjectResult(result);
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, null, req.Query.ToList());
-                return new BadRequestObjectResult(ex.Message);
-            }
-        }
+        //        return new OkObjectResult(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.LogError(ex, null, req.Query.ToList());
+        //        return new BadRequestObjectResult(ex.Message);
+        //    }
+        //}
 
-        [FunctionName("InteractionGetBlinks")]
-        public async Task<IActionResult> GetBlinks(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetBlinks")] HttpRequest req,
-           ILogger log)
-        {
-            try
-            {
-                var command = await JsonSerializer.DeserializeAsync<InteractionGetBlinksCommand>(req.Body);
+        //[FunctionName("InteractionGetBlinks")]
+        //public async Task<IActionResult> GetBlinks(
+        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetBlinks")] HttpRequest req,
+        //   ILogger log)
+        //{
+        //    try
+        //    {
+        //        var command = await JsonSerializer.DeserializeAsync<InteractionGetBlinksCommand>(req.Body);
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 
-                return new OkObjectResult(result);
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, null, req.Query.ToList());
-                return new BadRequestObjectResult(ex.Message);
-            }
-        }
+        //        return new OkObjectResult(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.LogError(ex, null, req.Query.ToList());
+        //        return new BadRequestObjectResult(ex.Message);
+        //    }
+        //}
 
-        [FunctionName("InteractionGetNewMatches")]
-        public async Task<IActionResult> GetNewMatches(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetNewMatches")] HttpRequest req,
-           ILogger log)
-        {
-            try
-            {
-                var command = await JsonSerializer.DeserializeAsync<InteractionGetNewMatchesCommand>(req.Body);
+        //[FunctionName("InteractionGetNewMatches")]
+        //public async Task<IActionResult> GetNewMatches(
+        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetNewMatches")] HttpRequest req,
+        //   ILogger log)
+        //{
+        //    try
+        //    {
+        //        var command = await JsonSerializer.DeserializeAsync<InteractionGetNewMatchesCommand>(req.Body);
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 
-                return new OkObjectResult(result);
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, null, req.Query.ToList());
-                return new BadRequestObjectResult(ex.Message);
-            }
-        }
+        //        return new OkObjectResult(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.LogError(ex, null, req.Query.ToList());
+        //        return new BadRequestObjectResult(ex.Message);
+        //    }
+        //}
 
-        [FunctionName("InteractionGetChatList")]
-        public async Task<IActionResult> GetChatList(
-          [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetChatList")] HttpRequest req,
-          ILogger log)
-        {
-            try
-            {
-                var command = await JsonSerializer.DeserializeAsync<InteractionGetChatListCommand>(req.Body);
+        //[FunctionName("InteractionGetChatList")]
+        //public async Task<IActionResult> GetChatList(
+        //  [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetChatList")] HttpRequest req,
+        //  ILogger log)
+        //{
+        //    try
+        //    {
+        //        var command = await JsonSerializer.DeserializeAsync<InteractionGetChatListCommand>(req.Body);
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 
-                return new OkObjectResult(result);
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, null, req.Query.ToList());
-                return new BadRequestObjectResult(ex.Message);
-            }
-        }
+        //        return new OkObjectResult(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.LogError(ex, null, req.Query.ToList());
+        //        return new BadRequestObjectResult(ex.Message);
+        //    }
+        //}
 
         [FunctionName("InteractionBlink")]
         public async Task<IActionResult> Blink(
@@ -221,7 +221,8 @@ namespace VerusDate.Api.Function
         {
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<InteractionLikeCommand>(req.Body);
+                //var command = await JsonSerializer.DeserializeAsync<InteractionLikeCommand>(req.Body);
+                var command = InteractionSeed.GetInteraction<InteractionLikeCommand>().Generate();
 
                 var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 
@@ -244,7 +245,8 @@ namespace VerusDate.Api.Function
         {
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<InteractionGenerateChatCommand>(req.Body);
+                //var command = await JsonSerializer.DeserializeAsync<InteractionGenerateChatCommand>(req.Body);
+                var command = InteractionSeed.GetInteraction<InteractionGenerateChatCommand>().Generate();
 
                 var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 

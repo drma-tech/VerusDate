@@ -10,7 +10,6 @@
     <Compile Remove="Model\Interaction.cs" />
     <Compile Remove="Model\Ticket.cs" />
     <Compile Remove="Model\TicketVote.cs" />
-    <Compile Remove="Seed\EventSeed.cs" />
     <Compile Remove="Validation\EventValidation.cs" />
     <Compile Remove="Validation\ProfileLookingValidation.cs" />
     <Compile Remove="Validation\ProfileValidation.cs" />
@@ -25,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Model\Interaction\" />
+    <Folder Include="Model\Event\" />
+    <Folder Include="Model\Ticket\" />
     <Folder Include="Validation\" />
     <Folder Include="ValueType\" />
   </ItemGroup>

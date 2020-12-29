@@ -1,32 +1,31 @@
 ﻿using MediatR;
-using Microsoft.Azure.CosmosRepository;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using VerusDate.Api.Core.Interfaces;
 using VerusDate.Shared.Helper;
+using VerusDate.Shared.Model.Interaction;
 
 namespace VerusDate.Server.Mediator.Commands.Interaction
 {
-    public class InteractionGenerateChatCommand : Shared.Model.Interaction, IRequest<Shared.Model.Chat> { }
+    public class InteractionGenerateChatCommand : Shared.Model.Interaction.Interaction, IRequest<Chat> { }
 
-    public class InteractionGenerateChatHandler : IRequestHandler<InteractionGenerateChatCommand, Shared.Model.Chat>
+    public class InteractionGenerateChatHandler : IRequestHandler<InteractionGenerateChatCommand, Chat>
     {
-        private readonly IRepository<Shared.Model.Interaction> _repo;
-        private readonly IRepository<Shared.Model.Chat> _repoChat;
+        private readonly IRepository _repo;
 
-        public InteractionGenerateChatHandler(IRepositoryFactory factory)
+        public InteractionGenerateChatHandler(IRepository repo)
         {
-            _repo = factory.RepositoryOf<Shared.Model.Interaction>();
-            _repoChat = factory.RepositoryOf<Shared.Model.Chat>();
+            _repo = repo;
         }
 
-        public async Task<Shared.Model.Chat> Handle(InteractionGenerateChatCommand request, CancellationToken cancellationToken)
+        public async Task<Chat> Handle(InteractionGenerateChatCommand request, CancellationToken cancellationToken)
         {
-            //if (request.Id == request.IdInteraction) throw new InvalidOperationException();
+            if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
 
-            var obj1 = await _repo.GetAsync(request.Id, request.IdPrimary, cancellationToken);
+            var obj1 = await _repo.Get<Shared.Model.Interaction.Interaction>(request.Id, request.Key, cancellationToken);
 
-            if (!obj1.Match.Value)
+            if (!obj1.Match.Value.Value)
             {
                 throw new NotificationException("Match ainda não ocorreu nesta interação");
             }
@@ -38,15 +37,15 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
             {
                 var IdChat = Guid.NewGuid().ToString();
 
-                var obj2 = await _repo.GetAsync(request.Id, request.IdSecondary, cancellationToken);
+                var obj2 = await _repo.Get<Shared.Model.Interaction.Interaction>(request.GetInvertedId(), request.IdUserInteraction, cancellationToken);
 
                 obj1.IdChat = IdChat;
                 obj2.IdChat = IdChat;
 
-                await _repo.UpdateAsync(obj1, cancellationToken);
-                await _repo.UpdateAsync(obj2, cancellationToken);
+                await _repo.Update(obj1, request.Id, request.Key, cancellationToken);
+                await _repo.Update(obj2, request.GetInvertedId(), request.IdUserInteraction, cancellationToken);
 
-                return await _repoChat.CreateAsync(new Shared.Model.Chat() { Id = IdChat }, cancellationToken);
+                return await _repo.Add(new Chat() { Id = IdChat }, IdChat, cancellationToken);
             }
         }
     }

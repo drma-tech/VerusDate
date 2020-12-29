@@ -19,10 +19,10 @@ namespace VerusDate.Web.Api
         {
             if (string.IsNullOrEmpty(StorageKey)) return null;
 
-            if (!await storage.ContainKeyAsync(StorageKey))
-            {
-                await storage.SetItemAsync(StorageKey, await http.GetCustom<GlobalInteractions>("GlobalInteractions/Get"));
-            }
+            //if (!await storage.ContainKeyAsync(StorageKey))
+            //{
+            //    await storage.SetItemAsync(StorageKey, await http.GetCustom<GlobalInteractions>("GlobalInteractions/Get"));
+            //}
 
             return await storage.GetItemAsync<GlobalInteractions>(StorageKey);
         }

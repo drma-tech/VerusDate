@@ -12,12 +12,14 @@ namespace VerusDate.Web.Api
     {
         public async static Task<List<Ticket>> Ticket_GetList(this HttpClient http)
         {
-            return await http.ListCustom<Ticket>("Ticket/GetList");
+            //return await http.ListCustom<Ticket>("Ticket/GetList");
+            return null;
         }
 
         public async static Task<List<TicketVote>> Ticket_GetMyVotes(this HttpClient http)
         {
-            return await http.ListCustom<TicketVote>("Ticket/GetMyVotes");
+            //return await http.ListCustom<TicketVote>("Ticket/GetMyVotes");
+            return null;
         }
 
         public async static Task<HttpResponseMessage> Ticket_Insert(this HttpClient http, Ticket obj)

@@ -15,10 +15,10 @@ else
             <div class="col mb-2">
                 <div class="contact-box" style="padding: 0px;">
                     <a class="embed-responsive embed-responsive-1by1 divPhoto" href="/ProfileView/@item.Id" style="background-color: black;">
-                        <img alt="..." class="imgPhoto" src="@item.GetPhotoFace()" />
+                        <img alt="..." class="imgPhoto" src="@item.Photo.GetMainPhoto()" />
                     </a>
                     <p style="position: absolute; margin: 10px; bottom: 100px;">
-                        <span class="badge badge-secondary">@item.NickName, @item.BirthDate.GetAge(), @item.Distance.Value.GetDistance(ProfileHelper.DistanceType.Km)</span>
+                        <span class="badge badge-secondary">@item.Basic.NickName, @item.Bio.BirthDate.GetAge(), @item.GetDistance(0,0)</span>
                     </p>
                     @*@if (item.DtLastLogin.Date >= DateTime.Now.Date.AddDays(-7))
                         {
@@ -52,10 +52,10 @@ else
 
 @code
 {
-    private VerusDate.Shared.Model.Profile profile;
-    private VerusDate.Shared.Model.Gamification gamification;
-    private List<VerusDate.Shared.Model.Profile> listaUsers;
-    private List<VerusDate.Shared.Model.Interaction> interactions;
+    private VerusDate.Shared.Model.Profile.Profile profile;
+    private VerusDate.Shared.Model.Profile.ProfileGamification gamification;
+    private List<VerusDate.Shared.Model.Profile.Profile> listaUsers;
+    private List<VerusDate.Shared.Model.Interaction.Interaction> interactions;
 
     private VisibilityOptions Options => new VisibilityOptions()
     {
@@ -67,13 +67,13 @@ else
     {
         profile = await Http.Profile_Get(LocalStorage);
         gamification = await Http.Gamification_Get(LocalStorage);
-        listaUsers = await Http.Profile_ListSearch();
-        interactions = await Http.Interation_GetList();
+        //listaUsers = await Http.Profile_ListSearch();
+        //interactions = await Http.Interation_GetList();
     }
 
-    private Interaction getCurrentInteraction(string IdUserInteraction)
+    private VerusDate.Shared.Model.Interaction.Interaction getCurrentInteraction(string IdUserInteraction)
     {
-        return interactions.SingleOrDefault(s => s.IdInteraction == IdUserInteraction);
+        return interactions.SingleOrDefault(s => s.IdUserInteraction == IdUserInteraction);
     }
 
     private async Task Blink(string IdUserInteraction)

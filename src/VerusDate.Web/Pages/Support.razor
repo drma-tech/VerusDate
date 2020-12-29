@@ -150,8 +150,8 @@
 </Row>
 
 @code {
-    private List<VerusDate.Shared.Model.Ticket> tickets;
-    private List<VerusDate.Shared.Model.TicketVote> myVotes;
+    private List<VerusDate.Shared.Model.Ticket.Ticket> tickets;
+    private List<VerusDate.Shared.Model.Ticket.TicketVote> myVotes;
 
     public TicketStatus? TicketStatusBug { get; set; }
     public TicketStatus? TicketStatusFeature { get; set; }
@@ -181,7 +181,7 @@
         myVotes = await Http.Ticket_GetMyVotes();
     }
 
-    private List<Ticket> GetTicketList(TicketType ticketType)
+    private List<VerusDate.Shared.Model.Ticket.Ticket> GetTicketList(TicketType ticketType)
     {
         if (ticketType == TicketType.Bug && TicketStatusBug.HasValue)
             return tickets.Where(w => w.TicketType == ticketType & w.TicketStatus == TicketStatusBug).OrderByDescending(o => o.DtInsert).ToList();
@@ -216,7 +216,7 @@
         {
             await Http.Ticket_Vote(IdTicket);
             tickets.Single(s => s.Id == IdTicket).Vote();
-            myVotes.Add(new VerusDate.Shared.Model.TicketVote() { Id = IdTicket, IdVotedUser = ComponenteUtils.IdUser });
+            myVotes.Add(new VerusDate.Shared.Model.Ticket.TicketVote() { Id = IdTicket, IdVotedUser = ComponenteUtils.IdUser });
             Toast.ShowSuccess("Voto registrado com sucesso");
         }
     }

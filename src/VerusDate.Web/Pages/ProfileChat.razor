@@ -11,7 +11,7 @@
     <div class="col-sm-9">
         <div class="ibox ">
             <div class="ibox-title">
-                <h5>Conversa com @CurrentUser?.NickName</h5>
+                <h5>Conversa com @CurrentUser?.Basic.NickName</h5>
             </div>
             <div class="ibox-content">
                 <div style="height: 265px; overflow:auto; display:flex; flex-direction:column-reverse;">
@@ -22,13 +22,13 @@
                         }
                         else
                         {
-                            @foreach (var item in ListChat)
+                            @foreach (var item in ListChat.Itens)
                             {
                                 if (item.IdUserSender == ComponenteUtils.IdUser) //usuário logado como sender
                                 {
                                     <div class="chat-element">
                                         <a href="#" class="float-left" style="height: 38px; width: 38px;">
-                                            <PhotoFace IdFace="@profile?.MainPhoto" isCircle="true"></PhotoFace>
+                                            <PhotoFace IdFace="@profile?.Photo.Main" isCircle="true"></PhotoFace>
                                         </a>
                                         <div class="media-body">
                                             <small class="float-right">@item.DtMessage.GetElapsedTime()</small>
@@ -50,11 +50,11 @@
                                 {
                                     <div class="chat-element right">
                                         <a href="#" class="float-right" style="height: 38px; width: 38px;">
-                                            <PhotoFace IdFace="@CurrentUser.MainPhoto" isCircle="true"></PhotoFace>
+                                            <PhotoFace IdFace="@CurrentUser.Photo.Main" isCircle="true"></PhotoFace>
                                         </a>
                                         <div class="media-body text-right">
                                             <small class="float-left">@item.DtMessage.GetElapsedTime()</small>
-                                            <strong>@CurrentUser.NickName</strong>
+                                            <strong>@CurrentUser.Basic.NickName</strong>
                                             <p class="m-b-xs">
                                                 @if (item.TypeContent == TypeContent.Message)
                                                 {
@@ -103,9 +103,9 @@
             <div class="contact-box" style="padding: 0px;">
 
                 <div class="embed-responsive embed-responsive-1by1 divPhoto" style="background-color: black;">
-                    <img alt="..." class="imgPhoto" src="@CurrentUser.MainPhoto" />
+                    <img alt="..." class="imgPhoto" src="@CurrentUser.Photo.Main" />
                     <span style="position: absolute; left: 10px; top: 10px;">
-                        <i class="badge badge-secondary">@CurrentUser.NickName, @CurrentUser.BirthDate.GetAge(), @CurrentUser.Distance.Value.GetDistance(ProfileHelper.DistanceType.Km)</i>
+                        <i class="badge badge-secondary">@CurrentUser.Basic.NickName, @CurrentUser.Bio.BirthDate.GetAge(), @CurrentUser.GetDistance(0,0)</i>
                     </span>
                     <div class="text-center" style="position: absolute; bottom: 10px; width: 100%;">
                         @*<BtnChat IdUserView="@IdUserView.ToString()" IdChat="@InteractionVM?.IdChat"></BtnChat>*@
@@ -113,38 +113,38 @@
                 </div>
                 <div style="padding: 10px;">
                     <h5>Sobre mim</h5>
-                    <p>@CurrentUser.Description</p>
+                    <p>@CurrentUser.Basic.Description</p>
                 </div>
             </div>
             <div class="ibox">
                 <div class="ibox-content">
                     <h4>Básico</h4>
 
-                    <ItemDataProfile For="@(() => CurrentUser.BiologicalSex)" Value="@CurrentUser.BiologicalSex" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.MaritalStatus)" Value="@CurrentUser.MaritalStatus" ClassIcon="far fa-heart" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Basic.BiologicalSex)" Value="@CurrentUser.Basic.BiologicalSex" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Basic.MaritalStatus)" Value="@CurrentUser.Basic.MaritalStatus" ClassIcon="far fa-heart" Affinities="@affinities"></ItemDataProfile>
                     @*<ItemDataProfile For="@(() => CurrentUser.Intent)" Value="@CurrentUser.Intent" ClassIcon="fas fa-search" Affinities="@affinities"></ItemDataProfile>*@
-                    <ItemDataProfile For="@(() => CurrentUser.GenderIdentity)" Value="@CurrentUser.GenderIdentity" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.SexualOrientation)" Value="@CurrentUser.SexualOrientation" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Basic.GenderIdentity)" Value="@CurrentUser.Basic.GenderIdentity" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Basic.SexualOrientation)" Value="@CurrentUser.Basic.SexualOrientation" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
 
                     <h4>Bio</h4>
 
-                    <ItemDataProfile For="null" Value="@CurrentUser.BirthDate.GetZodiac()" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.Height)" Value="@CurrentUser.Height" ClassIcon="fas fa-ruler" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.BodyMass)" Value="@CurrentUser.BodyMass" ClassIcon="fas fa-weight" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.RaceCategory)" Value="@CurrentUser.RaceCategory" ClassIcon="fas fa-globe" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="null" Value="@CurrentUser.Bio.BirthDate.GetZodiac()" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Bio.Height)" Value="@CurrentUser.Bio.Height" ClassIcon="fas fa-ruler" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Bio.BodyMass)" Value="@CurrentUser.Bio.BodyMass" ClassIcon="fas fa-weight" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Bio.RaceCategory)" Value="@CurrentUser.Bio.RaceCategory" ClassIcon="fas fa-globe" Affinities="@affinities"></ItemDataProfile>
 
                     <h4>Lifestyle</h4>
 
-                    <ItemDataProfile For="@(() => CurrentUser.HaveChildren)" Value="@CurrentUser.HaveChildren" ClassIcon="fas fa-child" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.WantChildren)" Value="@CurrentUser.WantChildren" ClassIcon="fas fa-baby" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.Drink)" Value="@CurrentUser.Drink" ClassIcon="fas fa-glass-cheers" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.Smoke)" Value="@CurrentUser.Smoke" ClassIcon="fas fa-smoking" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.EducationLevel)" Value="@CurrentUser.EducationLevel" ClassIcon="fas fa-graduation-cap" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.CareerCluster)" Value="@CurrentUser.CareerCluster" ClassIcon="fas fa-briefcase" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.Religion)" Value="@CurrentUser.Religion" ClassIcon="fas fa-praying-hands" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.MoneyPersonality)" Value="@CurrentUser.MoneyPersonality" ClassIcon="fas fa-wallet" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.RelationshipPersonality)" Value="@CurrentUser.RelationshipPersonality" ClassIcon="fas fa-people-arrows" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.MyersBriggsTypeIndicator)" Value="@CurrentUser.MyersBriggsTypeIndicator" ClassIcon="fas fa-user" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Lifestyle.HaveChildren)" Value="@CurrentUser.Lifestyle.HaveChildren" ClassIcon="fas fa-child" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Lifestyle.WantChildren)" Value="@CurrentUser.Lifestyle.WantChildren" ClassIcon="fas fa-baby" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Lifestyle.Drink)" Value="@CurrentUser.Lifestyle.Drink" ClassIcon="fas fa-glass-cheers" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Lifestyle.Smoke)" Value="@CurrentUser.Lifestyle.Smoke" ClassIcon="fas fa-smoking" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Lifestyle.EducationLevel)" Value="@CurrentUser.Lifestyle.EducationLevel" ClassIcon="fas fa-graduation-cap" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Lifestyle.CareerCluster)" Value="@CurrentUser.Lifestyle.CareerCluster" ClassIcon="fas fa-briefcase" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Lifestyle.Religion)" Value="@CurrentUser.Lifestyle.Religion" ClassIcon="fas fa-praying-hands" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Lifestyle.MoneyPersonality)" Value="@CurrentUser.Lifestyle.MoneyPersonality" ClassIcon="fas fa-wallet" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Lifestyle.RelationshipPersonality)" Value="@CurrentUser.Lifestyle.RelationshipPersonality" ClassIcon="fas fa-people-arrows" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Lifestyle.MyersBriggsTypeIndicator)" Value="@CurrentUser.Lifestyle.MyersBriggsTypeIndicator" ClassIcon="fas fa-user" Affinities="@affinities"></ItemDataProfile>
                 </div>
             </div>
         }
@@ -156,10 +156,10 @@
     [Parameter]
     public Guid IdUserView { get; set; }
 
-    private VerusDate.Shared.Model.Profile profile { get; set; }
-    private VerusDate.Shared.Model.Profile CurrentUser { get; set; }
-    private VerusDate.Shared.Model.Interaction InteractionVM { get; set; }
-    private List<VerusDate.Shared.Model.Chat> ListChat { get; set; }
+    private VerusDate.Shared.Model.Profile.Profile profile { get; set; }
+    private VerusDate.Shared.Model.Profile.Profile CurrentUser { get; set; }
+    private VerusDate.Shared.Model.Interaction.Interaction InteractionVM { get; set; }
+    private VerusDate.Shared.Model.Interaction.Chat ListChat { get; set; }
     private List<AffinityVM> affinities;
 
     [Required]
@@ -194,11 +194,11 @@
                 {
                     try
                     {
-                        if (user == CurrentUser.Id) //só recebe se quem mandou for o mesmo do chat
-                    {
-                            ListChat.Add(new VerusDate.Shared.Model.Chat() { IdChat = InteractionVM.IdChat, IdUserSender = user, TypeContent = TypeContent.Message, Content = message });
-                            StateHasChanged();
-                        }
+                        //if (user == CurrentUser.Id) //só recebe se quem mandou for o mesmo do chat
+                        //{
+                        //    ListChat.Add(new VerusDate.Shared.Model.Interaction.Chat() { IdChat = InteractionVM.IdChat, IdUserSender = user, TypeContent = TypeContent.Message, Content = message });
+                        //    StateHasChanged();
+                        //}
                     }
                     catch (Exception ex)
                     {
@@ -222,7 +222,7 @@
     private VisibilityOptions Options => new VisibilityOptions()
     {
         Loading = ListChat == null,
-        NoData = ListChat != null && !ListChat.Any()
+        //NoData = ListChat != null && !ListChat.Any()
     };
 
     private VisibilityOptions OptionsProfile => new VisibilityOptions()
@@ -232,22 +232,22 @@
 
     protected override async Task LoadData()
     {
-        CurrentUser = await Http.Profile_GetView(IdUserView.ToString());
+        //CurrentUser = await Http.Profile_GetView(IdUserView.ToString());
 
-        InteractionVM = await Http.Interation_Get(IdUserView.ToString());
-        ListChat = await Http.Chat_Get(InteractionVM.IdChat, ComponenteUtils.IdUser);
-        var looking = await Http.ProfileLooking_Get(LocalStorage);
-        affinities = ProfileApi.GetAffinity(looking, CurrentUser);
+        //InteractionVM = await Http.Interation_Get(IdUserView.ToString());
+        //ListChat = await Http.Chat_Get(InteractionVM.IdChat, ComponenteUtils.IdUser);
+        //var looking = await Http.ProfileLooking_Get(LocalStorage);
+        //affinities = ProfileApi.GetAffinity(looking, CurrentUser);
     }
 
     protected async Task SendPrivateMessage()
     {
         try
         {
-            await hubConnection.SendAsync("SendPrivateMessage", ComponenteUtils.IdUser, Message, CurrentUser.Id);
-            ListChat.Add(new VerusDate.Shared.Model.Chat() { IdChat = InteractionVM.IdChat, IdUserSender = ComponenteUtils.IdUser, TypeContent = TypeContent.Message, Content = Message });
-            Message = "";
-            await Http.Chat_Insert(ListChat.Where(w => w.IsSync == false).ToList()); //TODO: encontrar maneira mais eficiente de salvar
+            //await hubConnection.SendAsync("SendPrivateMessage", ComponenteUtils.IdUser, Message, CurrentUser.Id);
+            //ListChat.Add(new VerusDate.Shared.Model.Chat() { IdChat = InteractionVM.IdChat, IdUserSender = ComponenteUtils.IdUser, TypeContent = TypeContent.Message, Content = Message });
+            //Message = "";
+            //await Http.Chat_Insert(ListChat.Where(w => w.IsSync == false).ToList()); //TODO: encontrar maneira mais eficiente de salvar
         }
         catch (Exception ex)
         {

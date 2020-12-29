@@ -6,14 +6,14 @@
 </button>
 
 @code {
-    [Parameter] public ProfileLooking Looking { get; set; }
-    [Parameter] public Profile ProfView { get; set; }
+    [Parameter] public VerusDate.Shared.Model.Profile.ProfileLooking Looking { get; set; }
+    [Parameter] public VerusDate.Shared.Model.Profile.Profile ProfView { get; set; }
 
     private List<AffinityVM> affinities;
 
     protected override async Task OnInitializedAsync()
     {
-        affinities = ProfileApi.GetAffinity(Looking, ProfView);
+        //affinities = ProfileApi.GetAffinity(Looking, ProfView);
     }
 
     public double GetPercentAffinity()
@@ -31,11 +31,11 @@
         }
     }
 
-    public void RefreshComponente(ProfileLooking Looking, Profile ProfView)
+    public void RefreshComponente(VerusDate.Shared.Model.Profile.ProfileLooking Looking, VerusDate.Shared.Model.Profile.Profile ProfView)
     {
         if (ProfView == null) return;
 
-        this.affinities = ProfileApi.GetAffinity(Looking, ProfView);
-        //StateHasChanged();
+        //this.affinities = ProfileApi.GetAffinity(Looking, ProfView);
+        ////StateHasChanged();
     }
 }

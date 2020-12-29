@@ -15,7 +15,7 @@ namespace VerusDate.Web.Core
 
             looking.Distance = 20;
             looking.MaritalStatus = GetMaritalStatus(profile);
-            looking.Intent = profile.Intent;
+            looking.Intent = profile.Basic.Intent;
             looking.BiologicalSex = GetBiologicalSex(profile);
             //looking.GenderIdentity = null;
             looking.SexualOrientation = GetSexualOrientation(profile);
@@ -55,24 +55,24 @@ namespace VerusDate.Web.Core
 
         private static int GetMinAge(Profile profile)
         {
-            var minAge = profile.BirthDate.GetAge() - GetAgeDifference(profile.BirthDate.GetAge());
+            var minAge = profile.Bio.BirthDate.GetAge() - GetAgeDifference(profile.Bio.BirthDate.GetAge());
             if (minAge < 18) minAge = 18;
             return minAge;
         }
 
         private static int GetMaxAge(Profile profile)
         {
-            var maxAge = profile.BirthDate.GetAge() + GetAgeDifference(profile.BirthDate.GetAge());
+            var maxAge = profile.Bio.BirthDate.GetAge() + GetAgeDifference(profile.Bio.BirthDate.GetAge());
             if (maxAge > 120) maxAge = 120;
             return maxAge;
         }
 
         private static MaritalStatus? GetMaritalStatus(Profile profile)
         {
-            if (profile.Intent.IsLongTerm())
+            if (profile.Basic.Intent.IsLongTerm())
             {
-                if (profile.MaritalStatus == MaritalStatus.Polyamorous) return null;
-                else if (profile.MaritalStatus == MaritalStatus.Monogamous) return null;
+                if (profile.Basic.MaritalStatus == MaritalStatus.Polyamorous) return null;
+                else if (profile.Basic.MaritalStatus == MaritalStatus.Monogamous) return null;
                 else return MaritalStatus.Single;
             }
             else
@@ -83,18 +83,18 @@ namespace VerusDate.Web.Core
 
         private static BiologicalSex? GetBiologicalSex(Profile profile)
         {
-            if (profile.GenderIdentity == GenderIdentity.Cisgender) //binary
+            if (profile.Basic.GenderIdentity == GenderIdentity.Cisgender) //binary
             {
-                if (profile.SexualOrientation == SexualOrientation.Heteressexual)
+                if (profile.Basic.SexualOrientation == SexualOrientation.Heteressexual)
                 {
-                    if (profile.BiologicalSex == BiologicalSex.Female) return BiologicalSex.Male;
-                    else if (profile.BiologicalSex == BiologicalSex.Male) return BiologicalSex.Female;
+                    if (profile.Basic.BiologicalSex == BiologicalSex.Female) return BiologicalSex.Male;
+                    else if (profile.Basic.BiologicalSex == BiologicalSex.Male) return BiologicalSex.Female;
                     else return null;
                 }
-                else if (profile.SexualOrientation == SexualOrientation.Homossexual)
+                else if (profile.Basic.SexualOrientation == SexualOrientation.Homossexual)
                 {
-                    if (profile.BiologicalSex == BiologicalSex.Female) return BiologicalSex.Female;
-                    else if (profile.BiologicalSex == BiologicalSex.Male) return BiologicalSex.Male;
+                    if (profile.Basic.BiologicalSex == BiologicalSex.Female) return BiologicalSex.Female;
+                    else if (profile.Basic.BiologicalSex == BiologicalSex.Male) return BiologicalSex.Male;
                     else return null;
                 }
                 else
@@ -110,8 +110,8 @@ namespace VerusDate.Web.Core
 
         private static SexualOrientation? GetSexualOrientation(Profile profile)
         {
-            if (profile.SexualOrientation == SexualOrientation.Heteressexual) return SexualOrientation.Heteressexual;
-            else if (profile.SexualOrientation == SexualOrientation.Homossexual) return SexualOrientation.Homossexual;
+            if (profile.Basic.SexualOrientation == SexualOrientation.Heteressexual) return SexualOrientation.Heteressexual;
+            else if (profile.Basic.SexualOrientation == SexualOrientation.Homossexual) return SexualOrientation.Homossexual;
             else return null;
         }
 
@@ -119,9 +119,9 @@ namespace VerusDate.Web.Core
         {
             var list = EnumHelper.GetList(typeof(Height));
 
-            var minHeight = (int)profile.Height - 15;
-            if (!list.Any(a => a.Value == minHeight)) minHeight = (int)profile.Height - 16;
-            if (!list.Any(a => a.Value == minHeight)) minHeight = (int)profile.Height - 17;
+            var minHeight = (int)profile.Bio.Height - 15;
+            if (!list.Any(a => a.Value == minHeight)) minHeight = (int)profile.Bio.Height - 16;
+            if (!list.Any(a => a.Value == minHeight)) minHeight = (int)profile.Bio.Height - 17;
             if ((Height)minHeight < Height._150) minHeight = (int)Height._150;
             return (Height)minHeight;
         }
@@ -130,16 +130,16 @@ namespace VerusDate.Web.Core
         {
             var list = EnumHelper.GetList(typeof(Height));
 
-            var maxHeight = (int)profile.Height + 15;
-            if (!list.Any(a => a.Value == maxHeight)) maxHeight = (int)profile.Height + 16;
-            if (!list.Any(a => a.Value == maxHeight)) maxHeight = (int)profile.Height + 17;
+            var maxHeight = (int)profile.Bio.Height + 15;
+            if (!list.Any(a => a.Value == maxHeight)) maxHeight = (int)profile.Bio.Height + 16;
+            if (!list.Any(a => a.Value == maxHeight)) maxHeight = (int)profile.Bio.Height + 17;
             if ((Height)maxHeight > Height._192) maxHeight = (int)Height._192;
             return (Height)maxHeight;
         }
 
         private static WantChildren? GetWantChildren(Profile profile)
         {
-            if (profile.WantChildren == WantChildren.No)
+            if (profile.Lifestyle.WantChildren == WantChildren.No)
                 return WantChildren.No;
             else
                 return null;
@@ -157,11 +157,11 @@ namespace VerusDate.Web.Core
 
         private static RelationshipPersonality? GetRelationshipPersonality(Profile profile)
         {
-            if (profile.RelationshipPersonality == RelationshipPersonality.Explorers)
+            if (profile.Lifestyle.RelationshipPersonality == RelationshipPersonality.Explorers)
                 return RelationshipPersonality.Explorers;
-            else if (profile.RelationshipPersonality == RelationshipPersonality.Directors)
+            else if (profile.Lifestyle.RelationshipPersonality == RelationshipPersonality.Directors)
                 return RelationshipPersonality.Negotiator;
-            else if (profile.RelationshipPersonality == RelationshipPersonality.Negotiator)
+            else if (profile.Lifestyle.RelationshipPersonality == RelationshipPersonality.Negotiator)
                 return RelationshipPersonality.Directors;
             else
                 return RelationshipPersonality.Builders;

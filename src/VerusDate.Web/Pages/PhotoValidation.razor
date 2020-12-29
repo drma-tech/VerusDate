@@ -20,7 +20,7 @@
                         <div class="text-center">
                             @if (profile != null)
                             {
-                                <img id="photo" crossorigin='anonymous' src="@profile?.GetPhotoFace()" style="width: auto; max-height: 450px;" alt="..." />
+                                <img id="photo" crossorigin='anonymous' src="@profile?.Photo.GetMainPhoto()" style="width: auto; max-height: 450px;" alt="..." />
                             }
                         </div>
                     </div>
@@ -32,7 +32,7 @@
 
 @code
 {
-    private VerusDate.Shared.Model.Profile profile { get; set; }
+    private VerusDate.Shared.Model.Profile.Profile profile { get; set; }
 
     protected override async Task LoadData()
     {

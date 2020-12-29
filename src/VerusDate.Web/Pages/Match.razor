@@ -13,7 +13,7 @@ else
         <div class="col-sm-4 col-lg-3">
             <div class="contact-box" style="padding: 0px;">
                 <a href="/ProfileView/@getCurrentProfile().Id">
-                    <PhotoFace IdFace="@getCurrentProfile().MainPhoto" Label="@labelPhoto"></PhotoFace>
+                    <PhotoFace IdFace="@getCurrentProfile().Photo.Main" Label="@labelPhoto"></PhotoFace>
                     @*<ActivityStatus EnumActivityStatus="@getCurrentProfile().ActivityStatus"></ActivityStatus>*@
                 </a>
                 <div class="contact-box-footer">
@@ -22,7 +22,7 @@ else
                     <BtnLike IdUserView="getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnLike>
                 </div>
                 <div class="contact-box-footer" style="padding: 10px; text-align: unset;">
-                    <Affinity @ref="objAffinity" ProfView="getCurrentProfile()" Looking="looking"></Affinity>
+                    @*<Affinity @ref="objAffinity" ProfView="getCurrentProfile()" Looking="looking"></Affinity>*@
                     <button type="button" class="btn btn-sm btn-danger text-right" style="float: right;" title="Reportar este perfil" data-toggle="modal" data-target="#modalReport">
                         <i class="fas fa-exclamation-circle"></i>
                         Reportar
@@ -36,12 +36,12 @@ else
 
 @code {
 
-    private ProfileLooking looking;
-    private List<VerusDate.Shared.Model.Profile> matches;
+    private VerusDate.Shared.Model.Profile.ProfileLooking looking;
+    private List<VerusDate.Shared.Model.Profile.Profile> matches;
     private Affinity objAffinity;
     private int pos;
 
-    private string labelPhoto => $"{getCurrentProfile().NickName}, {getCurrentProfile().BirthDate.GetAge()}, {getCurrentProfile().Distance.Value.GetDistance(ProfileHelper.DistanceType.Km)}";
+    private string labelPhoto => $"{getCurrentProfile().Basic.NickName}, {getCurrentProfile().Bio.BirthDate.GetAge()}, {getCurrentProfile().GetDistance(0, 0)}";
 
     private VisibilityOptions Options => new VisibilityOptions()
     {
@@ -56,11 +56,11 @@ else
 
     protected override async Task LoadData()
     {
-        matches = await Http.Profile_ListMatch();
-        looking = await Http.ProfileLooking_Get(LocalStorage);
+        //matches = await Http.Profile_ListMatch();
+        //looking = await Http.ProfileLooking_Get(LocalStorage);
     }
 
-    private VerusDate.Shared.Model.Profile getCurrentProfile()
+    private VerusDate.Shared.Model.Profile.Profile getCurrentProfile()
     {
         if (pos >= matches.Count) return null;
 

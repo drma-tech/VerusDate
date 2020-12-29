@@ -11,7 +11,7 @@ namespace VerusDate.Shared.Model.Ticket
         {
         }
 
-        public DateTimeOffset? DtInsert { get; set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset DtInsert { get; set; } = DateTimeOffset.UtcNow;
         public DateTimeOffset? DtUpdate { get; set; }
         public string IdUserOwner { get; set; }
 

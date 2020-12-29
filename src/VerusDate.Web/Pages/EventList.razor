@@ -72,7 +72,7 @@
 
 <Card Margin="Margin.Is3.FromTop">
     <CardHeader>
-        Eventos disponíveis na sua localidade (@ProfileUserVM?.Location)
+        Eventos disponíveis na sua localidade (@ProfileUserVM?.Basic.Location)
         <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="FeatureUnavailable" title="Preencher automaticamente">
             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
         </Button>
@@ -134,9 +134,9 @@
 
 @code {
 
-    private VerusDate.Shared.Model.Profile ProfileUserVM { get; set; }
-    private List<VerusDate.Shared.Model.Event> MyEvents { get; set; }
-    private List<VerusDate.Shared.Model.Event> AvailableEvents { get; set; }
+    private VerusDate.Shared.Model.Profile.Profile ProfileUserVM { get; set; }
+    private List<VerusDate.Shared.Model.Event.Event> MyEvents { get; set; }
+    private List<VerusDate.Shared.Model.Event.Event> AvailableEvents { get; set; }
 
     protected override async Task LoadData()
     {

@@ -116,6 +116,11 @@ namespace VerusDate.Shared.Model.Profile
             Basic.Longitude = null;
             Basic.Latitude = null;
         }
+
+        public override void SetIdLoggedUser(string IdUser)
+        {
+            this.Id = IdUser;
+        }
     }
 
     public class ProfileView : Profile

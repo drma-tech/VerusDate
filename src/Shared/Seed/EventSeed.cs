@@ -26,7 +26,7 @@ namespace VerusDate.Shared.Seed
                 .Rules((s, p) =>
                 {
                     p.Id = IdEvent ?? s.Random.Guid().ToString();
-                    p.IdUserOwner = IdUser ?? s.Random.Guid().ToString();
+                    p.SetIdLoggedUser(IdUser ?? s.Random.Guid().ToString());
                     p.NewBlindDate(fakeBD.DtStart, fakeBD.Location, fakeBD.MinimalAge, fakeBD.MaxAge, fakeBD.Intent.ToArray(), fakeBD.SexualOrientation, fakeBD.GenderDivision);
                 });
         }

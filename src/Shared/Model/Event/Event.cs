@@ -14,7 +14,7 @@ namespace VerusDate.Shared.Model.Event
 
         public DateTimeOffset? DtInsert { get; set; } = DateTimeOffset.UtcNow;
         public DateTimeOffset? DtUpdate { get; set; }
-        public string IdUserOwner { get; set; }
+        public string IdUserOwner { get; private set; }
 
         [Display(Name = "Data Início")]
         public DateTimeOffset DtStart { get; private set; } = DateTimeOffset.UtcNow.AddDays(7);
@@ -83,6 +83,11 @@ namespace VerusDate.Shared.Model.Event
             this.Intent = Intent;
             this.SexualOrientation = SexualOrientation;
             this.GenderDivision = GenderDivision;
+        }
+
+        public override void SetIdLoggedUser(string IdUser)
+        {
+            this.IdUserOwner = IdUser;
         }
     }
 }

@@ -25,6 +25,8 @@ namespace VerusDate.Api.Mediator.Command.Ticket
             //var query = new StringBuilder("UPDATE Ticket SET TotalVotes = TotalVotes + 1 WHERE Id = @IdTicket; INSERT INTO TicketVote (IdTicket,IdUser) VALUES (@IdTicket,@Id);");
             //TODO: ATUALIZAR TOTAL DE TICKET POR PERIODO
 
+            request.Key = request.IdTicket;
+
             return await _repo.Add(request, request.IdTicket, cancellationToken);
         }
     }

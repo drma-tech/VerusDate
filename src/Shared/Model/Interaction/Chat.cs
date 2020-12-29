@@ -13,6 +13,11 @@ namespace VerusDate.Shared.Model.Interaction
         }
 
         public List<ChatItem> Itens { get; set; } = new List<ChatItem>();
+
+        public override void SetIdLoggedUser(string IdUser)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class ChatItem

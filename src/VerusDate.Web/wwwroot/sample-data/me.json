@@ -1,8 +1,8 @@
 ﻿{
   "clientPrincipal": {
     "identityProvider": "google",
-    "userId": "123",
-    "userDetails": "dhiogoacioli",
+    "userId": "b9a10c8be2f244c0a625b78f05e30812",
+    "userDetails": "dhiogoacioli@gmail.com",
     "userRoles": [
       "anonymous",
       "authenticated"

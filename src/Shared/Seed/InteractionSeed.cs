@@ -10,7 +10,8 @@ namespace VerusDate.Shared.Seed
             return new Faker<T>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.SetId(s.Random.Guid().ToString(), s.Random.Guid().ToString());
+                    p.SetIdLoggedUser(s.Random.Guid().ToString());
+                    p.SetId(s.Random.Guid().ToString());
                 });
         }
     }

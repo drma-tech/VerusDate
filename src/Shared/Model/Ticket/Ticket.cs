@@ -12,8 +12,8 @@ namespace VerusDate.Shared.Model.Ticket
         }
 
         public DateTimeOffset DtInsert { get; set; } = DateTimeOffset.UtcNow;
-        public DateTimeOffset? DtUpdate { get; set; }
-        public string IdUserOwner { get; set; }
+        public DateTimeOffset? DtUpdate { get; private set; }
+        public string IdUserOwner { get; private set; }
 
         [Display(Name = "Tipo")]
         public TicketType TicketType { get; set; }
@@ -32,6 +32,11 @@ namespace VerusDate.Shared.Model.Ticket
             TicketStatus = ticketStatus;
 
             DtUpdate = DateTimeOffset.UtcNow;
+        }
+
+        public override void SetIdLoggedUser(string IdUser)
+        {
+            this.IdUserOwner = IdUser;
         }
 
         public void Vote()

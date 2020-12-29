@@ -1,30 +1,19 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using VerusDate.Server.Core.Helper;
+using VerusDate.Shared.Core;
 
 namespace VerusDate.Api.Mediator.Behavior
 {
     public class UserSessionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
-        private readonly HttpContext httpContext;
-
-        public UserSessionBehavior(IHttpContextAccessor accessor)
-        {
-            httpContext = accessor.HttpContext;
-        }
-
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            if (request is BaseCommandQuery<TResponse> bq)
-            {
-                bq.IdUser = httpContext.GetUserId();
-            }
+            var idUser = "b9a10c8be2f244c0a625b78f05e30812";
 
-            if (request is IBaseCommand<TResponse> bc)
+            if (request is CosmosBase baseCommand)
             {
-                bc.IdUser = httpContext.GetUserId();
+                baseCommand.SetIdLoggedUser(idUser);
             }
 
             return await next();

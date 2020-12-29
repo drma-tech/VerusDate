@@ -2,7 +2,7 @@
 
 namespace VerusDate.Shared.Core
 {
-    public class CosmosBase
+    public abstract class CosmosBase
     {
         /// <summary>
         /// Campo único dentro do container
@@ -21,11 +21,17 @@ namespace VerusDate.Shared.Core
         /// </summary>
         public string Key { get; set; }
 
-        public CosmosBase(string Type)
+        protected CosmosBase(string Type)
         {
             if (string.IsNullOrEmpty(Type)) throw new ArgumentNullException(nameof(Type));
 
             this.Type = Type;
         }
+
+        /// <summary>
+        /// Usado na API para capturar o id da to token (usuário logado)
+        /// </summary>
+        /// <param name="IdUser"></param>
+        public abstract void SetIdLoggedUser(string IdUser);
     }
 }

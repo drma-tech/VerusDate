@@ -216,7 +216,7 @@
         {
             await Http.Ticket_Vote(IdTicket);
             tickets.Single(s => s.Id == IdTicket).Vote();
-            myVotes.Add(new VerusDate.Shared.Model.Ticket.TicketVote() { Id = IdTicket, IdVotedUser = ComponenteUtils.IdUser });
+            myVotes.Add(new VerusDate.Shared.Model.Ticket.TicketVote() { Key = IdTicket });
             Toast.ShowSuccess("Voto registrado com sucesso");
         }
     }

@@ -30,7 +30,7 @@
     <Card>
         <CardHeader Style="background-color: #D4AF37; color: #fff !important;">
             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon>
-            Ranking - @gamification?.Ranking (@gamification?.XP%)
+            Ranking - @profile.Gamification?.Ranking (@profile.Gamification?.XP%)
         </CardHeader>
         <CardBody>
             XXX
@@ -39,7 +39,7 @@
     <Card>
         <CardHeader Style="background-color: #5c7cfa; color: #fff !important;">
             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem"></Icon>
-            Diamante - @gamification?.Diamond
+            Diamante - @profile.Gamification?.Diamond
         </CardHeader>
         <CardBody>
             XXX
@@ -48,7 +48,7 @@
     <Card>
         <CardHeader Style="background-color: #dc3545; color: #fff !important;">
             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt"></Icon>
-            Maça - @gamification?.Food/@GamificationApi.GetMaxFood(gamification)
+            Maça - @profile.Gamification?.Food/@GamificationApi.GetMaxFood(profile.Gamification)
         </CardHeader>
         <CardBody>
             XXX
@@ -386,16 +386,16 @@
 @code
 {
     private VerusDate.Shared.Model.Profile.Profile profile;
-    private VerusDate.Shared.Model.Profile.ProfileGamification gamification;
 
     private VisibilityOptions OptionsValidation => new VisibilityOptions()
     {
-        Loading = profile == null | gamification == null
+        Loading = profile == null
     };
 
     protected override async Task LoadData()
     {
         profile = await Http.Profile_Get(LocalStorage);
-        gamification = await Http.Gamification_Get(LocalStorage);
+
+        var iduser = await Http.Profile_GetView(null, "");
     }
 }

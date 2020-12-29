@@ -1,4 +1,6 @@
-﻿using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using VerusDate.Api.Core;
 
 [assembly: FunctionsStartup(typeof(VerusDate.Api.Startup))]
@@ -17,6 +19,12 @@ namespace VerusDate.Api
         public override void Configure(IFunctionsHostBuilder builder)
         {
             var config = builder.GetContext().Configuration;
+
+            //web não aceita status NoContent
+            builder.Services.AddMvcCore().AddMvcOptions(x =>
+            {
+                x.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
+            });
 
             builder.Services.AddHandles();
             builder.Services.AddRepositories(config);

@@ -38,7 +38,14 @@ namespace VerusDate.Web.Core
 
             var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
 
-            return await response.Content.ReadFromJsonAsync<T>();
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<T>();
+            }
+            else
+            {
+                throw new NotificationException(response);
+            }
         }
 
         /// <summary>
@@ -72,7 +79,14 @@ namespace VerusDate.Web.Core
 
             var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
 
-            return await response.Content.ReadFromJsonAsync<T>();
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<T>();
+            }
+            else
+            {
+                throw new NotificationException(response);
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ namespace VerusDate.Web.Core
     {
         public static string IdUser { get; set; }
         public static string GetStorageKey(string key) => string.IsNullOrEmpty(IdUser) ? throw new ArgumentException(IdUser) : $"{key}({IdUser})";
-        public static string BaseApi => "http://localhost:7071/api/";
+        public static string BaseApi => "https://green-grass-0dbf41210.azurestaticapps.net/api/";
     }
 
     /// <summary>

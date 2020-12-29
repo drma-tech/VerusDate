@@ -52,7 +52,7 @@ namespace VerusDate.Api.Function
             try
             {
                 var principal = StaticWebAppsAuth.Parse(req);
-                return new BadRequestObjectResult("id=" + principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value);
+                return new OkObjectResult("id=" + principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value);
 
                 //var result = await _mediator.Send(new ProfileGetViewCommand() { IdUserView = req.Query["Id"] }, req.HttpContext.RequestAborted);
 

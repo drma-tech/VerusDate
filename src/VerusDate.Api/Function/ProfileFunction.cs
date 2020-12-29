@@ -6,6 +6,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Profile;
@@ -50,9 +51,13 @@ namespace VerusDate.Api.Function
         {
             try
             {
-                var result = await _mediator.Send(new ProfileGetViewCommand() { Id = req.Query["Id"] }, req.HttpContext.RequestAborted);
+                var principal = StaticWebAppsAuth.Parse(req);
 
-                return new OkObjectResult(result);
+                return new OkObjectResult("id=" + principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value);
+
+                //var result = await _mediator.Send(new ProfileGetViewCommand() { Id = req.Query["Id"] }, req.HttpContext.RequestAborted);
+
+                //return new OkObjectResult(result);
             }
             catch (Exception ex)
             {

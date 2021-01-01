@@ -12,9 +12,9 @@ namespace VerusDate.Web.Api
             return await http.Get<Profile>($"Profile/Get");
         }
 
-        public async static Task<Profile> Profile_GetView(this HttpClient http, string IdUserView)
+        public async static Task<string> Profile_GetView(this HttpClient http, string IdUserView)
         {
-            return await http.Get<Profile>($"Profile/GetView?id={IdUserView}");
+            return await http.GetString($"Profile/GetView?id={IdUserView}");
         }
 
         //public List<AffinityVM> GetAffinity(ProfileLooking profUser, Profile profView)

@@ -56,9 +56,13 @@ namespace VerusDate.Api.Function
                     var data = header[0];
                     return new OkObjectResult(data);
                 }
+                else
+                {
+                    return new OkObjectResult("nothing");
+                }
 
-                var principal = StaticWebAppsAuth.Parse(req);
-                return new OkObjectResult("id=" + principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value);
+                //var principal = StaticWebAppsAuth.Parse(req);
+                //return new OkObjectResult("id=" + principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value);
 
                 //var result = await _mediator.Send(new ProfileGetViewCommand() { IdUserView = req.Query["Id"] }, req.HttpContext.RequestAborted);
 

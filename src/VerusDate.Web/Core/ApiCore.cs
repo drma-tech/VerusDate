@@ -10,20 +10,6 @@ namespace VerusDate.Web.Core
     {
         private async static Task<T> ReturnResponse<T>(this HttpResponseMessage response)
         {
-            //if (!await local.ContainKeyAsync(StorageKey))
-            //{
-            //    var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
-
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        await local.SetItemAsync(StorageKey, await response.Content.ReadFromJsonAsync<T>());
-            //    }
-            //    else
-            //    {
-            //        throw new NotificationException(response);
-            //    }
-            //}
-
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<T>();
@@ -32,6 +18,13 @@ namespace VerusDate.Web.Core
             {
                 throw new NotificationException(response);
             }
+        }
+
+        public async static Task<string> GetString(this HttpClient http, string requestUri)
+        {
+            var response = await http.GetAsync(http.BaseApi() + requestUri);
+
+            return await response.Content.ReadAsStringAsync();
         }
 
         public async static Task<T> Get<T>(this HttpClient http, string requestUri) where T : class

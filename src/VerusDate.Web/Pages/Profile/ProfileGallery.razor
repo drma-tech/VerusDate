@@ -41,7 +41,7 @@
 
     protected override async Task LoadData()
     {
-        _profile = await Http.Profile_Get(LocalStorage);
+        _profile = await Http.Profile_Get();
         imageDataUri = _profile?.Photo.Main;
     }
 

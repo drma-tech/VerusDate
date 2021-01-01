@@ -20,7 +20,7 @@
                 {
                     <div class="col-lg-1 col-md-2 col-3 text-center">
                         <a @onclick="() => GoChatAndGenerate(item.Id)" class="embed-responsive embed-responsive-1by1 img-fluid img-circle divPhoto">
-                            <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.GetPhotoFace()" />
+                            <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.Photo.GetMainPhoto()" />
                         </a>
                         <small>@item.NickName</small>
                     </div>
@@ -64,7 +64,7 @@
                             {
                                 <tr>
                                     <td class="client-avatar embed-responsive embed-responsive-1by1 divPhoto">
-                                        <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.GetPhotoFace()" />
+                                        <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.Photo.GetMainPhoto()" />
                                     </td>
                                     <td><a @onclick="() => GoChat(item.Id)" class="client-link">@item.NickName</a></td>
                                     <td>@item.QtdUnread @if (item.QtdUnread > 0) { <span class="label label-warning">Sua vez</span> }</td>
@@ -81,7 +81,7 @@
 
 @code
 {
-    private List<VerusDate.Shared.ModelQuery.ProfileBasic> NewMatches { get; set; }
+    private List<VerusDate.Shared.ModelQuery.ProfileSearch> NewMatches { get; set; }
     private List<VerusDate.Shared.ModelQuery.ProfileChatList> ChatList { get; set; }
 
     private VisibilityOptions OptionsMatch => new VisibilityOptions()

@@ -7,14 +7,12 @@ namespace VerusDate.Shared.Model.Profile
 {
     public class Profile : CosmosBase
     {
-        public Profile() : base("Profile")
+        public Profile() : base(nameof(Profile))
         {
         }
 
-        public DateTimeOffset? DtInsert { get; set; } = DateTimeOffset.UtcNow;
-        public DateTimeOffset? DtUpdate { get; set; }
-        public DateTimeOffset? DtTopList { get; set; } = DateTimeOffset.UtcNow;
-        public DateTimeOffset? DtLastLogin { get; set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset? DtTopList { get; private set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset? DtLastLogin { get; private set; } = DateTimeOffset.UtcNow;
 
         public ProfileBasic Basic { get; set; }
         public ProfileBio Bio { get; set; }
@@ -117,9 +115,10 @@ namespace VerusDate.Shared.Model.Profile
             Basic.Latitude = null;
         }
 
-        public override void SetIdLoggedUser(string IdUser)
+        public override void SetIds(string IdLoggedUser)
         {
-            this.Id = IdUser;
+            this.Id = IdLoggedUser;
+            this.Key = IdLoggedUser;
         }
     }
 

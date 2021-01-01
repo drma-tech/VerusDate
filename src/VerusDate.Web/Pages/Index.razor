@@ -6,64 +6,67 @@
 <Row>
     <Column ColumnSize="ColumnSize.Is12">
         <Card Margin="Margin.Is3.FromBottom">
-            <CardHeader>Destaques - Localização (@profile?.Basic.Location) | Intenção (@profile?.Basic.Intent.First().GetName())</CardHeader>
+            <CardHeader>
+                Destaques da Semana - Localização (São Paulo)
+                <Badge Color="Color.Danger" Float="Float.Right">Demonstração</Badge>
+            </CardHeader>
             <CardBody>
-                @*<div class="row">
-                        @for (int i = 0; i < 12; i++)
-                        {
-                            <div class="col-lg-1 col-md-2 col-3 text-center">
-                                <a href="#" class="embed-responsive embed-responsive-1by1 img-fluid img-circle divPhoto">
-                                    <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@ProfileHelper.GetPhotoFace(null)" />
-                                </a>
-                                <small>NickName</small>
-                                <span class="badge badge-light" style="font-size: 9px; position: absolute; top: 5px; left: 5px;">0 Pontos</span>
-                            </div>
-                        }
-                    </div>*@
-                <FeatureUnavailable></FeatureUnavailable>
+                <Row>
+                    @foreach (var item in lstDestaques)
+                    {
+                        <Column ColumnSize="ColumnSize.Is1.OnFullHD.Is2.OnDesktop.Is4.OnMobile">
+                            <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
+                                <CardImage Source="@item.Photo.GetMainPhoto()" Alt="Photo Image"></CardImage>
+                                <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Center" Style="font-size: small;"></Paragraph>
+                                <Badge Color="Color.Light" Style="font-size: 11px;">@item.NickName</Badge>
+                                <Badge Color="Color.Light" Style="font-size: 9px; position: absolute; top: 5px; left: 5px;">@ProfileSeed.GetNumber(100, 500) XP</Badge>
+                            </Card>
+                        </Column>
+                    }
+                </Row>
             </CardBody>
         </Card>
     </Column>
 </Row>
 
-<CardDeck>
-    <Card>
-        <CardHeader Style="background-color: #D4AF37; color: #fff !important;">
-            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon>
-            @*Ranking - @profile.Gamification?.Ranking (@profile.Gamification?.XP%)*@
-        </CardHeader>
-        <CardBody>
-            XXX
-        </CardBody>
-    </Card>
-    <Card>
-        <CardHeader Style="background-color: #5c7cfa; color: #fff !important;">
-            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem"></Icon>
-            @*Diamante - @profile.Gamification?.Diamond*@
-        </CardHeader>
-        <CardBody>
-            XXX
-        </CardBody>
-    </Card>
-    <Card>
-        <CardHeader Style="background-color: #dc3545; color: #fff !important;">
-            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt"></Icon>
-            @*Maça - @profile.Gamification?.Food/@GamificationApi.GetMaxFood(profile.Gamification)*@
-        </CardHeader>
-        <CardBody>
-            XXX
-        </CardBody>
-    </Card>
-    <Card>
-        <CardHeader Class="bg-info" Style="color: #fff !important;">
-            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThumbsUp"></Icon>
-            Popularidade - 75%
-        </CardHeader>
-        <CardBody>
-            XXX
-        </CardBody>
-    </Card>
-</CardDeck>
+@*<CardDeck>
+        <Card>
+            <CardHeader Style="background-color: #D4AF37; color: #fff !important;">
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon>
+                Ranking - @profile?.Gamification.Ranking (@profile?.Gamification.XP%)
+            </CardHeader>
+            <CardBody>
+                XXX
+            </CardBody>
+        </Card>
+        <Card>
+            <CardHeader Style="background-color: #5c7cfa; color: #fff !important;">
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem"></Icon>
+                Diamante - @profile?.Gamification.Diamond
+            </CardHeader>
+            <CardBody>
+                XXX
+            </CardBody>
+        </Card>
+        <Card>
+            <CardHeader Style="background-color: #dc3545; color: #fff !important;">
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt"></Icon>
+                Maça - @profile?.Gamification.Food/@GamificationApi.GetMaxFood(profile?.Gamification)
+            </CardHeader>
+            <CardBody>
+                XXX
+            </CardBody>
+        </Card>
+        <Card>
+            <CardHeader Class="bg-info" Style="color: #fff !important;">
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThumbsUp"></Icon>
+                Popularidade - 75%
+            </CardHeader>
+            <CardBody>
+                XXX
+            </CardBody>
+        </Card>
+    </CardDeck>*@
 
 @*<div class="row">
         <div class="col-lg-3 col-6">
@@ -385,15 +388,17 @@
 
 @code
 {
-    private VerusDate.Shared.Model.Profile.Profile profile;
+    //private VerusDate.Shared.Model.Profile.Profile profile = new VerusDate.Shared.Model.Profile.Profile();
+    private List<ProfileSearch> lstDestaques = new List<ProfileSearch>();
 
     private VisibilityOptions OptionsValidation => new VisibilityOptions()
     {
-        Loading = profile == null
+        Loading = lstDestaques == null
     };
 
     protected override async Task LoadData()
     {
-        profile = await Http.Profile_Get(LocalStorage);
+        //profile = await Http.Profile_Get();
+        lstDestaques = ProfileSeed.GetProfileSearch().Generate(12);
     }
 }

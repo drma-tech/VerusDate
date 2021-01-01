@@ -25,8 +25,7 @@ namespace VerusDate.Shared.Seed
             return new Faker<Model.Event.Event>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.Id = IdEvent ?? s.Random.Guid().ToString();
-                    p.SetIdLoggedUser(IdUser ?? s.Random.Guid().ToString());
+                    p.SetIds(IdUser ?? s.Random.Guid().ToString());
                     p.NewBlindDate(fakeBD.DtStart, fakeBD.Location, fakeBD.MinimalAge, fakeBD.MaxAge, fakeBD.Intent.ToArray(), fakeBD.SexualOrientation, fakeBD.GenderDivision);
                 });
         }

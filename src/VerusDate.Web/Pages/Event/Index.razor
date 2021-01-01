@@ -1,6 +1,6 @@
-﻿@page "/EventList"
+﻿@page "/Event"
 @attribute [Authorize]
-@inherits PageCore<EventList>
+@inherits PageCore<Event.Index>
 @inject HttpClient Http
 @*https://www.ehow.co.uk/12106705/types-of-dating*@
 @*https://www.cupidolouco.com.br/index.php?option=com_content&view=article&id=14&Itemid=174*@
@@ -140,6 +140,6 @@
 
     protected override async Task LoadData()
     {
-        ProfileUserVM = await Http.Profile_Get(LocalStorage);
+        ProfileUserVM = await Http.Profile_Get();
     }
 }

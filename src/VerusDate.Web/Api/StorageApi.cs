@@ -13,7 +13,7 @@ namespace VerusDate.Web.Api
         {
             if (bytes == null || bytes.Length == 0) throw new ArgumentNullException(nameof(bytes));
 
-            await ProfileApi.ClearCache(storage);
+            //await ProfileApi.ClearCache(storage);
             //await ProfileValidationApi.ClearCache(storage);
 
             return await http.PostAsJsonAsync("Storage/UploadPhotoFace", new { Stream = bytes });
@@ -21,7 +21,7 @@ namespace VerusDate.Web.Api
 
         public async static Task<HttpResponseMessage> Storage_UploadPhotoGallery(this HttpClient http, ILocalStorageService storage, MemoryStream stream1, MemoryStream stream2, MemoryStream stream3, MemoryStream stream4)
         {
-            await ProfileApi.ClearCache(storage);
+            //await ProfileApi.ClearCache(storage);
 
             return await http.PostAsJsonAsync("Storage/UploadPhotoGallery", new
             {

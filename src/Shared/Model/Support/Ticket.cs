@@ -3,16 +3,14 @@ using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.Model.Ticket
+namespace VerusDate.Shared.Model.Support
 {
     public class Ticket : CosmosBase
     {
-        public Ticket() : base("Ticket")
+        public Ticket() : base(nameof(Ticket))
         {
         }
 
-        public DateTimeOffset DtInsert { get; set; } = DateTimeOffset.UtcNow;
-        public DateTimeOffset? DtUpdate { get; private set; }
         public string IdUserOwner { get; private set; }
 
         [Display(Name = "Tipo")]
@@ -34,9 +32,11 @@ namespace VerusDate.Shared.Model.Ticket
             DtUpdate = DateTimeOffset.UtcNow;
         }
 
-        public override void SetIdLoggedUser(string IdUser)
+        public override void SetIds(string IdLoggedUser)
         {
-            this.IdUserOwner = IdUser;
+            Id = Guid.NewGuid().ToString();
+            IdUserOwner = IdLoggedUser;
+            Key = Id;
         }
 
         public void Vote()

@@ -35,17 +35,19 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
             }
             else
             {
-                var IdChat = Guid.NewGuid().ToString();
-
                 var obj2 = await _repo.Get<Shared.Model.Interaction.Interaction>(request.GetInvertedId(), request.IdUserInteraction, cancellationToken);
 
-                obj1.IdChat = IdChat;
-                obj2.IdChat = IdChat;
+                var chat = new Chat();
+
+                chat.SetIds(null);
+
+                obj1.IdChat = chat.Id;
+                obj2.IdChat = chat.Id;
 
                 await _repo.Update(obj1, request.Id, request.Key, cancellationToken);
                 await _repo.Update(obj2, request.GetInvertedId(), request.IdUserInteraction, cancellationToken);
 
-                return await _repo.Add(new Chat() { Id = IdChat }, IdChat, cancellationToken);
+                return await _repo.Add(chat, chat.Id, cancellationToken);
             }
         }
     }

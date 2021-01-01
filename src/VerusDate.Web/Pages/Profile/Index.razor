@@ -1,6 +1,6 @@
 ﻿@page "/Profile"
 @attribute [Authorize]
-@inherits PageCore<Profile>
+@inherits PageCore<Profile.Index>
 @inject HttpClient Http
 
 <Row>
@@ -64,6 +64,6 @@
         gamification = await Http.Gamification_Get(LocalStorage);
         //badge = await Http.Badge_Get(LocalStorage);
         GlobalInteractionsVM = await Http.GlobalInteractions_Get(LocalStorage);
-        profile = await Http.Profile_Get(LocalStorage);
+        profile = await Http.Profile_Get();
     }
 }

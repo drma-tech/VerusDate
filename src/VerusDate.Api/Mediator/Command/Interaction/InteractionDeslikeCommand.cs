@@ -22,7 +22,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 
             if (obj == null)
             {
-                request.SetId(request.IdUserInteraction);
+                request.SetIdInteraction(request.IdUserInteraction);
                 obj = await _repo.Add(request, request.Id, cancellationToken);
             }
 

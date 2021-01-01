@@ -1,6 +1,6 @@
 ﻿@page "/Support"
 @attribute [Authorize]
-@inherits PageCore<Support>
+@inherits PageCore<Support.Index>
 @inject HttpClient Http
 @*@inject IModalService Modal*@
 
@@ -51,7 +51,7 @@
                                         <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.Id)" disabled="@anyVote(item.Id)">
                                             <i class="fas fa-check"></i> Votar
                                         </button>
-                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtInsert.GetElapsedTime()</span>
+                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtInsert.Value.GetElapsedTime()</span>
                                         <span class="badge"><i class="fas fa-vote-yea"></i> @item.TotalVotes</span>
                                         @if (item.TicketStatus == TicketStatus.Published)
                                         {
@@ -120,7 +120,7 @@
                                         <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.Id)" disabled="@anyVote(item.Id)">
                                             <i class="fas fa-check"></i> Votar
                                         </button>
-                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtInsert.GetElapsedTime()</span>
+                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtInsert.Value.GetElapsedTime()</span>
                                         <span class="badge"><i class="fas fa-vote-yea"></i> @item.TotalVotes</span>
                                         @if (item.TicketStatus == TicketStatus.Published)
                                         {
@@ -150,21 +150,21 @@
 </Row>
 
 @code {
-    private List<VerusDate.Shared.Model.Ticket.Ticket> tickets;
-    private List<VerusDate.Shared.Model.Ticket.TicketVote> myVotes;
+    private List<VerusDate.Shared.Model.Support.Ticket> tickets;
+    private List<VerusDate.Shared.Model.Support.TicketVote> myVotes;
 
     public TicketStatus? TicketStatusBug { get; set; }
     public TicketStatus? TicketStatusFeature { get; set; }
 
     private VisibilityOptions OptionsBug => new VisibilityOptions()
     {
-        Loading = tickets == null && myVotes == null,
+        Loading = tickets == null,
         NoData = (tickets != null && !GetTicketList(TicketType.Bug).Any())
     };
 
     private VisibilityOptions OptionsFeature => new VisibilityOptions()
     {
-        Loading = tickets == null && myVotes == null,
+        Loading = tickets == null,
         NoData = (tickets != null && !GetTicketList(TicketType.FeatureRequest).Any())
     };
 
@@ -181,7 +181,7 @@
         myVotes = await Http.Ticket_GetMyVotes();
     }
 
-    private List<VerusDate.Shared.Model.Ticket.Ticket> GetTicketList(TicketType ticketType)
+    private List<VerusDate.Shared.Model.Support.Ticket> GetTicketList(TicketType ticketType)
     {
         if (ticketType == TicketType.Bug && TicketStatusBug.HasValue)
             return tickets.Where(w => w.TicketType == ticketType & w.TicketStatus == TicketStatusBug).OrderByDescending(o => o.DtInsert).ToList();
@@ -214,9 +214,13 @@
         }
         else
         {
-            await Http.Ticket_Vote(IdTicket);
+            var vote = new VerusDate.Shared.Model.Support.TicketVote();
+            vote.SetKey(IdTicket);
+
+            await Http.Ticket_Vote(vote);
             tickets.Single(s => s.Id == IdTicket).Vote();
-            myVotes.Add(new VerusDate.Shared.Model.Ticket.TicketVote() { Key = IdTicket });
+
+            myVotes.Add(vote);
             Toast.ShowSuccess("Voto registrado com sucesso");
         }
     }

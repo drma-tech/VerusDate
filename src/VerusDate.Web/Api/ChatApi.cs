@@ -13,7 +13,7 @@ namespace VerusDate.Web.Api
 
         public async static Task<Chat> Chat_Get(this HttpClient http, ISessionStorageService session, string IdChat, string IdUser)
         {
-            return await http.GetCustomSession<Chat>(session, StorageKey, $"Chat/Get/{IdChat}/{IdUser}");
+            return await http.Get<Chat>($"Chat/Get/{IdChat}/{IdUser}");
         }
 
         public async static Task<HttpResponseMessage> Chat_Insert(this HttpClient http, Chat chat)

@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
-using VerusDate.Api.Mediator.Command.Ticket;
 
-namespace VerusDate.Shared.Validation
+namespace VerusDate.Api.Mediator.Command.Support
 {
     public class TicketInsertCommandValidation : AbstractValidator<TicketInsertCommand>
     {

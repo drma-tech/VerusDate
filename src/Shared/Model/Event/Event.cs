@@ -8,12 +8,10 @@ namespace VerusDate.Shared.Model.Event
 {
     public class Event : CosmosBase
     {
-        public Event() : base("Event")
+        public Event() : base(nameof(Event))
         {
         }
 
-        public DateTimeOffset? DtInsert { get; set; } = DateTimeOffset.UtcNow;
-        public DateTimeOffset? DtUpdate { get; set; }
         public string IdUserOwner { get; private set; }
 
         [Display(Name = "Data Início")]
@@ -85,9 +83,11 @@ namespace VerusDate.Shared.Model.Event
             this.GenderDivision = GenderDivision;
         }
 
-        public override void SetIdLoggedUser(string IdUser)
+        public override void SetIds(string IdLoggedUser)
         {
-            this.IdUserOwner = IdUser;
+            this.Id = Guid.NewGuid().ToString();
+            this.IdUserOwner = IdLoggedUser;
+            this.Key = this.Id;
         }
     }
 }

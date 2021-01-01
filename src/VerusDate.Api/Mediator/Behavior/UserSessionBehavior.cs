@@ -18,7 +18,7 @@ namespace VerusDate.Api.Mediator.Behavior
 
             if (request is CosmosBase baseCommand)
             {
-                baseCommand.SetIdLoggedUser(idUser);
+                baseCommand.SetIds(idUser);
             }
 
             return await next();

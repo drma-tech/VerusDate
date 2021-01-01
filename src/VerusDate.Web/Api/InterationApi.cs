@@ -19,32 +19,32 @@ namespace VerusDate.Web.Api
         {
             if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
 
-            return await http.GetCustomSession<Interaction>(session, StorageKey, $"Interaction/Get/{IdUserInteraction}");
+            return await http.Get<Interaction>($"Interaction/Get/{IdUserInteraction}");
         }
 
         public async static Task<List<Interaction>> Interation_GetList(this HttpClient http, ISessionStorageService session)
         {
-            return await http.GetCustomSession<List<Interaction>>(session, StorageKey, "Interaction/GetList");
+            return await http.GetList<Interaction>("Interaction/GetList");
         }
 
-        public async static Task<List<ProfileBasic>> Interation_GetLikes(this HttpClient http, ISessionStorageService session)
+        public async static Task<List<ProfileSearch>> Interation_GetLikes(this HttpClient http, ISessionStorageService session)
         {
-            return await http.GetCustomSession<List<ProfileBasic>>(session, StorageKey, "Interaction/GetLikes");
+            return await http.GetList<ProfileSearch>("Interaction/GetLikes");
         }
 
-        public async static Task<List<ProfileBasic>> Interation_GetBlinks(this HttpClient http, ISessionStorageService session)
+        public async static Task<List<ProfileSearch>> Interation_GetBlinks(this HttpClient http, ISessionStorageService session)
         {
-            return await http.GetCustomSession<List<ProfileBasic>>(session, StorageKey, "Interaction/GetBlinks");
+            return await http.GetList<ProfileSearch>("Interaction/GetBlinks");
         }
 
-        public async static Task<List<ProfileBasic>> Interation_GetNewMatches(this HttpClient http, ISessionStorageService session)
+        public async static Task<List<ProfileSearch>> Interation_GetNewMatches(this HttpClient http, ISessionStorageService session)
         {
-            return await http.GetCustomSession<List<ProfileBasic>>(session, StorageKey, "Interaction/GetNewMatches");
+            return await http.GetList<ProfileSearch>("Interaction/GetNewMatches");
         }
 
         public async static Task<List<ProfileChatList>> Interation_GetChatList(this HttpClient http, ISessionStorageService session)
         {
-            return await http.GetCustomSession<List<ProfileChatList>>(session, StorageKey, "Interaction/GetChatList");
+            return await http.GetList<ProfileChatList>("Interaction/GetChatList");
         }
 
         public async static Task<HttpResponseMessage> Interation_Blink(this HttpClient http, ILocalStorageService storage, string IdUserInteraction)

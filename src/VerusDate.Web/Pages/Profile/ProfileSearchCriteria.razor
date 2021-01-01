@@ -167,14 +167,14 @@ else
 
     protected override async Task LoadData()
     {
-        looking = (await Http.Profile_Get(LocalStorage)).Looking;
+        looking = (await Http.Profile_Get()).Looking;
 
         if (looking == null)
         {
             looking = new VerusDate.Shared.Model.Profile.ProfileLooking();
         }
 
-        profile = await Http.Profile_Get(LocalStorage);
+        profile = await Http.Profile_Get();
     }
 
     private async Task HandleValidSubmit()

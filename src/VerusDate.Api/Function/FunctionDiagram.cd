@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="VerusDate.Api.Function.ChatFunction">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <Members>
+      <Method Name="ChatFunction" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Function\ChatFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.InteractionFunction">
+    <Position X="9.75" Y="2" Width="1.75" />
+    <Members>
+      <Method Name="InteractionFunction" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACAFAAAAAAAAAABAAACAAAAAAAAAAAAAAAAAAAAJAAA=</HashCode>
+      <FileName>Function\InteractionFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.ProfileFunction">
+    <Position X="14.5" Y="2" Width="1.5" />
+    <Members>
+      <Method Name="ProfileFunction" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAYBAAAAAAAAAABAAAAQAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Function\ProfileFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.StorageFunction">
+    <Position X="7.5" Y="2" Width="1.5" />
+    <Members>
+      <Method Name="StorageFunction" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Function\StorageFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.StoreFunction">
+    <Position X="12.25" Y="2" Width="1.5" />
+    <Members>
+      <Method Name="StoreFunction" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Function\StoreFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.SupportFunction">
+    <Position X="16.75" Y="2" Width="1.5" />
+    <Members>
+      <Method Name="SupportFunction" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Function\SupportFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="11" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

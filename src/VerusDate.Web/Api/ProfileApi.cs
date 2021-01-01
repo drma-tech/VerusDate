@@ -1,6 +1,4 @@
-﻿using Blazored.LocalStorage;
-using Blazored.SessionStorage;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using VerusDate.Shared.Model.Profile;
@@ -10,23 +8,14 @@ namespace VerusDate.Web.Api
 {
     public static class ProfileApi
     {
-        public static string StorageKey => ComponenteUtils.GetStorageKey("Profile");
-
-        public async static Task ClearCache(ILocalStorageService storage)
+        public async static Task<Profile> Profile_Get(this HttpClient http)
         {
-            await storage.RemoveItemAsync(StorageKey);
+            return await http.Get<Profile>($"Profile/Get");
         }
 
-        public async static Task<Profile> Profile_Get(this HttpClient http, ILocalStorageService local)
+        public async static Task<Profile> Profile_GetView(this HttpClient http, string IdUserView)
         {
-            return await http.GetCustomLocal<Profile>(local, StorageKey, $"Profile/Get");
-        }
-
-        public async static Task<Profile> Profile_GetView(this HttpClient http, ISessionStorageService session, string IdUserView)
-        {
-            if (string.IsNullOrEmpty(IdUserView)) return null;
-
-            return await http.GetCustomSession<Profile>(session, StorageKey + IdUserView, $"Profile/GetView?id={IdUserView}");
+            return await http.Get<Profile>($"Profile/GetView?id={IdUserView}");
         }
 
         //public List<AffinityVM> GetAffinity(ProfileLooking profUser, Profile profView)
@@ -149,47 +138,19 @@ namespace VerusDate.Web.Api
         //    return await http.ListCustom<Profile>("Profile/ListSearch");
         //}
 
-        public async static Task<HttpResponseMessage> Profile_Add(this HttpClient http, ILocalStorageService storage, Profile obj, string id)
+        public async static Task<Profile> Profile_Add(this HttpClient http, Profile obj)
         {
-            var response = await http.PostAsJsonAsync("Profile/Add", obj);
-
-            if (response.IsSuccessStatusCode)
-            {
-                obj.Id = id; //TODO: descobrir outra maneira de saber se é insert ou update, pq depende desse campo
-                await storage.SetItemAsync(StorageKey, obj);
-                //await ProfileValidationApi.ClearCache(storage);
-                await GamificationApi.ClearCache(storage);
-            }
-
-            return response;
+            return await http.Post("Profile/Add", obj);
         }
 
-        public async static Task<HttpResponseMessage> Profile_Update(this HttpClient http, ILocalStorageService storage, Profile obj)
+        public async static Task<Profile> Profile_Update(this HttpClient http, Profile obj)
         {
-            var response = await http.PostAsJsonAsync("Profile/Update", obj);
-
-            if (response.IsSuccessStatusCode)
-            {
-                await storage.SetItemAsync(StorageKey, obj);
-                //await ProfileValidationApi.ClearCache(storage);
-                await GamificationApi.ClearCache(storage);
-            }
-
-            return response;
+            return await http.Put("Profile/Update", obj);
         }
 
-        public async static Task<HttpResponseMessage> Profile_UpdateLooking(this HttpClient http, ILocalStorageService storage, ProfileLooking obj)
+        public async static Task<ProfileLooking> Profile_UpdateLooking(this HttpClient http, ProfileLooking obj)
         {
-            var response = await http.PostAsJsonAsync("Profile/UpdateLooking", obj);
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    await storage.SetItemAsync(StorageKey, obj);
-            //}
-
-            return response;
+            return await http.Put("Profile/UpdateLooking", obj);
         }
-
-      
     }
 }

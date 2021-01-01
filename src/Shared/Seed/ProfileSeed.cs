@@ -1,17 +1,28 @@
 ﻿using Bogus;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Model.Profile;
+using VerusDate.Shared.ModelQuery;
 
 namespace VerusDate.Shared.Seed
 {
     public static class ProfileSeed
     {
+        public static Faker<Profile> GetProfile(string Id = null, bool profile = true, bool looking = false, bool gamification = false, bool badge = false, bool photo = false)
+        {
+            return GetProfile<Profile>(Id, profile, looking, gamification, badge, photo);
+        }
+
+        public static int GetNumber(int min = 0, int max = 1)
+        {
+            return new Faker().Random.Number(min, max);
+        }
+
         public static Faker<T> GetProfile<T>(string Id = null, bool profile = true, bool looking = false, bool gamification = false, bool badge = false, bool photo = false) where T : Profile
         {
             return new Faker<T>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.Id = Id ?? s.Random.Guid().ToString();
+                    p.SetIds(Id ?? s.Random.Guid().ToString());
                     if (profile) p.UpdateProfile(GetProfileBasic<ProfileBasic>(), GetProfileBio(), GetProfileLifestyle());
                     if (looking) p.UpdateLooking(GetProfileLookingVM());
                     if (gamification) p.UpdateGamification(GetProfileGamification());
@@ -21,12 +32,26 @@ namespace VerusDate.Shared.Seed
                 });
         }
 
+        public static Faker<ProfileSearch> GetProfileSearch(string Id = null)
+        {
+            return new Faker<ProfileSearch>("pt_BR")
+                .Rules((s, p) =>
+                {
+                    p.SetIds(Id ?? s.Random.Guid().ToString());
+                    p.NickName = s.Name.FirstName();
+                    p.BirthDate = s.Date.Past(18).Date;
+                    p.UpdatePhoto(GetProfilePhoto());
+                    p.ActivityStatus = s.PickRandom<ActivityStatus>();
+                    p.Distance = s.Random.Number(500, 10000);
+                });
+        }
+
         public static Faker<T> GetProfileBasic<T>() where T : ProfileBasic
         {
             return new Faker<T>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.NickName = s.Internet.UserName();
+                    p.NickName = s.Name.FirstName();
                     p.Description = s.Lorem.Word();
                     p.Latitude = s.Address.Latitude(-3.220192, -34.316614);
                     p.Longitude = s.Address.Longitude(-35.039519, -69.421414);
@@ -129,7 +154,7 @@ namespace VerusDate.Shared.Seed
             return new Faker<ProfilePhoto>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.UpdateMainPhoto(s.Image.PicsumUrl());
+                    p.UpdateMainPhoto(s.Internet.Avatar());
                     p.UpdatePhotoGallery(new[] { s.Image.PicsumUrl() });
                 });
         }

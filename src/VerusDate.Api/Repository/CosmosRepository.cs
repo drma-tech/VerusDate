@@ -48,14 +48,6 @@ namespace VerusDate.Api.Repository
             }
         }
 
-        private QueryRequestOptions GetDefaultOptions(string partitionKeyValue)
-        {
-            if (string.IsNullOrEmpty(partitionKeyValue))
-                return null;
-            else
-                return new QueryRequestOptions() { PartitionKey = new PartitionKey(partitionKeyValue) };
-        }
-
         public async Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken) where T : CosmosBase
         {
             return await Query(predicate, null, cancellationToken);
@@ -63,7 +55,7 @@ namespace VerusDate.Api.Repository
 
         public async Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase
         {
-            IQueryable<T> query = Container.GetItemLinqQueryable<T>(requestOptions: GetDefaultOptions(partitionKeyValue))
+            IQueryable<T> query = Container.GetItemLinqQueryable<T>(requestOptions: CosmosRepositoryExtensions.GetDefaultOptions(partitionKeyValue))
                 .Where(predicate.Compose(item => item.Type == typeof(T).Name, Expression.AndAlso));
 
             using (FeedIterator<T> iterator = query.ToFeedIterator())
@@ -84,8 +76,6 @@ namespace VerusDate.Api.Repository
 
         public async Task<T> Add<T>(T item, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase
         {
-            item.Key = partitionKeyValue;
-
             var response = await Container.CreateItemAsync(item, new PartitionKey(partitionKeyValue), null, cancellationToken);
 
             return response.Resource;
@@ -93,8 +83,6 @@ namespace VerusDate.Api.Repository
 
         public async Task<T> Update<T>(T item, string id, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase
         {
-            item.Key = partitionKeyValue;
-
             var response = await Container.ReplaceItemAsync(item, id, new PartitionKey(partitionKeyValue), null, cancellationToken);
 
             return response.Resource;

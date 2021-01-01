@@ -8,15 +8,16 @@ namespace VerusDate.Shared.Model.Interaction
 {
     public class Chat : CosmosBase
     {
-        public Chat() : base("Chat")
+        public Chat() : base(nameof(Chat))
         {
         }
 
         public List<ChatItem> Itens { get; set; } = new List<ChatItem>();
 
-        public override void SetIdLoggedUser(string IdUser)
+        public override void SetIds(string IdLoggedUser)
         {
-            throw new NotImplementedException();
+            this.Id = Guid.NewGuid().ToString();
+            this.Key = this.Id;
         }
     }
 

@@ -5,16 +5,8 @@ namespace VerusDate.Shared.Model.Interaction
 {
     public class Interaction : CosmosBase
     {
-        public Interaction() : base("Interaction")
+        public Interaction() : base(nameof(Interaction))
         {
-        }
-
-        public void SetId(string IdUserInteraction)
-        {
-            this.Id = $"{IdLoggedUser}-{IdUserInteraction}";
-            this.Key = IdLoggedUser;
-
-            this.IdUserInteraction = IdUserInteraction;
         }
 
         public static string GetId(string IdLoggedUser, string IdUserInteraction)
@@ -30,8 +22,6 @@ namespace VerusDate.Shared.Model.Interaction
         public string IdLoggedUser { get; private set; }
         public string IdUserInteraction { get; private set; }
 
-        public DateTimeOffset? DtInsert { get; set; } = DateTimeOffset.UtcNow;
-        public DateTimeOffset? DtUpdate { get; private set; }
         public Action Like { get; set; } = new Action();
         public Action Deslike { get; set; } = new Action();
         public Action Blink { get; set; } = new Action();
@@ -74,9 +64,17 @@ namespace VerusDate.Shared.Model.Interaction
             DtUpdate = DateTimeOffset.UtcNow;
         }
 
-        public override void SetIdLoggedUser(string IdUser)
+        public override void SetIds(string IdLoggedUser)
         {
-            this.IdLoggedUser = IdUser;
+            this.IdLoggedUser = IdLoggedUser;
+        }
+
+        public void SetIdInteraction(string IdUserInteraction)
+        {
+            this.Id = $"{IdLoggedUser}-{IdUserInteraction}";
+            this.Key = IdLoggedUser;
+
+            this.IdUserInteraction = IdUserInteraction;
         }
     }
 }

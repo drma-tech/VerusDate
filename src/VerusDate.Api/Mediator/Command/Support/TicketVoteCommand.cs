@@ -2,14 +2,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
-using VerusDate.Shared.Model.Ticket;
+using VerusDate.Shared.Model.Support;
 
-namespace VerusDate.Api.Mediator.Command.Ticket
+namespace VerusDate.Api.Mediator.Command.Support
 {
-    public class TicketVoteCommand : TicketVote, IRequest<TicketVote>
-    {
-        public string IdTicket { get; set; }
-    }
+    public class TicketVoteCommand : TicketVote, IRequest<TicketVote> { }
 
     public class TicketVoteHandler : IRequestHandler<TicketVoteCommand, TicketVote>
     {
@@ -25,9 +22,9 @@ namespace VerusDate.Api.Mediator.Command.Ticket
             //var query = new StringBuilder("UPDATE Ticket SET TotalVotes = TotalVotes + 1 WHERE Id = @IdTicket; INSERT INTO TicketVote (IdTicket,IdUser) VALUES (@IdTicket,@Id);");
             //TODO: ATUALIZAR TOTAL DE TICKET POR PERIODO
 
-            request.Key = request.IdTicket;
+            request.SetKey(request.Key);
 
-            return await _repo.Add(request, request.IdTicket, cancellationToken);
+            return await _repo.Add(request, request.Key, cancellationToken);
         }
     }
 }

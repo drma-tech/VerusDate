@@ -9,15 +9,15 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
-using VerusDate.Api.Mediator.Command.Ticket;
+using VerusDate.Api.Mediator.Command.Support;
 
 namespace VerusDate.Api.Function
 {
-    public class TicketFunction
+    public class SupportFunction
     {
         private readonly IMediator _mediator;
 
-        public TicketFunction(IMediator mediator)
+        public SupportFunction(IMediator mediator)
         {
             _mediator = mediator;
         }

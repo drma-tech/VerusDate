@@ -1,5 +1,4 @@
-﻿using Blazored.LocalStorage;
-using Blazored.SessionStorage;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -9,16 +8,7 @@ namespace VerusDate.Web.Core
 {
     public static class ApiCore
     {
-        /// <summary>
-        /// Retorna o valor do local storage (caso não exista, busca da api e armazena)
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="http"></param>
-        /// <param name="local"></param>
-        /// <param name="StorageKey"></param>
-        /// <param name="requestUri"></param>
-        /// <returns></returns>
-        public async static Task<T> GetCustomLocal<T>(this HttpClient http, ILocalStorageService local, string StorageKey, string requestUri) where T : class
+        private async static Task<T> ReturnResponse<T>(this HttpResponseMessage response)
         {
             //if (!await local.ContainKeyAsync(StorageKey))
             //{
@@ -34,10 +24,6 @@ namespace VerusDate.Web.Core
             //    }
             //}
 
-            //return await local.GetItemAsync<T>(StorageKey);
-
-            var response = await http.GetAsync(http.BaseApi() + requestUri);
-
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<T>();
@@ -48,45 +34,39 @@ namespace VerusDate.Web.Core
             }
         }
 
-        /// <summary>
-        /// Retorna o valor da sessão do usuário (caso não exista, busca da api e armazena)
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="http"></param>
-        /// <param name="session"></param>
-        /// <param name="StorageKey"></param>
-        /// <param name="requestUri"></param>
-        /// <returns></returns>
-        public async static Task<T> GetCustomSession<T>(this HttpClient http, ISessionStorageService session, string StorageKey, string requestUri) where T : class
+        public async static Task<T> Get<T>(this HttpClient http, string requestUri) where T : class
         {
-            //var result = await session.GetItemAsync<T>(StorageKey);
-
-            //if (result == null)
-            //{
-            //    var response = await http.GetAsync(ComponenteUtils.BaseApi + requestUri);
-
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        await session.SetItemAsync(StorageKey, await response.Content.ReadFromJsonAsync<T>());
-            //    }
-            //    else
-            //    {
-            //        throw new NotificationException(response);
-            //    }
-            //}
-
-            //return result;
-
             var response = await http.GetAsync(http.BaseApi() + requestUri);
 
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadFromJsonAsync<T>();
-            }
-            else
-            {
-                throw new NotificationException(response);
-            }
+            return await response.ReturnResponse<T>();
+        }
+
+        public async static Task<List<T>> GetList<T>(this HttpClient http, string requestUri) where T : class
+        {
+            var response = await http.GetAsync(http.BaseApi() + requestUri);
+
+            return await response.ReturnResponse<List<T>>();
+        }
+
+        public async static Task<T> Post<T>(this HttpClient http, string requestUri, T obj) where T : class
+        {
+            var response = await http.PostAsJsonAsync(http.BaseApi() + requestUri, obj);
+
+            return await response.ReturnResponse<T>();
+        }
+
+        public async static Task<T> Put<T>(this HttpClient http, string requestUri, T obj) where T : class
+        {
+            var response = await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj);
+
+            return await response.ReturnResponse<T>();
+        }
+
+        public async static Task<T> Delete<T>(this HttpClient http, string requestUri)
+        {
+            var response = await http.DeleteAsync(http.BaseApi() + requestUri);
+
+            return await response.ReturnResponse<T>();
         }
     }
 }

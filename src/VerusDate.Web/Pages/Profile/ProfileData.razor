@@ -140,7 +140,7 @@ else
 
     protected override async Task LoadData()
     {
-        profile = await Http.Profile_Get(LocalStorage);
+        profile = await Http.Profile_Get();
 
         //if (profile == null)
         //{
@@ -194,16 +194,16 @@ else
 
             if (string.IsNullOrEmpty(profile?.Id))
             {
-                response = await Http.Profile_Add(LocalStorage, profile, ComponenteUtils.IdUser);
+                //response = await Http.Profile_Add(profile);
                 Toast.ShowWarning("+30 XP");
             }
             else
             {
-                response = await Http.Profile_Update(LocalStorage, profile);
+                //response = await Http.Profile_Update(profile);
                 Toast.ShowWarning("-100 XP");
             }
 
-            await response.ProcessResponse(Toast, "Salvo com sucesso!");
+            //await response.ProcessResponse(Toast, "Salvo com sucesso!");
         }
         catch (Exception ex)
         {

@@ -19,7 +19,7 @@
                 {
                     <div class="col-lg-1 col-md-2 col-3 text-center">
                         <div class="embed-responsive embed-responsive-1by1 img-fluid img-circle divPhoto">
-                            <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.GetPhotoFace()" />
+                            <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.Photo.GetMainPhoto()" />
                         </div>
                         <small>@item.NickName</small>
                     </div>
@@ -45,7 +45,7 @@
                 {
                     <div class="col-lg-1 col-md-2 col-3 text-center">
                         <div class="embed-responsive embed-responsive-1by1 img-fluid img-circle divPhoto">
-                            <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.GetPhotoFace()" />
+                            <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.Photo.GetMainPhoto()" />
                         </div>
                         <small>@item.NickName</small>
                     </div>
@@ -56,8 +56,8 @@
 </div>
 
 @code {
-    private List<VerusDate.Shared.ModelQuery.ProfileBasic> Likes { get; set; }
-    private List<VerusDate.Shared.ModelQuery.ProfileBasic> Blinks { get; set; }
+    private List<VerusDate.Shared.ModelQuery.ProfileSearch> Likes { get; set; }
+    private List<VerusDate.Shared.ModelQuery.ProfileSearch> Blinks { get; set; }
 
     private VisibilityOptions OptionsLikes => new VisibilityOptions()
     {

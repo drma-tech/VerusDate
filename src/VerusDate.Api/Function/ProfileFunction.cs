@@ -51,6 +51,12 @@ namespace VerusDate.Api.Function
         {
             try
             {
+                if (req.Headers.TryGetValue("x-ms-client-principal", out var header))
+                {
+                    var data = header[0];
+                    return new OkObjectResult(data);
+                }
+
                 var principal = StaticWebAppsAuth.Parse(req);
                 return new OkObjectResult("id=" + principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value);
 

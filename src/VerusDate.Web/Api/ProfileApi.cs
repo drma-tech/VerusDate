@@ -1,5 +1,4 @@
 ﻿using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 using VerusDate.Shared.Model.Profile;
 using VerusDate.Web.Core;

@@ -41,6 +41,7 @@ namespace VerusDate.Shared.Seed
                     p.NickName = s.Name.FirstName();
                     p.BirthDate = s.Date.Past(18).Date;
                     p.UpdatePhoto(GetProfilePhoto());
+                    //p.UpdatePhoto(new ProfilePhoto());
                     p.ActivityStatus = s.PickRandom<ActivityStatus>();
                     p.Distance = s.Random.Number(500, 10000);
                 });

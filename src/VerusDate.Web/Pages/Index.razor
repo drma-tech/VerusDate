@@ -407,6 +407,9 @@
 
     protected override async Task LoadData()
     {
+        var token = await Http.Profile_GetView("123");
+        Console.WriteLine(token);
+
         //profile = await Http.Profile_Get();
         await Task.Run(() =>
         {

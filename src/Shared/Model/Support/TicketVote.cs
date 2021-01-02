@@ -10,7 +10,7 @@ namespace VerusDate.Shared.Model.Support
             Id = Guid.NewGuid().ToString();
         }
 
-        public string IdVotedUser { get; private set; }
+        public string IdVotedUser { get; set; }
 
         public override void SetIds(string IdLoggedUser)
         {

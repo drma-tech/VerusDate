@@ -5,6 +5,18 @@ namespace VerusDate.Shared.Helper
 {
     public static class ProfileHelper
     {
+        public static string GetResume(this string text, int count)
+        {
+            if (text.Length > count)
+            {
+                return text.Substring(0, count) + "...";
+            }
+            else
+            {
+                return text;
+            }
+        }
+
         public static Zodiac GetZodiac(this DateTime date)
         {
             if (date.Month == 12)

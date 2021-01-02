@@ -19,8 +19,8 @@ namespace VerusDate.Shared.Model.Interaction
             return $"{IdUserInteraction}-{IdLoggedUser}";
         }
 
-        public string IdLoggedUser { get; private set; }
-        public string IdUserInteraction { get; private set; }
+        public string IdLoggedUser { get; set; }
+        public string IdUserInteraction { get; set; }
 
         public Action Like { get; set; } = new Action();
         public Action Deslike { get; set; } = new Action();

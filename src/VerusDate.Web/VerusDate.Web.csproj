@@ -6,13 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Shared\modal\**" />
-    <Content Remove="Shared\modal\**" />
-    <EmbeddedResource Remove="Shared\modal\**" />
-    <None Remove="Shared\modal\**" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Content Remove="Shared\modal\NewTicket_old.razor" />
     <Content Remove="Shared\RedirectToLogin.razor" />
   </ItemGroup>
 

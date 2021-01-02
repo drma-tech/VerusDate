@@ -144,11 +144,11 @@ else
         </Card>
     </EditForm>
 
-    <BasicModal @ref="help" Title="Ajuda">
+    <VerusDate.Web.Shared.modal.BasicModal @ref="help" Title="Ajuda">
         <ul>
             <li>Aqui você pode definir seu tipo ideal de perfil, para incrementar nossas sugestões e também para calcular o percentual de afinidades</li>
         </ul>
-    </BasicModal>
+    </VerusDate.Web.Shared.modal.BasicModal>
 }
 
 @code {
@@ -156,9 +156,9 @@ else
     VerusDate.Shared.Model.Profile.ProfileLooking looking;
     VerusDate.Shared.Model.Profile.Profile profile;
 
-    private BasicModal help;
+    private Shared.modal.BasicModal help;
 
-    private ProfileDataHelp<object> ProfileDataHelp;
+    private Shared.modal.ProfileDataHelp<object> ProfileDataHelp;
 
     private VisibilityOptions Options => new VisibilityOptions()
     {

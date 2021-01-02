@@ -6,7 +6,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
-using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Profile;
@@ -27,13 +27,15 @@ namespace VerusDate.Api.Function
         [FunctionName("ProfileGet")]
         public async Task<IActionResult> Get(
            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/Get")] HttpRequest req,
-           ILogger log)
+           ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
                 var command = new ProfileGetCommand();
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(command, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -47,8 +49,10 @@ namespace VerusDate.Api.Function
         [FunctionName("ProfileGetView")]
         public async Task<IActionResult> GetView(
            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/GetView")] HttpRequest req,
-           ILogger log)
+           ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
                 if (req.Headers.TryGetValue("x-ms-client-principal", out var header))
@@ -64,7 +68,7 @@ namespace VerusDate.Api.Function
                 //var principal = StaticWebAppsAuth.Parse(req);
                 //return new OkObjectResult("id=" + principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value);
 
-                //var result = await _mediator.Send(new ProfileGetViewCommand() { IdUserView = req.Query["Id"] }, req.HttpContext.RequestAborted);
+                //var result = await _mediator.Send(new ProfileGetViewCommand() { IdUserView = req.Query["Id"] }, source.Token);
 
                 //return new OkObjectResult(result);
             }
@@ -114,14 +118,16 @@ namespace VerusDate.Api.Function
         [FunctionName("ProfileAdd")]
         public async Task<IActionResult> Add(
             [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Profile/Add")] HttpRequest req,
-            ILogger log)
+            ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
                 //var command = await JsonSerializer.DeserializeAsync<ProfileAddCommand>(req.Body);
                 var command = ProfileSeed.GetProfile<ProfileAddCommand>(null).Generate();
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(command, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -135,14 +141,16 @@ namespace VerusDate.Api.Function
         [FunctionName("ProfileUpdate")]
         public async Task<IActionResult> Update(
             [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Profile/Update")] HttpRequest req,
-            ILogger log)
+            ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
                 //var command = await JsonSerializer.DeserializeAsync<ProfileUpdateCommand>(req.Body);
                 var command = ProfileSeed.GetProfile<ProfileUpdateCommand>(req.Query["Id"]).Generate();
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(command, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -156,14 +164,16 @@ namespace VerusDate.Api.Function
         [FunctionName("ProfileUpdateLooking")]
         public async Task<IActionResult> UpdateLooking(
             [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Profile/UpdateLooking")] HttpRequest req,
-            ILogger log)
+            ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
                 //var command = await JsonSerializer.DeserializeAsync<ProfileUpdateLookingCommand>(req.Body);
                 var command = ProfileSeed.GetProfile<ProfileUpdateLookingCommand>(req.Query["Id"]).Generate();
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(command, source.Token);
 
                 return new OkObjectResult(result);
             }

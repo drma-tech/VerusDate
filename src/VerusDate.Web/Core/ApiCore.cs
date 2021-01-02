@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading.Tasks;
 using VerusDate.Shared.Helper;
 
@@ -18,6 +19,11 @@ namespace VerusDate.Web.Core
             {
                 throw new NotificationException(response);
             }
+        }
+
+        private static JsonSerializerOptions GetOptions()
+        {
+            return new JsonSerializerOptions();
         }
 
         public async static Task<string> GetString(this HttpClient http, string requestUri)
@@ -43,14 +49,14 @@ namespace VerusDate.Web.Core
 
         public async static Task<T> Post<T>(this HttpClient http, string requestUri, T obj) where T : class
         {
-            var response = await http.PostAsJsonAsync(http.BaseApi() + requestUri, obj);
+            var response = await http.PostAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
 
             return await response.ReturnResponse<T>();
         }
 
         public async static Task<T> Put<T>(this HttpClient http, string requestUri, T obj) where T : class
         {
-            var response = await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj);
+            var response = await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
 
             return await response.ReturnResponse<T>();
         }

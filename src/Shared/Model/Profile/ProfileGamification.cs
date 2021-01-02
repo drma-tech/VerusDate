@@ -16,16 +16,16 @@ namespace VerusDate.Shared.Model.Profile
         public int MaxFood => Ranking == 0 ? MaxRankFood : Ranking * MaxRankFood;
 
         [Display(Name = "Ranking")]
-        public int Ranking { get; private set; }
+        public int Ranking { get; set; }
 
         [Display(Name = "XP")]
-        public int XP { get; private set; }
+        public int XP { get; set; }
 
         [Display(Name = "Food")]
-        public int Food { get; private set; }
+        public int Food { get; set; }
 
         [Display(Name = "Diamond")]
-        public int Diamond { get; private set; }
+        public int Diamond { get; set; }
 
         public void AddXP(int qtd)
         {

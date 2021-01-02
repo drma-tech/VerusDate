@@ -12,34 +12,34 @@ namespace VerusDate.Shared.Model.Event
         {
         }
 
-        public string IdUserOwner { get; private set; }
+        public string IdUserOwner { get; set; }
 
         [Display(Name = "Data Início")]
-        public DateTimeOffset DtStart { get; private set; } = DateTimeOffset.UtcNow.AddDays(7);
+        public DateTimeOffset DtStart { get; set; } = DateTimeOffset.UtcNow.AddDays(7);
 
         [Display(Name = "Data Fim")]
-        public DateTimeOffset DtEnd { get; private set; } = DateTimeOffset.UtcNow.AddDays(7).AddHours(3);
+        public DateTimeOffset DtEnd { get; set; } = DateTimeOffset.UtcNow.AddDays(7).AddHours(3);
 
         [Display(Name = "Tipo de Evento")]
-        public EventType EventType { get; private set; }
+        public EventType EventType { get; set; }
 
         [Display(Name = "Localização")]
-        public string Location { get; private set; }
+        public string Location { get; set; }
 
         [Display(Name = "Idade (Min - Máx)")]
-        public int MinimalAge { get; private set; } = 18;
+        public int MinimalAge { get; set; } = 18;
 
         [Display(Name = "Idade (Min - Máx)")]
-        public int MaxAge { get; private set; } = 40;
+        public int MaxAge { get; set; } = 40;
 
         [Display(Name = "Intenções")]
-        public IReadOnlyList<Intent> Intent { get; private set; } = new List<Intent>();
+        public IReadOnlyList<Intent> Intent { get; set; } = new List<Intent>();
 
         [Display(Name = "Orientação Sexual")]
-        public SexualOrientation[] SexualOrientation { get; private set; }
+        public SexualOrientation[] SexualOrientation { get; set; }
 
         [Display(Name = "Equilibrar os gêneros?")]
-        public bool GenderDivision { get; private set; }
+        public bool GenderDivision { get; set; }
 
         public void NewBlindDate(DateTimeOffset DtStart, string Location, int MinimalAge, int MaxAge, Intent[] Intent,
             SexualOrientation[] SexualOrientation, bool GenderDivision)

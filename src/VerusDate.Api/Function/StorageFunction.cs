@@ -25,13 +25,13 @@ namespace VerusDate.Api.Function
         //[FunctionName("StorageUploadPhotoGallery")]
         //public async Task<IActionResult> UploadPhotoGallery(
         //    [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Storage/UploadPhotoGallery")] HttpRequest req,
-        //    ILogger log)
+        //    ILogger log, CancellationToken cancellationToken)
         //{
         //    try
         //    {
         //        var command = await JsonSerializer.DeserializeAsync<UploadPhotoGalleryCommand>(req.Body);
 
-        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+        //        var result = await _mediator.Send(command, source.Token);
 
         //        if (result)
         //            return new OkObjectResult(result);
@@ -48,13 +48,13 @@ namespace VerusDate.Api.Function
         //[FunctionName("StorageUploadPhotoValidation")]
         //public async Task<IActionResult> UploadPhotoValidation(
         //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Storage/UploadPhotoValidation")] HttpRequest req,
-        //   ILogger log)
+        //   ILogger log, CancellationToken cancellationToken)
         //{
         //    try
         //    {
         //        var command = await JsonSerializer.DeserializeAsync<UploadPhotoValidationCommand>(req.Body);
 
-        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+        //        var result = await _mediator.Send(command, source.Token);
 
         //        if (result)
         //            return new OkObjectResult(result);

@@ -1,29 +1,45 @@
-﻿<div style="width: 350px;">
-    <EditForm Model="@Ticket" OnValidSubmit="SubmitForm">
-        <FluentValidationValidator />
-        <div class="form-group">
-            <InputTextArea @bind-Value="@Ticket.Description" @attributes="@AttributeHelper.GetAttributes((() => Ticket.Description), false, true, true)"></InputTextArea>
-            <ValidationMessage For="@(()=>Ticket.Description)"></ValidationMessage>
-        </div>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        <button @onclick="Cancel" class="btn btn-secondary">Cancelar</button>
-    </EditForm>
-</div>
+﻿@inject HttpClient Http
+
+<Modal @ref="modal">
+    <ModalBackdrop />
+    <ModalContent IsCentered="true">
+        <ModalHeader>
+            <ModalTitle>Novo Ticket</ModalTitle>
+            <CloseButton Clicked="@modal.Hide" />
+        </ModalHeader>
+        <ModalBody>
+            <EditForm Model="@Ticket" OnValidSubmit="SubmitForm">
+                <FluentValidationValidator />
+                <div class="form-group">
+                    <MemoEdit @bind-Text="@Ticket.Description" Rows="7" MaxLength="512" Placeholder="@AttributeHelper.GetPrompt(()=>Ticket.Description)"></MemoEdit>
+                    <ValidationMessage For="@(()=>Ticket.Description)"></ValidationMessage>
+                </div>
+                <Button Type="ButtonType.Submit" Color="Color.Primary">Salvar</Button>
+                <Button Clicked="@modal.Hide" Color="Color.Secondary">Cancelar</Button>
+            </EditForm>
+        </ModalBody>
+    </ModalContent>
+</Modal>
 
 @code {
+    private Modal modal;
+    private TicketType TicketType;
 
-    [CascadingParameter] BlazoredModalInstance BlazoredModal { get; set; }
-    [Parameter] public TicketType TicketType { get; set; }
+    public VerusDate.Shared.Model.Support.Ticket Ticket { get; set; } = new();
 
-    public VerusDate.Shared.Model.Ticket Ticket { get; set; }
-
-    protected override void OnInitialized()
+    public void ShowModal(TicketType TicketType)
     {
-        base.OnInitialized();
-
-        Ticket = new VerusDate.Shared.Model.Ticket(ComponenteUtils.IdUser, TicketType);
+        this.TicketType = TicketType;
+        modal.Show();
     }
 
-    void SubmitForm() => BlazoredModal.Close(ModalResult.Ok<VerusDate.Shared.Model.Ticket>(Ticket));
-    void Cancel() => BlazoredModal.Cancel();
+    public async Task SubmitForm()
+    {
+        Ticket.TicketType = TicketType;
+        Ticket.TicketStatus = TicketStatus.Published;
+        Ticket.SetIds(ComponenteUtils.IdUser);
+
+        await Http.Ticket_Insert(Ticket);
+        modal.Hide();
+    }
 }

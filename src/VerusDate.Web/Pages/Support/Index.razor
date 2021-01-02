@@ -5,7 +5,16 @@
 @*@inject IModalService Modal*@
 
 <Alert Color="Color.Secondary" Visible="true">
-    <Link To="Terms/pt">Termos de Uso</Link> ▪ <Link To="Privacy/pt">Políticas de Privacidade</Link> ▪ <Link To="Faq">Dúvidas / Perguntas</Link>
+    <AlertDescription>
+        <Link To="Terms/pt">Termos de Uso</Link> ▪ <Link To="Privacy/pt">Políticas de Privacidade</Link> ▪ <Link To="Faq">Dúvidas / Perguntas</Link>
+    </AlertDescription>
+</Alert>
+
+<Alert Color="Color.Warning" Visible="true">
+    <AlertDescription>
+        Olá, como ainda estamos em uma versão beta, é provável que alguns erros ocorram ou que alguns recursos precisem de melhorias.
+    </AlertDescription>
+    <CloseButton></CloseButton>
 </Alert>
 
 <Row>
@@ -13,7 +22,7 @@
         <Card>
             <CardHeader>
                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug"></Icon> Erros
-                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => ShowModal(TicketType.Bug)">
+                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => NewTicket.ShowModal(TicketType.Bug)">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
                 </Button>
             </CardHeader>
@@ -41,39 +50,44 @@
                 }
                 else
                 {
-                    <div style="max-height: 350px; overflow:auto;">
-                        <ul class="sortable-list connectList agile-list ui-sortable" style="padding: 0;">
-                            @foreach (var item in GetTicketList(TicketType.Bug))
-                            {
-                                <li class="info-element ui-sortable-handle">
-                                    @item.Description
-                                    <div class="agile-detail">
-                                        <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.Id)" disabled="@anyVote(item.Id)">
-                                            <i class="fas fa-check"></i> Votar
-                                        </button>
-                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtInsert.Value.GetElapsedTime()</span>
-                                        <span class="badge"><i class="fas fa-vote-yea"></i> @item.TotalVotes</span>
-                                        @if (item.TicketStatus == TicketStatus.Published)
-                                        {
-                                            <span class="badge badge-success">@item.TicketStatus.GetName()</span>
-                                        }
-                                        else if (item.TicketStatus == TicketStatus.Progress)
-                                        {
-                                            <span class="badge badge-warning">@item.TicketStatus.GetName()</span>
-                                        }
-                                        else if (item.TicketStatus == TicketStatus.Done)
-                                        {
-                                            <span class="badge badge-primary">@item.TicketStatus.GetName()</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge badge-danger">@item.TicketStatus.GetName()</span>
-                                        }
-                                    </div>
-                                </li>
-                            }
-                        </ul>
-                    </div>
+                    <Row Style="max-height: 330px; overflow: auto;">
+                        @foreach (var item in GetTicketList(TicketType.Bug))
+                        {
+                            <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is1.FromBottom">
+                                <Card Style="background-color: #e2e3e5">
+                                    <CardBody Padding="Padding.Is1">
+                                        <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Justified">
+                                            <MemoEdit Rows="2" Plaintext="true" Text="@item.Description.GetResume(50)" />
+                                        </Paragraph>
+                                        <Paragraph Margin="Margin.Is2.FromBottom">
+                                            <Badge Color="Color.Secondary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Icon> @item.DtInsert.Value.GetElapsedTime()</Badge>
+                                            <br />
+                                            <Badge Color="Color.Secondary" Margin="Margin.Is1.FromRight"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.VoteYea"></Icon> @item.TotalVotes</Badge>
+                                            @if (item.TicketStatus == TicketStatus.Published)
+                                            {
+                                                <Badge Color="Color.Success"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle"></Icon> @item.TicketStatus.GetName()</Badge>
+                                            }
+                                            else if (item.TicketStatus == TicketStatus.Progress)
+                                            {
+                                                <Badge Color="Color.Warning">@item.TicketStatus.GetName()</Badge>
+                                            }
+                                            else if (item.TicketStatus == TicketStatus.Done)
+                                            {
+                                                <Badge Color="Color.Primary">@item.TicketStatus.GetName()</Badge>
+                                            }
+                                            else
+                                            {
+                                                <Badge Color="Color.Danger">@item.TicketStatus.GetName()</Badge>
+                                            }
+                                            <Button Float="Float.Right" Size="Size.ExtraSmall" Color="Color.Primary" Clicked="()=>Vote(item.Id)" Disabled="@anyVote(item.Id)">
+                                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Votar
+                                            </Button>
+                                        </Paragraph>
+                                    </CardBody>
+                                </Card>
+                            </Column>
+                        }
+                    </Row>
                 }
             </CardBody>
         </Card>
@@ -82,7 +96,7 @@
         <Card>
             <CardHeader>
                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smile"></Icon> Sugestões de Melhorias
-                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => ShowModal(TicketType.FeatureRequest)">
+                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => NewTicket.ShowModal(TicketType.FeatureRequest)">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
                 </Button>
             </CardHeader>
@@ -110,51 +124,60 @@
                 }
                 else
                 {
-                    <div style="max-height: 350px; overflow:auto;">
-                        <ul class="sortable-list connectList agile-list ui-sortable" style="padding: 0;">
-                            @foreach (var item in GetTicketList(TicketType.FeatureRequest))
-                            {
-                                <li class="info-element ui-sortable-handle">
-                                    @item.Description
-                                    <div class="agile-detail">
-                                        <button type="button" class="float-right btn btn-xs btn-primary" @onclick="()=>Vote(item.Id)" disabled="@anyVote(item.Id)">
-                                            <i class="fas fa-check"></i> Votar
-                                        </button>
-                                        <span class="badge"><i class="fa fa-clock-o"></i> @item.DtInsert.Value.GetElapsedTime()</span>
-                                        <span class="badge"><i class="fas fa-vote-yea"></i> @item.TotalVotes</span>
-                                        @if (item.TicketStatus == TicketStatus.Published)
-                                        {
-                                            <span class="badge badge-success">@item.TicketStatus.GetName()</span>
-                                        }
-                                        else if (item.TicketStatus == TicketStatus.Progress)
-                                        {
-                                            <span class="badge badge-warning">@item.TicketStatus.GetName()</span>
-                                        }
-                                        else if (item.TicketStatus == TicketStatus.Done)
-                                        {
-                                            <span class="badge badge-primary">@item.TicketStatus.GetName()</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge badge-danger">@item.TicketStatus.GetName()</span>
-                                        }
-                                    </div>
-                                </li>
-                            }
-                        </ul>
-                    </div>
+                    <Row Style="max-height: 330px; overflow: auto;">
+                        @foreach (var item in GetTicketList(TicketType.FeatureRequest))
+                        {
+                            <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is1.FromBottom">
+                                <Card Style="background-color: #e2e3e5">
+                                    <CardBody Padding="Padding.Is1">
+                                        <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Justified">
+                                            <MemoEdit Rows="2" Plaintext="true" Text="@item.Description.GetResume(60)" />
+                                        </Paragraph>
+                                        <Paragraph Margin="Margin.Is2.FromBottom">
+                                            <Badge Color="Color.Secondary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Icon> @item.DtInsert.Value.GetElapsedTime()</Badge>
+                                            <br />
+                                            <Badge Color="Color.Secondary" Margin="Margin.Is1.FromRight"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.VoteYea"></Icon> @item.TotalVotes</Badge>
+                                            @if (item.TicketStatus == TicketStatus.Published)
+                                            {
+                                                <Badge Color="Color.Success"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle"></Icon> @item.TicketStatus.GetName()</Badge>
+                                            }
+                                            else if (item.TicketStatus == TicketStatus.Progress)
+                                            {
+                                                <Badge Color="Color.Warning">@item.TicketStatus.GetName()</Badge>
+                                            }
+                                            else if (item.TicketStatus == TicketStatus.Done)
+                                            {
+                                                <Badge Color="Color.Primary">@item.TicketStatus.GetName()</Badge>
+                                            }
+                                            else //Declined
+                                            {
+                                                <Badge Color="Color.Danger">@item.TicketStatus.GetName()</Badge>
+                                            }
+                                            <Button Float="Float.Right" Size="Size.ExtraSmall" Color="Color.Primary" Clicked="()=>Vote(item.Id)" Disabled="@anyVote(item.Id)">
+                                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Votar
+                                            </Button>
+                                        </Paragraph>
+                                    </CardBody>
+                                </Card>
+                            </Column>
+                        }
+                    </Row>
                 }
             </CardBody>
         </Card>
     </Column>
 </Row>
 
+<VerusDate.Web.Shared.modal.NewTicket @ref="NewTicket"></VerusDate.Web.Shared.modal.NewTicket>
+
 @code {
-    private List<VerusDate.Shared.Model.Support.Ticket> tickets;
-    private List<VerusDate.Shared.Model.Support.TicketVote> myVotes;
+    private List<VerusDate.Shared.Model.Support.Ticket> tickets = new();
+    private List<VerusDate.Shared.Model.Support.TicketVote> myVotes = new();
 
     public TicketStatus? TicketStatusBug { get; set; }
     public TicketStatus? TicketStatusFeature { get; set; }
+
+    private Shared.modal.NewTicket NewTicket;
 
     private VisibilityOptions OptionsBug => new VisibilityOptions()
     {
@@ -167,13 +190,6 @@
         Loading = tickets == null,
         NoData = (tickets != null && !GetTicketList(TicketType.FeatureRequest).Any())
     };
-
-    protected override async Task OnInitializedAsync()
-    {
-        await base.OnInitializedAsync();
-
-        Toast.ShowWarning("Olá, como ainda estamos em uma versão beta, é provável que alguns erros ocorram ou que alguns recursos precisem de melhorias.");
-    }
 
     protected override async Task LoadData()
     {
@@ -191,20 +207,21 @@
             return tickets.Where(w => w.TicketType == ticketType).OrderByDescending(o => o.DtInsert).ToList();
     }
 
-    async Task ShowModal(TicketType ticketType)
-    {
-        //var parameters = new ModalParameters();
-        //parameters.Add(nameof(TicketType), ticketType);
+    //async Task ShowModal(TicketType ticketType)
+    //{
+    //    NewTicket.ShowModal(ticketType);
+    //    //var parameters = new ModalParameters();
+    //    //parameters.Add(nameof(TicketType), ticketType);
 
-        //var messageForm = Modal.Show<NewTicket>("Novo Ticket", parameters);
-        //var result = await messageForm.Result;
+    //    //var messageForm = Modal.Show<NewTicket>("Novo Ticket", parameters);
+    //    //var result = await messageForm.Result;
 
-        //if (!result.Cancelled)
-        //{
-        //    await Http.Ticket_Insert((TicketVM)result.Data);
-        //    tickets.Add((TicketVM)result.Data);
-        //}
-    }
+    //    //if (!result.Cancelled)
+    //    //{
+    //    //    await Http.Ticket_Insert((VerusDate.Shared.Model.Support.Ticket)result.Data);
+    //    //    tickets.Add((VerusDate.Shared.Model.Support.Ticket)result.Data);
+    //    //}
+    //}
 
     private async Task Vote(string IdTicket)
     {
@@ -227,6 +244,6 @@
 
     private bool anyVote(string IdTicket)
     {
-        return myVotes.Any(a => a.Id == IdTicket & a.Id == ComponenteUtils.IdUser);
+        return myVotes.Any(a => a.Key == IdTicket & a.IdVotedUser == ComponenteUtils.IdUser);
     }
 }

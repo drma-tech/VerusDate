@@ -15,29 +15,29 @@ namespace VerusDate.Shared.Core
         /// <summary>
         /// Data de inserção do registro
         /// </summary>
-        public DateTimeOffset? DtInsert { get; protected set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset? DtInsert { get; set; } = DateTimeOffset.UtcNow;
 
         /// <summary>
         /// Data de atualização de um ou mais campos (após o insert)
         /// </summary>
-        public DateTimeOffset? DtUpdate { get; protected set; }
+        public DateTimeOffset? DtUpdate { get; set; }
 
         /// <summary>
         /// Campo único dentro do container
         /// </summary>
-        public string Id { get; protected set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// PartitionKeyPath (Partição Lógica)
         /// <para>Se for uma estrutura 'pai', usar o valor do Id</para>
         /// <para>Se for uma estrutura 'filha', usar o valor do Id da estrutura 'pai'</para>
         /// </summary>
-        public string Key { get; protected set; }
+        public string Key { get; set; }
 
         /// <summary>
         /// Tipo da estrutura (geralmente o nome da classe)
         /// </summary>
-        public string Type { get; private set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Recupera o status dos dados atuais

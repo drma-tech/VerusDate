@@ -4,9 +4,9 @@ namespace VerusDate.Shared.Model.Profile
 {
     public class ProfilePhoto
     {
-        public string Main { get; private set; }
-        public string Validation { get; private set; }
-        public string[] Gallery { get; private set; } = Array.Empty<string>();
+        public string Main { get; set; }
+        public string Validation { get; set; }
+        public string[] Gallery { get; set; } = Array.Empty<string>();
 
         public void UpdateMainPhoto(string Main)
         {

@@ -55,8 +55,18 @@ namespace VerusDate.Api.Repository
 
         public async Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase
         {
-            IQueryable<T> query = Container.GetItemLinqQueryable<T>(requestOptions: CosmosRepositoryExtensions.GetDefaultOptions(partitionKeyValue))
-                .Where(predicate.Compose(item => item.Type == typeof(T).Name, Expression.AndAlso));
+            IQueryable<T> query;
+
+            if (predicate is null)
+            {
+                query = Container.GetItemLinqQueryable<T>(requestOptions: CosmosRepositoryExtensions.GetDefaultOptions(partitionKeyValue))
+                    .Where(item => item.Type == typeof(T).Name);
+            }
+            else
+            {
+                query = Container.GetItemLinqQueryable<T>(requestOptions: CosmosRepositoryExtensions.GetDefaultOptions(partitionKeyValue))
+                    .Where(predicate.Compose(item => item.Type == typeof(T).Name, Expression.AndAlso));
+            }
 
             using (FeedIterator<T> iterator = query.ToFeedIterator())
             {

@@ -11,7 +11,7 @@ namespace VerusDate.Shared.Model.Support
         {
         }
 
-        public string IdUserOwner { get; private set; }
+        public string IdUserOwner { get; set; }
 
         [Display(Name = "Tipo")]
         public TicketType TicketType { get; set; }
@@ -20,10 +20,10 @@ namespace VerusDate.Shared.Model.Support
         public string Description { get; set; }
 
         [Display(Name = "Status")]
-        public TicketStatus TicketStatus { get; private set; }
+        public TicketStatus TicketStatus { get; set; }
 
         [Display(Name = "Total de Votos")]
-        public int TotalVotes { get; private set; }
+        public int TotalVotes { get; set; }
 
         public void ChangeStatus(TicketStatus ticketStatus)
         {

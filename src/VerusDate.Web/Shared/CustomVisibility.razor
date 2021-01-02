@@ -1,26 +1,37 @@
 ﻿@if (Options.Premium)
 {
-    <div class="alert alert-danger">
-        <i class="fas fa-user-lock"></i> Recurso disponível apenas para usuário premium
-    </div>
+    <Alert Color="Color.Danger" Visible="true" Margin="Margin.Is0.FromBottom">
+        <AlertDescription>
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserLock"></Icon> Recurso disponível apenas para usuário premium
+        </AlertDescription>
+    </Alert>
 }
 else if (Options.Invalid)
 {
-    <div class="alert alert-danger">
-        <i class="fas fa-bug"></i> Operação inválida. Favor, tentar novamente.
-    </div>
+    <Alert Color="Color.Danger" Visible="true" Margin="Margin.Is0.FromBottom">
+        <AlertDescription>
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug"></Icon> Operação inválida. Favor, tentar novamente.
+        </AlertDescription>
+    </Alert>
 }
 else if (Options.Loading)
 {
-    <div class="alert alert-warning">
-        <i class="spinner-border spinner-border-sm"></i> Carregando...
-    </div>
+    <Alert Color="Color.Warning" Visible="true" Margin="Margin.Is0.FromBottom">
+        <AlertDescription>
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Spinner"></Icon> Carregando...
+        </AlertDescription>
+    </Alert>
+    @*<div class="alert alert-warning">
+            <i class="spinner-border spinner-border-sm"></i> Carregando...
+        </div>*@
 }
 else if (Options.NoData)
 {
-    <div class="alert alert-primary">
-        <i class="fas fa-exclamation-triangle"></i> Não há dados para mostrar
-    </div>
+    <Alert Color="Color.Primary" Visible="true" Margin="Margin.Is0.FromBottom">
+        <AlertDescription>
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationTriangle"></Icon> Não há dados para mostrar
+        </AlertDescription>
+    </Alert>
 }
 
 @code {

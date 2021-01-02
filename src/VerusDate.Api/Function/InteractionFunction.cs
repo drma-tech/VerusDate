@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Interaction;
@@ -28,13 +29,15 @@ namespace VerusDate.Api.Function
         [FunctionName("InteractionGet")]
         public async Task<IActionResult> Get(
             [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/Get")] HttpRequest req,
-            ILogger log)
+            ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
                 var command = await JsonSerializer.DeserializeAsync<InteractionGetCommand>(req.Body);
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(command, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -48,7 +51,7 @@ namespace VerusDate.Api.Function
         //[FunctionName("InteractionGetList")]
         //public async Task<IActionResult> GetList(
         //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetList")] HttpRequest req,
-        //   ILogger log)
+        //   ILogger log, CancellationToken cancellationToken)
         //{
         //    try
         //    {
@@ -68,7 +71,7 @@ namespace VerusDate.Api.Function
         //[FunctionName("InteractionGetLikes")]
         //public async Task<IActionResult> GetLikes(
         //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetLikes")] HttpRequest req,
-        //   ILogger log)
+        //   ILogger log, CancellationToken cancellationToken)
         //{
         //    try
         //    {
@@ -88,7 +91,7 @@ namespace VerusDate.Api.Function
         //[FunctionName("InteractionGetBlinks")]
         //public async Task<IActionResult> GetBlinks(
         //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetBlinks")] HttpRequest req,
-        //   ILogger log)
+        //   ILogger log, CancellationToken cancellationToken)
         //{
         //    try
         //    {
@@ -108,7 +111,7 @@ namespace VerusDate.Api.Function
         //[FunctionName("InteractionGetNewMatches")]
         //public async Task<IActionResult> GetNewMatches(
         //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetNewMatches")] HttpRequest req,
-        //   ILogger log)
+        //   ILogger log, CancellationToken cancellationToken)
         //{
         //    try
         //    {
@@ -128,7 +131,7 @@ namespace VerusDate.Api.Function
         //[FunctionName("InteractionGetChatList")]
         //public async Task<IActionResult> GetChatList(
         //  [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetChatList")] HttpRequest req,
-        //  ILogger log)
+        //  ILogger log, CancellationToken cancellationToken)
         //{
         //    try
         //    {
@@ -147,14 +150,16 @@ namespace VerusDate.Api.Function
 
         [FunctionName("InteractionBlink")]
         public async Task<IActionResult> Blink(
-         [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Blink")] HttpRequest req,
-         ILogger log)
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Blink")] HttpRequest req,
+            ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<InteractionBlinkCommand>(req.Body);
+                var command = await JsonSerializer.DeserializeAsync<InteractionBlinkCommand>(req.Body, null, source.Token);
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(command, source.Token);
 
                 if (result)
                     return new OkObjectResult(result);
@@ -170,14 +175,16 @@ namespace VerusDate.Api.Function
 
         [FunctionName("InteractionBlock")]
         public async Task<IActionResult> Block(
-         [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Block")] HttpRequest req,
-         ILogger log)
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Block")] HttpRequest req,
+            ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<InteractionBlockCommand>(req.Body);
+                var command = await JsonSerializer.DeserializeAsync<InteractionBlockCommand>(req.Body, null, source.Token);
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(command, source.Token);
 
                 if (result)
                     return new OkObjectResult(result);
@@ -193,14 +200,16 @@ namespace VerusDate.Api.Function
 
         [FunctionName("InteractionDeslike")]
         public async Task<IActionResult> Deslike(
-         [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Deslike")] HttpRequest req,
-         ILogger log)
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Deslike")] HttpRequest req,
+            ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<InteractionDeslikeCommand>(req.Body);
+                var command = await JsonSerializer.DeserializeAsync<InteractionDeslikeCommand>(req.Body, null, source.Token);
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(command, source.Token);
 
                 if (result)
                     return new OkObjectResult(result);
@@ -216,15 +225,17 @@ namespace VerusDate.Api.Function
 
         [FunctionName("InteractionLike")]
         public async Task<IActionResult> Like(
-         [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Like")] HttpRequest req,
-         ILogger log)
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Like")] HttpRequest req,
+            ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
                 //var command = await JsonSerializer.DeserializeAsync<InteractionLikeCommand>(req.Body);
                 var command = InteractionSeed.GetInteraction<InteractionLikeCommand>().Generate();
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(command, source.Token);
 
                 if (result)
                     return new OkObjectResult(result);
@@ -240,15 +251,17 @@ namespace VerusDate.Api.Function
 
         [FunctionName("InteractionGenerateChat")]
         public async Task<IActionResult> GenerateChat(
-         [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/GenerateChat")] HttpRequest req,
-         ILogger log)
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/GenerateChat")] HttpRequest req,
+            ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
                 //var command = await JsonSerializer.DeserializeAsync<InteractionGenerateChatCommand>(req.Body);
                 var command = InteractionSeed.GetInteraction<InteractionGenerateChatCommand>().Generate();
 
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(command, source.Token);
 
                 return new OkObjectResult(result);
             }

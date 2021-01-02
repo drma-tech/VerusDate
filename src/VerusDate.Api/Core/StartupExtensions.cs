@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using VerusDate.Api.Core.Interfaces;
 using VerusDate.Api.Mediator.Behavior;
 using VerusDate.Api.Mediator.Command.Profile;
+using VerusDate.Api.Mediator.Command.Support;
 using VerusDate.Api.Repository;
 
 namespace VerusDate.Api.Core
@@ -34,6 +35,9 @@ namespace VerusDate.Api.Core
         public static void AddValidations(this IServiceCollection services)
         {
             services.AddSingleton<IValidator<ProfileAddCommand>, ProfileAddCommandValidation>();
+            services.AddSingleton<IValidator<ProfileUpdateCommand>, ProfileUpdateCommandValidation>();
+            services.AddSingleton<IValidator<ProfileUpdateLookingCommand>, ProfileUpdateLookingCommandValidation>();
+            services.AddSingleton<IValidator<TicketInsertCommand>, TicketInsertCommandValidation>();
         }
     }
 }

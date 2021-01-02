@@ -17,7 +17,7 @@ namespace VerusDate.Web.Shared
 
         [Parameter] public bool DisableHelp { get; set; }
 
-        private ProfileDataHelp<TValue> dataHelp;
+        private Shared.modal.ProfileDataHelp<TValue> dataHelp;
 
         private async Task SetValue(TValue value)
         {

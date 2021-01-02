@@ -112,12 +112,12 @@ else
         </Card>
     </EditForm>
 
-    <BasicModal @ref="privacy" Title="Termos de privacidade">
+    <VerusDate.Web.Shared.modal.BasicModal @ref="privacy" Title="Termos de privacidade">
         <ul>
             <li>Pedimos que leia nosso '<a href="/Terms/pt" target="_blank">Termos de Uso</a>' para ficar ciente de como seus dados serão tratados;</li>
             <li>Seja honesto nas respostas dadas neste formulário. Todas as informações aqui contidas estão abertas a denúncias e poderão ser avaliadas;</li>
         </ul>
-    </BasicModal>
+    </VerusDate.Web.Shared.modal.BasicModal>
 }
 
 @code {
@@ -125,7 +125,7 @@ else
     private VerusDate.Shared.Model.Profile.Profile profile;
     private GeoLocation GPS;
     protected bool IsShortTerm { get { return !profile.Basic.Intent.IsLongTerm(); } }
-    private BasicModal privacy;
+    private Shared.modal.BasicModal privacy;
 
     private void SetValues(IReadOnlyList<Intent> value)
     {

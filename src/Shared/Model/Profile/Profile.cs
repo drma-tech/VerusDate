@@ -11,8 +11,8 @@ namespace VerusDate.Shared.Model.Profile
         {
         }
 
-        public DateTimeOffset? DtTopList { get; private set; } = DateTimeOffset.UtcNow;
-        public DateTimeOffset? DtLastLogin { get; private set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset? DtTopList { get; set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset? DtLastLogin { get; set; } = DateTimeOffset.UtcNow;
 
         public ProfileBasic Basic { get; set; }
         public ProfileBio Bio { get; set; }

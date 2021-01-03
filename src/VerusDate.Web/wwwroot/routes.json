@@ -9,11 +9,11 @@
       "statusCode": "404"
     },
     {
-      "route": "/api",
+      "route": "/api/*",
       "allowedRoles": [ "authenticated" ]
     },
     {
-      "route": "/admin",
+      "route": "/admin/*",
       "allowedRoles": [ "administrator" ]
     },
     {

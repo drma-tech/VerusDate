@@ -9,7 +9,7 @@
       "statusCode": "404"
     },
     {
-      "route": "/api/*",
+      "route": "/api",
       "allowedRoles": [ "authenticated" ]
     },
     {

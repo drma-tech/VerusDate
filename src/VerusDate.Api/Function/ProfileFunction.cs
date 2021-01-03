@@ -56,18 +56,18 @@ namespace VerusDate.Api.Function
 
             try
             {
-                if (req.Headers.TryGetValue("x-ms-client-principal", out var header))
-                {
-                    var data = header[0];
-                    return new OkObjectResult(data);
-                }
-                else
-                {
-                    return new OkObjectResult("nothing");
-                }
+                //if (req.Headers.TryGetValue("x-ms-client-principal", out var header))
+                //{
+                //    var data = header[0];
+                //    return new OkObjectResult(data);
+                //}
+                //else
+                //{
+                //    return new OkObjectResult("nothing");
+                //}
 
-                //var principal = StaticWebAppsAuth.Parse(req);
-                //return new OkObjectResult("id=" + principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value);
+                var principal = StaticWebAppsAuth.Parse(req);
+                return new OkObjectResult("id=" + principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value);
 
                 //var result = await _mediator.Send(new ProfileGetViewCommand() { IdUserView = req.Query["Id"] }, source.Token);
 

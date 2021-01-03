@@ -12,9 +12,9 @@ namespace VerusDate.Api.Core
     {
         private class ClientPrincipal
         {
-            public string IdentityProvider { get; }
-            public string UserId { get; }
-            public string UserDetails { get; }
+            public string IdentityProvider { get; set; }
+            public string UserId { get; set; }
+            public string UserDetails { get; set; }
             public IEnumerable<string> UserRoles { get; set; }
         }
 

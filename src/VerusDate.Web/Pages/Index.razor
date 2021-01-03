@@ -407,15 +407,18 @@
 
     protected override async Task LoadData()
     {
-        //var token = await Http.Profile_GetView("123");
-        //Console.WriteLine("token:" + token);
+        var token = await Http.Profile_GetView("123");
+        Console.WriteLine("token:" + token);
 
         //profile = await Http.Profile_Get();
 
         //var sw = new System.Diagnostics.Stopwatch();
         //sw.Start();
 
-        lstDestaques = ProfileSeed.GetProfileSearch().Generate(12);
+        await Task.Run(() =>
+        {
+            lstDestaques = ProfileSeed.GetProfileSearch().Generate(12);
+        });
 
         //sw.Stop();
         //Console.WriteLine(sw.Elapsed);

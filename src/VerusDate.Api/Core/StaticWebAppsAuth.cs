@@ -18,7 +18,7 @@ namespace VerusDate.Api.Core
             public IEnumerable<string> UserRoles { get; set; }
         }
 
-        public static ClaimsPrincipal Parse(HttpRequest req)
+        public static ClaimsPrincipal Parse(this HttpRequest req)
         {
             var principal = new ClientPrincipal();
 
@@ -43,6 +43,13 @@ namespace VerusDate.Api.Core
             identity.AddClaims(principal.UserRoles.Select(r => new Claim(ClaimTypes.Role, r)));
 
             return new ClaimsPrincipal(identity);
+        }
+
+        public static string GetUserId(this HttpRequest req)
+        {
+            var principal = req.Parse();
+
+            return principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value;
         }
     }
 }

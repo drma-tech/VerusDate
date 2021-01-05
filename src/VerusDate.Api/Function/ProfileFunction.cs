@@ -57,11 +57,11 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = new ProfileGetViewCommand() { IdLoggedUser = req.GetUserId(), IdUserView = req.Query["Id"] };
+                //var command = new ProfileGetViewCommand() { IdLoggedUser = req.GetUserId(), IdUserView = req.Query["Id"] };
 
-                var result = await _mediator.Send(command, source.Token);
+                //var result = await _mediator.Send(command, source.Token);
 
-                return new OkObjectResult(result);
+                return new OkObjectResult(req.GetUserId());
             }
             catch (Exception ex)
             {

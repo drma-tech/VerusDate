@@ -7,16 +7,16 @@
                     <Figure Size="FigureSize.Is128x128">
                         <FigureImage Source="img/nouser.jpg" Rounded="true" />
                     </Figure>
-                    <Link To="Identity/Account/Manage" Title="Gerenciar Perfil" style="font-size: 0.80rem; padding: 0.70rem;">
+                    <Blazorise.Link To="Profile/Account" Title="Gerenciar Perfil" Style="font-size: 0.80rem; padding: 0.70rem;">
                         @context.User.Identity.Name
-                    </Link>
+                    </Blazorise.Link>
                 </Authorized>
                 <NotAuthorized>
                     <Figure Size="FigureSize.Is128x128">
                         <FigureImage Source="img/nouser.jpg" Rounded="true" />
                     </Figure>
                 </NotAuthorized>
-            </AuthorizeView>            
+            </AuthorizeView>
         </SidebarBrand>
         <SidebarNavigation>
             <SidebarItem>

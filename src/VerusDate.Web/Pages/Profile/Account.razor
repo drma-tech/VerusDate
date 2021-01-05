@@ -1,0 +1,31 @@
+﻿@page "/Profile/Account"
+@attribute [Authorize]
+@using System.Security.Claims
+@inject NavigationManager Navigation
+
+<h3>Account</h3>
+
+<AuthorizeView>
+    <Authorized>
+        <Paragraph>
+            Provider: @context.User.Identity.AuthenticationType
+        </Paragraph>
+        <Paragraph>
+            Id: @context.User.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value
+        </Paragraph>
+        <Paragraph>
+            Identificação: @context.User.Identity.Name
+        </Paragraph>
+        <Button Color="Color.Danger" Clicked="()=>{ DeleteAccount(context.User.Identity.AuthenticationType); }">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserSlash" /> Deletar Conta
+        </Button>
+    </Authorized>
+</AuthorizeView>
+
+@code {
+    private void DeleteAccount(string provider)
+    {
+        //await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("/.auth/purge/" + provider);
+    }
+}

@@ -32,7 +32,7 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var result = ProfileSeed.GetProfileSearch(req.GetUserId()).Generate(12);
+                var result = ProfileSeed.GetProfileSearch().Generate(12);
 
                 return new OkObjectResult(result);
             }

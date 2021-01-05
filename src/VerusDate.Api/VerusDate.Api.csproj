@@ -6,6 +6,7 @@
   <ItemGroup>
     <Compile Remove="App\GamificationApp.cs" />
     <Compile Remove="Core\Hubs\ChatHub.cs" />
+    <Compile Remove="Mediator\Behavior\UserSessionBehavior.cs" />
     <Compile Remove="Mediator\Queries\GlobalInteraction\GlobalInteractionsGetCommand.cs" />
     <Compile Remove="Mediator\Queries\Interaction\InteractionGetBlinksCommand.cs" />
     <Compile Remove="Mediator\Queries\Interaction\InteractionGetChatListCommand.cs" />

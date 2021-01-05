@@ -28,7 +28,7 @@ namespace VerusDate.Api.Core
         public static void AddPipelines(this IServiceCollection services)
         {
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UserSessionBehavior<,>));
+            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UserSessionBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         }
 

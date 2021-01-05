@@ -33,9 +33,10 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = new ProfileGetCommand();
-
-                command.IdLoggedUser = req.GetUserId();
+                var command = new ProfileGetCommand
+                {
+                    IdLoggedUser = req.GetUserId()
+                };
 
                 var result = await _mediator.Send(command, source.Token);
 
@@ -57,11 +58,15 @@ namespace VerusDate.Api.Function
 
             try
             {
-                //var command = new ProfileGetViewCommand() { IdLoggedUser = req.GetUserId(), IdUserView = req.Query["Id"] };
+                var command = new ProfileGetViewCommand()
+                {
+                    IdLoggedUser = req.GetUserId(),
+                    IdUserView = req.Query["Id"]
+                };
 
-                //var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(command, source.Token);
 
-                return new OkObjectResult(req.GetUserId());
+                return new OkObjectResult(result);
             }
             catch (Exception ex)
             {

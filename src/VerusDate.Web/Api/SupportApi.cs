@@ -18,16 +18,14 @@ namespace VerusDate.Web.Api
             return await http.GetList<TicketVote>("Ticket/GetMyVotes");
         }
 
-        public async static Task<Ticket> Ticket_Insert(this HttpClient http, Ticket obj)
+        public async static Task<HttpResponseMessage> Ticket_Insert(this HttpClient http, Ticket obj)
         {
-            //return await http.Post("Ticket/Insert", obj);
-            return null;
+            return await http.Post("Ticket/Insert", obj);
         }
 
-        public async static Task<TicketVote> Ticket_Vote(this HttpClient http, TicketVote obj)
+        public async static Task<HttpResponseMessage> Ticket_Vote(this HttpClient http, TicketVote obj)
         {
-            //return await http.Post("Ticket/Vote", obj);
-            return null;
+            return await http.Post("Ticket/Vote", obj);
         }
     }
 }

@@ -2,9 +2,9 @@
 {
     public enum ActivityStatus
     {
-        Today = 0,
-        Week = 1,
-        Month = 2,
-        Disabled = 3
+        Today = 1,
+        Week = 2,
+        Month = 3,
+        Disabled = 4
     }
 }

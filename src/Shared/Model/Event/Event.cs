@@ -89,5 +89,20 @@ namespace VerusDate.Shared.Model.Event
             this.IdUserOwner = IdLoggedUser;
             this.Key = this.Id;
         }
+
+        public string GetIcon()
+        {
+            switch (EventType)
+            {
+                case EventType.BlindDate:
+                    return "fas fa-eye-slash";
+                case EventType.SpeedDating:
+                    return "fas fa-user-clock";
+                case EventType.GroupDate:
+                    return "fas fa-users";
+                default:
+                    throw new IndexOutOfRangeException(nameof(EventType));
+            }
+        }
     }
 }

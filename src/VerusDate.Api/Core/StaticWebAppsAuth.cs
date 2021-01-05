@@ -47,9 +47,18 @@ namespace VerusDate.Api.Core
 
         public static string GetUserId(this HttpRequest req)
         {
-            var principal = req.Parse();
+            if (req.Host.Host.Contains("localhost"))
+            {
+                var local_id = "b9a10c8be2f244c0a625b78f05e30812";
 
-            return principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value;
+                return local_id;
+            }
+            else
+            {
+                var principal = req.Parse();
+
+                return principal.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value;
+            }
         }
     }
 }

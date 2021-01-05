@@ -1,4 +1,5 @@
-﻿@inject HttpClient Http
+﻿@inherits ComponenteCore<NewTicket>
+@inject HttpClient Http
 
 <Modal @ref="modal">
     <ModalBackdrop />
@@ -35,11 +36,22 @@
 
     public async Task SubmitForm()
     {
-        Ticket.TicketType = TicketType;
-        Ticket.TicketStatus = TicketStatus.Published;
-        Ticket.SetIds(ComponenteUtils.IdUser);
+        try
+        {
+            Ticket.TicketType = TicketType;
+            Ticket.TicketStatus = TicketStatus.Published;
+            Ticket.SetIds(ComponenteUtils.IdUser);
 
-        await Http.Ticket_Insert(Ticket);
-        modal.Hide();
+            var response = await Http.Ticket_Insert(Ticket);
+
+            await response.ProcessResponse(Toast, "Salvo com sucesso!");
+
+            Ticket = new();
+            modal.Hide();
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
     }
 }

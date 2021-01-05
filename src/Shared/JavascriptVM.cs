@@ -20,9 +20,18 @@ namespace VerusDate.Shared
         public string county { get; set; }
         public string city { get; set; }
 
+        /// <summary>
+        /// Recupera a localização contendo as seguintes informaçoes: country, state, county, city
+        /// <para>Caso county e city sejam iguais, só retornará um deles</para>
+        /// </summary>
+        /// <returns></returns>
         public string GetLocation()
         {
-            return string.Join(" - ", new[] { countryName, state, county, city }.Where(w => !string.IsNullOrEmpty(w)));
+            var locations = new List<string>() { countryName, state };
+
+            locations.AddRange(new[] { county, city }.Distinct());
+
+            return string.Join(" - ", locations.Where(w => !string.IsNullOrEmpty(w)));
         }
     }
 

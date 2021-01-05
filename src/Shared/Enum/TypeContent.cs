@@ -2,9 +2,9 @@
 {
     public enum TypeContent
     {
-        Message = 0,
-        Picture = 1,
-        Audio = 2,
-        Video = 3
+        Message = 1,
+        Picture = 2,
+        Audio = 3,
+        Video = 4
     }
 }

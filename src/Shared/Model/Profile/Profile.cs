@@ -73,7 +73,18 @@ namespace VerusDate.Shared.Model.Profile
         {
             if (Basic.Intent.IsShortTerm(exclusive: true))
             {
-                Lifestyle = null;
+                Lifestyle.Drink = null;
+                Lifestyle.Smoke = null;
+                Lifestyle.Diet = null;
+                Lifestyle.HaveChildren = null;
+                Lifestyle.WantChildren = null;
+                Lifestyle.EducationLevel = null;
+                Lifestyle.CareerCluster = null;
+                Lifestyle.Religion = null;
+                Lifestyle.MoneyPersonality = null;
+                Lifestyle.RelationshipPersonality = null;
+                Lifestyle.MyersBriggsTypeIndicator = null;
+                Lifestyle.Hobbies = Array.Empty<string>();
             }
         }
 

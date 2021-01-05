@@ -46,10 +46,10 @@ namespace VerusDate.Shared.Model.Profile
         [Display(Name = "Altura (Min - Máx)")]
         public Height? MaxHeight { get; set; }
 
-        [Display(Name = "Corpo")]
+        [Display(Name = "Corpo", Description = "Esta informação poderá ser subjetiva")]
         public BodyMass? BodyMass { get; set; }
 
-        [Display(Name = "Raça")]
+        [Display(Name = "Raça", Description = "Classificação por US OMB")]
         public RaceCategory? RaceCategory { get; set; }
 
         [Display(Name = "Tem Filho(s)")]

@@ -31,10 +31,10 @@ namespace VerusDate.Shared.Model.Profile
         [Display(Name = "Sexo Biológico")]
         public BiologicalSex BiologicalSex { get; set; }
 
-        [Display(Name = "Identidade de Gênero", Description = "Este campo é opcional")]
-        public GenderIdentity GenderIdentity { get; set; } = GenderIdentity.Cisgender;
+        [Display(Name = "Identidade de Gênero", Description = "Alteração opcional")]
+        public GenderIdentity GenderIdentity { get; set; }
 
-        [Display(Name = "Orientação Sexual", Description = "Este campo é opcional")]
-        public SexualOrientation SexualOrientation { get; set; } = SexualOrientation.Heteressexual;
+        [Display(Name = "Orientação Sexual", Description = "Alteração opcional")]
+        public SexualOrientation SexualOrientation { get; set; }
     }
 }

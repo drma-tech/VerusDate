@@ -16,8 +16,9 @@ namespace VerusDate.Web.Shared
         [Parameter] public EventCallback<IReadOnlyList<TEnum>> SelectedValuesChanged { get; set; }
 
         [Parameter] public bool DisableHelp { get; set; }
+        [Parameter] public string HelpLink { get; set; }
 
-        private Shared.modal.ProfileDataHelp<TValue> dataHelp;
+        private modal.ProfileDataHelp<TValue> dataHelp;
 
         private async Task SetValue(TValue value)
         {

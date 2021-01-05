@@ -33,7 +33,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var result = await _mediator.Send(new ChatGetCommand() { IdUserInteraction = req.Query["Id"] }, source.Token);
+                var command = new ChatGetCommand() { IdLoggedUser = req.GetUserId(), IdUserInteraction = req.Query["Id"] };
+
+                var result = await _mediator.Send(command, source.Token);
 
                 if (result == null)
                     return new NotFoundResult();
@@ -57,6 +59,8 @@ namespace VerusDate.Api.Function
             try
             {
                 var command = await JsonSerializer.DeserializeAsync<ChatSyncCommand>(req.Body, null, source.Token);
+
+                command.SetIds(req.GetUserId());
 
                 var result = await _mediator.Send(command, source.Token);
 

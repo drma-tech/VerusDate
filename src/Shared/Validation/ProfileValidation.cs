@@ -4,9 +4,9 @@ using VerusDate.Shared.Enum;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileUpdateCommandValidation : AbstractValidator<ProfileUpdateCommand>
+    public class ProfileValidation : AbstractValidator<Shared.Model.Profile.Profile>
     {
-        public ProfileUpdateCommandValidation()
+        public ProfileValidation()
         {
             //BASIC
 

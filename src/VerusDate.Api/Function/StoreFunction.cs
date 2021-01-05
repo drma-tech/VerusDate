@@ -34,6 +34,8 @@ namespace VerusDate.Api.Function
             {
                 var command = await JsonSerializer.DeserializeAsync<StoreExchangeFoodCommand>(req.Body, null, source.Token);
 
+                command.Id = req.GetUserId();
+
                 var result = await _mediator.Send(command, source.Token);
 
                 return new OkObjectResult(result);

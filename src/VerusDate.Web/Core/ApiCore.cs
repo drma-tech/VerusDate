@@ -9,7 +9,7 @@ namespace VerusDate.Web.Core
 {
     public static class ApiCore
     {
-        private async static Task<T> ReturnResponse<T>(this HttpResponseMessage response)
+        public async static Task<T> ReturnResponse<T>(this HttpResponseMessage response)
         {
             if (response.IsSuccessStatusCode)
             {
@@ -47,18 +47,18 @@ namespace VerusDate.Web.Core
             return await response.ReturnResponse<List<T>>();
         }
 
-        public async static Task<T> Post<T>(this HttpClient http, string requestUri, T obj) where T : class
+        public async static Task<HttpResponseMessage> Post<T>(this HttpClient http, string requestUri, T obj) where T : class
         {
-            var response = await http.PostAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
+            return await http.PostAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
 
-            return await response.ReturnResponse<T>();
+            //return await response.ReturnResponse<T>();
         }
 
-        public async static Task<T> Put<T>(this HttpClient http, string requestUri, T obj) where T : class
+        public async static Task<HttpResponseMessage> Put<T>(this HttpClient http, string requestUri, T obj) where T : class
         {
-            var response = await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
+            return await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
 
-            return await response.ReturnResponse<T>();
+            //return await response.ReturnResponse<T>();
         }
 
         public async static Task<T> Delete<T>(this HttpClient http, string requestUri)

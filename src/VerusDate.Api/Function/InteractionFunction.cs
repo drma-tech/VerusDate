@@ -13,7 +13,6 @@ using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Interaction;
 using VerusDate.Api.Mediator.Queries.Interaction;
 using VerusDate.Server.Mediator.Commands.Interaction;
-using VerusDate.Shared.Seed;
 
 namespace VerusDate.Api.Function
 {
@@ -35,7 +34,7 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<InteractionGetCommand>(req.Body);
+                var command = new InteractionGetCommand() { IdLoggedUser = req.GetUserId(), IdUserInteraction = req.Query["Id"] };
 
                 var result = await _mediator.Send(command, source.Token);
 
@@ -159,6 +158,8 @@ namespace VerusDate.Api.Function
             {
                 var command = await JsonSerializer.DeserializeAsync<InteractionBlinkCommand>(req.Body, null, source.Token);
 
+                command.SetIds(req.GetUserId());
+
                 var result = await _mediator.Send(command, source.Token);
 
                 if (result)
@@ -183,6 +184,8 @@ namespace VerusDate.Api.Function
             try
             {
                 var command = await JsonSerializer.DeserializeAsync<InteractionBlockCommand>(req.Body, null, source.Token);
+
+                command.SetIds(req.GetUserId());
 
                 var result = await _mediator.Send(command, source.Token);
 
@@ -209,6 +212,8 @@ namespace VerusDate.Api.Function
             {
                 var command = await JsonSerializer.DeserializeAsync<InteractionDeslikeCommand>(req.Body, null, source.Token);
 
+                command.SetIds(req.GetUserId());
+
                 var result = await _mediator.Send(command, source.Token);
 
                 if (result)
@@ -232,8 +237,10 @@ namespace VerusDate.Api.Function
 
             try
             {
-                //var command = await JsonSerializer.DeserializeAsync<InteractionLikeCommand>(req.Body);
-                var command = InteractionSeed.GetInteraction<InteractionLikeCommand>().Generate();
+                var command = await JsonSerializer.DeserializeAsync<InteractionLikeCommand>(req.Body);
+                //var command = InteractionSeed.GetInteraction<InteractionLikeCommand>().Generate();
+
+                command.SetIds(req.GetUserId());
 
                 var result = await _mediator.Send(command, source.Token);
 
@@ -258,8 +265,10 @@ namespace VerusDate.Api.Function
 
             try
             {
-                //var command = await JsonSerializer.DeserializeAsync<InteractionGenerateChatCommand>(req.Body);
-                var command = InteractionSeed.GetInteraction<InteractionGenerateChatCommand>().Generate();
+                var command = await JsonSerializer.DeserializeAsync<InteractionGenerateChatCommand>(req.Body);
+                //var command = InteractionSeed.GetInteraction<InteractionGenerateChatCommand>().Generate();
+
+                command.SetIds(req.GetUserId());
 
                 var result = await _mediator.Send(command, source.Token);
 

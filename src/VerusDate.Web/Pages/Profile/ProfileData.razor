@@ -3,6 +3,7 @@
 @inherits PageCore<ProfileData>
 @inject HttpClient Http
 @*@using Microsoft.AspNetCore.Components*@
+@using BrowserInterop.Extensions
 
 @if (Options.HasCustomVisibility)
 {
@@ -47,7 +48,7 @@ else
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <div class="form-group row">
-                            <CustomLabel For="@(() => profile.Bio.BirthDate)" CssIcon="fas fa-birthday-cake"></CustomLabel>
+                            <CustomLabel For="@(() => profile.Bio.BirthDate)" CssIcon="fas fa-birthday-cake" Comment="Confira a idade e signo"></CustomLabel>
                             <div class="col-sm-8">
                                 <InputDate @bind-Value="@profile.Bio.BirthDate" @attributes='new Dictionary<string, object>() { { "class", "form-control" } }'></InputDate>
                                 <ValidationMessage For="@(()=>profile.Bio.BirthDate)"></ValidationMessage>
@@ -74,11 +75,11 @@ else
                 <Divider DividerType="DividerType.TextContent" Text="Lifestyle"></Divider>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Drink)" TValue="Drink" TEnum="Drink" @bind-SelectedValue="@profile.Lifestyle.Drink"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GlassCheers" DisableHelp="true"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Smoke)" TValue="Smoke" TEnum="Smoke" @bind-SelectedValue="@profile.Lifestyle.Smoke"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smoking" DisableHelp="true"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Diet)" TValue="Diet" TEnum="Diet" @bind-SelectedValue="@profile.Lifestyle.Diet"
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Drink)" TValue="Drink?" TEnum="Drink" @bind-SelectedValue="@profile.Lifestyle.Drink"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GlassCheers" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Smoke)" TValue="Smoke?" TEnum="Smoke" @bind-SelectedValue="@profile.Lifestyle.Smoke"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smoking" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Diet)" TValue="Diet?" TEnum="Diet" @bind-SelectedValue="@profile.Lifestyle.Diet"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Utensils" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.HaveChildren)" TValue="HaveChildren?" TEnum="HaveChildren" @bind-SelectedValue="@profile.Lifestyle.HaveChildren"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Child" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
@@ -95,18 +96,18 @@ else
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.MoneyPersonality)" TValue="MoneyPersonality?" TEnum="MoneyPersonality" @bind-SelectedValue="@profile.Lifestyle.MoneyPersonality"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@profile.Lifestyle.MyersBriggsTypeIndicator"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.16personalities.com/br"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@profile.Lifestyle.RelationshipPersonality"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                     </Column>
                 </Row>
             </CardBody>
             <CardFooter>
-                <Button Type="ButtonType.Submit" Color="Color.Primary" Disabled="@(profile.DaysUpdate() < 7)">
+                <Button Type="ButtonType.Submit" Color="Color.Primary" Disabled="@(profile.GetDataStatus() != DataStatus.New && profile.DaysUpdate() < 1)">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
                 </Button>
                 <Badge Color="Color.Danger" Margin="Margin.Is3.FromLeft">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationTriangle"></Icon> Só poderá atualizar seu perfil a cada uma semana e perderá um nível a cada atualização
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationTriangle"></Icon> Só poderá atualizar no máximo uma vez ao dia e perderá 100 XP a cada atualização
                 </Badge>
             </CardFooter>
         </Card>
@@ -123,7 +124,7 @@ else
 @code {
 
     private VerusDate.Shared.Model.Profile.Profile profile;
-    private GeoLocation GPS;
+    private GeoLocation GPS = new();
     protected bool IsShortTerm { get { return !profile.Basic.Intent.IsLongTerm(); } }
     private Shared.modal.BasicModal privacy;
 
@@ -142,46 +143,66 @@ else
     {
         profile = await Http.Profile_Get();
 
-        //if (profile == null)
-        //{
-        //    profile = VerusDate.Shared.Seed.ProfileSeed.GetProfileVM();
+        if (profile == null) //para novos usuários
+        {
+            profile = new();
 
-        //    profile.LoadDefatultData();
+            profile.Basic = new();
+            profile.Bio = new();
+            profile.Lifestyle = new();
 
-        //    //if (profile != null && !profile.Longitude.HasValue)
-        //    //{
-        //    //    //GPS = await JsRuntime.InvokeAsync<GeoLocation>("RealDate.GPS.getCurrentPosition");
-        //    //    var fake = VerusDate.Shared.Seed.ProfileSeed.GetProfileVM();
-        //    //    GPS = new GeoLocation() { Latitude = fake.Latitude.Value, Longitude = fake.Longitude.Value, Accuracy = 20 };
+            profile.Basic.GenderIdentity = GenderIdentity.Cisgender;
+            profile.Basic.SexualOrientation = SexualOrientation.Heteressexual;
+            profile.Bio.BirthDate = DateTime.Now.AddYears(-18);
+            profile.Lifestyle.Diet = Diet.Omnivore;
 
-        //    //    //TODO: chamar código da api
-        //    //    var here = await Http.Map_GetLocation(GPS.Latitude, GPS.Longitude);
-        //    //    if (here.items.Any())
-        //    //    {
-        //    //        var address = here.items[0].address;
-        //    //        profile.Location = address.GetLocation();
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        profile.Location = "Localização Desconhecida";
-        //    //    }
+            await SetLocation(profile);
+        }
+    }
 
-        //    //    if (GPS?.Latitude == 0 && GPS?.Longitude == 0 && GPS.Accuracy == 0)
-        //    //    {
-        //    //        Toast.ShowWarning($"Não foi possível detectar um sistema GPS no seu dispositivo. Favor, tentar novamente ou liberar acesso ao GPS do seu dispositivo.", "alerta");
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        profile.Longitude = GPS.Longitude;
-        //    //        profile.Latitude = GPS.Latitude;
+    private async Task SetLocation(VerusDate.Shared.Model.Profile.Profile profile)
+    {
+        if (profile != null && profile.Basic != null && !profile.Basic.Longitude.HasValue)
+        {
+            var window = await JsRuntime.Window();
+            var navigator = await window.Navigator();
+            var position = await navigator.Geolocation.GetCurrentPosition();
 
-        //    //        if (GPS.Accuracy > 500)
-        //    //        {
-        //    //            Toast.ShowWarning($"A posição do GPS foi recuperada, mas a precisão é de apenas: {Math.Round(GPS.Accuracy / 1000, 1)} km. Tente novamente mais tarde ou use um dispositivo mais preciso.", "alerta");
-        //    //        }
-        //    //    }
-        //    //}
-        //}
+            if (position.Error != null)
+            {
+                Toast.ShowWarning(position.Error.Message, "alerta");
+            }
+            else if (position.Location != null)
+            {
+                GPS.Latitude = position.Location.Coords.Latitude;
+                GPS.Longitude = position.Location.Coords.Longitude;
+                GPS.Accuracy = position.Location.Coords.Accuracy;
+
+                //TODO: chamar código da api
+                var here = await Http.Map_GetLocation(GPS.Latitude, GPS.Longitude);
+                if (here.items.Any())
+                {
+                    var address = here.items[0].address;
+                    profile.Basic.Location = address.GetLocation();
+                }
+                else
+                {
+                    profile.Basic.Location = "Localização Desconhecida";
+                }
+
+                profile.Basic.Longitude = GPS.Longitude;
+                profile.Basic.Latitude = GPS.Latitude;
+
+                if (GPS.Accuracy > 500)
+                {
+                    Toast.ShowWarning($"A posição do GPS foi recuperada, mas a precisão é de apenas: {Math.Round(GPS.Accuracy / 1000, 1)} km. Tente novamente mais tarde ou use um dispositivo mais preciso.", "alerta");
+                }
+            }
+            else
+            {
+                Toast.ShowWarning($"Não foi possível detectar um sistema GPS no seu dispositivo. Favor, tentar novamente ou liberar acesso ao GPS do seu dispositivo.", "alerta");
+            }
+        }
     }
 
     private async Task HandleValidSubmit()
@@ -192,18 +213,28 @@ else
 
             profile.ClearSimpleView();
 
-            if (string.IsNullOrEmpty(profile?.Id))
+            if (profile.GetDataStatus() == DataStatus.New)
             {
-                //response = await Http.Profile_Add(profile);
-                Toast.ShowWarning("+30 XP");
+                response = await Http.Profile_Add(profile);
+
+                if (response.IsSuccessStatusCode)
+                    Toast.ShowWarning("+30 XP");
             }
             else
             {
-                //response = await Http.Profile_Update(profile);
-                Toast.ShowWarning("-100 XP");
+                response = await Http.Profile_Update(profile);
+
+                if (response.IsSuccessStatusCode)
+                    Toast.ShowWarning("-100 XP");
             }
 
-            //await response.ProcessResponse(Toast, "Salvo com sucesso!");
+            if (response.IsSuccessStatusCode)
+            {
+                profile = await ApiCore.ReturnResponse<VerusDate.Shared.Model.Profile.Profile>(response);
+            }
+
+            await response.ProcessResponse(Toast, "Salvo com sucesso!");
+
         }
         catch (Exception ex)
         {

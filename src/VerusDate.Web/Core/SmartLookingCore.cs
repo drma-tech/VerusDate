@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
-using VerusDate.Shared.Model;
 using VerusDate.Shared.Model.Profile;
 
 namespace VerusDate.Web.Core

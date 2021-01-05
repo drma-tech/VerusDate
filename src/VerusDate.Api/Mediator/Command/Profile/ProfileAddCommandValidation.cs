@@ -18,26 +18,68 @@ namespace VerusDate.Api.Mediator.Command.Profile
                 .NotEmpty()
                 .MaximumLength(512);
 
+            RuleFor(x => x.Basic.Location)
+                .NotEmpty();
+
+            RuleFor(x => x.Basic.Longitude)
+                .NotEmpty();
+
+            RuleFor(x => x.Basic.Latitude)
+                .NotEmpty();
+
+            RuleFor(x => x.Basic.MaritalStatus)
+                .NotEmpty();
+
             RuleFor(x => x.Basic.Intent)
+                .NotEmpty();
+
+            RuleFor(x => x.Basic.BiologicalSex)
+                .NotEmpty();
+
+            RuleFor(x => x.Basic.GenderIdentity)
+                .NotEmpty();
+
+            RuleFor(x => x.Basic.SexualOrientation)
                 .NotEmpty();
 
             //BIO
 
             RuleFor(x => x.Bio.BirthDate)
-               .NotEmpty()
-               .GreaterThanOrEqualTo(DateTime.Now.AddYears(-18)).WithMessage("You must be 18 or older to register");
+                .NotEmpty()
+                .LessThanOrEqualTo(DateTime.Now.AddYears(-18).AddDays(1)).WithMessage("Você deve ter 18 ou mais para se registrar");
+
+            RuleFor(x => x.Bio.RaceCategory)
+                .NotEmpty();
+
+            RuleFor(x => x.Bio.Height)
+               .NotEmpty();
+
+            RuleFor(x => x.Bio.BodyMass)
+               .NotEmpty();
 
             //LIFESTYLE
 
-            RuleFor(x => x.Lifestyle.EducationLevel)
+            RuleFor(x => x.Lifestyle.Drink)
+                .NotEmpty()
+                .When(w => w.Basic.Intent.IsLongTerm());
+
+            RuleFor(x => x.Lifestyle.Smoke)
+                .NotEmpty()
+                .When(w => w.Basic.Intent.IsLongTerm());
+
+            RuleFor(x => x.Lifestyle.Diet)
                 .NotEmpty()
                 .When(w => w.Basic.Intent.IsLongTerm());
 
             RuleFor(x => x.Lifestyle.HaveChildren)
-               .NotEmpty()
-               .When(w => w.Basic.Intent.IsLongTerm());
+                .NotEmpty()
+                .When(w => w.Basic.Intent.IsLongTerm());
 
             RuleFor(x => x.Lifestyle.WantChildren)
+                .NotEmpty()
+                .When(w => w.Basic.Intent.IsLongTerm());
+
+            RuleFor(x => x.Lifestyle.EducationLevel)
                 .NotEmpty()
                 .When(w => w.Basic.Intent.IsLongTerm());
 
@@ -52,6 +94,8 @@ namespace VerusDate.Api.Mediator.Command.Profile
             RuleFor(x => x.Lifestyle.MoneyPersonality)
                 .NotEmpty()
                 .When(w => w.Basic.Intent.IsLongTerm());
+
+            //MTBI = OPCIONAL - TEM QUE FAZER TESTE
 
             RuleFor(x => x.Lifestyle.RelationshipPersonality)
                .NotEmpty()

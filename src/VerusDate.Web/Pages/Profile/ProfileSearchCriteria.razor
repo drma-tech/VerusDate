@@ -71,25 +71,27 @@ else
 
                         <Field Horizontal="true">
                             <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
-                                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler"></Icon> @AttributeHelper.GetName(() => looking.MinimalAge)
+                                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler"></Icon> @AttributeHelper.GetName(() => looking.MinimalHeight)
                             </FieldLabel>
                             <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
                                 <Select TValue="Height?" @bind-Value="@looking.MinimalHeight">
+                                    <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Height>())
                                     {
                                         <option value="@item">@item.GetName()</option>
                                     }
                                 </Select>
-                                <ValidationMessage For="@(() => looking.MinimalAge)"></ValidationMessage>
+                                <ValidationMessage For="@(() => looking.MinimalHeight)"></ValidationMessage>
                             </FieldBody>
                             <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
-                                <Select TValue="Height?" @bind-Value="@looking.MinimalHeight">
+                                <Select TValue="Height?" @bind-Value="@looking.MaxHeight">
+                                    <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Height>())
                                     {
                                         <option value="@item">@item.GetName()</option>
                                     }
                                 </Select>
-                                <ValidationMessage For="@(() => looking.MaxAge)"></ValidationMessage>
+                                <ValidationMessage For="@(() => looking.MaxHeight)"></ValidationMessage>
                             </FieldBody>
                         </Field>
                     </Column>
@@ -122,11 +124,11 @@ else
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.Religion)" TValue="Religion?" TEnum="Religion" @bind-SelectedValue="@looking.Religion"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PrayingHands" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         @*<CustomFieldSelect Type="FieldType.Select" For="@(() => looking.MoneyPersonality)" TValue="MoneyPersonality?" TEnum="MoneyPersonality" @bind-SelectedValue="@looking.MoneyPersonality"
-                                               CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                                CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>
                             <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@looking.MyersBriggsTypeIndicator"
-                                               CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                                CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>
                             <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@looking.RelationshipPersonality"
-                                               CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>*@
+                                                CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>*@
                     </Column>
                 </Row>
             </CardBody>
@@ -134,9 +136,9 @@ else
                 <Button Type="ButtonType.Submit" Color="Color.Primary">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
                 </Button>
-                @if (!string.IsNullOrEmpty(profile?.Id))
+                @if (profile.Looking != null)
                 {
-                    <Badge Color="Color.Danger">
+                    <Badge Color="Color.Danger" Margin="Margin.Is3.FromLeft">
                         <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon> -100 XP
                     </Badge>
                 }
@@ -153,8 +155,8 @@ else
 
 @code {
 
-    VerusDate.Shared.Model.Profile.ProfileLooking looking;
-    VerusDate.Shared.Model.Profile.Profile profile;
+    private VerusDate.Shared.Model.Profile.Profile profile;
+    private VerusDate.Shared.Model.Profile.ProfileLooking looking;
 
     private Shared.modal.BasicModal help;
 
@@ -167,14 +169,20 @@ else
 
     protected override async Task LoadData()
     {
-        looking = (await Http.Profile_Get()).Looking;
+        profile = await Http.Profile_Get();
+
+        if (profile == null)
+        {
+            Toast.ShowWarning("Favor, atualizar primeiro seu perfil");
+            return;
+        }
+
+        looking = profile.Looking;
 
         if (looking == null)
         {
-            looking = new VerusDate.Shared.Model.Profile.ProfileLooking();
+            looking = new();
         }
-
-        profile = await Http.Profile_Get();
     }
 
     private async Task HandleValidSubmit()
@@ -183,17 +191,29 @@ else
         {
             HttpResponseMessage response;
 
-            if (string.IsNullOrEmpty(profile.Id))
+            profile.Looking = looking;
+
+            if (profile.Looking == null)
             {
-                //response = await Http.ProfileLooking_Add(LocalStorage, looking, ComponenteUtils.IdUser);
-                Toast.ShowWarning("+30 XP");
+                response = await Http.Profile_UpdateLooking(profile);
+
+                if (response.IsSuccessStatusCode)
+                    Toast.ShowWarning("+30 XP");
             }
             else
             {
-                //response = await Http.ProfileLooking_Update(LocalStorage, looking);
+                response = await Http.Profile_UpdateLooking(profile);
+
+                if (response.IsSuccessStatusCode)
+                    Toast.ShowWarning("-100 XP");
             }
 
-            //await response.ProcessResponse(Toast, "Salvo com sucesso!");
+            if (response.IsSuccessStatusCode)
+            {
+                profile = await ApiCore.ReturnResponse<VerusDate.Shared.Model.Profile.Profile>(response);
+            }
+
+            await response.ProcessResponse(Toast, "Salvo com sucesso!");
         }
         catch (Exception ex)
         {

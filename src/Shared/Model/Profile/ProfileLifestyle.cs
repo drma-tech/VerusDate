@@ -7,13 +7,13 @@ namespace VerusDate.Shared.Model.Profile
     public class ProfileLifestyle
     {
         [Display(Name = "Bebe")]
-        public Drink Drink { get; set; }
+        public Drink? Drink { get; set; }
 
         [Display(Name = "Fuma")]
-        public Smoke Smoke { get; set; }
+        public Smoke? Smoke { get; set; }
 
-        [Display(Name = "Dieta", Description = "Este campo é opcional")]
-        public Diet Diet { get; set; } = Diet.Omnivore;
+        [Display(Name = "Dieta", Description = "Alteração opcional")]
+        public Diet? Diet { get; set; }
 
         [Display(Name = "Tem Filho(s)")]
         public HaveChildren? HaveChildren { get; set; }
@@ -36,7 +36,7 @@ namespace VerusDate.Shared.Model.Profile
         [Display(Name = "Personalidade no Relacionamento")]
         public RelationshipPersonality? RelationshipPersonality { get; set; }
 
-        [Display(Name = "Personalidade MBTI")]
+        [Display(Name = "Personalidade MBTI", Description = "Este campo é opcional")]
         public MyersBriggsTypeIndicator? MyersBriggsTypeIndicator { get; set; }
 
         [Display(Name = "Hobbies")]

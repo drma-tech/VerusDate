@@ -6,13 +6,13 @@ namespace VerusDate.Shared.Model.Profile
 {
     public class ProfileBio
     {
-        [Display(Name = "Nascimento")]
-        public DateTime BirthDate { get; set; } = DateTime.Now.AddYears(-18);
+        [Display(Name = "Nascimento", Description = "Confira a idade e signo")]
+        public DateTime BirthDate { get; set; }
 
-        [Display(Name = "Altura")]
+        [Display(Name = "Altura", Description = "Pode ser um valor aproximado")]
         public Height Height { get; set; }
 
-        [Display(Name = "Raça", Description = "Classificação da Raça")]
+        [Display(Name = "Raça", Description = "Classificação por US OMB")]
         public RaceCategory RaceCategory { get; set; }
 
         [Display(Name = "Corpo", Description = "Massa Corporal")]

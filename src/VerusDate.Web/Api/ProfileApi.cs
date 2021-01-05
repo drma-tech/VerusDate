@@ -137,17 +137,17 @@ namespace VerusDate.Web.Api
         //    return await http.ListCustom<Profile>("Profile/ListSearch");
         //}
 
-        public async static Task<Profile> Profile_Add(this HttpClient http, Profile obj)
+        public async static Task<HttpResponseMessage> Profile_Add(this HttpClient http, Profile obj)
         {
             return await http.Post("Profile/Add", obj);
         }
 
-        public async static Task<Profile> Profile_Update(this HttpClient http, Profile obj)
+        public async static Task<HttpResponseMessage> Profile_Update(this HttpClient http, Profile obj)
         {
             return await http.Put("Profile/Update", obj);
         }
 
-        public async static Task<ProfileLooking> Profile_UpdateLooking(this HttpClient http, ProfileLooking obj)
+        public async static Task<HttpResponseMessage> Profile_UpdateLooking(this HttpClient http, Profile obj)
         {
             return await http.Put("Profile/UpdateLooking", obj);
         }

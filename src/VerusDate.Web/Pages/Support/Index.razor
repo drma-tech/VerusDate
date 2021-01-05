@@ -12,86 +12,12 @@
 
 <Alert Color="Color.Warning" Visible="true">
     <AlertDescription>
-        Olá, como ainda estamos em uma versão beta, é provável que alguns erros ocorram ou que alguns recursos precisem de melhorias.
+        Nossa plataforma ainda está em desenvolvimento. Fique a vontade para sugerir melhorias ou informar quaisquer erros.
     </AlertDescription>
     <CloseButton></CloseButton>
 </Alert>
 
 <Row>
-    <Column ColumnSize="ColumnSize.Is6">
-        <Card>
-            <CardHeader>
-                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug"></Icon> Erros
-                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => NewTicket.ShowModal(TicketType.Bug)">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
-                </Button>
-            </CardHeader>
-            <CardBody>
-                <Row>
-                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <Field Horizontal="true">
-                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
-                                Status
-                            </FieldLabel>
-                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
-                                <Select TValue="TicketStatus?" @bind-SelectedValue="@TicketStatusBug">
-                                    @foreach (var item in EnumHelper.GetArray<TicketStatus>())
-                                    {
-                                        <SelectItem Value="@item">@item.GetName()</SelectItem>
-                                    }
-                                </Select>
-                            </FieldBody>
-                        </Field>
-                    </Column>
-                </Row>
-                @if (OptionsBug.HasCustomVisibility)
-                {
-                    <CustomVisibility Options="@OptionsBug"></CustomVisibility>
-                }
-                else
-                {
-                    <Row Style="max-height: 330px; overflow: auto;">
-                        @foreach (var item in GetTicketList(TicketType.Bug))
-                        {
-                            <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is1.FromBottom">
-                                <Card Style="background-color: #e2e3e5">
-                                    <CardBody Padding="Padding.Is1">
-                                        <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Justified">
-                                            <MemoEdit Rows="2" Plaintext="true" Text="@item.Description.GetResume(50)" />
-                                        </Paragraph>
-                                        <Paragraph Margin="Margin.Is2.FromBottom">
-                                            <Badge Color="Color.Secondary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Icon> @item.DtInsert.Value.GetElapsedTime()</Badge>
-                                            <br />
-                                            <Badge Color="Color.Secondary" Margin="Margin.Is1.FromRight"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.VoteYea"></Icon> @item.TotalVotes</Badge>
-                                            @if (item.TicketStatus == TicketStatus.Published)
-                                            {
-                                                <Badge Color="Color.Success"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle"></Icon> @item.TicketStatus.GetName()</Badge>
-                                            }
-                                            else if (item.TicketStatus == TicketStatus.Progress)
-                                            {
-                                                <Badge Color="Color.Warning">@item.TicketStatus.GetName()</Badge>
-                                            }
-                                            else if (item.TicketStatus == TicketStatus.Done)
-                                            {
-                                                <Badge Color="Color.Primary">@item.TicketStatus.GetName()</Badge>
-                                            }
-                                            else
-                                            {
-                                                <Badge Color="Color.Danger">@item.TicketStatus.GetName()</Badge>
-                                            }
-                                            <Button Float="Float.Right" Size="Size.ExtraSmall" Color="Color.Primary" Clicked="()=>Vote(item.Id)" Disabled="@anyVote(item.Id)">
-                                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Votar
-                                            </Button>
-                                        </Paragraph>
-                                    </CardBody>
-                                </Card>
-                            </Column>
-                        }
-                    </Row>
-                }
-            </CardBody>
-        </Card>
-    </Column>
     <Column ColumnSize="ColumnSize.Is6">
         <Card>
             <CardHeader>
@@ -150,6 +76,80 @@
                                                 <Badge Color="Color.Primary">@item.TicketStatus.GetName()</Badge>
                                             }
                                             else //Declined
+                                            {
+                                                <Badge Color="Color.Danger">@item.TicketStatus.GetName()</Badge>
+                                            }
+                                            <Button Float="Float.Right" Size="Size.ExtraSmall" Color="Color.Primary" Clicked="()=>Vote(item.Id)" Disabled="@anyVote(item.Id)">
+                                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Votar
+                                            </Button>
+                                        </Paragraph>
+                                    </CardBody>
+                                </Card>
+                            </Column>
+                        }
+                    </Row>
+                }
+            </CardBody>
+        </Card>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is6">
+        <Card>
+            <CardHeader>
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug"></Icon> Erros
+                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => NewTicket.ShowModal(TicketType.Bug)">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
+                </Button>
+            </CardHeader>
+            <CardBody>
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <Field Horizontal="true">
+                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                                Status
+                            </FieldLabel>
+                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
+                                <Select TValue="TicketStatus?" @bind-SelectedValue="@TicketStatusBug">
+                                    @foreach (var item in EnumHelper.GetArray<TicketStatus>())
+                                    {
+                                        <SelectItem Value="@item">@item.GetName()</SelectItem>
+                                    }
+                                </Select>
+                            </FieldBody>
+                        </Field>
+                    </Column>
+                </Row>
+                @if (OptionsBug.HasCustomVisibility)
+                {
+                    <CustomVisibility Options="@OptionsBug"></CustomVisibility>
+                }
+                else
+                {
+                    <Row Style="max-height: 330px; overflow: auto;">
+                        @foreach (var item in GetTicketList(TicketType.Bug))
+                        {
+                            <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is1.FromBottom">
+                                <Card Style="background-color: #e2e3e5">
+                                    <CardBody Padding="Padding.Is1">
+                                        <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Justified">
+                                            <MemoEdit Rows="2" Plaintext="true" Text="@item.Description.GetResume(60)" />
+                                        </Paragraph>
+                                        <Paragraph Margin="Margin.Is2.FromBottom">
+                                            <Badge Color="Color.Secondary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Icon> @item.DtInsert.Value.GetElapsedTime()</Badge>
+                                            <br />
+                                            <Badge Color="Color.Secondary" Margin="Margin.Is1.FromRight"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.VoteYea"></Icon> @item.TotalVotes</Badge>
+                                            @if (item.TicketStatus == TicketStatus.Published)
+                                            {
+                                                <Badge Color="Color.Success"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle"></Icon> @item.TicketStatus.GetName()</Badge>
+                                            }
+                                            else if (item.TicketStatus == TicketStatus.Progress)
+                                            {
+                                                <Badge Color="Color.Warning">@item.TicketStatus.GetName()</Badge>
+                                            }
+                                            else if (item.TicketStatus == TicketStatus.Done)
+                                            {
+                                                <Badge Color="Color.Primary">@item.TicketStatus.GetName()</Badge>
+                                            }
+                                            else
                                             {
                                                 <Badge Color="Color.Danger">@item.TicketStatus.GetName()</Badge>
                                             }

@@ -1,4 +1,6 @@
-﻿/* width */
+﻿/*BARRA DE ROLAGEM*/
+
+/* width */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -17,3 +19,17 @@
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+
+/*Blazored.Toast*/
+.blazored-toast-container {
+    z-index: 3 !important;
+}
+
+/*Blazorise Header e Footer*/
+.b-layout-header-fixed {
+    z-index: 3 !important;
+}
+
+.b-layout-footer {
+    z-index: 3 !important;
+}

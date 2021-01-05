@@ -35,6 +35,8 @@ namespace VerusDate.Api.Function
             {
                 var command = new TicketGetListCommand();
 
+                command.IdLoggedUser = req.GetUserId();
+
                 var result = await _mediator.Send(command, source.Token);
 
                 return new OkObjectResult(result);
@@ -56,6 +58,8 @@ namespace VerusDate.Api.Function
             try
             {
                 var command = new TicketGetMyVotesCommand();
+
+                command.IdLoggedUser = req.GetUserId();
 
                 var result = await _mediator.Send(command, source.Token);
 
@@ -79,6 +83,8 @@ namespace VerusDate.Api.Function
             {
                 var command = await JsonSerializer.DeserializeAsync<TicketInsertCommand>(req.Body, null, source.Token);
 
+                command.SetIds(req.GetUserId());
+
                 var result = await _mediator.Send(command, source.Token);
 
                 return new OkObjectResult(result);
@@ -100,6 +106,8 @@ namespace VerusDate.Api.Function
             try
             {
                 var command = await JsonSerializer.DeserializeAsync<TicketVoteCommand>(req.Body, null, source.Token);
+
+                command.SetIds(req.GetUserId());
 
                 var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
 

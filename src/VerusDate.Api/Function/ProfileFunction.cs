@@ -6,12 +6,12 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Profile;
 using VerusDate.Api.Mediator.Queries.Profile;
-using VerusDate.Shared.Seed;
 
 namespace VerusDate.Api.Function
 {
@@ -35,6 +35,8 @@ namespace VerusDate.Api.Function
             {
                 var command = new ProfileGetCommand();
 
+                command.IdLoggedUser = req.GetUserId();
+
                 var result = await _mediator.Send(command, source.Token);
 
                 return new OkObjectResult(result);
@@ -55,9 +57,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var UserId = req.GetUserId();
+                var command = new ProfileGetViewCommand() { IdLoggedUser = req.GetUserId(), IdUserView = req.Query["Id"] };
 
-                var result = await _mediator.Send(new ProfileGetViewCommand() { IdLoggedUser = UserId, IdUserView = req.Query["Id"] }, source.Token);
+                var result = await _mediator.Send(command, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -113,8 +115,10 @@ namespace VerusDate.Api.Function
 
             try
             {
-                //var command = await JsonSerializer.DeserializeAsync<ProfileAddCommand>(req.Body);
-                var command = ProfileSeed.GetProfile<ProfileAddCommand>(null).Generate();
+                var command = await JsonSerializer.DeserializeAsync<ProfileAddCommand>(req.Body);
+                //var command = ProfileSeed.GetProfile<ProfileAddCommand>(null).Generate();
+
+                command.SetIds(req.GetUserId());
 
                 var result = await _mediator.Send(command, source.Token);
 
@@ -136,8 +140,10 @@ namespace VerusDate.Api.Function
 
             try
             {
-                //var command = await JsonSerializer.DeserializeAsync<ProfileUpdateCommand>(req.Body);
-                var command = ProfileSeed.GetProfile<ProfileUpdateCommand>(req.Query["Id"]).Generate();
+                var command = await JsonSerializer.DeserializeAsync<ProfileUpdateCommand>(req.Body);
+                //var command = ProfileSeed.GetProfile<ProfileUpdateCommand>(req.Query["Id"]).Generate();
+
+                command.SetIds(req.GetUserId());
 
                 var result = await _mediator.Send(command, source.Token);
 
@@ -159,8 +165,10 @@ namespace VerusDate.Api.Function
 
             try
             {
-                //var command = await JsonSerializer.DeserializeAsync<ProfileUpdateLookingCommand>(req.Body);
-                var command = ProfileSeed.GetProfile<ProfileUpdateLookingCommand>(req.Query["Id"]).Generate();
+                var command = await JsonSerializer.DeserializeAsync<ProfileUpdateLookingCommand>(req.Body);
+                //var command = ProfileSeed.GetProfile<ProfileUpdateLookingCommand>(req.Query["Id"]).Generate();
+
+                command.SetIds(req.GetUserId());
 
                 var result = await _mediator.Send(command, source.Token);
 

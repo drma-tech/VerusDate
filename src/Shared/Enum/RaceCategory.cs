@@ -13,19 +13,23 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Negro ou Afro-Americano", Description = "Uma pessoa com origem em qualquer um dos grupos raciais negros da África. Termos como 'haitiano' ou 'negro' podem ser usados além de 'preto ou afro-americano'")]
         Black_AfricanAmerican = 3,
 
-        [Display(Name = "Hispânico ou Latino", Description = "Pessoa da cultura cubana, mexicana, porto-riquenha, cubana, sul ou centro-americana ou outra cultura ou origem espanhola, independentemente da raça. O termo 'origem espanhola' pode ser usado além de 'hispânico ou latino'")]
-        Hispanic_Latino = 4,
-
         [Display(Name = "Nativo do Havaí ou de outras ilhas do Pacífico", Description = "Uma pessoa com origem em qualquer um dos povos originais do Havaí, Guam, Samoa ou outras ilhas do Pacífico")]
-        NativeHawaiian_OtherPacificIslander = 5,
+        NativeHawaiian_OtherPacificIslander = 4,
 
         [Display(Name = "Branca", Description = "Uma pessoa com origem em qualquer um dos povos originais da Europa, Oriente Médio ou Norte da África")]
-        White = 6,
+        White = 5,
 
-        [Display(Name = "Raças Mistas", Description = "")]
-        MixedRaces = 7,
+        [Display(Name = "Raças Mistas", Description = "Caso possua duas ou mais raças aqui listadas")]
+        MixedRaces = 6,
 
-        [Display(Name = "Outra", Description = "")]
-        Other = 8
+        [Display(Name = "Outra", Description = "Caso se considere de uma raça não listada aqui")]
+        Other = 7,
+
+        //não é raça e sim etinia
+        //[Display(Name = "Hispânico ou Latino", Description = "Pessoa da cultura cubana, mexicana, porto-riquenha, cubana, sul ou centro-americana ou outra cultura ou origem espanhola, independentemente da raça. O termo 'origem espanhola' pode ser usado além de 'hispânico ou latino'")]
+        //Hispanic_Latino = 8,
+
+        //[Display(Name = "Não Hispânico ou Latino")]
+        //NotHispanicOrLatino = 9
     }
 }

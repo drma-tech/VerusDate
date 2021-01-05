@@ -9,57 +9,61 @@
 }
 else
 {
-    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6">
+    <Row>
         @foreach (var item in listaUsers)
         {
-            <div class="col mb-2">
-                <div class="contact-box" style="padding: 0px;">
-                    <a class="embed-responsive embed-responsive-1by1 divPhoto" href="/ProfileView/@item.Id" style="background-color: black;">
-                        <img alt="..." class="imgPhoto" src="@item.Photo.GetMainPhoto()" />
-                    </a>
-                    <p style="position: absolute; margin: 10px; bottom: 100px;">
-                        <span class="badge badge-secondary">@item.Basic.NickName, @item.Bio.BirthDate.GetAge(), @item.GetDistance(0,0)</span>
-                    </p>
-                    @*@if (item.DtLastLogin.Date >= DateTime.Now.Date.AddDays(-7))
-                        {
-                            <div style="color: green; position: absolute; margin-left: 10px; margin-top: 6px; top: 0px;" title="Recently logged in">
-                                <i class="fas fa-dot-circle" style="font-size: 12px;"></i>
-                            </div>
-                        }
-                        else if (item.DtLastLogin.Date >= DateTime.Now.Date.AddDays(-30))
-                        {
-                            <div style="color: yellow; position: absolute; margin-left: 10px; margin-top: 6px; top: 0px;" title="Login done in a while">
-                                <i class="fas fa-dot-circle" style="font-size: 12px;"></i>
-                            </div>
-                        }
-                        else
-                        {
-                            <div style="color: red; position: absolute; margin-left: 10px; margin-top: 6px; top: 0px;" title="User with inactive status">
-                                <i class="fas fa-dot-circle" style="font-size: 12px;"></i>
-                            </div>
-                        }*@
-                    <div class="contact-box-footer">
-                        <button class="btn btn-primary btn-circle btn-lg" style="position: relative;" type="button" title="Blink" @onclick="() => Blink(item.Id)">
-                            <span class="badge badge-warning" style="position: absolute; top: -8px; right: -10px;" title="-1 Diamante"><i class="fas fa-gem"></i></span>
-                            <i class="far fa-kiss-wink-heart"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <Column ColumnSize="ColumnSize.Is2.OnFullHD.Is3.OnWidescreen.Is4.OnDesktop.Is6.OnMobile" Margin="Margin.Is3.FromBottom">
+                <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
+                    <CardImage Source="@item.Photo.GetMainPhoto()" Alt="Photo Image"></CardImage>
+                    <Badge Color="Color.Secondary" Style="position: absolute; bottom: 58px; left: 5px;">@item.NickName, @item.BirthDate.GetAge(), @item.Distance Km</Badge>
+                    @if (item.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
+                    {
+                        <Badge Color="Color.Success" Style="position: absolute; top: 5px; left: 5px;" title="logado recentemente">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                        </Badge>
+                    }
+                    else if (item.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
+                    {
+                        <Badge Color="Color.Warning" Style="position: absolute; top: 5px; left: 5px;" title="logado essa semana">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                        </Badge>
+                    }
+                    else if (item.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
+                    {
+                        <Badge Color="Color.Danger" Style="position: absolute; top: 5px; left: 5px;" title="logado esse mês">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                        </Badge>
+                    }
+                    else
+                    {
+                        <Badge Color="Color.Dark" Style="position: absolute; top: 5px; left: 5px;" title="usuário desativado">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                        </Badge>
+                    }
+                    <CardBody Padding="Padding.Is2">
+                        <Button Color="Color.Primary" title="Blink" Clicked="() => Blink(item.Id)" Style="position: relative;">
+                            <Badge Color="Color.Warning" Style="position: absolute; top: -8px; right: -10px;" title="-1 Diamante">
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem"></Icon>
+                            </Badge>
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.KissWinkHeart"></Icon>
+                        </Button>
+                    </CardBody>
+                </Card>
+            </Column>
         }
-    </div>
+    </Row>
 }
 
 @code
 {
     private VerusDate.Shared.Model.Profile.Profile profile;
     private VerusDate.Shared.Model.Profile.ProfileGamification gamification;
-    private List<VerusDate.Shared.Model.Profile.Profile> listaUsers;
+    private List<VerusDate.Shared.ModelQuery.ProfileSearch> listaUsers;
     private List<VerusDate.Shared.Model.Interaction.Interaction> interactions;
 
     private VisibilityOptions Options => new VisibilityOptions()
     {
-        Loading = listaUsers == null || interactions == null,
+        Loading = listaUsers == null,// || interactions == null,
         NoData = listaUsers != null && !listaUsers.Any()
     };
 
@@ -67,7 +71,7 @@ else
     {
         profile = await Http.Profile_Get();
         gamification = await Http.Gamification_Get(LocalStorage);
-        //listaUsers = await Http.Profile_ListSearch();
+        listaUsers = await Http.Profile_ListSearch();
         //interactions = await Http.Interation_GetList();
     }
 

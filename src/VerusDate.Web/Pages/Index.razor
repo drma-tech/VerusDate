@@ -22,10 +22,9 @@
                     {
                         @foreach (var item in lstDestaques)
                         {
-                            <Column ColumnSize="ColumnSize.Is1.OnFullHD.Is2.OnDesktop.Is4.OnMobile">
+                            <Column ColumnSize="ColumnSize.Is1.OnFullHD.Is2.OnWidescreen.Is3.OnDesktop.Is4.OnMobile">
                                 <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
                                     <CardImage Source="@item.Photo.GetMainPhoto()" Alt="Photo Image"></CardImage>
-                                    <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Center" Style="font-size: small;"></Paragraph>
                                     <Badge Color="Color.Light" Style="font-size: 11px;">@item.NickName</Badge>
                                     <Badge Color="Color.Light" Style="font-size: 9px; position: absolute; top: 5px; left: 5px;">@ProfileSeed.GetNumber(100, 500) XP</Badge>
                                 </Card>
@@ -415,10 +414,9 @@
         //var sw = new System.Diagnostics.Stopwatch();
         //sw.Start();
 
-        await Task.Run(() =>
-        {
-            lstDestaques = ProfileSeed.GetProfileSearch().Generate(12);
-        });
+        lstDestaques = await Http.Gamification_ListDestaques();
+
+        //lstDestaques = ProfileSeed.GetProfileSearch().Generate(12);
 
         //sw.Stop();
         //Console.WriteLine(sw.Elapsed);

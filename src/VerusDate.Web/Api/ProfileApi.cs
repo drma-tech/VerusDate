@@ -1,6 +1,8 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using VerusDate.Shared.Model.Profile;
+using VerusDate.Shared.ModelQuery;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api
@@ -132,10 +134,10 @@ namespace VerusDate.Web.Api
         //    return await http.ListCustom<Profile>("Profile/ListMatch");
         //}
 
-        //public async Task<List<Profile>> Profile_ListSearch(this HttpClient http)
-        //{
-        //    return await http.ListCustom<Profile>("Profile/ListSearch");
-        //}
+        public static async Task<List<ProfileSearch>> Profile_ListSearch(this HttpClient http)
+        {
+            return await http.GetList<ProfileSearch>("Profile/ListSearch");
+        }
 
         public async static Task<HttpResponseMessage> Profile_Add(this HttpClient http, Profile obj)
         {

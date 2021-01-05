@@ -3,10 +3,12 @@
 
 @if (IsVisible)
 {
-    <button class="btn btn-primary btn-circle btn-lg" style="position: relative; margin-left: 10px;" type="button" title="Like" @onclick="Like">
-        <span class="badge badge-warning" style="position: absolute; top: -8px; right: -10px;" title="-1 Maça"><i class="fas fa-apple-alt"></i></span>
-        <i class="far fa-thumbs-up"></i>
-    </button>
+    <Button Color="Color.Primary" Size="Size.Large" Style="position: relative;" title="Like" Clicked="Like" Margin="Margin.Is2.FromLeft">
+        <Badge Color="Color.Warning" Style="position: absolute; top: -8px; right: -10px;" title="-1 Maça">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt"></Icon>
+        </Badge>
+        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThumbsUp"></Icon>
+    </Button>
 }
 
 @code {

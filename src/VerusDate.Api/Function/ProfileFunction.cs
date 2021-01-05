@@ -76,23 +76,23 @@ namespace VerusDate.Api.Function
             }
         }
 
-        //[FunctionName("ProfileListMatch")]
-        //public async Task<IActionResult> ListMatch(
-        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/ListMatch")] HttpRequest req,
-        //   ILogger log)
-        //{
-        //    try
-        //    {
-        //        var result = await _mediator.Send(new ProfileListMatchCommand() { Id = req.Query["Id"] }, req.HttpContext.RequestAborted);
+        [FunctionName("ProfileListMatch")]
+        public async Task<IActionResult> ListMatch(
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/ListMatch")] HttpRequest req,
+            ILogger log)
+        {
+            try
+            {
+                var result = ProfileSeed.GetProfileSearch(req.GetUserId()).Generate(18);
 
-        //        return new OkObjectResult(result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.LogError(ex, null, req.Query.ToList());
-        //        return new BadRequestObjectResult(ex.Message);
-        //    }
-        //}
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, null, req.Query.ToList());
+                return new BadRequestObjectResult(ex.Message);
+            }
+        }
 
         [FunctionName("ProfileListSearch")]
         public async Task<IActionResult> ListSearch(

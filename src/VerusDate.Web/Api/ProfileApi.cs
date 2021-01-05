@@ -129,10 +129,10 @@ namespace VerusDate.Web.Api
 
         //#endregion AFFINITY
 
-        //public async Task<List<Profile>> Profile_ListMatch(this HttpClient http)
-        //{
-        //    return await http.ListCustom<Profile>("Profile/ListMatch");
-        //}
+        public static async Task<List<ProfileSearch>> Profile_ListMatch(this HttpClient http)
+        {
+            return await http.GetList<ProfileSearch>("Profile/ListMatch");
+        }
 
         public static async Task<List<ProfileSearch>> Profile_ListSearch(this HttpClient http)
         {

@@ -8,14 +8,14 @@
       "route": "/.auth/login/github",
       "statusCode": "404"
     },
-    {
-      "route": "/api/public/*",
-      "allowedRoles": [ "anonymous" ]
-    },
-    {
-      "route": "/api/*",
-      "allowedRoles": [ "authenticated" ]
-    },
+    //{
+    //  "route": "/api/public/*",
+    //  "allowedRoles": [ "anonymous" ]
+    //},
+    //{
+    //  "route": "/api/*",
+    //  "allowedRoles": [ "authenticated" ]
+    //},
     {
       "route": "/*",
       "serve": "/index.html",

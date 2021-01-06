@@ -1,4 +1,4 @@
-﻿{
+{
   "routes": [
     {
       "route": "/.auth/login/aad",

@@ -1,11 +1,9 @@
 ﻿using Blazored.LocalStorage;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using VerusDate.Shared.Model.Profile;
-using VerusDate.Shared.ModelQuery;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api
@@ -19,11 +17,6 @@ namespace VerusDate.Web.Api
         public async static Task ClearCache(ILocalStorageService storage)
         {
             await storage.RemoveItemAsync(StorageKey);
-        }
-
-        public async static Task<List<ProfileSearch>> Gamification_ListDestaques(this HttpClient http)
-        {
-            return await http.GetList<ProfileSearch>($"Gamification/ListDestaques");
         }
 
         public async static Task<ProfileGamification> Gamification_Get(this HttpClient http, ILocalStorageService storage)

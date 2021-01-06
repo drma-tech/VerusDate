@@ -9,6 +9,14 @@
       "statusCode": "404"
     },
     {
+      "route": "/api/*",
+      "allowedRoles": [ "authenticated" ]
+    },
+    {
+      "route": "/api/public/*",
+      "allowedRoles": [ "anonymous" ]
+    },
+    {
       "route": "/admin/*",
       "allowedRoles": [ "administrator" ]
     },
@@ -16,6 +24,14 @@
       "route": "/*",
       "serve": "/index.html",
       "statusCode": 200
-    }
+    },
+    "platformErrorOverrides",
+    [
+      {
+        "errorType": "Unauthenticated",
+        "statusCode": "302",
+        "serve": "/login-providers"
+      }
+    ]
   ]
 }

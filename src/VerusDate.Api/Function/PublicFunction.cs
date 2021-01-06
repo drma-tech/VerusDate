@@ -13,18 +13,18 @@ using VerusDate.Shared.Seed;
 
 namespace VerusDate.Api.Function
 {
-    public class GamificationFunction
+    public class PublicFunction
     {
         private readonly IMediator _mediator;
 
-        public GamificationFunction(IMediator mediator)
+        public PublicFunction(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [FunctionName("GamificationListDestaques")]
+        [FunctionName("PublicListDestaques")]
         public async Task<IActionResult> ListDestaques(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Gamification/ListDestaques")] HttpRequest req,
+           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Public/ListDestaques")] HttpRequest req,
            ILogger log, CancellationToken cancellationToken)
         {
             using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);

@@ -21,24 +21,5 @@
       "serve": "/index.html",
       "statusCode": 200
     }
-  ],
-  "platformErrorOverrides": [
-    //{
-    //  "errorType": "NotFound",
-    //  "serve": "/custom-404.html"
-    //},
-    {
-      "errorType": "Unauthenticated",
-      "statusCode": "302",
-      "serve": "/login-providers"
-    }
-  ],
-  "defaultHeaders": {
-    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'",
-    "cache-control": "must-revalidate, max-age=6000",
-    "x-dns-prefetch-control": ""
-  }
-  //"mimeTypes": {
-  //  "custom": "text/html"
-  //}
+  ]
 }

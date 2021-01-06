@@ -122,7 +122,6 @@ namespace VerusDate.Api.Function
             try
             {
                 var command = await JsonSerializer.DeserializeAsync<ProfileAddCommand>(req.Body);
-                //var command = ProfileSeed.GetProfile<ProfileAddCommand>(null).Generate();
 
                 command.SetIds(req.GetUserId());
 
@@ -147,7 +146,6 @@ namespace VerusDate.Api.Function
             try
             {
                 var command = await JsonSerializer.DeserializeAsync<ProfileUpdateCommand>(req.Body);
-                //var command = ProfileSeed.GetProfile<ProfileUpdateCommand>(req.Query["Id"]).Generate();
 
                 command.SetIds(req.GetUserId());
 
@@ -172,7 +170,6 @@ namespace VerusDate.Api.Function
             try
             {
                 var command = await JsonSerializer.DeserializeAsync<ProfileUpdateLookingCommand>(req.Body);
-                //var command = ProfileSeed.GetProfile<ProfileUpdateLookingCommand>(req.Query["Id"]).Generate();
 
                 command.SetIds(req.GetUserId());
 

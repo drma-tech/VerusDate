@@ -9,7 +9,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
-using VerusDate.Shared.ModelQuery;
 using VerusDate.Shared.Seed;
 
 namespace VerusDate.Api.Function

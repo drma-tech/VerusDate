@@ -9,10 +9,6 @@
       "statusCode": "404"
     },
     {
-      "route": "/api/*",
-      "allowedRoles": [ "authenticated" ]
-    },
-    {
       "route": "/admin/*",
       "allowedRoles": [ "administrator" ]
     },

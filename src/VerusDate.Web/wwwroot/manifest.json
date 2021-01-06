@@ -24,25 +24,25 @@
       "name": "Matches",
       "short_name": "Matches",
       "description": "Veja nossas novas sugestões para você",
-      "url": "/match"
-      //"icons": [
-      //  {
-      //    "src": "/icons/play-later.png",
-      //    "sizes": "192x192"
-      //  }
-      //]
+      "url": "/match",
+      "icons": [
+        {
+          "src": "/icons/play-later.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Busca",
       "short_name": "Busca",
-      "description": "Busque agora novos pretendentes",
-      "url": "/search"
-      //"icons": [
-      //  {
-      //    "src": "/icons/subscriptions.png",
-      //    "sizes": "192x192"
-      //  }
-      //]
+      "description": "Conheça novas pessoas de acordo com sua definição de busca",
+      "url": "/search",
+      "icons": [
+        {
+          "src": "/icons/subscriptions.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ],
   "screenshots": [

@@ -24,14 +24,13 @@
       "route": "/*",
       "serve": "/index.html",
       "statusCode": 200
-    },
-    "platformErrorOverrides",
-    [
-      {
-        "errorType": "Unauthenticated",
-        "statusCode": "302",
-        "serve": "/login-providers"
-      }
-    ]
+    }
+  ],
+  "platformErrorOverrides": [
+    {
+      "errorType": "Unauthenticated",
+      "statusCode": "302",
+      "serve": "/login-providers"
+    }
   ]
 }

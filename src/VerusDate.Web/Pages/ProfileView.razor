@@ -1,4 +1,4 @@
-﻿@page "/ProfileView/{IdUserView:guid}"
+﻿@page "/ProfileView/{IdUserView}"
 @attribute [Authorize]
 @inherits PageCore<ProfileView>
 @inject HttpClient Http
@@ -18,7 +18,7 @@ else
                         <i class="badge badge-secondary">@view.Basic.NickName, @view.Bio.BirthDate.GetAge(), @view.GetDistance(0, 0)</i>
                     </span>
                     <div class="text-center" style="position: absolute; bottom: 10px; width: 100%;">
-                        <BtnChat IdUserView="@IdUserView.ToString()" IdChat="@InteractionVM?.IdChat"></BtnChat>
+                        <BtnChat IdUserView="@IdUserView" IdChat="@InteractionVM?.IdChat"></BtnChat>
                     </div>
                 </div>
                 <div style="padding: 10px;">
@@ -70,13 +70,13 @@ else
             </div>
         </div>
     </div>
-    <ProfileReport></ProfileReport>
+    <VerusDate.Web.Shared.modal.ProfileReport></VerusDate.Web.Shared.modal.ProfileReport>
 }
 
 @code {
 
     [Parameter]
-    public Guid IdUserView { get; set; }
+    public string IdUserView { get; set; }
 
     private VerusDate.Shared.Model.Profile.Profile view;
     private List<VerusDate.Shared.AffinityVM> affinities;
@@ -87,12 +87,13 @@ else
     private VisibilityOptions Options => new VisibilityOptions()
     {
         Loading = view == null || affinities == null || gamification == null,
-        Invalid = IdUserView.ToString() == ComponenteUtils.IdUser
+        Invalid = IdUserView == ComponenteUtils.IdUser
     };
 
     protected override async Task LoadData()
     {
-        //view = await Http.Profile_GetView(IdUserView.ToString());
+        //view = await Http.Profile_GetView(IdUserView);
+        view = ProfileSeed.GetProfile(null, true, true, true, true, true);
 
         if (view == null)
         {
@@ -100,10 +101,10 @@ else
         }
         else
         {
-            //var looking = await Http.ProfileLooking_Get(LocalStorage);
+            var looking = view.Looking;
             //affinities = ProfileApi.GetAffinity(looking, view);
-            //gamification = await Http.Gamification_GetView(IdUserView.ToString());
-            //badge = await Http.Badge_GetView(IdUserView.ToString());
+            gamification = view.Gamification;
+            badge = view.Badge;
             //InteractionVM = await Http.Interation_Get(IdUserView.ToString());
         }
     }

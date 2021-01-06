@@ -1,6 +1,6 @@
 {
-  "name": "VerusDate.Web",
-  "short_name": "VerusDate.Web",
+  "name": "Verus Date",
+  "short_name": "Verus Date",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -10,6 +10,33 @@
       "src": "icon-512.png",
       "type": "image/png",
       "sizes": "512x512"
+    }
+  ],
+  "categories": [ "entertainment", "lifestyle", "social" ],
+  "shortcuts": [
+    {
+      "name": "Matches",
+      "short_name": "Matches",
+      "description": "Veja nossas novas sugestões para você",
+      "url": "/match"
+      //"icons": [
+      //  {
+      //    "src": "/icons/play-later.png",
+      //    "sizes": "192x192"
+      //  }
+      //]
+    },
+    {
+      "name": "Busca",
+      "short_name": "Busca",
+      "description": "Busque agora novos pretendentes",
+      "url": "/search"
+      //"icons": [
+      //  {
+      //    "src": "/icons/subscriptions.png",
+      //    "sizes": "192x192"
+      //  }
+      //]
     }
   ]
 }

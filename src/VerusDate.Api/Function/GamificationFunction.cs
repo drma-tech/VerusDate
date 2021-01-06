@@ -24,7 +24,7 @@ namespace VerusDate.Api.Function
 
         [FunctionName("GamificationListDestaques")]
         public async Task<IActionResult> ListDestaques(
-           [HttpTrigger(AuthorizationLevel.Anonymous, FunctionMethod.GET, Route = "Gamification/ListDestaques")] HttpRequest req,
+           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Gamification/ListDestaques")] HttpRequest req,
            ILogger log, CancellationToken cancellationToken)
         {
             using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);

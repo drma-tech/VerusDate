@@ -49,10 +49,9 @@
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
 
-    <script src="_content/BrowserInterop/scripts.js"></script>
+    <script src="_content/BrowserInterop/scripts.js" autostart="false"></script>
 
     <script>
-
         //check if webassembly is supported
         const webassemblySupported = (function () {
             try {

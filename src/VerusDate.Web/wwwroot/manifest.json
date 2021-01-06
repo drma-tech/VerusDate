@@ -27,8 +27,9 @@
       "url": "/match",
       "icons": [
         {
-          "src": "/icons/play-later.png",
-          "sizes": "192x192"
+          "src": "https://www.verusdate.com/icon-512.png",
+          "type": "image/png",
+          "sizes": "512x512"
         }
       ]
     },
@@ -39,8 +40,9 @@
       "url": "/search",
       "icons": [
         {
-          "src": "/icons/subscriptions.png",
-          "sizes": "192x192"
+          "src": "https://www.verusdate.com/icon-512.png",
+          "type": "image/png",
+          "sizes": "512x512"
         }
       ]
     }

@@ -13,11 +13,13 @@
     }
   ],
   "categories": [ "entertainment", "lifestyle", "social" ],
+  "lang": "Portuguese",
+  "description": "Site de relacionamento com recursos que garantem perfis e informações reais (a honestidade será nosso pilar e esperamos isso de todos) ▪ Para qualquer tipo de intenção, sexo, idade e orientação sexual ▪ Com gamificação para um ambiente mais divertido",
   "shortcuts": [
     {
       "name": "Matches",
       "short_name": "Matches",
-      "description": "Veja nossas novas sugest�es para voc�",
+      "description": "Veja nossas novas sugestões para você",
       "url": "/match"
       //"icons": [
       //  {
@@ -37,6 +39,18 @@
       //    "sizes": "192x192"
       //  }
       //]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "[Embedded]",
+      "sizes": "1280x800",
+      "type": "image/png"
+    },
+    {
+      "src": "[Embedded]",
+      "sizes": "750x1334",
+      "type": "image/png"
     }
   ]
 }

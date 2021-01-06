@@ -4,15 +4,15 @@
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>
                     <div class="alert alert-danger" role="alert">
-                        VocÍ n„o est· autorizado a acessar este recurso.
+                        Voc√™ n√£o est√° autorizado a acessar este recurso.
                     </div>
                 </NotAuthorized>
                 <Authorizing>
                     <div class="alert alert-warning" role="alert">
                         <div class="spinner-border spinner-border-sm" role="status">
-                            <span class="sr-only">AutenticaÁ„o em andamento...</span>
+                            <span class="sr-only">Autentica√ß√£o em andamento...</span>
                         </div>
-                        AutenticaÁ„o em andamento...
+                        Autentica√ß√£o em andamento...
                     </div>
                 </Authorizing>
             </AuthorizeRouteView>
@@ -20,7 +20,7 @@
         <NotFound>
             <LayoutView Layout="@typeof(MainLayout)">
                 <div class="alert alert-danger" role="alert">
-                    Desculpe, n„o h· nada neste endereÁo.
+                    Desculpe, n√£o h√° nada neste endere√ßo.
                 </div>
             </LayoutView>
         </NotFound>

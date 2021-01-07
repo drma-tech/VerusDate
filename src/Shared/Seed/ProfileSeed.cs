@@ -52,7 +52,7 @@ namespace VerusDate.Shared.Seed
                 .Rules((s, p) =>
                 {
                     p.NickName = s.Name.FirstName();
-                    p.Description = s.Lorem.Word();
+                    p.Description = s.Lorem.Text();
                     p.Latitude = s.Address.Latitude(-3.220192, -34.316614);
                     p.Longitude = s.Address.Longitude(-35.039519, -69.421414);
                     //p.Latitude = s.Address.Latitude();
@@ -141,7 +141,7 @@ namespace VerusDate.Shared.Seed
             return new Faker<ProfileBadge>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.Rank.IncreaseLevel();
+                    p.Ranking.IncreaseLevel();
                     p.Seniority.IncreaseLevel();
                     p.CompletedProfile.IncreaseLevel();
                     p.VerifiedProfile.IncreaseLevel();

@@ -9,67 +9,103 @@
 }
 else
 {
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="contact-box" style="padding: 0px;">
-                <div class="embed-responsive embed-responsive-1by1 divPhoto" style="background-color: black;">
-                    <img alt="..." class="imgPhoto" src="@view.Photo.GetMainPhoto()" />
-                    <span style="position: absolute; left: 10px; top: 10px;">
-                        <i class="badge badge-secondary">@view.Basic.NickName, @view.Bio.BirthDate.GetAge(), @view.GetDistance(0, 0)</i>
-                    </span>
-                    <div class="text-center" style="position: absolute; bottom: 10px; width: 100%;">
-                        <BtnChat IdUserView="@IdUserView" IdChat="@InteractionVM?.IdChat"></BtnChat>
-                    </div>
-                </div>
-                <div style="padding: 10px;">
-                    <h5>Sobre mim</h5>
-                    <p>@view.Basic.Description</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9">
-            <div class="ibox">
-                <div class="ibox-content">
-                    <ProfileBadge Type="@badge?.Rank"></ProfileBadge>
+    <Row>
+        <Column ColumnSize="ColumnSize.Is7.OnTablet.Is5.OnWidescreen.Is3.OnFullHD">
+            <Card Margin="Margin.Is3.FromBottom">
+                <CardImage Source="@view.Photo.GetMainPhoto()" Alt="@labelPhoto"></CardImage>
+                <Badge Color="Color.Primary" Style="position: absolute; top: 5px; left: 5px;">@view.Basic.NickName - @view.Bio.BirthDate.GetAge()</Badge>
+                @if (view.GetActivityStatus() == VerusDate.Shared.Enum.ActivityStatus.Today)
+                {
+                    <Badge Color="Color.Success" Style="position: absolute; top: 5px; right: 5px;" title="logado recentemente">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                    </Badge>
+                }
+                else if (view.GetActivityStatus() == VerusDate.Shared.Enum.ActivityStatus.Week)
+                {
+                    <Badge Color="Color.Warning" Style="position: absolute; top: 5px; right: 5px;" title="logado essa semana">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                    </Badge>
+                }
+                else if (view.GetActivityStatus() == VerusDate.Shared.Enum.ActivityStatus.Month)
+                {
+                    <Badge Color="Color.Danger" Style="position: absolute; top: 5px; right: 5px;" title="logado esse mês">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                    </Badge>
+                }
+                else
+                {
+                    <Badge Color="Color.Dark" Style="position: absolute; top: 5px; right: 5px;" title="usuário desativado">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                    </Badge>
+                }
+                <CardBody Padding="Padding.Is2">
+                    <Badge Color="Color.Secondary">Sobre mim</Badge>
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0">
+                        @view.Basic.Description
+                    </Paragraph>
+                </CardBody>
+                <CardBody Padding="Padding.Is2">
+                    <BtnChat IdUserView="@IdUserView" IdChat="@InteractionVM?.IdChat"></BtnChat>
+                    <Button Color="Color.Danger" title="Reportar este perfil" Float="Float.Right" data-toggle="modal" data-target="#modalReport">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon> Reportar
+                    </Button>
+                </CardBody>
+            </Card>
+            @*<Card>
+                    <CardBody Padding="Padding.Is2">
+                        <Button Color="Color.Success" title="Percentual de Afinidade" Float="Float.Left">
+                            Afinidade <Badge Color="Color.Light">100%</Badge>
+                        </Button>
+                        <Button Color="Color.Danger" title="Reportar este perfil" Float="Float.Right" data-toggle="modal" data-target="#modalReport">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon> Reportar
+                        </Button>
+                    </CardBody>
+                </Card>*@
+        </Column>
+        <Column ColumnSize="ColumnSize.Is9">
+            <Card Margin="Margin.Is3.FromBottom">
+                <CardBody Padding="Padding.Is2">
+                    <ProfileBadge Type="@badge?.Ranking"></ProfileBadge>
                     <ProfileBadge Type="@badge?.Seniority"></ProfileBadge>
                     <ProfileBadge Type="@badge?.CompletedProfile"></ProfileBadge>
                     <ProfileBadge Type="@badge?.VerifiedProfile"></ProfileBadge>
                     <ProfileBadge Type="@badge?.Popular"></ProfileBadge>
-                </div>
-            </div>
-            <div class="ibox">
-                <div class="ibox-content">
-                    <h4>Básico</h4>
+                </CardBody>
+            </Card>
+            <Card Margin="Margin.Is3.FromBottom">
+                <CardBody Padding="Padding.Is2">
+                    <Divider DividerType="DividerType.TextContent" Text="Básico"></Divider>
 
-                    <ItemDataProfile For="@(() => view.Basic.BiologicalSex)" Value="@view.Basic.BiologicalSex" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.MaritalStatus)" Value="@view.Basic.MaritalStatus" ClassIcon="far fa-heart" Affinities="@affinities"></ItemDataProfile>
                     @*<ItemDataProfile For="@(() => view.Intent)" Value="@view.Intent" ClassIcon="fas fa-search" Affinities="@affinities"></ItemDataProfile>*@
+                    <ItemDataProfile For="@(() => view.Basic.BiologicalSex)" Value="@view.Basic.BiologicalSex" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.GenderIdentity)" Value="@view.Basic.GenderIdentity" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.SexualOrientation)" Value="@view.Basic.SexualOrientation" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
 
-                    <h4>Bio</h4>
+                    <Divider DividerType="DividerType.TextContent" Text="Bio"></Divider>
 
                     <ItemDataProfile For="null" Value="@view.Bio.BirthDate.GetZodiac()" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Bio.Height)" Value="@view.Bio.Height" ClassIcon="fas fa-ruler" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => view.Bio.BodyMass)" Value="@view.Bio.BodyMass" ClassIcon="fas fa-weight" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Bio.RaceCategory)" Value="@view.Bio.RaceCategory" ClassIcon="fas fa-globe" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Bio.BodyMass)" Value="@view.Bio.BodyMass" ClassIcon="fas fa-weight" Affinities="@affinities"></ItemDataProfile>
 
-                    <h4>Lifestyle</h4>
+                    <Divider DividerType="DividerType.TextContent" Text="Lifestyle"></Divider>
 
-                    <ItemDataProfile For="@(() => view.Lifestyle.HaveChildren)" Value="@view.Lifestyle.HaveChildren" ClassIcon="fas fa-child" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => view.Lifestyle.WantChildren)" Value="@view.Lifestyle.WantChildren" ClassIcon="fas fa-baby" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Lifestyle.Drink)" Value="@view.Lifestyle.Drink" ClassIcon="fas fa-glass-cheers" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Lifestyle.Smoke)" Value="@view.Lifestyle.Smoke" ClassIcon="fas fa-smoking" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Lifestyle.Diet)" Value="@view.Lifestyle.Diet" ClassIcon="fas fa-utensils" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Lifestyle.HaveChildren)" Value="@view.Lifestyle.HaveChildren" ClassIcon="fas fa-child" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Lifestyle.WantChildren)" Value="@view.Lifestyle.WantChildren" ClassIcon="fas fa-baby" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Lifestyle.EducationLevel)" Value="@view.Lifestyle.EducationLevel" ClassIcon="fas fa-graduation-cap" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Lifestyle.CareerCluster)" Value="@view.Lifestyle.CareerCluster" ClassIcon="fas fa-briefcase" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Lifestyle.Religion)" Value="@view.Lifestyle.Religion" ClassIcon="fas fa-praying-hands" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Lifestyle.MoneyPersonality)" Value="@view.Lifestyle.MoneyPersonality" ClassIcon="fas fa-wallet" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Lifestyle.RelationshipPersonality)" Value="@view.Lifestyle.RelationshipPersonality" ClassIcon="fas fa-people-arrows" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Lifestyle.MyersBriggsTypeIndicator)" Value="@view.Lifestyle.MyersBriggsTypeIndicator" ClassIcon="fas fa-user" Affinities="@affinities"></ItemDataProfile>
-                </div>
-            </div>
-        </div>
-    </div>
+                </CardBody>
+            </Card>
+        </Column>
+    </Row>
     <VerusDate.Web.Shared.modal.ProfileReport></VerusDate.Web.Shared.modal.ProfileReport>
 }
 
@@ -83,6 +119,8 @@ else
     private VerusDate.Shared.Model.Profile.ProfileGamification gamification;
     private VerusDate.Shared.Model.Profile.ProfileBadge badge;
     private VerusDate.Shared.Model.Interaction.Interaction InteractionVM;
+
+    private string labelPhoto => $"{view.Basic.NickName}, {view.Bio.BirthDate.GetAge()}, {view.GetDistance(0, 0)}";
 
     private VisibilityOptions Options => new VisibilityOptions()
     {
@@ -102,7 +140,7 @@ else
         else
         {
             var looking = view.Looking;
-            //affinities = ProfileApi.GetAffinity(looking, view);
+            affinities = ProfileApi.GetAffinity(looking, view);
             gamification = view.Gamification;
             badge = view.Badge;
             //InteractionVM = await Http.Interation_Get(IdUserView.ToString());

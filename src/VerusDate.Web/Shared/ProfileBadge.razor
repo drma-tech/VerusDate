@@ -1,15 +1,26 @@
 ﻿@using VerusDate.Shared.Model.Profile;
 
-<button class="btn @CssClassButton() dim btn-large-dim" type="button" title="@Type.Description">
-    <i class="@Type.ClassIcon"></i>
-    <span class="badge badge-light" style="top: -40px;">@Type.Title</span>
-</button>
+@if (Type.Completed())
+{
+    <Button Type="ButtonType.Button" Color="Color.Success" title="@Type.Description">
+        <Icon Name="@Type.ClassIcon"></Icon> @Type.Title
+        @if (Type.MaxLevel != 1)
+        {
+            <Badge Color="Color.Light" Pill="true" Margin="Margin.Is1.FromLeft">@Type.Level</Badge>
+        }
+    </Button>
+}
+else
+{
+    <Button Type="ButtonType.Button" Color="Color.Secondary" title="@Type.Description">
+        <Icon Name="@Type.ClassIcon"></Icon> @Type.Title
+        @if (Type.MaxLevel != 1)
+        {
+            <Badge Color="Color.Light" Pill="true" Margin="Margin.Is1.FromLeft">@Type.Level</Badge>
+        }
+    </Button>
+}
 
 @code {
     [Parameter] public BadgeType Type { get; set; }
-
-    private string CssClassButton()
-    {
-        return Type.Completed() ? "btn-primary" : "btn-default";
-    }
 }

@@ -1,9 +1,35 @@
 ﻿@using System.Linq.Expressions;
 
-<span class="@GetClassAffinity(AttributeHelper.GetNameOf(For))" title="@Value.GetDescription()">
-    <i class="@ClassIcon"></i>  @GetValue()@if (!string.IsNullOrEmpty(@Value.GetDescription()))
-    {  <i class="fas fa-info-circle"></i>}
-</span>
+@if (!Affinities.Any(s => s.AttributeName == Field))
+{
+    <Badge Color="Color.Secondary" title="@Value.GetDescription()" Pill="true" Style="@GetCursor()">
+        <Icon Name="@ClassIcon"></Icon> @GetValue()
+        @if (!string.IsNullOrEmpty(@Value.GetDescription()))
+        {
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
+        }
+    </Badge>
+}
+else if (Affinities.Single(s => s.AttributeName == Field).HaveAffinity)
+{
+    <Badge Color="Color.Success" title="@Value.GetDescription()" Pill="true" Style="@GetCursor()">
+        <Icon Name="@ClassIcon"></Icon> @GetValue()
+        @if (!string.IsNullOrEmpty(@Value.GetDescription()))
+        {
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
+        }
+    </Badge>
+}
+else
+{
+    <Badge Color="Color.Danger" title="@Value.GetDescription()" Pill="true" Style="@GetCursor()">
+        <Icon Name="@ClassIcon"></Icon> @GetValue()
+        @if (!string.IsNullOrEmpty(@Value.GetDescription()))
+        {
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
+        }
+    </Badge>
+}
 
 @code {
     [Parameter] public Expression<Func<object>> For { get; set; }
@@ -12,20 +38,7 @@
     [Parameter] public List<AffinityVM> Affinities { get; set; }
 
     private string Title => AttributeHelper.GetName(For);
-
-    private string GetClassAffinity(string field)
-    {
-        if (!Affinities.Any(s => s.AttributeName == field)) return "label label-secondary";
-
-        if (Affinities.Single(s => s.AttributeName == field).HaveAffinity)
-        {
-            return "label label-primary";
-        }
-        else
-        {
-            return "label label-danger";
-        }
-    }
+    private string Field => AttributeHelper.GetNameOf(For);
 
     private string GetValue()
     {
@@ -33,5 +46,17 @@
             return "Não Respondido";
         else
             return Value.GetName();
+    }
+
+    private string GetCursor()
+    {
+        if (string.IsNullOrEmpty(Value.GetDescription()))
+        {
+            return "cursor: default";
+        }
+        else
+        {
+            return "cursor: help";
+        }
     }
 }

@@ -1,25 +1,33 @@
 @inherits LayoutComponentBase
 
 <Layout Sider="true">
-    <LayoutSider>
-        <LayoutSiderContent>
-            <NavMenu />
-        </LayoutSiderContent>
-    </LayoutSider>
+    <AuthorizeView>
+        <Authorized>
+            <LayoutSider>
+                <LayoutSiderContent>
+                    <NavMenu />
+                </LayoutSiderContent>
+            </LayoutSider>
+        </Authorized>
+    </AuthorizeView>
     <Layout>
         <LayoutHeader Fixed="true">
             <Bar Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
-                <BarBrand Display="Display.Always">
-                    <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #D4AF37; color: #fff !important;">
-                        <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown" /> 2
-                    </Badge>
-                    <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #5c7cfa; color: #fff !important;">
-                        <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" /> 2
-                    </Badge>
-                    <Badge Color="Color.Secondary" Float="Float.Left" Style="background-color: #dc3545; color: #fff !important;">
-                        <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt" /> 2
-                    </Badge>
-                </BarBrand>
+                <AuthorizeView>
+                    <Authorized>
+                        <BarBrand Display="Display.Always">
+                            <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #D4AF37; color: #fff !important;" Pill="true">
+                                <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown" /> 2
+                            </Badge>
+                            <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #5c7cfa; color: #fff !important;" Pill="true">
+                                <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" /> 2
+                            </Badge>
+                            <Badge Color="Color.Secondary" Float="Float.Left" Style="background-color: #dc3545; color: #fff !important;" Pill="true">
+                                <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt" /> 2
+                            </Badge>
+                        </BarBrand>
+                    </Authorized>
+                </AuthorizeView>
                 <BarMenu Display="Display.InlineBlock" Style="flex-basis: unset !important;">
                     <BarEnd Display="Display.Block">
                         <LoginDisplay />

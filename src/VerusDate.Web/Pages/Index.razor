@@ -2,78 +2,128 @@
 @inherits PageCore<Index>
 @inject HttpClient Http
 
-<Jumbotron Background="Background.Primary" Margin="Margin.Is3.FromBottom" Padding="Padding.Is3.FromBottom.Is3.FromTop">
-    <JumbotronTitle Size="JumbotronTitleSize.Is4">Bem vindo ao Verus Date!</JumbotronTitle>
-    <JumbotronSubtitle>
-        Está é uma versão MVP (Minimum viable product). Algum dos recursos existentes servem apenas de demonstração de funcionalidade.
-    </JumbotronSubtitle>
-</Jumbotron>
-
-<Row>
-    <Column ColumnSize="ColumnSize.Is12">
-        <Card Margin="Margin.Is3.FromBottom">
-            <CardHeader>
-                Destaques da Semana - Localização (São Paulo)
-            </CardHeader>
-            <CardBody>
+<AuthorizeView>
+    <Authorized>
+        <Row>
+            <Column ColumnSize="ColumnSize.Is12">
+                <Card Margin="Margin.Is3.FromBottom">
+                    <CardHeader>
+                        Destaques da Semana - Localização (São Paulo)
+                    </CardHeader>
+                    <CardBody>
+                        <Row>
+                            @foreach (var item in lstDestaques)
+                            {
+                                <Column ColumnSize="ColumnSize.Is1.OnFullHD.Is2.OnWidescreen.Is3.OnDesktop.Is4.OnMobile">
+                                    <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
+                                        <CardImage Source="@item.Photo.GetMainPhoto()" Alt="Photo Image"></CardImage>
+                                        <Badge Color="Color.Light" Style="font-size: 11px;">@item.NickName</Badge>
+                                        <Badge Color="Color.Light" Style="font-size: 9px; position: absolute; top: 5px; left: 5px;">@ProfileSeed.GetNumber(100, 500) XP</Badge>
+                                    </Card>
+                                </Column>
+                            }
+                        </Row>
+                    </CardBody>
+                </Card>
+            </Column>
+        </Row>
+        <Row>
+            <Column ColumnSize="ColumnSize.Is6">
                 <Row>
-                    @if (lstDestaques != null)
-                    {
-                        @foreach (var item in lstDestaques)
-                        {
-                            <Column ColumnSize="ColumnSize.Is1.OnFullHD.Is2.OnWidescreen.Is3.OnDesktop.Is4.OnMobile">
-                                <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
-                                    <CardImage Source="@item.Photo.GetMainPhoto()" Alt="Photo Image"></CardImage>
-                                    <Badge Color="Color.Light" Style="font-size: 11px;">@item.NickName</Badge>
-                                    <Badge Color="Color.Light" Style="font-size: 9px; position: absolute; top: 5px; left: 5px;">@ProfileSeed.GetNumber(100, 500) XP</Badge>
-                                </Card>
-                            </Column>
-                        }
-                    }
+                    <Column ColumnSize="ColumnSize.Is6">
+                        <Card Margin="Margin.Is3.FromBottom">
+                            <CardHeader Style="background-color: #D4AF37; color: #fff !important;">
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon>
+                                Ranking - @gamification?.Ranking (@gamification?.XP%)
+                            </CardHeader>
+                            <CardBody>
+                                XXX
+                            </CardBody>
+                        </Card>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is6">
+                        <Card Margin="Margin.Is3.FromBottom">
+                            <CardHeader Style="background-color: #5c7cfa; color: #fff !important;">
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem"></Icon>
+                                Diamante - @gamification?.Diamond
+                            </CardHeader>
+                            <CardBody>
+                                XXX
+                            </CardBody>
+                        </Card>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is6">
+                        <Card Margin="Margin.Is3.FromBottom">
+                            <CardHeader Style="background-color: #dc3545; color: #fff !important;">
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt"></Icon>
+                                Maça - @gamification?.Food/@GamificationApi.GetMaxFood(gamification)
+                            </CardHeader>
+                            <CardBody>
+                                XXX
+                            </CardBody>
+                        </Card>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is6">
+                        <Card Margin="Margin.Is3.FromBottom">
+                            <CardHeader Class="bg-info" Style="color: #fff !important;">
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThumbsUp"></Icon>
+                                Popularidade - 75%
+                            </CardHeader>
+                            <CardBody>
+                                XXX
+                            </CardBody>
+                        </Card>
+                    </Column>
                 </Row>
-            </CardBody>
-        </Card>
-    </Column>
-</Row>
-
-@*<CardDeck>
-        <Card>
-            <CardHeader Style="background-color: #D4AF37; color: #fff !important;">
-                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon>
-                Ranking - @profile?.Gamification.Ranking (@profile?.Gamification.XP%)
-            </CardHeader>
-            <CardBody>
-                XXX
-            </CardBody>
-        </Card>
-        <Card>
-            <CardHeader Style="background-color: #5c7cfa; color: #fff !important;">
-                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem"></Icon>
-                Diamante - @profile?.Gamification.Diamond
-            </CardHeader>
-            <CardBody>
-                XXX
-            </CardBody>
-        </Card>
-        <Card>
-            <CardHeader Style="background-color: #dc3545; color: #fff !important;">
-                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt"></Icon>
-                Maça - @profile?.Gamification.Food/@GamificationApi.GetMaxFood(profile?.Gamification)
-            </CardHeader>
-            <CardBody>
-                XXX
-            </CardBody>
-        </Card>
-        <Card>
-            <CardHeader Class="bg-info" Style="color: #fff !important;">
-                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThumbsUp"></Icon>
-                Popularidade - 75%
-            </CardHeader>
-            <CardBody>
-                XXX
-            </CardBody>
-        </Card>
-    </CardDeck>*@
+            </Column>
+            <Column ColumnSize="ColumnSize.Is6">
+            </Column>
+        </Row>
+    </Authorized>
+    <NotAuthorized>
+        <Jumbotron Background="Background.Primary" Margin="Margin.Is3.FromBottom" Padding="Padding.Is3.FromBottom.Is3.FromTop">
+            <JumbotronTitle Size="JumbotronTitleSize.Is4">Bem vindo ao Verus Date!</JumbotronTitle>
+            <JumbotronSubtitle>
+                Está é uma versão MVP (Minimum viable product). Algum dos recursos existentes servem apenas de demonstração de funcionalidade.
+            </JumbotronSubtitle>
+        </Jumbotron>
+        <Row>
+            <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen">
+                <Card>
+                    <CardHeader>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bullhorn"></Icon> Nossas Premissas
+                    </CardHeader>
+                    <CardBody Padding="Padding.Is3">
+                        <Alert Color="Color.Info" Visible="true" Padding="Padding.Is3">
+                            <Heading Size="HeadingSize.Is5" Color="TextColor.Success">
+                                Perfis Verdadeiros
+                            </Heading>
+                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom">
+                                Nós garantimos não existir perfis falsos ou inativos
+                            </Paragraph>
+                        </Alert>
+                        <Alert Color="Color.Info" Visible="true" Padding="Padding.Is3">
+                            <Heading Size="HeadingSize.Is5" Color="TextColor.Success">
+                                Gamificação
+                            </Heading>
+                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom">
+                                Todos os nossos recursos são baseados em elementos dos jogos para deixar tudo mais divertido
+                            </Paragraph>
+                        </Alert>
+                        <Alert Color="Color.Info" Visible="true" Padding="Padding.Is3" Margin="Margin.Is0.FromBottom">
+                            <Heading Size="HeadingSize.Is5" Color="TextColor.Success">
+                                Livre de Preconceitos
+                            </Heading>
+                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom">
+                                Independente da sua intenção, gênero, orientação sexual, raça, idade etc, nós temos um sistema de cruzamento de perfis completo e inteligente para você pode achar o que esteja procurando
+                            </Paragraph>
+                        </Alert>
+                    </CardBody>
+                </Card>
+            </Column>
+        </Row>
+    </NotAuthorized>
+</AuthorizeView>
 
 @*<div class="row">
         <div class="col-lg-3 col-6">
@@ -395,8 +445,8 @@
 
 @code
 {
-    //private VerusDate.Shared.Model.Profile.Profile profile = new VerusDate.Shared.Model.Profile.Profile();
-    private IEnumerable<ProfileSearch> lstDestaques;
+    private VerusDate.Shared.Model.Profile.ProfileGamification gamification = new();
+    private List<ProfileSearch> lstDestaques = new();
 
     private VisibilityOptions OptionsValidation => new VisibilityOptions()
     {

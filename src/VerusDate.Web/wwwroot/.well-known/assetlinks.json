@@ -1,5 +1,5 @@
 [{
       "relation": ["delegate_permission/common.handle_all_urls"],
-      "target" : { "namespace": "android_app", "package_name": "com.verusdate.dev.twa",
-                   "sha256_cert_fingerprints": ["41:8C:C1:FA:8E:D5:79:E9:89:32:7B:9B:DC:9A:40:94:EF:30:A8:CD:C8:C2:24:23:50:AE:CF:AB:B5:F0:7A:7C"] }
+      "target" : { "namespace": "android_app", "package_name": "com.verusdate.www.twa",
+                   "sha256_cert_fingerprints": ["D2:8E:CD:D9:40:A5:00:8C:17:B6:EB:2A:60:2C:E8:F9:2A:AE:74:5E:B7:0E:4A:E1:F3:3F:D7:ED:6F:7A:45:E8"] }
     }]

@@ -4,14 +4,14 @@ namespace VerusDate.Shared.Helper
 {
     public static class ImageHelper
     {
-        public static string GetNoUserPhoto => "/img/nouser.jpg";
-
         public enum PhotoType
         {
             PhotoFace,
             PhotoGallery,
             PhotoValidation
         }
+
+        public static string GetNoUserPhoto => "/img/nouser.jpg";
 
         public static string GetPhotoContainer(PhotoType type)
         {

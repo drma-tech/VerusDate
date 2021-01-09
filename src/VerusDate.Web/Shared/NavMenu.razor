@@ -69,6 +69,11 @@
     {
         await base.OnInitializedAsync();
 
+        await LoadData();
+    }
+
+    protected async Task LoadData()
+    {
         if (ComponenteUtils.IsAuthenticated)
         {
             profile = await Http.Profile_Get();

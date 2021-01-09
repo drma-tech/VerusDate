@@ -64,7 +64,7 @@ namespace VerusDate.Web.Core
                     var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
                     var user = authState.User;
 
-                    ComponenteUtils.IsAuthenticated = user.Identity.IsAuthenticated;
+                    ComponenteUtils.IsAuthenticated = user.Identity != null && user.Identity.IsAuthenticated;
                     ComponenteUtils.IdUser = user.FindFirst(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
                 }
             }

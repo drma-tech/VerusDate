@@ -7,6 +7,11 @@ namespace VerusDate.Shared.Helper
 {
     public static class AttributeHelper
     {
+        public static string GetDescription<T>(Expression<Func<T>> expression)
+        {
+            return GetDisplayAttribute(expression)?.Description;
+        }
+
         public static string GetName<T>(Expression<Func<T>> expression)
         {
             if (expression == null) return null;
@@ -27,11 +32,6 @@ namespace VerusDate.Shared.Helper
                 var op = ((UnaryExpression)expression.Body).Operand;
                 return ((MemberExpression)op).Member.Name;
             }
-        }
-
-        public static string GetDescription<T>(Expression<Func<T>> expression)
-        {
-            return GetDisplayAttribute(expression)?.Description;
         }
 
         public static string GetPrompt<T>(Expression<Func<T>> expression)

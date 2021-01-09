@@ -76,11 +76,6 @@ else
         NoData = (matches != null && !matches.Any()) || pos >= matches?.Count
     };
 
-    protected override async Task OnInitializedAsync()
-    {
-        await base.OnInitializedAsync();
-    }
-
     protected override async Task LoadData()
     {
         matches = await Http.Profile_ListMatch();

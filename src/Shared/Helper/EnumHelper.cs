@@ -5,18 +5,22 @@ using System.Linq;
 
 namespace VerusDate.Shared.Helper
 {
-    public class EnumList
-    {
-        public int Value { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-    }
-
     public static class EnumHelper
     {
         public static T[] GetArray<T>() where T : struct, IConvertible
         {
             return System.Enum.GetValues(typeof(T)).Cast<T>().ToArray();
+        }
+
+        public static string GetDescription(this System.Enum value)
+        {
+            if (value == null) return null;
+
+            var fieldInfo = value.GetType().GetField(value.ToString());
+
+            if (fieldInfo == null) return null;
+
+            return ((DisplayAttribute[])fieldInfo.GetCustomAttributes(typeof(DisplayAttribute), false))[0].Description;
         }
 
         public static List<EnumList> GetList(Type enumType)
@@ -51,16 +55,12 @@ namespace VerusDate.Shared.Helper
 
             return ((DisplayAttribute[])fieldInfo.GetCustomAttributes(typeof(DisplayAttribute), false))[0].Name;
         }
+    }
 
-        public static string GetDescription(this System.Enum value)
-        {
-            if (value == null) return null;
-
-            var fieldInfo = value.GetType().GetField(value.ToString());
-
-            if (fieldInfo == null) return null;
-
-            return ((DisplayAttribute[])fieldInfo.GetCustomAttributes(typeof(DisplayAttribute), false))[0].Description;
-        }
+    public class EnumList
+    {
+        public string Description { get; set; }
+        public string Name { get; set; }
+        public int Value { get; set; }
     }
 }

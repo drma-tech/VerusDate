@@ -19,11 +19,11 @@ namespace VerusDate.Shared.Helper
         {
         }
 
-        protected NotificationException(SerializationInfo info, StreamingContext context) : base(info, context)
+        public NotificationException(HttpResponseMessage response) : base(response?.Content.ReadAsStringAsync().Result)
         {
         }
 
-        public NotificationException(HttpResponseMessage response) : base(response?.Content.ReadAsStringAsync().Result)
+        protected NotificationException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

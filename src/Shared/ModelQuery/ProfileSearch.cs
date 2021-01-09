@@ -31,6 +31,8 @@ namespace VerusDate.Shared.ModelQuery
         {
             if (Photo == null || string.IsNullOrEmpty(Photo.Main))
                 return GetNoUserPhoto;
+            else if (Photo.Main.StartsWith("https://"))
+                return Photo.Main;
             else
                 return $"{BlobPath}/{GetPhotoContainer(PhotoType.PhotoFace)}/{Photo.Main}";
         }

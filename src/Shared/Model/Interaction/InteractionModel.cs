@@ -1,11 +1,11 @@
 ﻿using System;
 using VerusDate.Shared.Core;
 
-namespace VerusDate.Shared.Model.Interaction
+namespace VerusDate.Shared.Model
 {
-    public class Interaction : CosmosBase
+    public class InteractionModel : CosmosBase
     {
-        public Interaction() : base(nameof(Interaction))
+        public InteractionModel() : base("Interaction")
         {
         }
 
@@ -75,6 +75,18 @@ namespace VerusDate.Shared.Model.Interaction
             this.Key = IdLoggedUser;
 
             this.IdUserInteraction = IdUserInteraction;
+        }
+    }
+
+    public class Action
+    {
+        public bool? Value { get; set; }
+        public DateTimeOffset? Date { get; set; }
+
+        public void Execute()
+        {
+            Value = true;
+            Date = DateTimeOffset.UtcNow;
         }
     }
 }

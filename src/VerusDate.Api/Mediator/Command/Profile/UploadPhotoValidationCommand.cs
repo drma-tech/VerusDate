@@ -7,6 +7,7 @@ using VerusDate.Api.Core;
 using VerusDate.Api.Core.Interfaces;
 using VerusDate.Server.Core.Helper;
 using VerusDate.Shared.Helper;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Mediator.Commands.Profile
 {
@@ -29,7 +30,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
         public async Task<bool> Handle(UploadPhotoValidationCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<Shared.Model.Profile.Profile>(request.Id, request.Id, cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, request.Id, cancellationToken);
             if (obj == null || string.IsNullOrEmpty(obj.Photo.Main)) throw new NotificationException("Foto para validação não encontrada. Favor, inserir primeiro sua foto de rosto.");
 
             var NewPhotoId = Guid.NewGuid().ToString();

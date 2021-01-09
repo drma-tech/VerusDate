@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using VerusDate.Shared.Model.Interaction;
+using VerusDate.Shared.Model;
 using VerusDate.Shared.ModelQuery;
 using VerusDate.Web.Core;
 
@@ -15,16 +15,16 @@ namespace VerusDate.Web.Api
     {
         public static string StorageKey => ComponenteUtils.GetStorageKey("Interation");
 
-        public async static Task<Interaction> Interation_Get(this HttpClient http, ISessionStorageService session, string IdUserInteraction)
+        public async static Task<InteractionModel> Interation_Get(this HttpClient http, ISessionStorageService session, string IdUserInteraction)
         {
             if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
 
-            return await http.Get<Interaction>($"Interaction/Get/{IdUserInteraction}");
+            return await http.Get<InteractionModel>($"Interaction/Get/{IdUserInteraction}");
         }
 
-        public async static Task<List<Interaction>> Interation_GetList(this HttpClient http, ISessionStorageService session)
+        public async static Task<List<InteractionModel>> Interation_GetList(this HttpClient http, ISessionStorageService session)
         {
-            return await http.GetList<Interaction>("Interaction/GetList");
+            return await http.GetList<InteractionModel>("Interaction/GetList");
         }
 
         public async static Task<List<ProfileSearch>> Interation_GetLikes(this HttpClient http, ISessionStorageService session)
@@ -42,9 +42,9 @@ namespace VerusDate.Web.Api
             return await http.GetList<ProfileSearch>("Interaction/GetNewMatches");
         }
 
-        public async static Task<List<ProfileChatList>> Interation_GetChatList(this HttpClient http, ISessionStorageService session)
+        public async static Task<List<ProfileChatListModel>> Interation_GetChatList(this HttpClient http, ISessionStorageService session)
         {
-            return await http.GetList<ProfileChatList>("Interaction/GetChatList");
+            return await http.GetList<ProfileChatListModel>("Interaction/GetChatList");
         }
 
         public async static Task<HttpResponseMessage> Interation_Blink(this HttpClient http, ILocalStorageService storage, string IdUserInteraction)

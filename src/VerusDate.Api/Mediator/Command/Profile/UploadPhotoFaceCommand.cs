@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Core.Interfaces;
 using VerusDate.Shared.Helper;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Mediator.Commands.Profile
 {
-    public class UploadPhotoFaceCommand : IRequest<Shared.Model.Profile.Profile>
+    public class UploadPhotoFaceCommand : IRequest<ProfileModel>
     {
         public string Id { get; set; }
         public byte[] MainPhoto { get; set; }
     }
 
-    public class UploadPhotoFaceHandler : IRequestHandler<UploadPhotoFaceCommand, Shared.Model.Profile.Profile>
+    public class UploadPhotoFaceHandler : IRequestHandler<UploadPhotoFaceCommand, ProfileModel>
     {
         private readonly IRepository _repo;
         private readonly StorageHelper storageHelper;
@@ -26,9 +27,9 @@ namespace VerusDate.Server.Mediator.Commands.Profile
             this.storageHelper = storageHelper;
         }
 
-        public async Task<Shared.Model.Profile.Profile> Handle(UploadPhotoFaceCommand request, CancellationToken cancellationToken)
+        public async Task<ProfileModel> Handle(UploadPhotoFaceCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<Shared.Model.Profile.Profile>(request.Id, request.Id, cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, request.Id, cancellationToken);
             if (obj == null) throw new NotificationException("Perfil não encontrado");
 
             using (var stream = new MemoryStream(request.MainPhoto))
@@ -40,7 +41,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
                 }
                 else
                 {
-                    obj.Photo = new Shared.Model.Profile.ProfilePhoto();
+                    obj.Photo = new ProfilePhotoModel();
                 }
 
                 var photoName = Guid.NewGuid().ToString() + ".jpg";

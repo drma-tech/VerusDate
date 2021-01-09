@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.Model.Support
+namespace VerusDate.Shared.Model
 {
-    public class Ticket : CosmosBase
+    public class TicketModel : CosmosBase
     {
-        public Ticket() : base(nameof(Ticket))
+        public TicketModel() : base("Ticket")
         {
         }
 

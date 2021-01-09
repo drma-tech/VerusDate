@@ -2,10 +2,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Mediator.Commands.Interaction
 {
-    public class InteractionBlinkCommand : Shared.Model.Interaction.Interaction, IRequest<bool> { }
+    public class InteractionBlinkCommand : InteractionModel, IRequest<bool> { }
 
     public class InteractionBlinkHandler : IRequestHandler<InteractionBlinkCommand, bool>
     {
@@ -18,7 +19,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 
         public async Task<bool> Handle(InteractionBlinkCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<Shared.Model.Interaction.Interaction>(request.Id, request.Key, cancellationToken);
+            var obj = await _repo.Get<InteractionModel>(request.Id, request.Key, cancellationToken);
 
             obj.ExecuteBlink();
 

@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.Model.Event
+namespace VerusDate.Shared.Model
 {
-    public class Event : CosmosBase
+    public class EventModel : CosmosBase
     {
-        public Event() : base(nameof(Event))
+        public EventModel() : base("Event")
         {
         }
 

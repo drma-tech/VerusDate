@@ -6,8 +6,8 @@
 </button>
 
 @code {
-    [Parameter] public VerusDate.Shared.Model.Profile.ProfileLooking Looking { get; set; }
-    [Parameter] public VerusDate.Shared.Model.Profile.Profile ProfView { get; set; }
+    [Parameter] public ProfileLookingModel Looking { get; set; }
+    [Parameter] public ProfileModel ProfView { get; set; }
 
     private List<AffinityVM> affinities;
 
@@ -31,7 +31,7 @@
         }
     }
 
-    public void RefreshComponente(VerusDate.Shared.Model.Profile.ProfileLooking Looking, VerusDate.Shared.Model.Profile.Profile ProfView)
+    public void RefreshComponente(ProfileLookingModel Looking, ProfileModel ProfView)
     {
         if (ProfView == null) return;
 

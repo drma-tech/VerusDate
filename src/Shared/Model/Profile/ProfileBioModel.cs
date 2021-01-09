@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.Model.Profile
+namespace VerusDate.Shared.Model
 {
-    public class ProfileBio
+    public class ProfileBioModel
     {
         [Display(Name = "Nascimento", Description = "Confira a idade e signo")]
         public DateTime BirthDate { get; set; }

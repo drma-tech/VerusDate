@@ -56,10 +56,10 @@ else
 
 @code
 {
-    private VerusDate.Shared.Model.Profile.Profile profile;
-    private VerusDate.Shared.Model.Profile.ProfileGamification gamification;
-    private List<VerusDate.Shared.ModelQuery.ProfileSearch> listaUsers;
-    private List<VerusDate.Shared.Model.Interaction.Interaction> interactions;
+    private ProfileModel profile;
+    private ProfileGamificationModel gamification;
+    private List<ProfileSearch> listaUsers;
+    private List<InteractionModel> interactions;
 
     private VisibilityOptions Options => new VisibilityOptions()
     {
@@ -75,7 +75,7 @@ else
         //interactions = await Http.Interation_GetList();
     }
 
-    private VerusDate.Shared.Model.Interaction.Interaction getCurrentInteraction(string IdUserInteraction)
+    private InteractionModel getCurrentInteraction(string IdUserInteraction)
     {
         return interactions.SingleOrDefault(s => s.IdUserInteraction == IdUserInteraction);
     }

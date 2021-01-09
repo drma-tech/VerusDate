@@ -1,6 +1,6 @@
 ﻿using System;
 using VerusDate.Shared.Enum;
-using VerusDate.Shared.Model.Profile;
+using VerusDate.Shared.Model;
 using static VerusDate.Shared.Helper.ImageHelper;
 
 namespace VerusDate.Shared.ModelQuery
@@ -13,7 +13,7 @@ namespace VerusDate.Shared.ModelQuery
 
         public string NickName { get; set; }
         public DateTime BirthDate { get; set; }
-        public ProfilePhoto Photo { get; set; }
+        public ProfilePhotoModel Photo { get; set; }
         public ActivityStatus ActivityStatus { get; set; }
         public double Distance { get; set; }
 
@@ -22,7 +22,7 @@ namespace VerusDate.Shared.ModelQuery
             this.Id = IdLoggedUser;
         }
 
-        public void UpdatePhoto(ProfilePhoto obj)
+        public void UpdatePhoto(ProfilePhotoModel obj)
         {
             Photo = obj;
         }
@@ -36,7 +36,7 @@ namespace VerusDate.Shared.ModelQuery
         }
     }
 
-    public class ProfileChatList : ProfileSearch
+    public class ProfileChatListModel : ProfileSearch
     {
         public int QtdUnread { get; set; }
     }

@@ -2,9 +2,9 @@
 using System.Text.Json.Serialization;
 using VerusDate.Shared.Helper;
 
-namespace VerusDate.Shared.Model.Profile
+namespace VerusDate.Shared.Model
 {
-    public class ProfileGamification
+    public class ProfileGamificationModel
     {
         [JsonIgnore]
         private static int MaxRankXP => 100;

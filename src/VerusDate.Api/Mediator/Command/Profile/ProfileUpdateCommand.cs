@@ -2,12 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileUpdateCommand : Shared.Model.Profile.Profile, IRequest<Shared.Model.Profile.Profile> { }
+    public class ProfileUpdateCommand : ProfileModel, IRequest<ProfileModel> { }
 
-    public class ProfileUpdateHandler : IRequestHandler<ProfileUpdateCommand, Shared.Model.Profile.Profile>
+    public class ProfileUpdateHandler : IRequestHandler<ProfileUpdateCommand, ProfileModel>
     {
         private readonly IRepository _repo;
 
@@ -16,11 +17,11 @@ namespace VerusDate.Api.Mediator.Command.Profile
             _repo = repo;
         }
 
-        public async Task<Shared.Model.Profile.Profile> Handle(ProfileUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<ProfileModel> Handle(ProfileUpdateCommand request, CancellationToken cancellationToken)
         {
             //await _gamificationApp.RemoveXP(request.Id, EventRemoveXP.UpdateProfile, cancellationToken);
 
-            var obj = await _repo.Get<Shared.Model.Profile.Profile>(request.Id, request.Id, cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, request.Id, cancellationToken);
 
             obj.UpdateProfile(request.Basic, request.Bio, request.Lifestyle);
 

@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
 using System;
 using VerusDate.Shared.Enum;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileValidation : AbstractValidator<Shared.Model.Profile.Profile>
+    public class ProfileValidation : AbstractValidator<ProfileModel>
     {
         public ProfileValidation()
         {

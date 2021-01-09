@@ -156,10 +156,10 @@
     [Parameter]
     public Guid IdUserView { get; set; }
 
-    private VerusDate.Shared.Model.Profile.Profile profile { get; set; }
-    private VerusDate.Shared.Model.Profile.Profile CurrentUser { get; set; }
-    private VerusDate.Shared.Model.Interaction.Interaction InteractionVM { get; set; }
-    private VerusDate.Shared.Model.Interaction.Chat ListChat { get; set; }
+    private ProfileModel profile { get; set; }
+    private ProfileModel CurrentUser { get; set; }
+    private InteractionModel InteractionVM { get; set; }
+    private ChatModel ListChat { get; set; }
     private List<AffinityVM> affinities;
 
     [Required]

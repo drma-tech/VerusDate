@@ -1,15 +1,15 @@
 ﻿using Bogus;
 using VerusDate.Shared.Enum;
-using VerusDate.Shared.Model.Profile;
+using VerusDate.Shared.Model;
 using VerusDate.Shared.ModelQuery;
 
 namespace VerusDate.Shared.Seed
 {
     public static class ProfileSeed
     {
-        public static Faker<Profile> GetProfile(string Id = null, bool profile = true, bool looking = false, bool gamification = false, bool badge = false, bool photo = false)
+        public static Faker<ProfileModel> GetProfile(string Id = null, bool profile = true, bool looking = false, bool gamification = false, bool badge = false, bool photo = false)
         {
-            return GetProfile<Profile>(Id, profile, looking, gamification, badge, photo);
+            return GetProfile<ProfileModel>(Id, profile, looking, gamification, badge, photo);
         }
 
         public static int GetNumber(int min = 0, int max = 1)
@@ -17,13 +17,13 @@ namespace VerusDate.Shared.Seed
             return new Faker().Random.Number(min, max);
         }
 
-        public static Faker<T> GetProfile<T>(string Id = null, bool profile = true, bool looking = false, bool gamification = false, bool badge = false, bool photo = false) where T : Profile
+        public static Faker<T> GetProfile<T>(string Id = null, bool profile = true, bool looking = false, bool gamification = false, bool badge = false, bool photo = false) where T : ProfileModel
         {
             return new Faker<T>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.SetIds(Id ?? s.Random.Guid().ToString());
-                    if (profile) p.UpdateProfile(GetProfileBasic<ProfileBasic>(), GetProfileBio(), GetProfileLifestyle());
+                    if (profile) p.UpdateProfile(GetProfileBasic<ProfileBasicModel>(), GetProfileBio(), GetProfileLifestyle());
                     if (looking) p.UpdateLooking(GetProfileLookingVM());
                     if (gamification) p.UpdateGamification(GetProfileGamification());
                     if (badge) p.UpdateBadge(GetProfileBadge());
@@ -46,7 +46,7 @@ namespace VerusDate.Shared.Seed
                 });
         }
 
-        public static Faker<T> GetProfileBasic<T>() where T : ProfileBasic
+        public static Faker<T> GetProfileBasic<T>() where T : ProfileBasicModel
         {
             return new Faker<T>("pt_BR")
                 .Rules((s, p) =>
@@ -66,9 +66,9 @@ namespace VerusDate.Shared.Seed
                 });
         }
 
-        public static Faker<ProfileBio> GetProfileBio()
+        public static Faker<ProfileBioModel> GetProfileBio()
         {
-            return new Faker<ProfileBio>("pt_BR")
+            return new Faker<ProfileBioModel>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.BirthDate = s.Date.Past(18).Date;
@@ -78,9 +78,9 @@ namespace VerusDate.Shared.Seed
                 });
         }
 
-        public static Faker<ProfileLifestyle> GetProfileLifestyle()
+        public static Faker<ProfileLifestyleModel> GetProfileLifestyle()
         {
-            return new Faker<ProfileLifestyle>("pt_BR")
+            return new Faker<ProfileLifestyleModel>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.Drink = s.PickRandom<Drink>();
@@ -98,9 +98,9 @@ namespace VerusDate.Shared.Seed
                 });
         }
 
-        public static Faker<ProfileLooking> GetProfileLookingVM()
+        public static Faker<ProfileLookingModel> GetProfileLookingVM()
         {
-            return new Faker<ProfileLooking>("pt_BR")
+            return new Faker<ProfileLookingModel>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.MinimalAge = s.Random.Int(18, 120);
@@ -126,9 +126,9 @@ namespace VerusDate.Shared.Seed
                 });
         }
 
-        public static Faker<ProfileGamification> GetProfileGamification()
+        public static Faker<ProfileGamificationModel> GetProfileGamification()
         {
-            return new Faker<ProfileGamification>("pt_BR")
+            return new Faker<ProfileGamificationModel>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.AddXP(s.Random.Number(1, 1000));
@@ -136,9 +136,9 @@ namespace VerusDate.Shared.Seed
                 });
         }
 
-        public static Faker<ProfileBadge> GetProfileBadge()
+        public static Faker<ProfileBadgeModel> GetProfileBadge()
         {
-            return new Faker<ProfileBadge>("pt_BR")
+            return new Faker<ProfileBadgeModel>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.Ranking.IncreaseLevel();
@@ -149,9 +149,9 @@ namespace VerusDate.Shared.Seed
                 });
         }
 
-        public static Faker<ProfilePhoto> GetProfilePhoto()
+        public static Faker<ProfilePhotoModel> GetProfilePhoto()
         {
-            return new Faker<ProfilePhoto>("pt_BR")
+            return new Faker<ProfilePhotoModel>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.UpdateMainPhoto(s.Internet.Avatar());

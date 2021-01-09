@@ -4,11 +4,11 @@ using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
 using static VerusDate.Shared.Helper.ImageHelper;
 
-namespace VerusDate.Shared.Model.Profile
+namespace VerusDate.Shared.Model
 {
-    public class Profile : CosmosBase
+    public class ProfileModel : CosmosBase
     {
-        public Profile() : base(nameof(Profile))
+        public ProfileModel() : base("Profile")
         {
         }
 
@@ -17,13 +17,13 @@ namespace VerusDate.Shared.Model.Profile
 
         private readonly string BlobPath = "https://storageverusdate.blob.core.windows.net";
 
-        public ProfileBasic Basic { get; set; }
-        public ProfileBio Bio { get; set; }
-        public ProfileLifestyle Lifestyle { get; set; }
-        public ProfileLooking Looking { get; set; }
-        public ProfileGamification Gamification { get; set; }
-        public ProfileBadge Badge { get; set; }
-        public ProfilePhoto Photo { get; set; }
+        public ProfileBasicModel Basic { get; set; }
+        public ProfileBioModel Bio { get; set; }
+        public ProfileLifestyleModel Lifestyle { get; set; }
+        public ProfileLookingModel Looking { get; set; }
+        public ProfileGamificationModel Gamification { get; set; }
+        public ProfileBadgeModel Badge { get; set; }
+        public ProfilePhotoModel Photo { get; set; }
 
         public void UpList()
         {
@@ -35,7 +35,7 @@ namespace VerusDate.Shared.Model.Profile
             DtLastLogin = DateTimeOffset.UtcNow;
         }
 
-        public void UpdateProfile(ProfileBasic basic, ProfileBio bio, ProfileLifestyle lifestyle)
+        public void UpdateProfile(ProfileBasicModel basic, ProfileBioModel bio, ProfileLifestyleModel lifestyle)
         {
             Basic = basic;
             Bio = bio;
@@ -44,28 +44,28 @@ namespace VerusDate.Shared.Model.Profile
             DtUpdate = DateTimeOffset.UtcNow;
         }
 
-        public void UpdateLooking(ProfileLooking obj)
+        public void UpdateLooking(ProfileLookingModel obj)
         {
             Looking = obj;
 
             DtUpdate = DateTimeOffset.UtcNow;
         }
 
-        public void UpdateGamification(ProfileGamification obj)
+        public void UpdateGamification(ProfileGamificationModel obj)
         {
             Gamification = obj;
 
             DtUpdate = DateTimeOffset.UtcNow;
         }
 
-        public void UpdateBadge(ProfileBadge obj)
+        public void UpdateBadge(ProfileBadgeModel obj)
         {
             Badge = obj;
 
             DtUpdate = DateTimeOffset.UtcNow;
         }
 
-        public void UpdatePhoto(ProfilePhoto obj)
+        public void UpdatePhoto(ProfilePhotoModel obj)
         {
             Photo = obj;
 
@@ -144,7 +144,7 @@ namespace VerusDate.Shared.Model.Profile
         }
     }
 
-    public class ProfileView : Profile
+    public class ProfileView : ProfileModel
     {
         public ActivityStatus ActivityStatus { get; set; }
         public double Distance { get; set; }

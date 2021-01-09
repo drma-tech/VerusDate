@@ -2,10 +2,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Interaction
 {
-    public class InteractionLikeCommand : Shared.Model.Interaction.Interaction, IRequest<bool> { }
+    public class InteractionLikeCommand : InteractionModel, IRequest<bool> { }
 
     public class InteractionLikeHandler : IRequestHandler<InteractionLikeCommand, bool>
     {
@@ -18,7 +19,7 @@ namespace VerusDate.Api.Mediator.Command.Interaction
 
         public async Task<bool> Handle(InteractionLikeCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<Shared.Model.Interaction.Interaction>(request.Id, request.Key, cancellationToken);
+            var obj = await _repo.Get<InteractionModel>(request.Id, request.Key, cancellationToken);
 
             if (obj == null)
             {
@@ -30,7 +31,7 @@ namespace VerusDate.Api.Mediator.Command.Interaction
 
             var mergeLike = await _repo.Update(obj, request.Id, request.Key, cancellationToken) != null;
 
-            var matched = await _repo.Get<Shared.Model.Interaction.Interaction>(request.GetInvertedId(), request.IdUserInteraction, cancellationToken);
+            var matched = await _repo.Get<InteractionModel>(request.GetInvertedId(), request.IdUserInteraction, cancellationToken);
 
             //se o outro tbm deu like, gera o match para os dois
             if (matched != null && matched.Like.Value.Value)

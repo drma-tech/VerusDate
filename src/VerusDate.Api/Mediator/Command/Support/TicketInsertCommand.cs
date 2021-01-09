@@ -2,12 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Support
 {
-    public class TicketInsertCommand : Shared.Model.Support.Ticket, IRequest<Shared.Model.Support.Ticket> { }
+    public class TicketInsertCommand : TicketModel, IRequest<TicketModel> { }
 
-    public class TicketInsertHandler : IRequestHandler<TicketInsertCommand, Shared.Model.Support.Ticket>
+    public class TicketInsertHandler : IRequestHandler<TicketInsertCommand, TicketModel>
     {
         private readonly IRepository _repo;
 
@@ -16,7 +17,7 @@ namespace VerusDate.Api.Mediator.Command.Support
             _repo = repo;
         }
 
-        public async Task<Shared.Model.Support.Ticket> Handle(TicketInsertCommand request, CancellationToken cancellationToken)
+        public async Task<TicketModel> Handle(TicketInsertCommand request, CancellationToken cancellationToken)
         {
             return await _repo.Add(request, request.Id, cancellationToken);
         }

@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.Model.Interaction
+namespace VerusDate.Shared.Model
 {
-    public class Chat : CosmosBase
+    public class ChatModel : CosmosBase
     {
-        public Chat() : base(nameof(Chat))
+        public ChatModel() : base("Chat")
         {
         }
 

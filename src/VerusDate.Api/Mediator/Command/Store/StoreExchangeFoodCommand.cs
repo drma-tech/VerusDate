@@ -3,10 +3,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Store
 {
-    public class StoreExchangeFoodCommand : IRequest<Shared.Model.Profile.Profile>
+    public class StoreExchangeFoodCommand : IRequest<ProfileModel>
     {
         public string Id { get; set; }
 
@@ -14,7 +15,7 @@ namespace VerusDate.Api.Mediator.Command.Store
         public int QtdDiamond { get; set; }
     }
 
-    public class StoreExchangeFoodHandler : IRequestHandler<StoreExchangeFoodCommand, Shared.Model.Profile.Profile>
+    public class StoreExchangeFoodHandler : IRequestHandler<StoreExchangeFoodCommand, ProfileModel>
     {
         private readonly IRepository _repo;
 
@@ -23,9 +24,9 @@ namespace VerusDate.Api.Mediator.Command.Store
             _repo = repo;
         }
 
-        public async Task<Shared.Model.Profile.Profile> Handle(StoreExchangeFoodCommand request, CancellationToken cancellationToken)
+        public async Task<ProfileModel> Handle(StoreExchangeFoodCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<Shared.Model.Profile.Profile>(request.Id, request.Id, cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, request.Id, cancellationToken);
 
             obj.Gamification.ExchangeFood(request.QtdDiamond);
 

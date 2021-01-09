@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace VerusDate.Shared.Model.Profile
+namespace VerusDate.Shared.Model
 {
-    public class ProfilePhoto
+    public class ProfilePhotoModel
     {
         public string Main { get; set; }
         public string Validation { get; set; }

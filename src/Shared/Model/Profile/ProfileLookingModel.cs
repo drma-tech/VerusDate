@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.Model.Profile
+namespace VerusDate.Shared.Model
 {
-    public class ProfileLooking
+    public class ProfileLookingModel
     {
         //TODO: IReadOnlyList - LIMITAÇÃO DO BLAZOR
         [Display(Name = "Intenções", Description = "Campo obrigatório")]
@@ -67,7 +67,7 @@ namespace VerusDate.Shared.Model.Profile
         [Display(Name = "Carreira")]
         public CareerCluster? CareerCluster { get; set; }
 
-        public void UpdateData(ProfileLooking vm)
+        public void UpdateData(ProfileLookingModel vm)
         {
             Intent = vm.Intent;
             Distance = vm.Distance;

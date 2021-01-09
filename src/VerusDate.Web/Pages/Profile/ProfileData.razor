@@ -123,7 +123,7 @@ else
 
 @code {
 
-    private VerusDate.Shared.Model.Profile.Profile profile;
+    private ProfileModel profile;
     private GeoLocation GPS = new();
     protected bool IsShortTerm { get { return !profile.Basic.Intent.IsLongTerm(); } }
     private Shared.modal.BasicModal privacy;
@@ -163,7 +163,7 @@ else
         }
     }
 
-    private async Task SetLocation(VerusDate.Shared.Model.Profile.Profile profile)
+    private async Task SetLocation(ProfileModel profile)
     {
         if (profile != null && profile.Basic != null && !profile.Basic.Longitude.HasValue)
         {
@@ -233,7 +233,7 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                profile = await ApiCore.ReturnResponse<VerusDate.Shared.Model.Profile.Profile>(response);
+                profile = await ApiCore.ReturnResponse<ProfileModel>(response);
             }
 
             await response.ProcessResponse(Toast, "Salvo com sucesso!");

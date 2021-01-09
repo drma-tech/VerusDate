@@ -114,11 +114,11 @@ else
     [Parameter]
     public string IdUserView { get; set; }
 
-    private VerusDate.Shared.Model.Profile.Profile view;
+    private ProfileModel view;
     private List<VerusDate.Shared.AffinityVM> affinities;
-    private VerusDate.Shared.Model.Profile.ProfileGamification gamification;
-    private VerusDate.Shared.Model.Profile.ProfileBadge badge;
-    private VerusDate.Shared.Model.Interaction.Interaction InteractionVM;
+    private ProfileGamificationModel gamification;
+    private ProfileBadgeModel badge;
+    private InteractionModel InteractionVM;
 
     private string labelPhoto => $"{view.Basic.NickName}, {view.Bio.BirthDate.GetAge()}, {view.GetDistance(0, 0)}";
 

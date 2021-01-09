@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace VerusDate.Shared.Model.Profile
+namespace VerusDate.Shared.Model
 {
-    public class ProfileBadge
+    public class ProfileBadgeModel
     {
         public BadgeType Ranking { get; set; } = new BadgeType(10, "fas fa-crown", "Ranking", "Nível alcançado");
 

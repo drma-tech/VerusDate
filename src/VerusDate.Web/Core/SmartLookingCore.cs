@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
-using VerusDate.Shared.Model.Profile;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Web.Core
 {
     public static class SmartLookingCore
     {
-        public static void PopulateFields(Profile profile, ProfileLooking looking)
+        public static void PopulateFields(ProfileModel profile, ProfileLookingModel looking)
         {
             if (profile == null) throw new NotificationException("Preenchimento de cadastro do perfil não encontrado");
-            if (looking == null) looking = new ProfileLooking();
+            if (looking == null) looking = new ProfileLookingModel();
 
             looking.Distance = 20;
             looking.MaritalStatus = GetMaritalStatus(profile);
@@ -52,21 +52,21 @@ namespace VerusDate.Web.Core
                 return 15;
         }
 
-        private static int GetMinAge(Profile profile)
+        private static int GetMinAge(ProfileModel profile)
         {
             var minAge = profile.Bio.BirthDate.GetAge() - GetAgeDifference(profile.Bio.BirthDate.GetAge());
             if (minAge < 18) minAge = 18;
             return minAge;
         }
 
-        private static int GetMaxAge(Profile profile)
+        private static int GetMaxAge(ProfileModel profile)
         {
             var maxAge = profile.Bio.BirthDate.GetAge() + GetAgeDifference(profile.Bio.BirthDate.GetAge());
             if (maxAge > 120) maxAge = 120;
             return maxAge;
         }
 
-        private static MaritalStatus? GetMaritalStatus(Profile profile)
+        private static MaritalStatus? GetMaritalStatus(ProfileModel profile)
         {
             if (profile.Basic.Intent.IsLongTerm())
             {
@@ -80,7 +80,7 @@ namespace VerusDate.Web.Core
             }
         }
 
-        private static BiologicalSex? GetBiologicalSex(Profile profile)
+        private static BiologicalSex? GetBiologicalSex(ProfileModel profile)
         {
             if (profile.Basic.GenderIdentity == GenderIdentity.Cisgender) //binary
             {
@@ -107,14 +107,14 @@ namespace VerusDate.Web.Core
             }
         }
 
-        private static SexualOrientation? GetSexualOrientation(Profile profile)
+        private static SexualOrientation? GetSexualOrientation(ProfileModel profile)
         {
             if (profile.Basic.SexualOrientation == SexualOrientation.Heteressexual) return SexualOrientation.Heteressexual;
             else if (profile.Basic.SexualOrientation == SexualOrientation.Homossexual) return SexualOrientation.Homossexual;
             else return null;
         }
 
-        private static Height GetMinHeight(Profile profile)
+        private static Height GetMinHeight(ProfileModel profile)
         {
             var list = EnumHelper.GetList(typeof(Height));
 
@@ -125,7 +125,7 @@ namespace VerusDate.Web.Core
             return (Height)minHeight;
         }
 
-        private static Height GetMaxHeight(Profile profile)
+        private static Height GetMaxHeight(ProfileModel profile)
         {
             var list = EnumHelper.GetList(typeof(Height));
 
@@ -136,7 +136,7 @@ namespace VerusDate.Web.Core
             return (Height)maxHeight;
         }
 
-        private static WantChildren? GetWantChildren(Profile profile)
+        private static WantChildren? GetWantChildren(ProfileModel profile)
         {
             if (profile.Lifestyle.WantChildren == WantChildren.No)
                 return WantChildren.No;
@@ -144,17 +144,17 @@ namespace VerusDate.Web.Core
                 return null;
         }
 
-        private static MoneyPersonality? GetMoneyPersonality(Profile profile)
+        private static MoneyPersonality? GetMoneyPersonality(ProfileModel profile)
         {
             return null;
         }
 
-        private static MyersBriggsTypeIndicator? GetMyersBriggsTypeIndicator(Profile profile)
+        private static MyersBriggsTypeIndicator? GetMyersBriggsTypeIndicator(ProfileModel profile)
         {
             return null;
         }
 
-        private static RelationshipPersonality? GetRelationshipPersonality(Profile profile)
+        private static RelationshipPersonality? GetRelationshipPersonality(ProfileModel profile)
         {
             if (profile.Lifestyle.RelationshipPersonality == RelationshipPersonality.Explorers)
                 return RelationshipPersonality.Explorers;

@@ -6,7 +6,7 @@
 
 <Alert Color="Color.Secondary" Visible="true">
     <AlertDescription>
-        <Link To="Terms/pt">Termos de Uso</Link> ▪ <Link To="Privacy/pt">Políticas de Privacidade</Link> ▪ <Link To="Faq">Dúvidas / Perguntas</Link>
+        <Blazorise.Link To="Terms/pt">Termos de Uso</Blazorise.Link> ▪ <Blazorise.Link To="Privacy/pt">Políticas de Privacidade</Blazorise.Link> ▪ <Blazorise.Link To="Faq">Dúvidas / Perguntas</Blazorise.Link>
     </AlertDescription>
 </Alert>
 
@@ -171,8 +171,8 @@
 <VerusDate.Web.Shared.modal.NewTicket @ref="NewTicket"></VerusDate.Web.Shared.modal.NewTicket>
 
 @code {
-    private List<VerusDate.Shared.Model.Support.Ticket> tickets = new();
-    private List<VerusDate.Shared.Model.Support.TicketVote> myVotes = new();
+    private List<TicketModel> tickets = new();
+    private List<TicketVoteModel> myVotes = new();
 
     public TicketStatus? TicketStatusBug { get; set; }
     public TicketStatus? TicketStatusFeature { get; set; }
@@ -197,7 +197,7 @@
         myVotes = await Http.Ticket_GetMyVotes();
     }
 
-    private List<VerusDate.Shared.Model.Support.Ticket> GetTicketList(TicketType ticketType)
+    private List<TicketModel> GetTicketList(TicketType ticketType)
     {
         if (ticketType == TicketType.Bug && TicketStatusBug.HasValue)
             return tickets.Where(w => w.TicketType == ticketType & w.TicketStatus == TicketStatusBug).OrderByDescending(o => o.DtInsert).ToList();
@@ -231,7 +231,7 @@
         }
         else
         {
-            var vote = new VerusDate.Shared.Model.Support.TicketVote();
+            var vote = new TicketVoteModel();
             vote.SetKey(IdTicket);
 
             await Http.Ticket_Vote(vote);

@@ -2,12 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileUpdateLookingCommand : Shared.Model.Profile.Profile, IRequest<Shared.Model.Profile.Profile> { }
+    public class ProfileUpdateLookingCommand : ProfileModel, IRequest<ProfileModel> { }
 
-    public class ProfileLookingAddHandler : IRequestHandler<ProfileUpdateLookingCommand, Shared.Model.Profile.Profile>
+    public class ProfileLookingAddHandler : IRequestHandler<ProfileUpdateLookingCommand, ProfileModel>
     {
         private readonly IRepository _repo;
 
@@ -16,7 +17,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
             _repo = repo;
         }
 
-        public async Task<Shared.Model.Profile.Profile> Handle(ProfileUpdateLookingCommand request, CancellationToken cancellationToken)
+        public async Task<ProfileModel> Handle(ProfileUpdateLookingCommand request, CancellationToken cancellationToken)
         {
             //var obj = await _profileValidationApp.Get(request.Id, cancellationToken);
 
@@ -27,7 +28,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
             //await _profileValidationApp.ValidateProfileCriteria(request.Id, true, cancellationToken);
 
-            var obj = await _repo.Get<Shared.Model.Profile.Profile>(request.Id, request.Id, cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, request.Id, cancellationToken);
 
             obj.UpdateLooking(request.Looking);
 

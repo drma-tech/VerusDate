@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Queries.Support
 {
-    public class TicketGetListCommand : MediatorQuery<List<Shared.Model.Support.Ticket>> { }
+    public class TicketGetListCommand : MediatorQuery<List<TicketModel>> { }
 
-    public class TicketGetListHandler : IRequestHandler<TicketGetListCommand, List<Shared.Model.Support.Ticket>>
+    public class TicketGetListHandler : IRequestHandler<TicketGetListCommand, List<TicketModel>>
     {
         private readonly IRepository _repo;
 
@@ -17,9 +18,9 @@ namespace VerusDate.Api.Mediator.Queries.Support
             _repo = repo;
         }
 
-        public async Task<List<Shared.Model.Support.Ticket>> Handle(TicketGetListCommand request, CancellationToken cancellationToken)
+        public async Task<List<TicketModel>> Handle(TicketGetListCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.Query<Shared.Model.Support.Ticket>(null, cancellationToken);
+            return await _repo.Query<TicketModel>(null, cancellationToken);
         }
     }
 }

@@ -2,12 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Chat
 {
-    public class ChatSyncCommand : Shared.Model.Interaction.Chat, IRequest<Shared.Model.Interaction.Chat> { }
+    public class ChatSyncCommand : ChatModel, IRequest<ChatModel> { }
 
-    public class ChatSyncChatHandler : IRequestHandler<ChatSyncCommand, Shared.Model.Interaction.Chat>
+    public class ChatSyncChatHandler : IRequestHandler<ChatSyncCommand, ChatModel>
     {
         private readonly IRepository _repo;
 
@@ -16,9 +17,9 @@ namespace VerusDate.Api.Mediator.Command.Chat
             _repo = repo;
         }
 
-        public async Task<Shared.Model.Interaction.Chat> Handle(ChatSyncCommand request, CancellationToken cancellationToken)
+        public async Task<ChatModel> Handle(ChatSyncCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<Shared.Model.Interaction.Chat>(request.Id, request.Id, cancellationToken: cancellationToken);
+            var obj = await _repo.Get<ChatModel>(request.Id, request.Id, cancellationToken: cancellationToken);
 
             obj.Itens = request.Itens;
 

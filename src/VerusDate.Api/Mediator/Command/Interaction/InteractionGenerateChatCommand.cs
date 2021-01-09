@@ -4,13 +4,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
 using VerusDate.Shared.Helper;
-using VerusDate.Shared.Model.Interaction;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Mediator.Commands.Interaction
 {
-    public class InteractionGenerateChatCommand : Shared.Model.Interaction.Interaction, IRequest<Chat> { }
+    public class InteractionGenerateChatCommand : InteractionModel, IRequest<ChatModel> { }
 
-    public class InteractionGenerateChatHandler : IRequestHandler<InteractionGenerateChatCommand, Chat>
+    public class InteractionGenerateChatHandler : IRequestHandler<InteractionGenerateChatCommand, ChatModel>
     {
         private readonly IRepository _repo;
 
@@ -19,11 +19,11 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
             _repo = repo;
         }
 
-        public async Task<Chat> Handle(InteractionGenerateChatCommand request, CancellationToken cancellationToken)
+        public async Task<ChatModel> Handle(InteractionGenerateChatCommand request, CancellationToken cancellationToken)
         {
             if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
 
-            var obj1 = await _repo.Get<Shared.Model.Interaction.Interaction>(request.Id, request.Key, cancellationToken);
+            var obj1 = await _repo.Get<InteractionModel>(request.Id, request.Key, cancellationToken);
 
             if (!obj1.Match.Value.Value)
             {
@@ -35,9 +35,9 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
             }
             else
             {
-                var obj2 = await _repo.Get<Shared.Model.Interaction.Interaction>(request.GetInvertedId(), request.IdUserInteraction, cancellationToken);
+                var obj2 = await _repo.Get<InteractionModel>(request.GetInvertedId(), request.IdUserInteraction, cancellationToken);
 
-                var chat = new Chat();
+                var chat = new ChatModel();
 
                 chat.SetIds(null);
 

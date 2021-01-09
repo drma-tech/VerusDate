@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Enum;
 
-namespace VerusDate.Shared.Model.Profile
+namespace VerusDate.Shared.Model
 {
-    public class ProfileBasic
+    public class ProfileBasicModel
     {
         [Display(Name = "Nome / Apelido", Prompt = "Ex: Paulo ou Paulinho")]
         public string NickName { get; set; }

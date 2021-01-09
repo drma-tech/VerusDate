@@ -1,13 +1,14 @@
 ﻿using Bogus;
 using VerusDate.Shared.Enum;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Shared.Seed
 {
     public static class EventSeed
     {
-        public static Faker<Model.Event.Event> GetEventVM(string IdUser = null)
+        public static Faker<EventModel> GetEventVM(string IdUser = null)
         {
-            return new Faker<Model.Event.Event>("pt_BR")
+            return new Faker<EventModel>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.SetIds(IdUser ?? s.Random.Guid().ToString());

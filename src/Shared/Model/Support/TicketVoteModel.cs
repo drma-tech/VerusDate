@@ -1,11 +1,11 @@
 ﻿using System;
 using VerusDate.Shared.Core;
 
-namespace VerusDate.Shared.Model.Support
+namespace VerusDate.Shared.Model
 {
-    public class TicketVote : CosmosBase
+    public class TicketVoteModel : CosmosBase
     {
-        public TicketVote() : base(nameof(TicketVote))
+        public TicketVoteModel() : base("TicketVote")
         {
             Id = Guid.NewGuid().ToString();
         }

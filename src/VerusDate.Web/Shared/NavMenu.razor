@@ -1,10 +1,13 @@
+@inherits ComponenteCore<NavMenu>
+@inject HttpClient Http
+
 <Sidebar @ref="sidebar">
     <SidebarContent>
         <SidebarBrand Style="text-align: center;">
             <a href="">Verus Date</a>
             <AuthorizeView>
                 <Authorized>
-                    <Figure Size="FigureSize.Is128x128">
+                    <Figure Style="max-width: 128px;" Margin="Margin.Is0">
                         <FigureImage Source="@profile.GetMainPhoto()" Rounded="true" />
                     </Figure>
                     <Blazorise.Link To="Profile/Account" Title="Gerenciar Perfil" Style="font-size: 0.80rem; padding: 0.70rem;">
@@ -60,5 +63,15 @@
     void ToggleSidebar()
     {
         sidebar.Toggle();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        if (ComponenteUtils.IsAuthenticated)
+        {
+            profile = await Http.Profile_Get();
+        }
     }
 }

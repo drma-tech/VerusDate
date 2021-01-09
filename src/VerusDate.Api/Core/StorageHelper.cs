@@ -27,7 +27,7 @@ namespace VerusDate.Api.Core
             await client.UploadAsync(stream, headers, cancellationToken: cancellationToken);
         }
 
-        public async Task DeletePhoto(PhotoType type, string fileName)
+        public async Task DeletePhoto(PhotoType type, string fileName, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(fileName)) return;
 
@@ -36,7 +36,7 @@ namespace VerusDate.Api.Core
 
             if (await blob.ExistsAsync())
             {
-                await blob.DeleteAsync(DeleteSnapshotsOption.IncludeSnapshots);
+                await blob.DeleteAsync(DeleteSnapshotsOption.IncludeSnapshots, cancellationToken: cancellationToken);
             }
         }
     }

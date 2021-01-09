@@ -1,11 +1,13 @@
-﻿<Sidebar @ref="sidebar">
+﻿@inject HttpClient Http
+
+<Sidebar @ref="sidebar">
     <SidebarContent>
         <SidebarBrand Style="text-align: center;">
             <a href="">Verus Date</a>
             <AuthorizeView>
                 <Authorized>
                     <Figure Size="FigureSize.Is128x128">
-                        <FigureImage Source="@VerusDate.Shared.Helper.ImageHelper.GetNoUserPHoto" Rounded="true" />
+                        <FigureImage Source="@VerusDate.Shared.Helper.ImageHelper.GetNoUserPhoto" Rounded="true" />
                     </Figure>
                     <Blazorise.Link To="Identity/Account/Manage" Title="Gerenciar Perfil" style="font-size: 0.80rem; padding: 0.70rem;">
                         @context.User.Identity.Name
@@ -13,10 +15,10 @@
                 </Authorized>
                 <NotAuthorized>
                     <Figure Size="FigureSize.Is128x128">
-                        <FigureImage Source="@VerusDate.Shared.Helper.ImageHelper.GetNoUserPHoto" Rounded="true" />
+                        <FigureImage Source="@profile.GetMainPhoto()" Rounded="true" />
                     </Figure>
                 </NotAuthorized>
-            </AuthorizeView>            
+            </AuthorizeView>
         </SidebarBrand>
         <SidebarNavigation>
             <SidebarItem>
@@ -59,10 +61,16 @@
 </Sidebar>
 
 @code {
+    private VerusDate.Shared.Model.Profile.Profile profile = new();
     Sidebar sidebar;
 
     void ToggleSidebar()
     {
         sidebar.Toggle();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        profile = await Http.Profile_Get();
     }
 }

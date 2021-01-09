@@ -458,10 +458,7 @@
     {
         lstDestaques = await Http.Public_ListDestaques();
 
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-
-        if (user.Identity.IsAuthenticated)
+        if (ComponenteUtils.IsAuthenticated)
         {
             profile = await Http.Profile_Get();
             gamification = profile.Gamification;

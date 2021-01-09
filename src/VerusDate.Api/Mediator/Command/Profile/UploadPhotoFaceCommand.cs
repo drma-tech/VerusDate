@@ -33,18 +33,17 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
             using (var stream = new MemoryStream(request.MainPhoto))
             {
-                string photoName;
-
                 if (obj.Photo != null && !string.IsNullOrEmpty(obj.Photo.Main)) //foto já existente
                 {
-                    photoName = obj.Photo.Main;
+                    //se manter a foto com o mesmo id, o cache do browser não vai atualizar a foto
+                    await storageHelper.DeletePhoto(ImageHelper.PhotoType.PhotoFace, obj.Photo.Main, cancellationToken);
                 }
                 else
                 {
-                    photoName = Guid.NewGuid().ToString() + ".jpg";
-
                     obj.Photo = new Shared.Model.Profile.ProfilePhoto();
                 }
+
+                var photoName = Guid.NewGuid().ToString() + ".jpg";
 
                 await storageHelper.UploadPhoto(ImageHelper.PhotoType.PhotoFace, stream, photoName, cancellationToken);
 

@@ -24,6 +24,7 @@ namespace VerusDate.Web.Core
     public static class ComponenteUtils
     {
         public static string IdUser { get; set; }
+        public static bool IsAuthenticated { get; set; }
 
         public static string GetStorageKey(string key) => string.IsNullOrEmpty(IdUser) ? throw new ArgumentException(IdUser) : $"{key}({IdUser})";
 
@@ -61,8 +62,10 @@ namespace VerusDate.Web.Core
                 if (string.IsNullOrEmpty(ComponenteUtils.IdUser))
                 {
                     var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-                    //ComponenteUtils.IdUser = authState.User.FindFirst(c => c.Type == "sub")?.Value;
-                    ComponenteUtils.IdUser = authState.User.FindFirst(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                    var user = authState.User;
+
+                    ComponenteUtils.IsAuthenticated = user.Identity.IsAuthenticated;
+                    ComponenteUtils.IdUser = user.FindFirst(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
                 }
             }
             catch (Exception ex)

@@ -8,7 +8,7 @@
             <Column ColumnSize="ColumnSize.Is12">
                 <Card Margin="Margin.Is3.FromBottom">
                     <CardHeader>
-                        Destaques da Semana - Localização (São Paulo)
+                        Destaques da Semana - Localização (@profile?.Basic?.Location)
                     </CardHeader>
                     <CardBody>
                         <Row>
@@ -16,7 +16,7 @@
                             {
                                 <Column ColumnSize="ColumnSize.Is1.OnFullHD.Is2.OnWidescreen.Is3.OnDesktop.Is4.OnMobile">
                                     <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
-                                        <CardImage Source="@item.Photo.GetMainPhoto()" Alt="Photo Image"></CardImage>
+                                        <CardImage Source="@item.GetMainPhoto()" Alt="Photo Image"></CardImage>
                                         <Badge Color="Color.Light" Style="font-size: 11px;">@item.NickName</Badge>
                                         <Badge Color="Color.Light" Style="font-size: 9px; position: absolute; top: 5px; left: 5px;">@ProfileSeed.GetNumber(100, 500) XP</Badge>
                                     </Card>
@@ -445,6 +445,7 @@
 
 @code
 {
+    private VerusDate.Shared.Model.Profile.Profile profile = new();
     private VerusDate.Shared.Model.Profile.ProfileGamification gamification = new();
     private List<ProfileSearch> lstDestaques = new();
 
@@ -456,5 +457,14 @@
     protected override async Task LoadData()
     {
         lstDestaques = await Http.Public_ListDestaques();
+
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            profile = await Http.Profile_Get();
+            gamification = profile.Gamification;
+        }
     }
 }

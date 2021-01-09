@@ -7,9 +7,10 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
-using VerusDate.Api.Mediator.Command.Store;
+using VerusDate.Server.Mediator.Commands.Profile;
 
 namespace VerusDate.Api.Function
 {
@@ -20,6 +21,30 @@ namespace VerusDate.Api.Function
         public StorageFunction(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [FunctionName("StorageUploadPhotoFace")]
+        public async Task<IActionResult> UploadPhotoFace(
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Storage/UploadPhotoFace")] HttpRequest req,
+            ILogger log, CancellationToken cancellationToken)
+        {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
+            try
+            {
+                var command = await JsonSerializer.DeserializeAsync<UploadPhotoFaceCommand>(req.Body);
+
+                command.Id = req.GetUserId();
+
+                var result = await _mediator.Send(command, source.Token);
+
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, null, req.Query.ToList());
+                return new BadRequestObjectResult(ex.Message);
+            }
         }
 
         //[FunctionName("StorageUploadPhotoGallery")]

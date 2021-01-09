@@ -1,11 +1,14 @@
 ﻿using System;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Model.Profile;
+using static VerusDate.Shared.Helper.ImageHelper;
 
 namespace VerusDate.Shared.ModelQuery
 {
     public class ProfileSearch
     {
+        private readonly string BlobPath = "https://storageverusdate.blob.core.windows.net";
+
         public string Id { get; set; }
 
         public string NickName { get; set; }
@@ -22,6 +25,14 @@ namespace VerusDate.Shared.ModelQuery
         public void UpdatePhoto(ProfilePhoto obj)
         {
             Photo = obj;
+        }
+
+        public string GetMainPhoto()
+        {
+            if (Photo == null || string.IsNullOrEmpty(Photo.Main))
+                return GetNoUserPhoto;
+            else
+                return $"{BlobPath}/{GetPhotoContainer(PhotoType.PhotoFace)}/{Photo.Main}";
         }
     }
 

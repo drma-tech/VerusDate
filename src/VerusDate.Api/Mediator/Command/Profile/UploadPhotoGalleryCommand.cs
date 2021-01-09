@@ -38,7 +38,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
                 {
                     var photoName = Guid.NewGuid().ToString();
 
-                    await storageHelper.UploadPhoto(StorageHelper.PhotoType.PhotoGallery, stream, photoName);
+                    await storageHelper.UploadPhoto(ImageHelper.PhotoType.PhotoGallery, stream, photoName, cancellationToken);
                     //TODO: deletar fotos antigas
                     //await storageHelper.DeletePhoto(StorageHelper.PhotoType.PhotoGallery, obj.PhotoFileName1);
 

@@ -5,15 +5,15 @@
             <AuthorizeView>
                 <Authorized>
                     <Figure Size="FigureSize.Is128x128">
-                        <FigureImage Source="img/nouser.jpg" Rounded="true" />
+                        <FigureImage Source="@VerusDate.Shared.Helper.ImageHelper.GetNoUserPHoto" Rounded="true" />
                     </Figure>
-                    <Link To="Identity/Account/Manage" Title="Gerenciar Perfil" style="font-size: 0.80rem; padding: 0.70rem;">
+                    <Blazorise.Link To="Identity/Account/Manage" Title="Gerenciar Perfil" style="font-size: 0.80rem; padding: 0.70rem;">
                         @context.User.Identity.Name
-                    </Link>
+                    </Blazorise.Link>
                 </Authorized>
                 <NotAuthorized>
                     <Figure Size="FigureSize.Is128x128">
-                        <FigureImage Source="img/nouser.jpg" Rounded="true" />
+                        <FigureImage Source="@VerusDate.Shared.Helper.ImageHelper.GetNoUserPHoto" Rounded="true" />
                     </Figure>
                 </NotAuthorized>
             </AuthorizeView>            

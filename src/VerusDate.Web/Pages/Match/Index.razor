@@ -12,7 +12,7 @@ else
     <Row>
         <Column ColumnSize="ColumnSize.Is8.OnTablet.Is6.OnWidescreen.Is4.OnFullHD">
             <Card Margin="Margin.Is2.FromBottom.OnMobile">
-                <CardImage Source="@getCurrentProfile().Photo.GetMainPhoto()" Alt="@labelPhoto"></CardImage>
+                <CardImage Source="@getCurrentProfile().GetMainPhoto()" Alt="@labelPhoto"></CardImage>
                 <Badge Color="Color.Secondary" Style="position: absolute; bottom: 68px; left: 5px;">@getCurrentProfile().NickName, @getCurrentProfile().BirthDate.GetAge(), @getCurrentProfile().Distance Km</Badge>
                 @if (getCurrentProfile().ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                 {

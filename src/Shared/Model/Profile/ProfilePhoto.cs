@@ -17,13 +17,5 @@ namespace VerusDate.Shared.Model.Profile
         {
             this.Gallery = Gallery;
         }
-
-        public string GetMainPhoto()
-        {
-            if (string.IsNullOrEmpty(Main))
-                return "/img/nouser.jpg";
-            else
-                return Main;
-        }
     }
 }

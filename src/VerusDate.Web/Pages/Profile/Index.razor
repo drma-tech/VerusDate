@@ -6,8 +6,7 @@
 <Row>
     <Column ColumnSize="ColumnSize.Is3.OnDesktop">
         <Card Margin="Margin.Is3.FromBottom">
-            <CardImage Source="img/nouser.jpg">
-            </CardImage>
+            <CardImage Source="@profile.GetMainPhoto()"></CardImage>
             <CardBody>
                 <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="ProfileData">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserEdit"></Icon> Alterar dados
@@ -60,7 +59,7 @@
     private VerusDate.Shared.Model.Profile.ProfileGamification gamification;
     private VerusDate.Shared.Model.Profile.ProfileBadge badge;
     private VerusDate.Shared.ModelQuery.GlobalInteractions GlobalInteractionsVM;
-    private VerusDate.Shared.Model.Profile.Profile profile;
+    private VerusDate.Shared.Model.Profile.Profile profile = new();
 
     protected override async Task LoadData()
     {

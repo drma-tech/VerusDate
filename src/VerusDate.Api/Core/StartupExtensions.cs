@@ -23,6 +23,8 @@ namespace VerusDate.Api.Core
             {
                 return new CosmosRepository(config);
             });
+
+            services.AddScoped(typeof(StorageHelper), typeof(StorageHelper));
         }
 
         public static void AddPipelines(this IServiceCollection services)

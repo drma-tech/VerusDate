@@ -5,7 +5,7 @@
             <AuthorizeView>
                 <Authorized>
                     <Figure Size="FigureSize.Is128x128">
-                        <FigureImage Source="img/nouser.jpg" Rounded="true" />
+                        <FigureImage Source="@profile.GetMainPhoto()" Rounded="true" />
                     </Figure>
                     <Blazorise.Link To="Profile/Account" Title="Gerenciar Perfil" Style="font-size: 0.80rem; padding: 0.70rem;">
                         @context.User.Identity.Name
@@ -55,6 +55,7 @@
 
 @code {
     Sidebar sidebar;
+    private VerusDate.Shared.Model.Profile.Profile profile = new();
 
     void ToggleSidebar()
     {

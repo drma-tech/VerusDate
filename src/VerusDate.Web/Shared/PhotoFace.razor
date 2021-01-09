@@ -25,7 +25,7 @@ else
     private string GetPhotoFace()
     {
         if (string.IsNullOrEmpty(IdFace))
-            return "/img/nouser.jpg";
+            return ImageHelper.GetNoUserPhoto;
         else if (IdFace.StartsWith("data:"))
             return IdFace;
         else

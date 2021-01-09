@@ -2,6 +2,7 @@
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
+using static VerusDate.Shared.Helper.ImageHelper;
 
 namespace VerusDate.Shared.Model.Profile
 {
@@ -13,6 +14,8 @@ namespace VerusDate.Shared.Model.Profile
 
         public DateTimeOffset? DtTopList { get; set; } = DateTimeOffset.UtcNow;
         public DateTimeOffset? DtLastLogin { get; set; } = DateTimeOffset.UtcNow;
+
+        private readonly string BlobPath = "https://storageverusdate.blob.core.windows.net";
 
         public ProfileBasic Basic { get; set; }
         public ProfileBio Bio { get; set; }
@@ -111,6 +114,14 @@ namespace VerusDate.Shared.Model.Profile
         public double GetDistance(double latitude, double longitude)
         {
             return ProfileHelper.GetDistance(Basic.Latitude.Value, latitude, Basic.Longitude.Value, longitude, ProfileHelper.DistanceType.Km);
+        }
+
+        public string GetMainPhoto()
+        {
+            if (Photo == null || string.IsNullOrEmpty(Photo.Main))
+                return GetNoUserPhoto;
+            else
+                return $"{BlobPath}/{GetPhotoContainer(PhotoType.PhotoFace)}/{Photo.Main}";
         }
 
         /// <summary>

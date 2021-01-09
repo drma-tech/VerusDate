@@ -1,25 +1,25 @@
-﻿using Blazored.LocalStorage;
-using System;
+﻿using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api
 {
     public static class StorageApi
     {
-        public async static Task<HttpResponseMessage> Storage_UploadPhotoFace(this HttpClient http, ILocalStorageService storage, byte[] bytes)
+        public async static Task<HttpResponseMessage> Storage_UploadPhotoFace(this HttpClient http, byte[] bytes)
         {
             if (bytes == null || bytes.Length == 0) throw new ArgumentNullException(nameof(bytes));
 
             //await ProfileApi.ClearCache(storage);
             //await ProfileValidationApi.ClearCache(storage);
 
-            return await http.PostAsJsonAsync("Storage/UploadPhotoFace", new { Stream = bytes });
+            return await http.Post("Storage/UploadPhotoFace", new { MainPhoto = bytes });
         }
 
-        public async static Task<HttpResponseMessage> Storage_UploadPhotoGallery(this HttpClient http, ILocalStorageService storage, MemoryStream stream1, MemoryStream stream2, MemoryStream stream3, MemoryStream stream4)
+        public async static Task<HttpResponseMessage> Storage_UploadPhotoGallery(this HttpClient http, MemoryStream stream1, MemoryStream stream2, MemoryStream stream3, MemoryStream stream4)
         {
             //await ProfileApi.ClearCache(storage);
 
@@ -32,12 +32,12 @@ namespace VerusDate.Web.Api
             });
         }
 
-        public async static Task<HttpResponseMessage> Storage_UploadPhotoValidation(this HttpClient http, ILocalStorageService storage, byte[] bytes)
+        public async static Task<HttpResponseMessage> Storage_UploadPhotoValidation(this HttpClient http, byte[] bytes)
         {
             if (bytes == null || bytes.Length == 0) throw new ArgumentNullException(nameof(bytes));
 
             //await ProfileValidationApi.ClearCache(storage);
-            await GamificationApi.ClearCache(storage);
+            //await GamificationApi.ClearCache(storage);
 
             return await http.PostAsJsonAsync("Storage/UploadPhotoValidation", new { Stream = bytes });
         }

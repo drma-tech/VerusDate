@@ -41,7 +41,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
                 if (validated)
                 {
-                    await storageHelper.UploadPhoto(StorageHelper.PhotoType.PhotoValidation, ms, NewPhotoId);
+                    await storageHelper.UploadPhoto(ImageHelper.PhotoType.PhotoValidation, ms, NewPhotoId, cancellationToken);
                     //await storageHelper.DeletePhoto(StorageHelper.PhotoType.PhotoValidation, obj.PhotoFaceValidation);
 
                     await _repo.Update(obj, request.Id, request.Id, cancellationToken);

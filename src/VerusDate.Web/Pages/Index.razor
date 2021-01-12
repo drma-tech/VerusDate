@@ -87,39 +87,271 @@
                 Está é uma versão MVP (Minimum viable product). Algum dos recursos existentes servem apenas de demonstração de funcionalidade.
             </JumbotronSubtitle>
         </Jumbotron>
+        <CardDeck Margin="Margin.Is3.FromBottom">
+            <Card>
+                <CardBody>
+                    <CardTitle Size="5" Color="TextColor.Info">Sem Perfis Falsos</CardTitle>
+                    <Paragraph Alignment="TextAlignment.Justified" Color="TextColor.Secondary">
+                        Nós garantimos que não haverá perfis falsos ou inativos. Com tecnologia para reconhecimento facil e um avançado sistema para controle dos dados
+                    </Paragraph>
+                    <Button Color="Color.Info" Type="ButtonType.Link" To="#head_perfil" Target="Target.Top">Saiba Mais</Button>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardBody>
+                    <CardTitle Size="5" Color="TextColor.Info">Gamificação</CardTitle>
+                    <Paragraph Alignment="TextAlignment.Justified" Color="TextColor.Secondary">
+                        Todos os nossos recursos são baseados em elementos de jogos para deixar tudo mais leve e divertido
+                    </Paragraph>
+                    <Button Color="Color.Info" Type="ButtonType.Link" To="#head_gamificacao" Target="Target.Top">Saiba Mais</Button>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardBody>
+                    <CardTitle Size="5" Color="TextColor.Info">Livre de Preconceitos</CardTitle>
+                    <Paragraph Alignment="TextAlignment.Justified" Color="TextColor.Secondary">
+                        Independente de suas intenções, gênero, orientação sexual, raça, idade etc., nós temos um sistema completo e inteligente para encontrar o que você está procurando
+                    </Paragraph>
+                    <Button Color="Color.Info" Type="ButtonType.Link" To="#head_preconceito" Target="Target.Top">Saiba Mais</Button>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardBody>
+                    <CardTitle Size="5" Color="TextColor.Info">Eventos</CardTitle>
+                    <Paragraph Alignment="TextAlignment.Justified" Color="TextColor.Secondary">
+                        Com nossa exclusiva seção de eventos, você terá novas oportunidades de interação com seus pretendentes
+                    </Paragraph>
+                    <Button Color="Color.Info" Type="ButtonType.Link" To="#head_evento" Target="Target.Top">Saiba Mais</Button>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardBody>
+                    <CardTitle Size="5" Color="TextColor.Info">Segurança e Privacidade</CardTitle>
+                    <Paragraph Alignment="TextAlignment.Justified" Color="TextColor.Secondary">
+                        Um dos nossos pilares é a segurança e privacidade dos dados dos nossos usuários
+                    </Paragraph>
+                    <Button Color="Color.Info" Type="ButtonType.Link" To="#head_seguranca" Target="Target.Top">Saiba Mais</Button>
+                </CardBody>
+            </Card>
+        </CardDeck>
+
+        <Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is5.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_perfil">Sem Perfis Falsos</Heading>
+        <Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Nós garantimos que não haverá perfis falsos ou inativos. Com tecnologia para reconhecimento facil e um avançado sistema para controle dos dados</Paragraph>
         <Row>
-            <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen">
-                <Card>
-                    <CardHeader>
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bullhorn"></Icon> Nossas Premissas
-                    </CardHeader>
-                    <CardBody Padding="Padding.Is3">
-                        <Alert Color="Color.Info" Visible="true" Padding="Padding.Is3">
-                            <Heading Size="HeadingSize.Is5" Color="TextColor.Success">
-                                Perfis Verdadeiros
-                            </Heading>
-                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom">
-                                Nós garantimos não existir perfis falsos ou inativos
+            <Column ColumnSize="ColumnSize.Is3"></Column>
+            <Column ColumnSize="ColumnSize.Is6">
+                <Alert Color="Color.Info" Visible="true">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Todos os perfis são verificados com reconhecimento facial
+                </Alert>
+                <Alert Color="Color.Info" Visible="true">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Perfis com mais de 30 dias sem acesso são automaticamente desativados
+                </Alert>
+                <Alert Color="Color.Info" Visible="true">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Todas as informações dos perfis são passíveis de denúncias (punições e/ou notificações serão avaliadas de acordo com o cenário)
+                </Alert>
+            </Column>
+        </Row>
+
+        <Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is5.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_gamificacao">Gamificação</Heading>
+        <Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Todos os nossos recursos são baseados em elementos de jogos para deixar tudo mais leve e divertido</Paragraph>
+        <CardDeck>
+            <Card>
+                <CardHeader>
+                    <CardTitle Color="TextColor.Info" Size="5" Margin="Margin.Is0.FromBottom">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon> Ranking
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
+                        Para cada novo nível alcançado, será desbloqueado novas funcionalidades
+                    </Paragraph>
+                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 100 XP acumulados
+                    </Badge>
+                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Caso perca todos XP do ranking atual + 1
+                    </Badge>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardHeader>
+                    <CardTitle Color="TextColor.Info" Size="5" Margin="Margin.Is0.FromBottom">
+                        XP
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
+                        Ganhe experiência, suba de nível e tenha acesso a novos recursos
+                    </Paragraph>
+                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Ganhe cumprindo tarefas
+                    </Badge>
+                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Avaliando um perfil
+                    </Badge>
+                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Interagindo com seus matches
+                    </Badge>
+                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Respondendo todas as interações
+                    </Badge>
+                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Ignorar seus matches
+                    </Badge>
+                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Receber denúncias
+                    </Badge>
+                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Repetir mensagens enviadas
+                    </Badge>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardHeader>
+                    <CardTitle Color="TextColor.Info" Size="5" Margin="Margin.Is0.FromBottom">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt"></Icon> Food
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
+                        Com as maças você pode selecionar seus pretendentes e esperar novos matches
+                    </Paragraph>
+                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 24 horas (não acumulável)
+                    </Badge>
+                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada anúncio visto
+                    </Badge>
+                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Dar like em alguém
+                    </Badge>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardHeader>
+                    <CardTitle Color="TextColor.Info" Size="5" Margin="Margin.Is0.FromBottom">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem"></Icon> Diamond
+                    </CardTitle>
+                </CardHeader>
+                <CardBody>
+                    <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
+                        Com os diamantes você tem acesso a recursos exclusivos
+                    </Paragraph>
+                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 24 horas
+                    </Badge>
+                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Cada amigo convidado
+                    </Badge>
+                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Comprando de forma avulsa
+                    </Badge>
+                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Dar uma piscadinha
+                    </Badge>
+                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Subir para o top 1 da sua cidade
+                    </Badge>
+                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Trocar por 10 maças
+                    </Badge>
+                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Criar ou se inscrever em um evento
+                    </Badge>
+                </CardBody>
+            </Card>
+        </CardDeck>
+        <Paragraph Margin="Margin.Is3.FromTop" Alignment="TextAlignment.Center">
+            <Badge Color="Color.Warning">* Alguns recursos e funcionalidades podem exigir que certos pré-requisitos sejam cumpridos ou que precisem ser pagos</Badge><br />
+            <Badge Color="Color.Warning">* A quantidade de ganhos/perdas de recursos podem variar para cada nível e o tipo de conta (básica / premium)</Badge>
+        </Paragraph>
+
+        <Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is5.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_preconceito">Livre de Preconceitos</Heading>
+        <Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Independente de suas intenções, gênero, orientação sexual, raça, idade etc., nós temos um sistema completo e inteligente para encontrar o que você está procurando</Paragraph>
+        <Row>
+            <Column ColumnSize="ColumnSize.Is3"></Column>
+            <Column ColumnSize="ColumnSize.Is6">
+                <Alert Color="Color.Info" Visible="true">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Aceitamos todos os perfis e sem nenhuma restrição (com muito respeito, claro)
+                </Alert>
+                <Alert Color="Color.Info" Visible="true">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Todos os filtros são liberados gratuitamente para que se ache o que esteja procurando
+                </Alert>
+                <Alert Color="Color.Info" Visible="true">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Não toleramos nenhum tipo de preconceito dentro da plataforma (em caso de denúncia, será severamente punido)
+                </Alert>
+            </Column>
+        </Row>
+
+        <Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is5.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_evento">Eventos</Heading>
+        <Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Com nossa exclusiva seção de eventos, você terá novas oportunidades de interação com seus pretendentes</Paragraph>
+        <Row>
+            <Column ColumnSize="ColumnSize.Is8.Is2.WithOffset">
+                <CardDeck Margin="Margin.Is3.FromBottom">
+                    <Card>
+                        <CardBody>
+                            <CardTitle Size="5" Color="TextColor.Info">BLIND DATE (Encontro às cegas)</CardTitle>
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash" Class="fa-4x" Style="color: #17a2b8;" Float="Float.Right" Margin="Margin.Is2.FromLeft"></Icon>
+                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                                Conheça alguém por sua essência, não sua aparência. Participe de um grupo e conheça pessoas sem saber suas aparências e escolha com quem quer se relacionar.
                             </Paragraph>
-                        </Alert>
-                        <Alert Color="Color.Info" Visible="true" Padding="Padding.Is3">
-                            <Heading Size="HeadingSize.Is5" Color="TextColor.Success">
-                                Gamificação
-                            </Heading>
-                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom">
-                                Todos os nossos recursos são baseados em elementos dos jogos para deixar tudo mais divertido
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardBody>
+                            <CardTitle Size="5" Color="TextColor.Info">SPEED DATING (Encontro Rápido)</CardTitle>
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserClock" Class="fa-4x" Style="color: #17a2b8;" Float="Float.Right" Margin="Margin.Is2.FromLeft"></Icon>
+                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                                Conheça várias pessoas em encontros rápidos. Participe de um grupo e conheça pessoas em vídeo chamadas com 5 minutos de duraçao e escolha seus potenciais pretendentes.
                             </Paragraph>
-                        </Alert>
-                        <Alert Color="Color.Info" Visible="true" Padding="Padding.Is3" Margin="Margin.Is0.FromBottom">
-                            <Heading Size="HeadingSize.Is5" Color="TextColor.Success">
-                                Livre de Preconceitos
-                            </Heading>
-                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom">
-                                Independente da sua intenção, gênero, orientação sexual, raça, idade etc, nós temos um sistema de cruzamento de perfis completo e inteligente para você pode achar o que esteja procurando
+                        </CardBody>
+                    </Card>
+                </CardDeck>
+                <CardDeck>
+                    <Card>
+                        <CardBody>
+                            <CardTitle Size="5" Color="TextColor.Info">GROUP DATING (Encontro em grupo)</CardTitle>
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Users" Class="fa-4x" Style="color: #17a2b8;" Float="Float.Right" Margin="Margin.Is2.FromLeft"></Icon>
+                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                                Muitos participantes com interesses parecidos e com livre interação. Único evento com encontros reais. Conheça várias pessoas legais e vê o que rola.
                             </Paragraph>
-                        </Alert>
-                    </CardBody>
-                </Card>
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardBody>
+                            <CardTitle Size="5" Color="TextColor.Info">Totalmente customizado</CardTitle>
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.CalendarAlt" Class="fa-4x" Style="color: #17a2b8;" Float="Float.Right" Margin="Margin.Is2.FromLeft"></Icon>
+                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                                Você mesmo cria seus eventos como achar necessário. Com diversos filtros e com um mínimo de participantes para ser realizado.
+                            </Paragraph>
+                        </CardBody>
+                    </Card>
+                </CardDeck>
+            </Column>
+        </Row>
+
+        <Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is5.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_seguranca">Segurança e Privacidade</Heading>
+        <Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Um dos nossos pilares é a segurança e privacidade dos dados dos nossos usuários</Paragraph>
+        <Row>
+            <Column ColumnSize="ColumnSize.Is6.Is3.WithOffset">
+                <CardDeck>
+                    <Card>
+                        <CardBody>
+                            <CardTitle Size="5" Color="TextColor.Info">Autenticação e Autorização</CardTitle>
+                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                                Não guardamos nenhuma informação sensível que possa ser de alguma maneira extraviada, como senhas e dados financeiros. Utilizamos serviços de terceiros reconhecidos pelo mercado para tais operações.
+                            </Paragraph>
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardBody>
+                            <CardTitle Size="5" Color="TextColor.Info">Privacidade dos Dados</CardTitle>
+                            <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                                Não compartilhamos seus dados pessoais com terceiros de forma alguma. Também temos recursos para garantir mais privacidade dos dados até o momento do match.
+                            </Paragraph>
+                        </CardBody>
+                    </Card>
+                </CardDeck>
             </Column>
         </Row>
     </NotAuthorized>

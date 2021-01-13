@@ -84,6 +84,8 @@ namespace VerusDate.Web.Core
         [Inject]
         protected IJSRuntime JsRuntime { get; set; }
 
+        public bool IsLoading { get; set; } = true;
+
         protected abstract Task LoadData();
 
         protected override async Task OnInitializedAsync()
@@ -97,6 +99,10 @@ namespace VerusDate.Web.Core
             catch (Exception ex)
             {
                 ex.ProcessException(Toast, Logger);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 

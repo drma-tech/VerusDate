@@ -28,8 +28,9 @@ else
                                      CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User"></CustomField>
                         <CustomField Type="FieldType.MemoEdit" For="@(() => profile.Basic.Description)" @bind-Value="@profile.Basic.Description"
                                      CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.QuoteLeft" Rows="7"></CustomField>
-                        <CustomField Type="FieldType.TextEdit" For="@(() => profile.Basic.Location)" @bind-Value="@profile.Basic.Location"
-                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkerAlt" Disabled="true"></CustomField>
+                        <CustomField Type="FieldType.TextEditButtom" For="@(() => profile.Basic.Location)" @bind-Value="@profile.Basic.Location"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkerAlt" Disabled="true" 
+                                     ButtomClicked="async ()=> { await SetLocation(profile); }" ButtomCssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt" ButtomTitle="Recuperar posição GPS"></CustomField>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.MaritalStatus)" TValue="MaritalStatus" TEnum="MaritalStatus" @bind-SelectedValue="@profile.Basic.MaritalStatus"
@@ -98,7 +99,7 @@ else
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@profile.Lifestyle.RelationshipPersonality"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@profile.Lifestyle.MyersBriggsTypeIndicator"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.16personalities.com/br"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.16personalities.com/br" rel="noopener"></CustomFieldSelect>
                     </Column>
                 </Row>
             </CardBody>
@@ -123,7 +124,7 @@ else
 
 @code {
 
-    private ProfileModel profile;
+    private ProfileModel profile = new();
     private GeoLocation GPS = new();
     protected bool IsShortTerm { get { return !profile.Basic.Intent.IsLongTerm(); } }
     private Shared.modal.BasicModal privacy;
@@ -136,15 +137,12 @@ else
 
     private VisibilityOptions Options => new VisibilityOptions()
     {
-        Loading = profile == null,
+        Loading = IsLoading
     };
 
     protected override async Task LoadData()
     {
         profile = await Http.Profile_Get();
-
-        //var id = await Http.Profile_GetView("123");
-        //Console.WriteLine(id);
 
         if (profile == null) //para novos usuários
         {
@@ -158,8 +156,6 @@ else
             profile.Basic.SexualOrientation = SexualOrientation.Heteressexual;
             profile.Bio.BirthDate = DateTime.Now.AddYears(-18);
             profile.Lifestyle.Diet = Diet.Omnivore;
-
-            await SetLocation(profile);
         }
     }
 

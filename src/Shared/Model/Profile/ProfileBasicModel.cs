@@ -19,7 +19,7 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Latitude")]
         public double? Latitude { get; set; }
 
-        [Display(Name = "Localização", Prompt = "Favor, liberar o GPS do seu aparelho", Description = "Informação automática (deve-se liberar a opção de GPS)")]
+        [Display(Name = "Localização", Prompt = "Favor clicar no botão ao lado", Description = "Informação automática (deve-se liberar acesso a localização do aparelho)")]
         public string Location { get; set; }
 
         [Display(Name = "Status de Relacionamento")]

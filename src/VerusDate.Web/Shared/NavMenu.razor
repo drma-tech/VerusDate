@@ -4,11 +4,11 @@
 <Sidebar @ref="sidebar">
     <SidebarContent>
         <SidebarBrand Style="text-align: center;">
-            <a href="">Verus Date</a>
+            <Blazorise.Link To="">Verus Date</Blazorise.Link>
             <AuthorizeView>
                 <Authorized>
                     <Figure Style="max-width: 128px;" Margin="Margin.Is0">
-                        <FigureImage Source="@profile.GetMainPhoto()" Rounded="true" />
+                        <FigureImage Source="@profile.GetMainPhoto()" Rounded="true" AlternateText="No User" />
                     </Figure>
                     <Blazorise.Link To="Profile/Account" Title="Gerenciar Perfil" Style="font-size: 0.80rem; padding: 0.70rem;">
                         @context.User.Identity.Name
@@ -77,6 +77,8 @@
         if (ComponenteUtils.IsAuthenticated)
         {
             profile = await Http.Profile_Get();
+
+            if (profile == null) profile = new();
         }
     }
 }

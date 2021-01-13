@@ -745,7 +745,7 @@
         {
             lstDestaques = await Http.Public_ListDestaques();
             profile = await Http.Profile_Get();
-            gamification = profile.Gamification;
+            gamification = profile?.Gamification;
         }
     }
 }

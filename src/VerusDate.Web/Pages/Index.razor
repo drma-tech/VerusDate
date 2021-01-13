@@ -138,8 +138,8 @@
         <Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is5.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_perfil">Sem Perfis Falsos</Heading>
         <Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Nós garantimos que não haverá perfis falsos ou inativos. Com tecnologia para reconhecimento facil e um avançado sistema para controle dos dados</Paragraph>
         <Row>
-            <Column ColumnSize="ColumnSize.Is3"></Column>
-            <Column ColumnSize="ColumnSize.Is6">
+            <Column ColumnSize="ColumnSize.Is1.OnMobile.Is2.OnDesktop"></Column>
+            <Column ColumnSize="ColumnSize.Is12.OnMobile.Is8.OnDesktop">
                 <Alert Color="Color.Info" Visible="true">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Todos os perfis são verificados com reconhecimento facial
                 </Alert>
@@ -165,12 +165,18 @@
                     <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
                         Para cada novo nível alcançado, será desbloqueado novas funcionalidades
                     </Paragraph>
-                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 100 XP acumulados
-                    </Badge>
-                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Caso perca todos XP do ranking atual + 1
-                    </Badge>
+                    <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                        <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 100 XP acumulados
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Caso perca todos XP do ranking atual + 1
+                            </AlertMessage>
+                        </Alert>
+                    </Paragraph>
                 </CardBody>
             </Card>
             <Card>
@@ -183,27 +189,43 @@
                     <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
                         Ganhe experiência, suba de nível e tenha acesso a novos recursos
                     </Paragraph>
-                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Ganhe cumprindo tarefas
-                    </Badge>
-                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Avaliando um perfil
-                    </Badge>
-                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Interagindo com seus matches
-                    </Badge>
-                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Respondendo todas as interações
-                    </Badge>
-                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Ignorar seus matches
-                    </Badge>
-                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Receber denúncias
-                    </Badge>
-                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Repetir mensagens enviadas
-                    </Badge>
+                    <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                        <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Ganhe cumprindo tarefas
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Avaliando um perfil
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Interagindo com seus matches
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Respondendo todas as interações
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Ignorar seus matches
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Receber denúncias
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Repetir mensagens enviadas
+                            </AlertMessage>
+                        </Alert>
+                    </Paragraph>
                 </CardBody>
             </Card>
             <Card>
@@ -216,15 +238,23 @@
                     <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
                         Com as maças você pode selecionar seus pretendentes e esperar novos matches
                     </Paragraph>
-                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 24 horas (não acumulável)
-                    </Badge>
-                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada anúncio visto
-                    </Badge>
-                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Dar like em alguém
-                    </Badge>
+                    <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                        <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 24 horas (não acumulável)
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada anúncio visto
+                            </AlertMessage>
+                        </Alert>                       
+                        <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Dar like em alguém
+                            </AlertMessage>
+                        </Alert>
+                    </Paragraph>
                 </CardBody>
             </Card>
             <Card>
@@ -237,40 +267,61 @@
                     <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
                         Com os diamantes você tem acesso a recursos exclusivos
                     </Paragraph>
-                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 24 horas
-                    </Badge>
-                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Cada amigo convidado
-                    </Badge>
-                    <Badge Color="Color.Success" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Comprando de forma avulsa
-                    </Badge>
-                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Dar uma piscadinha
-                    </Badge>
-                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Subir para o top 1 da sua cidade
-                    </Badge>
-                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Trocar por 10 maças
-                    </Badge>
-                    <Badge Color="Color.Danger" Display="Display.Block" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Criar ou se inscrever em um evento
-                    </Badge>
+                    <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                        <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 24 horas
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Cada amigo convidado
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Comprando de forma avulsa
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Dar uma piscadinha
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Subir para o top 1 da sua cidade
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Trocar por 10 maças
+                            </AlertMessage>
+                        </Alert>
+                        <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                            <AlertMessage>
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Criar ou se inscrever em um evento
+                            </AlertMessage>
+                        </Alert>
+                    </Paragraph>
                 </CardBody>
             </Card>
         </CardDeck>
         <Paragraph Margin="Margin.Is3.FromTop" Alignment="TextAlignment.Center">
-            <Badge Color="Color.Warning">* Alguns recursos e funcionalidades podem exigir que certos pré-requisitos sejam cumpridos ou que precisem ser pagos</Badge><br />
-            <Badge Color="Color.Warning">* A quantidade de ganhos/perdas de recursos podem variar para cada nível e o tipo de conta (básica / premium)</Badge>
+            <Alert Color="Color.Warning" Display="Display.InlineBlock" Visible="true" Margin="Margin.Is1.FromBottom.Is1.FromTop" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                <AlertMessage>* Alguns recursos e funcionalidades podem exigir que certos pré-requisitos sejam cumpridos ou que precisem ser pagos</AlertMessage>
+            </Alert>
+            <br />
+            <Alert Color="Color.Warning" Display="Display.InlineBlock" Visible="true" Margin="Margin.Is1.FromBottom.Is1.FromTop" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                <AlertMessage>* A quantidade de ganhos/perdas de recursos pode variar para cada nível e o tipo de conta (básica / premium)</AlertMessage>
+            </Alert>
         </Paragraph>
 
         <Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is5.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_preconceito">Livre de Preconceitos</Heading>
         <Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Independente de suas intenções, gênero, orientação sexual, raça, idade etc., nós temos um sistema completo e inteligente para encontrar o que você está procurando</Paragraph>
         <Row>
-            <Column ColumnSize="ColumnSize.Is3"></Column>
-            <Column ColumnSize="ColumnSize.Is6">
+            <Column ColumnSize="ColumnSize.Is1.OnMobile.Is2.OnDesktop"></Column>
+            <Column ColumnSize="ColumnSize.Is12.OnMobile.Is8.OnDesktop">
                 <Alert Color="Color.Info" Visible="true">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Aceitamos todos os perfis e sem nenhuma restrição (com muito respeito, claro)
                 </Alert>
@@ -278,7 +329,7 @@
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Todos os filtros são liberados gratuitamente para que se ache o que esteja procurando
                 </Alert>
                 <Alert Color="Color.Info" Visible="true">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Não toleramos nenhum tipo de preconceito dentro da plataforma (em caso de denúncia, será severamente punido)
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Não toleramos nenhum tipo de preconceito dentro da plataforma (poderá ser banido em definitivo)
                 </Alert>
             </Column>
         </Row>
@@ -286,7 +337,8 @@
         <Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is5.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_evento">Eventos</Heading>
         <Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Com nossa exclusiva seção de eventos, você terá novas oportunidades de interação com seus pretendentes</Paragraph>
         <Row>
-            <Column ColumnSize="ColumnSize.Is8.Is2.WithOffset">
+            <Column ColumnSize="ColumnSize.Is1.OnMobile.Is2.OnDesktop"></Column>
+            <Column ColumnSize="ColumnSize.Is12.OnMobile.Is8.OnDesktop">
                 <CardDeck Margin="Margin.Is3.FromBottom">
                     <Card>
                         <CardBody>
@@ -313,7 +365,7 @@
                             <CardTitle Size="5" Color="TextColor.Info">GROUP DATING (Encontro em grupo)</CardTitle>
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Users" Class="fa-4x" Style="color: #17a2b8;" Float="Float.Right" Margin="Margin.Is2.FromLeft"></Icon>
                             <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
-                                Muitos participantes com interesses parecidos e com livre interação. Único evento com encontros reais. Conheça várias pessoas legais e vê o que rola.
+                                Muitos participantes com interesses parecidos e com livre interação. Único evento com encontros reais. Conheça várias pessoas legais e veja o que rola.
                             </Paragraph>
                         </CardBody>
                     </Card>
@@ -333,7 +385,8 @@
         <Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is5.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_seguranca">Segurança e Privacidade</Heading>
         <Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Um dos nossos pilares é a segurança e privacidade dos dados dos nossos usuários</Paragraph>
         <Row>
-            <Column ColumnSize="ColumnSize.Is6.Is3.WithOffset">
+            <Column ColumnSize="ColumnSize.Is1.OnMobile.Is2.OnDesktop"></Column>
+            <Column ColumnSize="ColumnSize.Is12.OnMobile.Is8.OnDesktop">
                 <CardDeck>
                     <Card>
                         <CardBody>
@@ -347,7 +400,7 @@
                         <CardBody>
                             <CardTitle Size="5" Color="TextColor.Info">Privacidade dos Dados</CardTitle>
                             <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
-                                Não compartilhamos seus dados pessoais com terceiros de forma alguma. Também temos recursos para garantir mais privacidade dos dados até o momento do match.
+                                Não compartilhamos seus dados pessoais com terceiros de forma alguma. Também temos recursos para garantir mais privacidade dos dados antes do match.
                             </Paragraph>
                         </CardBody>
                     </Card>

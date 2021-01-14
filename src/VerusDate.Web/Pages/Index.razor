@@ -734,6 +734,8 @@
     private ProfileGamificationModel gamification = new();
     private List<ProfileSearch> lstDestaques = new();
 
+    //protected override bool ShouldRender() => false;
+
     private VisibilityOptions OptionsValidation => new VisibilityOptions()
     {
         Loading = lstDestaques == null

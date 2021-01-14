@@ -10,6 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{39C5B597-67BE-4FBB-9E75-DEF242032C60}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{CA3B2269-AFF2-4677-BD06-FF4BFCB0863F}"
+	ProjectSection(SolutionItems) = preProject
+		docs\arquitetura_aure.png = docs\arquitetura_aure.png
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{66B97027-082E-4F0D-89AE-D857183F775F}"
 	ProjectSection(SolutionItems) = preProject

@@ -1,6 +1,4 @@
-﻿using Blazored.LocalStorage;
-using Blazored.SessionStorage;
-using Blazored.Toast.Services;
+﻿using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
@@ -45,12 +43,6 @@ namespace VerusDate.Web.Core
 
         [Inject]
         protected IToastService Toast { get; set; }
-
-        [Inject]
-        protected ILocalStorageService LocalStorage { get; set; }
-
-        [Inject]
-        protected ISessionStorageService SessionStorage { get; set; }
 
         [Inject]
         protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }

@@ -5,7 +5,7 @@
 @attribute [Authorize]
 @inherits PageCore<ProfileChat>
 @inject HttpClient Http
-@inject IAccessTokenProvider TokenProvider
+@*@inject IAccessTokenProvider TokenProvider*@
 
 <div class="row">
     <div class="col-sm-9">
@@ -178,40 +178,40 @@
 
         try
         {
-            var tokenResult = await TokenProvider.RequestAccessToken();
+            //var tokenResult = await TokenProvider.RequestAccessToken();
 
-            if (tokenResult.TryGetToken(out var token))
-            {
-                hubConnection = new HubConnectionBuilder()
-                .WithUrl(NavigationManager.ToAbsoluteUri("/chathub"), opt =>
-                {
-                    opt.AccessTokenProvider = () => Task.FromResult(token.Value);
-                })
-                .WithAutomaticReconnect()
-                .Build();
+            //if (tokenResult.TryGetToken(out var token))
+            //{
+            //    hubConnection = new HubConnectionBuilder()
+            //    .WithUrl(NavigationManager.ToAbsoluteUri("/chathub"), opt =>
+            //    {
+            //        opt.AccessTokenProvider = () => Task.FromResult(token.Value);
+            //    })
+            //    .WithAutomaticReconnect()
+            //    .Build();
 
-                hubConnection.On<string, string>("ReceivePrivateMessage", (user, message) =>
-                {
-                    try
-                    {
-                        //if (user == CurrentUser.Id) //só recebe se quem mandou for o mesmo do chat
-                        //{
-                        //    ListChat.Add(new VerusDate.Shared.Model.Interaction.Chat() { IdChat = InteractionVM.IdChat, IdUserSender = user, TypeContent = TypeContent.Message, Content = message });
-                        //    StateHasChanged();
-                        //}
-                    }
-                    catch (Exception ex)
-                    {
-                        ex.ProcessException(Toast, Logger);
-                    }
-                });
+            //    hubConnection.On<string, string>("ReceivePrivateMessage", (user, message) =>
+            //    {
+            //        try
+            //        {
+            //            //if (user == CurrentUser.Id) //só recebe se quem mandou for o mesmo do chat
+            //            //{
+            //            //    ListChat.Add(new VerusDate.Shared.Model.Interaction.Chat() { IdChat = InteractionVM.IdChat, IdUserSender = user, TypeContent = TypeContent.Message, Content = message });
+            //            //    StateHasChanged();
+            //            //}
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            ex.ProcessException(Toast, Logger);
+            //        }
+            //    });
 
-                await hubConnection.StartAsync();
-            }
-            else
-            {
-                throw new InvalidOperationException(nameof(tokenResult));
-            }
+            //    await hubConnection.StartAsync();
+            //}
+            //else
+            //{
+            //    throw new InvalidOperationException(nameof(tokenResult));
+            //}
         }
         catch (Exception ex)
         {

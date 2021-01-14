@@ -224,7 +224,7 @@
     {
         try
         {
-            var result = await Http.Gamification_AddDiamond(LocalStorage, qtd);
+            var result = await Http.Gamification_AddDiamond(qtd);
 
             await result.ProcessResponse(Toast, "Compra realizada com sucesso!");
 
@@ -240,7 +240,7 @@
     {
         try
         {
-            var result = await Http.Gamification_ExchangeFood(LocalStorage, qtdDiamond);
+            var result = await Http.Gamification_ExchangeFood(qtdDiamond);
 
             await result.ProcessResponse(Toast, "Troca realizada com sucesso!");
 

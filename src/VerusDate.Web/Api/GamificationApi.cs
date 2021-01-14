@@ -1,5 +1,4 @@
-﻿using Blazored.LocalStorage;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -14,12 +13,7 @@ namespace VerusDate.Web.Api
 
         public static int GetMaxFood(ProfileGamificationModel obj) => obj == null ? 20 : obj.MaxFood;
 
-        public async static Task ClearCache(ILocalStorageService storage)
-        {
-            await storage.RemoveItemAsync(StorageKey);
-        }
-
-        public async static Task<ProfileGamificationModel> Gamification_Get(this HttpClient http, ILocalStorageService storage)
+        public async static Task<ProfileGamificationModel> Gamification_Get(this HttpClient http)
         {
             if (string.IsNullOrEmpty(StorageKey)) return null;
 
@@ -28,7 +22,7 @@ namespace VerusDate.Web.Api
             //    await storage.SetItemAsync(StorageKey, await http.GetCustom<ProfileGamification>("Gamification/Get"));
             //}
 
-            return await storage.GetItemAsync<ProfileGamificationModel>(StorageKey);
+            return await http.Get<ProfileGamificationModel>("Gamification/Get");
         }
 
         public async static Task<ProfileGamificationModel> Gamification_GetView(this HttpClient http, string IdUser)
@@ -39,7 +33,7 @@ namespace VerusDate.Web.Api
             return null;
         }
 
-        public async static Task<HttpResponseMessage> Gamification_AddDiamond(this HttpClient http, ILocalStorageService storage, int qtd)
+        public async static Task<HttpResponseMessage> Gamification_AddDiamond(this HttpClient http, int qtd)
         {
             if (qtd <= 0) throw new ArgumentNullException(nameof(qtd));
 
@@ -47,15 +41,15 @@ namespace VerusDate.Web.Api
 
             if (response.IsSuccessStatusCode)
             {
-                var obj = await storage.GetItemAsync<ProfileGamificationModel>(StorageKey);
-                obj.AddDiamond(qtd);
-                await storage.SetItemAsync(StorageKey, obj);
+                //var obj = await storage.GetItemAsync<ProfileGamificationModel>(StorageKey);
+                //obj.AddDiamond(qtd);
+                //await storage.SetItemAsync(StorageKey, obj);
             }
 
             return response;
         }
 
-        public async static Task<HttpResponseMessage> Gamification_ExchangeFood(this HttpClient http, ILocalStorageService storage, int QtdDiamond)
+        public async static Task<HttpResponseMessage> Gamification_ExchangeFood(this HttpClient http, int QtdDiamond)
         {
             if (QtdDiamond <= 0) throw new ArgumentNullException(nameof(QtdDiamond));
 
@@ -63,9 +57,9 @@ namespace VerusDate.Web.Api
 
             if (response.IsSuccessStatusCode)
             {
-                var obj = await storage.GetItemAsync<ProfileGamificationModel>(StorageKey);
-                obj.ExchangeFood(QtdDiamond);
-                await storage.SetItemAsync(StorageKey, obj);
+                //var obj = await storage.GetItemAsync<ProfileGamificationModel>(StorageKey);
+                //obj.ExchangeFood(QtdDiamond);
+                //await storage.SetItemAsync(StorageKey, obj);
             }
 
             return response;

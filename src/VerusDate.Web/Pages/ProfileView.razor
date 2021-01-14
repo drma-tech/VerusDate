@@ -164,7 +164,7 @@ else
     {
         try
         {
-            var result = await Http.Interation_Like(LocalStorage, IdUserInteraction);
+            var result = await Http.Interation_Like(IdUserInteraction);
             await result.ProcessResponse(Toast);
         }
         catch (Exception ex)
@@ -177,7 +177,7 @@ else
     {
         try
         {
-            var result = await Http.Interation_Blink(LocalStorage, IdUserInteraction);
+            var result = await Http.Interation_Blink(IdUserInteraction);
             await result.ProcessResponse(Toast);
         }
         catch (Exception ex)

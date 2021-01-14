@@ -155,7 +155,7 @@ namespace VerusDate.Shared.Seed
                 .Rules((s, p) =>
                 {
                     p.UpdateMainPhoto(s.Internet.Avatar());
-                    p.UpdatePhotoGallery(new[] { s.Image.PicsumUrl() });
+                    //p.UpdatePhotoGallery(new[] { s.Image.PicsumUrl(128, 128) });
                 });
         }
     }

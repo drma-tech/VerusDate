@@ -63,9 +63,9 @@
 
     protected override async Task LoadData()
     {
-        gamification = await Http.Gamification_Get(LocalStorage);
+        gamification = await Http.Gamification_Get();
         //badge = await Http.Badge_Get(LocalStorage);
-        GlobalInteractionsVM = await Http.GlobalInteractions_Get(LocalStorage);
+        GlobalInteractionsVM = await Http.GlobalInteractions_Get();
         profile = await Http.Profile_Get();
     }
 }

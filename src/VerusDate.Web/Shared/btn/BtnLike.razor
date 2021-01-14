@@ -21,7 +21,7 @@
     {
         try
         {
-            var result = await Http.Interation_Like(LocalStorage, IdUserView);
+            var result = await Http.Interation_Like(IdUserView);
             await result.ProcessResponse(Toast, msgInfo: "-1 Maça");
             await OnClick.InvokeAsync(null);
             RefreshCore.RefreshHead(); //need uddate apples

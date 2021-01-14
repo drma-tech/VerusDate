@@ -77,7 +77,7 @@
             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
         </Button>
     </CardHeader>
-    <CardBody>        
+    <CardBody>
         <Table Hoverable="true" Responsive="true" Narrow="true" FullWidth="true" Margin="Margin.Is0.FromBottom">
             <TableHeader ThemeContrast="ThemeContrast.Light">
                 <TableRow>
@@ -130,6 +130,6 @@
     {
         profile = await Http.Profile_Get();
 
-        AvailableEvents = EventSeed.GetEventVM().Generate(5);
+        AvailableEvents = await Http.Event_GetAll();
     }
 }

@@ -13,25 +13,25 @@ using VerusDate.Api.Seed;
 
 namespace VerusDate.Api.Function
 {
-    public class PublicFunction
+    public class EventFunction
     {
         private readonly IMediator _mediator;
 
-        public PublicFunction(IMediator mediator)
+        public EventFunction(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        [FunctionName("PublicListDestaques")]
-        public async Task<IActionResult> ListDestaques(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Public/ListDestaques")] HttpRequest req,
+        [FunctionName("EventGetAll")]
+        public async Task<IActionResult> GetAll(
+           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Event/GetAll")] HttpRequest req,
            ILogger log, CancellationToken cancellationToken)
         {
             using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
 
             try
             {
-                var result = ProfileSeed.GetProfileSearch().Generate(12);
+                var result = EventSeed.GetEventVM().Generate(5);
 
                 return new OkObjectResult(result);
             }

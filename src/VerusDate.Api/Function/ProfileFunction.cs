@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Profile;
 using VerusDate.Api.Mediator.Queries.Profile;
-using VerusDate.Shared.Seed;
+using VerusDate.Api.Seed;
 
 namespace VerusDate.Api.Function
 {

@@ -3,7 +3,7 @@ using VerusDate.Shared.Enum;
 using VerusDate.Shared.Model;
 using VerusDate.Shared.ModelQuery;
 
-namespace VerusDate.Shared.Seed
+namespace VerusDate.Api.Seed
 {
     public static class ProfileSeed
     {

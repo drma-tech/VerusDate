@@ -70,7 +70,7 @@ else
     protected override async Task LoadData()
     {
         profile = await Http.Profile_Get();
-        gamification = await Http.Gamification_Get();
+        gamification = profile?.Gamification;
         listaUsers = await Http.Profile_ListSearch();
         //interactions = await Http.Interation_GetList();
     }

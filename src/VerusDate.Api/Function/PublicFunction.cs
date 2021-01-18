@@ -5,11 +5,13 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
-using VerusDate.Api.Seed;
+using VerusDate.Api.Mediator.Queries.Profile;
+using VerusDate.Shared.ModelQuery;
 
 namespace VerusDate.Api.Function
 {
@@ -31,9 +33,11 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var result = ProfileSeed.GetProfileSearch().Generate(12);
+                var request = req.BuildRequestQuery<ProfileGetDestaquesCommand, List<ProfileSearch>>();
 
-                return new OkObjectResult(result);
+                var result = await _mediator.Send(request, source.Token);
+
+                return new OkObjectResult(result.Take(12));
             }
             catch (Exception ex)
             {

@@ -1,12 +1,33 @@
 ﻿using MediatR;
+using Microsoft.Azure.Cosmos;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Mediator.Commands.Interaction
 {
-    public class InteractionDeslikeCommand : InteractionModel, IRequest<bool> { }
+    public class InteractionDeslikeCommand : CosmosBase, IRequest<bool>
+    {
+        public InteractionDeslikeCommand() : base(CosmosType.Interaction)
+        {
+        }
+
+        [Required]
+        public string IdUserInteraction { get; set; }
+
+        public string IdLoggedUser { get; private set; }
+
+        public override void SetIds(string IdLoggedUser)
+        {
+            this.SetId($"{IdLoggedUser}-{IdUserInteraction}");
+            this.SetPartitionKey(IdLoggedUser);
+            this.IdLoggedUser = IdLoggedUser;
+        }
+    }
 
     public class InteractionDeslikeHandler : IRequestHandler<InteractionDeslikeCommand, bool>
     {
@@ -19,17 +40,27 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 
         public async Task<bool> Handle(InteractionDeslikeCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<InteractionModel>(request.Id, request.Key, cancellationToken);
+            if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
+
+            var obj = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
 
             if (obj == null)
             {
-                request.SetIdInteraction(request.IdUserInteraction);
-                obj = await _repo.Add(request, request.Id, cancellationToken);
+                obj = new InteractionModel();
+
+                obj.SetIds(request.IdLoggedUser);
+                obj.SetIdInteraction(request.IdUserInteraction);
+
+                obj.ExecuteDeslike();
+
+                return await _repo.Add(obj, cancellationToken) != null;
             }
+            else
+            {
+                obj.ExecuteDeslike();
 
-            obj.ExecuteLike();
-
-            return await _repo.Update(obj, request.Id, request.Id, cancellationToken) != null;
+                return await _repo.Update(obj, cancellationToken) != null;
+            }
         }
     }
 }

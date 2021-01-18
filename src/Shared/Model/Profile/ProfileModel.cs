@@ -8,7 +8,7 @@ namespace VerusDate.Shared.Model
 {
     public class ProfileModel : CosmosBase
     {
-        public ProfileModel() : base("Profile")
+        public ProfileModel() : base(CosmosType.Profile)
         {
         }
 
@@ -139,8 +139,8 @@ namespace VerusDate.Shared.Model
 
         public override void SetIds(string IdLoggedUser)
         {
-            this.Id = IdLoggedUser;
-            this.Key = IdLoggedUser;
+            this.SetId(IdLoggedUser);
+            this.SetPartitionKey(IdLoggedUser);
         }
     }
 

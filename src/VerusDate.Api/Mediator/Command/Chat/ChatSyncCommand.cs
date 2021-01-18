@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Azure.Cosmos;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
@@ -19,11 +20,11 @@ namespace VerusDate.Api.Mediator.Command.Chat
 
         public async Task<ChatModel> Handle(ChatSyncCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ChatModel>(request.Id, request.Id, cancellationToken: cancellationToken);
+            var obj = await _repo.Get<ChatModel>(request.Id, new PartitionKey(request.Key), cancellationToken: cancellationToken);
 
             obj.Itens = request.Itens;
 
-            return await _repo.Update(obj, request.Id, request.Key, cancellationToken);
+            return await _repo.Update(obj, cancellationToken);
         }
     }
 }

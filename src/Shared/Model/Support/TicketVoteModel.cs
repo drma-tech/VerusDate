@@ -5,9 +5,9 @@ namespace VerusDate.Shared.Model
 {
     public class TicketVoteModel : CosmosBase
     {
-        public TicketVoteModel() : base("TicketVote")
+        public TicketVoteModel() : base(CosmosType.TicketVote)
         {
-            Id = Guid.NewGuid().ToString();
+            SetId(Guid.NewGuid().ToString());
         }
 
         public string IdVotedUser { get; set; }
@@ -19,7 +19,7 @@ namespace VerusDate.Shared.Model
 
         public void SetKey(string IdTicket)
         {
-            Key = IdTicket;
+            SetPartitionKey(IdTicket);
         }
     }
 }

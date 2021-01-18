@@ -1,20 +1,16 @@
 ﻿using Bogus;
+using System;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Model;
 using VerusDate.Shared.ModelQuery;
 
-namespace VerusDate.Api.Seed
+namespace VerusDate.Seed.Model
 {
     public static class ProfileSeed
     {
         public static Faker<ProfileModel> GetProfile(string Id = null, bool profile = true, bool looking = false, bool gamification = false, bool badge = false, bool photo = false)
         {
             return GetProfile<ProfileModel>(Id, profile, looking, gamification, badge, photo);
-        }
-
-        public static int GetNumber(int min = 0, int max = 1)
-        {
-            return new Faker().Random.Number(min, max);
         }
 
         public static Faker<T> GetProfile<T>(string Id = null, bool profile = true, bool looking = false, bool gamification = false, bool badge = false, bool photo = false) where T : ProfileModel
@@ -32,17 +28,16 @@ namespace VerusDate.Api.Seed
                 });
         }
 
-        public static Faker<ProfileSearch> GetProfileSearch(string Id = null)
+        public static Faker<ProfileBadgeModel> GetProfileBadge()
         {
-            return new Faker<ProfileSearch>("pt_BR")
+            return new Faker<ProfileBadgeModel>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.SetIds(Id ?? s.Random.Guid().ToString());
-                    p.NickName = s.Name.FirstName();
-                    p.BirthDate = s.Date.Past(18).Date;
-                    p.UpdatePhoto(GetProfilePhoto());
-                    p.ActivityStatus = s.PickRandom<ActivityStatus>();
-                    p.Distance = s.Random.Number(1, 100);
+                    p.Ranking.IncreaseLevel();
+                    p.Seniority.IncreaseLevel();
+                    p.CompletedProfile.IncreaseLevel();
+                    p.VerifiedProfile.IncreaseLevel();
+                    p.Popular.IncreaseLevel();
                 });
         }
 
@@ -71,10 +66,20 @@ namespace VerusDate.Api.Seed
             return new Faker<ProfileBioModel>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.BirthDate = s.Date.Past(18).Date;
+                    p.BirthDate = s.Date.Past(100, DateTime.Now.AddYears(-18)).Date;
                     p.Height = s.PickRandom<Height>();
                     p.RaceCategory = s.PickRandom<RaceCategory>();
                     p.BodyMass = s.PickRandom<BodyMass>();
+                });
+        }
+
+        public static Faker<ProfileGamificationModel> GetProfileGamification()
+        {
+            return new Faker<ProfileGamificationModel>("pt_BR")
+                .Rules((s, p) =>
+                {
+                    p.AddXP(s.Random.Number(1, 1000));
+                    p.AddDiamond(s.Random.Number(1, 100));
                 });
         }
 
@@ -126,36 +131,27 @@ namespace VerusDate.Api.Seed
                 });
         }
 
-        public static Faker<ProfileGamificationModel> GetProfileGamification()
-        {
-            return new Faker<ProfileGamificationModel>("pt_BR")
-                .Rules((s, p) =>
-                {
-                    p.AddXP(s.Random.Number(1, 1000));
-                    p.AddDiamond(s.Random.Number(1, 100));
-                });
-        }
-
-        public static Faker<ProfileBadgeModel> GetProfileBadge()
-        {
-            return new Faker<ProfileBadgeModel>("pt_BR")
-                .Rules((s, p) =>
-                {
-                    p.Ranking.IncreaseLevel();
-                    p.Seniority.IncreaseLevel();
-                    p.CompletedProfile.IncreaseLevel();
-                    p.VerifiedProfile.IncreaseLevel();
-                    p.Popular.IncreaseLevel();
-                });
-        }
-
         public static Faker<ProfilePhotoModel> GetProfilePhoto()
         {
             return new Faker<ProfilePhotoModel>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.UpdateMainPhoto(s.Internet.Avatar());
-                    //p.UpdatePhotoGallery(new[] { s.Image.PicsumUrl(128, 128) });
+                    p.UpdatePhotoGallery(new[] { s.Image.PicsumUrl(), s.Image.PicsumUrl(), s.Image.PicsumUrl() });
+                });
+        }
+
+        public static Faker<ProfileSearch> GetProfileSearch(string Id = null)
+        {
+            return new Faker<ProfileSearch>("pt_BR")
+                .Rules((s, p) =>
+                {
+                    p.SetIds(Id ?? s.Random.Guid().ToString());
+                    p.NickName = s.Name.FirstName();
+                    p.BirthDate = s.Date.Past(18).Date;
+                    p.UpdatePhoto(GetProfilePhoto());
+                    p.ActivityStatus = s.PickRandom<ActivityStatus>();
+                    p.Distance = s.Random.Number(1, 100);
                 });
         }
     }

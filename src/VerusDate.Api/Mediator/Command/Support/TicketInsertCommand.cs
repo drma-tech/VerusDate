@@ -19,7 +19,7 @@ namespace VerusDate.Api.Mediator.Command.Support
 
         public async Task<TicketModel> Handle(TicketInsertCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.Add(request, request.Id, cancellationToken);
+            return await _repo.Add(request, cancellationToken);
         }
     }
 }

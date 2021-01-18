@@ -1,12 +1,33 @@
 ﻿using MediatR;
+using Microsoft.Azure.Cosmos;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Interaction
 {
-    public class InteractionLikeCommand : InteractionModel, IRequest<bool> { }
+    public class InteractionLikeCommand : CosmosBase, IRequest<bool>
+    {
+        public InteractionLikeCommand() : base(CosmosType.Interaction)
+        {
+        }
+
+        [Required]
+        public string IdUserInteraction { get; set; }
+
+        public string IdLoggedUser { get; private set; }
+
+        public override void SetIds(string IdLoggedUser)
+        {
+            this.SetId($"{IdLoggedUser}-{IdUserInteraction}");
+            this.SetPartitionKey(IdLoggedUser);
+            this.IdLoggedUser = IdLoggedUser;
+        }
+    }
 
     public class InteractionLikeHandler : IRequestHandler<InteractionLikeCommand, bool>
     {
@@ -19,36 +40,46 @@ namespace VerusDate.Api.Mediator.Command.Interaction
 
         public async Task<bool> Handle(InteractionLikeCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<InteractionModel>(request.Id, request.Key, cancellationToken);
+            if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
 
+            var obj = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            bool result;
+
+            //executa a interação
             if (obj == null)
             {
-                request.SetIdInteraction(request.IdUserInteraction);
-                obj = await _repo.Add(request, request.Id, cancellationToken);
+                obj = new InteractionModel();
+
+                obj.SetIds(request.IdLoggedUser);
+                obj.SetIdInteraction(request.IdUserInteraction);
+
+                obj.ExecuteLike();
+
+                result = await _repo.Add(obj, cancellationToken) != null;
+            }
+            else //caso existe uma interação (blink)
+            {
+                obj.ExecuteLike();
+
+                result = await _repo.Update(obj, cancellationToken) != null;
             }
 
-            obj.ExecuteLike();
+            //executa o possível match
+            var matched = await _repo.Get<InteractionModel>(obj.GetInvertedId(), new PartitionKey(request.IdUserInteraction), cancellationToken);
 
-            var mergeLike = await _repo.Update(obj, request.Id, request.Key, cancellationToken) != null;
-
-            var matched = await _repo.Get<InteractionModel>(request.GetInvertedId(), request.IdUserInteraction, cancellationToken);
-
-            //se o outro tbm deu like, gera o match para os dois
-            if (matched != null && matched.Like.Value.Value)
+            if (matched != null && matched.Like.Value.Value) //se a outra pessoa deu like também
             {
                 obj.ExecuteMatch();
-
                 matched.ExecuteMatch();
 
-                var mergeUser1 = await _repo.Update(obj, request.Id, request.Key, cancellationToken) != null;
-
-                var mergeUser2 = await _repo.Update(matched, request.GetInvertedId(), request.IdUserInteraction, cancellationToken) != null;
+                var mergeUser1 = await _repo.Update(obj, cancellationToken) != null;
+                var mergeUser2 = await _repo.Update(matched, cancellationToken) != null;
 
                 return mergeUser1 && mergeUser2;
             }
             else
             {
-                return mergeLike;
+                return result;
             }
         }
     }

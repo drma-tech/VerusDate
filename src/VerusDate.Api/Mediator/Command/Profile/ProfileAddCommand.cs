@@ -28,7 +28,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
             //await _profileValidationApp.ValidateProfileData(request.Id, true, cancellationToken);
 
-            return await _repo.Add(request, request.Id, cancellationToken);
+            return await _repo.Add(request, cancellationToken);
         }
     }
 }

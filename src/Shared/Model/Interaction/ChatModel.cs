@@ -8,7 +8,7 @@ namespace VerusDate.Shared.Model
 {
     public class ChatModel : CosmosBase
     {
-        public ChatModel() : base("Chat")
+        public ChatModel() : base(CosmosType.Chat)
         {
         }
 
@@ -16,8 +16,9 @@ namespace VerusDate.Shared.Model
 
         public override void SetIds(string IdLoggedUser)
         {
-            this.Id = Guid.NewGuid().ToString();
-            this.Key = this.Id;
+            var guid = Guid.NewGuid().ToString();
+            this.SetId(guid);
+            this.SetPartitionKey(guid);
         }
     }
 

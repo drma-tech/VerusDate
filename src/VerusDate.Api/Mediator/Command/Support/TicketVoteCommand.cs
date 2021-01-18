@@ -24,7 +24,7 @@ namespace VerusDate.Api.Mediator.Command.Support
 
             request.SetKey(request.Key);
 
-            return await _repo.Add(request, request.Key, cancellationToken);
+            return await _repo.Add(request, cancellationToken);
         }
     }
 }

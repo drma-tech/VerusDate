@@ -7,7 +7,7 @@ namespace VerusDate.Shared.Model
 {
     public class TicketModel : CosmosBase
     {
-        public TicketModel() : base("Ticket")
+        public TicketModel() : base(CosmosType.Ticket)
         {
         }
 
@@ -34,9 +34,10 @@ namespace VerusDate.Shared.Model
 
         public override void SetIds(string IdLoggedUser)
         {
-            Id = Guid.NewGuid().ToString();
+            var guid = Guid.NewGuid().ToString();
+            this.SetId(guid);
+            this.SetPartitionKey(guid);
             IdUserOwner = IdLoggedUser;
-            Key = Id;
         }
 
         public void Vote()

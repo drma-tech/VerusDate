@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Azure.Cosmos;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,7 +31,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
         public async Task<bool> Handle(UploadPhotoGalleryCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ProfileModel>(request.Id, request.Id, cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Id), cancellationToken);
             if (obj == null) throw new NotificationException("Perfil não encontrado");
 
             foreach (var bytes in request.Streams)

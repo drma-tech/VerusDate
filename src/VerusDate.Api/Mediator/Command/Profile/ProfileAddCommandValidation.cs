@@ -100,20 +100,6 @@ namespace VerusDate.Api.Mediator.Command.Profile
             RuleFor(x => x.Lifestyle.RelationshipPersonality)
                .NotEmpty()
                .When(w => w.Basic.Intent.IsLongTerm());
-
-            //OTHERS
-
-            RuleFor(x => x.Looking)
-                .Empty();
-
-            RuleFor(x => x.Gamification)
-                .Empty();
-
-            RuleFor(x => x.Badge)
-                .Empty();
-
-            RuleFor(x => x.Photo)
-                .Empty();
         }
     }
 }

@@ -17,6 +17,10 @@ namespace VerusDate.Shared.Model
 
     public class BadgeType
     {
+        protected BadgeType()
+        {
+        }
+
         public BadgeType(int MaxLevel, string ClassIcon, string Title, string Description)
         {
             this.MaxLevel = MaxLevel;

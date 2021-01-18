@@ -5,14 +5,14 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Profile;
 using VerusDate.Api.Mediator.Queries.Profile;
-using VerusDate.Api.Seed;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Function
 {
@@ -34,12 +34,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = new ProfileGetCommand
-                {
-                    IdLoggedUser = req.GetUserId()
-                };
+                var request = req.BuildRequestQuery<ProfileGetCommand, ProfileModel>();
 
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -59,13 +56,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = new ProfileGetViewCommand()
-                {
-                    IdLoggedUser = req.GetUserId(),
-                    IdUserView = req.Query["Id"]
-                };
+                var request = req.BuildRequestQuery<ProfileGetViewCommand, ProfileView>();
 
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -83,9 +76,9 @@ namespace VerusDate.Api.Function
         {
             try
             {
-                var result = ProfileSeed.GetProfileSearch(req.GetUserId()).Generate(18);
+                //var result = ProfileSeed.GetProfileSearch(req.GetUserId()).Generate(18);
 
-                return new OkObjectResult(result);
+                return new OkObjectResult(null);
             }
             catch (Exception ex)
             {
@@ -97,11 +90,15 @@ namespace VerusDate.Api.Function
         [FunctionName("ProfileListSearch")]
         public async Task<IActionResult> ListSearch(
            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/ListSearch")] HttpRequest req,
-           ILogger log)
+           ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
-                var result = ProfileSeed.GetProfileSearch(req.GetUserId()).Generate(18);
+                var request = req.BuildRequestQuery<ProfileListSearchCommand, List<ProfileModel>>();
+
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -121,11 +118,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<ProfileAddCommand>(req.Body);
+                var request = await req.BuildRequestCommand<ProfileAddCommand>(source.Token);
 
-                command.SetIds(req.GetUserId());
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -145,11 +140,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<ProfileUpdateCommand>(req.Body);
+                var request = await req.BuildRequestCommand<ProfileUpdateCommand>(source.Token);
 
-                command.SetIds(req.GetUserId());
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -169,11 +162,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<ProfileUpdateLookingCommand>(req.Body);
+                var request = await req.BuildRequestCommand<ProfileUpdateLookingCommand>(source.Token);
 
-                command.SetIds(req.GetUserId());
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }

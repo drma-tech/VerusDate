@@ -2,7 +2,7 @@
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Model;
 
-namespace VerusDate.Api.Seed
+namespace VerusDate.Seed.Model
 {
     public static class EventSeed
     {

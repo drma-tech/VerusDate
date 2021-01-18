@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Cosmos;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
@@ -9,6 +11,11 @@ namespace VerusDate.Api.Mediator.Queries.Chat
     public class ChatGetCommand : MediatorQuery<ChatModel>
     {
         public string IdUserInteraction { get; set; }
+
+        public override void SetParameters(IQueryCollection query)
+        {
+            IdUserInteraction = query["id"];
+        }
     }
 
     public class ChatGetHandler : IRequestHandler<ChatGetCommand, ChatModel>
@@ -24,9 +31,9 @@ namespace VerusDate.Api.Mediator.Queries.Chat
         {
             //recupera a interação, para garantir não pegar um chat qualquer
             var Id = InteractionModel.GetId(request.IdLoggedUser, request.IdUserInteraction);
-            var obj = await _repo.Get<InteractionModel>(Id, Id, cancellationToken: cancellationToken);
+            var obj = await _repo.Get<InteractionModel>(Id, new PartitionKey(Id), cancellationToken);
 
-            return await _repo.Get<ChatModel>(obj.IdChat, obj.IdChat, cancellationToken: cancellationToken);
+            return await _repo.Get<ChatModel>(obj.IdChat, new PartitionKey(obj.Key), cancellationToken);
         }
     }
 }

@@ -9,7 +9,7 @@
         {
             @if (!string.IsNullOrEmpty(HelpLink))
             {
-                <a href="@HelpLink" target="_blank" style="display: block; font-size: 80%;">@(new Uri(@HelpLink).Host)</a>
+                <a href="@HelpLink" target="_blank" style="display: block; font-size: 80%;" rel="noopener">@(new Uri(@HelpLink).Host)</a>
             }
             <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(For)</FieldHelp>
         }

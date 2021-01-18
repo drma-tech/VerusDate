@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Azure.Cosmos;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
@@ -28,11 +29,11 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
             //await _profileValidationApp.ValidateProfileCriteria(request.Id, true, cancellationToken);
 
-            var obj = await _repo.Get<ProfileModel>(request.Id, request.Id, cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
 
             obj.UpdateLooking(request.Looking);
 
-            return await _repo.Update(obj, request.Id, request.Id, cancellationToken);
+            return await _repo.Update(obj, cancellationToken);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace VerusDate.Shared.Model
 {
     public class EventModel : CosmosBase
     {
-        public EventModel() : base("Event")
+        public EventModel() : base(CosmosType.Event)
         {
         }
 
@@ -85,24 +85,21 @@ namespace VerusDate.Shared.Model
 
         public override void SetIds(string IdLoggedUser)
         {
-            this.Id = Guid.NewGuid().ToString();
+            var guid = Guid.NewGuid().ToString();
+            this.SetId(guid);
+            this.SetPartitionKey(guid);
             this.IdUserOwner = IdLoggedUser;
-            this.Key = this.Id;
         }
 
         public string GetIcon()
         {
-            switch (EventType)
+            return EventType switch
             {
-                case EventType.BlindDate:
-                    return "fas fa-eye-slash";
-                case EventType.SpeedDating:
-                    return "fas fa-user-clock";
-                case EventType.GroupDate:
-                    return "fas fa-users";
-                default:
-                    throw new IndexOutOfRangeException(nameof(EventType));
-            }
+                EventType.BlindDate => "fas fa-eye-slash",
+                EventType.SpeedDating => "fas fa-user-clock",
+                EventType.GroupDate => "fas fa-users",
+                _ => throw new IndexOutOfRangeException(nameof(EventType)),
+            };
         }
     }
 }

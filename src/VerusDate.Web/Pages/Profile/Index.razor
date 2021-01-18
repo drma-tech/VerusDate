@@ -6,7 +6,7 @@
 <Row>
     <Column ColumnSize="ColumnSize.Is3.OnDesktop">
         <Card Margin="Margin.Is3.FromBottom">
-            <CardImage Source="@profile.GetMainPhoto()"></CardImage>
+            <CardImage Source="@MainPhoto"></CardImage>
             <CardBody>
                 <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="ProfileData">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserEdit"></Icon> Alterar dados
@@ -56,16 +56,24 @@
 
 @code {
 
+    private string MainPhoto = ImageHelper.GetNoUserPhoto;
+
+    private ProfileModel profile;
     private ProfileGamificationModel gamification;
     private ProfileBadgeModel badge;
-    private GlobalInteractions GlobalInteractionsVM;
-    private ProfileModel profile = new();
+    private GlobalInteractions GlobalInteractionsVM = new();
 
     protected override async Task LoadData()
     {
-        gamification = await Http.Gamification_Get();
-        //badge = await Http.Badge_Get(LocalStorage);
-        GlobalInteractionsVM = await Http.GlobalInteractions_Get();
         profile = await Http.Profile_Get();
+
+        if (profile != null)
+        {
+            MainPhoto = profile.GetMainPhoto();
+        }
+
+        gamification = profile?.Gamification;
+        badge = profile?.Badge;
+        //GlobalInteractionsVM = await Http.GlobalInteractions_Get();
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Model;
 using static VerusDate.Shared.Helper.ImageHelper;
 
 namespace VerusDate.Shared.ModelQuery
 {
-    public class ProfileSearch
+    public class ProfileSearch : CosmosBaseQuery
     {
         private readonly string BlobPath = "https://storageverusdate.blob.core.windows.net";
 

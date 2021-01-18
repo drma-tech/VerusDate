@@ -1,12 +1,33 @@
 ﻿using MediatR;
+using Microsoft.Azure.Cosmos;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Mediator.Commands.Interaction
 {
-    public class InteractionBlinkCommand : InteractionModel, IRequest<bool> { }
+    public class InteractionBlinkCommand : CosmosBase, IRequest<bool>
+    {
+        public InteractionBlinkCommand() : base(CosmosType.Interaction)
+        {
+        }
+
+        [Required]
+        public string IdUserInteraction { get; set; }
+
+        public string IdLoggedUser { get; private set; }
+
+        public override void SetIds(string IdLoggedUser)
+        {
+            this.SetId($"{IdLoggedUser}-{IdUserInteraction}");
+            this.SetPartitionKey(IdLoggedUser);
+            this.IdLoggedUser = IdLoggedUser;
+        }
+    }
 
     public class InteractionBlinkHandler : IRequestHandler<InteractionBlinkCommand, bool>
     {
@@ -19,11 +40,27 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 
         public async Task<bool> Handle(InteractionBlinkCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<InteractionModel>(request.Id, request.Key, cancellationToken);
+            if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
 
-            obj.ExecuteBlink();
+            var obj = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
 
-            return await _repo.Update(obj, request.Id, request.Key, cancellationToken) != null;
+            if (obj == null)
+            {
+                obj = new InteractionModel();
+
+                obj.SetIds(request.IdLoggedUser);
+                obj.SetIdInteraction(request.IdUserInteraction);
+
+                obj.ExecuteBlink();
+
+                return await _repo.Add(obj, cancellationToken) != null;
+            }
+            else //caso existe uma interação (like)
+            {
+                obj.ExecuteBlink();
+
+                return await _repo.Update(obj, cancellationToken) != null;
+            }
         }
     }
 }

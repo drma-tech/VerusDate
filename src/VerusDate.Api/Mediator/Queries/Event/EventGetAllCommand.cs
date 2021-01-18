@@ -9,7 +9,7 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Queries.Interaction
 {
-    public class InteractionGetListCommand : MediatorQuery<IEnumerable<InteractionModel>>
+    public class EventGetAllCommand : MediatorQuery<List<EventModel>>
     {
         public override void SetParameters(IQueryCollection query)
         {
@@ -17,18 +17,18 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
         }
     }
 
-    public class InteractionGetListHandler : IRequestHandler<InteractionGetListCommand, IEnumerable<InteractionModel>>
+    public class EventGetAllHandler : IRequestHandler<EventGetAllCommand, List<EventModel>>
     {
         private readonly IRepository _repo;
 
-        public InteractionGetListHandler(IRepository repo)
+        public EventGetAllHandler(IRepository repo)
         {
             _repo = repo;
         }
 
-        public async Task<IEnumerable<InteractionModel>> Handle(InteractionGetListCommand request, CancellationToken cancellationToken)
+        public async Task<List<EventModel>> Handle(EventGetAllCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.Query<InteractionModel>(null, request.IdLoggedUser, CosmosType.Interaction, cancellationToken);
+            return await _repo.Query<EventModel>(null, null, CosmosType.Event, cancellationToken);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace VerusDate.Shared.Model
 {
     public class InteractionModel : CosmosBase
     {
-        public InteractionModel() : base("Interaction")
+        public InteractionModel() : base(CosmosType.Interaction)
         {
         }
 
@@ -71,9 +71,8 @@ namespace VerusDate.Shared.Model
 
         public void SetIdInteraction(string IdUserInteraction)
         {
-            this.Id = $"{IdLoggedUser}-{IdUserInteraction}";
-            this.Key = IdLoggedUser;
-
+            this.SetId($"{IdLoggedUser}-{IdUserInteraction}");
+            this.SetPartitionKey(IdLoggedUser);
             this.IdUserInteraction = IdUserInteraction;
         }
     }

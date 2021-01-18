@@ -1,13 +1,21 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Queries.Support
 {
-    public class TicketGetMyVotesCommand : MediatorQuery<List<TicketVoteModel>> { }
+    public class TicketGetMyVotesCommand : MediatorQuery<List<TicketVoteModel>>
+    {
+        public override void SetParameters(IQueryCollection query)
+        {
+            //do nothing
+        }
+    }
 
     public class TicketGetMyVotesHandler : IRequestHandler<TicketGetMyVotesCommand, List<TicketVoteModel>>
     {
@@ -20,7 +28,7 @@ namespace VerusDate.Api.Mediator.Queries.Support
 
         public async Task<List<TicketVoteModel>> Handle(TicketGetMyVotesCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.Query<TicketVoteModel>(x => x.IdVotedUser == request.IdLoggedUser, cancellationToken);
+            return await _repo.Query<TicketVoteModel>(x => x.IdVotedUser == request.IdLoggedUser, null, CosmosType.TicketVote, cancellationToken);
         }
     }
 }

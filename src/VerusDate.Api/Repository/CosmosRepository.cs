@@ -34,11 +34,11 @@ namespace VerusDate.Api.Repository
             Container = _client.GetContainer(databaseId, containerId);
         }
 
-        public async Task<T> Get<T>(string id, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase
+        public async Task<T> Get<T>(string id, PartitionKey key, CancellationToken cancellationToken) where T : CosmosBase
         {
             try
             {
-                var response = await Container.ReadItemAsync<T>(id, new PartitionKey(partitionKeyValue), null, cancellationToken);
+                var response = await Container.ReadItemAsync<T>(id, key, null, cancellationToken);
 
                 return response.Resource;
             }
@@ -48,27 +48,22 @@ namespace VerusDate.Api.Repository
             }
         }
 
-        public async Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken) where T : CosmosBase
-        {
-            return await Query(predicate, null, cancellationToken);
-        }
-
-        public async Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase
+        public async Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, string partitionKeyValue, CosmosType Type, CancellationToken cancellationToken) where T : CosmosBase
         {
             IQueryable<T> query;
 
             if (predicate is null)
             {
                 query = Container.GetItemLinqQueryable<T>(requestOptions: CosmosRepositoryExtensions.GetDefaultOptions(partitionKeyValue))
-                    .Where(item => item.Type == typeof(T).Name);
+                    .Where(item => item.Type == Type);
             }
             else
             {
                 query = Container.GetItemLinqQueryable<T>(requestOptions: CosmosRepositoryExtensions.GetDefaultOptions(partitionKeyValue))
-                    .Where(predicate.Compose(item => item.Type == typeof(T).Name, Expression.AndAlso));
+                    .Where(predicate.Compose(item => item.Type == Type, Expression.AndAlso));
             }
 
-            using (FeedIterator<T> iterator = query.ToFeedIterator())
+            using (var iterator = query.ToFeedIterator())
             {
                 List<T> results = new List<T>();
 
@@ -84,23 +79,41 @@ namespace VerusDate.Api.Repository
             }
         }
 
-        public async Task<T> Add<T>(T item, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase
+        public async Task<List<T>> Query<T>(QueryDefinition query, CancellationToken cancellationToken) where T : CosmosBaseQuery
         {
-            var response = await Container.CreateItemAsync(item, new PartitionKey(partitionKeyValue), null, cancellationToken);
+            using (var iterator = Container.GetItemQueryIterator<T>(query))
+            {
+                List<T> results = new List<T>();
+
+                while (iterator.HasMoreResults)
+                {
+                    foreach (var item in await iterator.ReadNextAsync(cancellationToken))
+                    {
+                        results.Add(item);
+                    }
+                }
+
+                return results;
+            }
+        }
+
+        public async Task<T> Add<T>(T item, CancellationToken cancellationToken) where T : CosmosBase
+        {
+            var response = await Container.CreateItemAsync(item, new PartitionKey(item.Key), null, cancellationToken);
 
             return response.Resource;
         }
 
-        public async Task<T> Update<T>(T item, string id, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase
+        public async Task<T> Update<T>(T item, CancellationToken cancellationToken) where T : CosmosBase
         {
-            var response = await Container.ReplaceItemAsync(item, id, new PartitionKey(partitionKeyValue), null, cancellationToken);
+            var response = await Container.ReplaceItemAsync(item, item.Id, new PartitionKey(item.Key), null, cancellationToken);
 
             return response.Resource;
         }
 
-        public async Task<T> Delete<T>(string id, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase
+        public async Task<T> Delete<T>(string id, PartitionKey key, CancellationToken cancellationToken) where T : CosmosBase
         {
-            var response = await Container.DeleteItemAsync<T>(id, new PartitionKey(partitionKeyValue), null, cancellationToken);
+            var response = await Container.DeleteItemAsync<T>(id, key, null, cancellationToken);
 
             return response.Resource;
         }

@@ -66,7 +66,10 @@
 <Card Margin="Margin.Is3.FromTop">
     <CardHeader>Meus Eventos</CardHeader>
     <CardBody>
-        <Alert Color="Color.Primary" Visible="true" Margin="Margin.Is0.FromBottom"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationTriangle"></Icon> Não há dados para mostrar</Alert>
+        @if (OptionsMyEvents.HasCustomVisibility)
+        {
+            <CustomVisibility Options="OptionsMyEvents"></CustomVisibility>
+        }
     </CardBody>
 </Card>
 
@@ -78,58 +81,76 @@
         </Button>
     </CardHeader>
     <CardBody>
-        <Table Hoverable="true" Responsive="true" Narrow="true" FullWidth="true" Margin="Margin.Is0.FromBottom">
-            <TableHeader ThemeContrast="ThemeContrast.Light">
-                <TableRow>
-                    <TableHeaderCell>Tipo</TableHeaderCell>
-                    <TableHeaderCell>Data / Hora</TableHeaderCell>
-                    <TableHeaderCell>Cidade</TableHeaderCell>
-                    <TableHeaderCell>Idade</TableHeaderCell>
-                    <TableHeaderCell>Orientação</TableHeaderCell>
-                    <TableHeaderCell>Intenção</TableHeaderCell>
-                    <TableHeaderCell>Disponibilidade</TableHeaderCell>
-                    <TableHeaderCell>#</TableHeaderCell>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                @foreach (var item in AvailableEvents)
-                {
+        @if (OptionsEvents.HasCustomVisibility)
+        {
+            <CustomVisibility Options="OptionsEvents"></CustomVisibility>
+        }
+        else
+        {
+            <Table Hoverable="true" Responsive="true" Narrow="true" FullWidth="true" Margin="Margin.Is0.FromBottom">
+                <TableHeader ThemeContrast="ThemeContrast.Light">
                     <TableRow>
-                        <TableRowCell><Icon Class="@item.GetIcon()"></Icon> @item.EventType.GetName()</TableRowCell>
-                        <TableRowCell>
-                            @item.DtStart.Date.ToShortDateString() (@item.DtStart.DateTime.ToLocalTime().ToShortTimeString() - @item.DtEnd.DateTime.ToLocalTime().ToShortTimeString())
-                        </TableRowCell>
-                        <TableRowCell>@item.Location</TableRowCell>
-                        <TableRowCell>@item.MinimalAge-@item.MaxAge</TableRowCell>
-                        <TableRowCell>@(item.SexualOrientation.Count() > 0 ? item.SexualOrientation.First().GetName() : "-")</TableRowCell>
-                        <TableRowCell>@(item.Intent.Count() > 0 ? item.Intent.First().GetName() : "-")</TableRowCell>
-                        <TableRowCell>
-                            <Badge Color="Color.Primary">10</Badge>
-                            <Badge Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Male"></Icon> 5</Badge>
-                            <Badge Color="Color.Danger"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Female"></Icon> 5</Badge>
-                        </TableRowCell>
-                        <TableRowCell>
-                            <Button Size="Size.ExtraSmall" Color="Color.Primary" Disabled="true">
-                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt"></Icon> Inscrever
-                            </Button>
-                        </TableRowCell>
+                        <TableHeaderCell>Tipo</TableHeaderCell>
+                        <TableHeaderCell>Data / Hora</TableHeaderCell>
+                        <TableHeaderCell>Cidade</TableHeaderCell>
+                        <TableHeaderCell>Idade</TableHeaderCell>
+                        <TableHeaderCell>Orientação</TableHeaderCell>
+                        <TableHeaderCell>Intenção</TableHeaderCell>
+                        <TableHeaderCell>Disponibilidade</TableHeaderCell>
+                        <TableHeaderCell>#</TableHeaderCell>
                     </TableRow>
-                }
-            </TableBody>
-        </Table>
+                </TableHeader>
+                <TableBody>
+                    @foreach (var item in AvailableEvents)
+                    {
+                        <TableRow>
+                            <TableRowCell><Icon Class="@item.GetIcon()"></Icon> @item.EventType.GetName()</TableRowCell>
+                            <TableRowCell>
+                                @item.DtStart.Date.ToShortDateString() (@item.DtStart.DateTime.ToLocalTime().ToShortTimeString() - @item.DtEnd.DateTime.ToLocalTime().ToShortTimeString())
+                            </TableRowCell>
+                            <TableRowCell>@item.Location</TableRowCell>
+                            <TableRowCell>@item.MinimalAge-@item.MaxAge</TableRowCell>
+                            <TableRowCell>@(item.SexualOrientation.Count() > 0 ? item.SexualOrientation.First().GetName() : "-")</TableRowCell>
+                            <TableRowCell>@(item.Intent.Count() > 0 ? item.Intent.First().GetName() : "-")</TableRowCell>
+                            <TableRowCell>
+                                <Badge Color="Color.Primary">10</Badge>
+                                <Badge Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Male"></Icon> 5</Badge>
+                                <Badge Color="Color.Danger"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Female"></Icon> 5</Badge>
+                            </TableRowCell>
+                            <TableRowCell>
+                                <Button Size="Size.ExtraSmall" Color="Color.Primary" Disabled="true">
+                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt"></Icon> Inscrever
+                                </Button>
+                            </TableRowCell>
+                        </TableRow>
+                    }
+                </TableBody>
+            </Table>
+        }
     </CardBody>
 </Card>
 
 @code {
 
     private ProfileModel profile { get; set; }
-    //private List<VerusDate.Shared.Model.Event.Event> MyEvents { get; set; }
-    private List<EventModel> AvailableEvents { get; set; } = new();
+    private List<EventModel> MyEvents { get; set; }
+    private List<EventModel> AvailableEvents { get; set; }
+
+    private VisibilityOptions OptionsMyEvents => new VisibilityOptions()
+    {
+        Loading = IsLoading,
+        NoData = MyEvents == null
+    };
+
+    private VisibilityOptions OptionsEvents => new VisibilityOptions()
+    {
+        Loading = IsLoading,
+        NoData = AvailableEvents != null && !AvailableEvents.Any()
+    };
 
     protected override async Task LoadData()
     {
         profile = await Http.Profile_Get();
-
         AvailableEvents = await Http.Event_GetAll();
     }
 }

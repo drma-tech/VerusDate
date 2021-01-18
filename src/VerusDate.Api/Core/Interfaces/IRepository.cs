@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Azure.Cosmos;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading;
@@ -9,16 +10,16 @@ namespace VerusDate.Api.Core.Interfaces
 {
     public interface IRepository
     {
-        Task<T> Get<T>(string id, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase;
+        Task<T> Get<T>(string id, PartitionKey key, CancellationToken cancellationToken) where T : CosmosBase;
 
-        Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken) where T : CosmosBase;
+        Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, string partitionKeyValue, CosmosType Type, CancellationToken cancellationToken) where T : CosmosBase;
 
-        Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase;
+        Task<List<T>> Query<T>(QueryDefinition query, CancellationToken cancellationToken) where T : CosmosBaseQuery;
 
-        Task<T> Add<T>(T item, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase;
+        Task<T> Add<T>(T item, CancellationToken cancellationToken) where T : CosmosBase;
 
-        Task<T> Update<T>(T item, string id, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase;
+        Task<T> Update<T>(T item, CancellationToken cancellationToken) where T : CosmosBase;
 
-        Task<T> Delete<T>(string id, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase;
+        Task<T> Delete<T>(string id, PartitionKey key, CancellationToken cancellationToken) where T : CosmosBase;
     }
 }

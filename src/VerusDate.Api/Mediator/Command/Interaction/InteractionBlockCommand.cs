@@ -1,12 +1,33 @@
 ﻿using MediatR;
+using Microsoft.Azure.Cosmos;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Mediator.Commands.Interaction
 {
-    public class InteractionBlockCommand : Shared.Model.Interaction.Interaction, IRequest<bool> { }
+    public class InteractionBlockCommand : CosmosBase, IRequest<bool>
+    {
+        public InteractionBlockCommand() : base(CosmosType.Interaction)
+        {
+        }
+
+        [Required]
+        public string IdUserInteraction { get; set; }
+
+        public string IdLoggedUser { get; private set; }
+
+        public override void SetIds(string IdLoggedUser)
+        {
+            this.SetId($"{IdLoggedUser}-{IdUserInteraction}");
+            this.SetPartitionKey(IdLoggedUser);
+            this.IdLoggedUser = IdLoggedUser;
+        }
+    }
 
     public class InteractionBlockHandler : IRequestHandler<InteractionBlockCommand, bool>
     {
@@ -19,7 +40,9 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
 
         public async Task<bool> Handle(InteractionBlockCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<Shared.Model.Interaction.Interaction>(request.Id, request.Key, cancellationToken);
+            if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
+
+            var obj = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
 
             if (obj == null)
             {
@@ -28,7 +51,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
             else
             {
                 obj.ExecuteBlock();
-                return await _repo.Update(obj, request.Id, request.Key, cancellationToken) != null;
+                return await _repo.Update(obj, cancellationToken) != null;
             }
         }
     }

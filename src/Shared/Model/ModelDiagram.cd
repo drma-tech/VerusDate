@@ -1,52 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
-  <Class Name="VerusDate.Shared.Model.Profile.Profile">
-    <Position X="0.75" Y="4" Width="2.5" />
+  <Class Name="VerusDate.Shared.Model.Profile.ProfileModel">
+    <Position X="1.25" Y="4" Width="3" />
     <TypeIdentifier>
-      <HashCode>ABAAABJQAAAAICAICAAQAAgAEACIAAAAACgYAACAkAA=</HashCode>
-      <FileName>Model\Profile\Profile.cs</FileName>
+      <HashCode>QBAAABJQAAAAICAICAAQAAgAEACIAAAAACgYAICAkAA=</HashCode>
+      <FileName>Model\Profile\ProfileModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VerusDate.Shared.Model.Ticket.Ticket">
-    <Position X="9.5" Y="4" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAggIAAEAAAAAAAAAAQAAAAAAAAAAEABAAA=</HashCode>
-      <FileName>Model\Ticket\Ticket.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="VerusDate.Shared.Model.Ticket.TicketVote">
-    <Position X="12.25" Y="4" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AABAAAAAAAAAIAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\Ticket\TicketVote.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="VerusDate.Shared.Model.Interaction.Interaction">
-    <Position X="4" Y="4" Width="2" />
+  <Class Name="VerusDate.Shared.Model.Interaction.InteractionModel">
+    <Position X="5" Y="4" Width="2" />
     <TypeIdentifier>
       <HashCode>ACBEAggAAAAAIAIAAACAEAADAAAAAAQAAAAAAIIJAQA=</HashCode>
-      <FileName>Model\Interaction\Interaction.cs</FileName>
+      <FileName>Model\Interaction\InteractionModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VerusDate.Shared.Model.Interaction.Chat">
-    <Position X="6.75" Y="4" Width="2" />
+  <Class Name="VerusDate.Shared.Model.Interaction.ChatModel">
+    <Position X="7.75" Y="4" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Model\Interaction\Chat.cs</FileName>
+      <FileName>Model\Interaction\ChatModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VerusDate.Shared.Model.Event.Event">
-    <Position X="14.75" Y="4" Width="2.75" />
+  <Class Name="VerusDate.Shared.Model.Event.EventModel">
+    <Position X="10.5" Y="4" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AEEAAAAAAgEEIAAEgAoAAQAEAAAAAAAEAAQAAAAAAAA=</HashCode>
-      <FileName>Model\Event\Event.cs</FileName>
+      <HashCode>AFEAAAAAAgEEIAAEgAoAAQAEAAAAAAAEAAQAAAAAAAA=</HashCode>
+      <FileName>Model\Event\EventModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VerusDate.Shared.Core.CosmosBase">
-    <Position X="8" Y="0.5" Width="2.25" />
+    <Position X="8.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAgCAAAAAAAAIAQAAAAAAAAIAAAAAAAAAQAAAAAACAA=</HashCode>
       <FileName>Core\ComosBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Shared.Model.Support.TicketModel" Collapsed="true">
+    <Position X="14" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAggIAAEAAAAAAAAAAQAAAAAAAAAAEABAAA=</HashCode>
+      <FileName>Model\Support\TicketModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Shared.Model.Support.TicketVoteModel" Collapsed="true">
+    <Position X="16.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAIAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Support\TicketVoteModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using VerusDate.Shared;
 using VerusDate.Shared.Enum;
-using VerusDate.Shared.Model.Profile;
+using VerusDate.Shared.Model;
 using VerusDate.Shared.ModelQuery;
 using VerusDate.Web.Core;
 
@@ -13,17 +13,17 @@ namespace VerusDate.Web.Api
 {
     public static class ProfileApi
     {
-        public async static Task<Profile> Profile_Get(this HttpClient http)
+        public async static Task<ProfileModel> Profile_Get(this HttpClient http)
         {
-            return await http.Get<Profile>($"Profile/Get");
+            return await http.Get<ProfileModel>($"Profile/Get");
         }
 
-        public async static Task<Profile> Profile_GetView(this HttpClient http, string IdUserView)
+        public async static Task<ProfileModel> Profile_GetView(this HttpClient http, string IdUserView)
         {
-            return await http.Get<Profile>($"Profile/GetView?id={IdUserView}");
+            return await http.Get<ProfileModel>($"Profile/GetView?id={IdUserView}");
         }
 
-        public static List<AffinityVM> GetAffinity(ProfileLooking profUser, Profile profView)
+        public static List<AffinityVM> GetAffinity(ProfileLookingModel profUser, ProfileModel profView)
         {
             if (profUser == null) throw new ArgumentNullException(nameof(profUser));
             if (profView == null) throw new ArgumentNullException(nameof(profView));
@@ -143,17 +143,17 @@ namespace VerusDate.Web.Api
             return await http.GetList<ProfileSearch>("Profile/ListSearch");
         }
 
-        public async static Task<HttpResponseMessage> Profile_Add(this HttpClient http, Profile obj)
+        public async static Task<HttpResponseMessage> Profile_Add(this HttpClient http, ProfileModel obj)
         {
             return await http.Post("Profile/Add", obj);
         }
 
-        public async static Task<HttpResponseMessage> Profile_Update(this HttpClient http, Profile obj)
+        public async static Task<HttpResponseMessage> Profile_Update(this HttpClient http, ProfileModel obj)
         {
             return await http.Put("Profile/Update", obj);
         }
 
-        public async static Task<HttpResponseMessage> Profile_UpdateLooking(this HttpClient http, Profile obj)
+        public async static Task<HttpResponseMessage> Profile_UpdateLooking(this HttpClient http, ProfileModel obj)
         {
             return await http.Put("Profile/UpdateLooking", obj);
         }

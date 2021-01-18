@@ -1,6 +1,4 @@
-﻿using Blazored.LocalStorage;
-using Blazored.SessionStorage;
-using Blazored.Toast.Services;
+﻿using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
@@ -47,12 +45,6 @@ namespace VerusDate.Web.Core
         protected IToastService Toast { get; set; }
 
         [Inject]
-        protected ILocalStorageService LocalStorage { get; set; }
-
-        [Inject]
-        protected ISessionStorageService SessionStorage { get; set; }
-
-        [Inject]
         protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
         protected override async Task OnInitializedAsync()
@@ -84,6 +76,8 @@ namespace VerusDate.Web.Core
         [Inject]
         protected IJSRuntime JsRuntime { get; set; }
 
+        public bool IsLoading { get; set; } = true;
+
         protected abstract Task LoadData();
 
         protected override async Task OnInitializedAsync()
@@ -97,6 +91,10 @@ namespace VerusDate.Web.Core
             catch (Exception ex)
             {
                 ex.ProcessException(Toast, Logger);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
 

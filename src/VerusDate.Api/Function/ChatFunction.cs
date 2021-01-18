@@ -6,12 +6,12 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Chat;
 using VerusDate.Api.Mediator.Queries.Chat;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Function
 {
@@ -33,9 +33,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = new ChatGetCommand() { IdLoggedUser = req.GetUserId(), IdUserInteraction = req.Query["Id"] };
+                var request = req.BuildRequestQuery<ChatGetCommand, ChatModel>();
 
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 if (result == null)
                     return new NotFoundResult();
@@ -58,11 +58,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<ChatSyncCommand>(req.Body, null, source.Token);
+                var request = await req.BuildRequestCommand<ChatSyncCommand>(source.Token);
 
-                command.SetIds(req.GetUserId());
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }

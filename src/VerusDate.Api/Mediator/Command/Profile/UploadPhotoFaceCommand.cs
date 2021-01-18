@@ -1,21 +1,33 @@
 ﻿using MediatR;
+using Microsoft.Azure.Cosmos;
 using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Helper;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Mediator.Commands.Profile
 {
-    public class UploadPhotoFaceCommand : IRequest<Shared.Model.Profile.Profile>
+    public class UploadPhotoFaceCommand : CosmosBase, IRequest<ProfileModel>
     {
-        public string Id { get; set; }
+        public UploadPhotoFaceCommand() : base(CosmosType.Profile)
+        {
+        }
+
         public byte[] MainPhoto { get; set; }
+
+        public override void SetIds(string IdLoggedUser)
+        {
+            this.SetId(IdLoggedUser);
+            this.SetPartitionKey(IdLoggedUser);
+        }
     }
 
-    public class UploadPhotoFaceHandler : IRequestHandler<UploadPhotoFaceCommand, Shared.Model.Profile.Profile>
+    public class UploadPhotoFaceHandler : IRequestHandler<UploadPhotoFaceCommand, ProfileModel>
     {
         private readonly IRepository _repo;
         private readonly StorageHelper storageHelper;
@@ -26,9 +38,9 @@ namespace VerusDate.Server.Mediator.Commands.Profile
             this.storageHelper = storageHelper;
         }
 
-        public async Task<Shared.Model.Profile.Profile> Handle(UploadPhotoFaceCommand request, CancellationToken cancellationToken)
+        public async Task<ProfileModel> Handle(UploadPhotoFaceCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<Shared.Model.Profile.Profile>(request.Id, request.Id, cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
             if (obj == null) throw new NotificationException("Perfil não encontrado");
 
             using (var stream = new MemoryStream(request.MainPhoto))
@@ -40,7 +52,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
                 }
                 else
                 {
-                    obj.Photo = new Shared.Model.Profile.ProfilePhoto();
+                    obj.Photo = new ProfilePhotoModel();
                 }
 
                 var photoName = Guid.NewGuid().ToString() + ".jpg";
@@ -52,7 +64,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
                 obj.UpdatePhoto(obj.Photo);
             }
 
-            return await _repo.Update(obj, request.Id, request.Id, cancellationToken);
+            return await _repo.Update(obj, cancellationToken);
         }
     }
 }

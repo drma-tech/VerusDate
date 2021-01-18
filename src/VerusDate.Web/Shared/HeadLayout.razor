@@ -1,8 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 @inherits ComponenteCore<HeadLayout>
 @inject HttpClient Http
-@inject SignOutSessionStateManager SignOutManager
 
 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0; background-color: #fff;">
     <div class="navbar-header">
@@ -65,7 +63,7 @@
 </nav>
 
 @code{
-    private VerusDate.Shared.Model.Profile.ProfileGamification gamification;
+    private ProfileGamificationModel gamification;
 
     protected override async Task OnInitializedAsync()
     {
@@ -84,12 +82,7 @@
 
     protected async Task LoadData()
     {
-        gamification = await Http.Gamification_Get(LocalStorage);
-    }
-
-    private async Task BeginSignOut(MouseEventArgs args)
-    {
-        await SignOutManager.SetSignOutState();
-        NavigationManager.NavigateTo("authentication/logout");
+        var profile = await Http.Profile_Get();
+        gamification = profile?.Gamification;
     }
 }

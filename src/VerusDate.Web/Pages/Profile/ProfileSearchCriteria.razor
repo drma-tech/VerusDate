@@ -155,8 +155,8 @@ else
 
 @code {
 
-    private VerusDate.Shared.Model.Profile.Profile profile;
-    private VerusDate.Shared.Model.Profile.ProfileLooking looking;
+    private ProfileModel profile;
+    private ProfileLookingModel looking;
 
     private Shared.modal.BasicModal help;
 
@@ -210,7 +210,7 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                profile = await ApiCore.ReturnResponse<VerusDate.Shared.Model.Profile.Profile>(response);
+                profile = await ApiCore.ReturnResponse<ProfileModel>(response);
             }
 
             await response.ProcessResponse(Toast, "Salvo com sucesso!");

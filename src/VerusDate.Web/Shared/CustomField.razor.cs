@@ -11,6 +11,9 @@ namespace VerusDate.Web.Shared
     {
         [Parameter] public string Value { get; set; }
         [Parameter] public EventCallback<string> ValueChanged { get; set; }
+        [Parameter] public EventCallback ButtomClicked { get; set; }
+        [Parameter] public object ButtomCssIcon { get; set; }
+        [Parameter] public string ButtomTitle { get; set; }
 
         private async Task SetValue(string value)
         {

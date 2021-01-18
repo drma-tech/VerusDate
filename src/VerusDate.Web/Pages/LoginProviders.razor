@@ -4,7 +4,8 @@
 <br />
 
 <Row>
-    <Column ColumnSize="ColumnSize.Is6.Is3.WithOffset">
+    <Column ColumnSize="ColumnSize.Is1.OnMobile.Is1.OnDesktop.Is2.OnFullHD"></Column>
+    <Column ColumnSize="ColumnSize.Is12.OnMobile.Is10.OnDesktop.Is8.OnFullHD">
         @foreach (var provider in providers)
         {
             <Button Block="true" Class="@("btn-" + @provider.Key)" Size="Size.Large" Margin="Margin.Is3.FromBottom" Type="ButtonType.Link" To="@("/.auth/login/" + @provider.Key)">
@@ -16,7 +17,7 @@
 
 @code {
     public Dictionary<string, string> providers = new Dictionary<string, string>
-{
+    {
         { "google", "Google" },
         { "twitter", "Twitter" },
         { "facebook", "Facebook" }

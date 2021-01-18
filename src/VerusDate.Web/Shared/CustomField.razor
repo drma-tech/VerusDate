@@ -16,6 +16,19 @@
                 <InputText Value="@Value" ValueChanged="@SetValue" ValueExpression="@For" @attributes="@GetAttributes(For, disabled: Disabled)"></InputText>
                 break;
 
+            case FieldType.TextEditButtom:
+                <Addons>
+                    <Addon AddonType="AddonType.Body">
+                        <InputText Value="@Value" ValueChanged="@SetValue" ValueExpression="@For" @attributes="@GetAttributes(For, disabled: Disabled)"></InputText>
+                    </Addon>
+                    <Addon AddonType="AddonType.End">
+                        <Button Color="Color.Primary" Outline="true" Clicked="@ButtomClicked" title="@ButtomTitle">
+                            <Icon Name="@ButtomCssIcon"></Icon>
+                        </Button>
+                    </Addon>
+                </Addons>
+                break;
+
             case FieldType.MemoEdit:
                 <InputTextArea Value="@Value" ValueChanged="@SetValue" ValueExpression="@For" @attributes="@GetAttributes(For, true, Disabled)"></InputTextArea>
                 break;

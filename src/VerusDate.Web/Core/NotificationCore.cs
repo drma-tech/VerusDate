@@ -1,5 +1,4 @@
 ﻿using Blazored.Toast.Services;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
@@ -39,11 +38,7 @@ namespace VerusDate.Web.Core
 
         public static void ProcessException(this Exception ex, IToastService toast, ILogger logger)
         {
-            if (ex is AccessTokenNotAvailableException exception)
-            {
-                exception.Redirect();
-            }
-            else if (ex is NotificationException)
+            if (ex is NotificationException)
             {
                 toast.ShowWarning(ex.Message);
             }

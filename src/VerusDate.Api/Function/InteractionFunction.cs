@@ -6,13 +6,13 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Interaction;
 using VerusDate.Api.Mediator.Queries.Interaction;
 using VerusDate.Server.Mediator.Commands.Interaction;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Function
 {
@@ -34,9 +34,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = new InteractionGetCommand() { IdLoggedUser = req.GetUserId(), IdUserInteraction = req.Query["Id"] };
+                var request = req.BuildRequestQuery<InteractionGetCommand, InteractionModel>();
 
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -156,11 +156,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<InteractionBlinkCommand>(req.Body, null, source.Token);
+                var request = await req.BuildRequestCommand<InteractionBlinkCommand>(source.Token);
 
-                command.SetIds(req.GetUserId());
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 if (result)
                     return new OkObjectResult(result);
@@ -183,11 +181,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<InteractionBlockCommand>(req.Body, null, source.Token);
+                var request = await req.BuildRequestCommand<InteractionBlockCommand>(source.Token);
 
-                command.SetIds(req.GetUserId());
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 if (result)
                     return new OkObjectResult(result);
@@ -210,11 +206,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<InteractionDeslikeCommand>(req.Body, null, source.Token);
+                var request = await req.BuildRequestCommand<InteractionDeslikeCommand>(source.Token);
 
-                command.SetIds(req.GetUserId());
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 if (result)
                     return new OkObjectResult(result);
@@ -237,12 +231,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<InteractionLikeCommand>(req.Body);
-                //var command = InteractionSeed.GetInteraction<InteractionLikeCommand>().Generate();
+                var request = await req.BuildRequestCommand<InteractionLikeCommand>(source.Token);
 
-                command.SetIds(req.GetUserId());
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 if (result)
                     return new OkObjectResult(result);
@@ -265,12 +256,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<InteractionGenerateChatCommand>(req.Body);
-                //var command = InteractionSeed.GetInteraction<InteractionGenerateChatCommand>().Generate();
+                var request = await req.BuildRequestCommand<InteractionGenerateChatCommand>(source.Token);
 
-                command.SetIds(req.GetUserId());
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }

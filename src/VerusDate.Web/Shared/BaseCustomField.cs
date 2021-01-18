@@ -8,6 +8,7 @@ namespace VerusDate.Web.Shared
     public enum FieldType
     {
         TextEdit,
+        TextEditButtom,
         MemoEdit,
         Select,
         SelectMultiple

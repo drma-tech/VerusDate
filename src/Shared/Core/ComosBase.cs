@@ -3,12 +3,20 @@ using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Core
 {
+    public enum CosmosType
+    {
+        Profile = 1,
+        Interaction = 2,
+        Chat = 3,
+        Ticket = 4,
+        TicketVote = 5,
+        Event = 6
+    }
+
     public abstract class CosmosBase
     {
-        protected CosmosBase(string Type)
+        protected CosmosBase(CosmosType Type)
         {
-            if (string.IsNullOrEmpty(Type)) throw new ArgumentNullException(nameof(Type));
-
             this.Type = Type;
         }
 
@@ -23,21 +31,19 @@ namespace VerusDate.Shared.Core
         public DateTimeOffset? DtUpdate { get; set; }
 
         /// <summary>
-        /// Campo único dentro do container
+        /// Campo único dentro do container (tem distinção por tipo)
         /// </summary>
-        public string Id { get; set; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// PartitionKeyPath (Partição Lógica)
-        /// <para>Se for uma estrutura 'pai', usar o valor do Id</para>
-        /// <para>Se for uma estrutura 'filha', usar o valor do Id da estrutura 'pai'</para>
         /// </summary>
-        public string Key { get; set; }
+        public string Key { get; private set; }
 
         /// <summary>
         /// Tipo da estrutura (geralmente o nome da classe)
         /// </summary>
-        public string Type { get; set; }
+        public CosmosType Type { get; set; }
 
         /// <summary>
         /// Recupera o status dos dados atuais
@@ -51,9 +57,32 @@ namespace VerusDate.Shared.Core
         }
 
         /// <summary>
-        /// Configura atributos dos campos chaves
+        /// Configura o id do objeto (vai ser mesclado com o tipo)
+        /// </summary>
+        /// <param name="id"></param>
+        public void SetId(string id)
+        {
+            Id = Type + ":" + id;
+        }
+
+        /// <summary>
+        /// PartitionKeyPath (Partição Lógica)
+        /// <para>Se for uma estrutura 'pai', usar o valor do Id</para>
+        /// <para>Se for uma estrutura 'filha', usar o valor do Id da estrutura 'pai'</para>
+        /// </summary>
+        public void SetPartitionKey(string id)
+        {
+            Key = id;
+        }
+
+        /// <summary>
+        /// Configura atributos dos campos chaves (mesclar com o campo Type)
         /// </summary>
         /// <param name="IdUser">Id do usuário capturado do token</param>
         public abstract void SetIds(string IdLoggedUser);
+    }
+
+    public class CosmosBaseQuery
+    {
     }
 }

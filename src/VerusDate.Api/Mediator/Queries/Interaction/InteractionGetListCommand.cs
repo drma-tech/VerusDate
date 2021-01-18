@@ -1,14 +1,23 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Queries.Interaction
 {
-    public class InteractionGetListCommand : MediatorQuery<IEnumerable<Shared.Model.Interaction.Interaction>> { }
+    public class InteractionGetListCommand : MediatorQuery<IEnumerable<InteractionModel>>
+    {
+        public override void SetParameters(IQueryCollection query)
+        {
+            //do nothing
+        }
+    }
 
-    public class InteractionGetListHandler : IRequestHandler<InteractionGetListCommand, IEnumerable<Shared.Model.Interaction.Interaction>>
+    public class InteractionGetListHandler : IRequestHandler<InteractionGetListCommand, IEnumerable<InteractionModel>>
     {
         private readonly IRepository _repo;
 
@@ -17,9 +26,9 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
             _repo = repo;
         }
 
-        public async Task<IEnumerable<Shared.Model.Interaction.Interaction>> Handle(InteractionGetListCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<InteractionModel>> Handle(InteractionGetListCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.Query<Shared.Model.Interaction.Interaction>(x => x.Key == request.IdLoggedUser, cancellationToken);
+            return await _repo.Query<InteractionModel>(null, request.IdLoggedUser, CosmosType.Interaction, cancellationToken);
         }
     }
 }

@@ -2,12 +2,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileAddCommand : Shared.Model.Profile.Profile, IRequest<Shared.Model.Profile.Profile> { }
+    public class ProfileAddCommand : ProfileModel, IRequest<ProfileModel> { }
 
-    public class ProfileAddHandler : IRequestHandler<ProfileAddCommand, Shared.Model.Profile.Profile>
+    public class ProfileAddHandler : IRequestHandler<ProfileAddCommand, ProfileModel>
     {
         private readonly IRepository _repo;
 
@@ -16,7 +17,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
             _repo = repo;
         }
 
-        public async Task<Shared.Model.Profile.Profile> Handle(ProfileAddCommand request, CancellationToken cancellationToken)
+        public async Task<ProfileModel> Handle(ProfileAddCommand request, CancellationToken cancellationToken)
         {
             //var pv = await _profileValidationApp.Get(request.IdUser, cancellationToken);
 
@@ -27,7 +28,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
             //await _profileValidationApp.ValidateProfileData(request.Id, true, cancellationToken);
 
-            return await _repo.Add(request, request.Id, cancellationToken);
+            return await _repo.Add(request, cancellationToken);
         }
     }
 }

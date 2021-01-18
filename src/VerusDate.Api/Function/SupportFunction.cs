@@ -5,13 +5,14 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Support;
 using VerusDate.Api.Mediator.Queries.Support;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Function
 {
@@ -33,11 +34,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = new TicketGetListCommand();
+                var request = req.BuildRequestQuery<TicketGetListCommand, List<TicketModel>>();
 
-                command.IdLoggedUser = req.GetUserId();
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -57,11 +56,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = new TicketGetMyVotesCommand();
+                var request = req.BuildRequestQuery<TicketGetMyVotesCommand, List<TicketVoteModel>>();
 
-                command.IdLoggedUser = req.GetUserId();
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -81,11 +78,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<TicketInsertCommand>(req.Body, null, source.Token);
+                var request = await req.BuildRequestCommand<TicketInsertCommand>(source.Token);
 
-                command.SetIds(req.GetUserId());
-
-                var result = await _mediator.Send(command, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }
@@ -105,11 +100,9 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var command = await JsonSerializer.DeserializeAsync<TicketVoteCommand>(req.Body, null, source.Token);
+                var request = await req.BuildRequestCommand<TicketVoteCommand>(source.Token);
 
-                command.SetIds(req.GetUserId());
-
-                var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                var result = await _mediator.Send(request, source.Token);
 
                 return new OkObjectResult(result);
             }

@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
     <Content Remove="Shared\modal\NewTicket_old.razor" />
-    <Content Remove="Shared\RedirectToLogin.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,21 +20,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AnthonyChu.AzureStaticWebApps.Blazor.Authentication" Version="0.0.2-preview" />
     <PackageReference Include="Blazored.FluentValidation" Version="1.3.2" />
-    <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
-    <PackageReference Include="Blazored.SessionStorage" Version="1.0.12" />
     <PackageReference Include="Blazored.Toast" Version="3.1.2" />
-    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.2.4" />
-    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.2.4" />
-    <PackageReference Include="Blazorise.Sidebar" Version="0.9.2.4" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.2.5" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.2.5" />
+    <PackageReference Include="Blazorise.Sidebar" Version="0.9.2.5" />
     <PackageReference Include="BrowserInterop" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="5.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.1" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
-    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.2" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>

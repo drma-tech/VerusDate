@@ -14,7 +14,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VerusDate.Api.Function.InteractionFunction">
-    <Position X="9.75" Y="2" Width="1.75" />
+    <Position X="12.25" Y="2" Width="1.75" />
     <Members>
       <Method Name="InteractionFunction" Hidden="true" />
     </Members>
@@ -27,7 +27,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VerusDate.Api.Function.ProfileFunction">
-    <Position X="14.5" Y="2" Width="1.5" />
+    <Position X="17" Y="2" Width="1.5" />
     <Members>
       <Method Name="ProfileFunction" Hidden="true" />
     </Members>
@@ -35,12 +35,12 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAYBAAAAAAAAAABAAAAQAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <HashCode>AAYBAAAAIAAAAABAAAAYAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
       <FileName>Function\ProfileFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VerusDate.Api.Function.StorageFunction">
-    <Position X="7.5" Y="2" Width="1.5" />
+    <Position X="7.5" Y="2" Width="1.75" />
     <Members>
       <Method Name="StorageFunction" Hidden="true" />
     </Members>
@@ -48,12 +48,12 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Function\StorageFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VerusDate.Api.Function.StoreFunction">
-    <Position X="12.25" Y="2" Width="1.5" />
+    <Position X="14.75" Y="2" Width="1.5" />
     <Members>
       <Method Name="StoreFunction" Hidden="true" />
     </Members>
@@ -66,7 +66,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VerusDate.Api.Function.SupportFunction">
-    <Position X="16.75" Y="2" Width="1.5" />
+    <Position X="19.25" Y="2" Width="1.5" />
     <Members>
       <Method Name="SupportFunction" Hidden="true" />
     </Members>
@@ -74,13 +74,23 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAABAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <HashCode>AAABAEAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAABAAI=</HashCode>
       <FileName>Function\SupportFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="System.Object" Collapsed="true">
-    <Position X="11" Y="0.75" Width="1.5" />
+    <Position X="12.25" Y="0.75" Width="1.5" />
     <TypeIdentifier />
+  </Class>
+  <Class Name="VerusDate.Api.Function.PublicFunction">
+    <Position X="10" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Function\PublicFunction.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

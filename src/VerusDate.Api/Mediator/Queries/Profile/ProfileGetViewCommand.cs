@@ -4,12 +4,17 @@ using Microsoft.Azure.Cosmos;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Queries.Profile
 {
     public class ProfileGetViewCommand : MediatorQuery<ProfileView>
     {
+        public ProfileGetViewCommand() : base(CosmosType.Profile)
+        {
+        }
+
         public string IdUserView { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }

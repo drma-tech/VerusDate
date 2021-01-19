@@ -16,7 +16,7 @@ namespace VerusDate.Web.Api
             //await ProfileApi.ClearCache(storage);
             //await ProfileValidationApi.ClearCache(storage);
 
-            return await http.Post("Storage/UploadPhotoFace", new { MainPhoto = bytes });
+            return await http.Put("Storage/UploadPhotoFace", new { MainPhoto = bytes });
         }
 
         public async static Task<HttpResponseMessage> Storage_UploadPhotoGallery(this HttpClient http, MemoryStream stream1, MemoryStream stream2, MemoryStream stream3, MemoryStream stream4)
@@ -39,7 +39,7 @@ namespace VerusDate.Web.Api
             //await ProfileValidationApi.ClearCache(storage);
             //await GamificationApi.ClearCache(storage);
 
-            return await http.PostAsJsonAsync("Storage/UploadPhotoValidation", new { Stream = bytes });
+            return await http.Put("Storage/UploadPhotoValidation", new { Stream = bytes });
         }
     }
 }

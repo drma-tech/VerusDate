@@ -11,6 +11,10 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
 {
     public class InteractionGetListCommand : MediatorQuery<IEnumerable<InteractionModel>>
     {
+        public InteractionGetListCommand() : base(CosmosType.Interaction)
+        {
+        }
+
         public override void SetParameters(IQueryCollection query)
         {
             //do nothing

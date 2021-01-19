@@ -4,12 +4,17 @@ using Microsoft.Azure.Cosmos;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Queries.Chat
 {
     public class ChatGetCommand : MediatorQuery<ChatModel>
     {
+        public ChatGetCommand() : base(CosmosType.Chat)
+        {
+        }
+
         public string IdUserInteraction { get; set; }
 
         public override void SetParameters(IQueryCollection query)

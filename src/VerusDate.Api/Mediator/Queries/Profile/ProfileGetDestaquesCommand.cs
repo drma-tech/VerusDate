@@ -6,12 +6,17 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.ModelQuery;
 
 namespace VerusDate.Api.Mediator.Queries.Profile
 {
     public class ProfileGetDestaquesCommand : MediatorQuery<List<ProfileSearch>>
     {
+        public ProfileGetDestaquesCommand() : base(CosmosType.Profile)
+        {
+        }
+
         public override void SetParameters(IQueryCollection query)
         {
             //do nothing
@@ -42,7 +47,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             SQL.Append("FROM ");
             SQL.Append("	c ");
             SQL.Append("WHERE ");
-            SQL.Append("	c.type = 'Profile' ");
+            SQL.Append($"	c.type = {(int)CosmosType.Profile} ");
             SQL.Append("ORDER BY ");
             SQL.Append("	c.dtTopList");
 

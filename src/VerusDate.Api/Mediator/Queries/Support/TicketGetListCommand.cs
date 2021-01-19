@@ -11,6 +11,10 @@ namespace VerusDate.Api.Mediator.Queries.Support
 {
     public class TicketGetListCommand : MediatorQuery<List<TicketModel>>
     {
+        public TicketGetListCommand() : base(CosmosType.Ticket)
+        {
+        }
+
         public override void SetParameters(IQueryCollection query)
         {
             //do nothing

@@ -11,6 +11,10 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
 {
     public class EventGetAllCommand : MediatorQuery<List<EventModel>>
     {
+        public EventGetAllCommand() : base(CosmosType.Event)
+        {
+        }
+
         public override void SetParameters(IQueryCollection query)
         {
             //do nothing

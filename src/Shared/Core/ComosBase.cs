@@ -15,6 +15,8 @@ namespace VerusDate.Shared.Core
 
     public abstract class CosmosBase
     {
+        //TODO: proteger os atributos assim que a leitura dos dados na classe conseguir atribuir valores
+
         protected CosmosBase(CosmosType Type)
         {
             this.Type = Type;
@@ -33,12 +35,12 @@ namespace VerusDate.Shared.Core
         /// <summary>
         /// Campo único dentro do container (tem distinção por tipo)
         /// </summary>
-        public string Id { get; private set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// PartitionKeyPath (Partição Lógica)
         /// </summary>
-        public string Key { get; private set; }
+        public string Key { get; set; }
 
         /// <summary>
         /// Tipo da estrutura (geralmente o nome da classe)

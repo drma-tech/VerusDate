@@ -73,24 +73,24 @@ else
                             <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
                                 <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler"></Icon> @AttributeHelper.GetName(() => looking.MinimalHeight)
                             </FieldLabel>
-                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
-                                <Select TValue="Height?" @bind-Value="@looking.MinimalHeight">
+                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">                                
+                                <InputSelect TValue="Height?" @bind-Value="@looking.MinimalHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Height>())
                                     {
                                         <option value="@item">@item.GetName()</option>
                                     }
-                                </Select>
+                                </InputSelect>
                                 <ValidationMessage For="@(() => looking.MinimalHeight)"></ValidationMessage>
                             </FieldBody>
                             <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
-                                <Select TValue="Height?" @bind-Value="@looking.MaxHeight">
+                                <InputSelect TValue="Height?" @bind-Value="@looking.MaxHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Height>())
                                     {
                                         <option value="@item">@item.GetName()</option>
                                     }
-                                </Select>
+                                </InputSelect>
                                 <ValidationMessage For="@(() => looking.MaxHeight)"></ValidationMessage>
                             </FieldBody>
                         </Field>

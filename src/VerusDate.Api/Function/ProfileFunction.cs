@@ -13,6 +13,7 @@ using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Profile;
 using VerusDate.Api.Mediator.Queries.Profile;
 using VerusDate.Shared.Model;
+using VerusDate.Shared.ModelQuery;
 
 namespace VerusDate.Api.Function
 {
@@ -96,7 +97,7 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var request = req.BuildRequestQuery<ProfileListSearchCommand, List<ProfileModel>>();
+                var request = req.BuildRequestQuery<ProfileListSearchCommand, List<ProfileSearch>>();
 
                 var result = await _mediator.Send(request, source.Token);
 

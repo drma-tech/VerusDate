@@ -4,12 +4,17 @@ using Microsoft.Azure.Cosmos;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Queries.Profile
 {
     public class ProfileGetCommand : MediatorQuery<ProfileModel>
     {
+        public ProfileGetCommand() : base(CosmosType.Profile)
+        {
+        }
+
         public override void SetParameters(IQueryCollection query)
         {
             //do nothing
@@ -27,7 +32,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 
         public async Task<ProfileModel> Handle(ProfileGetCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.Get<ProfileModel>(request.IdLoggedUser, new PartitionKey(request.IdLoggedUser), cancellationToken);
+            return await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.IdLoggedUser), cancellationToken);
         }
     }
 }

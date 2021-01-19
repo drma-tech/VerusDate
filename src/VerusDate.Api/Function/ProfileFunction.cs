@@ -73,13 +73,17 @@ namespace VerusDate.Api.Function
         [FunctionName("ProfileListMatch")]
         public async Task<IActionResult> ListMatch(
             [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Profile/ListMatch")] HttpRequest req,
-            ILogger log)
+            ILogger log, CancellationToken cancellationToken)
         {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
             try
             {
-                //var result = ProfileSeed.GetProfileSearch(req.GetUserId()).Generate(18);
+                var request = req.BuildRequestQuery<ProfileListMatchCommand, List<ProfileSearch>>();
 
-                return new OkObjectResult(null);
+                var result = await _mediator.Send(request, source.Token);
+
+                return new OkObjectResult(result);
             }
             catch (Exception ex)
             {

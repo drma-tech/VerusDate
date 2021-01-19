@@ -12,7 +12,6 @@
     <Compile Remove="Mediator\Queries\Interaction\InteractionGetChatListCommand.cs" />
     <Compile Remove="Mediator\Queries\Interaction\InteractionGetLikesCommand.cs" />
     <Compile Remove="Mediator\Queries\Interaction\InteractionGetNewMatchesCommand.cs" />
-    <Compile Remove="Mediator\Queries\Profile\ProfileListMatchCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.8.0" />

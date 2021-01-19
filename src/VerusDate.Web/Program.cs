@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using TG.Blazor.IndexedDB;
 
 namespace VerusDate.Web
 {
@@ -27,7 +28,18 @@ namespace VerusDate.Web
 
             builder.Services
                 .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
-                .AddStaticWebAppsAuthentication();
+                .AddStaticWebAppsAuthentication()
+                .AddIndexedDB(dbStore =>
+                {
+                    dbStore.DbName = "VerusDate";
+                    dbStore.Version = 1;
+
+                    dbStore.Stores.Add(new StoreSchema
+                    {
+                        Name = "Profile",
+                        PrimaryKey = new IndexSpec { Name = "id", KeyPath = "key", Auto = true },
+                    });
+                });
 
             builder.Services.AddBlazoredToast();
 

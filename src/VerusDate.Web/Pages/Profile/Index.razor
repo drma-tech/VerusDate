@@ -2,6 +2,7 @@
 @attribute [Authorize]
 @inherits PageCore<Profile.Index>
 @inject HttpClient Http
+@inject IndexedDBManager DbManager
 
 <Row>
     <Column ColumnSize="ColumnSize.Is3.OnDesktop">
@@ -65,10 +66,21 @@
 
     protected override async Task LoadData()
     {
-        profile = await Http.Profile_Get();
+        profile = await DbManager.GetRecordById<string, ProfileModel>("Profile", "Profile:b9a10c8be2f244c0a625b78f05e30812");
+
+        if (profile == null)
+        {
+            profile = await Http.Profile_Get();
+        }
 
         if (profile != null)
         {
+            await DbManager.AddRecord(new StoreRecord<ProfileModel>
+            {
+                Storename = "Profile",
+                Data = profile
+            });
+
             MainPhoto = profile.GetMainPhoto();
         }
 

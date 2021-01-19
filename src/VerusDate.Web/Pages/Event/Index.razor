@@ -150,7 +150,7 @@
 
     protected override async Task LoadData()
     {
-        profile = await Http.Profile_Get();
-        AvailableEvents = await Http.Event_GetAll();
+        profile = await Http.Profile_Get(LocalStorage);
+        AvailableEvents = await Http.Event_GetAll(SessionStorage);
     }
 }

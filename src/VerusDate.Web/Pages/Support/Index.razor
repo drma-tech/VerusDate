@@ -193,8 +193,8 @@
 
     protected override async Task LoadData()
     {
-        tickets = await Http.Ticket_GetList();
-        myVotes = await Http.Ticket_GetMyVotes();
+        tickets = await Http.Ticket_GetList(SessionStorage);
+        myVotes = await Http.Ticket_GetMyVotes(LocalStorage);
     }
 
     private List<TicketModel> GetTicketList(TicketType ticketType)

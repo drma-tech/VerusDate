@@ -78,7 +78,7 @@
     {
         if (ComponenteUtils.IsAuthenticated)
         {
-            var profile = await Http.Profile_Get();
+            var profile = await Http.Profile_Get(LocalStorage);
 
             if (profile != null)
             {

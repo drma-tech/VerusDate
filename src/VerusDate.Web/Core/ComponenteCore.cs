@@ -1,4 +1,6 @@
-﻿using Blazored.Toast.Services;
+﻿using Blazored.LocalStorage;
+using Blazored.SessionStorage;
+using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Logging;
@@ -24,7 +26,7 @@ namespace VerusDate.Web.Core
         public static string IdUser { get; set; }
         public static bool IsAuthenticated { get; set; }
 
-        public static string GetStorageKey(string key) => string.IsNullOrEmpty(IdUser) ? throw new ArgumentException(IdUser) : $"{key}({IdUser})";
+        //public static string GetStorageKey(string key) => string.IsNullOrEmpty(IdUser) ? throw new ArgumentException(IdUser) : $"{key}({IdUser})";
 
         public static string BaseApi(this HttpClient http) => http.BaseAddress.ToString().Contains("localhost") ? "http://localhost:7071/api/" : http.BaseAddress.ToString() + "api/";
     }
@@ -46,6 +48,12 @@ namespace VerusDate.Web.Core
 
         [Inject]
         protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+
+        [Inject]
+        protected ISyncLocalStorageService LocalStorage { get; set; }
+
+        [Inject]
+        protected ISyncSessionStorageService SessionStorage { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

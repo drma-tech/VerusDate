@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blazored.SessionStorage;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -11,38 +12,36 @@ namespace VerusDate.Web.Api
 {
     public static class InterationApi
     {
-        public static string StorageKey => ComponenteUtils.GetStorageKey("Interation");
-
-        public async static Task<InteractionModel> Interation_Get(this HttpClient http, string IdUserInteraction)
+        public async static Task<InteractionModel> Interation_Get(this HttpClient http, ISyncSessionStorageService storage, string IdUserInteraction)
         {
             if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
 
-            return await http.Get<InteractionModel>($"Interaction/Get/{IdUserInteraction}");
+            return await http.Get<InteractionModel>($"Interaction/Get/{IdUserInteraction}", storage);
         }
 
-        public async static Task<List<InteractionModel>> Interation_GetList(this HttpClient http)
+        public async static Task<List<InteractionModel>> Interation_GetList(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<InteractionModel>("Interaction/GetList");
+            return await http.GetList<InteractionModel>("Interaction/GetList", storage);
         }
 
-        public async static Task<List<ProfileSearch>> Interation_GetLikes(this HttpClient http)
+        public async static Task<List<ProfileSearch>> Interation_GetLikes(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<ProfileSearch>("Interaction/GetLikes");
+            return await http.GetList<ProfileSearch>("Interaction/GetLikes", storage);
         }
 
-        public async static Task<List<ProfileSearch>> Interation_GetBlinks(this HttpClient http)
+        public async static Task<List<ProfileSearch>> Interation_GetBlinks(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<ProfileSearch>("Interaction/GetBlinks");
+            return await http.GetList<ProfileSearch>("Interaction/GetBlinks", storage);
         }
 
-        public async static Task<List<ProfileSearch>> Interation_GetNewMatches(this HttpClient http)
+        public async static Task<List<ProfileSearch>> Interation_GetNewMatches(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<ProfileSearch>("Interaction/GetNewMatches");
+            return await http.GetList<ProfileSearch>("Interaction/GetNewMatches", storage);
         }
 
-        public async static Task<List<ProfileChatListModel>> Interation_GetChatList(this HttpClient http)
+        public async static Task<List<ProfileChatListModel>> Interation_GetChatList(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<ProfileChatListModel>("Interaction/GetChatList");
+            return await http.GetList<ProfileChatListModel>("Interaction/GetChatList", storage);
         }
 
         public async static Task<HttpResponseMessage> Interation_Blink(this HttpClient http, string IdUserInteraction)

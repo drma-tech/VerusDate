@@ -169,7 +169,7 @@ else
 
     protected override async Task LoadData()
     {
-        profile = await Http.Profile_Get();
+        profile = await Http.Profile_Get(LocalStorage);
 
         if (profile == null)
         {
@@ -195,14 +195,14 @@ else
 
             if (profile.Looking == null)
             {
-                response = await Http.Profile_UpdateLooking(profile);
+                response = await Http.Profile_UpdateLooking(profile, LocalStorage);
 
                 if (response.IsSuccessStatusCode)
                     Toast.ShowWarning("+30 XP");
             }
             else
             {
-                response = await Http.Profile_UpdateLooking(profile);
+                response = await Http.Profile_UpdateLooking(profile, LocalStorage);
 
                 if (response.IsSuccessStatusCode)
                     Toast.ShowWarning("-100 XP");
@@ -210,7 +210,7 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                profile = await ApiCore.ReturnResponse<ProfileModel>(response);
+                profile = await Http.Profile_Get(LocalStorage);
             }
 
             await response.ProcessResponse(Toast, "Salvo com sucesso!");

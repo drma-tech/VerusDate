@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Blazored.SessionStorage;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using VerusDate.Shared.Model;
@@ -8,9 +9,9 @@ namespace VerusDate.Web.Api
 {
     public static class EventApi
     {
-        public static async Task<List<EventModel>> Event_GetAll(this HttpClient http)
+        public static async Task<List<EventModel>> Event_GetAll(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<EventModel>("Event/GetAll");
+            return await http.GetList<EventModel>("Event/GetAll", storage);
         }
     }
 }

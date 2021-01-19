@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Blazored.SessionStorage;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using VerusDate.Shared.ModelQuery;
@@ -8,9 +9,9 @@ namespace VerusDate.Web.Api
 {
     public static class PublicApi
     {
-        public async static Task<List<ProfileSearch>> Public_ListDestaques(this HttpClient http)
+        public async static Task<List<ProfileSearch>> Public_ListDestaques(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<ProfileSearch>($"Public/ListDestaques");
+            return await http.GetList<ProfileSearch>($"Public/ListDestaques", storage);
         }
     }
 }

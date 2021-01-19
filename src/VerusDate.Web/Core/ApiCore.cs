@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Blazored.LocalStorage;
+using Blazored.SessionStorage;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -26,46 +29,80 @@ namespace VerusDate.Web.Core
             return new JsonSerializerOptions();
         }
 
-        public async static Task<string> GetString(this HttpClient http, string requestUri)
+        public async static Task<T> Get<T>(this HttpClient http, string requestUri, ISyncLocalStorageService storage) where T : class
         {
-            var response = await http.GetAsync(http.BaseApi() + requestUri);
+            if (!storage.ContainKey(requestUri))
+            {
+                var response = await http.GetAsync(http.BaseApi() + requestUri);
 
-            return await response.Content.ReadAsStringAsync();
+                storage.SetItem(requestUri, await response.ReturnResponse<T>());
+            }
+
+            return storage.GetItem<T>(requestUri);
         }
 
-        public async static Task<T> Get<T>(this HttpClient http, string requestUri) where T : class
+        public async static Task<T> Get<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage) where T : class
         {
-            var response = await http.GetAsync(http.BaseApi() + requestUri);
+            var result = storage.GetItem<T>(requestUri);
 
-            return await response.ReturnResponse<T>();
+            if (result == null)
+            {
+                var response = await http.GetAsync(http.BaseApi() + requestUri);
+
+                storage.SetItem(requestUri, await response.ReturnResponse<T>());
+            }
+
+            return storage.GetItem<T>(requestUri);
         }
 
-        public async static Task<List<T>> GetList<T>(this HttpClient http, string requestUri) where T : class
+        public async static Task<List<T>> GetList<T>(this HttpClient http, string requestUri, ISyncLocalStorageService storage) where T : class
         {
-            var response = await http.GetAsync(http.BaseApi() + requestUri);
+            if (!storage.ContainKey(requestUri))
+            {
+                var response = await http.GetAsync(http.BaseApi() + requestUri);
 
-            return await response.ReturnResponse<List<T>>();
+                storage.SetItem(requestUri, await response.ReturnResponse<List<T>>());
+            }
+
+            return storage.GetItem<List<T>>(requestUri);
         }
 
-        public async static Task<HttpResponseMessage> Post<T>(this HttpClient http, string requestUri, T obj) where T : class
+        public async static Task<List<T>> GetList<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage) where T : class
         {
-            return await http.PostAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
+            var result = storage.GetItem<List<T>>(requestUri);
 
-            //return await response.ReturnResponse<T>();
+            if (result == null || !result.Any())
+            {
+                var response = await http.GetAsync(http.BaseApi() + requestUri);
+
+                storage.SetItem(requestUri, await response.ReturnResponse<List<T>>());
+            }
+
+            return storage.GetItem<List<T>>(requestUri);
         }
 
-        public async static Task<HttpResponseMessage> Put<T>(this HttpClient http, string requestUri, T obj) where T : class
+        public async static Task<HttpResponseMessage> Post<T>(this HttpClient http, string requestUri, T obj, ISyncLocalStorageService storage, string urlGet) where T : class
         {
-            return await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
+            var response = await http.PostAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
 
-            //return await response.ReturnResponse<T>();
+            if (storage != null && response.IsSuccessStatusCode)
+            {
+                storage.SetItem(urlGet, await response.ReturnResponse<T>());
+            }
+
+            return response;
         }
 
-        public async static Task<T> Delete<T>(this HttpClient http, string requestUri)
+        public async static Task<HttpResponseMessage> Put<T>(this HttpClient http, string requestUri, T obj, ISyncLocalStorageService storage, string urlGet) where T : class
         {
-            var response = await http.DeleteAsync(http.BaseApi() + requestUri);
+            var response = await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
 
-            return await response.ReturnResponse<T>();
+            if (storage != null && response.IsSuccessStatusCode)
+            {
+                storage.SetItem(urlGet, await response.ReturnResponse<T>());
+            }
+
+            return response;
         }
     }
 }

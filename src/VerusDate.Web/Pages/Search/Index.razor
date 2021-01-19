@@ -69,9 +69,9 @@ else
 
     protected override async Task LoadData()
     {
-        profile = await Http.Profile_Get();
+        profile = await Http.Profile_Get(LocalStorage);
         gamification = profile?.Gamification;
-        listaUsers = await Http.Profile_ListSearch();
+        listaUsers = await Http.Profile_ListSearch(SessionStorage);
         //interactions = await Http.Interation_GetList();
     }
 

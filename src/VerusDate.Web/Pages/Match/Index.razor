@@ -78,7 +78,7 @@ else
 
     protected override async Task LoadData()
     {
-        matches = await Http.Profile_ListMatch();
+        matches = await Http.Profile_ListMatch(SessionStorage);
         //looking = await Http.ProfileLooking_Get(LocalStorage);
     }
 

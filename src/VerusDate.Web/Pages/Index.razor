@@ -771,8 +771,8 @@
     {
         if (ComponenteUtils.IsAuthenticated)
         {
-            lstDestaques = await Http.Public_ListDestaques();
-            profile = await Http.Profile_Get();
+            lstDestaques = await Http.Public_ListDestaques(SessionStorage);
+            profile = await Http.Profile_Get(LocalStorage);
             gamification = profile?.Gamification;
         }
     }

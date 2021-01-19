@@ -37,7 +37,7 @@
 
     protected override async Task LoadData()
     {
-        _profile = await Http.Profile_Get();
+        _profile = await Http.Profile_Get(LocalStorage);
 
         if (_profile != null && _profile.Photo != null)
         {
@@ -61,7 +61,7 @@
 
                 if (ImageHelper.ValidImage(buffer))
                 {
-                    var response = await Http.Storage_UploadPhotoFace(buffer);
+                    var response = await Http.Storage_UploadPhotoFace(buffer, LocalStorage);
 
                     if (response.IsSuccessStatusCode)
                     {

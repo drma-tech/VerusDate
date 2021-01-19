@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Blazored.LocalStorage;
+using Blazored.SessionStorage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -13,14 +15,14 @@ namespace VerusDate.Web.Api
 {
     public static class ProfileApi
     {
-        public async static Task<ProfileModel> Profile_Get(this HttpClient http)
+        public async static Task<ProfileModel> Profile_Get(this HttpClient http, ISyncLocalStorageService storage)
         {
-            return await http.Get<ProfileModel>($"Profile/Get");
+            return await http.Get<ProfileModel>("Profile/Get", storage);
         }
 
-        public async static Task<ProfileModel> Profile_GetView(this HttpClient http, string IdUserView)
+        public async static Task<ProfileModel> Profile_GetView(this HttpClient http, ISyncSessionStorageService storage, string IdUserView)
         {
-            return await http.Get<ProfileModel>($"Profile/GetView?id={IdUserView}");
+            return await http.Get<ProfileModel>($"Profile/GetView?id={IdUserView}", storage);
         }
 
         public static List<AffinityVM> GetAffinity(ProfileLookingModel profUser, ProfileModel profView)
@@ -133,29 +135,29 @@ namespace VerusDate.Web.Api
 
         #endregion AFFINITY
 
-        public static async Task<List<ProfileSearch>> Profile_ListMatch(this HttpClient http)
+        public static async Task<List<ProfileSearch>> Profile_ListMatch(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<ProfileSearch>("Profile/ListMatch");
+            return await http.GetList<ProfileSearch>("Profile/ListMatch", storage);
         }
 
-        public static async Task<List<ProfileSearch>> Profile_ListSearch(this HttpClient http)
+        public static async Task<List<ProfileSearch>> Profile_ListSearch(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<ProfileSearch>("Profile/ListSearch");
+            return await http.GetList<ProfileSearch>("Profile/ListSearch", storage);
         }
 
-        public async static Task<HttpResponseMessage> Profile_Add(this HttpClient http, ProfileModel obj)
+        public async static Task<HttpResponseMessage> Profile_Add(this HttpClient http, ProfileModel obj, ISyncLocalStorageService storage)
         {
-            return await http.Post("Profile/Add", obj);
+            return await http.Post("Profile/Add", obj, storage, "Profile/Get");
         }
 
-        public async static Task<HttpResponseMessage> Profile_Update(this HttpClient http, ProfileModel obj)
+        public async static Task<HttpResponseMessage> Profile_Update(this HttpClient http, ProfileModel obj, ISyncLocalStorageService storage)
         {
-            return await http.Put("Profile/Update", obj);
+            return await http.Put("Profile/Update", obj, storage, "Profile/Get");
         }
 
-        public async static Task<HttpResponseMessage> Profile_UpdateLooking(this HttpClient http, ProfileModel obj)
+        public async static Task<HttpResponseMessage> Profile_UpdateLooking(this HttpClient http, ProfileModel obj, ISyncLocalStorageService storage)
         {
-            return await http.Put("Profile/UpdateLooking", obj);
+            return await http.Put("Profile/UpdateLooking", obj, storage, "Profile/Get");
         }
     }
 }

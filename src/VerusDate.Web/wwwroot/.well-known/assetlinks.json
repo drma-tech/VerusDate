@@ -1,5 +1,10 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target" : { "namespace": "android_app", "package_name": "com.verusdate.www.twa",
-                   "sha256_cert_fingerprints": ["08:4C:CB:54:8A:EA:5F:85:F2:CA:9F:B3:08:AD:34:0D:A0:3A:69:A9:8E:2A:42:1B:16:40:92:28:09:43:BF:35"] }
-    }]
+[
+  {
+    "relation": [ "delegate_permission/common.handle_all_urls" ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.verusdate.www.twa",
+      "sha256_cert_fingerprints": [ "19:1A:E7:5D:3A:DC:5F:55:FF:18:82:DC:94:68:2F:F6:75:AB:76:83:FD:1C:11:9A:FF:87:65:9C:05:0B:51:1E" ]
+    }
+  }
+]

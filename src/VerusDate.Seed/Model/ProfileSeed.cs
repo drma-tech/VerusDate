@@ -148,7 +148,7 @@ namespace VerusDate.Seed.Model
                 {
                     p.SetIds(Id ?? s.Random.Guid().ToString());
                     p.NickName = s.Name.FirstName();
-                    p.BirthDate = s.Date.Past(18).Date;
+                    p.Age = s.Random.Number(18, 100);
                     p.UpdatePhoto(GetProfilePhoto());
                     p.ActivityStatus = s.PickRandom<ActivityStatus>();
                     p.Distance = s.Random.Number(1, 100);

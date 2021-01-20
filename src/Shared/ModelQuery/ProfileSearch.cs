@@ -13,7 +13,7 @@ namespace VerusDate.Shared.ModelQuery
         public string Id { get; set; }
 
         public string NickName { get; set; }
-        public DateTime BirthDate { get; set; }
+        public int Age { get; set; }
         public ProfileLookingModel Looking { get; set; }
         public ProfilePhotoModel Photo { get; set; }
         public ActivityStatus ActivityStatus { get; set; }

@@ -12,6 +12,8 @@ namespace VerusDate.Api.Core.Interfaces
     {
         Task<T> Get<T>(string id, PartitionKey key, CancellationToken cancellationToken) where T : CosmosBase;
 
+        Task<T> Get<T>(QueryDefinition query, CancellationToken cancellationToken) where T : class;
+
         Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, string partitionKeyValue, CosmosType Type, CancellationToken cancellationToken) where T : CosmosBase;
 
         Task<List<T>> Query<T>(QueryDefinition query, CancellationToken cancellationToken) where T : CosmosBaseQuery;

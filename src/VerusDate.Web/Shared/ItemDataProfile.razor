@@ -1,51 +1,44 @@
 ﻿@using System.Linq.Expressions;
 
-@if (!Affinities.Any(s => s.AttributeName == Field))
-{
-    <Badge Color="Color.Secondary" title="@Value.GetDescription()" Pill="true" Style="@GetCursor()">
-        <Icon Name="@ClassIcon"></Icon> @GetValue()
-        @if (!string.IsNullOrEmpty(@Value.GetDescription()))
-        {
-            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
-        }
-    </Badge>
-}
-else if (Affinities.Single(s => s.AttributeName == Field).HaveAffinity)
-{
-    <Badge Color="Color.Success" title="@Value.GetDescription()" Pill="true" Style="@GetCursor()">
-        <Icon Name="@ClassIcon"></Icon> @GetValue()
-        @if (!string.IsNullOrEmpty(@Value.GetDescription()))
-        {
-            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
-        }
-    </Badge>
-}
-else
-{
-    <Badge Color="Color.Danger" title="@Value.GetDescription()" Pill="true" Style="@GetCursor()">
-        <Icon Name="@ClassIcon"></Icon> @GetValue()
-        @if (!string.IsNullOrEmpty(@Value.GetDescription()))
-        {
-            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
-        }
-    </Badge>
-}
+<Badge Color="@GetColor()" title="@GetDescription()" Pill="true" Style="@GetCursor()">
+    <Icon Name="@ClassIcon"></Icon> @GetValue()
+    @if (!string.IsNullOrEmpty(GetDescription()))
+    {
+        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
+    }
+</Badge>
 
 @code {
     [Parameter] public Expression<Func<object>> For { get; set; }
     [Parameter] public Enum Value { get; set; }
+    [Parameter] public string StringValue { get; set; }
     [Parameter] public string ClassIcon { get; set; }
-    [Parameter] public List<AffinityVM> Affinities { get; set; }
+    [Parameter] public List<AffinityVM> Affinities { get; set; } = new();
 
     private string Title => AttributeHelper.GetName(For);
     private string Field => AttributeHelper.GetNameOf(For);
 
     private string GetValue()
     {
-        if (Value == null)
-            return "Não Respondido";
+        if (string.IsNullOrEmpty(StringValue))
+        {
+            if (Value == null)
+                return "Não Respondido";
+            else
+                return Value.GetName();
+        }
         else
-            return Value.GetName();
+        {
+            return StringValue;
+        }
+    }
+
+    private string GetDescription()
+    {
+        if (string.IsNullOrEmpty(StringValue))
+            return Value.GetDescription();
+        else
+            return null;
     }
 
     private string GetCursor()
@@ -57,6 +50,22 @@ else
         else
         {
             return "cursor: help";
+        }
+    }
+
+    private Color GetColor()
+    {
+        if (!Affinities.Any(s => s.AttributeName == Field))
+        {
+            return Color.Secondary;
+        }
+        else if (Affinities.Single(s => s.AttributeName == Field).HaveAffinity)
+        {
+            return Color.Success;
+        }
+        else //not affinity
+        {
+            return Color.Danger;
         }
     }
 }

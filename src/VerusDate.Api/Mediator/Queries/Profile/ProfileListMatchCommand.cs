@@ -50,15 +50,15 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             var filter = new Dictionary<string, object>();
 
             SQL.Append("SELECT TOP 20 ");
-            SQL.Append("	c.id ");
+            SQL.Append("	c.key as id ");
             SQL.Append("  , c.basic.nickName ");
-            SQL.Append("  , c.bio.birthDate ");
+            SQL.Append("  , TRUNC(DateTimeDiff('month',c.bio.birthDate,GetCurrentDateTime())/12) Age ");
             SQL.Append("  , c.looking ");
             SQL.Append("  , c.photo ");
-            SQL.Append("  , c.dtLastLogin >= DateTimeAdd('d',-1,GetCurrentDateTime()) ? 0 ");
-            SQL.Append("        : c.dtLastLogin >= DateTimeAdd('d',-7,GetCurrentDateTime()) ? 1 ");
-            SQL.Append("        : c.dtLastLogin >= DateTimeAdd('m',-1,GetCurrentDateTime()) ? 2 ");
-            SQL.Append("        : 3 ");
+            SQL.Append("  , c.dtLastLogin >= DateTimeAdd('d',-1,GetCurrentDateTime()) ? 1 ");
+            SQL.Append("        : c.dtLastLogin >= DateTimeAdd('d',-7,GetCurrentDateTime()) ? 2 ");
+            SQL.Append("        : c.dtLastLogin >= DateTimeAdd('m',-1,GetCurrentDateTime()) ? 3 ");
+            SQL.Append("        : 4 ");
             SQL.Append("    as ActivityStatus ");
             SQL.Append("  , ROUND(ST_DISTANCE({'type': 'Point', 'coordinates':[@latitude, @longitude]},{'type': 'Point', 'coordinates':[c.basic.latitude, c.basic.longitude]}) / @valueCalDistance) as Distance ");
             SQL.Append("FROM ");

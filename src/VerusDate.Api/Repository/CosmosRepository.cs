@@ -48,6 +48,24 @@ namespace VerusDate.Api.Repository
             }
         }
 
+        public async Task<T> Get<T>(QueryDefinition query, CancellationToken cancellationToken) where T : class
+        {
+            using (var iterator = Container.GetItemQueryIterator<T>(query))
+            {
+                T result = null;
+
+                while (iterator.HasMoreResults)
+                {
+                    foreach (var item in await iterator.ReadNextAsync(cancellationToken))
+                    {
+                        result = item;
+                    }
+                }
+
+                return result;
+            }
+        }
+
         public async Task<List<T>> Query<T>(Expression<Func<T, bool>> predicate, string partitionKeyValue, CosmosType Type, CancellationToken cancellationToken) where T : CosmosBase
         {
             IQueryable<T> query;

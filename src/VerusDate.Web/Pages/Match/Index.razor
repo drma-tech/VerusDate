@@ -13,7 +13,7 @@ else
         <Column ColumnSize="ColumnSize.Is8.OnTablet.Is6.OnWidescreen.Is4.OnFullHD">
             <Card Margin="Margin.Is2.FromBottom.OnMobile">
                 <CardImage Source="@getCurrentProfile().GetMainPhoto()" Alt="@labelPhoto"></CardImage>
-                <Badge Color="Color.Secondary" Style="position: absolute; bottom: 68px; left: 5px;">@getCurrentProfile().NickName, @getCurrentProfile().BirthDate.GetAge(), @getCurrentProfile().Distance Km</Badge>
+                <Badge Color="Color.Secondary" Style="position: absolute; bottom: 68px; left: 5px;">@getCurrentProfile().NickName, @getCurrentProfile().Age, @getCurrentProfile().Distance Km</Badge>
                 @if (getCurrentProfile().ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                 {
                     <Badge Color="Color.Success" Style="position: absolute; top: 5px; left: 5px;" title="logado recentemente">
@@ -68,7 +68,7 @@ else
     private Affinity objAffinity;
     private int pos;
 
-    private string labelPhoto => $"{getCurrentProfile().NickName}, {getCurrentProfile().BirthDate.GetAge()}, {getCurrentProfile().Distance}";
+    private string labelPhoto => $"{getCurrentProfile().NickName}, {getCurrentProfile().Age}, {getCurrentProfile().Distance}";
 
     private VisibilityOptions Options => new VisibilityOptions()
     {

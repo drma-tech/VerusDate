@@ -37,7 +37,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             var SQL = new StringBuilder();
 
             SQL.Append("SELECT TOP 10 ");
-            SQL.Append("	c.id ");
+            SQL.Append("	c.key as id ");
             SQL.Append("  , c.basic.nickName ");
             SQL.Append("  , c.bio.birthDate ");
             SQL.Append("  , c.photo ");

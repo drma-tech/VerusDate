@@ -103,38 +103,12 @@ namespace VerusDate.Shared.Model
             return ProfileHelper.GetDaysPassed(DtUpdate.Value);
         }
 
-        public ActivityStatus GetActivityStatus()
-        {
-            if (DtLastLogin.Value.Date == DateTime.Now.Date) return ActivityStatus.Today;
-            if (DtLastLogin.Value.Date >= DateTime.Now.Date.AddDays(-7)) return ActivityStatus.Week;
-            if (DtLastLogin.Value.Date >= DateTime.Now.Date.AddMonths(-1)) return ActivityStatus.Month;
-            else return ActivityStatus.Disabled;
-        }
-
-        public double GetDistance(double latitude, double longitude)
-        {
-            return ProfileHelper.GetDistance(Basic.Latitude.Value, latitude, Basic.Longitude.Value, longitude, ProfileHelper.DistanceType.Km);
-        }
-
         public string GetMainPhoto()
         {
             if (Photo == null || string.IsNullOrEmpty(Photo.Main))
                 return GetNoUserPhoto;
             else
                 return $"{BlobPath}/{GetPhotoContainer(PhotoType.PhotoFace)}/{Photo.Main}";
-        }
-
-        /// <summary>
-        /// Use para perfis que não sejam do usuário logado
-        /// </summary>
-        public void ProtectSensitiveData()
-        {
-            DtInsert = null;
-            DtUpdate = null;
-            DtTopList = null;
-            DtLastLogin = null;
-            Basic.Longitude = null;
-            Basic.Latitude = null;
         }
 
         public override void SetIds(string IdLoggedUser)
@@ -148,5 +122,6 @@ namespace VerusDate.Shared.Model
     {
         public ActivityStatus ActivityStatus { get; set; }
         public double Distance { get; set; }
+        public int Age { get; set; }      
     }
 }

@@ -44,7 +44,7 @@ namespace VerusDate.Shared.Helper
         /// <param name="distance"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static string GetDistance(this double distance, DistanceType type)
+        public static string GetDistanceExtension(this double distance, DistanceType type)
         {
             if (distance < 0.5) distance = 0.5;
 
@@ -54,6 +54,16 @@ namespace VerusDate.Shared.Helper
                 DistanceType.Mile => $"{distance} mile",
                 _ => $"null",
             };
+        }
+
+        /// <summary>
+        /// must be in years
+        /// </summary>
+        /// <param name="age"></param>
+        /// <returns></returns>
+        public static string GetAgeExtension(int age)
+        {
+            return age + " Anos";
         }
 
         public static double GetDistance(double lat1, double lat2, double lon1, double lon2, DistanceType type)

@@ -15,7 +15,7 @@ else
             <Column ColumnSize="ColumnSize.Is2.OnFullHD.Is3.OnWidescreen.Is4.OnDesktop.Is6.OnMobile" Margin="Margin.Is3.FromBottom">
                 <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
                     <CardImage Source="@item.GetMainPhoto()" Alt="Photo Image"></CardImage>
-                    <Badge Color="Color.Secondary" Style="position: absolute; bottom: 58px; left: 5px;">@item.NickName, @item.BirthDate.GetAge(), @item.Distance Km</Badge>
+                    <Badge Color="Color.Secondary" Style="position: absolute; bottom: 58px; left: 5px;">@item.NickName, @item.Age, @item.Distance Km</Badge>
                     @if (item.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                     {
                         <Badge Color="Color.Success" Style="position: absolute; top: 5px; left: 5px;" title="logado recentemente">

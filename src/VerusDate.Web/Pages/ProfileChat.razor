@@ -105,7 +105,7 @@
                 <div class="embed-responsive embed-responsive-1by1 divPhoto" style="background-color: black;">
                     <img alt="..." class="imgPhoto" src="@CurrentUser.Photo.Main" />
                     <span style="position: absolute; left: 10px; top: 10px;">
-                        <i class="badge badge-secondary">@CurrentUser.Basic.NickName, @CurrentUser.Bio.BirthDate.GetAge(), @CurrentUser.GetDistance(0,0)</i>
+                        <i class="badge badge-secondary">@CurrentUser.Basic.NickName, @CurrentUser.Bio.BirthDate.GetAge(), @ProfileHelper.GetDistanceExtension(CurrentUser.Distance, ProfileHelper.DistanceType.Km)</i>
                     </span>
                     <div class="text-center" style="position: absolute; bottom: 10px; width: 100%;">
                         @*<BtnChat IdUserView="@IdUserView.ToString()" IdChat="@InteractionVM?.IdChat"></BtnChat>*@
@@ -129,9 +129,9 @@
                     <h4>Bio</h4>
 
                     <ItemDataProfile For="null" Value="@CurrentUser.Bio.BirthDate.GetZodiac()" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => CurrentUser.Bio.RaceCategory)" Value="@CurrentUser.Bio.RaceCategory" ClassIcon="fas fa-globe" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => CurrentUser.Bio.Height)" Value="@CurrentUser.Bio.Height" ClassIcon="fas fa-ruler" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => CurrentUser.Bio.BodyMass)" Value="@CurrentUser.Bio.BodyMass" ClassIcon="fas fa-weight" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => CurrentUser.Bio.RaceCategory)" Value="@CurrentUser.Bio.RaceCategory" ClassIcon="fas fa-globe" Affinities="@affinities"></ItemDataProfile>
 
                     <h4>Lifestyle</h4>
 
@@ -157,7 +157,7 @@
     public Guid IdUserView { get; set; }
 
     private ProfileModel profile { get; set; }
-    private ProfileModel CurrentUser { get; set; }
+    private VerusDate.Shared.Model.ProfileView CurrentUser { get; set; }
     private InteractionModel InteractionVM { get; set; }
     private ChatModel ListChat { get; set; }
     private List<AffinityVM> affinities;
@@ -227,7 +227,7 @@
 
     private VisibilityOptions OptionsProfile => new VisibilityOptions()
     {
-        Loading = CurrentUser == null || affinities == null
+        Loading = IsLoading
     };
 
     protected override async Task LoadData()

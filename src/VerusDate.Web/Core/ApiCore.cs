@@ -43,9 +43,7 @@ namespace VerusDate.Web.Core
 
         public async static Task<T> Get<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage) where T : class
         {
-            var result = storage.GetItem<T>(requestUri);
-
-            if (result == null)
+            if (!storage.ContainKey(requestUri))
             {
                 var response = await http.GetAsync(http.BaseApi() + requestUri);
 
@@ -69,9 +67,7 @@ namespace VerusDate.Web.Core
 
         public async static Task<List<T>> GetList<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage) where T : class
         {
-            var result = storage.GetItem<List<T>>(requestUri);
-
-            if (result == null || !result.Any())
+            if (!storage.ContainKey(requestUri))
             {
                 var response = await http.GetAsync(http.BaseApi() + requestUri);
 

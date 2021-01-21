@@ -8,9 +8,9 @@
             <Column ColumnSize="ColumnSize.Is12">
                 <Card Margin="Margin.Is3.FromBottom">
                     <CardHeader>
-                        Destaques da Semana - Localização (@profile?.Basic?.Location)
+                        Destaques da Semana (@profile?.Basic?.Location)
                     </CardHeader>
-                    <CardBody>
+                    <CardBody Padding="Padding.Is0.FromBottom">
                         @if (OptionsDestaques.HasCustomVisibility)
                         {
                             <CustomVisibility Options="OptionsDestaques"></CustomVisibility>
@@ -39,18 +39,24 @@
             </Column>
         </Row>
         <Row>
-            <Column ColumnSize="ColumnSize.Is6">
+            <Column ColumnSize="ColumnSize.Is12.Is6.OnDesktop">
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6">
                         <Card Margin="Margin.Is3.FromBottom">
                             <CardHeader Style="background-color: #D4AF37; color: #fff !important;">
                                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon>
-                                Ranking - @gamification?.Ranking (@gamification?.XP%)
+                                Ranking
                             </CardHeader>
                             <CardBody>
                                 @if (OptionsGamification.HasCustomVisibility)
                                 {
                                     <CustomVisibility Options="OptionsDestaques"></CustomVisibility>
+                                }
+                                else
+                                {
+                                    <CardText>
+                                        @gamification?.Ranking (@gamification?.XP %)
+                                    </CardText>
                                 }
                             </CardBody>
                         </Card>
@@ -59,12 +65,18 @@
                         <Card Margin="Margin.Is3.FromBottom">
                             <CardHeader Style="background-color: #5c7cfa; color: #fff !important;">
                                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem"></Icon>
-                                Diamante - @gamification?.Diamond
+                                Diamante
                             </CardHeader>
                             <CardBody>
                                 @if (OptionsGamification.HasCustomVisibility)
                                 {
                                     <CustomVisibility Options="OptionsDestaques"></CustomVisibility>
+                                }
+                                else
+                                {
+                                    <CardText>
+                                        @gamification?.Diamond
+                                    </CardText>
                                 }
                             </CardBody>
                         </Card>
@@ -73,12 +85,18 @@
                         <Card Margin="Margin.Is3.FromBottom">
                             <CardHeader Style="background-color: #dc3545; color: #fff !important;">
                                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt"></Icon>
-                                Maça - @gamification?.Food/@GamificationApi.GetMaxFood(gamification)
+                                Maça
                             </CardHeader>
                             <CardBody>
                                 @if (OptionsGamification.HasCustomVisibility)
                                 {
                                     <CustomVisibility Options="OptionsDestaques"></CustomVisibility>
+                                }
+                                else
+                                {
+                                    <CardText>
+                                        @gamification?.Food / @GamificationApi.GetMaxFood(gamification)
+                                    </CardText>
                                 }
                             </CardBody>
                         </Card>
@@ -87,12 +105,16 @@
                         <Card Margin="Margin.Is3.FromBottom">
                             <CardHeader Class="bg-info" Style="color: #fff !important;">
                                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThumbsUp"></Icon>
-                                Popularidade - 75%
+                                Popularidade
                             </CardHeader>
                             <CardBody>
                                 @if (OptionsGamification.HasCustomVisibility)
                                 {
                                     <CustomVisibility Options="OptionsDestaques"></CustomVisibility>
+                                }
+                                else
+                                {
+                                    <CardText>100%</CardText>
                                 }
                             </CardBody>
                         </Card>

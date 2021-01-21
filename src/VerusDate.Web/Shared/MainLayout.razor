@@ -40,37 +40,49 @@
                 @Body
             </Container>
         </LayoutContent>
-        <LayoutFooter Margin="Margin.Is2" Display="Display.None.Block.OnDesktop">
-            <Badge Color="Color.Secondary" Float="Float.Left">©2021 DRMA Technologies. All rights reserved.</Badge>
-            <Badge Color="Color.Danger" Float="Float.Right">Versão MVP</Badge>
-        </LayoutFooter>
-        <LayoutFooter Fixed="true" Display="Display.Block.None.OnDesktop">
-            <Bar Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
-                <BarBrand Display="Display.None.OnDesktop">
-                    <Button Color="Color.Secondary" To="/" Type="ButtonType.Link">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThLarge" />
-                    </Button>
-                    <Button Color="Color.Secondary" To="Profile" Type="ButtonType.Link">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AddressCard" />
-                    </Button>
-                    <Button Color="Color.Secondary" To="Match" Type="ButtonType.Link">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Fire" />
-                    </Button>
-                    <Button Color="Color.Secondary" To="Search" Type="ButtonType.Link">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" />
-                    </Button>
-                    <Button Color="Color.Secondary" To="EventList" Type="ButtonType.Link">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.CalendarAlt" />
-                    </Button>
-                    <Button Color="Color.Secondary" To="Store" Type="ButtonType.Link">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ShoppingCart" />
-                    </Button>
-                    <Button Color="Color.Secondary" To="Support" Type="ButtonType.Link">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug" />
-                    </Button>
-                </BarBrand>
-            </Bar>
-        </LayoutFooter>
+        <AuthorizeView>
+            <Authorized>
+                <LayoutFooter Fixed="true" Display="Display.Block.None.OnDesktop">
+                    <Bar Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light" Padding="Padding.Is0" Display="Display.Block" Style="text-align: center;">
+                        <BarBrand Display="Display.None.OnDesktop" Margin="Margin.Is0.FromRight">
+                            <Buttons>
+                                <Button Color="Color.Secondary" To="/" Type="ButtonType.Link">
+                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThLarge" />
+                                </Button>
+                                <Button Color="Color.Secondary" To="Profile" Type="ButtonType.Link">
+                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AddressCard" />
+                                </Button>
+                                <Button Color="Color.Secondary" To="Match" Type="ButtonType.Link">
+                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Fire" />
+                                </Button>
+                                <Button Color="Color.Secondary" To="Search" Type="ButtonType.Link">
+                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" />
+                                </Button>
+                                <Button Color="Color.Secondary" To="Event" Type="ButtonType.Link">
+                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.CalendarAlt" />
+                                </Button>
+                                <Button Color="Color.Secondary" To="Store" Type="ButtonType.Link">
+                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ShoppingCart" />
+                                </Button>
+                                <Button Color="Color.Secondary" To="Support" Type="ButtonType.Link">
+                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug" />
+                                </Button>
+                            </Buttons>
+                        </BarBrand>
+                    </Bar>
+                </LayoutFooter>
+                <LayoutFooter Margin="Margin.Is2" Display="Display.None.Block.OnDesktop">
+                    <Badge Color="Color.Secondary" Float="Float.Left">©2021 DRMA Technologies. All rights reserved.</Badge>
+                    <Badge Color="Color.Danger" Float="Float.Right">Versão MVP</Badge>
+                </LayoutFooter>
+            </Authorized>
+            <NotAuthorized>
+                <LayoutFooter Margin="Margin.Is2" Display="Display.Block">
+                    <Badge Color="Color.Secondary" Float="Float.Left">©2021 DRMA Technologies. All rights reserved.</Badge>
+                    <Badge Color="Color.Danger" Float="Float.Right">Versão MVP</Badge>
+                </LayoutFooter>
+            </NotAuthorized>
+        </AuthorizeView>
     </Layout>
 </Layout>
 

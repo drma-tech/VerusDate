@@ -20,10 +20,14 @@
         background: #555;
     }
 
+/*BLAZORED*/
+
 /*Blazored.Toast*/
 .blazored-toast-container {
     z-index: 3 !important;
 }
+
+/*BLAZORIZE*/
 
 /*Blazorise Header e Footer*/
 .b-layout-header-fixed {
@@ -32,4 +36,12 @@
 
 .b-layout-footer {
     z-index: 3 !important;
+}
+
+.card-header {
+    padding: .5rem !important;
+}
+
+.card-body {
+    padding: .5rem !important;
 }

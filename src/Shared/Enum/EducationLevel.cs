@@ -7,7 +7,7 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Superior incompleto ou menos")]
         HighSchool = 1,
 
-        [Display(Name = "Tecnólogo / Bacharelado / Licenciatura")]
+        [Display(Name = "Bacharelado / Licenciatura")]
         College = 2,
 
         [Display(Name = "Mestrado / Douturado / PHD")]

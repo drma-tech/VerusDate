@@ -10,41 +10,52 @@
 else
 {
     <Row>
-        <Column ColumnSize="ColumnSize.Is7.OnTablet.Is5.OnWidescreen.Is3.OnFullHD">
+        <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is4.OnWidescreen">
             <Card Margin="Margin.Is3.FromBottom">
                 <CardImage Source="@view.GetMainPhoto()" Alt="@labelPhoto"></CardImage>
-                <Badge Color="Color.Success" Style="position: absolute; top: 5px; left: 5px; cursor: default" title="Perfil compatível com o que você procura">@(GetPercentAffinity() + "%")</Badge>
+                <Tooltip Text="Perfil compatível com o que você procura" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="position: absolute; top: 5px; left: 10px; cursor: help;">
+                    <Badge Color="Color.Success">@(GetPercentAffinity() + "%")</Badge>
+                </Tooltip>
+
                 @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                 {
-                    <Badge Color="Color.Success" Style="position: absolute; top: 5px; right: 5px;" title="logado recentemente">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
-                    </Badge>
+                    <Tooltip Text="logado recentemente" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
+                        <Badge Color="Color.Success">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                        </Badge>
+                    </Tooltip>
                 }
                 else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
                 {
-                    <Badge Color="Color.Warning" Style="position: absolute; top: 5px; right: 5px;" title="logado essa semana">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
-                    </Badge>
+                    <Tooltip Text="logado essa semana" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
+                        <Badge Color="Color.Warning">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                        </Badge>
+                    </Tooltip>
                 }
                 else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
                 {
-                    <Badge Color="Color.Danger" Style="position: absolute; top: 5px; right: 5px;" title="logado esse mês">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
-                    </Badge>
+                    <Tooltip Text="logado esse mês" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
+                        <Badge Color="Color.Danger">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                        </Badge>
+                    </Tooltip>
                 }
                 else
                 {
-                    <Badge Color="Color.Dark" Style="position: absolute; top: 5px; right: 5px;" title="usuário desativado">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
-                    </Badge>
+                    <Tooltip Text="usuário desativado" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
+                        <Badge Color="Color.Dark">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                        </Badge>
+                    </Tooltip>
                 }
-                <CardBody Padding="Padding.Is2">
+                <CardBody>
                     <Badge Color="Color.Secondary">@view.Basic.NickName</Badge>
                     <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0">
                         @view.Basic.Description
                     </Paragraph>
                 </CardBody>
-                <CardBody Padding="Padding.Is2">
+                <CardBody>
                     <BtnChat IdUserView="@IdUserView" IdChat="@InteractionVM?.IdChat"></BtnChat>
                     <Button Color="Color.Danger" title="Reportar este perfil" Float="Float.Right" data-toggle="modal" data-target="#modalReport">
                         <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon> Reportar
@@ -52,18 +63,31 @@ else
                 </CardBody>
             </Card>
         </Column>
-        <Column ColumnSize="ColumnSize.Is9">
+        <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is8.OnWidescreen">
             <Card Margin="Margin.Is3.FromBottom">
-                <CardBody Padding="Padding.Is2">
-                    @*<ProfileBadge Type="@badge?.Ranking"></ProfileBadge>
-                        <ProfileBadge Type="@badge?.Seniority"></ProfileBadge>
-                        <ProfileBadge Type="@badge?.CompletedProfile"></ProfileBadge>
-                        <ProfileBadge Type="@badge?.VerifiedProfile"></ProfileBadge>
-                        <ProfileBadge Type="@badge?.Popular"></ProfileBadge>*@
+                <CardHeader>Conquistas</CardHeader>
+                <CardBody>
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                            <ProfileBadge Type="@badge.Ranking"></ProfileBadge>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                            <ProfileBadge Type="@badge.Seniority"></ProfileBadge>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                            <ProfileBadge Type="@badge.CompletedProfile"></ProfileBadge>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                            <ProfileBadge Type="@badge.VerifiedProfile"></ProfileBadge>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                            <ProfileBadge Type="@badge.Popular"></ProfileBadge>
+                        </Column>
+                    </Row>
                 </CardBody>
             </Card>
             <Card Margin="Margin.Is3.FromBottom">
-                <CardBody Padding="Padding.Is2">
+                <CardBody>
                     <Divider DividerType="DividerType.TextContent" Text="Básico"></Divider>
 
                     <ItemDataProfile For="@(() => view.Distance)" StringValue="@ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)" ClassIcon="fas fa-map-marker-alt" Affinities="@affinities"></ItemDataProfile>
@@ -110,7 +134,7 @@ else
     private VerusDate.Shared.Model.ProfileView view;
     private List<VerusDate.Shared.AffinityVM> affinities = new();
     private ProfileGamificationModel gamification;
-    private ProfileBadgeModel badge;
+    private ProfileBadgeModel badge = new();
     private InteractionModel InteractionVM;
 
     private string labelPhoto => $"{view.Basic.NickName}, {view.Age}, {ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)}";
@@ -134,7 +158,7 @@ else
         {
             affinities = ProfileApi.GetAffinity(user, view);
             gamification = view.Gamification;
-            badge = view.Badge;
+            if (view?.Badge != null) badge = view.Badge;
             //InteractionVM = await Http.Interation_Get(IdUserView.ToString());
         }
     }

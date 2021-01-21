@@ -1,12 +1,14 @@
 ﻿@using System.Linq.Expressions;
 
-<Badge Color="@GetColor()" title="@GetDescription()" Pill="true" Style="@GetCursor()">
-    <Icon Name="@ClassIcon"></Icon> @GetValue()
-    @if (!string.IsNullOrEmpty(GetDescription()))
-    {
-        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
-    }
-</Badge>
+<Tooltip Text="@GetDescription()" Multiline="true" Fade="true" Style="@GetCursor()" Inline="true">
+    <Badge Color="@GetColor()" Pill="true">
+        <Icon Name="@ClassIcon"></Icon> @GetValue()
+        @if (!string.IsNullOrEmpty(GetDescription()))
+        {
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
+        }
+    </Badge>
+</Tooltip>
 
 @code {
     [Parameter] public Expression<Func<object>> For { get; set; }
@@ -14,9 +16,6 @@
     [Parameter] public string StringValue { get; set; }
     [Parameter] public string ClassIcon { get; set; }
     [Parameter] public List<AffinityVM> Affinities { get; set; } = new();
-
-    private string Title => AttributeHelper.GetName(For);
-    private string Field => AttributeHelper.GetNameOf(For);
 
     private string GetValue()
     {
@@ -52,6 +51,8 @@
             return "cursor: help";
         }
     }
+
+    private string Field => AttributeHelper.GetNameOf(For);
 
     private Color GetColor()
     {

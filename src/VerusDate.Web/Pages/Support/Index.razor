@@ -12,13 +12,12 @@
 
 <Alert Color="Color.Warning" Visible="true">
     <AlertDescription>
-        Nossa plataforma ainda está em desenvolvimento. Fique a vontade para sugerir melhorias ou informar quaisquer erros.
+        Fique a vontade para sugerir melhorias ou informar quaisquer erros. Os mais votados terão prioridades.
     </AlertDescription>
-    <CloseButton></CloseButton>
 </Alert>
 
 <Row>
-    <Column ColumnSize="ColumnSize.Is6">
+    <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen">
         <Card>
             <CardHeader>
                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smile"></Icon> Sugestões de Melhorias
@@ -28,12 +27,12 @@
             </CardHeader>
             <CardBody>
                 <Row>
-                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                    <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD">
                         <Field Horizontal="true">
-                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                            <FieldLabel ColumnSize="ColumnSize.Is4">
                                 Status
                             </FieldLabel>
-                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
+                            <FieldBody ColumnSize="ColumnSize.Is8">
                                 <Select TValue="TicketStatus?" @bind-SelectedValue="@TicketStatusFeature">
                                     @foreach (var item in EnumHelper.GetArray<TicketStatus>())
                                     {
@@ -53,7 +52,7 @@
                     <Row Style="max-height: 330px; overflow: auto;">
                         @foreach (var item in GetTicketList(TicketType.FeatureRequest))
                         {
-                            <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is1.FromBottom">
+                            <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD" Margin="Margin.Is1.FromBottom">
                                 <Card Style="background-color: #e2e3e5">
                                     <CardBody Padding="Padding.Is1">
                                         <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Justified">
@@ -92,7 +91,7 @@
             </CardBody>
         </Card>
     </Column>
-    <Column ColumnSize="ColumnSize.Is6">
+    <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen">
         <Card>
             <CardHeader>
                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug"></Icon> Erros
@@ -102,12 +101,12 @@
             </CardHeader>
             <CardBody>
                 <Row>
-                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                    <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD">
                         <Field Horizontal="true">
-                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                            <FieldLabel ColumnSize="ColumnSize.Is4">
                                 Status
                             </FieldLabel>
-                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
+                            <FieldBody ColumnSize="ColumnSize.Is8">
                                 <Select TValue="TicketStatus?" @bind-SelectedValue="@TicketStatusBug">
                                     @foreach (var item in EnumHelper.GetArray<TicketStatus>())
                                     {
@@ -127,7 +126,7 @@
                     <Row Style="max-height: 330px; overflow: auto;">
                         @foreach (var item in GetTicketList(TicketType.Bug))
                         {
-                            <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is1.FromBottom">
+                            <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD" Margin="Margin.Is1.FromBottom">
                                 <Card Style="background-color: #e2e3e5">
                                     <CardBody Padding="Padding.Is1">
                                         <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Justified">

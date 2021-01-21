@@ -2,7 +2,7 @@
 
 @if (Type.Completed())
 {
-    <Button Type="ButtonType.Button" Color="Color.Success" title="@Type.Description">
+    <Button Type="ButtonType.Button" Color="Color.Success" Block="true" title="@Type.Description">
         <Icon Name="@Type.ClassIcon"></Icon> @Type.Title
         @if (Type.MaxLevel != 1)
         {
@@ -12,7 +12,7 @@
 }
 else
 {
-    <Button Type="ButtonType.Button" Color="Color.Secondary" title="@Type.Description">
+    <Button Type="ButtonType.Button" Color="Color.Secondary" Block="true" title="@Type.Description">
         <Icon Name="@Type.ClassIcon"></Icon> @Type.Title
         @if (Type.MaxLevel != 1)
         {

@@ -7,13 +7,14 @@
 @*https://www.regain.us/advice/dating/7-types-of-dating-different-ways-to-meet-your-new-match/*@
 
 <Row>
-    <Column ColumnSize="ColumnSize.Is4">
-        <Card>
+    <Column ColumnSize="ColumnSize.Is12.Is4.OnWidescreen">
+        <Card Margin="Margin.Is3.FromBottom">
             <CardBody Padding="Padding.Is2">
                 <Row>
                     <Column ColumnSize="ColumnSize.Is4">
                         <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash" Class="fa-3x"></Icon>
+                            <br />
                             Blind Date
                         </Paragraph>
                     </Column>
@@ -25,13 +26,14 @@
             </CardBody>
         </Card>
     </Column>
-    <Column ColumnSize="ColumnSize.Is4">
-        <Card>
+    <Column ColumnSize="ColumnSize.Is12.Is4.OnWidescreen">
+        <Card Margin="Margin.Is3.FromBottom">
             <CardBody Padding="Padding.Is2">
                 <Row>
                     <Column ColumnSize="ColumnSize.Is4">
                         <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserClock" Class="fa-3x"></Icon>
+                            <br />
                             Speed Dating
                         </Paragraph>
                     </Column>
@@ -43,18 +45,19 @@
             </CardBody>
         </Card>
     </Column>
-    <Column ColumnSize="ColumnSize.Is4">
-        <Card>
+    <Column ColumnSize="ColumnSize.Is12.Is4.OnWidescreen">
+        <Card Margin="Margin.Is3.FromBottom">
             <CardBody Padding="Padding.Is2">
                 <Row>
                     <Column ColumnSize="ColumnSize.Is4">
                         <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Users" Class="fa-3x"></Icon>
+                            <br />
                             Group Dating
                         </Paragraph>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is8">
-                        <Paragraph Alignment="TextAlignment.Justified">Muitos participantes com mesmos interesses e com livre interação</Paragraph>
+                        <Paragraph Alignment="TextAlignment.Justified">Participantes com mesmos interesses e livre interação</Paragraph>
                         <Button Color="Color.Primary" Block="true" Size="Size.ExtraSmall" Clicked="FeatureUnavailable">Saiba mais</Button>
                     </Column>
                 </Row>
@@ -63,7 +66,7 @@
     </Column>
 </Row>
 
-<Card Margin="Margin.Is3.FromTop">
+<Card Margin="Margin.Is3.FromBottom">
     <CardHeader>Meus Eventos</CardHeader>
     <CardBody>
         @if (OptionsMyEvents.HasCustomVisibility)
@@ -73,7 +76,7 @@
     </CardBody>
 </Card>
 
-<Card Margin="Margin.Is3.FromTop">
+<Card Margin="Margin.Is3.FromBottom">
     <CardHeader>
         Eventos disponíveis na sua localidade (@profile?.Basic.Location)
         <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="FeatureUnavailable" title="Preencher automaticamente">

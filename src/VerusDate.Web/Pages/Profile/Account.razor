@@ -3,29 +3,46 @@
 @using System.Security.Claims
 @inject NavigationManager Navigation
 
-<h3>Account</h3>
+    <AuthorizeView>
+        <Authorized>
+            <Row>
+                <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardHeader>Dados de Acesso</CardHeader>
+                        <CardBody>
+                            <Field>
+                                <FieldLabel>Provedor de Acesso</FieldLabel>
+                                <TextEdit Text="@context.User.Identity.AuthenticationType" Disabled="true" />
+                            </Field>
+                            <Field>
+                                <FieldLabel>Código Único</FieldLabel>
+                                <TextEdit Text="@context.User.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value" Disabled="true" />
+                            </Field>
+                            <Field>
+                                <FieldLabel>Identificação</FieldLabel>
+                                <TextEdit Text="@context.User.Identity.Name" Disabled="true" />
+                            </Field>
+                        </CardBody>
+                    </Card>
+                </Column>
+                <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardHeader>Operações</CardHeader>
+                        <CardBody>
+                            <Button Color="Color.Danger" Block="true" Clicked="()=>{ DeleteAccount(context.User.Identity.AuthenticationType); }">
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserSlash" /> Deletar Conta
+                            </Button>
+                        </CardBody>
+                    </Card>
+                </Column>
+            </Row>
+        </Authorized>
+    </AuthorizeView>
 
-<AuthorizeView>
-    <Authorized>
-        <Paragraph>
-            Provider: @context.User.Identity.AuthenticationType
-        </Paragraph>
-        <Paragraph>
-            Id: @context.User.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value
-        </Paragraph>
-        <Paragraph>
-            Identificação: @context.User.Identity.Name
-        </Paragraph>
-        <Button Color="Color.Danger" Clicked="()=>{ DeleteAccount(context.User.Identity.AuthenticationType); }">
-            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserSlash" /> Deletar Conta
-        </Button>
-    </Authorized>
-</AuthorizeView>
-
-@code {
-    private void DeleteAccount(string provider)
-    {
-        //await SignOutManager.SetSignOutState();
-        Navigation.NavigateTo("/.auth/purge/" + provider);
+    @code {
+        private void DeleteAccount(string provider)
+        {
+            //await SignOutManager.SetSignOutState();
+            Navigation.NavigateTo("/.auth/purge/" + provider);
+        }
     }
-}

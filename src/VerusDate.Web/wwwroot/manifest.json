@@ -1,11 +1,21 @@
 {
   "name": "Verus Date",
-  "short_name": "Verus Date",
-  "start_url": "./",
+  "short_name": "VerusDate",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#03173d",
   "icons": [
+    {
+      "src": "https://www.verusdate.com/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://www.verusdate.com/icon-300.png",
+      "type": "image/png",
+      "sizes": "300x300"
+    },
     {
       "src": "https://www.verusdate.com/icon-512.png",
       "type": "image/png",
@@ -27,9 +37,9 @@
       "url": "/match",
       "icons": [
         {
-          "src": "https://www.verusdate.com/icon-512.png",
+          "src": "https://www.verusdate.com/icon-192.png",
           "type": "image/png",
-          "sizes": "512x512"
+          "sizes": "192x192"
         }
       ]
     },
@@ -40,9 +50,9 @@
       "url": "/search",
       "icons": [
         {
-          "src": "https://www.verusdate.com/icon-512.png",
+          "src": "https://www.verusdate.com/icon-192.png",
           "type": "image/png",
-          "sizes": "512x512"
+          "sizes": "192x192"
         }
       ]
     }

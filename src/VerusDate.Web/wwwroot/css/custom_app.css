@@ -45,3 +45,7 @@
 .card-body {
     padding: .5rem !important;
 }*/
+
+/*[data-tooltip]:not(.is-loading)::before, [data-tooltip]:not(.is-disabled)::before, [data-tooltip]:not([disabled])::before {
+    left: 100% !important;
+}*/

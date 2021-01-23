@@ -1,5 +1,4 @@
 ﻿@page "/Faq"
-@inherits PageCore<Faq>
 
 <div class="row">
     <div class="col-lg-12">
@@ -8,7 +7,7 @@
             <div class="text-center p-lg">
                 <h2>Se você não acha uma resposta para sua pergunta</h2>
                 <span>adicione sua pergunta clicando aqui </span>
-                <button class="btn btn-primary btn-sm" @onclick="FeatureUnavailable"><i class="fa fa-plus"></i> <span class="bold">Nova pergunta</span></button>
+                <button class="btn btn-primary btn-sm" disabled="disabled"><i class="fa fa-plus"></i> <span class="bold">Nova pergunta</span></button>
             </div>
         </div>
 
@@ -84,8 +83,5 @@
 </div>
 
 @code {
-    protected override async Task LoadData()
-    {
-        //ignore
-    }
+
 }

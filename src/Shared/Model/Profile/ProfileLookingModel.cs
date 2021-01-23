@@ -7,7 +7,7 @@ namespace VerusDate.Shared.Model
     public class ProfileLookingModel
     {
         //TODO: IReadOnlyList - LIMITAÇÃO DO BLAZOR
-        [Display(Name = "Intenções", Description = "Campo obrigatório")]
+        [Display(Name = "Intenções", Description = "Campo obrigatório (múltipla escolha)")]
         public IReadOnlyList<Intent> Intent { get; set; } = new List<Intent>();
 
         [Display(Name = "Distância (KM)", Description = "Campo obrigatório")]

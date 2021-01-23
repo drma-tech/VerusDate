@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VerusDate.Web", "src\VerusD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VerusDate.Api", "src\VerusDate.Api\VerusDate.Api.csproj", "{BECEC08F-50AF-4FAD-8E58-D029118454C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerusDate.Seed", "src\VerusDate.Seed\VerusDate.Seed.csproj", "{A6033E01-EA03-4EE6-AA7E-BD808F7D8149}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VerusDate.Seed", "src\VerusDate.Seed\VerusDate.Seed.csproj", "{A6033E01-EA03-4EE6-AA7E-BD808F7D8149}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

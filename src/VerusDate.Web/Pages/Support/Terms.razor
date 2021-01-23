@@ -1,5 +1,4 @@
 ﻿@page "/Terms/{lang}"
-@inherits PageCore<Terms>
 
 <div class="article">
     <div class="row justify-content-md-center">
@@ -267,9 +266,4 @@
 @code {
 
     [Parameter] public string lang { get; set; }
-
-    protected override async Task LoadData()
-    {
-        //ignore
-    }
 }

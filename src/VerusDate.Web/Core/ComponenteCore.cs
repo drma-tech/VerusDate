@@ -8,6 +8,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using VerusDate.Web.Api;
 
 namespace VerusDate.Web.Core
 {
@@ -41,7 +42,7 @@ namespace VerusDate.Web.Core
         protected ILogger<T> Logger { get; set; }
 
         [Inject]
-        protected NavigationManager NavigationManager { get; set; }
+        protected NavigationManager Navigation { get; set; }
 
         [Inject]
         protected IToastService Toast { get; set; }
@@ -84,6 +85,9 @@ namespace VerusDate.Web.Core
         [Inject]
         protected IJSRuntime JsRuntime { get; set; }
 
+        [Inject]
+        protected HttpClient Http { get; set; }
+
         public bool IsLoading { get; set; } = true;
 
         protected abstract Task LoadData();
@@ -92,6 +96,14 @@ namespace VerusDate.Web.Core
         {
             try
             {
+                var principal = await Http.Principal_Get(LocalStorage);
+
+                //força o cadastro, caso não tenha registrado a conta principal
+                if (principal == null)
+                {
+                    Navigation.NavigateTo("/ProfilePrincipal");
+                }
+
                 await base.OnInitializedAsync();
 
                 await LoadData();

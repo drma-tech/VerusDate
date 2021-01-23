@@ -1,0 +1,104 @@
+﻿@page "/ProfilePrincipal"
+@attribute [Authorize]
+@using System.Security.Claims
+@inherits PageCore<ProfilePrincipal>
+
+<EditForm Model="@principal" OnValidSubmit="HandleValidSubmit">
+    <FluentValidationValidator />
+    <Microsoft.AspNetCore.Components.Forms.ValidationSummary />
+    <Row>
+        <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
+            <Card Margin="Margin.Is3.FromBottom">
+                <CardHeader>Dados Cadastrais</CardHeader>
+                <CardBody>
+                    <Fields>
+                        <Field ColumnSize="ColumnSize.Is6.OnDesktop">
+                            <FieldLabel>Provedor de Acesso</FieldLabel>
+                            <TextEdit Text="@principal.IdentityProvider" Disabled="true" />
+                        </Field>
+                        <Field ColumnSize="ColumnSize.Is6.OnDesktop">
+                            <FieldLabel>Identificação</FieldLabel>
+                            <TextEdit Text="@principal.UserDetails" Disabled="true" />
+                        </Field>
+                    </Fields>
+                    <Fields>
+                        <Field ColumnSize="ColumnSize.Is6.OnDesktop">
+                            <FieldLabel>Email</FieldLabel>
+                            <TextEdit @bind-Text="@principal.Email" Role="TextRole.Email" />
+                            <ValidationMessage For="@(() => principal.Email)"></ValidationMessage>
+                        </Field>
+                        <Field ColumnSize="ColumnSize.Is6.OnDesktop">
+                            <FieldLabel>Mobile</FieldLabel>
+                            <TextEdit @bind-Text="@principal.Mobile" />
+                            <ValidationMessage For="@(() => principal.Mobile)"></ValidationMessage>
+                        </Field>
+                    </Fields>
+                </CardBody>
+            </Card>
+        </Column>
+        <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
+            <Card Margin="Margin.Is3.FromBottom">
+                <CardHeader>Noossas Premissas</CardHeader>
+                <CardBody>
+                </CardBody>
+            </Card>
+        </Column>
+    </Row>
+    <Row Margin="Margin.Is3.FromBottom">
+        <Column>
+            <Check TValue="bool" @bind-Checked="@termsAccepted">Aceito os <Blazorise.Link To="Terms/pt" Target="Target.Blank">Termos de Uso</Blazorise.Link></Check>
+        </Column>
+    </Row>
+    <Row>
+        <Column>
+            <Button Type="ButtonType.Submit" Color="Color.Primary" Disabled="@(!termsAccepted)">
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
+            </Button>
+        </Column>
+    </Row>
+</EditForm>
+
+@code {
+    private ClientePrincipal principal = new();
+    private bool termsAccepted;
+
+    protected override async Task LoadData()
+    {
+        if (ComponenteUtils.IsAuthenticated)
+        {
+            principal = await Http.Principal_Get(LocalStorage);
+
+            if (principal == null) principal = new();
+
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+            principal.UserId = authState.User.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value;
+            principal.IdentityProvider = authState.User.Identity.AuthenticationType;
+            principal.UserDetails = authState.User.Identity.Name;
+            principal.UserRoles = authState.User.Claims.Where(w => w.Type == ClaimTypes.Role)?.Select(s => s.Value).ToArray();
+
+            principal.Email = principal.UserDetails;
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            var response = await Http.Principal_Add(principal, LocalStorage);
+
+            if (response.IsSuccessStatusCode)
+            {
+                principal = await Http.Principal_Get(LocalStorage);
+
+                Navigation.NavigateTo("/");
+            }
+
+            await response.ProcessResponse(Toast, "Salvo com sucesso!");
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+}

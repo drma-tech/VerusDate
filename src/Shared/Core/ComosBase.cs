@@ -5,12 +5,13 @@ namespace VerusDate.Shared.Core
 {
     public enum CosmosType
     {
-        Profile = 1,
-        Interaction = 2,
-        Chat = 3,
-        Ticket = 4,
-        TicketVote = 5,
-        Event = 6
+        Principal = 1,
+        Profile = 2,
+        Interaction = 3,
+        Chat = 4,
+        Ticket = 5,
+        TicketVote = 6,
+        Event = 7
     }
 
     public abstract class CosmosBase

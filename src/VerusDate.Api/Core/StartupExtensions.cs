@@ -36,6 +36,7 @@ namespace VerusDate.Api.Core
 
         public static void AddValidations(this IServiceCollection services)
         {
+            services.AddSingleton<IValidator<PrincipalAddCommand>, PrincipalAddCommandValidation>();
             services.AddSingleton<IValidator<ProfileAddCommand>, ProfileAddCommandValidation>();
             services.AddSingleton<IValidator<ProfileUpdateCommand>, ProfileUpdateCommandValidation>();
             services.AddSingleton<IValidator<ProfileUpdateLookingCommand>, ProfileUpdateLookingCommandValidation>();

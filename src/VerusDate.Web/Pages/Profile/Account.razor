@@ -1,48 +1,56 @@
 ﻿@page "/Profile/Account"
 @attribute [Authorize]
+@inherits PageCore<Account>
 @using System.Security.Claims
-@inject NavigationManager Navigation
 
-    <AuthorizeView>
-        <Authorized>
-            <Row>
-                <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
-                    <Card Margin="Margin.Is3.FromBottom">
-                        <CardHeader>Dados de Acesso</CardHeader>
-                        <CardBody>
-                            <Field>
-                                <FieldLabel>Provedor de Acesso</FieldLabel>
-                                <TextEdit Text="@context.User.Identity.AuthenticationType" Disabled="true" />
-                            </Field>
-                            <Field>
-                                <FieldLabel>Código Único</FieldLabel>
-                                <TextEdit Text="@context.User.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value" Disabled="true" />
-                            </Field>
-                            <Field>
-                                <FieldLabel>Identificação</FieldLabel>
-                                <TextEdit Text="@context.User.Identity.Name" Disabled="true" />
-                            </Field>
-                        </CardBody>
-                    </Card>
-                </Column>
-                <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
-                    <Card Margin="Margin.Is3.FromBottom">
-                        <CardHeader>Operações</CardHeader>
-                        <CardBody>
-                            <Button Color="Color.Danger" Block="true" Clicked="()=>{ DeleteAccount(context.User.Identity.AuthenticationType); }">
-                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserSlash" /> Deletar Conta
-                            </Button>
-                        </CardBody>
-                    </Card>
-                </Column>
-            </Row>
-        </Authorized>
-    </AuthorizeView>
+<AuthorizeView>
+    <Authorized>
+        <Row>
+            <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
+                <Card Margin="Margin.Is3.FromBottom">
+                    <CardHeader>Dados de Acesso</CardHeader>
+                    <CardBody>
+                        <Field>
+                            <FieldLabel>Provedor de Acesso</FieldLabel>
+                            <TextEdit Text="@context.User.Identity.AuthenticationType" Disabled="true" />
+                        </Field>
+                        <Field>
+                            <FieldLabel>Código Único</FieldLabel>
+                            <TextEdit Text="@context.User.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value" Disabled="true" />
+                        </Field>
+                        <Field>
+                            <FieldLabel>Identificação</FieldLabel>
+                            <TextEdit Text="@context.User.Identity.Name" Disabled="true" />
+                        </Field>
+                    </CardBody>
+                </Card>
+            </Column>
+            <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
+                <Card Margin="Margin.Is3.FromBottom">
+                    <CardHeader>Operações</CardHeader>
+                    <CardBody>
+                        <Button Color="Color.Danger" Block="true" Clicked="()=>{ DeleteAccount(context.User.Identity.AuthenticationType); }">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserSlash" /> Deletar Conta
+                        </Button>
+                    </CardBody>
+                </Card>
+            </Column>
+        </Row>
+    </Authorized>
+</AuthorizeView>
 
-    @code {
-        private void DeleteAccount(string provider)
+@code {
+    protected override async Task LoadData()
+    {
+        if (ComponenteUtils.IsAuthenticated)
         {
-            //await SignOutManager.SetSignOutState();
-            Navigation.NavigateTo("/.auth/purge/" + provider);
+            //principal = await Http.Principal_Get(LocalStorage);
         }
     }
+
+    private void DeleteAccount(string provider)
+    {
+        //await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("/.auth/purge/" + provider);
+    }
+}

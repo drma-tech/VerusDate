@@ -1,7 +1,6 @@
 ﻿@page "/ProfileSearchCriteria"
 @attribute [Authorize]
 @inherits PageCore<ProfileSearchCriteria>
-@inject HttpClient Http
 
 @if (Options.HasCustomVisibility)
 {
@@ -160,7 +159,7 @@ else
 
     private Shared.modal.BasicModal help;
 
-    private Shared.modal.ProfileDataHelp<object> ProfileDataHelp;
+    //private Shared.modal.ProfileDataHelp<object> ProfileDataHelp;
 
     private VisibilityOptions Options => new VisibilityOptions()
     {

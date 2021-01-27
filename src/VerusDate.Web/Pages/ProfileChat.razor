@@ -4,7 +4,6 @@
 @implements IDisposable
 @attribute [Authorize]
 @inherits PageCore<ProfileChat>
-@inject HttpClient Http
 @*@inject IAccessTokenProvider TokenProvider*@
 
 <div class="row">
@@ -160,7 +159,7 @@
     private VerusDate.Shared.Model.ProfileView CurrentUser { get; set; }
     private InteractionModel InteractionVM { get; set; }
     private ChatModel ListChat { get; set; }
-    private List<AffinityVM> affinities;
+    private List<AffinityVM> affinities = new();
 
     [Required]
     [StringLength(100)]

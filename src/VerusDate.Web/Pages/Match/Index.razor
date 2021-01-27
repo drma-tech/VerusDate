@@ -1,7 +1,6 @@
 ﻿@page "/Match"
 @attribute [Authorize]
 @inherits PageCore<Pages.Match.Index>
-@inject HttpClient Http
 
 @if (Options.HasCustomVisibility)
 {
@@ -63,9 +62,9 @@ else
 
 @code {
 
-    private ProfileLookingModel looking;
+    //private ProfileLookingModel looking;
     private List<ProfileSearch> matches;
-    private Affinity objAffinity;
+    //private Affinity objAffinity;
     private int pos;
 
     private string labelPhoto => $"{getCurrentProfile().NickName}, {getCurrentProfile().Age}, {getCurrentProfile().Distance}";

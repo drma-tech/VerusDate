@@ -1,5 +1,4 @@
 ﻿@inherits ComponenteCore<Affinity>
-@inject HttpClient Http
 
 <button class="btn btn-sm btn-success" title="Percentual de afinidade entre este perfil e o que você está procurando">
     Afinidade <span class="badge badge-light">@GetPercentAffinity()%</span>
@@ -9,7 +8,7 @@
     [Parameter] public ProfileLookingModel Looking { get; set; }
     [Parameter] public ProfileModel ProfView { get; set; }
 
-    private List<AffinityVM> affinities;
+    private List<AffinityVM> affinities = new();
 
     protected override async Task OnInitializedAsync()
     {

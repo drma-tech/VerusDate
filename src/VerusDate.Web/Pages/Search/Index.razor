@@ -1,7 +1,6 @@
 ﻿@page "/Search"
 @attribute [Authorize]
 @inherits PageCore<Search.Index>
-@inject HttpClient Http
 
 @if (Options.HasCustomVisibility)
 {
@@ -59,7 +58,7 @@ else
     private ProfileModel profile;
     private ProfileGamificationModel gamification;
     private List<ProfileSearch> listaUsers;
-    private List<InteractionModel> interactions;
+    private List<InteractionModel> interactions = new();
 
     private VisibilityOptions Options => new VisibilityOptions()
     {

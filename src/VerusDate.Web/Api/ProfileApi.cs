@@ -150,12 +150,12 @@ namespace VerusDate.Web.Api
 
         public async static Task<HttpResponseMessage> Profile_Update(this HttpClient http, ProfileModel obj, ISyncLocalStorageService storage)
         {
-            return await http.Put("Profile/Update", obj, storage, "Profile/Get");
+            return await http.Put<ProfileModel>("Profile/Update", obj, storage, "Profile/Get");
         }
 
         public async static Task<HttpResponseMessage> Profile_UpdateLooking(this HttpClient http, ProfileModel obj, ISyncLocalStorageService storage)
         {
-            return await http.Put("Profile/UpdateLooking", obj, storage, "Profile/Get");
+            return await http.Put<ProfileModel>("Profile/UpdateLooking", obj, storage, "Profile/Get");
         }
     }
 }

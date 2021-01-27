@@ -65,7 +65,7 @@
 
                     if (response.IsSuccessStatusCode)
                     {
-                        _profile = await ApiCore.ReturnResponse<ProfileModel>(response);
+                        _profile = await Http.Profile_Get(LocalStorage);
                     }
 
                     await response.ProcessResponse(Toast, "Foto atualizada com sucesso!");

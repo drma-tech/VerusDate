@@ -1,7 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using Blazored.SessionStorage;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -89,7 +88,7 @@ namespace VerusDate.Web.Core
             return response;
         }
 
-        public async static Task<HttpResponseMessage> Put<T>(this HttpClient http, string requestUri, T obj, ISyncLocalStorageService storage, string urlGet) where T : class
+        public async static Task<HttpResponseMessage> Put<T>(this HttpClient http, string requestUri, object obj, ISyncLocalStorageService storage, string urlGet) where T : class
         {
             var response = await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
 

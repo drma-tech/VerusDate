@@ -3,53 +3,103 @@
 @inherits PageCore<Account>
 @using System.Security.Claims
 
-<AuthorizeView>
-    <Authorized>
-        <Row>
-            <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
-                <Card Margin="Margin.Is3.FromBottom">
-                    <CardHeader>Dados de Acesso</CardHeader>
-                    <CardBody>
-                        <Field>
-                            <FieldLabel>Provedor de Acesso</FieldLabel>
-                            <TextEdit Text="@context.User.Identity.AuthenticationType" Disabled="true" />
-                        </Field>
-                        <Field>
-                            <FieldLabel>Código Único</FieldLabel>
-                            <TextEdit Text="@context.User.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value" Disabled="true" />
-                        </Field>
-                        <Field>
-                            <FieldLabel>Identificação</FieldLabel>
-                            <TextEdit Text="@context.User.Identity.Name" Disabled="true" />
-                        </Field>
-                    </CardBody>
-                </Card>
-            </Column>
-            <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
-                <Card Margin="Margin.Is3.FromBottom">
-                    <CardHeader>Operações</CardHeader>
-                    <CardBody>
-                        <Button Color="Color.Danger" Block="true" Clicked="()=>{ DeleteAccount(context.User.Identity.AuthenticationType); }">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserSlash" /> Deletar Conta
-                        </Button>
-                    </CardBody>
-                </Card>
-            </Column>
-        </Row>
-    </Authorized>
-</AuthorizeView>
+<Row>
+    <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
+        <Card Margin="Margin.Is3.FromBottom">
+            <CardHeader>Dados Cadastrais</CardHeader>
+            <CardBody>
+                <Fields>
+                    <Field ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <FieldLabel>Provedor de Acesso</FieldLabel>
+                        <TextEdit Text="@principal.IdentityProvider" Disabled="true" />
+                    </Field>
+                    <Field ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <FieldLabel>Identificação</FieldLabel>
+                        <TextEdit Text="@principal.UserDetails" Disabled="true" />
+                    </Field>
+                </Fields>
+                <Fields>
+                    <Field ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <FieldLabel>Email</FieldLabel>
+                        <TextEdit Text="@principal.Email" Disabled="true" />
+                    </Field>
+                    <Field ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <FieldLabel>Mobile</FieldLabel>
+                        <TextEdit Text="@principal.Mobile" Disabled="true" />
+                    </Field>
+                </Fields>
+            </CardBody>
+        </Card>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
+        <Card Margin="Margin.Is3.FromBottom">
+            <CardHeader>Operações</CardHeader>
+            <CardBody>
+                <Tooltip Text="Limpar o cache local, caso esteja com problemas dos dados sendo exibidos" Placement="Placement.Bottom" Multiline="true">
+                    <Button Color="Color.Primary" Block="true" Clicked="()=>{ ClearCache(); }">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Eraser" /> Limpar Cache
+                    </Button>
+                </Tooltip>
+                <Tooltip Text="Desfaz todas as interações feitas com outros usuários (isso não afeta seus dados pessoais)" Placement="Placement.Bottom" Multiline="true">
+                    <Button Color="Color.Warning" Block="true" Clicked="()=>{ ResetInteractions(); }" Disabled="true">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.FastBackward" /> Resetar Interações
+                    </Button>
+                </Tooltip>
+                <Tooltip Text="Caso queira apagar seu perfil e todas as interações feitas (seu perfil não ficará mais disponível)" Placement="Placement.Bottom" Multiline="true">
+                    <Button Color="Color.Danger" Block="true" Clicked="()=>{ DeleteAccount(principal.IdentityProvider); }">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserSlash" /> Deletar Conta
+                    </Button>
+                </Tooltip>
+            </CardBody>
+        </Card>
+    </Column>
+</Row>
 
 @code {
+    private ClientePrincipal principal = new();
+
     protected override async Task LoadData()
     {
         if (ComponenteUtils.IsAuthenticated)
         {
-            //principal = await Http.Principal_Get(LocalStorage);
+            principal = await Http.Principal_Get(LocalStorage);
+
+            if (principal == null) principal = new();
+
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+            principal.UserId = authState.User.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value;
+            principal.IdentityProvider = authState.User.Identity.AuthenticationType;
+            principal.UserDetails = authState.User.Identity.Name;
+            principal.UserRoles = authState.User.Claims.Where(w => w.Type == ClaimTypes.Role)?.Select(s => s.Value).ToArray();
+
+            principal.Email = principal.UserDetails;
         }
+    }
+
+    private void ClearCache()
+    {
+        LocalStorage.Clear();
+        SessionStorage.Clear();
+
+        Toast.ShowSuccess("Operação efetuada com sucesso!");
+    }
+
+    private void ResetInteractions()
+    {
+        //transferir para backup
+
+        //deletar dados
+
+        Toast.ShowSuccess("Operação efetuada com sucesso!");
     }
 
     private void DeleteAccount(string provider)
     {
+        //transferir para backup
+
+        //deletar dados
+
         //await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("/.auth/purge/" + provider);
     }

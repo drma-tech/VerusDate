@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using VerusDate.Shared.Model;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api
@@ -13,12 +14,12 @@ namespace VerusDate.Web.Api
         {
             if (bytes == null || bytes.Length == 0) throw new ArgumentNullException(nameof(bytes));
 
-            return await http.Put("Storage/UploadPhotoFace", new { MainPhoto = bytes }, storage, "Profile/Get");
+            return await http.Put<ProfileModel>("Storage/UploadPhotoFace", new { MainPhoto = bytes }, storage, "Profile/Get");
         }
 
         public async static Task<HttpResponseMessage> Storage_UploadPhotoGallery(this HttpClient http, MemoryStream stream1, MemoryStream stream2, MemoryStream stream3, MemoryStream stream4, ISyncLocalStorageService storage)
         {
-            return await http.Put("Storage/UploadPhotoGallery", new
+            return await http.Put<ProfileModel>("Storage/UploadPhotoGallery", new
             {
                 Stream1 = stream1?.ToArray(),
                 Stream2 = stream2?.ToArray(),
@@ -31,7 +32,7 @@ namespace VerusDate.Web.Api
         {
             if (bytes == null || bytes.Length == 0) throw new ArgumentNullException(nameof(bytes));
 
-            return await http.Put("Storage/UploadPhotoValidation", new { Stream = bytes }, null, null);
+            return await http.Put<ProfileModel>("Storage/UploadPhotoValidation", new { Stream = bytes }, null, null);
         }
     }
 }

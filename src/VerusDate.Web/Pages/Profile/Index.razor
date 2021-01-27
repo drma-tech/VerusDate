@@ -12,16 +12,28 @@
                     <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
                         <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="ProfileData">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserEdit"></Icon> Dados
+                            @if (profile?.Basic == null)
+                            {
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Icon>
+                            }
                         </Button>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
                         <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="ProfileSearchCriteria">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Users"></Icon> Busca
+                            @if (profile?.Looking == null)
+                            {
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Icon>
+                            }
                         </Button>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
                         <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="ProfileGallery">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Images"></Icon> Fotos
+                            @if (profile?.Photo == null)
+                            {
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Icon>
+                            }
                         </Button>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">

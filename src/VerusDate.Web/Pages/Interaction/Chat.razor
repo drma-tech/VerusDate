@@ -1,9 +1,9 @@
-﻿@page "/ProfileChat/{IdUserView:guid}"
+﻿@page "/Interaction/View/Chat/{IdUserView}"
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.SignalR.Client
 @implements IDisposable
 @attribute [Authorize]
-@inherits PageCore<ProfileChat>
+@inherits PageCore<Interaction.Chat>
 @*@inject IAccessTokenProvider TokenProvider*@
 
 <div class="row">

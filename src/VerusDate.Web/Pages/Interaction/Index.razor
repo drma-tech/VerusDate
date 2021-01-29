@@ -1,0 +1,90 @@
+﻿@page "/Interaction/Index"
+@attribute [Authorize]
+@inherits PageCore<Interaction.Index>
+
+<Row>
+    <Column>
+        <Card Margin="Margin.Is3.FromBottom">
+            <CardHeader>Matches</CardHeader>
+            <CardBody>
+            </CardBody>
+        </Card>
+        <Card Margin="Margin.Is3.FromBottom">
+            <CardHeader>Likes</CardHeader>
+            <CardBody>
+                @if (OptionsLikes.HasCustomVisibility)
+                {
+                    <CustomVisibility Options="OptionsLikes"></CustomVisibility>
+                }
+                else
+                {
+                    <div class="row">
+                        @foreach (var item in Likes)
+                        {
+                            <div class="col-lg-1 col-md-2 col-3 text-center">
+                                <div class="embed-responsive embed-responsive-1by1 img-fluid img-circle divPhoto">
+                                    <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.GetMainPhoto()" />
+                                </div>
+                                <small>@item.NickName</small>
+                            </div>
+                        }
+                    </div>
+                }
+            </CardBody>
+        </Card>
+    </Column>
+    <Column>
+        <Card Margin="Margin.Is3.FromBottom">
+            <CardHeader>Mensagens</CardHeader>
+            <CardBody>
+            </CardBody>
+        </Card>
+        <Card Margin="Margin.Is3.FromBottom">
+            <CardHeader>Piscadinhas</CardHeader>
+            <CardBody>
+                @if (OptionsBlinks.HasCustomVisibility)
+                {
+                    <CustomVisibility Options="OptionsBlinks"></CustomVisibility>
+                }
+                else
+                {
+                    <div class="row">
+                        @foreach (var item in Blinks)
+                        {
+                            <div class="col-lg-1 col-md-2 col-3 text-center">
+                                <div class="embed-responsive embed-responsive-1by1 img-fluid img-circle divPhoto">
+                                    <img alt="..." class="imgPhoto" style="object-fit: cover;" src="@item.GetMainPhoto()" />
+                                </div>
+                                <small>@item.NickName</small>
+                            </div>
+                        }
+                    </div>
+                }
+            </CardBody>
+        </Card>
+    </Column>
+</Row>
+
+@code {
+    private List<ProfileSearch> Likes { get; set; }
+    private List<ProfileSearch> Blinks { get; set; }
+
+    private VisibilityOptions OptionsLikes => new VisibilityOptions()
+    {
+        Premium = true,
+        Loading = Likes == null,
+        NoData = Likes != null && !Likes.Any()
+    };
+
+    private VisibilityOptions OptionsBlinks => new VisibilityOptions()
+    {
+        Loading = Blinks == null,
+        NoData = Blinks != null && !Blinks.Any()
+    };
+
+    protected override async Task LoadData()
+    {
+        //Likes = await Http.Interation_GetLikes();
+        //Blinks = await Http.Interation_GetBlinks();
+    }
+}

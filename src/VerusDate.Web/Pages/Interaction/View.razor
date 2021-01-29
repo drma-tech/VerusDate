@@ -1,6 +1,6 @@
-﻿@page "/ProfileView/{IdUserView}"
+﻿@page "/Interaction/View/{IdUserView}"
 @attribute [Authorize]
-@inherits PageCore<ProfileView>
+@inherits PageCore<Interaction.View>
 
 @if (Options.HasCustomVisibility)
 {
@@ -12,13 +12,13 @@ else
         <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is4.OnWidescreen">
             <Card Margin="Margin.Is3.FromBottom">
                 <CardImage Source="@view.GetMainPhoto()" Alt="@labelPhoto"></CardImage>
-                <Tooltip Text="Perfil compatível com o que você procura" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="position: absolute; top: 5px; left: 10px; cursor: help;">
+                <Tooltip Text="Perfil compatível com o que você procura" Multiline="true" Fade="true" Placement="Placement.Right" Style="position: absolute; top: 5px; left: 10px; cursor: help;">
                     <Badge Color="Color.Success">@(GetPercentAffinity() + "%")</Badge>
                 </Tooltip>
 
                 @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                 {
-                    <Tooltip Text="logado recentemente" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
+                    <Tooltip Text="logado recentemente" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
                         <Badge Color="Color.Success">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
                         </Badge>
@@ -26,7 +26,7 @@ else
                 }
                 else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
                 {
-                    <Tooltip Text="logado essa semana" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
+                    <Tooltip Text="logado essa semana" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
                         <Badge Color="Color.Warning">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
                         </Badge>
@@ -34,7 +34,7 @@ else
                 }
                 else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
                 {
-                    <Tooltip Text="logado esse mês" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
+                    <Tooltip Text="logado esse mês" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
                         <Badge Color="Color.Danger">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
                         </Badge>
@@ -42,7 +42,7 @@ else
                 }
                 else
                 {
-                    <Tooltip Text="usuário desativado" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
+                    <Tooltip Text="usuário desativado" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
                         <Badge Color="Color.Dark">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
                         </Badge>
@@ -67,19 +67,16 @@ else
                 <CardHeader>Conquistas</CardHeader>
                 <CardBody>
                     <Row>
-                        <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                        <Column ColumnSize="ColumnSize.Is6.Is3.OnWidescreen.Is2.OnFullHD" Margin="Margin.Is2.FromBottom">
                             <ProfileBadge Type="@badge.Ranking"></ProfileBadge>
                         </Column>
-                        <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                        <Column ColumnSize="ColumnSize.Is6.Is3.OnWidescreen.Is2.OnFullHD" Margin="Margin.Is2.FromBottom">
                             <ProfileBadge Type="@badge.Seniority"></ProfileBadge>
                         </Column>
-                        <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
-                            <ProfileBadge Type="@badge.CompletedProfile"></ProfileBadge>
-                        </Column>
-                        <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                        <Column ColumnSize="ColumnSize.Is6.Is3.OnWidescreen.Is2.OnFullHD" Margin="Margin.Is2.FromBottom">
                             <ProfileBadge Type="@badge.VerifiedProfile"></ProfileBadge>
                         </Column>
-                        <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                        <Column ColumnSize="ColumnSize.Is6.Is3.OnWidescreen.Is2.OnFullHD" Margin="Margin.Is2.FromBottom">
                             <ProfileBadge Type="@badge.Popular"></ProfileBadge>
                         </Column>
                     </Row>
@@ -141,7 +138,7 @@ else
     private VisibilityOptions Options => new VisibilityOptions()
     {
         Loading = IsLoading,
-        Invalid = IdUserView == ComponenteUtils.IdUser
+        //Invalid = IdUserView == ComponenteUtils.IdUser
     };
 
     protected override async Task LoadData()

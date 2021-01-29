@@ -11,7 +11,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 {
     public class PrincipalGetCommand : MediatorQuery<ClientePrincipal>
     {
-        public PrincipalGetCommand() : base(CosmosType.Profile)
+        public PrincipalGetCommand() : base(CosmosType.Principal)
         {
         }
 

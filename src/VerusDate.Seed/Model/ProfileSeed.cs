@@ -35,7 +35,6 @@ namespace VerusDate.Seed.Model
                 {
                     p.Ranking.IncreaseLevel();
                     p.Seniority.IncreaseLevel();
-                    p.CompletedProfile.IncreaseLevel();
                     p.VerifiedProfile.IncreaseLevel();
                     p.Popular.IncreaseLevel();
                 });

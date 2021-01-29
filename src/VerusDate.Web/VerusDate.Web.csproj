@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Interaction\ProfileChatList.razor" />
     <Content Remove="Shared\modal\NewTicket_old.razor" />
   </ItemGroup>
 

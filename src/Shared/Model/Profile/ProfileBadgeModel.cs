@@ -6,11 +6,9 @@ namespace VerusDate.Shared.Model
     {
         public BadgeType Ranking { get; set; } = new BadgeType(10, "fas fa-crown", "Ranking", "Nível alcançado");
 
-        public BadgeType Seniority { get; set; } = new BadgeType(10, "fas fa-ghost", "Seniority", "Seniority");
+        public BadgeType Seniority { get; set; } = new BadgeType(10, "fas fa-ghost", "Seniority", "Tempo de existência na plataforma");
 
-        public BadgeType CompletedProfile { get; set; } = new BadgeType(1, "fas fa-check-double", "Perfil Completo", "Perfil Completo");
-
-        public BadgeType VerifiedProfile { get; set; } = new BadgeType(3, "fas fa-user-check", "Perfil Verificado", "Validação de todos os itens da lista de pendências");
+        public BadgeType VerifiedProfile { get; set; } = new BadgeType(3, "fas fa-user-check", "Verificado", "Validação de todos os itens da lista de pendências");
 
         public BadgeType Popular { get; set; } = new BadgeType(1, "far fa-grin-stars", "Popular", "Tem uma relação de 70% ou mais de likes");
     }

@@ -2,23 +2,33 @@
 
 @if (Type.Completed())
 {
-    <Button Type="ButtonType.Button" Color="Color.Success" Block="true" title="@Type.Description">
-        <Icon Name="@Type.ClassIcon"></Icon> @Type.Title
-        @if (Type.MaxLevel != 1)
-        {
-            <Badge Color="Color.Light" Pill="true" Margin="Margin.Is1.FromLeft">@Type.Level</Badge>
-        }
-    </Button>
+    <Tooltip Text="@Type.Description" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="display: block;">
+        <Button Type="ButtonType.Button" Color="Color.Success" Block="true">
+            <Icon Name="@Type.ClassIcon" Class="fa-3x"></Icon>
+            <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+                <Badge Color="Color.Light">@Type.Title</Badge>
+                @if (Type.MaxLevel != 1)
+                {
+                    <Badge Color="Color.Warning" Margin="Margin.Is1.FromLeft" Style="position: absolute; top: 5px; left: 5px;">@Type.Level</Badge>
+                }
+            </Paragraph>
+        </Button>
+    </Tooltip>
 }
 else
 {
-    <Button Type="ButtonType.Button" Color="Color.Secondary" Block="true" title="@Type.Description">
-        <Icon Name="@Type.ClassIcon"></Icon> @Type.Title
-        @if (Type.MaxLevel != 1)
-        {
-            <Badge Color="Color.Light" Pill="true" Margin="Margin.Is1.FromLeft">@Type.Level</Badge>
-        }
-    </Button>
+    <Tooltip Text="@Type.Description" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="display: block;">
+        <Button Type="ButtonType.Button" Color="Color.Secondary" Block="true">
+            <Icon Name="@Type.ClassIcon" Class="fa-3x"></Icon>
+            <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+                <Badge Color="Color.Light">@Type.Title</Badge>
+                @if (Type.MaxLevel != 1)
+                {
+                    <Badge Color="Color.Warning" Margin="Margin.Is1.FromLeft" Style="position: absolute; top: 5px; left: 5px;">@Type.Level</Badge>
+                }
+            </Paragraph>
+        </Button>
+    </Tooltip>
 }
 
 @code {

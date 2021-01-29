@@ -20,7 +20,7 @@
                                 @foreach (var item in lstDestaques)
                                 {
                                     <Column ColumnSize="ColumnSize.Is1.OnFullHD.Is2.OnWidescreen.Is3.OnDesktop.Is4.OnMobile">
-                                        <Blazorise.Link To="@("/ProfileView/" + item.Id)">
+                                        <Blazorise.Link To="@("/Interaction/View/" + item.Id)">
                                             <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
                                                 <CardImage Source="@item.GetMainPhoto()" Alt="Photo Image"></CardImage>
                                                 <Badge Color="Color.Light" Style="font-size: 9px; position: absolute; top: 5px; left: 5px;">99 XP</Badge>

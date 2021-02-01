@@ -39,9 +39,9 @@ else
                 }
                 <CardBody Padding="Padding.Is2">
                     <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0">
-                        <BtnDeslike IdUserView="getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnDeslike>
-                        <BtnBlink IdUserView="getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnBlink>
-                        <BtnLike IdUserView="getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnLike>
+                        <BtnDeslike IdUserView="@getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnDeslike>
+                        <BtnBlink IdUserView="@getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnBlink>
+                        <BtnLike IdUserView="@getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnLike>
                     </Paragraph>
                 </CardBody>
             </Card>

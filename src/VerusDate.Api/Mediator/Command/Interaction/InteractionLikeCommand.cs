@@ -72,8 +72,8 @@ namespace VerusDate.Api.Mediator.Command.Interaction
                 obj.ExecuteMatch();
                 matched.ExecuteMatch();
 
-                var mergeUser1 = await _repo.Update(obj, cancellationToken) != null;
-                var mergeUser2 = await _repo.Update(matched, cancellationToken) != null;
+                var mergeUser1 = await _repo.Update(obj, cancellationToken);
+                await _repo.Update(matched, cancellationToken);
 
                 return mergeUser1;
             }

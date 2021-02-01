@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using VerusDate.Shared;
 using VerusDate.Shared.Enum;
+using VerusDate.Shared.Helper;
 using VerusDate.Shared.Model;
 using VerusDate.Shared.ModelQuery;
 using VerusDate.Web.Core;
@@ -27,8 +28,10 @@ namespace VerusDate.Web.Api
 
         public static List<AffinityVM> GetAffinity(ProfileModel profUser, ProfileView profView)
         {
-            if (profUser == null) throw new ArgumentNullException(nameof(profUser));
-            if (profView == null) throw new ArgumentNullException(nameof(profView));
+            if (profUser == null) throw new NotificationException("Não foi possível identificar seu perfil");
+            if (profView == null) throw new NotificationException("Não foi possível identificar o perfil deste usuário");
+            if (profUser.Looking == null) throw new NotificationException("Não foi possível identificar seu perfil de busca");
+            if (profView.Looking == null) throw new NotificationException("Não foi possível identificar o perfil de busca deste usuário");
 
             var obj = new List<AffinityVM>
             {

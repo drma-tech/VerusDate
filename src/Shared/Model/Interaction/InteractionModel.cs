@@ -33,19 +33,19 @@ namespace VerusDate.Shared.Model
         public void ExecuteLike()
         {
             Like.Execute();
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
 
         public void ExecuteDeslike()
         {
             Deslike.Execute();
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
 
         public void ExecuteBlink()
         {
             Blink.Execute();
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
 
         public void ExecuteMatch()
@@ -53,7 +53,7 @@ namespace VerusDate.Shared.Model
             if (!Like.Value.Value) throw new InvalidOperationException("Ação só poderá ser feita depois do like");
 
             Match.Execute();
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
 
         public void ExecuteBlock()
@@ -61,7 +61,7 @@ namespace VerusDate.Shared.Model
             if (!Match.Value.Value) throw new InvalidOperationException("Ação só poderá ser feita depois do match");
 
             Block.Execute();
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
 
         public override void SetIds(string IdLoggedUser)
@@ -80,12 +80,12 @@ namespace VerusDate.Shared.Model
     public class Action
     {
         public bool? Value { get; set; }
-        public DateTimeOffset? Date { get; set; }
+        public DateTime? Date { get; set; }
 
         public void Execute()
         {
             Value = true;
-            Date = DateTimeOffset.UtcNow;
+            Date = DateTime.UtcNow;
         }
     }
 }

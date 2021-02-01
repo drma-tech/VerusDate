@@ -46,7 +46,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
             RuleFor(x => x.Bio.BirthDate)
                 .NotEmpty()
-                .LessThanOrEqualTo(DateTime.Now.AddYears(-18).AddDays(1)).WithMessage("Você deve ter 18 ou mais para se registrar");
+                .LessThanOrEqualTo(DateTime.UtcNow.AddYears(-18).Date).WithMessage("Você deve ter 18 ou mais para se registrar");
 
             RuleFor(x => x.Bio.RaceCategory)
                 .NotEmpty();

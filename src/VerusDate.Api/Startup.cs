@@ -21,9 +21,9 @@ namespace VerusDate.Api
             var config = builder.GetContext().Configuration;
 
             //web não aceita status NoContent
-            builder.Services.AddMvcCore().AddMvcOptions(x =>
+            builder.Services.AddMvcCore().AddMvcOptions(options =>
             {
-                x.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
+                options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
             });
 
             builder.Services.AddHandles();

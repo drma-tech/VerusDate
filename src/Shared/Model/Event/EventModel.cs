@@ -15,10 +15,10 @@ namespace VerusDate.Shared.Model
         public string IdUserOwner { get; set; }
 
         [Display(Name = "Data Início")]
-        public DateTimeOffset DtStart { get; set; } = DateTimeOffset.UtcNow.AddDays(7);
+        public DateTime DtStart { get; set; } = DateTime.UtcNow.AddDays(7);
 
         [Display(Name = "Data Fim")]
-        public DateTimeOffset DtEnd { get; set; } = DateTimeOffset.UtcNow.AddDays(7).AddHours(3);
+        public DateTime DtEnd { get; set; } = DateTime.UtcNow.AddDays(7).AddHours(3);
 
         [Display(Name = "Tipo de Evento")]
         public EventType EventType { get; set; }
@@ -41,7 +41,7 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Equilibrar os gêneros?")]
         public bool GenderDivision { get; set; }
 
-        public void NewBlindDate(DateTimeOffset DtStart, string Location, int MinimalAge, int MaxAge, Intent[] Intent,
+        public void NewBlindDate(DateTime DtStart, string Location, int MinimalAge, int MaxAge, Intent[] Intent,
             SexualOrientation[] SexualOrientation, bool GenderDivision)
         {
             this.DtStart = DtStart;
@@ -55,7 +55,7 @@ namespace VerusDate.Shared.Model
             this.GenderDivision = GenderDivision;
         }
 
-        public void NewSpeedDating(DateTimeOffset DtStart, string Location, int MinimalAge, int MaxAge, Intent[] Intent,
+        public void NewSpeedDating(DateTime DtStart, string Location, int MinimalAge, int MaxAge, Intent[] Intent,
             SexualOrientation[] SexualOrientation, bool GenderDivision)
         {
             this.DtStart = DtStart;
@@ -69,7 +69,7 @@ namespace VerusDate.Shared.Model
             this.GenderDivision = GenderDivision;
         }
 
-        public void NewGroupDate(DateTimeOffset DtStart, DateTimeOffset DtEnd, string Location, int MinimalAge, int MaxAge, Intent[] Intent,
+        public void NewGroupDate(DateTime DtStart, DateTime DtEnd, string Location, int MinimalAge, int MaxAge, Intent[] Intent,
             SexualOrientation[] SexualOrientation, bool GenderDivision)
         {
             this.DtStart = DtStart;

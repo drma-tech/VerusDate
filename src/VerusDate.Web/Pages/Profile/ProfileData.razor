@@ -153,7 +153,7 @@ else
 
             profile.Basic.GenderIdentity = GenderIdentity.Cisgender;
             profile.Basic.SexualOrientation = SexualOrientation.Heteressexual;
-            profile.Bio.BirthDate = DateTime.Now.AddYears(-18);
+            profile.Bio.BirthDate = DateTime.UtcNow.AddYears(-18).AddDays(1).Date;
             profile.Lifestyle.Diet = Diet.Omnivore;
         }
     }

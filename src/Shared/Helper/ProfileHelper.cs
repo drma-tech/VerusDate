@@ -13,20 +13,20 @@ namespace VerusDate.Shared.Helper
 
         public static int GetAge(this DateTime date)
         {
-            int years = DateTime.Now.Year - date.Year;
-            if (date.Month > DateTime.Now.Month || date.Month == DateTime.Now.Month && date.Day > DateTime.Now.Day)
+            int years = DateTime.UtcNow.Year - date.Year;
+            if (date.Month > DateTime.UtcNow.Month || date.Month == DateTime.UtcNow.Month && date.Day > DateTime.UtcNow.Day)
                 years--;
 
             return years;
         }
 
-        public static int GetDaysPassed(this DateTimeOffset date)
+        public static int GetDaysPassed(this DateTime date)
         {
             const int SECOND = 1;
             const int MINUTE = 60 * SECOND;
             const int HOUR = 60 * MINUTE;
 
-            var ts = new TimeSpan(DateTime.UtcNow.Ticks - date.UtcDateTime.Ticks);
+            var ts = new TimeSpan(DateTime.UtcNow.Ticks - date.ToLocalTime().Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
 
             if (delta < 24 * HOUR)
@@ -94,7 +94,7 @@ namespace VerusDate.Shared.Helper
             };
         }
 
-        public static string GetElapsedTime(this DateTimeOffset date)
+        public static string GetElapsedTime(this DateTime date)
         {
             const int SECOND = 1;
             const int MINUTE = 60 * SECOND;
@@ -102,7 +102,7 @@ namespace VerusDate.Shared.Helper
             const int DAY = 24 * HOUR;
             const int MONTH = 30 * DAY;
 
-            var ts = new TimeSpan(DateTime.UtcNow.Ticks - date.UtcDateTime.Ticks);
+            var ts = new TimeSpan(DateTime.UtcNow.Ticks - date.ToLocalTime().Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
 
             if (delta < 1 * MINUTE)

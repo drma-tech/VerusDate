@@ -65,7 +65,7 @@ namespace VerusDate.Seed.Model
             return new Faker<ProfileBioModel>("pt_BR")
                 .Rules((s, p) =>
                 {
-                    p.BirthDate = s.Date.Past(100, DateTime.Now.AddYears(-18)).Date;
+                    p.BirthDate = s.Date.Past(100, DateTime.UtcNow.AddYears(-18).Date);
                     p.Height = s.PickRandom<Height>();
                     p.RaceCategory = s.PickRandom<RaceCategory>();
                     p.BodyMass = s.PickRandom<BodyMass>();

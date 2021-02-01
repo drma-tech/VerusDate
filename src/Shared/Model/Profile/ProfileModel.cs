@@ -12,8 +12,8 @@ namespace VerusDate.Shared.Model
         {
         }
 
-        public DateTimeOffset? DtTopList { get; set; } = DateTimeOffset.UtcNow;
-        public DateTimeOffset? DtLastLogin { get; set; } = DateTimeOffset.UtcNow;
+        public DateTime? DtTopList { get; set; } = DateTime.UtcNow;
+        public DateTime? DtLastLogin { get; set; } = DateTime.UtcNow;
 
         private readonly string BlobPath = "https://storageverusdate.blob.core.windows.net";
 
@@ -27,12 +27,12 @@ namespace VerusDate.Shared.Model
 
         public void UpList()
         {
-            DtTopList = DateTimeOffset.UtcNow;
+            DtTopList = DateTime.UtcNow;
         }
 
         public void Login()
         {
-            DtLastLogin = DateTimeOffset.UtcNow;
+            DtLastLogin = DateTime.UtcNow;
         }
 
         public void UpdateProfile(ProfileBasicModel basic, ProfileBioModel bio, ProfileLifestyleModel lifestyle)
@@ -41,35 +41,35 @@ namespace VerusDate.Shared.Model
             Bio = bio;
             Lifestyle = lifestyle;
 
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
 
         public void UpdateLooking(ProfileLookingModel obj)
         {
             Looking = obj;
 
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
 
         public void UpdateGamification(ProfileGamificationModel obj)
         {
             Gamification = obj;
 
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
 
         public void UpdateBadge(ProfileBadgeModel obj)
         {
             Badge = obj;
 
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
 
         public void UpdatePhoto(ProfilePhotoModel obj)
         {
             Photo = obj;
 
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
 
         public void ClearSimpleView()

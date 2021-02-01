@@ -108,7 +108,7 @@
                         <TableRow>
                             <TableRowCell><Icon Class="@item.GetIcon()"></Icon> @item.EventType.GetName()</TableRowCell>
                             <TableRowCell>
-                                @item.DtStart.Date.ToShortDateString() (@item.DtStart.DateTime.ToLocalTime().ToShortTimeString() - @item.DtEnd.DateTime.ToLocalTime().ToShortTimeString())
+                                @item.DtStart.Date.ToShortDateString() (@item.DtStart.ToLocalTime().ToShortTimeString() - @item.DtEnd.ToLocalTime().ToShortTimeString())
                             </TableRowCell>
                             <TableRowCell>@item.Location</TableRowCell>
                             <TableRowCell>@item.MinimalAge-@item.MaxAge</TableRowCell>

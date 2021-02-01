@@ -29,7 +29,7 @@ namespace VerusDate.Shared.Model
         {
             TicketStatus = ticketStatus;
 
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
 
         public override void SetIds(string IdLoggedUser)
@@ -44,7 +44,7 @@ namespace VerusDate.Shared.Model
         {
             TotalVotes++;
 
-            DtUpdate = DateTimeOffset.UtcNow;
+            DtUpdate = DateTime.UtcNow;
         }
     }
 }

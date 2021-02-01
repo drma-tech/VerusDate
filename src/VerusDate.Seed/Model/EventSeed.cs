@@ -12,8 +12,8 @@ namespace VerusDate.Seed.Model
                 .Rules((s, p) =>
                 {
                     p.SetIds(IdUser ?? s.Random.Guid().ToString());
-                    p.DtStart = s.Date.FutureOffset();
-                    p.DtEnd = s.Date.FutureOffset();
+                    p.DtStart = s.Date.Future();
+                    p.DtEnd = s.Date.Future();
                     p.EventType = s.PickRandom<EventType>();
                     p.Location = s.Address.City();
                     p.MinimalAge = s.Random.Number(18, 40);

@@ -24,7 +24,7 @@ namespace VerusDate.Shared.Model
 
     public class ChatItem
     {
-        public DateTimeOffset DtMessage { get; set; }
+        public DateTime DtMessage { get; set; }
 
         [Required]
         public string IdUserSender { get; set; }

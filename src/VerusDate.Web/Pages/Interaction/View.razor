@@ -143,7 +143,7 @@ else
 
     protected override async Task LoadData()
     {
-        user = await Http.Profile_Get(LocalStorage);
+        user = await Http.Profile_Get(SessionStorage);
         view = await Http.Profile_GetView(SessionStorage, IdUserView);
 
         if (view == null)
@@ -163,7 +163,7 @@ else
     {
         try
         {
-            var result = await Http.Interation_Deslike(IdUserInteraction);
+            var result = await Http.Interation_Deslike(IdUserInteraction, SessionStorage);
             await result.ProcessResponse(Toast);
         }
         catch (Exception ex)
@@ -176,7 +176,7 @@ else
     {
         try
         {
-            var result = await Http.Interation_Like(IdUserInteraction);
+            var result = await Http.Interation_Like(IdUserInteraction, SessionStorage);
             await result.ProcessResponse(Toast);
         }
         catch (Exception ex)
@@ -189,7 +189,7 @@ else
     {
         try
         {
-            var result = await Http.Interation_Blink(IdUserInteraction);
+            var result = await Http.Interation_Blink(IdUserInteraction, SessionStorage);
             await result.ProcessResponse(Toast);
         }
         catch (Exception ex)

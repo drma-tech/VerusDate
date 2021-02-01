@@ -62,7 +62,7 @@
     {
         if (ComponenteUtils.IsAuthenticated)
         {
-            principal = await Http.Principal_Get(LocalStorage);
+            principal = await Http.Principal_Get(SessionStorage);
 
             if (principal == null) principal = new();
 
@@ -79,7 +79,6 @@
 
     private void ClearCache()
     {
-        LocalStorage.Clear();
         SessionStorage.Clear();
 
         Toast.ShowSuccess("Operação efetuada com sucesso!");

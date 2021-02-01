@@ -18,7 +18,7 @@
     {
         try
         {
-            var result = await Http.Interation_Deslike(IdUserView);
+            var result = await Http.Interation_Deslike(IdUserView, SessionStorage);
             await result.ProcessResponse(Toast);
             await OnClick.InvokeAsync(null);
         }

@@ -1,6 +1,5 @@
 ﻿using Blazored.SessionStorage;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 using VerusDate.Shared.Model;
 using VerusDate.Web.Core;
@@ -14,9 +13,9 @@ namespace VerusDate.Web.Api
             return await http.Get<ChatModel>($"Chat/Get/{IdChat}/{IdUser}", storage);
         }
 
-        public async static Task<HttpResponseMessage> Chat_Insert(this HttpClient http, ChatModel chat)
+        public async static Task<HttpResponseMessage> Chat_Insert(this HttpClient http, ChatModel chat, ISyncSessionStorageService storage)
         {
-            return await http.PostAsJsonAsync("Chat/Insert", chat);
+            return await http.Post("Chat/Insert", chat, storage, $"Chat/Get/{chat.Id}/{chat.Key}");
         }
     }
 }

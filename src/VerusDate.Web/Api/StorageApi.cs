@@ -1,4 +1,4 @@
-﻿using Blazored.LocalStorage;
+﻿using Blazored.SessionStorage;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -10,14 +10,14 @@ namespace VerusDate.Web.Api
 {
     public static class StorageApi
     {
-        public async static Task<HttpResponseMessage> Storage_UploadPhotoFace(this HttpClient http, byte[] bytes, ISyncLocalStorageService storage)
+        public async static Task<HttpResponseMessage> Storage_UploadPhotoFace(this HttpClient http, byte[] bytes, ISyncSessionStorageService storage)
         {
             if (bytes == null || bytes.Length == 0) throw new ArgumentNullException(nameof(bytes));
 
             return await http.Put<ProfileModel>("Storage/UploadPhotoFace", new { MainPhoto = bytes }, storage, "Profile/Get");
         }
 
-        public async static Task<HttpResponseMessage> Storage_UploadPhotoGallery(this HttpClient http, MemoryStream stream1, MemoryStream stream2, MemoryStream stream3, MemoryStream stream4, ISyncLocalStorageService storage)
+        public async static Task<HttpResponseMessage> Storage_UploadPhotoGallery(this HttpClient http, MemoryStream stream1, MemoryStream stream2, MemoryStream stream3, MemoryStream stream4, ISyncSessionStorageService storage)
         {
             return await http.Put<ProfileModel>("Storage/UploadPhotoGallery", new
             {

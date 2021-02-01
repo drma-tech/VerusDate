@@ -1,5 +1,4 @@
-﻿using Blazored.LocalStorage;
-using Blazored.SessionStorage;
+﻿using Blazored.SessionStorage;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -15,19 +14,22 @@ namespace VerusDate.Web.Api
             return await http.GetList<TicketModel>("Ticket/GetList", storage);
         }
 
-        public async static Task<List<TicketVoteModel>> Ticket_GetMyVotes(this HttpClient http, ISyncLocalStorageService storage)
+        public async static Task<List<TicketVoteModel>> Ticket_GetMyVotes(this HttpClient http, ISyncSessionStorageService storage)
         {
             return await http.GetList<TicketVoteModel>("Ticket/GetMyVotes", storage);
         }
 
-        public async static Task<HttpResponseMessage> Ticket_Insert(this HttpClient http, TicketModel obj)
+        public async static Task<HttpResponseMessage> Ticket_Insert(this HttpClient http, TicketModel obj, ISyncSessionStorageService storage)
         {
-            return await http.Post("Ticket/Insert", obj, null, null);
+            storage.RemoveItem("Ticket/GetList");
+            storage.RemoveItem("Ticket/GetMyVotes");
+
+            return await http.Post("Ticket/Insert", obj, storage, null);
         }
 
-        public async static Task<HttpResponseMessage> Ticket_Vote(this HttpClient http, TicketVoteModel obj)
+        public async static Task<HttpResponseMessage> Ticket_Vote(this HttpClient http, TicketVoteModel obj, ISyncSessionStorageService storage)
         {
-            return await http.Post("Ticket/Vote", obj, null, null);
+            return await http.Post("Ticket/Vote", obj, storage, null);
         }
     }
 }

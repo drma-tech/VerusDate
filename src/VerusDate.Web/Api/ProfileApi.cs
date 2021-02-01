@@ -1,5 +1,4 @@
-﻿using Blazored.LocalStorage;
-using Blazored.SessionStorage;
+﻿using Blazored.SessionStorage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +15,7 @@ namespace VerusDate.Web.Api
 {
     public static class ProfileApi
     {
-        public async static Task<ProfileModel> Profile_Get(this HttpClient http, ISyncLocalStorageService storage)
+        public async static Task<ProfileModel> Profile_Get(this HttpClient http, ISyncSessionStorageService storage)
         {
             return await http.Get<ProfileModel>("Profile/Get", storage);
         }
@@ -146,17 +145,17 @@ namespace VerusDate.Web.Api
             return await http.GetList<ProfileSearch>("Profile/ListSearch", storage);
         }
 
-        public async static Task<HttpResponseMessage> Profile_Add(this HttpClient http, ProfileModel obj, ISyncLocalStorageService storage)
+        public async static Task<HttpResponseMessage> Profile_Add(this HttpClient http, ProfileModel obj, ISyncSessionStorageService storage)
         {
             return await http.Post("Profile/Add", obj, storage, "Profile/Get");
         }
 
-        public async static Task<HttpResponseMessage> Profile_Update(this HttpClient http, ProfileModel obj, ISyncLocalStorageService storage)
+        public async static Task<HttpResponseMessage> Profile_Update(this HttpClient http, ProfileModel obj, ISyncSessionStorageService storage)
         {
             return await http.Put<ProfileModel>("Profile/Update", obj, storage, "Profile/Get");
         }
 
-        public async static Task<HttpResponseMessage> Profile_UpdateLooking(this HttpClient http, ProfileModel obj, ISyncLocalStorageService storage)
+        public async static Task<HttpResponseMessage> Profile_UpdateLooking(this HttpClient http, ProfileModel obj, ISyncSessionStorageService storage)
         {
             return await http.Put<ProfileModel>("Profile/UpdateLooking", obj, storage, "Profile/Get");
         }

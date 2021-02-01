@@ -21,7 +21,7 @@
     {
         try
         {
-            var result = await Http.Interation_Blink(IdUserView);
+            var result = await Http.Interation_Blink(IdUserView, SessionStorage);
             await result.ProcessResponse(Toast, msgInfo: "-1 Diamante");
             await OnClick.InvokeAsync(null);
             RefreshCore.RefreshHead(); //precisa atualizar os diamantes

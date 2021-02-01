@@ -110,7 +110,7 @@
 
     protected override async Task LoadData()
     {
-        profile = await Http.Profile_Get(LocalStorage);
+        profile = await Http.Profile_Get(SessionStorage);
 
         if (profile != null)
         {

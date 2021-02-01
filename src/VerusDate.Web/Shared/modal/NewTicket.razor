@@ -42,7 +42,7 @@
             Ticket.TicketStatus = TicketStatus.Published;
             Ticket.SetIds(ComponenteUtils.IdUser);
 
-            var response = await Http.Ticket_Insert(Ticket);
+            var response = await Http.Ticket_Insert(Ticket, SessionStorage);
 
             await response.ProcessResponse(Toast, "Salvo com sucesso!");
 

@@ -66,7 +66,7 @@
     {
         if (ComponenteUtils.IsAuthenticated)
         {
-            principal = await Http.Principal_Get(LocalStorage);
+            principal = await Http.Principal_Get(SessionStorage);
 
             if (principal == null) principal = new();
 
@@ -85,11 +85,11 @@
     {
         try
         {
-            var response = await Http.Principal_Add(principal, LocalStorage);
+            var response = await Http.Principal_Add(principal, SessionStorage);
 
             if (response.IsSuccessStatusCode)
             {
-                principal = await Http.Principal_Get(LocalStorage);
+                principal = await Http.Principal_Get(SessionStorage);
 
                 Navigation.NavigateTo("/");
             }

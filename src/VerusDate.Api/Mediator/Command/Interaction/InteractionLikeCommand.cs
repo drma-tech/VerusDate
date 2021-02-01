@@ -10,7 +10,7 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Interaction
 {
-    public class InteractionLikeCommand : CosmosBase, IRequest<bool>
+    public class InteractionLikeCommand : CosmosBase, IRequest<InteractionModel>
     {
         public InteractionLikeCommand() : base(CosmosType.Interaction)
         {
@@ -29,7 +29,7 @@ namespace VerusDate.Api.Mediator.Command.Interaction
         }
     }
 
-    public class InteractionLikeHandler : IRequestHandler<InteractionLikeCommand, bool>
+    public class InteractionLikeHandler : IRequestHandler<InteractionLikeCommand, InteractionModel>
     {
         private readonly IRepository _repo;
 
@@ -38,12 +38,12 @@ namespace VerusDate.Api.Mediator.Command.Interaction
             _repo = repo;
         }
 
-        public async Task<bool> Handle(InteractionLikeCommand request, CancellationToken cancellationToken)
+        public async Task<InteractionModel> Handle(InteractionLikeCommand request, CancellationToken cancellationToken)
         {
             if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
 
             var obj = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
-            bool result;
+            InteractionModel result;
 
             //executa a interação
             if (obj == null)
@@ -55,13 +55,13 @@ namespace VerusDate.Api.Mediator.Command.Interaction
 
                 obj.ExecuteLike();
 
-                result = await _repo.Add(obj, cancellationToken) != null;
+                result = await _repo.Add(obj, cancellationToken);
             }
             else //caso existe uma interação (blink)
             {
                 obj.ExecuteLike();
 
-                result = await _repo.Update(obj, cancellationToken) != null;
+                result = await _repo.Update(obj, cancellationToken);
             }
 
             //executa o possível match
@@ -75,7 +75,7 @@ namespace VerusDate.Api.Mediator.Command.Interaction
                 var mergeUser1 = await _repo.Update(obj, cancellationToken) != null;
                 var mergeUser2 = await _repo.Update(matched, cancellationToken) != null;
 
-                return mergeUser1 && mergeUser2;
+                return mergeUser1;
             }
             else
             {

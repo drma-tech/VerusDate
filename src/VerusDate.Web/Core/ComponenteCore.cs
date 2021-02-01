@@ -1,5 +1,4 @@
-﻿using Blazored.LocalStorage;
-using Blazored.SessionStorage;
+﻿using Blazored.SessionStorage;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -51,9 +50,6 @@ namespace VerusDate.Web.Core
         protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
         [Inject]
-        protected ISyncLocalStorageService LocalStorage { get; set; }
-
-        [Inject]
         protected ISyncSessionStorageService SessionStorage { get; set; }
 
         protected override async Task OnInitializedAsync()
@@ -96,7 +92,7 @@ namespace VerusDate.Web.Core
         {
             try
             {
-                var principal = await Http.Principal_Get(LocalStorage);
+                var principal = await Http.Principal_Get(SessionStorage);
 
                 //força o cadastro, caso não tenha registrado a conta principal
                 if (principal == null)

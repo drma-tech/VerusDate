@@ -1,5 +1,4 @@
 using AzureStaticWebApps.Blazor.Authentication;
-using Blazored.LocalStorage;
 using Blazored.SessionStorage;
 using Blazored.Toast;
 using Blazorise;
@@ -32,7 +31,6 @@ namespace VerusDate.Web
                 .AddStaticWebAppsAuthentication();
 
             builder.Services.AddBlazoredToast();
-            builder.Services.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);
             builder.Services.AddBlazoredSessionStorage(config => config.JsonSerializerOptions.WriteIndented = true);
 
             //builder.Services.AddLogging(builder => builder

@@ -192,7 +192,7 @@
     protected override async Task LoadData()
     {
         tickets = await Http.Ticket_GetList(SessionStorage);
-        myVotes = await Http.Ticket_GetMyVotes(LocalStorage);
+        myVotes = await Http.Ticket_GetMyVotes(SessionStorage);
     }
 
     private List<TicketModel> GetTicketList(TicketType ticketType)
@@ -232,7 +232,7 @@
             var vote = new TicketVoteModel();
             vote.SetKey(IdTicket);
 
-            await Http.Ticket_Vote(vote);
+            await Http.Ticket_Vote(vote, SessionStorage);
             tickets.Single(s => s.Id == IdTicket).Vote();
 
             myVotes.Add(vote);

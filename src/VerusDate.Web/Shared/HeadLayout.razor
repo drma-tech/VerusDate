@@ -82,7 +82,7 @@
 
     protected async Task LoadData()
     {
-        var profile = await Http.Profile_Get(LocalStorage);
+        var profile = await Http.Profile_Get(SessionStorage);
         gamification = profile?.Gamification;
     }
 }

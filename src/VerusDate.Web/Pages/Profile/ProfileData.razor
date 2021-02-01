@@ -28,7 +28,7 @@ else
                         <CustomField Type="FieldType.MemoEdit" For="@(() => profile.Basic.Description)" @bind-Value="@profile.Basic.Description"
                                      CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.QuoteLeft" Rows="7"></CustomField>
                         <CustomField Type="FieldType.TextEditButtom" For="@(() => profile.Basic.Location)" @bind-Value="@profile.Basic.Location"
-                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkerAlt" Disabled="true" 
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkerAlt" Disabled="true"
                                      ButtomClicked="async ()=> { await SetLocation(profile); }" ButtomCssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt" ButtomTitle="Recuperar posição GPS"></CustomField>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
@@ -141,7 +141,7 @@ else
 
     protected override async Task LoadData()
     {
-        profile = await Http.Profile_Get(LocalStorage);
+        profile = await Http.Profile_Get(SessionStorage);
 
         if (profile == null) //para novos usuários
         {
@@ -160,7 +160,7 @@ else
 
     private async Task SetLocation(ProfileModel profile)
     {
-        if (profile != null && profile.Basic != null && !profile.Basic.Longitude.HasValue)
+        if (profile != null && profile.Basic != null /*&& !profile.Basic.Longitude.HasValue*/)
         {
             var window = await JsRuntime.Window();
             var navigator = await window.Navigator();
@@ -177,7 +177,7 @@ else
                 GPS.Accuracy = position.Location.Coords.Accuracy;
 
                 //TODO: chamar código da api
-                var here = await Http.Map_GetLocation(GPS.Latitude, GPS.Longitude);
+                var here = await Http.Map_GetLocation(SessionStorage, GPS.Latitude, GPS.Longitude);
                 if (here.items.Any())
                 {
                     var address = here.items[0].address;
@@ -213,14 +213,14 @@ else
 
             if (profile.GetDataStatus() == DataStatus.New)
             {
-                response = await Http.Profile_Add(profile, LocalStorage);
+                response = await Http.Profile_Add(profile, SessionStorage);
 
                 if (response.IsSuccessStatusCode)
                     Toast.ShowWarning("+30 XP");
             }
             else
             {
-                response = await Http.Profile_Update(profile, LocalStorage);
+                response = await Http.Profile_Update(profile, SessionStorage);
 
                 if (response.IsSuccessStatusCode)
                     Toast.ShowWarning("-100 XP");
@@ -228,7 +228,7 @@ else
 
             if (response.IsSuccessStatusCode)
             {
-                profile = await Http.Profile_Get(LocalStorage);
+                profile = await Http.Profile_Get(SessionStorage);
             }
 
             await response.ProcessResponse(Toast, "Salvo com sucesso!");

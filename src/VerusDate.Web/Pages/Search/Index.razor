@@ -68,7 +68,7 @@ else
 
     protected override async Task LoadData()
     {
-        profile = await Http.Profile_Get(LocalStorage);
+        profile = await Http.Profile_Get(SessionStorage);
         gamification = profile?.Gamification;
         listaUsers = await Http.Profile_ListSearch(SessionStorage);
         //interactions = await Http.Interation_GetList();
@@ -83,7 +83,7 @@ else
     {
         try
         {
-            var result = await Http.Interation_Blink(IdUserInteraction);
+            var result = await Http.Interation_Blink(IdUserInteraction, SessionStorage);
 
             await result.ProcessResponse(Toast, msgInfo: "-1 Diamante");
 

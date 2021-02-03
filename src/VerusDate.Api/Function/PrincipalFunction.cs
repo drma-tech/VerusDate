@@ -26,7 +26,7 @@ namespace VerusDate.Api.Function
 
         [FunctionName("PrincipalGet")]
         public async Task<IActionResult> Get(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Principal/Get")] HttpRequest req,
+           [HttpTrigger(AuthorizationLevel.Anonymous, FunctionMethod.GET, Route = "Principal/Get")] HttpRequest req,
            ILogger log, CancellationToken cancellationToken)
         {
             using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);

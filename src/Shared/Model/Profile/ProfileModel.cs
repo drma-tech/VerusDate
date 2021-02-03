@@ -25,6 +25,9 @@ namespace VerusDate.Shared.Model
         public ProfileBadgeModel Badge { get; set; }
         public ProfilePhotoModel Photo { get; set; }
 
+        //public string[] ActiveInteractions { get; set; }
+        public string[] PassiveInteractions { get; set; } = Array.Empty<string>();
+
         public void UpList()
         {
             DtTopList = DateTime.UtcNow;

@@ -9,14 +9,14 @@ namespace VerusDate.Shared.Model
         {
         }
 
-        public static string GetId(string IdLoggedUser, string IdUserInteraction)
+        public static string GetId(CosmosType Type, string IdLoggedUser, string IdUserInteraction)
         {
-            return $"{IdLoggedUser}-{IdUserInteraction}";
+            return $"{Type}:{IdLoggedUser}-{IdUserInteraction}";
         }
 
         public string GetInvertedId()
         {
-            return $"{IdUserInteraction}-{IdLoggedUser}";
+            return $"{Type}:{IdUserInteraction}-{IdLoggedUser}";
         }
 
         public string IdLoggedUser { get; set; }

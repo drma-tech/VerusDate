@@ -34,7 +34,7 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
 
         public async Task<InteractionModel> Handle(InteractionGetCommand request, CancellationToken cancellationToken)
         {
-            var Id = InteractionModel.GetId(request.IdLoggedUser, request.IdUserInteraction);
+            var Id = InteractionModel.GetId(CosmosType.Interaction, request.IdLoggedUser, request.IdUserInteraction);
 
             return await _repo.Get<InteractionModel>(Id, new PartitionKey(Id), cancellationToken);
         }

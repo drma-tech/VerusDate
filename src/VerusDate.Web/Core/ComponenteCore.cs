@@ -92,12 +92,15 @@ namespace VerusDate.Web.Core
         {
             try
             {
-                var principal = await Http.Principal_Get(SessionStorage);
-
-                //força o cadastro, caso não tenha registrado a conta principal
-                if (principal == null)
+                if (ComponenteUtils.IsAuthenticated)
                 {
-                    Navigation.NavigateTo("/ProfilePrincipal");
+                    var principal = await Http.Principal_Get(SessionStorage);
+
+                    //força o cadastro, caso não tenha registrado a conta principal
+                    if (principal == null)
+                    {
+                        Navigation.NavigateTo("/ProfilePrincipal");
+                    }
                 }
 
                 await base.OnInitializedAsync();

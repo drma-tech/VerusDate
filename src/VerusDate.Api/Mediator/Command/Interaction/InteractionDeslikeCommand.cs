@@ -2,6 +2,7 @@
 using Microsoft.Azure.Cosmos;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
@@ -43,6 +44,14 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
             if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
 
             var obj = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+
+            //registra a interação. necessário, pois o cosmos não faz cross join com outros documentos (list match)
+            var profile = await _repo.Get<ProfileModel>(CosmosType.Profile + ":" + request.IdUserInteraction, new PartitionKey(request.IdUserInteraction), cancellationToken);
+            if (!Array.Exists(profile.PassiveInteractions, x => x == request.IdLoggedUser))
+            {
+                profile.PassiveInteractions = profile.PassiveInteractions.Concat(new string[] { request.IdLoggedUser }).ToArray();
+            }
+            await _repo.Update(profile, cancellationToken);
 
             if (obj == null)
             {

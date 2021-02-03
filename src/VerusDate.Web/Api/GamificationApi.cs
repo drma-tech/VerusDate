@@ -11,11 +11,11 @@ namespace VerusDate.Web.Api
     {
         public static int GetMaxFood(ProfileGamificationModel obj) => obj == null ? 20 : obj.MaxFood;
 
-        public async static Task<HttpResponseMessage> Gamification_AddDiamond(this HttpClient http, int qtd, ISyncSessionStorageService storage)
+        public async static Task<HttpResponseMessage> Store_AddDiamond(this HttpClient http, int qtd, ISyncSessionStorageService storage)
         {
             if (qtd <= 0) throw new ArgumentNullException(nameof(qtd));
 
-            var response = await http.Post("Gamification/AddDiamond", new { qtd }, storage, "Profile/Get");
+            var response = await http.Put<ProfileModel>("Store/AddDiamond", new { qtd }, storage, "Profile/Get");
 
             if (response.IsSuccessStatusCode)
             {
@@ -27,11 +27,11 @@ namespace VerusDate.Web.Api
             return response;
         }
 
-        public async static Task<HttpResponseMessage> Gamification_ExchangeFood(this HttpClient http, int QtdDiamond, ISyncSessionStorageService storage)
+        public async static Task<HttpResponseMessage> Store_ExchangeFood(this HttpClient http, int QtdDiamond, ISyncSessionStorageService storage)
         {
             if (QtdDiamond <= 0) throw new ArgumentNullException(nameof(QtdDiamond));
 
-            var response = await http.Post("Gamification/ExchangeFood", new { QtdDiamond }, storage, "Profile/Get");
+            var response = await http.Put<ProfileModel>("Store/ExchangeFood", new { QtdDiamond }, storage, "Profile/Get");
 
             if (response.IsSuccessStatusCode)
             {

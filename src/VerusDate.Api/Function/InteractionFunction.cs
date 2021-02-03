@@ -149,7 +149,7 @@ namespace VerusDate.Api.Function
 
         [FunctionName("InteractionBlink")]
         public async Task<IActionResult> Blink(
-            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Blink")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Interaction/Blink")] HttpRequest req,
             ILogger log, CancellationToken cancellationToken)
         {
             using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
@@ -174,7 +174,7 @@ namespace VerusDate.Api.Function
 
         [FunctionName("InteractionBlock")]
         public async Task<IActionResult> Block(
-            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Block")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Interaction/Block")] HttpRequest req,
             ILogger log, CancellationToken cancellationToken)
         {
             using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
@@ -199,7 +199,7 @@ namespace VerusDate.Api.Function
 
         [FunctionName("InteractionDeslike")]
         public async Task<IActionResult> Deslike(
-            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Deslike")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Interaction/Deslike")] HttpRequest req,
             ILogger log, CancellationToken cancellationToken)
         {
             using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
@@ -224,7 +224,7 @@ namespace VerusDate.Api.Function
 
         [FunctionName("InteractionLike")]
         public async Task<IActionResult> Like(
-            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/Like")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Interaction/Like")] HttpRequest req,
             ILogger log, CancellationToken cancellationToken)
         {
             using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
@@ -246,7 +246,7 @@ namespace VerusDate.Api.Function
 
         [FunctionName("InteractionGenerateChat")]
         public async Task<IActionResult> GenerateChat(
-            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Interaction/GenerateChat")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Interaction/GenerateChat")] HttpRequest req,
             ILogger log, CancellationToken cancellationToken)
         {
             using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);

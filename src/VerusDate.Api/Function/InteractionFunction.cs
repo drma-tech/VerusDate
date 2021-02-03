@@ -240,7 +240,7 @@ namespace VerusDate.Api.Function
             catch (Exception ex)
             {
                 log.LogError(ex, null, req.Query.ToList());
-                return new BadRequestObjectResult(ex.ProcessException());
+                return new BadRequestObjectResult(ex);
             }
         }
 

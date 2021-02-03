@@ -18,6 +18,7 @@ namespace VerusDate.Shared.ModelQuery
         public ProfilePhotoModel Photo { get; set; }
         public ActivityStatus ActivityStatus { get; set; }
         public double Distance { get; set; }
+        public bool Visible { get; set; } = true;
 
         public void SetIds(string IdLoggedUser)
         {

@@ -39,9 +39,9 @@ else
                 }
                 <CardBody Padding="Padding.Is2">
                     <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0">
-                        <BtnDeslike IdUserView="@getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnDeslike>
-                        <BtnBlink IdUserView="@getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnBlink>
-                        <BtnLike IdUserView="@getCurrentProfile().Id" OnClick="ShowNextProfile"></BtnLike>
+                        <BtnDeslike IdUserView="@getCurrentProfile().Id" OnClick="Interact"></BtnDeslike>
+                        <BtnBlink IdUserView="@getCurrentProfile().Id" OnClick="Interact"></BtnBlink>
+                        <BtnLike IdUserView="@getCurrentProfile().Id" OnClick="Interact"></BtnLike>
                     </Paragraph>
                 </CardBody>
             </Card>
@@ -77,7 +77,8 @@ else
 
     protected override async Task LoadData()
     {
-        matches = await Http.Profile_ListMatch(SessionStorage);
+        var list = await Http.Profile_ListMatch(SessionStorage);
+        matches = list.Where(w => w.Visible).ToList();
         //looking = await Http.ProfileLooking_Get(LocalStorage);
     }
 
@@ -88,8 +89,11 @@ else
         return matches[pos];
     }
 
-    private void ShowNextProfile()
+    private void Interact()
     {
+        matches[pos].Visible = false;
+        SessionStorage.Update_Profile_ListMatch(matches);
+
         pos++;
         //objAffinity.RefreshComponente(looking, getCurrentProfile());
     }

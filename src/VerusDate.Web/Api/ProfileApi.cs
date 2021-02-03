@@ -56,7 +56,7 @@ namespace VerusDate.Web.Api
                 obj.Add(new AffinityVM(nameof(profView.Lifestyle.Religion), CheckEnum((int)profView.Lifestyle.Religion.Value, (int?)profUser.Looking.Religion)));
                 obj.Add(new AffinityVM(nameof(profView.Lifestyle.EducationLevel), CheckEnum((int)profView.Lifestyle.EducationLevel.Value, (int?)profUser.Looking.EducationLevel)));
                 obj.Add(new AffinityVM(nameof(profView.Lifestyle.CareerCluster), CheckEnum((int)profView.Lifestyle.CareerCluster.Value, (int?)profUser.Looking.CareerCluster)));
-                //abaixo: não é oq ele procura, é o que ele é
+                //daqui em diante: não é oq ele procura, é o que ele é
                 obj.Add(new AffinityVM(nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int)profView.Lifestyle.MoneyPersonality.Value, (int?)profUser.Lifestyle.MoneyPersonality)));
                 obj.Add(new AffinityVM(nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnum((int)profView.Lifestyle.MyersBriggsTypeIndicator.Value, (int?)profUser.Lifestyle.MyersBriggsTypeIndicator)));
                 obj.Add(new AffinityVM(nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality)));
@@ -134,6 +134,11 @@ namespace VerusDate.Web.Api
         }
 
         #endregion AFFINITY
+
+        public static void Update_Profile_ListMatch(this ISyncSessionStorageService storage, List<ProfileSearch> list)
+        {
+            storage.SetItem("Profile/ListMatch", list);
+        }
 
         public static async Task<List<ProfileSearch>> Profile_ListMatch(this HttpClient http, ISyncSessionStorageService storage)
         {

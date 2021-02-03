@@ -40,7 +40,7 @@ namespace VerusDate.Api.Mediator.Command.Interaction
 
         public async Task<InteractionModel> Handle(InteractionLikeCommand request, CancellationToken cancellationToken)
         {
-            if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
+            if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException("Você não pode interagir com você mesmo");
 
             var obj = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
             InteractionModel result;

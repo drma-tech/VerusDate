@@ -1,16 +1,15 @@
 ﻿@inherits ComponenteCore<BtnChat>
 @inject HttpClient Http
 
-<Button Color="Color.Primary" title="Conversar" Clicked="GoChat" Disabled="string.IsNullOrEmpty(IdChat)">
+<Button Color="Color.Primary" title="Conversar" Clicked="GoChat">
     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Comments"></Icon>
 </Button>
 
 @code {
     [Parameter] public string IdUserView { get; set; }
-    [Parameter] public string IdChat { get; set; }
 
     private void GoChat()
     {
-        Navigation.NavigateTo($"ProfileChat/{IdUserView}");
+        Navigation.NavigateTo($"/Interaction/View/Chat/{IdUserView}");
     }
 }

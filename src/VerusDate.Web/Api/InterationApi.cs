@@ -15,7 +15,7 @@ namespace VerusDate.Web.Api
         {
             if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
 
-            return await http.Get<InteractionModel>($"Interaction/Get/{IdUserInteraction}", storage);
+            return await http.Get<InteractionModel>($"Interaction/Get?id={IdUserInteraction}", storage);
         }
 
         public async static Task<List<InteractionModel>> Interation_GetList(this HttpClient http, ISyncSessionStorageService storage)
@@ -33,9 +33,9 @@ namespace VerusDate.Web.Api
             return await http.GetList<ProfileSearch>("Interaction/GetBlinks", storage);
         }
 
-        public async static Task<List<ProfileSearch>> Interation_GetNewMatches(this HttpClient http, ISyncSessionStorageService storage)
+        public async static Task<List<ProfileSearch>> Interation_GetMyMatches(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<ProfileSearch>("Interaction/GetNewMatches", storage);
+            return await http.GetList<ProfileSearch>("Interaction/GetMyMatches", storage);
         }
 
         public async static Task<List<ProfileChatListModel>> Interation_GetChatList(this HttpClient http, ISyncSessionStorageService storage)

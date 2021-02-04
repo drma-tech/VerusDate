@@ -9,10 +9,7 @@
     <Compile Remove="Core\Hubs\ChatHub.cs" />
     <Compile Remove="Mediator\Behavior\UserSessionBehavior.cs" />
     <Compile Remove="Mediator\Queries\GlobalInteraction\GlobalInteractionsGetCommand.cs" />
-    <Compile Remove="Mediator\Queries\Interaction\InteractionGetBlinksCommand.cs" />
     <Compile Remove="Mediator\Queries\Interaction\InteractionGetChatListCommand.cs" />
-    <Compile Remove="Mediator\Queries\Interaction\InteractionGetLikesCommand.cs" />
-    <Compile Remove="Mediator\Queries\Interaction\InteractionGetNewMatchesCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.8.0" />

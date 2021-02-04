@@ -12,9 +12,9 @@ using VerusDate.Shared.ModelQuery;
 
 namespace VerusDate.Api.Mediator.Queries.Interaction
 {
-    public class InteractionGetBlinksCommand : MediatorQuery<List<ProfileSearch>>
+    public class InteractionGetMyMatchesCommand : MediatorQuery<List<ProfileSearch>>
     {
-        public InteractionGetBlinksCommand() : base(CosmosType.Profile)
+        public InteractionGetMyMatchesCommand() : base(CosmosType.Profile)
         {
         }
 
@@ -24,29 +24,28 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
         }
     }
 
-    public class InteractionGetBlinksHandler : IRequestHandler<InteractionGetBlinksCommand, List<ProfileSearch>>
+    public class InteractionGetMyMatchesHandler : IRequestHandler<InteractionGetMyMatchesCommand, List<ProfileSearch>>
     {
         private readonly IRepository _repo;
 
-        public InteractionGetBlinksHandler(IRepository repo)
+        public InteractionGetMyMatchesHandler(IRepository repo)
         {
             _repo = repo;
         }
 
-        public async Task<List<ProfileSearch>> Handle(InteractionGetBlinksCommand request, CancellationToken cancellationToken)
+        public async Task<List<ProfileSearch>> Handle(InteractionGetMyMatchesCommand request, CancellationToken cancellationToken)
         {
             //recupera as interações com matches
 
             var sqlIds = new StringBuilder();
-            //TODO: É OS BLINKS QUE EU RECEBI, NAO OQ EU DEI
+
             sqlIds.Append("SELECT c.idUserInteraction id ");
             sqlIds.Append("FROM c ");
             sqlIds.Append("WHERE ");
             sqlIds.Append($"	c.type             = {(int)CosmosType.Interaction} ");
             sqlIds.Append($"	AND c.key          = '{request.IdLoggedUser}' ");
-            sqlIds.Append("	    AND c.blink[\"value\"] = true ");
-            sqlIds.Append("	    AND c.match[\"value\"] != true ");
-            sqlIds.Append("	    AND c.block[\"value\"] != true ");
+            sqlIds.Append("	AND c.match[\"value\"] = true ");
+            sqlIds.Append("	AND c.block[\"value\"] != true ");
 
             var queryIds = new QueryDefinition(sqlIds.ToString());
 

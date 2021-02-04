@@ -5,6 +5,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using VerusDate.Api.Mediator.Command.Interaction;
 using VerusDate.Api.Mediator.Queries.Interaction;
 using VerusDate.Server.Mediator.Commands.Interaction;
 using VerusDate.Shared.Model;
+using VerusDate.Shared.ModelQuery;
 
 namespace VerusDate.Api.Function
 {
@@ -67,65 +69,71 @@ namespace VerusDate.Api.Function
         //    }
         //}
 
-        //[FunctionName("InteractionGetLikes")]
-        //public async Task<IActionResult> GetLikes(
-        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetLikes")] HttpRequest req,
-        //   ILogger log, CancellationToken cancellationToken)
-        //{
-        //    try
-        //    {
-        //        var command = await JsonSerializer.DeserializeAsync<InteractionGetLikesCommand>(req.Body);
+        [FunctionName("InteractionGetLikes")]
+        public async Task<IActionResult> GetLikes(
+           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetLikes")] HttpRequest req,
+           ILogger log, CancellationToken cancellationToken)
+        {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
 
-        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+            try
+            {
+                var request = req.BuildRequestQuery<InteractionGetLikesCommand, List<ProfileSearch>>();
 
-        //        return new OkObjectResult(result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.LogError(ex, null, req.Query.ToList());
-        //        return new BadRequestObjectResult(ex.Message);
-        //    }
-        //}
+                var result = await _mediator.Send(request, source.Token);
 
-        //[FunctionName("InteractionGetBlinks")]
-        //public async Task<IActionResult> GetBlinks(
-        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetBlinks")] HttpRequest req,
-        //   ILogger log, CancellationToken cancellationToken)
-        //{
-        //    try
-        //    {
-        //        var command = await JsonSerializer.DeserializeAsync<InteractionGetBlinksCommand>(req.Body);
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, null, req.Query.ToList());
+                return new BadRequestObjectResult(ex.Message);
+            }
+        }
 
-        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+        [FunctionName("InteractionGetBlinks")]
+        public async Task<IActionResult> GetBlinks(
+           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetBlinks")] HttpRequest req,
+           ILogger log, CancellationToken cancellationToken)
+        {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
 
-        //        return new OkObjectResult(result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.LogError(ex, null, req.Query.ToList());
-        //        return new BadRequestObjectResult(ex.Message);
-        //    }
-        //}
+            try
+            {
+                var request = req.BuildRequestQuery<InteractionGetBlinksCommand, List<ProfileSearch>>();
 
-        //[FunctionName("InteractionGetNewMatches")]
-        //public async Task<IActionResult> GetNewMatches(
-        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetNewMatches")] HttpRequest req,
-        //   ILogger log, CancellationToken cancellationToken)
-        //{
-        //    try
-        //    {
-        //        var command = await JsonSerializer.DeserializeAsync<InteractionGetNewMatchesCommand>(req.Body);
+                var result = await _mediator.Send(request, source.Token);
 
-        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, null, req.Query.ToList());
+                return new BadRequestObjectResult(ex.Message);
+            }
+        }
 
-        //        return new OkObjectResult(result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.LogError(ex, null, req.Query.ToList());
-        //        return new BadRequestObjectResult(ex.Message);
-        //    }
-        //}
+        [FunctionName("InteractionGetMyMatches")]
+        public async Task<IActionResult> GetNewMatches(
+           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetMyMatches")] HttpRequest req,
+           ILogger log, CancellationToken cancellationToken)
+        {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
+            try
+            {
+                var request = req.BuildRequestQuery<InteractionGetMyMatchesCommand, List<ProfileSearch>>();
+
+                var result = await _mediator.Send(request, source.Token);
+
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, null, req.Query.ToList());
+                return new BadRequestObjectResult(ex.Message);
+            }
+        }
 
         //[FunctionName("InteractionGetChatList")]
         //public async Task<IActionResult> GetChatList(

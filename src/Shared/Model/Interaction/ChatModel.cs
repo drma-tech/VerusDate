@@ -24,7 +24,7 @@ namespace VerusDate.Shared.Model
 
     public class ChatItem
     {
-        public DateTime DtMessage { get; set; }
+        public DateTime DtMessage { get; set; } = DateTime.UtcNow;
 
         [Required]
         public string IdUserSender { get; set; }

@@ -35,8 +35,8 @@ namespace VerusDate.Api.Mediator.Queries.Chat
         public async Task<ChatModel> Handle(ChatGetCommand request, CancellationToken cancellationToken)
         {
             //recupera a interação, para garantir não pegar um chat qualquer
-            var Id = InteractionModel.GetId(CosmosType.Chat, request.IdLoggedUser, request.IdUserInteraction);
-            var obj = await _repo.Get<InteractionModel>(Id, new PartitionKey(Id), cancellationToken);
+            var Id = InteractionModel.GetId(CosmosType.Interaction, request.IdLoggedUser, request.IdUserInteraction);
+            var obj = await _repo.Get<InteractionModel>(Id, new PartitionKey(request.IdLoggedUser), cancellationToken);
 
             return await _repo.Get<ChatModel>(obj.IdChat, new PartitionKey(obj.Key), cancellationToken);
         }

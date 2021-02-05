@@ -28,16 +28,16 @@
                                         <Badge Float="Float.Left">Eu</Badge>
                                         <Badge Float="Float.Right"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Icon> @item.DtMessage.GetElapsedTime()</Badge>
                                         <br />
-                                        <AlertDescription>
-                                            @if (item.TypeContent == TypeContent.Message)
-                                            {
+                                        @if (item.TypeContent == TypeContent.Message)
+                                        {
+                                            <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Justified">
                                                 @item.Content
-                                            }
-                                            else
-                                            {
-                                                <span>item inválido</span>
-                                            }
-                                        </AlertDescription>
+                                            </Paragraph>
+                                        }
+                                        else
+                                        {
+                                            <span>item inválido</span>
+                                        }
                                     </Alert>
                                 </Column>
                                 <Column ColumnSize="ColumnSize.Is2">
@@ -60,16 +60,16 @@
                                         <Badge Float="Float.Left">@view.Basic.NickName</Badge>
                                         <Badge Float="Float.Right"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Icon> @item.DtMessage.GetElapsedTime()</Badge>
                                         <br />
-                                        <AlertDescription>
-                                            @if (item.TypeContent == TypeContent.Message)
-                                            {
+                                        @if (item.TypeContent == TypeContent.Message)
+                                        {
+                                            <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Justified">
                                                 @item.Content
-                                            }
-                                            else
-                                            {
-                                                <span>item inválido</span>
-                                            }
-                                        </AlertDescription>
+                                            </Paragraph>
+                                        }
+                                        else
+                                        {
+                                            <span>item inválido</span>
+                                        }
                                     </Alert>
                                 </Column>
                             </Row>
@@ -347,11 +347,11 @@
     {
         try
         {
-            Message = "";
-
             //await hubConnection.SendAsync("SendPrivateMessage", ComponenteUtils.IdUser, Message, CurrentUser.Id);
 
             var chatItem = new VerusDate.Shared.Model.ChatItem() { IdUserSender = ComponenteUtils.IdUser, TypeContent = TypeContent.Message, Content = Message };
+            Message = "";
+
             chat.Itens.Add(chatItem);
             await Http.Chat_Insert(chatItem, IdUserView, SessionStorage); //TODO: encontrar maneira mais eficiente de salvar
         }

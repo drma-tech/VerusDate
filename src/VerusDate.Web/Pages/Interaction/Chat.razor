@@ -10,65 +10,72 @@
     <Column ColumnSize="ColumnSize.Is8.OnDesktop.Is6.OnWidescreen">
         <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>Conversa com @view?.Basic.NickName</CardHeader>
-            <CardBody Padding="Padding.Is0.FromBottom">
-                <div style="height: 265px; overflow:auto; display:flex; flex-direction:column-reverse;">
-                    <div class="chat-activity-list">
-                        @if (Options.HasCustomVisibility)
+            <CardBody Padding="Padding.Is0.FromBottom" Style="height: 265px; overflow: auto; display: flex; flex-direction: column-reverse;">
+
+                @if (Options.HasCustomVisibility)
+                {
+                    <CustomVisibility Options="Options"></CustomVisibility>
+                }
+                else
+                {
+                    @foreach (var item in chat.Itens.OrderByDescending(o => o.DtMessage))
+                    {
+                        if (item.IdUserSender == ComponenteUtils.IdUser) //usuário logado como sender
                         {
-                            <CustomVisibility Options="Options"></CustomVisibility>
+                            <Row Padding="Padding.Is2.FromBottom.Is2.FromTop">
+                                <Column ColumnSize="ColumnSize.Is9.Is1.WithOffset">
+                                    <Alert Color="Color.Secondary" Visible="true" Padding="Padding.Is2" Margin="Margin.Is0.FromBottom">
+                                        <Badge Float="Float.Left">Eu</Badge>
+                                        <Badge Float="Float.Right"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Icon> @item.DtMessage.GetElapsedTime()</Badge>
+                                        <br />
+                                        <AlertDescription>
+                                            @if (item.TypeContent == TypeContent.Message)
+                                            {
+                                                @item.Content
+                                            }
+                                            else
+                                            {
+                                                <span>item inválido</span>
+                                            }
+                                        </AlertDescription>
+                                    </Alert>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.Is2">
+                                    <Figure Margin="Margin.Is0" Size="FigureSize.Is48x48" Float="Float.Right">
+                                        <FigureImage Source="@user.GetMainPhoto()" Rounded="true" AlternateText="No User" />
+                                    </Figure>
+                                </Column>
+                            </Row>
                         }
                         else
                         {
-                            @foreach (var item in chat.Itens)
-                            {
-                                if (item.IdUserSender == ComponenteUtils.IdUser) //usuário logado como sender
-                                {
-                                    <div class="chat-element">
-                                        <a href="#" class="float-left" style="height: 38px; width: 38px;">
-                                            <PhotoFace IdFace="@user?.Photo.Main" isCircle="true"></PhotoFace>
-                                        </a>
-                                        <div class="media-body">
-                                            <small class="float-right">@item.DtMessage.GetElapsedTime()</small>
-                                            <strong>Eu</strong>
-                                            <p class="m-b-xs">
-                                                @if (item.TypeContent == TypeContent.Message)
-                                                {
-                                                    @item.Content
-                                                }
-                                                else
-                                                {
-                                                    <span>item inválido</span>
-                                                }
-                                            </p>
-                                        </div>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="chat-element right">
-                                        <a href="#" class="float-right" style="height: 38px; width: 38px;">
-                                            <PhotoFace IdFace="@view.Photo.Main" isCircle="true"></PhotoFace>
-                                        </a>
-                                        <div class="media-body text-right">
-                                            <small class="float-left">@item.DtMessage.GetElapsedTime()</small>
-                                            <strong>@view.Basic.NickName</strong>
-                                            <p class="m-b-xs">
-                                                @if (item.TypeContent == TypeContent.Message)
-                                                {
-                                                    @item.Content
-                                                }
-                                                else
-                                                {
-                                                    <span>item inválido</span>
-                                                }
-                                            </p>
-                                        </div>
-                                    </div>
-                                }
-                            }
+                            <Row Padding="Padding.Is2.FromBottom.Is2.FromTop">
+                                <Column ColumnSize="ColumnSize.Is2">
+                                    <Figure Margin="Margin.Is0" Size="FigureSize.Is48x48" Float="Float.Left">
+                                        <FigureImage Source="@user.GetMainPhoto()" Rounded="true" AlternateText="No User" />
+                                    </Figure>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.Is9">
+                                    <Alert Color="Color.Success" Visible="true" Padding="Padding.Is2" Margin="Margin.Is0.FromBottom">
+                                        <Badge Float="Float.Left">@view.Basic.NickName</Badge>
+                                        <Badge Float="Float.Right"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Icon> @item.DtMessage.GetElapsedTime()</Badge>
+                                        <br />
+                                        <AlertDescription>
+                                            @if (item.TypeContent == TypeContent.Message)
+                                            {
+                                                @item.Content
+                                            }
+                                            else
+                                            {
+                                                <span>item inválido</span>
+                                            }
+                                        </AlertDescription>
+                                    </Alert>
+                                </Column>
+                            </Row>
                         }
-                    </div>
-                </div>
+                    }
+                }
             </CardBody>
             <CardBody Padding="Padding.Is0.FromBottom">
                 <Addons>
@@ -234,7 +241,7 @@
 
     private ProfileModel user { get; set; }
     private ProfileView view { get; set; }
-    private InteractionModel InteractionVM { get; set; }
+    private InteractionModel interaction { get; set; }
     private ChatModel chat { get; set; }
     private List<AffinityVM> affinities = new();
     private ProfileBadgeModel badge = new();
@@ -323,8 +330,16 @@
         {
             affinities = ProfileApi.GetAffinity(user, view);
             if (view?.Badge != null) badge = view.Badge;
-            InteractionVM = await Http.Interation_Get(SessionStorage, IdUserView);
-            chat = await Http.Chat_Get(SessionStorage, IdUserView);
+            interaction = await Http.Interation_Get(SessionStorage, IdUserView);
+
+            if (string.IsNullOrEmpty(interaction.IdChat))
+            {
+                await Http.Interation_GenerateChat(IdUserView, SessionStorage);
+            }
+            else
+            {
+                chat = await Http.Chat_Get(SessionStorage, IdUserView);
+            }
         }
     }
 
@@ -332,10 +347,13 @@
     {
         try
         {
-            //await hubConnection.SendAsync("SendPrivateMessage", ComponenteUtils.IdUser, Message, CurrentUser.Id);
-            chat.Itens.Add(new VerusDate.Shared.Model.ChatItem() { IdUserSender = ComponenteUtils.IdUser, TypeContent = TypeContent.Message, Content = Message });
             Message = "";
-            await Http.Chat_Insert(chat, IdUserView, SessionStorage); //TODO: encontrar maneira mais eficiente de salvar
+
+            //await hubConnection.SendAsync("SendPrivateMessage", ComponenteUtils.IdUser, Message, CurrentUser.Id);
+
+            var chatItem = new VerusDate.Shared.Model.ChatItem() { IdUserSender = ComponenteUtils.IdUser, TypeContent = TypeContent.Message, Content = Message };
+            chat.Itens.Add(chatItem);
+            await Http.Chat_Insert(chatItem, IdUserView, SessionStorage); //TODO: encontrar maneira mais eficiente de salvar
         }
         catch (Exception ex)
         {

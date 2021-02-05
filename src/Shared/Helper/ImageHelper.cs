@@ -11,7 +11,7 @@ namespace VerusDate.Shared.Helper
             PhotoValidation
         }
 
-        public static string GetNoUserPhoto => "/img/nouser.jpg";
+        public static string GetNoUserPhoto => "img/nouser.jpg";
 
         public static string GetPhotoContainer(PhotoType type)
         {

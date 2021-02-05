@@ -13,9 +13,9 @@ namespace VerusDate.Web.Api
             return await http.Get<ChatModel>($"Chat/Get?id={IdUserInteraction}", storage);
         }
 
-        public async static Task<HttpResponseMessage> Chat_Insert(this HttpClient http, ChatModel chat, string IdUserInteraction, ISyncSessionStorageService storage)
+        public async static Task<HttpResponseMessage> Chat_Insert(this HttpClient http, ChatItem chatItem, string IdUserInteraction, ISyncSessionStorageService storage)
         {
-            return await http.Post("Chat/Insert", chat, storage, $"Chat/Get?id={IdUserInteraction}");
+            return await http.Post("Chat/Sync", new { IdUserInteraction, chatItem }, storage, $"Chat/Get?id={IdUserInteraction}");
         }
     }
 }

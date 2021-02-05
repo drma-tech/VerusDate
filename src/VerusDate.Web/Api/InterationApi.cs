@@ -73,12 +73,11 @@ namespace VerusDate.Web.Api
             return await http.Put<InteractionModel>("Interaction/Like", new { IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
         }
 
-        public async static Task<HttpResponseMessage> Interation_GenerateChat(this HttpClient http, string IdUser, string IdUserInteraction, ISyncSessionStorageService storage)
+        public async static Task<HttpResponseMessage> Interation_GenerateChat(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage)
         {
-            if (string.IsNullOrEmpty(IdUser)) throw new ArgumentNullException(nameof(IdUser));
             if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
 
-            return await http.Put<ChatModel>("Interaction/GenerateChat", new { IdUser, IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
+            return await http.Put<ChatModel>("Interaction/GenerateChat", new { IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
         }
     }
 }

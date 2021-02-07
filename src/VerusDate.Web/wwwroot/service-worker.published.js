@@ -48,4 +48,4 @@ async function onFetch(event) {
     return cachedResponse || fetch(event.request);
 }
 
-/* updated 2020-02-07 */
+/* updated 2020-02-07 v1 */

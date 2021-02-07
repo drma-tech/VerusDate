@@ -27,6 +27,19 @@
     z-index: 3 !important;
 }
 
+.blazored-toast {
+    padding: 0.8rem !important;
+}
+
+.blazored-toast-icon {
+    font-size: 2.0rem !important;
+    padding: 0 0.8rem 0 0 !important;
+}
+
+.blazored-toast-body .blazored-toast-header h5 {
+    font-size: 1.2rem !important;
+}
+
 /*BLAZORIZE*/
 
 /*Blazorise Header e Footer*/

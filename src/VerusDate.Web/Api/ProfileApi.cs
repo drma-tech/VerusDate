@@ -58,7 +58,8 @@ namespace VerusDate.Web.Api
                 obj.Add(new AffinityVM(nameof(profView.Lifestyle.CareerCluster), CheckEnum((int)profView.Lifestyle.CareerCluster.Value, (int?)profUser.Looking.CareerCluster)));
                 //daqui em diante: não é oq ele procura, é o que ele é
                 obj.Add(new AffinityVM(nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int)profView.Lifestyle.MoneyPersonality.Value, (int?)profUser.Lifestyle.MoneyPersonality)));
-                obj.Add(new AffinityVM(nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnum((int)profView.Lifestyle.MyersBriggsTypeIndicator.Value, (int?)profUser.Lifestyle.MyersBriggsTypeIndicator)));
+                if (profView.Lifestyle.MyersBriggsTypeIndicator.HasValue)
+                    obj.Add(new AffinityVM(nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnum((int)profView.Lifestyle.MyersBriggsTypeIndicator.Value, (int?)profUser.Lifestyle.MyersBriggsTypeIndicator)));
                 obj.Add(new AffinityVM(nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality)));
             }
 

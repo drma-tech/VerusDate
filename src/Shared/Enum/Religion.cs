@@ -4,43 +4,31 @@ namespace VerusDate.Shared.Enum
 {
     public enum Religion
     {
-        [Display(Name = "Cristianismo", Description = "Principais países: Vaticano, România, Samoa")] //2.3 billion
+        //2.4 bilhões
+        [Display(Name = "Cristianismo", Description = "É uma religião abraâmica monoteísta centrada na vida e nos ensinamentos de Jesus de Nazaré, tais como são apresentados no Novo Testamento. A fé cristã acredita essencialmente em Jesus como o Cristo, Filho de Deus, Salvador e Senhor.")]
         Christianity = 11,
 
-        [Display(Name = "Islamismo", Description = "Principais países: Maldivas, Mauritânia, Arábia Saudita e Turquia")] //1.9 billion
+        //1.8 bilhões
+        [Display(Name = "Islã", Description = "É uma religião abraâmica monoteísta articulada pelo Alcorão, um texto considerado pelos seus seguidores como a palavra literal de Deus, e pelos ensinamentos e exemplos normativos de Maomé, considerado pelos fiéis como o último profeta de Deus.")]
         Islam = 12,
 
-        [Display(Name = "Ateísmo / Agnosticismo", Description = "Principais países: República Tcheca, Japão, Estônia e Dinamarca")] //1.1 billion
-        Atheism_Agnosticism = 13,
+        //1.1 bilhões
+        [Display(Name = "Sem religião", Description = "Irreligião (também referida como incredulidade, ausência de religião ou pessoas sem religião) é a ausência, indiferença ou não prática de uma religião. (Agnósticos, Ateus, Deístas)")]
+        Irreligion = 13,
 
-        [Display(Name = "Hinduísmo", Description = "Principais países: Nepal e Índia")] //1.1 billion
+        //1.2 bilhões
+        [Display(Name = "Hinduísmo", Description = "O hinduísmo engloba o bramanismo, isto é, a crença na 'Alma Universal', Brâman; num sentido mais específico, o termo se refere ao mundo cultural e religioso, ordenado por castas, da Índia pós-budista.")]
         Hinduism = 14,
 
-        [Display(Name = "Budismo", Description = "Principais países: Camboja, Tibete e Tailândia")] //506 million
+        //0.5 bilhões
+        [Display(Name = "Budismo", Description = "Filosofia ou religião não teísta que surgiu originalmente na Índia por volta do século VI A.C. e abrange diversas tradições, crenças e práticas baseadas nos ensinamentos, o Darma, de Siddhartha Gautama, intitulado de Buddha.")]
         Buddhism = 15,
 
-        [Display(Name = "Religião Tradicional Chinesa", Description = "Principais países: China")] //394 million
-        Chinese = 16,
+        //0.4 bilhões
+        [Display(Name = "Religião étnica", Description = "Religião étnica ou religião indígena é um termo que pode incluir religiões civis oficialmente sancionadas e organizadas com um clero organizado, mas que são caracterizadas pelo fato de que seus adeptos em geral são definidos por uma etnia em comum e a conversão, essencialmente, equivale a uma assimilação cultural para o povo em questão.")]
+        Folk_Religion = 16,
 
-        [Display(Name = "Religiões Indígenas Primais", Description = "Principais países: Haiti, Guiné-Bissau e Camarões")] //300 million
-        Folk_Religion = 17,
-
-        [Display(Name = "Africano tradicional", Description = "Principal continente: África")] //100 million
-        Traditional_African = 18,
-
-        [Display(Name = "Sikhismo", Description = "Principais países: Índia, Reino Unido e Canadá")] //23 million
-        Sikhism = 19,
-
-        [Display(Name = "Juche", Description = "Principais países: Coreia do Norte")] //10 million
-        Juche = 20,
-
-        [Display(Name = "Espiritismo", Description = "Principais países: Cuba, Jamaica, Brasil e Suriname")] //15 million
-        Spiritism = 21,
-
-        [Display(Name = "Judaísmo", Description = "Principais países: Israel, Palestina, Mônaco e EUA")] //14 million
-        Judaism = 22,
-
-        [Display(Name = "Outro", Description = "")]
+        [Display(Name = "Outra religião ", Description = "Xintoísmo, Sikhismo, Espiritismo, Judaísmo, Wicca e Neopaganismo, etc.")]
         Other = 255
     }
 }

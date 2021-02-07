@@ -1,14 +1,13 @@
 ﻿@using System.Linq.Expressions;
+@inherits ComponenteCore<ItemDataProfile>
 
-<Tooltip Text="@GetDescription()" Multiline="true" Fade="true" Style="@GetCursor()" Inline="true">
-    <Badge Color="@GetColor()" Pill="true">
-        <Icon Name="@ClassIcon"></Icon> @GetValue()
-        @if (!string.IsNullOrEmpty(GetDescription()))
-        {
-            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
-        }
-    </Badge>
-</Tooltip>
+<Badge Color="@GetColor()" Pill="true" title="@GetDescription()" Style="@GetCursor()" @onclick="@(() => Toast.ShowInfo(GetDescription(), AttributeHelper.GetName(For) + ": " + GetValue()) )">
+    <Icon Name="@ClassIcon"></Icon> @GetValue()
+    @if (!string.IsNullOrEmpty(GetDescription()))
+    {
+        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
+    }
+</Badge>
 
 @code {
     [Parameter] public Expression<Func<object>> For { get; set; }

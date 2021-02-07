@@ -52,7 +52,7 @@
                             <Row Padding="Padding.Is2.FromBottom.Is2.FromTop">
                                 <Column ColumnSize="ColumnSize.Is2">
                                     <Figure Margin="Margin.Is0" Size="FigureSize.Is48x48" Float="Float.Left">
-                                        <FigureImage Source="@user.GetMainPhoto()" Rounded="true" AlternateText="No User" />
+                                        <FigureImage Source="@view.GetMainPhoto()" Rounded="true" AlternateText="No User" />
                                     </Figure>
                                 </Column>
                                 <Column ColumnSize="ColumnSize.Is9">
@@ -251,7 +251,7 @@
     [Display(Name = "Message", Prompt = "Para sua própria segurança, favor não incluir seu nome completo, endereço, celular, email ou quaisquer informações pessoais")]
     private string Message { get; set; }
 
-    private bool BtnDisabled { get { return string.IsNullOrEmpty(Message) || !IsConnected; } }
+    private bool BtnDisabled { get { return string.IsNullOrEmpty(Message) || !IsConnected || user == null; } }
 
     private string labelPhoto => $"{view.Basic.NickName}, {view.Age}, {ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)}";
 

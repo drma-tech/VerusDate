@@ -21,8 +21,10 @@
                                 {
                                     <Column ColumnSize="ColumnSize.Is1.OnFullHD.Is2.OnWidescreen.Is3.OnDesktop.Is4.OnMobile">
                                         <Blazorise.Link To="@("/Interaction/View/" + item.Id)">
-                                            <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
-                                                <CardImage Source="@item.GetMainPhoto()" Alt="Photo Image"></CardImage>
+                                            <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD" Style="display:block; text-align:center;">
+                                                <Figure Margin="Margin.Is0" Size="FigureSize.Is64x64">
+                                                    <FigureImage Source="@item.GetMainPhoto()" Rounded="true" AlternateText="Photo Image" />
+                                                </Figure>
                                                 <Badge Color="Color.Light" Style="font-size: 9px; position: absolute; top: 5px; left: 5px;">99 XP</Badge>
                                                 <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">
                                                     @item.NickName

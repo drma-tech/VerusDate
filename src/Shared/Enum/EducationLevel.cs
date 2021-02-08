@@ -10,7 +10,7 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Bacharelado / Licenciatura")]
         College = 2,
 
-        [Display(Name = "Mestrado / Douturado / PHD")]
+        [Display(Name = "Mestrado / Doutorado / PHD")]
         Associate = 3
     }
 }

@@ -37,7 +37,7 @@ namespace VerusDate.Web.Api
                 new AffinityVM(nameof(profView.Age), CheckAge(profView.Age, profUser.Looking.MinimalAge, profUser.Looking.MaxAge)),
                 new AffinityVM(nameof(profView.Basic.BiologicalSex), CheckEnum((int)profView.Basic.BiologicalSex, (int?)profUser.Looking.BiologicalSex)),
                 new AffinityVM(nameof(profView.Basic.MaritalStatus), CheckEnum((int)profView.Basic.MaritalStatus, (int?)profUser.Looking.MaritalStatus)),
-                new AffinityVM(nameof(profView.Basic.Intent), CheckMultiple(profView.Basic.Intent, profUser.Looking.Intent)),
+                new AffinityVM(nameof(profView.Basic.Intent), CheckMultiple(profView.Basic.Intent, profUser.Looking.Intent), profView.Basic.Intent.Intersect(profUser.Looking.Intent)),
                 new AffinityVM(nameof(profView.Basic.GenderIdentity), CheckEnum((int)profView.Basic.GenderIdentity, (int?)profUser.Looking.GenderIdentity)),
                 new AffinityVM(nameof(profView.Basic.SexualOrientation), CheckEnum((int)profView.Basic.SexualOrientation, (int?)profUser.Looking.SexualOrientation)),
                 new AffinityVM(nameof(profView.Distance), profView.Distance <= profUser.Looking.Distance),
@@ -59,7 +59,7 @@ namespace VerusDate.Web.Api
                 //daqui em diante: não é oq ele procura, é o que ele é
                 obj.Add(new AffinityVM(nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int)profView.Lifestyle.MoneyPersonality.Value, (int?)profUser.Lifestyle.MoneyPersonality)));
                 if (profView.Lifestyle.MyersBriggsTypeIndicator.HasValue)
-                    obj.Add(new AffinityVM(nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnum((int)profView.Lifestyle.MyersBriggsTypeIndicator.Value, (int?)profUser.Lifestyle.MyersBriggsTypeIndicator)));
+                    obj.Add(new AffinityVM(nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator.Value, profUser.Lifestyle.MyersBriggsTypeIndicator)));
                 obj.Add(new AffinityVM(nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality)));
             }
 
@@ -107,11 +107,44 @@ namespace VerusDate.Web.Api
         {
             if (!EnumLooking.HasValue) return true; //If the user has not defined, then it is an affinity
 
-            if (EnumUser == RelationshipPersonality.Explorers && EnumLooking.Value == RelationshipPersonality.Explorers) return true;
-            if (EnumUser == RelationshipPersonality.Builders && EnumLooking.Value == RelationshipPersonality.Builders) return true;
-            if (EnumUser == RelationshipPersonality.Directors && EnumLooking.Value == RelationshipPersonality.Negotiator) return true;
-            if (EnumUser == RelationshipPersonality.Negotiator && EnumLooking.Value == RelationshipPersonality.Directors) return true;
-            else return false;
+            return EnumUser switch
+            {
+                RelationshipPersonality.Explorers => EnumLooking.Value == RelationshipPersonality.Explorers,
+                RelationshipPersonality.Directors => EnumLooking.Value == RelationshipPersonality.Negotiator,
+                RelationshipPersonality.Builders => EnumLooking.Value == RelationshipPersonality.Builders,
+                RelationshipPersonality.Negotiator => EnumLooking.Value == RelationshipPersonality.Directors,
+                _ => false,
+            };
+        }
+
+        private static bool CheckEnumMBTI(MyersBriggsTypeIndicator EnumUser, MyersBriggsTypeIndicator? EnumLooking)
+        {
+            //http://www.personalityrelationships.net/
+            if (!EnumLooking.HasValue) return true; //If the user has not defined, then it is an affinity
+
+            return EnumUser switch
+            {
+                MyersBriggsTypeIndicator.INTJ => EnumLooking.Value == MyersBriggsTypeIndicator.ENTP || EnumLooking.Value == MyersBriggsTypeIndicator.ENFP,
+                MyersBriggsTypeIndicator.INTP => EnumLooking.Value == MyersBriggsTypeIndicator.ENTJ || EnumLooking.Value == MyersBriggsTypeIndicator.ENFJ,
+                MyersBriggsTypeIndicator.ENTJ => EnumLooking.Value == MyersBriggsTypeIndicator.INTP || EnumLooking.Value == MyersBriggsTypeIndicator.INFP,
+                MyersBriggsTypeIndicator.ENTP => EnumLooking.Value == MyersBriggsTypeIndicator.INTJ || EnumLooking.Value == MyersBriggsTypeIndicator.INFJ,
+                
+                MyersBriggsTypeIndicator.INFJ => EnumLooking.Value == MyersBriggsTypeIndicator.ENFP || EnumLooking.Value == MyersBriggsTypeIndicator.ENTP || EnumLooking.Value == MyersBriggsTypeIndicator.INTJ || EnumLooking.Value == MyersBriggsTypeIndicator.INFJ,
+                MyersBriggsTypeIndicator.INFP => EnumLooking.Value == MyersBriggsTypeIndicator.ENFJ || EnumLooking.Value == MyersBriggsTypeIndicator.ENTJ,
+                MyersBriggsTypeIndicator.ENFJ => EnumLooking.Value == MyersBriggsTypeIndicator.INFP || EnumLooking.Value == MyersBriggsTypeIndicator.INTP,
+                MyersBriggsTypeIndicator.ENFP => EnumLooking.Value == MyersBriggsTypeIndicator.INFJ || EnumLooking.Value == MyersBriggsTypeIndicator.INTJ,
+                
+                MyersBriggsTypeIndicator.ISTJ => EnumLooking.Value == MyersBriggsTypeIndicator.ESTP || EnumLooking.Value == MyersBriggsTypeIndicator.ESFP,
+                MyersBriggsTypeIndicator.ISFJ => EnumLooking.Value == MyersBriggsTypeIndicator.ESFP || EnumLooking.Value == MyersBriggsTypeIndicator.ESTP,
+                MyersBriggsTypeIndicator.ESTJ => EnumLooking.Value == MyersBriggsTypeIndicator.ISTP || EnumLooking.Value == MyersBriggsTypeIndicator.ISFP,
+                MyersBriggsTypeIndicator.ESFJ => EnumLooking.Value == MyersBriggsTypeIndicator.ISFP || EnumLooking.Value == MyersBriggsTypeIndicator.ISTP,
+                
+                MyersBriggsTypeIndicator.ISTP => EnumLooking.Value == MyersBriggsTypeIndicator.ESFJ || EnumLooking.Value == MyersBriggsTypeIndicator.ESTJ,
+                MyersBriggsTypeIndicator.ISFP => EnumLooking.Value == MyersBriggsTypeIndicator.ESTJ || EnumLooking.Value == MyersBriggsTypeIndicator.ESFJ,
+                MyersBriggsTypeIndicator.ESTP => EnumLooking.Value == MyersBriggsTypeIndicator.ISTJ || EnumLooking.Value == MyersBriggsTypeIndicator.ISFJ,
+                MyersBriggsTypeIndicator.ESFP => EnumLooking.Value == MyersBriggsTypeIndicator.ISTJ || EnumLooking.Value == MyersBriggsTypeIndicator.ISFJ,
+                _ => false,
+            };
         }
 
         private static bool CheckHeight(Height Height, Height? Looking_MinimalHeight, Height? Looking_MaxHeight)

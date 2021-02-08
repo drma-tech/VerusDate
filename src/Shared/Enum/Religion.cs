@@ -9,7 +9,7 @@ namespace VerusDate.Shared.Enum
         Christianity = 11,
 
         //1.8 bilhões
-        [Display(Name = "Islã", Description = "É uma religião abraâmica monoteísta articulada pelo Alcorão, um texto considerado pelos seus seguidores como a palavra literal de Deus, e pelos ensinamentos e exemplos normativos de Maomé, considerado pelos fiéis como o último profeta de Deus.")]
+        [Display(Name = "Islamismo", Description = "É uma religião abraâmica monoteísta articulada pelo Alcorão, um texto considerado pelos seus seguidores como a palavra literal de Deus, e pelos ensinamentos e exemplos normativos de Maomé, considerado pelos fiéis como o último profeta de Deus.")]
         Islam = 12,
 
         //1.1 bilhões

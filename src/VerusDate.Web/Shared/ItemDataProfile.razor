@@ -1,22 +1,39 @@
 ﻿@using System.Linq.Expressions;
 @inherits ComponenteCore<ItemDataProfile>
 
-<Badge Color="@GetColor()" Pill="true" title="@GetDescription()" Style="@GetCursor()" @onclick="@(() => Toast.ShowInfo(GetDescription(), AttributeHelper.GetName(For) + ": " + GetValue()) )">
-    <Icon Name="@ClassIcon"></Icon> @GetValue()
-    @if (!string.IsNullOrEmpty(GetDescription()))
+@if (Intent != null && Intent.Any())
+{
+    foreach (var item in Intent)
     {
-        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
+        <Badge Color="@GetColor(item)" Pill="true" title="@GetDescription(item)" Style="@GetCursor(item)" @onclick="@(() =>  BadgeClick(item))">
+            <Icon Name="@ClassIcon"></Icon> @GetValue(item)
+            @if (!string.IsNullOrEmpty(GetDescription(item)))
+            {
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
+            }
+        </Badge>
     }
-</Badge>
+}
+else
+{
+    <Badge Color="@GetColor(Value)" Pill="true" title="@GetDescription(Value)" Style="@GetCursor(Value)" @onclick="@(() =>  BadgeClick(Value))">
+        <Icon Name="@ClassIcon"></Icon> @GetValue(Value)
+        @if (!string.IsNullOrEmpty(GetDescription(Value)))
+        {
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
+        }
+    </Badge>
+}
 
 @code {
     [Parameter] public Expression<Func<object>> For { get; set; }
     [Parameter] public Enum Value { get; set; }
+    [Parameter] public IReadOnlyList<Intent> Intent { get; set; }
     [Parameter] public string StringValue { get; set; }
     [Parameter] public string ClassIcon { get; set; }
     [Parameter] public List<AffinityVM> Affinities { get; set; } = new();
 
-    private string GetValue()
+    private string GetValue(Enum Value)
     {
         if (string.IsNullOrEmpty(StringValue))
         {
@@ -31,7 +48,7 @@
         }
     }
 
-    private string GetDescription()
+    private string GetDescription(Enum Value)
     {
         if (string.IsNullOrEmpty(StringValue))
             return Value.GetDescription();
@@ -39,7 +56,7 @@
             return null;
     }
 
-    private string GetCursor()
+    private string GetCursor(Enum Value)
     {
         if (string.IsNullOrEmpty(Value.GetDescription()))
         {
@@ -53,19 +70,44 @@
 
     private string Field => AttributeHelper.GetNameOf(For);
 
-    private Color GetColor()
+    private Color GetColor(Enum Value)
     {
-        if (!Affinities.Any(s => s.AttributeName == Field))
+        if (!Affinities.Any(s => s.AttributeName == Field)) //se o atributo não está mapeado no affinity, fica neutro
         {
             return Color.Secondary;
         }
-        else if (Affinities.Single(s => s.AttributeName == Field).HaveAffinity)
+        else if (Affinities.Single(s => s.AttributeName == Field).HaveAffinity) //se está mapeado e tem affinity, então marca sucesso
         {
-            return Color.Success;
+            var affinity = Affinities.Single(s => s.AttributeName == Field);
+
+            if (affinity.Intent != null && affinity.Intent.Any())
+            {
+                if (affinity.Intent.Any(a => a == (Intent)Value))
+                {
+                    return Color.Success;
+                }
+                else
+                {
+                    return Color.Secondary;
+                }
+            }
+            else
+            {
+                return Color.Success;
+            }
+
         }
         else //not affinity
         {
             return Color.Danger;
+        }
+    }
+
+    private void BadgeClick(Enum Value)
+    {
+        if (!string.IsNullOrEmpty(GetDescription(Value)))
+        {
+            Toast.ShowInfo(GetDescription(Value), AttributeHelper.GetName(For) + ": " + GetValue(Value));
         }
     }
 }

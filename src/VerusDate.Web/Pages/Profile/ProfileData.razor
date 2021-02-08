@@ -76,7 +76,7 @@ else
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Drink)" TValue="Drink?" TEnum="Drink" @bind-SelectedValue="@profile.Lifestyle.Drink"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GlassCheers" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GlassCheers" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Smoke)" TValue="Smoke?" TEnum="Smoke" @bind-SelectedValue="@profile.Lifestyle.Smoke"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smoking" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Diet)" TValue="Diet?" TEnum="Diet" @bind-SelectedValue="@profile.Lifestyle.Diet"
@@ -103,7 +103,10 @@ else
                 </Row>
             </CardBody>
             <CardFooter>
-                <Button Type="ButtonType.Submit" Color="Color.Primary" Disabled="@(profile.GetDataStatus() != DataStatus.New && profile.DaysUpdate() < 1)">
+                @*<Button Type="ButtonType.Submit" Color="Color.Primary" Disabled="@(profile.GetDataStatus() != DataStatus.New && profile.DaysUpdate() < 1)">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
+                </Button>*@
+                <Button Type="ButtonType.Submit" Color="Color.Primary">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
                 </Button>
                 <Badge Color="Color.Danger" Margin="Margin.Is3.FromLeft">

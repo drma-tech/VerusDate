@@ -88,7 +88,7 @@ else
 
                     <ItemDataProfile For="@(() => view.Distance)" StringValue="@ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)" ClassIcon="fas fa-map-marker-alt" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.MaritalStatus)" Value="@view.Basic.MaritalStatus" ClassIcon="far fa-heart" Affinities="@affinities"></ItemDataProfile>
-                    @*<ItemDataProfile For="@(() => view.Intent)" Value="@view.Intent" ClassIcon="fas fa-search" Affinities="@affinities"></ItemDataProfile>*@
+                    <ItemDataProfile For="@(() => view.Basic.Intent)" Intent="@view.Basic.Intent" ClassIcon="fas fa-search" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.BiologicalSex)" Value="@view.Basic.BiologicalSex" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.GenderIdentity)" Value="@view.Basic.GenderIdentity" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.SexualOrientation)" Value="@view.Basic.SexualOrientation" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>

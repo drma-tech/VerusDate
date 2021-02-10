@@ -25,7 +25,7 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Orgânica / Totalmente Natural / Local", Description = "Uma dieta alimentar orgânica, totalmente natural e/ou local consiste em todos ou principalmente alimentos orgânicos e/ou produzidos localmente, geralmente por pequenas empresas ou fazendas.")]
         OrganicAllnaturalLocal = 7,
 
-        [Display(Name = "Desintoxicação / Perda de Peso", Description = "Finalmente, a dieta de desintoxicação e/ou perda de peso pode ser combinada com outras dietas para desintoxicar o corpo de toxinas e/ou perder peso.")]
+        [Display(Name = "Desintoxicação / Perda de Peso", Description = "A dieta de desintoxicação e/ou perda de peso pode ser combinada com outras dietas para desintoxicar o corpo de toxinas e/ou perder peso.")]
         DetoxWwightLoss = 8
     }
 }

@@ -19,13 +19,14 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Branca", Description = "Uma pessoa com origem em qualquer um dos povos originais da Europa, Oriente Médio ou Norte da África")]
         White = 5,
 
-        [Display(Name = "Raças Mistas", Description = "Caso possua duas ou mais raças aqui listadas")]
+        [Display(Name = "Raças Mistas", Description = "Caso possua duas ou mais raças entre as disponíveis")]
         MixedRaces = 6,
 
-        [Display(Name = "Outra", Description = "Caso se considere de uma raça não listada aqui")]
+        [Display(Name = "Outra", Description = "Caso não possua nenhuma das raças entre as disponíveis")]
         Other = 7,
 
-        //não é raça e sim etinia
+        //listados abaixo: não é raça e sim etinia
+
         //[Display(Name = "Hispânico ou Latino", Description = "Pessoa da cultura cubana, mexicana, porto-riquenha, cubana, sul ou centro-americana ou outra cultura ou origem espanhola, independentemente da raça. O termo 'origem espanhola' pode ser usado além de 'hispânico ou latino'")]
         //Hispanic_Latino = 8,
 

@@ -37,7 +37,7 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Orientação Sexual", Description = "Alteração opcional")]
         public SexualOrientation SexualOrientation { get; set; }
 
-        [Display(Name = "Idiomas", Description = "Falado de forma Nativa ou fluente")]
+        [Display(Name = "Idiomas", Description = "Escolhido automaticamente de acordo com os idiomas oficiais do pais (caso disponível)")]
         public IReadOnlyList<Language> Languages { get; set; } = Array.Empty<Language>();
     }
 }

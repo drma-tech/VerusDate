@@ -17,6 +17,9 @@ else
                 <Button Size="Size.ExtraSmall" Color="Color.Danger" Float="Float.Right" Clicked="privacy.ShowModal" title="Termos de Privacidade">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserShield"></Icon>
                 </Button>
+                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromRight">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon>
+                </Button>
             </CardHeader>
             <CardBody>
                 <Divider DividerType="DividerType.TextContent" Text="Básico"></Divider>
@@ -49,9 +52,18 @@ else
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <div class="form-group row">
-                            <CustomLabel For="@(() => profile.Bio.BirthDate)" CssIcon="fas fa-birthday-cake" Comment="Confira a idade e signo"></CustomLabel>
+                            <CustomLabel For="@(() => profile.Bio.BirthDate)" CssIcon="fas fa-birthday-cake"></CustomLabel>
                             <div class="col-sm-8">
-                                <InputDate @bind-Value="@profile.Bio.BirthDate" @attributes='new Dictionary<string, object>() { { "class", "form-control" } }'></InputDate>
+                                <Addons>
+                                    <Addon AddonType="AddonType.Body">
+                                        <InputDate @bind-Value="@profile.Bio.BirthDate" @attributes='new Dictionary<string, object>() { { "class", "form-control" } }'></InputDate>
+                                    </Addon>
+                                    <Addon AddonType="AddonType.End">
+                                        <Button Color="Color.Warning" Outline="true" Clicked="PrivateData">
+                                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash"></Icon>
+                                        </Button>
+                                    </Addon>
+                                </Addons>
                                 <ValidationMessage For="@(()=>profile.Bio.BirthDate)"></ValidationMessage>
                             </div>
                         </div>
@@ -131,9 +143,9 @@ else
                 <Button Type="ButtonType.Submit" Color="Color.Primary">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
                 </Button>
-                <Badge Color="Color.Danger" Margin="Margin.Is3.FromLeft">
+                @*<Badge Color="Color.Danger" Margin="Margin.Is3.FromLeft">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationTriangle"></Icon> Só poderá atualizar no máximo uma vez ao dia e perderá 100 XP a cada atualização
-                </Badge>
+                </Badge>*@
             </CardFooter>
         </Card>
     </EditForm>
@@ -144,6 +156,21 @@ else
             <li>Seja honesto nas respostas dadas neste formulário. Todas as informações aqui contidas estão abertas a denúncias e poderão ser avaliadas;</li>
         </ul>
     </VerusDate.Web.Shared.modal.BasicModal>
+
+    <VerusDate.Web.Shared.modal.BasicModal @ref="help" Title="Ajuda">
+        <Paragraph Margin="Margin.Is2.FromBottom" Alignment="TextAlignment.Justified">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash"></Icon> Este conteúdo é privado e não será exibido no seu perfil
+        </Paragraph>
+        <Paragraph Margin="Margin.Is2.FromBottom" Alignment="TextAlignment.Justified">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Question"></Icon> Esta opção terá explicações de cada um dos itens disponíveis para escolha
+        </Paragraph>
+        <Paragraph Margin="Margin.Is2.FromBottom" Alignment="TextAlignment.Justified">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Plus"></Icon> Esta opção abrirá um popup com múltiplas escolhas (juntamente com explicações, caso tenha)
+        </Paragraph>
+        <Paragraph Margin="Margin.Is2.FromBottom" Alignment="TextAlignment.Justified">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Icon> Esta opção solicitará localização para seu aparelho (precisa estar habilitada esta opção)
+        </Paragraph>
+    </VerusDate.Web.Shared.modal.BasicModal>
 }
 
 @code {
@@ -152,6 +179,7 @@ else
     private GeoLocation GPS = new();
     protected bool IsShortTerm { get { return !profile.Basic.Intent.IsLongTerm(); } }
     private Shared.modal.BasicModal privacy;
+    private Shared.modal.BasicModal help;
 
     private void SetValues(IReadOnlyList<Intent> value)
     {
@@ -210,6 +238,8 @@ else
                 {
                     var address = here.items[0].address;
                     profile.Basic.Location = address.GetLocation();
+
+                    AddLanguages((Country)System.Enum.Parse(typeof(Country), address.countryCode));
                 }
                 else
                 {
@@ -228,6 +258,21 @@ else
             {
                 Toast.ShowWarning($"Não foi possível detectar um sistema GPS no seu dispositivo. Favor, tentar novamente ou liberar acesso ao GPS do seu dispositivo.", "alerta");
             }
+        }
+    }
+
+    private void AddLanguages(Country country)
+    {
+        //https://pt.wikipedia.org/wiki/Lista_de_l%C3%ADnguas_oficiais
+        if (profile.Basic.Languages.Any()) return;
+
+        switch (country)
+        {
+            case Country.BRA:
+                profile.Basic.Languages = new Language[] { Language.Portuguese };
+                break;
+            default:
+                break;
         }
     }
 

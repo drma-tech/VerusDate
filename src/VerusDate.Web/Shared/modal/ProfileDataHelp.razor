@@ -3,7 +3,7 @@
 
 <Modal @ref="modal">
     <ModalBackdrop />
-    <ModalContent Centered="true" Size="ModalSize.Large">
+    <ModalContent Centered="true" Size="ModalSize.Default">
         <ModalHeader>
             <ModalTitle>@label</ModalTitle>
             <CloseButton Clicked="@modal.Hide" />
@@ -13,8 +13,9 @@
             {
                 @foreach (var item in EnumHelper.GetList(TypeEnum))
                 {
-                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is2.FromBottom">
-                        <Badge Color="Color.Primary">@item.Name</Badge> @item.Description
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
+                        <Badge Color="Color.Primary">@item.Name</Badge>
+                        <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
                     </Paragraph>
                 }
             }

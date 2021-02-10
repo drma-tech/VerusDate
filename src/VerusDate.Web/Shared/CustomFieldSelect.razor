@@ -7,10 +7,6 @@
         <Icon Name="@CssIcon"></Icon> @Label
         @if (!string.IsNullOrEmpty(AttributeHelper.GetDescription(For)))
         {
-            @if (!string.IsNullOrEmpty(HelpLink))
-            {
-                <a href="@HelpLink" target="_blank" style="display: block; font-size: 80%;" rel="noopener">@(new Uri(@HelpLink).Host)</a>
-            }
             <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(For)</FieldHelp>
         }
     </FieldLabel>
@@ -48,7 +44,7 @@
                             }
                         </div>
                     </Addon>
-                    <Addon AddonType="AddonType.End">                    
+                    <Addon AddonType="AddonType.End">
                         <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataSelect(For, typeof(TEnum))">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Plus"></Icon>
                         </Button>
@@ -59,6 +55,10 @@
 
             default:
                 break;
+        }
+        @if (!string.IsNullOrEmpty(HelpLink))
+        {
+            <a href="@HelpLink" target="_blank" style="display: block; font-size: 80%;" rel="noopener">@(new Uri(@HelpLink).Host)</a>
         }
         <ValidationMessage For="@For"></ValidationMessage>
     </FieldBody>

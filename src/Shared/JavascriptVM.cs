@@ -15,6 +15,7 @@ namespace VerusDate.Shared
     /// </summary>
     public class HereAddress
     {
+        public string countryCode { get; set; }
         public string countryName { get; set; }
         public string state { get; set; }
         public string county { get; set; }

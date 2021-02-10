@@ -8,18 +8,18 @@ namespace VerusDate.Shared.Enum
     {
         // SHORT-TERM
 
-        [Display(Name = "Sexo casual", Description = "quem quer um encontro sexual único, no qual existe a expectativa de que não haja mais relações entre os participantes sexuais")]
+        [Display(Name = "Ficar / Sexo casual", Description = "Pode resumir-se a um encontro de apenas um dia ou uma noite. Este pode implicar somente uma troca de beijos e carícias ou resultar também num envolvimento mais íntimo de carácter sexual, mas que não se prolongará por muito no tempo.")]
         OneNightStand = 11,
 
-        [Display(Name = "Ficar / Amizade colorida", Description = "semelhante a um relacionamento de sexo casual, mas com uma diferença importante: uma amizade platônica estabelecida")]
+        [Display(Name = "Amizade colorida", Description = "Pessoa com quem se possui uma relação afetiva e sem compromisso, baseada em relações sexuais e não no compromisso formal, de fidelidade ou com outras características de um relacionamento amoroso.")]
         FriendsWithBenefits = 12,
 
         // LONG-TERM
 
-        [Display(Name = "Relacionamento sério", Description = "quem tem a intenção de se envolver (sexual e/ou amorosamente) com alguem a longo prazo")]
+        [Display(Name = "Namoro / Relacionamento sério", Description = "Namoro significa a relação afetiva mantida entre duas pessoas que se unem pelo desejo de estarem juntas e partilharem novas experiências. É uma relação em que o casal está comprometido socialmente, mas sem estabelecer um vínculo matrimonial perante a lei civil ou religiosa.")]
         Relationship = 21,
 
-        [Display(Name = "Morar juntos / Casar", Description = "quem tem a intenção de casar ou morar juntos em um curto período de tempo")]
+        [Display(Name = "Morar juntos / Casar", Description = "Para quem tem a intenção de casar (vínculo estabelecido entre duas pessoas, mediante o reconhecimento governamental, cultural, religioso ou social) ou morar juntos em um curto/médio período de tempo")]
         Married = 22
     }
 

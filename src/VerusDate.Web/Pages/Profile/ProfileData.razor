@@ -180,13 +180,7 @@ else
     protected bool IsShortTerm { get { return !profile.Basic.Intent.IsLongTerm(); } }
     private Shared.modal.BasicModal privacy;
     private Shared.modal.BasicModal help;
-
-    private void SetValues(IReadOnlyList<Intent> value)
-    {
-        profile.Basic.Intent = value.ToArray();
-        //await SelectedValuesChanged.InvokeAsync(SelectedValue);
-    }
-
+  
     private VisibilityOptions Options => new VisibilityOptions()
     {
         Loading = IsLoading
@@ -195,8 +189,6 @@ else
     protected override async Task LoadData()
     {
         profile = await Http.Profile_Get(SessionStorage);
-
-        profile.Interest = new();
 
         if (profile == null) //para novos usuários
         {

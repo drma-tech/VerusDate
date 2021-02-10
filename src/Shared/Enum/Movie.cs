@@ -31,7 +31,7 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Filme-Noir")]
         FilmNoir = 9,
 
-        [Display(Name = "História")]
+        [Display(Name = "Histórico / Fatos Reais")]
         History = 10,
 
         [Display(Name = "Terror")]

@@ -19,10 +19,10 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Lazer")]
         public IReadOnlyList<LeisureActivities> LeisureActivities { get; set; } = Array.Empty<LeisureActivities>();
 
-        [Display(Name = "Música")]
+        [Display(Name = "Músicas")]
         public IReadOnlyList<Music> Music { get; set; } = Array.Empty<Music>();
 
-        [Display(Name = "Filme")]
+        [Display(Name = "Filmes e TV")]
         public IReadOnlyList<Movie> Movie { get; set; } = Array.Empty<Movie>();
 
         [Display(Name = "Leitura")]

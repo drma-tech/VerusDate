@@ -20,6 +20,7 @@ namespace VerusDate.Shared.Model
         public ProfileBasicModel Basic { get; set; }
         public ProfileBioModel Bio { get; set; }
         public ProfileLifestyleModel Lifestyle { get; set; }
+        public ProfileInterestModel Interest { get; set; }
         public ProfileLookingModel Looking { get; set; }
         public ProfileGamificationModel Gamification { get; set; }
         public ProfileBadgeModel Badge { get; set; }
@@ -38,11 +39,12 @@ namespace VerusDate.Shared.Model
             DtLastLogin = DateTime.UtcNow;
         }
 
-        public void UpdateProfile(ProfileBasicModel basic, ProfileBioModel bio, ProfileLifestyleModel lifestyle)
+        public void UpdateProfile(ProfileBasicModel basic, ProfileBioModel bio, ProfileLifestyleModel lifestyle, ProfileInterestModel interest)
         {
             Basic = basic;
             Bio = bio;
             Lifestyle = lifestyle;
+            Interest = interest;
 
             DtUpdate = DateTime.UtcNow;
         }

@@ -251,7 +251,7 @@
     [Display(Name = "Message", Prompt = "Para sua própria segurança, favor não incluir seu nome completo, endereço, celular, email ou quaisquer informações pessoais")]
     private string Message { get; set; }
 
-    private bool BtnDisabled { get { return string.IsNullOrEmpty(Message) || !IsConnected || user == null; } }
+    private bool BtnDisabled { get { return string.IsNullOrEmpty(Message) || !IsConnected || user == null || interaction == null || !interaction.ActiveInteraction(); } }
 
     private string labelPhoto => $"{view.Basic.NickName}, {view.Age}, {ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)}";
 
@@ -308,6 +308,7 @@
 
     private VisibilityOptions Options => new VisibilityOptions()
     {
+        Invalid = interaction == null || !interaction.ActiveInteraction(),
         Loading = IsLoading,
         NoData = chat == null || !chat.Itens.Any()
     };
@@ -332,13 +333,16 @@
             if (view?.Badge != null) badge = view.Badge;
             interaction = await Http.Interation_Get(SessionStorage, IdUserView);
 
-            if (string.IsNullOrEmpty(interaction.IdChat))
+            if (interaction != null)
             {
-                await Http.Interation_GenerateChat(IdUserView, SessionStorage);
-            }
-            else
-            {
-                chat = await Http.Chat_Get(SessionStorage, IdUserView);
+                if (string.IsNullOrEmpty(interaction.IdChat))
+                {
+                    await Http.Interation_GenerateChat(IdUserView, SessionStorage);
+                }
+                else
+                {
+                    chat = await Http.Chat_Get(SessionStorage, IdUserView);
+                }
             }
         }
     }

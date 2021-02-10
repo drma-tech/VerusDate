@@ -25,7 +25,7 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Status de Relacionamento")]
         public MaritalStatus MaritalStatus { get; set; }
 
-        [Display(Name = "Intenção")]
+        [Display(Name = "Intenções")]
         public IReadOnlyList<Intent> Intent { get; set; } = Array.Empty<Intent>();
 
         [Display(Name = "Sexo Biológico")]
@@ -36,5 +36,8 @@ namespace VerusDate.Shared.Model
 
         [Display(Name = "Orientação Sexual", Description = "Alteração opcional")]
         public SexualOrientation SexualOrientation { get; set; }
+
+        [Display(Name = "Idiomas", Description = "Falado de forma Nativa ou fluente")]
+        public IReadOnlyList<Language> Languages { get; set; } = Array.Empty<Language>();
     }
 }

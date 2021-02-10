@@ -7,13 +7,13 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Não", Description = "Não consome nenhum tipo de bebida alcoólica")]
         No = 1,
 
-        [Display(Name = "Sim, socialmente", Description = "É a pessoa que bebe 3 drinks por semana ou menos.")]
+        [Display(Name = "Sim, socialmente", Description = "É a pessoa que bebe raramente e/ou apenas em ocasiões sociais, não ultrapassando duas vezes ao mês")]
         Yes_Light = 2,
 
-        [Display(Name = "Sim, moderadamente", Description = "É a pessoa que bebe 3 a 14 drinks por semana para os homens e 3 a 7 drinks para as mulheres ou idosos.")]
+        [Display(Name = "Sim, moderadamente", Description = "É a pessoa que bebe aproximadamente uma vez por semana, podendo chegar a seis vezes ao mês")]
         Yes_Moderate = 3,
 
-        [Display(Name = "Sim, frequentemente", Description = "É a pessoa que bebe mais que 14 drinks por semana para os homens ou mais que 7 drinks para as mulheres ou idosos.")]
+        [Display(Name = "Sim, frequentemente", Description = "É a pessoa que bebe pelo menos duas vezes por semana")]
         Yes_Heavy = 4
     }
 }

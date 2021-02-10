@@ -39,16 +39,18 @@
             case FieldType.SelectMultiple:
                 <Addons>
                     <Addon AddonType="AddonType.Body">
-                        <Select TValue="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SetValues" Multiple="true">
-                            @foreach (var item in EnumHelper.GetArray<TEnum>())
+                        <div class="form-control" style="height: auto;">
+                            @foreach (var item in SelectedValues)
                             {
-                                <SelectItem Value="@item">@item.GetName()</SelectItem>
+                                <Badge Color="Color.Secondary" Margin="Margin.Is1.FromRight" Style="font-size: 90%;">
+                                    @item.GetName()
+                                </Badge>
                             }
-                        </Select>
+                        </div>
                     </Addon>
-                    <Addon AddonType="AddonType.End">
-                        <Button Color="Color.Primary" Outline="true" Disabled="@DisableHelp" Clicked="() => UpdateDataHelp(For, typeof(TEnum))">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Question"></Icon>
+                    <Addon AddonType="AddonType.End">                    
+                        <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataSelect(For, typeof(TEnum))">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Plus"></Icon>
                         </Button>
                     </Addon>
                 </Addons>
@@ -63,3 +65,4 @@
 </Field>
 
 <VerusDate.Web.Shared.modal.ProfileDataHelp TValue="TValue" @ref="dataHelp"></VerusDate.Web.Shared.modal.ProfileDataHelp>
+<VerusDate.Web.Shared.modal.ProfileDataSelect TValue="TValue" TEnum="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SetValues" @ref="dataSelect"></VerusDate.Web.Shared.modal.ProfileDataSelect>

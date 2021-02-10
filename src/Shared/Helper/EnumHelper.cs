@@ -37,6 +37,7 @@ namespace VerusDate.Shared.Helper
                 output.Add(new EnumList()
                 {
                     Value = (int)val,
+                    ValueObject = val,
                     Name = GetName((System.Enum)val),
                     Description = GetDescription((System.Enum)val),
                 });
@@ -62,5 +63,6 @@ namespace VerusDate.Shared.Helper
         public string Description { get; set; }
         public string Name { get; set; }
         public int Value { get; set; }
+        public object ValueObject { get; set; }
     }
 }

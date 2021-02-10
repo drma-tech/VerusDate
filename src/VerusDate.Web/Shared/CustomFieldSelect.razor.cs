@@ -19,6 +19,7 @@ namespace VerusDate.Web.Shared
         [Parameter] public string HelpLink { get; set; }
 
         private modal.ProfileDataHelp<TValue> dataHelp;
+        private modal.ProfileDataSelect<TValue, TEnum> dataSelect;
 
         private async Task SetValue(TValue value)
         {
@@ -55,6 +56,12 @@ namespace VerusDate.Web.Shared
         {
             dataHelp.ChangeContent(For, TypeEnum);
             dataHelp.ShowModal();
+        }
+
+        protected void UpdateDataSelect(Expression<Func<TValue>> For, Type TypeEnum)
+        {
+            dataSelect.ChangeContent(For, TypeEnum);
+            dataSelect.ShowModal();
         }
     }
 }

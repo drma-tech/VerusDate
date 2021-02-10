@@ -24,7 +24,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
             var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
 
-            obj.UpdateProfile(request.Basic, request.Bio, request.Lifestyle);
+            obj.UpdateProfile(request.Basic, request.Bio, request.Lifestyle, request.Interest);
 
             return await _repo.Update(obj, cancellationToken);
         }

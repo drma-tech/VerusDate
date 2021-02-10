@@ -4,19 +4,19 @@ namespace VerusDate.Shared.Enum
 {
     public enum BodyMass
     {
-        [Display(Name = "Abaixo do peso")]
+        [Display(Name = "Magro (a)")]
         UnderWeight = 1,
 
         [Display(Name = "Normal")]
         NormalWeight = 2,
 
-        [Display(Name = "Atlético / Musculuso")]
+        [Display(Name = "Atlético (a) / Musculuso (a)")]
         Athletic = 3,
 
-        [Display(Name = "Acima do peso")]
+        [Display(Name = "Pouco acima do peso / Com curvas")]
         OverWeight = 4,
 
-        [Display(Name = "Obeso")]
+        [Display(Name = "Acima do peso / Obeso (a)")]
         Obese = 5,
     }
 }

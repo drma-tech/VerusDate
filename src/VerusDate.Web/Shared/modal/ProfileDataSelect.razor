@@ -1,0 +1,82 @@
+﻿@using System.Linq.Expressions;
+@typeparam TValue
+@typeparam TEnum
+
+<Modal @ref="modal">
+    <ModalBackdrop />
+    <ModalContent Centered="true" Size="ModalSize.Default">
+        <ModalHeader>
+            <ModalTitle>@label</ModalTitle>
+            <CloseButton Clicked="@modal.Hide" />
+        </ModalHeader>
+        <ModalBody MaxHeight="70">
+            @if (TypeEnum != null)
+            {
+                @foreach (var item in EnumHelper.GetList(TypeEnum))
+                {
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is2.FromBottom">
+                        <Check TValue="bool" Checked="Checked(item)" CheckedChanged="@(()=>CheckedChanged(item, !Checked(item)))" Size="Size.Medium">@item.Name</Check>
+                        @if (!string.IsNullOrEmpty(@item.Description))
+                        {
+                            <FieldHelp>@item.Description</FieldHelp>
+                        }
+                    </Paragraph>
+                }
+            }
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Secondary" Clicked="@modal.Hide">Cancelar</Button>
+            <Button Color="Color.Primary" Clicked="@Confirmar">Confirmar</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
+
+@code {
+    private Modal modal;
+    private Expression<Func<TValue>> For;
+    private System.Type TypeEnum;
+
+    [Parameter] public IReadOnlyList<TEnum> SelectedValues { get; set; }
+    [Parameter] public EventCallback<IReadOnlyList<TEnum>> SelectedValuesChanged { get; set; }
+
+    private string label => VerusDate.Shared.Helper.AttributeHelper.GetName(For);
+
+    public void ShowModal()
+    {
+        modal.Show();
+    }
+
+    private bool Checked(EnumList item)
+    {
+        var result = SelectedValues.Any(a => item.ValueObject.Equals(a));
+        return result;
+    }
+
+    void CheckedChanged(EnumList item, bool value)
+    {
+        if(value) //add
+        {
+            SelectedValues = SelectedValues.ToArray().Concat(new TEnum[] { (TEnum)item.ValueObject }).ToList().AsReadOnly();
+        }
+        else //remove
+        {
+            var list = SelectedValues.ToList();
+            list.Remove((TEnum)item.ValueObject);
+            SelectedValues = list.AsReadOnly();
+        }
+    }
+
+    private async Task Confirmar()
+    {
+        await SelectedValuesChanged.InvokeAsync(SelectedValues);
+
+        modal.Hide();
+    }
+
+    public void ChangeContent(Expression<Func<TValue>> For, System.Type TypeEnum)
+    {
+        this.For = For;
+        this.TypeEnum = TypeEnum;
+        StateHasChanged();
+    }
+}

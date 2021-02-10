@@ -64,6 +64,14 @@ namespace VerusDate.Shared.Model
             DtUpdate = DateTime.UtcNow;
         }
 
+        public bool ActiveInteraction()
+        {
+            var match = Match.Value.HasValue && Match.Value.Value;
+            var blocked = Block.Value.HasValue && Block.Value.Value;
+
+            return match && !blocked;
+        }
+
         public override void SetIds(string IdLoggedUser)
         {
             this.IdLoggedUser = IdLoggedUser;

@@ -1,7 +1,6 @@
 ﻿@page "/ProfileData"
 @attribute [Authorize]
 @inherits PageCore<ProfileData>
-@*@using Microsoft.AspNetCore.Components*@
 @using BrowserInterop.Extensions
 
 @if (Options.HasCustomVisibility)
@@ -42,6 +41,8 @@ else
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.SexualOrientation)" TValue="SexualOrientation" TEnum="SexualOrientation" @bind-SelectedValue="@profile.Basic.SexualOrientation"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Basic.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@profile.Basic.Languages"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language" DisableHelp="true"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Divider DividerType="DividerType.TextContent" Text="Bio"></Divider>
@@ -101,11 +102,32 @@ else
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.16personalities.com/br"></CustomFieldSelect>
                     </Column>
                 </Row>
+                <Divider DividerType="DividerType.TextContent" Text="Interesses"></Divider>
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Food)" TValue="IReadOnlyList<Food>" TEnum="Food" @bind-SelectedValues="@profile.Interest.Food"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PizzaSlice"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Holidays)" TValue="IReadOnlyList<Holidays>" TEnum="Holidays" @bind-SelectedValues="@profile.Interest.Holidays"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlaneDeparture"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Sports)" TValue="IReadOnlyList<Sports>" TEnum="Sports" @bind-SelectedValues="@profile.Interest.Sports"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Swimmer"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.LeisureActivities)" TValue="IReadOnlyList<LeisureActivities>" TEnum="LeisureActivities" @bind-SelectedValues="@profile.Interest.LeisureActivities"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.UmbrellaBeach"></CustomFieldSelect>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Music)" TValue="IReadOnlyList<Music>" TEnum="Music" @bind-SelectedValues="@profile.Interest.Music"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Music"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Movie)" TValue="IReadOnlyList<Movie>" TEnum="Movie" @bind-SelectedValues="@profile.Interest.Movie"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Film"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Reading)" TValue="IReadOnlyList<Reading>" TEnum="Reading" @bind-SelectedValues="@profile.Interest.Reading"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BookReader"></CustomFieldSelect>
+                    </Column>
+                </Row>
             </CardBody>
             <CardFooter>
                 @*<Button Type="ButtonType.Submit" Color="Color.Primary" Disabled="@(profile.GetDataStatus() != DataStatus.New && profile.DaysUpdate() < 1)">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
-                </Button>*@
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
+                    </Button>*@
                 <Button Type="ButtonType.Submit" Color="Color.Primary">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
                 </Button>
@@ -146,6 +168,8 @@ else
     {
         profile = await Http.Profile_Get(SessionStorage);
 
+        profile.Interest = new();
+
         if (profile == null) //para novos usuários
         {
             profile = new();
@@ -153,6 +177,7 @@ else
             profile.Basic = new();
             profile.Bio = new();
             profile.Lifestyle = new();
+            profile.Interest = new();
 
             profile.Basic.GenderIdentity = GenderIdentity.Cisgender;
             profile.Basic.SexualOrientation = SexualOrientation.Heteressexual;

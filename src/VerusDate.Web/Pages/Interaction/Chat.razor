@@ -7,7 +7,7 @@
 @*@inject IAccessTokenProvider TokenProvider*@
 
 <Row>
-    <Column ColumnSize="ColumnSize.Is8.OnDesktop.Is6.OnWidescreen">
+    <Column ColumnSize="ColumnSize.Is7.OnDesktop.Is6.OnFullHD">
         <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>Conversa com @view?.Basic.NickName</CardHeader>
             <CardBody Padding="Padding.Is0.FromBottom" Style="height: 265px; overflow: auto; display: flex; flex-direction: column-reverse;">
@@ -109,7 +109,7 @@
             </CardBody>
         </Card>
     </Column>
-    <Column ColumnSize="ColumnSize.Is2.OnDesktop.Is3.OnWidescreen">
+    <Column ColumnSize="ColumnSize.Is5.OnDesktop.Is3.OnFullHD">
         @if (OptionsProfile.HasCustomVisibility)
         {
             <CustomVisibility Options="OptionsProfile"></CustomVisibility>
@@ -171,7 +171,7 @@
             </Card>
         }
     </Column>
-    <Column ColumnSize="ColumnSize.Is2.OnDesktop.Is3.OnWidescreen">
+    <Column ColumnSize="ColumnSize.IsFull.OnDesktop.Is3.OnFullHD">
         @if (OptionsProfile.HasCustomVisibility)
         {
             <CustomVisibility Options="OptionsProfile"></CustomVisibility>

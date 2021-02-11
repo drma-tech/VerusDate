@@ -48,6 +48,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             SQL.Append("  , c.basic ");
             SQL.Append("  , c.bio ");
             SQL.Append("  , c.lifestyle ");
+            SQL.Append("  , c.interest ");
             SQL.Append("  , c.looking ");
             SQL.Append("  , c.gamification ");
             SQL.Append("  , c.badge ");

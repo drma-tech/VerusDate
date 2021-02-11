@@ -32,7 +32,9 @@ namespace VerusDate.Api.Mediator.Command.Profile
                 .NotEmpty();
 
             RuleFor(x => x.Basic.Intent)
-                .NotEmpty();
+                .NotEmpty()
+                .Must((value) => value.Count <= 2)
+                .WithMessage("Escolha até no máximo duas intenções");
 
             RuleFor(x => x.Basic.BiologicalSex)
                 .NotEmpty();
@@ -42,6 +44,11 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
             RuleFor(x => x.Basic.SexualOrientation)
                 .NotEmpty();
+
+            RuleFor(x => x.Basic.Languages)
+               .NotEmpty()
+               .Must((value) => value.Count <= 5)
+               .WithMessage("Escolha até no máximo cinco idiomas");
 
             //BIO
 
@@ -101,6 +108,36 @@ namespace VerusDate.Api.Mediator.Command.Profile
             RuleFor(x => x.Lifestyle.RelationshipPersonality)
                .NotEmpty()
                .When(w => w.Basic.Intent.IsLongTerm());
+
+            //INTERESSES
+
+            RuleFor(x => x.Interest.Food)
+                .Must((value) => value.Count <= 3)
+                .WithMessage("Escolha até no máximo três opções");
+
+            RuleFor(x => x.Interest.Holidays)
+                .Must((value) => value.Count <= 3)
+                .WithMessage("Escolha até no máximo três opções");
+
+            RuleFor(x => x.Interest.Sports)
+                .Must((value) => value.Count <= 3)
+                .WithMessage("Escolha até no máximo três opções");
+
+            RuleFor(x => x.Interest.LeisureActivities)
+                .Must((value) => value.Count <= 3)
+                .WithMessage("Escolha até no máximo três opções");
+
+            RuleFor(x => x.Interest.Music)
+                .Must((value) => value.Count <= 3)
+                .WithMessage("Escolha até no máximo três opções");
+
+            RuleFor(x => x.Interest.Movie)
+                .Must((value) => value.Count <= 3)
+                .WithMessage("Escolha até no máximo três opções");
+
+            RuleFor(x => x.Interest.Reading)
+                .Must((value) => value.Count <= 3)
+                .WithMessage("Escolha até no máximo três opções");
         }
     }
 }

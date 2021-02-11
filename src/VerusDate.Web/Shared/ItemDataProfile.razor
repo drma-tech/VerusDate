@@ -1,9 +1,10 @@
 ﻿@using System.Linq.Expressions;
-@inherits ComponenteCore<ItemDataProfile>
+@inherits ComponenteCore<ItemDataProfile<TValue>>
+@typeparam TValue
 
-@if (Intent != null && Intent.Any())
+@if (Values != null && Values.Any())
 {
-    foreach (var item in Intent)
+    foreach (var item in Values)
     {
         <Badge Color="@GetColor(item)" Pill="true" title="@GetDescription(item)" Style="@GetCursor(item)" @onclick="@(() =>  BadgeClick(item))">
             <Icon Name="@ClassIcon"></Icon> @GetValue(item)
@@ -27,75 +28,112 @@ else
 
 @code {
     [Parameter] public Expression<Func<object>> For { get; set; }
-    [Parameter] public Enum Value { get; set; }
-    [Parameter] public IReadOnlyList<Intent> Intent { get; set; }
-    [Parameter] public string StringValue { get; set; }
+    [Parameter] public TValue Value { get; set; }
+    [Parameter] public IReadOnlyList<TValue> Values { get; set; }
     [Parameter] public string ClassIcon { get; set; }
     [Parameter] public List<AffinityVM> Affinities { get; set; } = new();
 
-    private string GetValue(Enum Value)
+    private string GetValue(TValue value)
     {
-        if (string.IsNullOrEmpty(StringValue))
+        if (value is string resultS)
         {
-            if (Value == null)
+            if (string.IsNullOrEmpty(resultS))
                 return "Não Respondido";
             else
-                return Value.GetName();
+                return resultS;
+        }
+        else if (value is Enum resultE)
+        {
+            var result = EnumHelper.GetName(resultE);
+
+            if (string.IsNullOrEmpty(result))
+                return "Não Respondido";
+            else
+                return result;
         }
         else
         {
-            return StringValue;
+            throw new InvalidOperationException("tipo inválido: " + value.GetType());
         }
     }
 
-    private string GetDescription(Enum Value)
+    private string GetDescription(TValue value)
     {
-        if (string.IsNullOrEmpty(StringValue))
-            return Value.GetDescription();
-        else
+        if (value is string resultS)
+        {
             return null;
+        }
+        else if (value is Enum resultE)
+        {
+            return resultE.GetDescription();
+        }
+        else
+        {
+            throw new InvalidOperationException("tipo inválido: " + value.GetType());
+        }
     }
 
-    private string GetCursor(Enum Value)
+    private string GetCursor(TValue value)
     {
-        if (string.IsNullOrEmpty(Value.GetDescription()))
+        if (value is string resultS)
         {
             return "cursor: default";
         }
+        else if (value is Enum resultE)
+        {
+            if (string.IsNullOrEmpty(resultE.GetDescription()))
+            {
+                return "cursor: default";
+            }
+            else
+            {
+                return "cursor: help";
+            }
+        }
         else
         {
-            return "cursor: help";
+            throw new InvalidOperationException("tipo inválido: " + value.GetType());
         }
     }
 
-    private string Field => AttributeHelper.GetNameOf(For);
-
-    private Color GetColor(Enum Value)
+    private Color GetColor(TValue value)
     {
-        if (!Affinities.Any(s => s.AttributeName == Field)) //se o atributo não está mapeado no affinity, fica neutro
+        var fieldName = AttributeHelper.GetNameOf(For);
+
+        if (!Affinities.Any(s => s.AttributeName == fieldName)) //se o atributo não está mapeado no affinity, fica neutro
         {
             return Color.Secondary;
         }
-        else if (Affinities.Single(s => s.AttributeName == Field).HaveAffinity) //se está mapeado e tem affinity, então marca sucesso
+        else if (Affinities.Single(s => s.AttributeName == fieldName).HaveAffinity) //se está mapeado e tem affinity, então marca sucesso
         {
-            var affinity = Affinities.Single(s => s.AttributeName == Field);
-
-            if (affinity.Intent != null && affinity.Intent.Any())
+            if (value is string resultS)
             {
-                if (affinity.Intent.Any(a => a == (Intent)Value))
+                return Color.Success;
+            }
+            else if (value is Enum resultE)
+            {
+                var affinity = Affinities.Single(s => s.AttributeName == fieldName);
+
+                if (affinity.ArrayEnums != null && affinity.ArrayEnums.Any())
                 {
-                    return Color.Success;
+                    if (affinity.ArrayEnums.Any(a => a == Convert.ToInt32(resultE)))
+                    {
+                        return Color.Success;
+                    }
+                    else
+                    {
+                        return Color.Secondary;
+                    }
                 }
                 else
                 {
-                    return Color.Secondary;
+                    return Color.Success;
                 }
             }
             else
             {
-                return Color.Success;
+                throw new InvalidOperationException("tipo inválido: " + value.GetType());
             }
-
         }
         else //not affinity
         {
@@ -103,7 +141,7 @@ else
         }
     }
 
-    private void BadgeClick(Enum Value)
+    private void BadgeClick(TValue Value)
     {
         if (!string.IsNullOrEmpty(GetDescription(Value)))
         {

@@ -7,8 +7,8 @@ namespace VerusDate.Shared.Helper
     {
         public enum DistanceType
         {
-            Km,
-            Mile
+            Km = 1,
+            Mile = 2
         }
 
         public static int GetAge(this DateTime date)

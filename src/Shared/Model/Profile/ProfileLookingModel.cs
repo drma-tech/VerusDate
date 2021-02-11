@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Enum;
 
@@ -6,9 +7,11 @@ namespace VerusDate.Shared.Model
 {
     public class ProfileLookingModel
     {
-        //TODO: IReadOnlyList - LIMITAÇÃO DO BLAZOR
         [Display(Name = "Intenções", Description = "Campo obrigatório (múltipla escolha)")]
-        public IReadOnlyList<Intent> Intent { get; set; } = new List<Intent>();
+        public IReadOnlyList<Intent> Intent { get; set; } = Array.Empty<Intent>();
+
+        [Display(Name = "Idiomas")]
+        public IReadOnlyList<Language> Languages { get; set; } = Array.Empty<Language>();
 
         [Display(Name = "Distância (KM)", Description = "Campo obrigatório")]
         public double Distance { get; set; }

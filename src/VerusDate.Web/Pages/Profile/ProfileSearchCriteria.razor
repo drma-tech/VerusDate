@@ -41,13 +41,14 @@ else
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search"></CustomFieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.BiologicalSex)" TValue="BiologicalSex?" TEnum="BiologicalSex" @bind-SelectedValue="@looking.BiologicalSex"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.GenderIdentity)" TValue="GenderIdentity?" TEnum="GenderIdentity" @bind-SelectedValue="@looking.GenderIdentity"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.SexualOrientation)" TValue="SexualOrientation?" TEnum="SexualOrientation" @bind-SelectedValue="@looking.SexualOrientation"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@looking.Languages"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language" DisableHelp="true"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Divider DividerType="DividerType.TextContent" Text="Bio"></Divider>
@@ -105,7 +106,7 @@ else
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.Drink)" TValue="Drink?" TEnum="Drink" @bind-SelectedValue="@looking.Drink"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GlassCheers" DisableHelp="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GlassCheers"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.Smoke)" TValue="Smoke?" TEnum="Smoke" @bind-SelectedValue="@looking.Smoke"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smoking" DisableHelp="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.Diet)" TValue="Diet?" TEnum="Diet" @bind-SelectedValue="@looking.Diet"

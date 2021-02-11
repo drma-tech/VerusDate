@@ -1,5 +1,4 @@
 ﻿using Blazored.SessionStorage;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -32,37 +31,46 @@ namespace VerusDate.Web.Api
             if (profUser.Looking == null) throw new NotificationException("Não foi possível identificar seu perfil de busca");
             if (profView.Looking == null) throw new NotificationException("Não foi possível identificar o perfil de busca deste usuário");
 
-            var obj = new List<AffinityVM>
-            {
-                //BASIC
-                new AffinityVM(nameof(profView.Basic.BiologicalSex), CheckEnum((int)profView.Basic.BiologicalSex, (int?)profUser.Looking.BiologicalSex)),
-                new AffinityVM(nameof(profView.Basic.MaritalStatus), CheckEnum((int)profView.Basic.MaritalStatus, (int?)profUser.Looking.MaritalStatus)),
-                new AffinityVM(nameof(profView.Basic.Intent), CheckIntent(profView.Basic.Intent, profUser.Looking.Intent), profView.Basic.Intent.Intersect(profUser.Looking.Intent)),
-                new AffinityVM(nameof(profView.Basic.GenderIdentity), CheckEnum((int)profView.Basic.GenderIdentity, (int?)profUser.Looking.GenderIdentity)),
-                new AffinityVM(nameof(profView.Basic.SexualOrientation), CheckEnum((int)profView.Basic.SexualOrientation, (int?)profUser.Looking.SexualOrientation)),
-                new AffinityVM(nameof(profView.Distance), profView.Distance <= profUser.Looking.Distance),
-                //BIO
-                new AffinityVM(nameof(profView.Age), CheckAge(profView.Age, profUser.Looking.MinimalAge, profUser.Looking.MaxAge)),
-                new AffinityVM(nameof(profView.Bio.RaceCategory), CheckEnum((int)profView.Bio.RaceCategory, (int?)profUser.Looking.RaceCategory)),
-                new AffinityVM(nameof(profView.Bio.Height), CheckHeight(profView.Bio.Height, profUser.Looking.MinimalHeight, profUser.Looking.MaxHeight)),
-                new AffinityVM(nameof(profView.Bio.BodyMass), CheckEnum((int)profView.Bio.BodyMass, (int?)profUser.Looking.BodyMass))
-            };
+            var obj = new List<AffinityVM>();
+
+            //BASIC
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.BiologicalSex), CheckEnum((int)profView.Basic.BiologicalSex, (int?)profUser.Looking.BiologicalSex)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.MaritalStatus), CheckEnum((int)profView.Basic.MaritalStatus, (int?)profUser.Looking.MaritalStatus)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Intent), CheckEnumArray(profView.Basic.Intent, profUser.Looking.Intent), profView.Basic.Intent.Intersect(profUser.Looking.Intent).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.GenderIdentity), CheckEnum((int)profView.Basic.GenderIdentity, (int?)profUser.Looking.GenderIdentity)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.SexualOrientation), CheckEnum((int)profView.Basic.SexualOrientation, (int?)profUser.Looking.SexualOrientation)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Distance), profView.Distance <= profUser.Looking.Distance));
+            if (profView.Basic.Languages.Any())
+                obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Languages), CheckEnumArray(profView.Basic.Languages, profUser.Looking.Languages), profView.Basic.Languages.Intersect(profUser.Looking.Languages).Select(s => (int)s)));
+            //BIO
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Age), CheckAge(profView.Age, profUser.Looking.MinimalAge, profUser.Looking.MaxAge)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.RaceCategory), CheckEnum((int)profView.Bio.RaceCategory, (int?)profUser.Looking.RaceCategory)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.Height), CheckHeight(profView.Bio.Height, profUser.Looking.MinimalHeight, profUser.Looking.MaxHeight)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.BodyMass), CheckEnum((int)profView.Bio.BodyMass, (int?)profUser.Looking.BodyMass)));
 
             if (profView.Basic.Intent.IsLongTerm())
             {
                 //LIFESTYLE (compatibilidade independe das definições de busca)
-                obj.Add(new AffinityVM(nameof(profView.Lifestyle.Smoke), CheckEnum((int)profView.Lifestyle.Smoke, (int?)profUser.Lifestyle.Smoke)));
-                obj.Add(new AffinityVM(nameof(profView.Lifestyle.Drink), CheckEnum((int)profView.Lifestyle.Drink, (int?)profUser.Lifestyle.Drink)));
-                obj.Add(new AffinityVM(nameof(profView.Lifestyle.Diet), CheckEnum((int)profView.Lifestyle.Diet, (int?)profUser.Lifestyle.Diet)));
-                obj.Add(new AffinityVM(nameof(profView.Lifestyle.HaveChildren), CheckEnum((int)profView.Lifestyle.HaveChildren.Value, (int?)profUser.Lifestyle.HaveChildren)));
-                obj.Add(new AffinityVM(nameof(profView.Lifestyle.WantChildren), CheckEnum((int)profView.Lifestyle.WantChildren.Value, (int?)profUser.Lifestyle.WantChildren)));
-                obj.Add(new AffinityVM(nameof(profView.Lifestyle.Religion), CheckEnum((int)profView.Lifestyle.Religion.Value, (int?)profUser.Lifestyle.Religion)));
-                obj.Add(new AffinityVM(nameof(profView.Lifestyle.EducationLevel), CheckEnum((int)profView.Lifestyle.EducationLevel.Value, (int?)profUser.Lifestyle.EducationLevel)));
-                obj.Add(new AffinityVM(nameof(profView.Lifestyle.CareerCluster), CheckEnum((int)profView.Lifestyle.CareerCluster.Value, (int?)profUser.Lifestyle.CareerCluster)));
-                obj.Add(new AffinityVM(nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int)profView.Lifestyle.MoneyPersonality.Value, (int?)profUser.Lifestyle.MoneyPersonality)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Smoke), CheckEnum((int)profView.Lifestyle.Smoke, (int?)profUser.Lifestyle.Smoke)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Drink), CheckEnum((int)profView.Lifestyle.Drink, (int?)profUser.Lifestyle.Drink)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Diet), CheckEnum((int)profView.Lifestyle.Diet, (int?)profUser.Lifestyle.Diet)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.HaveChildren), CheckEnum((int)profView.Lifestyle.HaveChildren.Value, (int?)profUser.Lifestyle.HaveChildren)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.WantChildren), CheckEnum((int)profView.Lifestyle.WantChildren.Value, (int?)profUser.Lifestyle.WantChildren)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Religion), CheckEnum((int)profView.Lifestyle.Religion.Value, (int?)profUser.Lifestyle.Religion)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.EducationLevel), CheckEnum((int)profView.Lifestyle.EducationLevel.Value, (int?)profUser.Lifestyle.EducationLevel)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.CareerCluster), CheckEnum((int)profView.Lifestyle.CareerCluster.Value, (int?)profUser.Lifestyle.CareerCluster)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int)profView.Lifestyle.MoneyPersonality.Value, (int?)profUser.Lifestyle.MoneyPersonality)));
                 if (profView.Lifestyle.MyersBriggsTypeIndicator.HasValue)
-                    obj.Add(new AffinityVM(nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator.Value, profUser.Lifestyle.MyersBriggsTypeIndicator)));
-                obj.Add(new AffinityVM(nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality)));
+                    obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator.Value, profUser.Lifestyle.MyersBriggsTypeIndicator)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality)));
+                //INTEREST (com uma opção de cada categoria já indica compatibilidade)
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Food), CheckEnumArray(profView.Interest.Food, profUser.Interest.Food), profView.Interest.Food.Intersect(profUser.Interest.Food).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Holidays), CheckEnumArray(profView.Interest.Holidays, profUser.Interest.Holidays), profView.Interest.Holidays.Intersect(profUser.Interest.Holidays).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Sports), CheckEnumArray(profView.Interest.Sports, profUser.Interest.Sports), profView.Interest.Sports.Intersect(profUser.Interest.Sports).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.LeisureActivities), CheckEnumArray(profView.Interest.LeisureActivities, profUser.Interest.LeisureActivities), profView.Interest.LeisureActivities.Intersect(profUser.Interest.LeisureActivities).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Music), CheckEnumArray(profView.Interest.Music, profUser.Interest.Music), profView.Interest.Music.Intersect(profUser.Interest.Music).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Movie), CheckEnumArray(profView.Interest.Movie, profUser.Interest.Movie), profView.Interest.Movie.Intersect(profUser.Interest.Movie).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Reading), CheckEnumArray(profView.Interest.Reading, profUser.Interest.Reading), profView.Interest.Reading.Intersect(profUser.Interest.Reading).Select(s => (int)s)));
             }
 
             return obj;
@@ -90,23 +98,36 @@ namespace VerusDate.Web.Api
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="EnumUser"></param>
-        /// <param name="EnumView">Definido em Looking (se for lifestyle, é o que ta no perfil)</param>
-        /// <returns></returns>
-        private static bool CheckEnum(int EnumUser, int? EnumLooking)
+        private static bool CheckHeight(Height Height, Height? Looking_MinimalHeight, Height? Looking_MaxHeight)
         {
-            if (!EnumLooking.HasValue) return true; //If the user has not defined, then it is an affinity
-
-            return EnumUser == EnumLooking;
+            if (Looking_MinimalHeight.HasValue && Looking_MaxHeight.HasValue)
+            {
+                return Looking_MinimalHeight <= Height && Looking_MaxHeight >= Height;
+            }
+            else if (Looking_MinimalHeight.HasValue)
+            {
+                return Looking_MinimalHeight <= Height;
+            }
+            else if (Looking_MaxHeight.HasValue)
+            {
+                return Looking_MaxHeight >= Height;
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        private static bool CheckIntent(IReadOnlyList<Intent> user, IReadOnlyList<Intent> looking)
+        private static bool CheckEnum(int user, int? looking)
         {
-            if (user == null) throw new ArgumentNullException(nameof(user));
-            if (looking == null) throw new ArgumentNullException(nameof(looking));
+            if (!looking.HasValue) return true; //If the user has not defined, then it is an affinity
+
+            return user == looking;
+        }
+
+        private static bool CheckEnumArray<T>(IEnumerable<T> user, IEnumerable<T> looking) where T : System.Enum
+        {
+            if (!looking.Any()) return true; //If the user has not defined, then it is an affinity
 
             return user.Intersect(looking).Any();
         }
@@ -153,26 +174,6 @@ namespace VerusDate.Web.Api
                 MyersBriggsTypeIndicator.ESFP => looking.Value == MyersBriggsTypeIndicator.ISTJ || looking.Value == MyersBriggsTypeIndicator.ISFJ,
                 _ => false,
             };
-        }
-
-        private static bool CheckHeight(Height Height, Height? Looking_MinimalHeight, Height? Looking_MaxHeight)
-        {
-            if (Looking_MinimalHeight.HasValue && Looking_MaxHeight.HasValue)
-            {
-                return Looking_MinimalHeight <= Height && Looking_MaxHeight >= Height;
-            }
-            else if (Looking_MinimalHeight.HasValue)
-            {
-                return Looking_MinimalHeight <= Height;
-            }
-            else if (Looking_MaxHeight.HasValue)
-            {
-                return Looking_MaxHeight >= Height;
-            }
-            else
-            {
-                return true;
-            }
         }
 
         #endregion AFFINITY

@@ -19,7 +19,7 @@ namespace VerusDate.Seed.Model
                 .Rules((s, p) =>
                 {
                     p.SetIds(Id ?? s.Random.Guid().ToString());
-                    if (profile) p.UpdateProfile(GetProfileBasic<ProfileBasicModel>(), GetProfileBio(), GetProfileLifestyle());
+                    if (profile) p.UpdateProfile(GetProfileBasic<ProfileBasicModel>(), GetProfileBio(), GetProfileLifestyle(), new ProfileInterestModel());
                     if (looking) p.UpdateLooking(GetProfileLookingVM());
                     if (gamification) p.UpdateGamification(GetProfileGamification());
                     if (badge) p.UpdateBadge(GetProfileBadge());

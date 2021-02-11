@@ -9,11 +9,11 @@
 else
 {
     <Row>
-        <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is4.OnWidescreen">
+        <Column ColumnSize="ColumnSize.IsHalf.OnDesktop.Is4.OnWidescreen">
             <Card Margin="Margin.Is3.FromBottom">
                 <CardImage Source="@view.GetMainPhoto()" Alt="@labelPhoto"></CardImage>
                 <Tooltip Text="Perfil compatível com o que você procura" Multiline="true" Fade="true" Placement="Placement.Right" Style="position: absolute; top: 5px; left: 10px; cursor: help;">
-                    <Badge Color="Color.Success">@(GetPercentAffinity() + "%")</Badge>
+                    <Badge Color="Color.Success">@(GetPercentAffinity(null) + "%")</Badge>
                 </Tooltip>
 
                 @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
@@ -62,40 +62,86 @@ else
                 </CardBody>
             </Card>
         </Column>
-        <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is8.OnWidescreen">
-            <Card Margin="Margin.Is3.FromBottom">
-                <CardHeader>Conquistas</CardHeader>
-                <CardBody>
-                    <Row>
-                        <Column ColumnSize="ColumnSize.Is6.Is3.OnWidescreen.Is2.OnFullHD" Margin="Margin.Is2.FromBottom">
-                            <ProfileBadge Type="@badge.Ranking"></ProfileBadge>
-                        </Column>
-                        <Column ColumnSize="ColumnSize.Is6.Is3.OnWidescreen.Is2.OnFullHD" Margin="Margin.Is2.FromBottom">
-                            <ProfileBadge Type="@badge.Seniority"></ProfileBadge>
-                        </Column>
-                        <Column ColumnSize="ColumnSize.Is6.Is3.OnWidescreen.Is2.OnFullHD" Margin="Margin.Is2.FromBottom">
-                            <ProfileBadge Type="@badge.VerifiedProfile"></ProfileBadge>
-                        </Column>
-                        <Column ColumnSize="ColumnSize.Is6.Is3.OnWidescreen.Is2.OnFullHD" Margin="Margin.Is2.FromBottom">
-                            <ProfileBadge Type="@badge.Popular"></ProfileBadge>
-                        </Column>
-                    </Row>
-                </CardBody>
-            </Card>
+        <Column ColumnSize="ColumnSize.IsHalf.OnDesktop.Is8.OnWidescreen">
+            <Row>
+                <Column ColumnSize="ColumnSize.IsFull.Is8.OnFullHD">
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardHeader>Conquistas</CardHeader>
+                        <CardBody>
+                            <Row>
+                                <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
+                                    <ProfileBadge Type="@badge.Ranking"></ProfileBadge>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
+                                    <ProfileBadge Type="@badge.Seniority"></ProfileBadge>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
+                                    <ProfileBadge Type="@badge.VerifiedProfile"></ProfileBadge>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
+                                    <ProfileBadge Type="@badge.Popular"></ProfileBadge>
+                                </Column>
+                            </Row>
+                        </CardBody>
+                    </Card>
+                </Column>
+                <Column ColumnSize="ColumnSize.IsFull.Is4.OnFullHD">
+                    <Card Margin="Margin.Is3.FromBottom">
+                        <CardHeader>Compatibilidade</CardHeader>
+                        <CardBody>
+                            <Row>
+                                <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
+                                    <Badge Color="Color.Secondary" Display="Display.Block">Básico</Badge>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
+                                    <Progress>
+                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Basic)" Animated="true" Background="GetBackground(AffinityCategory.Basic)" Striped="true">@GetPercentAffinity(AffinityCategory.Basic)%</ProgressBar>
+                                    </Progress>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
+                                    <Badge Color="Color.Secondary" Display="Display.Block">Bio</Badge>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
+                                    <Progress>
+                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Bio)" Animated="true" Background="GetBackground(AffinityCategory.Bio)" Striped="true">@GetPercentAffinity(AffinityCategory.Bio)%</ProgressBar>
+                                    </Progress>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
+                                    <Badge Color="Color.Secondary" Display="Display.Block">Lifestyle</Badge>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
+                                    <Progress>
+                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Lifestyle)" Animated="true" Background="GetBackground(AffinityCategory.Lifestyle)" Striped="true">@GetPercentAffinity(AffinityCategory.Lifestyle)%</ProgressBar>
+                                    </Progress>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
+                                    <Badge Color="Color.Secondary" Display="Display.Block">Interesses</Badge>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
+                                    <Progress>
+                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Interest)" Animated="true" Background="GetBackground(AffinityCategory.Interest)" Striped="true">@GetPercentAffinity(AffinityCategory.Interest)%</ProgressBar>
+                                    </Progress>
+                                </Column>
+                            </Row>
+                        </CardBody>
+                    </Card>
+                </Column>
+            </Row>
             <Card Margin="Margin.Is3.FromBottom">
                 <CardBody>
                     <Divider DividerType="DividerType.TextContent" Text="Básico"></Divider>
 
-                    <ItemDataProfile For="@(() => view.Distance)" StringValue="@ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)" ClassIcon="fas fa-map-marker-alt" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Distance)" Value="@ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)" ClassIcon="fas fa-map-marker-alt" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.MaritalStatus)" Value="@view.Basic.MaritalStatus" ClassIcon="far fa-heart" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => view.Basic.Intent)" Intent="@view.Basic.Intent" ClassIcon="fas fa-search" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Basic.Intent)" Values="@view.Basic.Intent" ClassIcon="fas fa-search" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.BiologicalSex)" Value="@view.Basic.BiologicalSex" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.GenderIdentity)" Value="@view.Basic.GenderIdentity" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.SexualOrientation)" Value="@view.Basic.SexualOrientation" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Basic.Languages)" Values="@view.Basic.Languages" ClassIcon="fas fa-language" Affinities="@affinities"></ItemDataProfile>
 
                     <Divider DividerType="DividerType.TextContent" Text="Bio"></Divider>
 
-                    <ItemDataProfile For="@(() => view.Age)" StringValue="@ProfileHelper.GetAgeExtension(view.Age)" ClassIcon="fas fa-birthday-cake" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Age)" Value="@ProfileHelper.GetAgeExtension(view.Age)" ClassIcon="fas fa-birthday-cake" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="null" Value="@view.Bio.BirthDate.GetZodiac()" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Bio.RaceCategory)" Value="@view.Bio.RaceCategory" ClassIcon="fas fa-globe" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Bio.Height)" Value="@view.Bio.Height" ClassIcon="fas fa-ruler" Affinities="@affinities"></ItemDataProfile>
@@ -114,6 +160,16 @@ else
                     <ItemDataProfile For="@(() => view.Lifestyle.MoneyPersonality)" Value="@view.Lifestyle.MoneyPersonality" ClassIcon="fas fa-wallet" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Lifestyle.RelationshipPersonality)" Value="@view.Lifestyle.RelationshipPersonality" ClassIcon="fas fa-people-arrows" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Lifestyle.MyersBriggsTypeIndicator)" Value="@view.Lifestyle.MyersBriggsTypeIndicator" ClassIcon="fas fa-user" Affinities="@affinities"></ItemDataProfile>
+
+                    <Divider DividerType="DividerType.TextContent" Text="Interesses"></Divider>
+
+                    <ItemDataProfile For="@(() => view.Interest.Food)" Values="@view.Interest.Food" ClassIcon="fas fa-pizza-slice" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Interest.Holidays)" Values="@view.Interest.Holidays" ClassIcon="fas fa-plane-departure" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Interest.Sports)" Values="@view.Interest.Sports" ClassIcon="fas fa-swimmer" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Interest.LeisureActivities)" Values="@view.Interest.LeisureActivities" ClassIcon="fas fa-umbrella-beach" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Interest.Music)" Values="@view.Interest.Music" ClassIcon="fas fa-music" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Interest.Movie)" Values="@view.Interest.Movie" ClassIcon="fas fa-film" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Interest.Reading)" Values="@view.Interest.Reading" ClassIcon="fas fa-book-reader" Affinities="@affinities"></ItemDataProfile>
                 </CardBody>
             </Card>
         </Column>
@@ -212,11 +268,39 @@ else
         }
     }
 
-    public double GetPercentAffinity()
+    public int GetPercentAffinity(AffinityCategory? category = null)
     {
-        double totCheck = affinities.Count(w => w.HaveAffinity);
-        double totItens = affinities.Count;
+        if (category == null)
+        {
+            double totCheck = affinities.Count(w => w.HaveAffinity);
+            double totItens = affinities.Count;
 
-        return Math.Round((totCheck / totItens) * 100, 0);
+            return Convert.ToInt32(Math.Round((totCheck / totItens) * 100, 0));
+        }
+        else
+        {
+            double totCheck = affinities.Where(w => w.Category == category).Count(w => w.HaveAffinity);
+            double totItens = affinities.Where(w => w.Category == category).Count();
+
+            return Convert.ToInt32(Math.Round((totCheck / totItens) * 100, 0));
+        }
+    }
+
+    public Background GetBackground(AffinityCategory category)
+    {
+        var perc = GetPercentAffinity(category);
+
+        if (perc >= 80)
+        {
+            return Background.Success;
+        }
+        else if (perc >= 60)
+        {
+            return Background.Warning;
+        }
+        else
+        {
+            return Background.Danger;
+        }
     }
 }

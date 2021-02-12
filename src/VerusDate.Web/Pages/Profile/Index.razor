@@ -5,7 +5,16 @@
 <Row>
     <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is4.OnWidescreen">
         <Card Margin="Margin.Is3.FromBottom">
-            <CardImage Source="@MainPhoto"></CardImage>
+            <CardBody Padding="Padding.Is0">
+                <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1" ShowIndicators="imageDataUriGallery.Count() > 1">
+                    @foreach (var item in imageDataUriGallery)
+                    {
+                        <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
+                            <Image Source="@item" Style="max-height: 450px" />
+                        </CarouselSlide>
+                    }
+                </Carousel>
+            </CardBody>
             <CardBody>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
@@ -101,12 +110,13 @@
 
 @code {
 
-    private string MainPhoto = ImageHelper.GetNoUserPhoto;
-
     private ProfileModel profile;
     private ProfileGamificationModel gamification;
     private ProfileBadgeModel badge = new();
     private GlobalInteractions GlobalInteractionsVM = new();
+
+    string selectedImage;
+    string[] imageDataUriGallery = Array.Empty<string>();
 
     protected override async Task LoadData()
     {
@@ -114,7 +124,8 @@
 
         if (profile != null)
         {
-            MainPhoto = profile.GetMainPhoto();
+            imageDataUriGallery = new string[] { profile.GetMainPhoto() }.Concat(profile.GetGalleryPhotos()).ToArray();
+            selectedImage = imageDataUriGallery.FirstOrDefault();
         }
 
         gamification = profile?.Gamification;

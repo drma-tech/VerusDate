@@ -1,5 +1,6 @@
 ﻿using Blazored.SessionStorage;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -17,15 +18,9 @@ namespace VerusDate.Web.Api
             return await http.Put<ProfileModel>("Storage/UploadPhotoFace", new { MainPhoto = bytes }, storage, "Profile/Get");
         }
 
-        public async static Task<HttpResponseMessage> Storage_UploadPhotoGallery(this HttpClient http, MemoryStream stream1, MemoryStream stream2, MemoryStream stream3, MemoryStream stream4, ISyncSessionStorageService storage)
+        public async static Task<HttpResponseMessage> Storage_UploadPhotoGallery(this HttpClient http, List<byte[]> Streams, ISyncSessionStorageService storage)
         {
-            return await http.Put<ProfileModel>("Storage/UploadPhotoGallery", new
-            {
-                Stream1 = stream1?.ToArray(),
-                Stream2 = stream2?.ToArray(),
-                Stream3 = stream3?.ToArray(),
-                Stream4 = stream4?.ToArray()
-            }, storage, "Profile/Get");
+            return await http.Put<ProfileModel>("Storage/UploadPhotoGallery", new { Streams }, storage, "Profile/Get");
         }
 
         public async static Task<HttpResponseMessage> Storage_UploadPhotoValidation(this HttpClient http, byte[] bytes)

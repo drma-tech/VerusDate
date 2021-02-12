@@ -32,9 +32,9 @@
     <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.2.5" />
     <PackageReference Include="Blazorise.Sidebar" Version="0.9.2.5" />
     <PackageReference Include="BrowserInterop" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.2" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.3" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.3" />
   </ItemGroup>
 
   <ItemGroup>

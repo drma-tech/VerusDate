@@ -3,13 +3,15 @@
 @inherits PageCore<ProfileGallery>
 
 <Row>
-    <Column ColumnSize="ColumnSize.Is12.Is6.OnDesktop.Is4.OnWidescreen" Margin="Margin.Is2.FromBottom">
+    <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is4.OnWidescreen" Margin="Margin.Is2.FromBottom">
         <Card>
             <CardHeader>
                 Foto Principal
             </CardHeader>
-            <CardImage Source="@imageDataUri"></CardImage>
             <CardBody>
+                <Figure Margin="Margin.Is0.Is2.FromBottom" Style="text-align: center; width: 100%; background-color: black;">
+                    <FigureImage Margin="Margin.Is0" Source="@imageDataUri" AlternateText="No User" Style="height: 450px" />
+                </Figure>
                 <div class="custom-file">
                     <InputFile OnChange="@OnInputFileChange" @attributes="@GetAttributes()"></InputFile>
                     <label for="logo" class="custom-file-label">Escolher arquivo...</label>
@@ -17,13 +19,24 @@
             </CardBody>
         </Card>
     </Column>
-    <Column ColumnSize="ColumnSize.Is12.Is6.OnDesktop.Is8.OnWidescreen" Margin="Margin.Is2.FromBottom">
+    <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is8.OnWidescreen" Margin="Margin.Is2.FromBottom">
         <Card>
             <CardHeader>
                 Galeria de Fotos
             </CardHeader>
             <CardBody>
-                <FeatureUnavailable></FeatureUnavailable>
+                <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" Margin="Margin.Is2.FromBottom">
+                    @foreach (var item in imageDataUriGallery)
+                    {
+                        <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
+                            <Image Source="@item" Style="height: 450px" />
+                        </CarouselSlide>
+                    }
+                </Carousel>
+                <div class="custom-file">
+                    <InputFile OnChange="@OnInputFileGalleryChange" @attributes="@GetAttributes()"></InputFile>
+                    <label for="logo" class="custom-file-label">Escolher arquivo...</label>
+                </div>
             </CardBody>
         </Card>
     </Column>
@@ -34,6 +47,9 @@
     private ProfileModel _profile = new();
     string imageDataUri = ImageHelper.GetNoUserPhoto;
 
+    string selectedImage;
+    string[] imageDataUriGallery = Array.Empty<string>();
+
     protected override async Task LoadData()
     {
         _profile = await Http.Profile_Get(SessionStorage);
@@ -41,6 +57,8 @@
         if (_profile != null && _profile.Photo != null)
         {
             imageDataUri = _profile.GetMainPhoto();
+            imageDataUriGallery = _profile.GetGalleryPhotos();
+            selectedImage = imageDataUriGallery.FirstOrDefault();
         }
     }
 
@@ -81,6 +99,53 @@
         catch (Exception ex)
         {
             imageDataUri = null;
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+
+    private async Task OnInputFileGalleryChange(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            var maxAllowedFiles = 3;
+            var format = "image/jpeg";
+            var buffers = new List<byte[]>();
+
+            foreach (var imageFile in e.GetMultipleFiles(maxAllowedFiles))
+            {
+                var resizedImageFile = await imageFile.RequestImageFileAsync(format, 480, 480);
+                var buffer = new byte[resizedImageFile.Size];
+                await resizedImageFile.OpenReadStream().ReadAsync(buffer);
+                imageDataUriGallery = imageDataUriGallery.Concat(new string[] { $"data:{format};base64,{Convert.ToBase64String(buffer)}" }).ToArray();
+
+                if (ImageHelper.ValidImage(buffer))
+                {
+                    buffers.Add(buffer);
+                }
+                else
+                {
+                    imageDataUriGallery = Array.Empty<string>();
+                    Toast.ShowError("Foto inválida, favor tentar novamente");
+                }
+            }
+
+            if (imageDataUriGallery.Any())
+            {
+                var response = await Http.Storage_UploadPhotoGallery(buffers, SessionStorage);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    _profile = await Http.Profile_Get(SessionStorage);
+                }
+
+                await response.ProcessResponse(Toast, "Foto atualizada com sucesso!");
+            }
+
+            RefreshCore.RefreshMenu();
+        }
+        catch (Exception ex)
+        {
+            imageDataUriGallery = Array.Empty<string>();
             ex.ProcessException(Toast, Logger);
         }
     }

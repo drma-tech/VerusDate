@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
@@ -116,6 +117,14 @@ namespace VerusDate.Shared.Model
                 return $"{BlobPath}/{GetPhotoContainer(PhotoType.PhotoFace)}/{Photo.Main}";
         }
 
+        public string[] GetGalleryPhotos()
+        {
+            if (Photo == null || !Photo.Gallery.Any())
+                return Array.Empty<string>();
+            else
+                return Photo.Gallery.Select(s => $"{BlobPath}/{GetPhotoContainer(PhotoType.PhotoGallery)}/{s}").ToArray();
+        }
+
         public override void SetIds(string IdLoggedUser)
         {
             this.SetId(IdLoggedUser);
@@ -127,6 +136,6 @@ namespace VerusDate.Shared.Model
     {
         public ActivityStatus ActivityStatus { get; set; }
         public double Distance { get; set; }
-        public int Age { get; set; }      
+        public int Age { get; set; }
     }
 }

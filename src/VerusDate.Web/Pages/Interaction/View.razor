@@ -11,46 +11,50 @@ else
     <Row>
         <Column ColumnSize="ColumnSize.IsHalf.OnDesktop.Is4.OnWidescreen">
             <Card Margin="Margin.Is3.FromBottom">
-                <CardImage Source="@view.GetMainPhoto()" Alt="@labelPhoto"></CardImage>
-                <Tooltip Text="Perfil compatível com o que você procura" Multiline="true" Fade="true" Placement="Placement.Right" Style="position: absolute; top: 5px; left: 10px; cursor: help;">
-                    <Badge Color="Color.Success">@(GetPercentAffinity(null) + "%")</Badge>
-                </Tooltip>
-
-                @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
-                {
-                    <Tooltip Text="logado recentemente" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
-                        <Badge Color="Color.Success">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
-                        </Badge>
-                    </Tooltip>
-                }
-                else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
-                {
-                    <Tooltip Text="logado essa semana" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
-                        <Badge Color="Color.Warning">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
-                        </Badge>
-                    </Tooltip>
-                }
-                else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
-                {
-                    <Tooltip Text="logado esse mês" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
-                        <Badge Color="Color.Danger">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
-                        </Badge>
-                    </Tooltip>
-                }
-                else
-                {
-                    <Tooltip Text="usuário desativado" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
-                        <Badge Color="Color.Dark">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
-                        </Badge>
-                    </Tooltip>
-                }
+                <CardBody Padding="Padding.Is0">
+                    <Badge Color="Color.Success" Style="position: absolute; top: 10px; left: 10px; z-index: 2;">@(GetPercentAffinity(null) + "%")</Badge>
+                    <Badge Color="Color.Dark" Style="position: absolute; top: 10px; right: 10px; z-index: 2;">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Icon> @imageDataUriGallery.Count()
+                    </Badge>
+                    <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1" ShowIndicators="imageDataUriGallery.Count() > 1">
+                        @foreach (var item in imageDataUriGallery)
+                        {
+                            <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
+                                <Image Source="@item" Style="max-height: 450px" />
+                            </CarouselSlide>
+                        }
+                    </Carousel>
+                </CardBody>
                 <CardBody>
                     <Badge Color="Color.Secondary">@view.Basic.NickName</Badge>
-                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0">
+                    <Badge Color="Color.Secondary">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Icon> @view.Basic.Location.Split(" - ").Last()
+                    </Badge>
+                    @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
+                    {
+                        <Badge Color="Color.Success" Style="cursor: help;" Margin="Margin.Is2.FromLeft">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> logado hoje
+                        </Badge>
+                    }
+                    else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
+                    {
+                        <Badge Color="Color.Warning" Style="cursor: help;" Margin="Margin.Is2.FromLeft">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> logado esta semana
+                        </Badge>
+                    }
+                    else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
+                    {
+                        <Badge Color="Color.Danger" Style="cursor: help;" Margin="Margin.Is2.FromLeft">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> logado este mês
+                        </Badge>
+                    }
+                    else
+                    {
+                        <Badge Color="Color.Dark" Style="cursor: help;" Margin="Margin.Is2.FromLeft">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> usuário desativado
+                        </Badge>
+                    }
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is2.FromTop.Is0.FromBottom">
                         @view.Basic.Description
                     </Paragraph>
                 </CardBody>
@@ -95,7 +99,7 @@ else
                                 </Column>
                                 <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
                                     <Progress>
-                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Basic)" Animated="true" Background="GetBackground(AffinityCategory.Basic)" Striped="true">@GetPercentAffinity(AffinityCategory.Basic)%</ProgressBar>
+                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Basic)" Background="GetBackground(AffinityCategory.Basic)" Striped="true">@GetPercentAffinity(AffinityCategory.Basic)%</ProgressBar>
                                     </Progress>
                                 </Column>
                                 <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
@@ -103,7 +107,7 @@ else
                                 </Column>
                                 <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
                                     <Progress>
-                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Bio)" Animated="true" Background="GetBackground(AffinityCategory.Bio)" Striped="true">@GetPercentAffinity(AffinityCategory.Bio)%</ProgressBar>
+                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Bio)" Background="GetBackground(AffinityCategory.Bio)" Striped="true">@GetPercentAffinity(AffinityCategory.Bio)%</ProgressBar>
                                     </Progress>
                                 </Column>
                                 <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
@@ -111,7 +115,7 @@ else
                                 </Column>
                                 <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
                                     <Progress>
-                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Lifestyle)" Animated="true" Background="GetBackground(AffinityCategory.Lifestyle)" Striped="true">@GetPercentAffinity(AffinityCategory.Lifestyle)%</ProgressBar>
+                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Lifestyle)" Background="GetBackground(AffinityCategory.Lifestyle)" Striped="true">@GetPercentAffinity(AffinityCategory.Lifestyle)%</ProgressBar>
                                     </Progress>
                                 </Column>
                                 <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
@@ -119,7 +123,7 @@ else
                                 </Column>
                                 <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
                                     <Progress>
-                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Interest)" Animated="true" Background="GetBackground(AffinityCategory.Interest)" Striped="true">@GetPercentAffinity(AffinityCategory.Interest)%</ProgressBar>
+                                        <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Interest)" Background="GetBackground(AffinityCategory.Interest)" Striped="true">@GetPercentAffinity(AffinityCategory.Interest)%</ProgressBar>
                                     </Progress>
                                 </Column>
                             </Row>
@@ -189,7 +193,8 @@ else
     private ProfileBadgeModel badge = new();
     private InteractionModel InteractionVM;
 
-    private string labelPhoto => $"{view.Basic.NickName}, {view.Age}, {ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)}";
+    string selectedImage;
+    string[] imageDataUriGallery = Array.Empty<string>();
 
     private VisibilityOptions Options => new VisibilityOptions()
     {
@@ -208,6 +213,9 @@ else
         }
         else
         {
+            imageDataUriGallery = new string[] { view.GetMainPhoto() }.Concat(view.GetGalleryPhotos()).ToArray();
+            selectedImage = imageDataUriGallery.FirstOrDefault();
+
             affinities = ProfileApi.GetAffinity(user, view);
             gamification = view.Gamification;
             if (view?.Badge != null) badge = view.Badge;
@@ -272,10 +280,17 @@ else
     {
         if (category == null)
         {
-            double totCheck = affinities.Count(w => w.HaveAffinity);
-            double totItens = affinities.Count;
+            var totBasic = GetPercentAffinity(AffinityCategory.Basic);
+            var totBio = GetPercentAffinity(AffinityCategory.Bio);
+            var totLifestyle = GetPercentAffinity(AffinityCategory.Lifestyle);
+            var totInterest = GetPercentAffinity(AffinityCategory.Interest);
 
-            return Convert.ToInt32(Math.Round((totCheck / totItens) * 100, 0));
+            var pesoBasic = 1;
+            var pesoBio = 1;
+            var pesoLifestyle = 4;
+            var pesoInterest = 2;
+
+            return (totBasic * pesoBasic + totBio * pesoBio + totLifestyle * pesoLifestyle + totInterest * pesoInterest) / (pesoBasic + pesoBio + pesoLifestyle + pesoInterest);
         }
         else
         {

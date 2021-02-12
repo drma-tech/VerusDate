@@ -7,6 +7,9 @@
         <Card>
             <CardHeader>
                 Foto Principal
+                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="helpMain.ShowModal" title="Ajuda" Margin="Margin.Is2.FromLeft">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon>
+                </Button>
             </CardHeader>
             <CardBody>
                 <Figure Margin="Margin.Is0.Is2.FromBottom" Style="text-align: center; width: 100%; background-color: black;">
@@ -42,10 +45,26 @@
     </Column>
 </Row>
 
+<VerusDate.Web.Shared.modal.BasicModal @ref="helpMain" Title="Dicas para foto principal">
+    Uma pesquisa divulgada no jornal da associação Psychological Science  destaca a importância da imagem de perfil e quais as impressões com a foto
+    <ul>
+        <li>Mostre os dentes ao sorrir;</li>
+        <li>Use terno/casacos de cor escura com camisa clara;</li>
+        <li>Deixe que seu maxilar projete alguma sombra no pescoço;</li>
+        <li>Faça uma foto que mostre ombros e rosto ou da cintura até o rosto;</li>
+        <li>Use a técnica “Squinch” – explicada pelo fotógrafo profissional Peter Hurley. Que diz que um retrato frontal fica mais fotogênico ao projetar a cabeça para frente e fechar/cerrar um pouco os olhos;</li>
+        <li>Faça uma composição assimétrica;</li>
+        <li>Evite usar óculos ou acessórios que cubram seus olhos;</li>
+    </ul>
+    A pesquisa ainda diz que é bom tentar tirar as fotos em um fundo iluminado e de frente para a câmera (inclinar um pouco o rosto de lado também pode ser produtivo). Além disso, é preciso evitar chapéus; óculos de sol; cabelo, sombras nos olhos, sorriso muito exagerado ou com muita sensualidade.
+</VerusDate.Web.Shared.modal.BasicModal>
+
 @code
 {
     private ProfileModel _profile = new();
     string imageDataUri = ImageHelper.GetNoUserPhoto;
+
+    private Shared.modal.BasicModal helpMain;
 
     string selectedImage;
     string[] imageDataUriGallery = Array.Empty<string>();

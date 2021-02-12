@@ -35,7 +35,7 @@
 
     protected override async Task LoadData()
     {
-        //photo = await Http.ProfilePhotos_Get(LocalStorage);
+        profile = await Http.Profile_Get(SessionStorage);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

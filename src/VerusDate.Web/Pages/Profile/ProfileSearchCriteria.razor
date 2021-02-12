@@ -10,14 +10,13 @@ else
 {
     <EditForm Model="@looking" OnValidSubmit="HandleValidSubmit">
         <FluentValidationValidator />
-
         <Card>
             <CardHeader>
                 Critérios de Busca
                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromLeft">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Info"></Icon>
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon>
                 </Button>
-                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="PopulateFields" title="Preencher automaticamente">
+                <Button Size="Size.ExtraSmall" Color="Color.Success" Float="Float.Right" Clicked="PopulateFields" title="Preencher automaticamente">
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Magic"></Icon>
                 </Button>
             </CardHeader>
@@ -148,7 +147,8 @@ else
 
     <VerusDate.Web.Shared.modal.BasicModal @ref="help" Title="Ajuda">
         <ul>
-            <li>Aqui você pode definir seu tipo ideal de perfil, para incrementar nossas sugestões e também para calcular o percentual de afinidades</li>
+            <li>Aqui você pode definir seu tipo ideal de perfil, para que possamos sugerir perfis mais compativeis com o que você procura</li>
+            <li>É importante salientar que cada escolha influenciará no nosso calculo do índice de compatibilidade (inclusive deixando em branco)</li>
         </ul>
     </VerusDate.Web.Shared.modal.BasicModal>
 }

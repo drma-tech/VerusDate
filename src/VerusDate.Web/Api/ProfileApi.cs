@@ -40,8 +40,8 @@ namespace VerusDate.Web.Api
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.GenderIdentity), CheckEnum((int)profView.Basic.GenderIdentity, (int?)profUser.Looking.GenderIdentity)));
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.SexualOrientation), CheckEnum((int)profView.Basic.SexualOrientation, (int?)profUser.Looking.SexualOrientation)));
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Distance), profView.Distance <= profUser.Looking.Distance));
-            if (profView.Basic.Languages.Any())
-                obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Languages), CheckEnumArray(profView.Basic.Languages, profUser.Looking.Languages), profView.Basic.Languages.Intersect(profUser.Looking.Languages).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Languages), CheckEnumArray(profView.Basic.Languages, profUser.Looking.Languages), profView.Basic.Languages.Intersect(profUser.Looking.Languages).Select(s => (int)s)));
+
             //BIO
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Age), CheckAge(profView.Age, profUser.Looking.MinimalAge, profUser.Looking.MaxAge)));
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.RaceCategory), CheckEnum((int)profView.Bio.RaceCategory, (int?)profUser.Looking.RaceCategory)));
@@ -60,9 +60,9 @@ namespace VerusDate.Web.Api
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.EducationLevel), CheckEnum((int)profView.Lifestyle.EducationLevel.Value, (int?)profUser.Lifestyle.EducationLevel)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.CareerCluster), CheckEnum((int)profView.Lifestyle.CareerCluster.Value, (int?)profUser.Lifestyle.CareerCluster)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int)profView.Lifestyle.MoneyPersonality.Value, (int?)profUser.Lifestyle.MoneyPersonality)));
-                if (profView.Lifestyle.MyersBriggsTypeIndicator.HasValue)
-                    obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator.Value, profUser.Lifestyle.MyersBriggsTypeIndicator)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator, profUser.Lifestyle.MyersBriggsTypeIndicator)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality.Value)));
+
                 //INTEREST (com uma opção de cada categoria já indica compatibilidade)
                 obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Food), CheckEnumArray(profView.Interest.Food, profUser.Interest.Food), profView.Interest.Food.Intersect(profUser.Interest.Food).Select(s => (int)s)));
                 obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Holidays), CheckEnumArray(profView.Interest.Holidays, profUser.Interest.Holidays), profView.Interest.Holidays.Intersect(profUser.Interest.Holidays).Select(s => (int)s)));
@@ -132,46 +132,47 @@ namespace VerusDate.Web.Api
             return user.Intersect(looking).Any();
         }
 
-        private static bool CheckEnumRelationshipPersonality(RelationshipPersonality user, RelationshipPersonality? looking)
+        private static bool CheckEnumRelationshipPersonality(RelationshipPersonality view, RelationshipPersonality user)
         {
-            if (!looking.HasValue) return true; //If the user has not defined, then it is an affinity
-
-            return user switch
+            return view switch
             {
-                RelationshipPersonality.Explorers => looking.Value == RelationshipPersonality.Explorers,
-                RelationshipPersonality.Directors => looking.Value == RelationshipPersonality.Negotiator,
-                RelationshipPersonality.Builders => looking.Value == RelationshipPersonality.Builders,
-                RelationshipPersonality.Negotiator => looking.Value == RelationshipPersonality.Directors,
+                RelationshipPersonality.Explorers => user == RelationshipPersonality.Explorers,
+                RelationshipPersonality.Directors => user == RelationshipPersonality.Negotiator,
+                RelationshipPersonality.Builders => user == RelationshipPersonality.Builders,
+                RelationshipPersonality.Negotiator => user == RelationshipPersonality.Directors,
                 _ => false,
             };
         }
 
-        private static bool CheckEnumMBTI(MyersBriggsTypeIndicator user, MyersBriggsTypeIndicator? looking)
+        private static bool CheckEnumMBTI(MyersBriggsTypeIndicator? view, MyersBriggsTypeIndicator? user)
         {
             //http://www.personalityrelationships.net/
-            if (!looking.HasValue) return true; //If the user has not defined, then it is an affinity
 
-            return user switch
+            //se um dos dois usuário não responderem, persumi-se que não tem afinidade
+            if (!user.HasValue) return false;
+            if (!view.HasValue) return false;
+
+            return view switch
             {
-                MyersBriggsTypeIndicator.INTJ => looking.Value == MyersBriggsTypeIndicator.ENTP || looking.Value == MyersBriggsTypeIndicator.ENFP,
-                MyersBriggsTypeIndicator.INTP => looking.Value == MyersBriggsTypeIndicator.ENTJ || looking.Value == MyersBriggsTypeIndicator.ENFJ,
-                MyersBriggsTypeIndicator.ENTJ => looking.Value == MyersBriggsTypeIndicator.INTP || looking.Value == MyersBriggsTypeIndicator.INFP,
-                MyersBriggsTypeIndicator.ENTP => looking.Value == MyersBriggsTypeIndicator.INTJ || looking.Value == MyersBriggsTypeIndicator.INFJ,
+                MyersBriggsTypeIndicator.INTJ => user.Value == MyersBriggsTypeIndicator.ENTP || user.Value == MyersBriggsTypeIndicator.ENFP,
+                MyersBriggsTypeIndicator.INTP => user.Value == MyersBriggsTypeIndicator.ENTJ || user.Value == MyersBriggsTypeIndicator.ENFJ,
+                MyersBriggsTypeIndicator.ENTJ => user.Value == MyersBriggsTypeIndicator.INTP || user.Value == MyersBriggsTypeIndicator.INFP,
+                MyersBriggsTypeIndicator.ENTP => user.Value == MyersBriggsTypeIndicator.INTJ || user.Value == MyersBriggsTypeIndicator.INFJ,
 
-                MyersBriggsTypeIndicator.INFJ => looking.Value == MyersBriggsTypeIndicator.ENFP || looking.Value == MyersBriggsTypeIndicator.ENTP || looking.Value == MyersBriggsTypeIndicator.INTJ || looking.Value == MyersBriggsTypeIndicator.INFJ,
-                MyersBriggsTypeIndicator.INFP => looking.Value == MyersBriggsTypeIndicator.ENFJ || looking.Value == MyersBriggsTypeIndicator.ENTJ,
-                MyersBriggsTypeIndicator.ENFJ => looking.Value == MyersBriggsTypeIndicator.INFP || looking.Value == MyersBriggsTypeIndicator.INTP,
-                MyersBriggsTypeIndicator.ENFP => looking.Value == MyersBriggsTypeIndicator.INFJ || looking.Value == MyersBriggsTypeIndicator.INTJ,
+                MyersBriggsTypeIndicator.INFJ => user.Value == MyersBriggsTypeIndicator.ENFP || user.Value == MyersBriggsTypeIndicator.ENTP || user.Value == MyersBriggsTypeIndicator.INTJ || user.Value == MyersBriggsTypeIndicator.INFJ,
+                MyersBriggsTypeIndicator.INFP => user.Value == MyersBriggsTypeIndicator.ENFJ || user.Value == MyersBriggsTypeIndicator.ENTJ,
+                MyersBriggsTypeIndicator.ENFJ => user.Value == MyersBriggsTypeIndicator.INFP || user.Value == MyersBriggsTypeIndicator.INTP,
+                MyersBriggsTypeIndicator.ENFP => user.Value == MyersBriggsTypeIndicator.INFJ || user.Value == MyersBriggsTypeIndicator.INTJ,
 
-                MyersBriggsTypeIndicator.ISTJ => looking.Value == MyersBriggsTypeIndicator.ESTP || looking.Value == MyersBriggsTypeIndicator.ESFP,
-                MyersBriggsTypeIndicator.ISFJ => looking.Value == MyersBriggsTypeIndicator.ESFP || looking.Value == MyersBriggsTypeIndicator.ESTP,
-                MyersBriggsTypeIndicator.ESTJ => looking.Value == MyersBriggsTypeIndicator.ISTP || looking.Value == MyersBriggsTypeIndicator.ISFP,
-                MyersBriggsTypeIndicator.ESFJ => looking.Value == MyersBriggsTypeIndicator.ISFP || looking.Value == MyersBriggsTypeIndicator.ISTP,
+                MyersBriggsTypeIndicator.ISTJ => user.Value == MyersBriggsTypeIndicator.ESTP || user.Value == MyersBriggsTypeIndicator.ESFP,
+                MyersBriggsTypeIndicator.ISFJ => user.Value == MyersBriggsTypeIndicator.ESFP || user.Value == MyersBriggsTypeIndicator.ESTP,
+                MyersBriggsTypeIndicator.ESTJ => user.Value == MyersBriggsTypeIndicator.ISTP || user.Value == MyersBriggsTypeIndicator.ISFP,
+                MyersBriggsTypeIndicator.ESFJ => user.Value == MyersBriggsTypeIndicator.ISFP || user.Value == MyersBriggsTypeIndicator.ISTP,
 
-                MyersBriggsTypeIndicator.ISTP => looking.Value == MyersBriggsTypeIndicator.ESFJ || looking.Value == MyersBriggsTypeIndicator.ESTJ,
-                MyersBriggsTypeIndicator.ISFP => looking.Value == MyersBriggsTypeIndicator.ESTJ || looking.Value == MyersBriggsTypeIndicator.ESFJ,
-                MyersBriggsTypeIndicator.ESTP => looking.Value == MyersBriggsTypeIndicator.ISTJ || looking.Value == MyersBriggsTypeIndicator.ISFJ,
-                MyersBriggsTypeIndicator.ESFP => looking.Value == MyersBriggsTypeIndicator.ISTJ || looking.Value == MyersBriggsTypeIndicator.ISFJ,
+                MyersBriggsTypeIndicator.ISTP => user.Value == MyersBriggsTypeIndicator.ESFJ || user.Value == MyersBriggsTypeIndicator.ESTJ,
+                MyersBriggsTypeIndicator.ISFP => user.Value == MyersBriggsTypeIndicator.ESTJ || user.Value == MyersBriggsTypeIndicator.ESFJ,
+                MyersBriggsTypeIndicator.ESTP => user.Value == MyersBriggsTypeIndicator.ISTJ || user.Value == MyersBriggsTypeIndicator.ISFJ,
+                MyersBriggsTypeIndicator.ESFP => user.Value == MyersBriggsTypeIndicator.ISTJ || user.Value == MyersBriggsTypeIndicator.ISFJ,
                 _ => false,
             };
         }

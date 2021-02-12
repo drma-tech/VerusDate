@@ -35,6 +35,8 @@ else
 
     private string GetValue(TValue value)
     {
+        if (value == null) return "Não Respondido";
+
         if (value is string resultS)
         {
             if (string.IsNullOrEmpty(resultS))
@@ -59,6 +61,8 @@ else
 
     private string GetDescription(TValue value)
     {
+        if (value == null) return null;
+
         if (value is string resultS)
         {
             return null;
@@ -75,6 +79,8 @@ else
 
     private string GetCursor(TValue value)
     {
+        if (value == null) return "cursor: default";
+
         if (value is string resultS)
         {
             return "cursor: default";
@@ -104,8 +110,10 @@ else
         {
             return Color.Secondary;
         }
-        else if (Affinities.Single(s => s.AttributeName == fieldName).HaveAffinity) //se está mapeado e tem affinity, então marca sucesso
+        else if (Affinities.Single(s => s.AttributeName == fieldName).HaveAffinity) //se está mapeado e tem affinity
         {
+            if (value == null) return Color.Secondary;
+
             if (value is string resultS)
             {
                 return Color.Success;
@@ -135,7 +143,7 @@ else
                 throw new InvalidOperationException("tipo inválido: " + value.GetType());
             }
         }
-        else //not affinity
+        else //se não mapeado ou não tem afinidade
         {
             return Color.Danger;
         }

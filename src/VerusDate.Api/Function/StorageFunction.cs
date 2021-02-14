@@ -66,27 +66,26 @@ namespace VerusDate.Api.Function
             }
         }
 
-        //[FunctionName("StorageUploadPhotoValidation")]
-        //public async Task<IActionResult> UploadPhotoValidation(
-        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Storage/UploadPhotoValidation")] HttpRequest req,
-        //   ILogger log, CancellationToken cancellationToken)
-        //{
-        //    try
-        //    {
-        //        var command = await JsonSerializer.DeserializeAsync<UploadPhotoValidationCommand>(req.Body);
+        [FunctionName("StorageUploadPhotoValidation")]
+        public async Task<IActionResult> UploadPhotoValidation(
+           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Storage/UploadPhotoValidation")] HttpRequest req,
+           ILogger log, CancellationToken cancellationToken)
+        {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
 
-        //        var result = await _mediator.Send(command, source.Token);
+            try
+            {
+                var request = await req.BuildRequestCommand<UploadPhotoValidationCommand>(source.Token);
 
-        //        if (result)
-        //            return new OkObjectResult(result);
-        //        else
-        //            return new BadRequestResult();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.LogError(ex, null, req.Query.ToList());
-        //        return new BadRequestObjectResult(ex.ProcessException());
-        //    }
-        //}
+                var result = await _mediator.Send(request, source.Token);
+
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, null, req.Query.ToList());
+                return new BadRequestObjectResult(ex.ProcessException());
+            }
+        }
     }
 }

@@ -2,53 +2,110 @@
 @attribute [Authorize]
 @inherits PageCore<PhotoValidation>
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <div id="divMessage" class="alert alert-warning" role="alert" style="margin-bottom: 0; padding: 6px;">
-                    <span id="lblMessage">Vamos ativar a câmera do seu dispositivo para validar sua foto principal</span>
+<Row>
+    <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is3.WithOffset">
+        <Card>
+            <CardHeader>
+                Validação da foto principal
+                <Button Size="Size.ExtraSmall" Color="Color.Danger" Float="Float.Right" Clicked="privacy.ShowModal" title="Privacidade">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserShield"></Icon>
+                </Button>
+            </CardHeader>
+            <CardBody>
+                <video id="video" style="background-color: black; width: 100%;" autoplay muted></video>
+                <img id="photo" crossorigin='anonymous' style="width: 100%; max-height: 450px; display: none;" />
+                <div id="divMessage" class="alert alert-warning" role="alert" style="margin-bottom: 0; margin-top: 6px; padding: 6px;">
+                    <span id="lblMessage">Precisamos ativar a câmera do seu dispositivo para validar sua foto principal</span>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6" style="background-color: black;">
-                        <video id="video" style="background-color: black; width: 100%;" autoplay muted></video>
-                    </div>
-                    <div class="col-md-6" style="background-color: gray;">
-                        <div class="text-center">
-                            @if (profile != null)
-                            {
-                                <img id="photo" crossorigin='anonymous' src="@profile.GetMainPhoto()" style="width: auto; max-height: 450px;" alt="..." />
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </CardBody>
+            <CardFooter>
+                @if (ActiveCamera)
+                {
+                    <Button Color="Color.Danger" Clicked="FinishDetection">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Icon> Desativar Câmera
+                    </Button>
+                }
+                else
+                {
+                    <Button Color="Color.Primary" Clicked="StartDetection">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Icon> Ativar Câmera
+                    </Button>
+                }
+                <Button Color="Color.Primary" Clicked="TakeShot" Disabled="!ActiveCamera" Margin="Margin.Is2.FromLeft">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Portrait"></Icon> Tirar Foto
+                </Button>
+                <Button Color="Color.Primary" Clicked="SendPhoto" Float="Float.Right" Disabled="!TakedPhoto">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ShareSquare"></Icon> Enviar
+                </Button>
+            </CardFooter>
+        </Card>
+    </Column>
+</Row>
+
+<VerusDate.Web.Shared.modal.BasicModal @ref="privacy" Title="Termos de privacidade">
+    <ul>
+        <li>A foto tirada por sua câmera será mantida privada (não será acessível dentro da plataforma) para futura verificação, caso seja necessário;</li>
+        <li>Os dados resultantes desta validação (atributos do seu rosto) não serão mantidos em nossos servidores e só existirá durante o processo de detecção;</li>
+    </ul>
+</VerusDate.Web.Shared.modal.BasicModal>
 
 @code
 {
-    private ProfileModel profile = new();
+    private bool ActiveCamera = false;
+    private bool TakedPhoto = false;
+
+    private Shared.modal.BasicModal privacy;
 
     protected override async Task LoadData()
     {
-        profile = await Http.Profile_Get(SessionStorage);
+        //do nothing
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected async Task StartDetection()
     {
-        await base.OnAfterRenderAsync(firstRender);
-
         try
         {
-            if (firstRender)
-            {
-                await JsRuntime.InvokeVoidAsync("RealDate.Face.startDetection");
-                //await ProfileValidationApi.ClearCache(LocalStorage);
-            }
+            await JsRuntime.InvokeVoidAsync("RealDate.Face.startDetection");
+            ActiveCamera = true;
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+
+    protected async Task FinishDetection()
+    {
+        try
+        {
+            await JsRuntime.InvokeVoidAsync("RealDate.Face.finishDetection");
+            ActiveCamera = false;
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+
+    protected async Task TakeShot()
+    {
+        try
+        {
+            await JsRuntime.InvokeVoidAsync("RealDate.Face.takeShot");
+            TakedPhoto = true;
+            ActiveCamera = false;
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+
+    protected async Task SendPhoto()
+    {
+        try
+        {
+            await JsRuntime.InvokeVoidAsync("RealDate.Face.sendPhoto");
         }
         catch (Exception ex)
         {

@@ -1,55 +1,60 @@
 ﻿using Microsoft.Azure.CognitiveServices.Vision.Face;
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-using VerusDate.Api;
 using VerusDate.Shared.Helper;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Core.Helper
 {
-    public static class FaceHelper
+    public class FaceHelper
     {
+        public IConfiguration Configuration { get; }
+
+        public FaceHelper(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public static IFaceClient Authenticate(string endpoint, string key)
         {
             return new FaceClient(new ApiKeyServiceClientCredentials(key)) { Endpoint = endpoint };
         }
 
-        public static async Task<bool> IsPhotoValid(string idPhotoFace, Stream StreamPhotoCamera)
+        public async Task<bool> IsPhotoValid(ProfileModel profile, Stream StreamPhotoCamera, CancellationToken cancellationToken)
         {
-            //IFaceClient client = Authenticate(Startup.Configuration.GetValue<string>("CognitivePath"), "efdaf276808c4adb83778efeec621ba0");
+            IFaceClient client = Authenticate(Configuration.GetValue<string>("CognitivePath"), Configuration.GetValue<string>("CognitiveKey"));
 
-            //var similar = await client.FindSimilar(Startup.Configuration.GetValue<string>("BlobPath"), idPhotoFace, StreamPhotoCamera);
+            var verify = await VerifyFaces(client, Configuration.GetValue<string>("BlobPath"), profile, StreamPhotoCamera, cancellationToken);
 
-            //return similar.Confidence > 0.6;
+            profile.Photo.Confidence = verify.Confidence;
 
-            return true;
+            return verify.IsIdentical;
         }
 
-        public static async Task<SimilarFace> FindSimilar(this IFaceClient client, string url, string idPhotoFace, Stream StreamPhotoCamera)
+        public static async Task<VerifyResult> VerifyFaces(IFaceClient client, string url, ProfileModel profile, Stream StreamPhotoCamera, CancellationToken cancellationToken)
         {
-            var photoFace = await client.DetectFaceFromUrl($"{url}/photo-face/{idPhotoFace}");
-
-            var targetFaceIds = new List<Guid?>
-            {
-                photoFace.FaceId.Value
-            };
-
-            var photoCamera = await client.DetectFaceFromStream(StreamPhotoCamera);
-
-            var result = await client.Face.FindSimilarAsync(photoCamera.FaceId.Value, null, null, targetFaceIds);
-
-            return result.First();
+            var photoFace = await DetectFaceFromUrl(client, profile, $"{url}/photo-face/{profile.Photo.Main}", cancellationToken);
+            var photoCamera = await DetectFaceFromStream(client, StreamPhotoCamera, cancellationToken);
+            
+            return await client.Face.VerifyFaceToFaceAsync(photoFace.FaceId.Value, photoCamera.FaceId.Value, cancellationToken);
         }
 
-        public static async Task<DetectedFace> DetectFaceFromUrl(this IFaceClient client, string url)
+        /// <summary>
+        /// Detecta a foto armazenada no storage (foto principal)
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static async Task<DetectedFace> DetectFaceFromUrl(IFaceClient client, ProfileModel profile, string url, CancellationToken cancellationToken)
         {
             var faces = await client.Face.DetectWithUrlAsync(url,
                           returnFaceAttributes: new List<FaceAttributeType?> { FaceAttributeType.Age, FaceAttributeType.Gender },
-                          recognitionModel: RecognitionModel.Recognition01);
+                          recognitionModel: RecognitionModel.Recognition03, cancellationToken: cancellationToken);
 
             if (faces.Count == 0)
             {
@@ -57,19 +62,35 @@ namespace VerusDate.Server.Core.Helper
             }
             else if (faces.Count > 1)
             {
-                throw new NotificationException("Foi detetado mais de um rosto na sua foto, favor colocar apenas você para a foto principal");
+                throw new NotificationException("Foi detectado mais de um rosto na sua foto principal, favor colocar apenas você para a foto principal");
             }
             else
             {
-                return faces.First();
+                var face = faces.First();
+
+                profile.Photo.Age = face.FaceAttributes.Age;
+                profile.Photo.Gender = face.FaceAttributes.Gender switch
+                {
+                    Gender.Male => Shared.Enum.BiologicalSex.Male,
+                    Gender.Female => Shared.Enum.BiologicalSex.Female,
+                    _ => Shared.Enum.BiologicalSex.Other,
+                };
+
+                return face;
             }
         }
 
-        public static async Task<DetectedFace> DetectFaceFromStream(this IFaceClient client, Stream Stream)
+        /// <summary>
+        /// Detecta a foto tirada pela camera, para validação
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="Stream"></param>
+        /// <returns></returns>
+        public static async Task<DetectedFace> DetectFaceFromStream(IFaceClient client, Stream Stream, CancellationToken cancellationToken)
         {
             var faces = await client.Face.DetectWithStreamAsync(Stream,
-                          returnFaceAttributes: new List<FaceAttributeType?> { FaceAttributeType.Age, FaceAttributeType.Gender },
-                          recognitionModel: RecognitionModel.Recognition01);
+                          //returnFaceAttributes: new List<FaceAttributeType?> { FaceAttributeType.Age, FaceAttributeType.Gender },
+                          recognitionModel: RecognitionModel.Recognition03, cancellationToken: cancellationToken);
 
             if (faces.Count == 0)
             {
@@ -77,7 +98,7 @@ namespace VerusDate.Server.Core.Helper
             }
             else if (faces.Count > 1)
             {
-                throw new NotificationException("Foi detetado mais de um rosto na sua câmera, favor deixar exposto apenas você");
+                throw new NotificationException("Foi detectado mais de um rosto na sua câmera, favor deixar exposto apenas você");
             }
             else
             {

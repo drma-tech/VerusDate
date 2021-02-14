@@ -1,4 +1,5 @@
 ﻿using System;
+using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Model
 {
@@ -7,6 +8,10 @@ namespace VerusDate.Shared.Model
         public string Main { get; set; }
         public string Validation { get; set; }
         public string[] Gallery { get; set; } = Array.Empty<string>();
+
+        public double Confidence { get; set; }
+        public double? Age { get; set; }
+        public BiologicalSex? Gender { get; set; }
 
         public void UpdateMainPhoto(string Main)
         {

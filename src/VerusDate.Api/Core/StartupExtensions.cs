@@ -7,6 +7,7 @@ using VerusDate.Api.Mediator.Behavior;
 using VerusDate.Api.Mediator.Command.Profile;
 using VerusDate.Api.Mediator.Command.Support;
 using VerusDate.Api.Repository;
+using VerusDate.Server.Core.Helper;
 
 namespace VerusDate.Api.Core
 {
@@ -25,6 +26,7 @@ namespace VerusDate.Api.Core
             });
 
             services.AddScoped(typeof(StorageHelper), typeof(StorageHelper));
+            services.AddScoped(typeof(FaceHelper), typeof(FaceHelper));
         }
 
         public static void AddPipelines(this IServiceCollection services)

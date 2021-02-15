@@ -129,6 +129,8 @@ else
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Music)" TValue="IReadOnlyList<Music>" TEnum="Music" @bind-SelectedValues="@profile.Interest.Music"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Music"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.MusicPersonality)" TValue="IReadOnlyList<MusicPersonality>" TEnum="MusicPersonality" @bind-SelectedValues="@profile.Interest.MusicPersonality"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Music"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Movie)" TValue="IReadOnlyList<Movie>" TEnum="Movie" @bind-SelectedValues="@profile.Interest.Movie"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Film"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Reading)" TValue="IReadOnlyList<Reading>" TEnum="Reading" @bind-SelectedValues="@profile.Interest.Reading"

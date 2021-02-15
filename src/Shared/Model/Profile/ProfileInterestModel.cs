@@ -22,6 +22,9 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Músicas")]
         public IReadOnlyList<Music> Music { get; set; } = Array.Empty<Music>();
 
+        [Display(Name = "Music Personality")]
+        public IReadOnlyList<MusicPersonality> MusicPersonality { get; set; } = Array.Empty<MusicPersonality>();
+
         [Display(Name = "Filmes e TV")]
         public IReadOnlyList<Movie> Movie { get; set; } = Array.Empty<Movie>();
 

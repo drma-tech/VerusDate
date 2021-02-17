@@ -24,7 +24,7 @@ namespace VerusDate.Api.Function
         }
 
         [FunctionName("ExternalGetLocation")]
-        public async Task<IActionResult> Get(
+        public async Task<IActionResult> GetLocation(
            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "External/GetLocation")] HttpRequest req,
            ILogger log, CancellationToken cancellationToken)
         {

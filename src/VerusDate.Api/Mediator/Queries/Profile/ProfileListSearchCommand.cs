@@ -95,7 +95,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
                 SQL.Append("	AND c.basic.sexualOrientation = @sexualOrientation ");
                 filter.Add("@sexualOrientation", (int)looking.SexualOrientation.Value);
             }
-            if (looking.Intent.Any())
+            if (looking.Languages.Any())
             {
                 SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.languages WHERE n in (" + string.Join(",", user.Looking.Languages.Cast<int>()) + ")) ");
             }

@@ -207,6 +207,9 @@ namespace VerusDate.Web.Api
 
         public async static Task<HttpResponseMessage> Profile_UpdateLooking(this HttpClient http, ProfileModel obj, ISyncSessionStorageService storage)
         {
+            storage.RemoveItem("Profile/ListMatch");
+            storage.RemoveItem("Profile/ListSearch");
+
             return await http.Put<ProfileModel>("Profile/UpdateLooking", obj, storage, "Profile/Get");
         }
     }

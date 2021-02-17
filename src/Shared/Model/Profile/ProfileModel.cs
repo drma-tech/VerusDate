@@ -93,7 +93,15 @@ namespace VerusDate.Shared.Model
                 Lifestyle.MoneyPersonality = null;
                 Lifestyle.RelationshipPersonality = null;
                 Lifestyle.MyersBriggsTypeIndicator = null;
-                Lifestyle.Hobbies = Array.Empty<string>();
+
+                Interest.Food = null;
+                Interest.Holidays = null;
+                Interest.Sports = null;
+                Interest.LeisureActivities = null;
+                Interest.MusicGenre = null;
+                Interest.MovieGenre = null;
+                Interest.TVGenre = null;
+                Interest.ReadingGenre = null;
             }
         }
 

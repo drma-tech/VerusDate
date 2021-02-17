@@ -68,9 +68,10 @@ namespace VerusDate.Web.Api
                 obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Holidays), CheckEnumArray(profView.Interest.Holidays, profUser.Interest.Holidays), profView.Interest.Holidays.Intersect(profUser.Interest.Holidays).Select(s => (int)s)));
                 obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Sports), CheckEnumArray(profView.Interest.Sports, profUser.Interest.Sports), profView.Interest.Sports.Intersect(profUser.Interest.Sports).Select(s => (int)s)));
                 obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.LeisureActivities), CheckEnumArray(profView.Interest.LeisureActivities, profUser.Interest.LeisureActivities), profView.Interest.LeisureActivities.Intersect(profUser.Interest.LeisureActivities).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Music), CheckEnumArray(profView.Interest.Music, profUser.Interest.Music), profView.Interest.Music.Intersect(profUser.Interest.Music).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Movie), CheckEnumArray(profView.Interest.Movie, profUser.Interest.Movie), profView.Interest.Movie.Intersect(profUser.Interest.Movie).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Reading), CheckEnumArray(profView.Interest.Reading, profUser.Interest.Reading), profView.Interest.Reading.Intersect(profUser.Interest.Reading).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.MusicGenre), CheckEnumArray(profView.Interest.MusicGenre, profUser.Interest.MusicGenre), profView.Interest.MusicGenre.Intersect(profUser.Interest.MusicGenre).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.MovieGenre), CheckEnumArray(profView.Interest.MovieGenre, profUser.Interest.MovieGenre), profView.Interest.MovieGenre.Intersect(profUser.Interest.MovieGenre).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.TVGenre), CheckEnumArray(profView.Interest.TVGenre, profUser.Interest.TVGenre), profView.Interest.TVGenre.Intersect(profUser.Interest.TVGenre).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.ReadingGenre), CheckEnumArray(profView.Interest.ReadingGenre, profUser.Interest.ReadingGenre), profView.Interest.ReadingGenre.Intersect(profUser.Interest.ReadingGenre).Select(s => (int)s)));
             }
 
             return obj;

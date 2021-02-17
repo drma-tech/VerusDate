@@ -127,15 +127,19 @@ namespace VerusDate.Api.Mediator.Command.Profile
                 .Must((value) => value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
-            RuleFor(x => x.Interest.Music)
+            RuleFor(x => x.Interest.MusicGenre)
                 .Must((value) => value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
-            RuleFor(x => x.Interest.Movie)
+            RuleFor(x => x.Interest.MovieGenre)
                 .Must((value) => value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
-            RuleFor(x => x.Interest.Reading)
+            RuleFor(x => x.Interest.TVGenre)
+                .Must((value) => value.Count <= 3)
+                .WithMessage("Escolha até no máximo três opções");
+
+            RuleFor(x => x.Interest.ReadingGenre)
                 .Must((value) => value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
         }

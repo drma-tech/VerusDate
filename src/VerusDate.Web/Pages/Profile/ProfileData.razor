@@ -45,7 +45,7 @@ else
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.SexualOrientation)" TValue="SexualOrientation" TEnum="SexualOrientation" @bind-SelectedValue="@profile.Basic.SexualOrientation"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Basic.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@profile.Basic.Languages"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language" DisableHelp="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Divider DividerType="DividerType.TextContent" Text="Bio"></Divider>
@@ -118,23 +118,23 @@ else
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Food)" TValue="IReadOnlyList<Food>" TEnum="Food" @bind-SelectedValues="@profile.Interest.Food"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PizzaSlice"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PizzaSlice" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Holidays)" TValue="IReadOnlyList<Holidays>" TEnum="Holidays" @bind-SelectedValues="@profile.Interest.Holidays"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlaneDeparture"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlaneDeparture" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Sports)" TValue="IReadOnlyList<Sports>" TEnum="Sports" @bind-SelectedValues="@profile.Interest.Sports"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Swimmer"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Swimmer" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.LeisureActivities)" TValue="IReadOnlyList<LeisureActivities>" TEnum="LeisureActivities" @bind-SelectedValues="@profile.Interest.LeisureActivities"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.UmbrellaBeach"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.UmbrellaBeach" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Music)" TValue="IReadOnlyList<Music>" TEnum="Music" @bind-SelectedValues="@profile.Interest.Music"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Music"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.MusicPersonality)" TValue="IReadOnlyList<MusicPersonality>" TEnum="MusicPersonality" @bind-SelectedValues="@profile.Interest.MusicPersonality"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Music"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Movie)" TValue="IReadOnlyList<Movie>" TEnum="Movie" @bind-SelectedValues="@profile.Interest.Movie"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Film"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Reading)" TValue="IReadOnlyList<Reading>" TEnum="Reading" @bind-SelectedValues="@profile.Interest.Reading"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BookReader"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.MusicGenre)" TValue="IReadOnlyList<MusicGenre>" TEnum="MusicGenre" @bind-SelectedValues="@profile.Interest.MusicGenre"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Music" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.MovieGenre)" TValue="IReadOnlyList<MovieGenre>" TEnum="MovieGenre" @bind-SelectedValues="@profile.Interest.MovieGenre"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Film" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.TVGenre)" TValue="IReadOnlyList<TVGenre>" TEnum="TVGenre" @bind-SelectedValues="@profile.Interest.TVGenre"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Tv" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.ReadingGenre)" TValue="IReadOnlyList<ReadingGenre>" TEnum="ReadingGenre" @bind-SelectedValues="@profile.Interest.ReadingGenre"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BookReader" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                     </Column>
                 </Row>
             </CardBody>

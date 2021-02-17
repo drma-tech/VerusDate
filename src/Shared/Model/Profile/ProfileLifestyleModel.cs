@@ -12,7 +12,7 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Fuma")]
         public Smoke? Smoke { get; set; }
 
-        [Display(Name = "Dieta", Description = "Alteração opcional")]
+        [Display(Name = "Dieta", Description = "Alteração opcional (opção mais comum selecionada automaticamente)")]
         public Diet? Diet { get; set; }
 
         [Display(Name = "Tem Filho(s)")]
@@ -36,10 +36,7 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Personalidade no Relacionamento")]
         public RelationshipPersonality? RelationshipPersonality { get; set; }
 
-        [Display(Name = "Personalidade MBTI", Description = "Este campo é opcional")]
+        [Display(Name = "Personalidade MBTI", Description = "Este campo é opcional (é necessário fazer um teste em site de terceiros)")]
         public MyersBriggsTypeIndicator? MyersBriggsTypeIndicator { get; set; }
-
-        [Display(Name = "Hobbies")]
-        public string[] Hobbies { get; set; } = Array.Empty<string>();
     }
 }

@@ -2,30 +2,37 @@
 
 namespace VerusDate.Shared.Enum
 {
+    //https://www.youtube.com/watch?v=pRwLmwrMuQk
     public enum MusicPersonality
     {
-        [Display(Name = "Pop", Description = "Fans of the top 40 pop hits tend to be extroverted, honest, and conventional. While pop music lovers are hardworking and have high self-esteem, researchers suggest that they tend to be less creative and more uneasy.")]
-        Pop = 1,
+        [Display(Name = "Clássica / Ópera", Description = "São normalmente mais introvertidos, mas também estão à vontade consigo mesmos e com o mundo ao seu redor. Eles são criativos e têm um bom senso de auto-estima.")]
+        ClassicalOpera = 1, //- Unfortunately, nowadays people almost never listen to classical music. But if you're one of those rare people who genuinely love it more than any other music genre, you're exceptionally smart and confident.
 
-        [Display(Name = "Rap / Hip Hop", Description = "In spite of the stereotype that rap lovers are more aggressive or violent, researchers have actually found no such link. Rap fans do tend to have high self-esteem and are usually outgoing.")]
-        RapHipHop = 2,
+        [Display(Name = "Jazz / Blues / Soul", Description = "Consideradas mais extrovertidas e com alta auto-estima. Eles também tendem a ser muito criativos, inteligentes e à vontade.")]
+        JazzBluesSoul = 2, //- If you can't live without jazz or blues, you're intelligent, charming, and traditional. Jazz lovers enjoy the simplest things and put their main focus on relationships.
 
-        [Display(Name = "Country / Western", Description = "Country music fans are typically hardworking, conventional, and outgoing. While country songs are often centered on heartbreak, people who gravitate towards this genre tend to be very emotionally stable. They also tend to be more conservative and rank lower on the trait of openness to experience.")]
-        CountryWestern = 3,
+        [Display(Name = "Musicais / Pop / Romântica", Description = "Tendem a ser extrovertidos, honestos e convencionais. Embora os amantes da música pop sejam trabalhadores e tenham autoestima elevada, os pesquisadores sugerem que tendem a ser menos criativos e mais inquietos.")]
+        MusicalsPopRomantic = 3, //- If you're a huge fan of pop music, you're probably extroverted, hardworking, and pretty honest. You love to meet new people and get into new and exciting adventures and ideas.
 
-        [Display(Name = "Rock / Heavy Metal", Description = "Despite the sometimes aggressive image that rock and heavy metal music project, researchers found that fans of this style of music are usually quite gentle. They tend to be creative, but are often introverted and may suffer from low self-esteem.")]
-        RockHeavyMetal = 4,
+        [Display(Name = "Sertanejo / Popular", Description = "São tipicamente trabalhadores, convencionais e extrovertidos. Embora as canções country sejam frequentemente centradas no coração partido, as pessoas que gravitam em torno desse gênero tendem a ser emocionalmente estáveis. Eles também tendem a ser mais conservadores e ter uma classificação inferior no traço de abertura à experiência.")]
+        CountryWesternFolk = 4, //- Country music has tons of dedicated fans all over the world. If you're one of them, you're laid-back, friendly, and responsible. Even though country songs often describe going through a roller coaster of emotions, most country lovers rarely go through mood swings and are very emotionally stable.
 
-        [Display(Name = "Indie Music", Description = "Fans of the indie genre are typically introverted, intellectual, and creative. According to researchers, they also tend to be less hardworking and less gentle. Passivity, anxiousness, and low self-esteem are other common personality characteristics.")]
-        IndieMusic = 5,
+        [Display(Name = "Punk / Rock Alternativo / Indie", Description = "São tipicamente introvertidos, intelectuais e criativos. De acordo com os pesquisadores, eles também tendem a ser menos trabalhadores e menos gentis. Passividade, ansiedade e baixa auto-estima são outras características comuns da personalidade.")]
+        PunkAlternativeRockIndie = 5, //- Indie lovers are certainly the most creative of all the music genre types. They know how to think outside of the box and find simple but innovative solutions in a heartbeat. This makes them powerful leaders and masters of brainstorming.
 
-        [Display(Name = "Dance", Description = "According to researchers, people who prefer dance music are usually outgoing and assertive. They also tend to rank high on the trait of openness to experience, one of the five major personality traits. People who prefer fast-paced electronic music also tend to rank low on gentleness.")]
-        Dance = 6,
+        //[Display(Name = "Samba / Latino / Swing", Description = "")]
+        //SambaLatinoSwing = 6,
 
-        [Display(Name = "Classical Music", Description = "Classical music lovers are typically more introverted but are also at ease with themselves and the world around them. They are creative and have a good sense of self-esteem.")]
-        ClassicalMusic = 7,
+        [Display(Name = "Rap / Hip Hop / Reggae", Description = "Apesar do estereótipo de que os amantes destes gêneros são mais agressivos ou violentos, os pesquisadores, na verdade, não encontraram essa ligação. Os fãs de rap tendem a ter alta autoestima e geralmente são extrovertidos.")]
+        RapHipHopReggae = 7, //- If your playlist mostly consists of rap and hip-hop music, you're probably highly extroverted and outgoing. Rap lovers are often the life of the party as they have outstanding social skills and can find common ground with both extroverts and introverts.
 
-        [Display(Name = "Jazz / Blues / Soul", Description = "People who enjoy jazz, blues, or soul music were found to be more extroverted with high self-esteem. They also tend to be very creative, intelligent, and at ease.")]
-        Jazz = 8,
+        [Display(Name = "Dança / Eletrônica / Techno", Description = "Costumam ser extrovertidas e assertivas. Eles também tendem a ter uma classificação elevada no traço de abertura à experiência, um dos cinco principais traços de personalidade. Pessoas que preferem música eletrônica acelerada também tendem a ter uma classificação baixa em gentileza.")]
+        DanceElectronicTechno = 8, //- If you can't stop listening to electronic music, you're probably a social butterfly who has strong opinions and rarely compromises. Electronic music lovers are often big fans of going to concerts and music festivals.
+
+        [Display(Name = "Rock / Heavy Metal", Description = "Apesar da imagem às vezes agressiva que o rock e o heavy metal projetam, costumam ser bastante gentis. Tendem a ser criativos, mas costumam ser introvertidos e podem sofrer de baixa autoestima.")]
+        RockHeavyMetal = 9, //- If rock ’n' roll is your kind of music, you're extremely creative and intuitive. Rock lovers see the world as a platform of endless possibilities and are interested in mastering many things at once.
+
+        //[Display(Name = "Militar / Religioso", Description = "")]
+        //MilitaryReligious = 10
     }
 }

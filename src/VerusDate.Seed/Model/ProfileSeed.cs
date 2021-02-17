@@ -98,7 +98,6 @@ namespace VerusDate.Seed.Model
                     p.MoneyPersonality = s.PickRandom<MoneyPersonality>();
                     p.RelationshipPersonality = s.PickRandom<RelationshipPersonality>();
                     p.MyersBriggsTypeIndicator = s.PickRandom<MyersBriggsTypeIndicator>();
-                    p.Hobbies = s.Random.WordsArray(1, 8);
                 });
         }
 

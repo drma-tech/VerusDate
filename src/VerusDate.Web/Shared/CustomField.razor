@@ -3,12 +3,7 @@
 <Field Horizontal="true">
     <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
         <Icon Name="@CssIcon"></Icon> @Label
-        @if (!string.IsNullOrEmpty(AttributeHelper.GetDescription(For)))
-        {
-            <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(For)</FieldHelp>
-        }
     </FieldLabel>
-
     <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
         @switch (Type)
         {
@@ -38,4 +33,10 @@
         }
         <ValidationMessage For="@For"></ValidationMessage>
     </FieldBody>
+    @if (!string.IsNullOrEmpty(AttributeHelper.GetDescription(For)))
+    {
+        <Column>
+            <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(For)</FieldHelp>
+        </Column>
+    }
 </Field>

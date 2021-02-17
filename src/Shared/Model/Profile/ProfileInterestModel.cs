@@ -7,28 +7,28 @@ namespace VerusDate.Shared.Model
 {
     public class ProfileInterestModel
     {
-        [Display(Name = "Comidas")]
+        [Display(Name = "Comidas", Description = "Este campo é opcional (escolha até 3 opções)")]
         public IReadOnlyList<Food> Food { get; set; } = Array.Empty<Food>();
 
-        [Display(Name = "Férias")]
+        [Display(Name = "Férias", Description = "Este campo é opcional (escolha até 3 opções)")]
         public IReadOnlyList<Holidays> Holidays { get; set; } = Array.Empty<Holidays>();
 
-        [Display(Name = "Esportes")]
+        [Display(Name = "Esportes", Description = "Este campo é opcional (escolha até 3 opções)")]
         public IReadOnlyList<Sports> Sports { get; set; } = Array.Empty<Sports>();
 
-        [Display(Name = "Lazer")]
+        [Display(Name = "Lazer", Description = "Este campo é opcional (escolha até 3 opções)")]
         public IReadOnlyList<LeisureActivities> LeisureActivities { get; set; } = Array.Empty<LeisureActivities>();
 
-        [Display(Name = "Músicas")]
-        public IReadOnlyList<Music> Music { get; set; } = Array.Empty<Music>();
+        [Display(Name = "Música", Description = "Este campo é opcional (escolha até 3 opções)")]
+        public IReadOnlyList<MusicGenre> MusicGenre { get; set; } = Array.Empty<MusicGenre>();
 
-        [Display(Name = "Music Personality")]
-        public IReadOnlyList<MusicPersonality> MusicPersonality { get; set; } = Array.Empty<MusicPersonality>();
+        [Display(Name = "Filme", Description = "Este campo é opcional (escolha até 3 opções)")]
+        public IReadOnlyList<MovieGenre> MovieGenre { get; set; } = Array.Empty<MovieGenre>();
 
-        [Display(Name = "Filmes e TV")]
-        public IReadOnlyList<Movie> Movie { get; set; } = Array.Empty<Movie>();
+        [Display(Name = "TV", Description = "Este campo é opcional (escolha até 3 opções)")]
+        public IReadOnlyList<TVGenre> TVGenre { get; set; } = Array.Empty<TVGenre>();
 
-        [Display(Name = "Leitura")]
-        public IReadOnlyList<Reading> Reading { get; set; } = Array.Empty<Reading>();
+        [Display(Name = "Leitura", Description = "Este campo é opcional (escolha até 3 opções)")]
+        public IReadOnlyList<ReadingGenre> ReadingGenre { get; set; } = Array.Empty<ReadingGenre>();
     }
 }

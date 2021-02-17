@@ -10,7 +10,7 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Nome / Apelido", Prompt = "Ex: Paulo ou Paulinho")]
         public string NickName { get; set; }
 
-        [Display(Name = "Descrição", Prompt = "Para sua própria segurança, favor não incluir seu celular, email ou quaisquer informações de contato. \n\nOBS: Promover redes sociais de outras plataformas ou conteúdo que viole direitos de terceiros estará sujeito a banimento da plataforma.")]
+        [Display(Name = "Descrição", Prompt = "Para sua própria segurança, favor não incluir seu celular, email ou quaisquer informações de contato. \n\nOBS: Promover redes sociais, produtos, serviços e/ou conteúdos que violem direitos de terceiros estará sujeito a banimento da plataforma.")]
         public string Description { get; set; }
 
         [Display(Name = "Longitude")]
@@ -25,16 +25,16 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Status de Relacionamento")]
         public MaritalStatus MaritalStatus { get; set; }
 
-        [Display(Name = "Intenções")]
+        [Display(Name = "Intenções", Description = "De acordo com a seleção, poderá alterar os campos disponíveis e/ou obrigatórios (escolha até 2 opções)")]
         public IReadOnlyList<Intent> Intent { get; set; } = Array.Empty<Intent>();
 
         [Display(Name = "Sexo Biológico")]
         public BiologicalSex BiologicalSex { get; set; }
 
-        [Display(Name = "Identidade de Gênero", Description = "Alteração opcional")]
+        [Display(Name = "Identidade de Gênero", Description = "Alteração opcional (opção mais comum selecionada automaticamente)")]
         public GenderIdentity GenderIdentity { get; set; }
 
-        [Display(Name = "Orientação Sexual", Description = "Alteração opcional")]
+        [Display(Name = "Orientação Sexual", Description = "Alteração opcional (opção mais comum selecionada automaticamente)")]
         public SexualOrientation SexualOrientation { get; set; }
 
         [Display(Name = "Idiomas", Description = "Escolhido automaticamente de acordo com os idiomas oficiais do pais (caso disponível)")]

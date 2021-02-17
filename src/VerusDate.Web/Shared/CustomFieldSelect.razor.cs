@@ -33,7 +33,7 @@ namespace VerusDate.Web.Shared
             await SelectedValuesChanged.InvokeAsync(SelectedValues);
         }
 
-        public static Dictionary<string, object> GetAttributes(Expression<Func<TValue>> expression, bool isMultiple = false, bool disabled = false)
+        public static Dictionary<string, object> GetAttributes(Expression<Func<TValue>> expression, bool isMultiple = false, bool disabled = false, string customStyle = "")
         {
             var dic = new Dictionary<string, object>() { { "class", "form-control" } };
 
@@ -47,6 +47,14 @@ namespace VerusDate.Web.Shared
             if (disabled)
             {
                 dic.Add("disabled", "disabled");
+                dic.Add("style", "background-color: #e9ecef; opacity: 1;" + customStyle);
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(customStyle))
+                {
+                    dic.Add("style", customStyle);
+                }
             }
 
             return dic;

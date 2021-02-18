@@ -44,11 +44,14 @@ namespace VerusDate.Api.Mediator.Command.Interaction
         {
             if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
 
-            var interactionUser = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var interaction1 = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var interaction2 = await _repo.Get<InteractionModel>(interaction1.GetInvertedId(), new PartitionKey(request.IdUserInteraction), cancellationToken);
 
-            interactionUser.AddChat(request.chat);
+            interaction1.AddChat(request.chat);
+            interaction2.AddChat(request.chat);
 
-            await _repo.Update(interactionUser, cancellationToken);
+            await _repo.Update(interaction1, cancellationToken);
+            await _repo.Update(interaction2, cancellationToken);
 
             return request.chat;
         }

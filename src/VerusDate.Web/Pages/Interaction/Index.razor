@@ -7,14 +7,14 @@
         <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>Matches</CardHeader>
             <CardBody>
-                @if (OptionsMatches.HasCustomVisibility)
+                @if (OptionsNewMatches.HasCustomVisibility)
                 {
-                    <CustomVisibility Options="OptionsMatches"></CustomVisibility>
+                    <CustomVisibility Options="OptionsNewMatches"></CustomVisibility>
                 }
                 else
                 {
                     <Row>
-                        @foreach (var item in Matches)
+                        @foreach (var item in NewMatches)
                         {
                             <Column ColumnSize="ColumnSize.Is3.OnFullHD.Is4.OnWidescreen.Is6.OnDesktop.Is12.OnMobile">
                                 <Blazorise.Link To="@("/Interaction/View/" + item.IdUserInteraction)">
@@ -63,7 +63,28 @@
         <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>Mensagens</CardHeader>
             <CardBody>
-                EM DESENVOLVIMENTO
+                @if (OptionsMsgMatches.HasCustomVisibility)
+                {
+                    <CustomVisibility Options="OptionsMsgMatches"></CustomVisibility>
+                }
+                else
+                {
+                    <Row>
+                        @foreach (var item in MsgMatches)
+                        {
+                            <Column ColumnSize="ColumnSize.Is3.OnFullHD.Is4.OnWidescreen.Is6.OnDesktop.Is12.OnMobile">
+                                <Blazorise.Link To="@("/Interaction/View/Chat/" + item.IdUserInteraction)">
+                                    <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
+                                        <CardImage Source="@item.GetMainPhoto(TypeUser.InteractionUser)" Alt="Photo Image"></CardImage>
+                                        <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">
+                                            @item.NickNameInteraction
+                                        </CardText>
+                                    </Card>
+                                </Blazorise.Link>
+                            </Column>
+                        }
+                    </Row>
+                }
             </CardBody>
         </Card>
         <Card Margin="Margin.Is3.FromBottom">
@@ -97,32 +118,42 @@
 </Row>
 
 @code {
-    private List<InteractionQuery> Matches { get; set; }
+    private List<InteractionQuery> NewMatches { get; set; }
+    private List<InteractionQuery> MsgMatches { get; set; }
     private List<InteractionQuery> Likes { get; set; }
     private List<InteractionQuery> Blinks { get; set; }
 
-    private VisibilityOptions OptionsMatches => new VisibilityOptions()
+    private VisibilityOptions OptionsNewMatches => new VisibilityOptions()
     {
-        Loading = IsLoading,
-        NoData = Matches == null || !Matches.Any()
+        Loading = NewMatches == null,
+        NoData = NewMatches == null || !NewMatches.Any()
+    };
+
+    private VisibilityOptions OptionsMsgMatches => new VisibilityOptions()
+    {
+        Loading = MsgMatches == null,
+        NoData = MsgMatches == null || !MsgMatches.Any()
     };
 
     private VisibilityOptions OptionsLikes => new VisibilityOptions()
     {
         //Premium = true,
-        Loading = IsLoading,
+        Loading = Likes == null,
         NoData = Likes == null || !Likes.Any()
     };
 
     private VisibilityOptions OptionsBlinks => new VisibilityOptions()
     {
-        Loading = IsLoading,
+        Loading = Blinks == null,
         NoData = Blinks == null || !Blinks.Any()
     };
 
     protected override async Task LoadData()
     {
-        Matches = await Http.Interation_GetMyMatches(SessionStorage);
+        var interactions = await Http.Interation_GetMyMatches(SessionStorage);
+        NewMatches = interactions.Where(w => !w.Chat.Any()).ToList();
+        MsgMatches = interactions.Where(w => w.Chat.Any()).ToList();
+
         Likes = await Http.Interation_GetLikes(SessionStorage);
         Blinks = await Http.Interation_GetBlinks(SessionStorage);
     }

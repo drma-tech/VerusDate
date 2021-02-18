@@ -65,7 +65,7 @@ namespace VerusDate.Web.Api
 
         public async static Task<HttpResponseMessage> Interaction_AddChat(this HttpClient http, ChatModel chat, string IdUserInteraction, ISyncSessionStorageService storage)
         {
-            return await http.Put<InteractionModel>("Interaction/AddChat", new { IdUserInteraction, chat }, storage, $"Interaction/Get?id={IdUserInteraction}");
+            return await http.Put<ChatModel>("Interaction/AddChat", new { IdUserInteraction, chat }, storage, $"Interaction/Get?id={IdUserInteraction}");
         }
     }
 }

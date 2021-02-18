@@ -1,5 +1,4 @@
 ﻿@page "/Interaction/View/Chat/{IdUserView}"
-@using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.SignalR.Client
 @implements IDisposable
 @attribute [Authorize]
@@ -300,7 +299,7 @@
     {
         Invalid = interaction == null || !interaction.ActiveInteraction(),
         Loading = IsLoading,
-        NoData = !interaction.Chat.Any()
+        NoData = interaction == null || !interaction.Chat.Any()
     };
 
     private VisibilityOptions OptionsProfile => new VisibilityOptions()

@@ -134,6 +134,10 @@ namespace VerusDate.Shared.Model
 
     public class ChatModel
     {
+        protected ChatModel()
+        {
+        }
+
         public DateTime DtMessage { get; set; } = DateTime.UtcNow;
 
         [Required]

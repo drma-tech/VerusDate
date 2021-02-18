@@ -34,8 +34,6 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
 
         public async Task<List<InteractionQuery>> Handle(InteractionGetLikesCommand request, CancellationToken cancellationToken)
         {
-            //recupera as interações com matches
-
             var sb = new StringBuilder();
             sb.Append("SELECT * ");
             sb.Append("FROM c ");
@@ -43,7 +41,8 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
             sb.Append($"	c.type             = {(int)CosmosType.Interaction} ");
             sb.Append($"	AND c.idUserInteraction    = '{request.IdLoggedUser}' ");
             sb.Append("     AND c[\"like\"][\"value\"] = true ");
-            //sqlIds.Append("	    AND c.match[\"value\"]     != true ");
+            sb.Append("	    AND c.blink[\"value\"]     != true ");
+            sb.Append("	    AND c.match[\"value\"]     != true ");
             sb.Append("	    AND c.block[\"value\"]     != true ");
 
             var query = new QueryDefinition(sb.ToString());

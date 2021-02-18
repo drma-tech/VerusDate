@@ -168,10 +168,7 @@ namespace VerusDate.Api.Function
 
                 var result = await _mediator.Send(request, source.Token);
 
-                if (result)
-                    return new OkObjectResult(result);
-                else
-                    return new BadRequestResult();
+                return new OkObjectResult(result);
             }
             catch (Exception ex)
             {

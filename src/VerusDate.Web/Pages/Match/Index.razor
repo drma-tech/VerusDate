@@ -92,9 +92,9 @@ else
     private void Interact()
     {
         matches[pos].Visible = false;
-        SessionStorage.Update_Profile_ListMatch(matches);
-
         pos++;
+
+        SessionStorage.Update_Profile_ListMatch(matches);
         //objAffinity.RefreshComponente(looking, getCurrentProfile());
     }
 }

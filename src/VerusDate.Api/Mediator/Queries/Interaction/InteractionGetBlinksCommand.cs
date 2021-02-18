@@ -34,8 +34,6 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
 
         public async Task<List<InteractionQuery>> Handle(InteractionGetBlinksCommand request, CancellationToken cancellationToken)
         {
-            //recupera as interações com matches
-
             var sb = new StringBuilder();
             sb.Append("SELECT * ");
             sb.Append("FROM c ");

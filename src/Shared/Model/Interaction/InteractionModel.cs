@@ -22,6 +22,12 @@ namespace VerusDate.Shared.Model
         public string IdLoggedUser { get; set; }
         public string IdUserInteraction { get; set; }
 
+        public string NickNameLoggedUser { get; set; }
+        public string MainPhotoLoggedUser { get; set; }
+
+        public string NickNameInteraction { get; set; }
+        public string MainPhotoInteraction { get; set; }
+
         public Action Like { get; set; } = new Action();
         public Action Deslike { get; set; } = new Action();
         public Action Blink { get; set; } = new Action();
@@ -30,8 +36,10 @@ namespace VerusDate.Shared.Model
 
         public string IdChat { get; set; }
 
-        public void ExecuteLike()
+        public void ExecuteLike(string NickNameLoggedUser, string MainPhotoLoggedUser)
         {
+            this.NickNameLoggedUser = NickNameLoggedUser;
+            this.MainPhotoLoggedUser = MainPhotoLoggedUser;
             Like.Execute();
             DtUpdate = DateTime.UtcNow;
         }
@@ -42,16 +50,20 @@ namespace VerusDate.Shared.Model
             DtUpdate = DateTime.UtcNow;
         }
 
-        public void ExecuteBlink()
+        public void ExecuteBlink(string NickNameLoggedUser, string MainPhotoLoggedUser)
         {
+            this.NickNameLoggedUser = NickNameLoggedUser;
+            this.MainPhotoLoggedUser = MainPhotoLoggedUser;
             Blink.Execute();
             DtUpdate = DateTime.UtcNow;
         }
 
-        public void ExecuteMatch()
+        public void ExecuteMatch(string NickNameInteraction, string MainPhotoInteraction)
         {
             if (!Like.Value.Value) throw new InvalidOperationException("Ação só poderá ser feita depois do like");
 
+            this.NickNameInteraction = NickNameInteraction;
+            this.MainPhotoInteraction = MainPhotoInteraction;
             Match.Execute();
             DtUpdate = DateTime.UtcNow;
         }

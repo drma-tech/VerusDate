@@ -44,6 +44,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
             if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
 
             var obj = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var profileUser = await _repo.Get<ProfileModel>(CosmosType.Profile + ":" + request.IdLoggedUser, new PartitionKey(request.IdLoggedUser), cancellationToken);
 
             //registra a interação. necessário, pois o cosmos não faz cross join com outros documentos (list match)
             var profile = await _repo.Get<ProfileModel>(CosmosType.Profile + ":" + request.IdUserInteraction, new PartitionKey(request.IdUserInteraction), cancellationToken);
@@ -60,15 +61,15 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
                 obj.SetIds(request.IdLoggedUser);
                 obj.SetIdInteraction(request.IdUserInteraction);
 
-                obj.ExecuteLike();
-                obj.ExecuteBlink();
+                obj.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo.Main);
+                obj.ExecuteBlink(profileUser.Basic.NickName, profileUser.Photo.Main);
 
                 return await _repo.Add(obj, cancellationToken) != null;
             }
             else //caso existe uma interação (like)
             {
-                obj.ExecuteLike();
-                obj.ExecuteBlink();
+                obj.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo.Main);
+                obj.ExecuteBlink(profileUser.Basic.NickName, profileUser.Photo.Main);
 
                 return await _repo.Update(obj, cancellationToken) != null;
             }

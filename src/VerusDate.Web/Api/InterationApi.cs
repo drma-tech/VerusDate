@@ -23,19 +23,19 @@ namespace VerusDate.Web.Api
             return await http.GetList<InteractionModel>("Interaction/GetList", storage);
         }
 
-        public async static Task<List<ProfileSearch>> Interation_GetLikes(this HttpClient http, ISyncSessionStorageService storage)
+        public async static Task<List<InteractionQuery>> Interation_GetLikes(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<ProfileSearch>("Interaction/GetLikes", storage);
+            return await http.GetList<InteractionQuery>("Interaction/GetLikes", storage);
         }
 
-        public async static Task<List<ProfileSearch>> Interation_GetBlinks(this HttpClient http, ISyncSessionStorageService storage)
+        public async static Task<List<InteractionQuery>> Interation_GetBlinks(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<ProfileSearch>("Interaction/GetBlinks", storage);
+            return await http.GetList<InteractionQuery>("Interaction/GetBlinks", storage);
         }
 
-        public async static Task<List<ProfileSearch>> Interation_GetMyMatches(this HttpClient http, ISyncSessionStorageService storage)
+        public async static Task<List<InteractionQuery>> Interation_GetMyMatches(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<ProfileSearch>("Interaction/GetMyMatches", storage);
+            return await http.GetList<InteractionQuery>("Interaction/GetMyMatches", storage);
         }
 
         public async static Task<List<ProfileChatListModel>> Interation_GetChatList(this HttpClient http, ISyncSessionStorageService storage)

@@ -2,17 +2,16 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Cosmos;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
 using VerusDate.Shared.Core;
-using VerusDate.Shared.ModelQuery;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Queries.Interaction
 {
-    public class InteractionGetLikesCommand : MediatorQuery<List<ProfileSearch>>
+    public class InteractionGetLikesCommand : MediatorQuery<List<InteractionQuery>>
     {
         public InteractionGetLikesCommand() : base(CosmosType.Profile)
         {
@@ -24,7 +23,7 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
         }
     }
 
-    public class InteractionGetLikesHandler : IRequestHandler<InteractionGetLikesCommand, List<ProfileSearch>>
+    public class InteractionGetLikesHandler : IRequestHandler<InteractionGetLikesCommand, List<InteractionQuery>>
     {
         private readonly IRepository _repo;
 
@@ -33,54 +32,23 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
             _repo = repo;
         }
 
-        public async Task<List<ProfileSearch>> Handle(InteractionGetLikesCommand request, CancellationToken cancellationToken)
+        public async Task<List<InteractionQuery>> Handle(InteractionGetLikesCommand request, CancellationToken cancellationToken)
         {
             //recupera as interações com matches
 
-            var sqlIds = new StringBuilder();
-            //TODO: É OS LIKES QUE EU RECEBI, NAO OQ EU DEI
-            sqlIds.Append("SELECT c.idUserInteraction id ");
-            sqlIds.Append("FROM c ");
-            sqlIds.Append("WHERE ");
-            sqlIds.Append($"	c.type             = {(int)CosmosType.Interaction} ");
-            sqlIds.Append($"	AND c.key          = '{request.IdLoggedUser}' ");
-            sqlIds.Append("     AND c[\"like\"][\"value\"] = true ");
-            sqlIds.Append("	    AND c.match[\"value\"] != true ");
-            sqlIds.Append("	    AND c.block[\"value\"] != true ");
+            var sb = new StringBuilder();
+            sb.Append("SELECT * ");
+            sb.Append("FROM c ");
+            sb.Append("WHERE ");
+            sb.Append($"	c.type             = {(int)CosmosType.Interaction} ");
+            sb.Append($"	AND c.idUserInteraction    = '{request.IdLoggedUser}' ");
+            sb.Append("     AND c[\"like\"][\"value\"] = true ");
+            //sqlIds.Append("	    AND c.match[\"value\"]     != true ");
+            sb.Append("	    AND c.block[\"value\"]     != true ");
 
-            var queryIds = new QueryDefinition(sqlIds.ToString());
+            var query = new QueryDefinition(sb.ToString());
 
-            var lstIds = await _repo.Query<ProfileIds>(queryIds, cancellationToken);
-
-            if (lstIds.Any())
-            {
-                //recupera os perfis de acordo com os ids
-
-                var sqlMatches = new StringBuilder();
-
-                sqlMatches.Append("SELECT TOP 10 ");
-                sqlMatches.Append("	c.key as id ");
-                sqlMatches.Append("  , c.basic.nickName ");
-                sqlMatches.Append("  , c.bio.birthDate ");
-                sqlMatches.Append("  , c.photo ");
-                sqlMatches.Append("  , c.dtLastLogin ");
-                sqlMatches.Append("  , c.basic.longitude ");
-                sqlMatches.Append("  , c.basic.latitude ");
-                sqlMatches.Append("FROM ");
-                sqlMatches.Append("	c ");
-                sqlMatches.Append("WHERE ");
-                sqlMatches.Append($"	c.id IN ({string.Join(",", lstIds.Select(s => $"'{CosmosType.Profile}:{s.Id}'"))}) ");
-                sqlMatches.Append("ORDER BY ");
-                sqlMatches.Append("	c.dtTopList");
-
-                var queryMatches = new QueryDefinition(sqlMatches.ToString());
-
-                return await _repo.Query<ProfileSearch>(queryMatches, cancellationToken);
-            }
-            else
-            {
-                return new List<ProfileSearch>();
-            }
+            return await _repo.Query<InteractionQuery>(query, cancellationToken);
         }
     }
 }

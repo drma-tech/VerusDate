@@ -78,7 +78,7 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var request = req.BuildRequestQuery<InteractionGetLikesCommand, List<ProfileSearch>>();
+                var request = req.BuildRequestQuery<InteractionGetLikesCommand, List<InteractionQuery>>();
 
                 var result = await _mediator.Send(request, source.Token);
 
@@ -100,7 +100,7 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var request = req.BuildRequestQuery<InteractionGetBlinksCommand, List<ProfileSearch>>();
+                var request = req.BuildRequestQuery<InteractionGetBlinksCommand, List<InteractionQuery>>();
 
                 var result = await _mediator.Send(request, source.Token);
 
@@ -122,7 +122,7 @@ namespace VerusDate.Api.Function
 
             try
             {
-                var request = req.BuildRequestQuery<InteractionGetMyMatchesCommand, List<ProfileSearch>>();
+                var request = req.BuildRequestQuery<InteractionGetMyMatchesCommand, List<InteractionQuery>>();
 
                 var result = await _mediator.Send(request, source.Token);
 

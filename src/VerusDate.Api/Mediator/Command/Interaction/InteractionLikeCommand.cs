@@ -44,6 +44,7 @@ namespace VerusDate.Api.Mediator.Command.Interaction
             if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException("Você não pode interagir com você mesmo");
 
             var obj = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var profileUser = await _repo.Get<ProfileModel>(CosmosType.Profile + ":" + request.IdLoggedUser, new PartitionKey(request.IdLoggedUser), cancellationToken);
             InteractionModel result;
 
             //executa a interação
@@ -54,33 +55,32 @@ namespace VerusDate.Api.Mediator.Command.Interaction
                 obj.SetIds(request.IdLoggedUser);
                 obj.SetIdInteraction(request.IdUserInteraction);
 
-                obj.ExecuteLike();
+                obj.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo.Main);
 
                 result = await _repo.Add(obj, cancellationToken);
             }
             else //caso existe uma interação (blink)
             {
-                obj.ExecuteLike();
+                obj.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo.Main);
 
                 result = await _repo.Update(obj, cancellationToken);
             }
 
             //registra a interação. necessário, pois o cosmos não faz cross join com outros documentos (list match)
-            var profile = await _repo.Get<ProfileModel>(CosmosType.Profile + ":" + request.IdUserInteraction, new PartitionKey(request.IdUserInteraction), cancellationToken);
-            if (!Array.Exists(profile.PassiveInteractions, x => x == request.IdLoggedUser))
+            var profileInteraction = await _repo.Get<ProfileModel>(CosmosType.Profile + ":" + request.IdUserInteraction, new PartitionKey(request.IdUserInteraction), cancellationToken);
+            if (!Array.Exists(profileInteraction.PassiveInteractions, x => x == request.IdLoggedUser))
             {
-                profile.PassiveInteractions = profile.PassiveInteractions.Concat(new string[] { request.IdLoggedUser }).ToArray();
+                profileInteraction.PassiveInteractions = profileInteraction.PassiveInteractions.Concat(new string[] { request.IdLoggedUser }).ToArray();
             }
-            await _repo.Update(profile, cancellationToken);
 
-            //executa o possível match
+            //recupera a interação e executa o possível match
             var matched = await _repo.Get<InteractionModel>(obj.GetInvertedId(), new PartitionKey(request.IdUserInteraction), cancellationToken);
 
             if (matched != null && matched.Like.Value.Value) //se a outra pessoa deu like também
             {
                 //registra o match nos dois
-                obj.ExecuteMatch();
-                matched.ExecuteMatch();
+                obj.ExecuteMatch(profileInteraction.Basic.NickName, profileInteraction.Photo.Main);
+                matched.ExecuteMatch(profileUser.Basic.NickName, profileUser.Photo.Main);
 
                 //registra o chat dos dois
                 var chat = new ChatModel();
@@ -89,15 +89,23 @@ namespace VerusDate.Api.Mediator.Command.Interaction
                 obj.IdChat = chat.Id;
                 matched.IdChat = chat.Id;
 
+                //atualiza as interações
                 var mergeUser1 = await _repo.Update(obj, cancellationToken);
                 await _repo.Update(matched, cancellationToken);
 
+                //insere o chat
                 await _repo.Add(chat, cancellationToken);
+
+                //atualiza profile (passive interactions)
+                await _repo.Update(profileInteraction, cancellationToken);
 
                 return mergeUser1;
             }
             else
             {
+                //atualiza profile (passive interactions)
+                await _repo.Update(profileInteraction, cancellationToken);
+
                 return result;
             }
         }

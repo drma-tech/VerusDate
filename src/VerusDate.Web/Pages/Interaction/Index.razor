@@ -17,11 +17,11 @@
                         @foreach (var item in Matches)
                         {
                             <Column ColumnSize="ColumnSize.Is3.OnFullHD.Is4.OnWidescreen.Is6.OnDesktop.Is12.OnMobile">
-                                <Blazorise.Link To="@("/Interaction/View/" + item.Id)">
+                                <Blazorise.Link To="@("/Interaction/View/" + item.IdUserInteraction)">
                                     <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
-                                        <CardImage Source="@item.GetMainPhoto()" Alt="Photo Image"></CardImage>
+                                        <CardImage Source="@item.GetMainPhoto(TypeUser.InteractionUser)" Alt="Photo Image"></CardImage>
                                         <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">
-                                            @item.NickName
+                                            @item.NickNameInteraction
                                         </CardText>
                                     </Card>
                                 </Blazorise.Link>
@@ -44,11 +44,11 @@
                         @foreach (var item in Likes)
                         {
                             <Column ColumnSize="ColumnSize.Is3.OnFullHD.Is4.OnWidescreen.Is6.OnDesktop.Is12.OnMobile">
-                                <Blazorise.Link To="@("/Interaction/View/" + item.Id)">
+                                <Blazorise.Link To="@("/Interaction/View/" + item.IdUserInteraction)">
                                     <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
-                                        <CardImage Source="@item.GetMainPhoto()" Alt="Photo Image"></CardImage>
+                                        <CardImage Source="@item.GetMainPhoto(TypeUser.LoggedUser)" Alt="Photo Image"></CardImage>
                                         <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">
-                                            @item.NickName
+                                            @item.NickNameLoggedUser
                                         </CardText>
                                     </Card>
                                 </Blazorise.Link>
@@ -79,11 +79,11 @@
                         @foreach (var item in Blinks)
                         {
                             <Column ColumnSize="ColumnSize.Is3.OnFullHD.Is4.OnWidescreen.Is6.OnDesktop.Is12.OnMobile">
-                                <Blazorise.Link To="@("/Interaction/View/" + item.Id)">
+                                <Blazorise.Link To="@("/Interaction/View/" + item.IdUserInteraction)">
                                     <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
-                                        <CardImage Source="@item.GetMainPhoto()" Alt="Photo Image"></CardImage>
+                                        <CardImage Source="@item.GetMainPhoto(TypeUser.LoggedUser)" Alt="Photo Image"></CardImage>
                                         <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">
-                                            @item.NickName
+                                            @item.NickNameLoggedUser
                                         </CardText>
                                     </Card>
                                 </Blazorise.Link>
@@ -97,9 +97,9 @@
 </Row>
 
 @code {
-    private List<ProfileSearch> Matches { get; set; }
-    private List<ProfileSearch> Likes { get; set; }
-    private List<ProfileSearch> Blinks { get; set; }
+    private List<InteractionQuery> Matches { get; set; }
+    private List<InteractionQuery> Likes { get; set; }
+    private List<InteractionQuery> Blinks { get; set; }
 
     private VisibilityOptions OptionsMatches => new VisibilityOptions()
     {

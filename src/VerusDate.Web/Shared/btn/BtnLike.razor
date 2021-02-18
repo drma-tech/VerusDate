@@ -26,7 +26,7 @@
 
             var interaction = await Http.Interation_Get(SessionStorage, IdUserView);
 
-            if (interaction.Match.Value == true)
+            if (interaction.Match.Value.HasValue && interaction.Match.Value.Value == true)
             {
                 Toast.ShowSuccess("Match");
             }

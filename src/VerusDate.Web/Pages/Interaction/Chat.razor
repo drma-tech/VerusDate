@@ -18,7 +18,7 @@
                 }
                 else
                 {
-                    @foreach (var item in chat.Itens.OrderByDescending(o => o.DtMessage))
+                    @foreach (var item in interaction.Chat.OrderByDescending(o => o.DtMessage))
                     {
                         if (item.IdUserSender == ComponenteUtils.IdUser) //usuário logado como sender
                         {
@@ -177,7 +177,7 @@
             <CustomVisibility Options="OptionsProfile"></CustomVisibility>
         }
         else
-        {           
+        {
             <Card Margin="Margin.Is3.FromBottom">
                 <CardBody>
                     <Divider DividerType="DividerType.TextContent" Text="Básico"></Divider>
@@ -236,13 +236,9 @@
     private ProfileModel user { get; set; }
     private ProfileView view { get; set; }
     private InteractionModel interaction { get; set; }
-    private ChatModel chat { get; set; }
     private List<AffinityVM> affinities = new();
     private ProfileBadgeModel badge = new();
 
-    [Required]
-    [StringLength(100)]
-    [Display(Name = "Message", Prompt = "Para sua própria segurança, favor não incluir seu nome completo, endereço, celular, email ou quaisquer informações pessoais")]
     private string Message { get; set; }
 
     private bool BtnDisabled { get { return string.IsNullOrEmpty(Message) || !IsConnected || user == null || interaction == null || !interaction.ActiveInteraction(); } }
@@ -304,7 +300,7 @@
     {
         Invalid = interaction == null || !interaction.ActiveInteraction(),
         Loading = IsLoading,
-        NoData = chat == null || !chat.Itens.Any()
+        NoData = !interaction.Chat.Any()
     };
 
     private VisibilityOptions OptionsProfile => new VisibilityOptions()
@@ -326,18 +322,6 @@
             affinities = ProfileApi.GetAffinity(user, view);
             if (view?.Badge != null) badge = view.Badge;
             interaction = await Http.Interation_Get(SessionStorage, IdUserView);
-
-            if (interaction != null)
-            {
-                if (string.IsNullOrEmpty(interaction.IdChat))
-                {
-                    await Http.Interation_GenerateChat(IdUserView, SessionStorage);
-                }
-                else
-                {
-                    chat = await Http.Chat_Get(SessionStorage, IdUserView);
-                }
-            }
         }
     }
 
@@ -347,11 +331,11 @@
         {
             //await hubConnection.SendAsync("SendPrivateMessage", ComponenteUtils.IdUser, Message, CurrentUser.Id);
 
-            var chatItem = new VerusDate.Shared.Model.ChatItem() { IdUserSender = ComponenteUtils.IdUser, TypeContent = TypeContent.Message, Content = Message };
+            var chat = new ChatModel(ComponenteUtils.IdUser, TypeContent.Message, Message);
+            interaction.AddChat(chat);
             Message = "";
 
-            chat.Itens.Add(chatItem);
-            await Http.Chat_Insert(chatItem, IdUserView, SessionStorage); //TODO: encontrar maneira mais eficiente de salvar
+            await Http.Interaction_AddChat(chat, IdUserView, SessionStorage); //TODO: encontrar maneira mais eficiente de salvar
         }
         catch (Exception ex)
         {

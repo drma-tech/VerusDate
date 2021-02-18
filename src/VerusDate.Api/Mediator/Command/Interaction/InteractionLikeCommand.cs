@@ -82,19 +82,9 @@ namespace VerusDate.Api.Mediator.Command.Interaction
                 obj.ExecuteMatch(profileInteraction.Basic.NickName, profileInteraction.Photo.Main);
                 matched.ExecuteMatch(profileUser.Basic.NickName, profileUser.Photo.Main);
 
-                //registra o chat dos dois
-                var chat = new ChatModel();
-                chat.SetIds(null);
-
-                obj.IdChat = chat.Id;
-                matched.IdChat = chat.Id;
-
                 //atualiza as interações
                 var mergeUser1 = await _repo.Update(obj, cancellationToken);
                 await _repo.Update(matched, cancellationToken);
-
-                //insere o chat
-                await _repo.Add(chat, cancellationToken);
 
                 //atualiza profile (passive interactions)
                 await _repo.Update(profileInteraction, cancellationToken);

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
+using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Model
 {
@@ -34,7 +37,7 @@ namespace VerusDate.Shared.Model
         public Action Match { get; set; } = new Action();
         public Action Block { get; set; } = new Action();
 
-        public string IdChat { get; set; }
+        public List<ChatModel> Chat { get; set; } = new List<ChatModel>();
 
         public void ExecuteLike(string NickNameLoggedUser, string MainPhotoLoggedUser)
         {
@@ -95,6 +98,26 @@ namespace VerusDate.Shared.Model
             this.SetPartitionKey(IdLoggedUser);
             this.IdUserInteraction = IdUserInteraction;
         }
+
+        public void AddChat(ChatModel chat)
+        {
+            if (IsChatActive())
+            {
+                Chat.Add(chat);
+            }
+            else
+            {
+                throw new InvalidOperationException("Operação não permitida");
+            }
+        }
+
+        public bool IsChatActive()
+        {
+            var matched = Match.Value.HasValue && Match.Value.Value;
+            var blocked = Block.Value.HasValue && Block.Value.Value;
+
+            return matched && !blocked;
+        }
     }
 
     public class Action
@@ -106,6 +129,26 @@ namespace VerusDate.Shared.Model
         {
             Value = true;
             Date = DateTime.UtcNow;
+        }
+    }
+
+    public class ChatModel
+    {
+        public DateTime DtMessage { get; set; } = DateTime.UtcNow;
+
+        [Required]
+        public string IdUserSender { get; set; }
+
+        public TypeContent TypeContent { get; set; }
+
+        [MaxLength(512)]
+        public string Content { get; set; }
+
+        public ChatModel(string IdUserSender, TypeContent TypeContent, string Content)
+        {
+            this.IdUserSender = IdUserSender;
+            this.TypeContent = TypeContent;
+            this.Content = Content;
         }
     }
 }

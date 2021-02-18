@@ -248,5 +248,27 @@ namespace VerusDate.Api.Function
                 return new BadRequestObjectResult(ex);
             }
         }
+
+        [FunctionName("AddChat")]
+        public async Task<IActionResult> AddChat(
+          [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Interaction/AddChat")] HttpRequest req,
+          ILogger log, CancellationToken cancellationToken)
+        {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
+            try
+            {
+                var request = await req.BuildRequestCommand<ChatSyncCommand>(source.Token);
+
+                var result = await _mediator.Send(request, source.Token);
+
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, null, req.Query.ToList());
+                return new BadRequestObjectResult(ex.ProcessException());
+            }
+        }
     }
 }

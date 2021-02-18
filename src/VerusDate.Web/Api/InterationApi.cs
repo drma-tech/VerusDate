@@ -13,8 +13,6 @@ namespace VerusDate.Web.Api
     {
         public async static Task<InteractionModel> Interation_Get(this HttpClient http, ISyncSessionStorageService storage, string IdUserInteraction)
         {
-            if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
-
             return await http.Get<InteractionModel>($"Interaction/Get?id={IdUserInteraction}", storage);
         }
 
@@ -45,39 +43,29 @@ namespace VerusDate.Web.Api
 
         public async static Task<HttpResponseMessage> Interation_Blink(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage)
         {
-            if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
-
             //await GamificationApi.ClearCache(storage);
             return await http.Put<InteractionModel>("Interaction/Blink", new { IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
         }
 
         public async static Task<HttpResponseMessage> Interation_Block(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage)
         {
-            if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
-
             return await http.Put<InteractionModel>("Interaction/Block", new { IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
         }
 
         public async static Task<HttpResponseMessage> Interation_Deslike(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage)
         {
-            if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
-
             return await http.Put<InteractionModel>("Interaction/Deslike", new { IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
         }
 
         public async static Task<HttpResponseMessage> Interation_Like(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage)
         {
-            if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
-
             //await GamificationApi.ClearCache(storage);
             return await http.Put<InteractionModel>("Interaction/Like", new { IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
         }
 
-        public async static Task<HttpResponseMessage> Interation_GenerateChat(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage)
+        public async static Task<HttpResponseMessage> Interaction_AddChat(this HttpClient http, ChatModel chat, string IdUserInteraction, ISyncSessionStorageService storage)
         {
-            if (string.IsNullOrEmpty(IdUserInteraction)) throw new ArgumentNullException(nameof(IdUserInteraction));
-
-            return await http.Put<ChatModel>("Interaction/GenerateChat", new { IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
+            return await http.Put<InteractionModel>("Interaction/AddChat", new { IdUserInteraction, chat }, storage, $"Interaction/Get?id={IdUserInteraction}");
         }
     }
 }

@@ -44,7 +44,7 @@
                         @foreach (var item in Likes)
                         {
                             <Column ColumnSize="ColumnSize.Is3.OnFullHD.Is4.OnWidescreen.Is6.OnDesktop.Is12.OnMobile">
-                                <Blazorise.Link To="@("/Interaction/View/" + item.IdUserInteraction)">
+                                <Blazorise.Link To="@("/Interaction/View/" + item.IdLoggedUser)">
                                     <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
                                         <CardImage Source="@item.GetMainPhoto(TypeUser.LoggedUser)" Alt="Photo Image"></CardImage>
                                         <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">
@@ -79,7 +79,7 @@
                         @foreach (var item in Blinks)
                         {
                             <Column ColumnSize="ColumnSize.Is3.OnFullHD.Is4.OnWidescreen.Is6.OnDesktop.Is12.OnMobile">
-                                <Blazorise.Link To="@("/Interaction/View/" + item.IdUserInteraction)">
+                                <Blazorise.Link To="@("/Interaction/View/" + item.IdLoggedUser)">
                                     <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
                                         <CardImage Source="@item.GetMainPhoto(TypeUser.LoggedUser)" Alt="Photo Image"></CardImage>
                                         <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">

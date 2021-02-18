@@ -8,7 +8,7 @@ using VerusDate.Api.Core.Interfaces;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Model;
 
-namespace VerusDate.Api.Mediator.Command.Chat
+namespace VerusDate.Api.Mediator.Command.Interaction
 {
     public class ChatSyncCommand : CosmosBase, IRequest<ChatModel>
     {
@@ -21,7 +21,7 @@ namespace VerusDate.Api.Mediator.Command.Chat
 
         public string IdLoggedUser { get; private set; }
 
-        public ChatItem chatItem { get; set; }
+        public ChatModel chat { get; set; }
 
         public override void SetIds(string IdLoggedUser)
         {
@@ -44,13 +44,13 @@ namespace VerusDate.Api.Mediator.Command.Chat
         {
             if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
 
-            var interaction = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var interactionUser = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
 
-            var chat = await _repo.Get<ChatModel>(interaction.IdChat, new PartitionKey(interaction.IdChat.Split(":")[1]), cancellationToken: cancellationToken);
+            interactionUser.AddChat(request.chat);
 
-            chat.Itens.Add(request.chatItem);
+            await _repo.Update(interactionUser, cancellationToken);
 
-            return await _repo.Update(chat, cancellationToken);
+            return request.chat;
         }
     }
 }

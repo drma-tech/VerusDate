@@ -1,71 +1,83 @@
 ﻿using Blazored.SessionStorage;
-using System;
+using Blazored.Toast.Services;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using VerusDate.Shared.Model;
-using VerusDate.Shared.ModelQuery;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api
 {
+    public struct InterationEndpoint
+    {
+        public const string GetLikes = "Interaction/GetLikes";
+        public const string GetBlinks = "Interaction/GetBlinks";
+        public const string GetMyMatches = "Interaction/GetMyMatches";
+
+        public const string Blink = "Interaction/Blink";
+        public const string Block = "Interaction/Block";
+        public const string Deslike = "Interaction/Deslike";
+        public const string Like = "Interaction/Like";
+        public const string AddChat = "Interaction/AddChat";
+
+        public static string Get(string IdUserInteraction) => $"Interaction/Get?id={IdUserInteraction}";
+    }
+
     public static class InterationApi
     {
         public async static Task<InteractionModel> Interation_Get(this HttpClient http, ISyncSessionStorageService storage, string IdUserInteraction)
         {
-            return await http.Get<InteractionModel>($"Interaction/Get?id={IdUserInteraction}", storage);
-        }
-
-        public async static Task<List<InteractionModel>> Interation_GetList(this HttpClient http, ISyncSessionStorageService storage)
-        {
-            return await http.GetList<InteractionModel>("Interaction/GetList", storage);
+            return await http.Get<InteractionModel>(InterationEndpoint.Get(IdUserInteraction), storage);
         }
 
         public async static Task<List<InteractionQuery>> Interation_GetLikes(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<InteractionQuery>("Interaction/GetLikes", storage);
+            return await http.GetList<InteractionQuery>(InterationEndpoint.GetLikes, storage);
         }
 
         public async static Task<List<InteractionQuery>> Interation_GetBlinks(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<InteractionQuery>("Interaction/GetBlinks", storage);
+            return await http.GetList<InteractionQuery>(InterationEndpoint.GetBlinks, storage);
         }
 
         public async static Task<List<InteractionQuery>> Interation_GetMyMatches(this HttpClient http, ISyncSessionStorageService storage)
         {
-            return await http.GetList<InteractionQuery>("Interaction/GetMyMatches", storage);
+            return await http.GetList<InteractionQuery>(InterationEndpoint.GetMyMatches, storage);
         }
 
-        public async static Task<List<ProfileChatListModel>> Interation_GetChatList(this HttpClient http, ISyncSessionStorageService storage)
+        public async static Task Interation_Blink(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage, IToastService toast)
         {
-            return await http.GetList<ProfileChatListModel>("Interaction/GetChatList", storage);
+            await http.Session_RemoveDiamond(storage, 1);
+
+            var response = await http.Put(InterationEndpoint.Blink, new { IdUserInteraction });
+
+            await response.ProcessResponse(toast, msgInfo: "-1 Diamante");
         }
 
-        public async static Task<HttpResponseMessage> Interation_Blink(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage)
+        public async static Task Interation_Block(this HttpClient http, string IdUserInteraction)
         {
-            //await GamificationApi.ClearCache(storage);
-            return await http.Put<InteractionModel>("Interaction/Blink", new { IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
+            await http.Put(InterationEndpoint.Block, new { IdUserInteraction });
         }
 
-        public async static Task<HttpResponseMessage> Interation_Block(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage)
+        public async static Task Interation_Deslike(this HttpClient http, string IdUserInteraction)
         {
-            return await http.Put<InteractionModel>("Interaction/Block", new { IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
+            await http.Put(InterationEndpoint.Deslike, new { IdUserInteraction });
         }
 
-        public async static Task<HttpResponseMessage> Interation_Deslike(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage)
+        public async static Task Interation_Like(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage, IToastService toast)
         {
-            return await http.Put<InteractionModel>("Interaction/Deslike", new { IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
+            await http.Session_RemoveFood(storage, 1);
+
+            var response = await http.Put(InterationEndpoint.Like, new { IdUserInteraction });
+
+            await response.ProcessResponse(toast, msgInfo: "-1 Maça");
         }
 
-        public async static Task<HttpResponseMessage> Interation_Like(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage)
+        public async static Task Interaction_AddChat(this HttpClient http, ChatModel chat, string IdUserInteraction, IToastService toast)
         {
-            //await GamificationApi.ClearCache(storage);
-            return await http.Put<InteractionModel>("Interaction/Like", new { IdUserInteraction }, storage, $"Interaction/Get/{IdUserInteraction}");
-        }
+            var response = await http.Put(InterationEndpoint.AddChat, new { IdUserInteraction, chat });
 
-        public async static Task<HttpResponseMessage> Interaction_AddChat(this HttpClient http, ChatModel chat, string IdUserInteraction, ISyncSessionStorageService storage)
-        {
-            return await http.Put<ChatModel>("Interaction/AddChat", new { IdUserInteraction, chat }, storage, $"Interaction/Get?id={IdUserInteraction}");
+            await response.ProcessResponse(toast);
         }
     }
 }

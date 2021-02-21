@@ -19,14 +19,10 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
         public async Task<ProfileModel> Handle(ProfileAddCommand request, CancellationToken cancellationToken)
         {
-            //var pv = await _profileValidationApp.Get(request.IdUser, cancellationToken);
-
-            //if (!pv.ProfileData.HasValue)
-            //{
-            //    await _gamificationApp.AddXP(request.Id, EventAddXP.ValidateProfileData, cancellationToken);
-            //}
-
-            //await _profileValidationApp.ValidateProfileData(request.Id, true, cancellationToken);
+            request.Gamification = new ProfileGamificationModel();
+            
+            request.Gamification.ResetFood();
+            request.Gamification.AddXP(30);
 
             return await _repo.Add(request, cancellationToken);
         }

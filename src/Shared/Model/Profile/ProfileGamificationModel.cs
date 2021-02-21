@@ -1,19 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using System.Reflection.Metadata.Ecma335;
 using VerusDate.Shared.Helper;
 
 namespace VerusDate.Shared.Model
 {
     public class ProfileGamificationModel
     {
-        [JsonIgnore]
         private static int MaxRankXP => 100;
 
-        [JsonIgnore]
         private static int MaxRankFood => 20;
-
-        [JsonIgnore]
-        public int MaxFood => Ranking == 0 ? MaxRankFood : Ranking * MaxRankFood;
 
         [Display(Name = "Ranking")]
         public int Ranking { get; set; }
@@ -26,6 +21,11 @@ namespace VerusDate.Shared.Model
 
         [Display(Name = "Diamond")]
         public int Diamond { get; set; }
+
+        public int GetMaxFood()
+        {
+            return Ranking == 0 ? MaxRankFood : Ranking * MaxRankFood;
+        }
 
         public void AddXP(int qtd)
         {
@@ -106,12 +106,17 @@ namespace VerusDate.Shared.Model
 
             RemoveDiamond(qtdDiamond);
 
-            if (Food + NewFood > MaxFood)
+            if (Food + NewFood > GetMaxFood())
             {
                 throw new NotificationException("Limite máximo de maças alcançado para seu nível");
             }
 
             Food += NewFood;
+        }
+
+        public void ResetFood()
+        {
+            Food = GetMaxFood();
         }
 
         public void RemoveFood(int qtd = 1)

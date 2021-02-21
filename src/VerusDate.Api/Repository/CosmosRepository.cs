@@ -122,18 +122,11 @@ namespace VerusDate.Api.Repository
             return response.Resource;
         }
 
-        public async Task<T> Update<T>(T item, CancellationToken cancellationToken) where T : CosmosBase
+        public async Task<bool> Update<T>(T item, CancellationToken cancellationToken) where T : CosmosBase
         {
             var response = await Container.ReplaceItemAsync(item, item.Id, new PartitionKey(item.Key), null, cancellationToken);
 
-            return response.Resource;
-        }
-
-        public async Task<T> Delete<T>(string id, PartitionKey key, CancellationToken cancellationToken) where T : CosmosBase
-        {
-            var response = await Container.DeleteItemAsync<T>(id, key, null, cancellationToken);
-
-            return response.Resource;
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
     }
 }

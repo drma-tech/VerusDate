@@ -72,7 +72,7 @@ else
                             <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
                                 <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler"></Icon> @AttributeHelper.GetName(() => looking.MinimalHeight)
                             </FieldLabel>
-                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">                                
+                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
                                 <InputSelect TValue="Height?" @bind-Value="@looking.MinimalHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Height>())
@@ -189,31 +189,9 @@ else
     {
         try
         {
-            HttpResponseMessage response;
+            await Http.Profile_UpdateLooking(profile, looking, SessionStorage, Toast);
 
-            profile.Looking = looking;
-
-            if (profile.Looking == null)
-            {
-                response = await Http.Profile_UpdateLooking(profile, SessionStorage);
-
-                if (response.IsSuccessStatusCode)
-                    Toast.ShowWarning("+30 XP");
-            }
-            else
-            {
-                response = await Http.Profile_UpdateLooking(profile, SessionStorage);
-
-                if (response.IsSuccessStatusCode)
-                    Toast.ShowWarning("-100 XP");
-            }
-
-            if (response.IsSuccessStatusCode)
-            {
-                profile = await Http.Profile_Get(SessionStorage);
-            }
-
-            await response.ProcessResponse(Toast, "Salvo com sucesso!");
+            profile = await Http.Profile_Get(SessionStorage);
         }
         catch (Exception ex)
         {

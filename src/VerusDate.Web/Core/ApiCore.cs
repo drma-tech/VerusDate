@@ -10,7 +10,7 @@ namespace VerusDate.Web.Core
 {
     public static class ApiCore
     {
-        public async static Task<T> ReturnResponse<T>(this HttpResponseMessage response)
+        private async static Task<T> ReturnResponse<T>(this HttpResponseMessage response)
         {
             if (response.IsSuccessStatusCode)
             {
@@ -63,16 +63,9 @@ namespace VerusDate.Web.Core
             return response;
         }
 
-        public async static Task<HttpResponseMessage> Put<T>(this HttpClient http, string requestUri, object obj, ISyncSessionStorageService storage, string urlGet) where T : class
+        public async static Task<HttpResponseMessage> Put(this HttpClient http, string requestUri, object obj) 
         {
-            var response = await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
-
-            if (storage != null && !string.IsNullOrWhiteSpace(urlGet) && response.IsSuccessStatusCode)
-            {
-                storage.SetItem(urlGet, await response.ReturnResponse<T>());
-            }
-
-            return response;
+            return await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
         }
     }
 }

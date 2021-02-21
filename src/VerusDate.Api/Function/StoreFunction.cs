@@ -22,6 +22,28 @@ namespace VerusDate.Api.Function
             _mediator = mediator;
         }
 
+        [FunctionName("StoreAddDiamond")]
+        public async Task<IActionResult> AddDiamond(
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Store/AddDiamond")] HttpRequest req,
+            ILogger log, CancellationToken cancellationToken)
+        {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
+            try
+            {
+                var request = await req.BuildRequestCommand<StoreAddDiamondCommand>(source.Token);
+
+                var result = await _mediator.Send(request, source.Token);
+
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, null, req.Query.ToList());
+                return new BadRequestObjectResult(ex.ProcessException());
+            }
+        }
+
         [FunctionName("StoreExchangeFood")]
         public async Task<IActionResult> ExchangeFood(
             [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Store/ExchangeFood")] HttpRequest req,

@@ -146,8 +146,8 @@ else
                     <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
                 </Button>
                 @*<Badge Color="Color.Danger" Margin="Margin.Is3.FromLeft">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationTriangle"></Icon> Só poderá atualizar no máximo uma vez ao dia e perderá 100 XP a cada atualização
-                </Badge>*@
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationTriangle"></Icon> Só poderá atualizar no máximo uma vez ao dia e perderá 100 XP a cada atualização
+                    </Badge>*@
             </CardFooter>
         </Card>
     </EditForm>
@@ -182,7 +182,7 @@ else
     protected bool IsShortTerm { get { return !profile.Basic.Intent.IsLongTerm(); } }
     private Shared.modal.BasicModal privacy;
     private Shared.modal.BasicModal help;
-  
+
     private VisibilityOptions Options => new VisibilityOptions()
     {
         Loading = IsLoading
@@ -274,32 +274,18 @@ else
     {
         try
         {
-            HttpResponseMessage response;
-
             profile.ClearSimpleView();
 
             if (profile.GetDataStatus() == DataStatus.New)
             {
-                response = await Http.Profile_Add(profile, SessionStorage);
-
-                if (response.IsSuccessStatusCode)
-                    Toast.ShowWarning("+30 XP");
+                await Http.Profile_Add(profile, SessionStorage, Toast);
             }
             else
             {
-                response = await Http.Profile_Update(profile, SessionStorage);
-
-                if (response.IsSuccessStatusCode)
-                    Toast.ShowWarning("-100 XP");
+                await Http.Profile_Update(profile, SessionStorage, Toast);
             }
 
-            if (response.IsSuccessStatusCode)
-            {
-                profile = await Http.Profile_Get(SessionStorage);
-            }
-
-            await response.ProcessResponse(Toast, "Salvo com sucesso!");
-
+            profile = await Http.Profile_Get(SessionStorage);
         }
         catch (Exception ex)
         {

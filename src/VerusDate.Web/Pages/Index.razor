@@ -79,6 +79,7 @@
                                         @gamification?.Diamond
                                     </CardText>
                                 }
+                                <Button Clicked="AddDiamond" Color="Color.Primary">add gem</Button>
                             </CardBody>
                         </Card>
                     </Column>
@@ -96,7 +97,7 @@
                                 else
                                 {
                                     <CardText>
-                                        @gamification?.Food / @GamificationApi.GetMaxFood(gamification)
+                                        @gamification?.Food / @gamification.GetMaxFood()
                                     </CardText>
                                 }
                             </CardBody>
@@ -798,9 +799,24 @@
     {
         if (ComponenteUtils.IsAuthenticated)
         {
-            lstDestaques = await Http.Public_ListDestaques(SessionStorage);
+            //lstDestaques = await Http.Public_ListDestaques(SessionStorage);
             profile = await Http.Profile_Get(SessionStorage);
             gamification = profile?.Gamification;
+        }
+    }
+
+    protected async Task AddDiamond()
+    {
+        try
+        {
+            await Http.Store_AddDiamond(1, SessionStorage, Toast);
+
+            profile = await Http.Profile_Get(SessionStorage);
+            gamification = profile?.Gamification;
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
         }
     }
 }

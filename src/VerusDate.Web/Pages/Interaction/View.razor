@@ -217,7 +217,7 @@ else
             imageDataUriGallery = new string[] { view.GetMainPhoto() }.Concat(view.GetGalleryPhotos()).ToArray();
             selectedImage = imageDataUriGallery.FirstOrDefault();
 
-            affinities = ProfileApi.GetAffinity(user, view);
+            affinities = AffinityCore.GetAffinity(user, view);
             gamification = view.Gamification;
             if (view?.Badge != null) badge = view.Badge;
             //InteractionVM = await Http.Interation_Get(IdUserView.ToString());
@@ -228,8 +228,7 @@ else
     {
         try
         {
-            var result = await Http.Interation_Deslike(IdUserInteraction, SessionStorage);
-            await result.ProcessResponse(Toast);
+            await Http.Interation_Deslike(IdUserInteraction);
         }
         catch (Exception ex)
         {
@@ -241,8 +240,7 @@ else
     {
         try
         {
-            var result = await Http.Interation_Like(IdUserInteraction, SessionStorage);
-            await result.ProcessResponse(Toast);
+            await Http.Interation_Like(IdUserInteraction, SessionStorage, Toast);
         }
         catch (Exception ex)
         {
@@ -254,8 +252,7 @@ else
     {
         try
         {
-            var result = await Http.Interation_Blink(IdUserInteraction, SessionStorage);
-            await result.ProcessResponse(Toast);
+            await Http.Interation_Blink(IdUserInteraction, SessionStorage, Toast);
         }
         catch (Exception ex)
         {

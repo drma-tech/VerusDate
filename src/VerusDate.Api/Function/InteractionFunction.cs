@@ -14,7 +14,6 @@ using VerusDate.Api.Mediator.Command.Interaction;
 using VerusDate.Api.Mediator.Queries.Interaction;
 using VerusDate.Server.Mediator.Commands.Interaction;
 using VerusDate.Shared.Model;
-using VerusDate.Shared.ModelQuery;
 
 namespace VerusDate.Api.Function
 {
@@ -48,26 +47,6 @@ namespace VerusDate.Api.Function
                 return new BadRequestObjectResult(ex.ProcessException());
             }
         }
-
-        //[FunctionName("InteractionGetList")]
-        //public async Task<IActionResult> GetList(
-        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetList")] HttpRequest req,
-        //   ILogger log, CancellationToken cancellationToken)
-        //{
-        //    try
-        //    {
-        //        var command = await JsonSerializer.DeserializeAsync<InteractionGetListCommand>(req.Body);
-
-        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
-
-        //        return new OkObjectResult(result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.LogError(ex, null, req.Query.ToList());
-        //        return new BadRequestObjectResult(ex.Message);
-        //    }
-        //}
 
         [FunctionName("InteractionGetLikes")]
         public async Task<IActionResult> GetLikes(
@@ -134,26 +113,6 @@ namespace VerusDate.Api.Function
                 return new BadRequestObjectResult(ex.Message);
             }
         }
-
-        //[FunctionName("InteractionGetChatList")]
-        //public async Task<IActionResult> GetChatList(
-        //  [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.GET, Route = "Interaction/GetChatList")] HttpRequest req,
-        //  ILogger log, CancellationToken cancellationToken)
-        //{
-        //    try
-        //    {
-        //        var command = await JsonSerializer.DeserializeAsync<InteractionGetChatListCommand>(req.Body);
-
-        //        var result = await _mediator.Send(command, req.HttpContext.RequestAborted);
-
-        //        return new OkObjectResult(result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.LogError(ex, null, req.Query.ToList());
-        //        return new BadRequestObjectResult(ex.Message);
-        //    }
-        //}
 
         [FunctionName("InteractionBlink")]
         public async Task<IActionResult> Blink(

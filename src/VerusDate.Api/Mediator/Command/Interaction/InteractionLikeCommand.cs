@@ -11,7 +11,7 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Interaction
 {
-    public class InteractionLikeCommand : CosmosBase, IRequest<InteractionModel>
+    public class InteractionLikeCommand : CosmosBase, IRequest<bool>
     {
         public InteractionLikeCommand() : base(CosmosType.Interaction)
         {
@@ -30,7 +30,7 @@ namespace VerusDate.Api.Mediator.Command.Interaction
         }
     }
 
-    public class InteractionLikeHandler : IRequestHandler<InteractionLikeCommand, InteractionModel>
+    public class InteractionLikeHandler : IRequestHandler<InteractionLikeCommand, bool>
     {
         private readonly IRepository _repo;
 
@@ -39,31 +39,33 @@ namespace VerusDate.Api.Mediator.Command.Interaction
             _repo = repo;
         }
 
-        public async Task<InteractionModel> Handle(InteractionLikeCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(InteractionLikeCommand request, CancellationToken cancellationToken)
         {
             if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException("Você não pode interagir com você mesmo");
 
-            var obj = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var interactionUser = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
             var profileUser = await _repo.Get<ProfileModel>(CosmosType.Profile + ":" + request.IdLoggedUser, new PartitionKey(request.IdLoggedUser), cancellationToken);
-            InteractionModel result;
+            bool result;
+
+            profileUser.Gamification.RemoveFood();
 
             //executa a interação
-            if (obj == null)
+            if (interactionUser == null)
             {
-                obj = new InteractionModel();
+                interactionUser = new InteractionModel();
 
-                obj.SetIds(request.IdLoggedUser);
-                obj.SetIdInteraction(request.IdUserInteraction);
+                interactionUser.SetIds(request.IdLoggedUser);
+                interactionUser.SetIdInteraction(request.IdUserInteraction);
 
-                obj.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo.Main);
+                interactionUser.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo.Main);
 
-                result = await _repo.Add(obj, cancellationToken);
+                result = await _repo.Add(interactionUser, cancellationToken) != null;
             }
             else //caso existe uma interação (blink)
             {
-                obj.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo.Main);
+                interactionUser.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo.Main);
 
-                result = await _repo.Update(obj, cancellationToken);
+                result = await _repo.Update(interactionUser, cancellationToken);
             }
 
             //registra a interação. necessário, pois o cosmos não faz cross join com outros documentos (list match)
@@ -74,20 +76,21 @@ namespace VerusDate.Api.Mediator.Command.Interaction
             }
 
             //recupera a interação e executa o possível match
-            var matched = await _repo.Get<InteractionModel>(obj.GetInvertedId(), new PartitionKey(request.IdUserInteraction), cancellationToken);
+            var matched = await _repo.Get<InteractionModel>(interactionUser.GetInvertedId(), new PartitionKey(request.IdUserInteraction), cancellationToken);
 
             if (matched != null && matched.Like.Value.Value) //se a outra pessoa deu like também
             {
                 //registra o match nos dois
-                obj.ExecuteMatch(profileInteraction.Basic.NickName, profileInteraction.Photo.Main);
+                interactionUser.ExecuteMatch(profileInteraction.Basic.NickName, profileInteraction.Photo.Main);
                 matched.ExecuteMatch(profileUser.Basic.NickName, profileUser.Photo.Main);
 
                 //atualiza as interações
-                var mergeUser1 = await _repo.Update(obj, cancellationToken);
+                var mergeUser1 = await _repo.Update(interactionUser, cancellationToken);
                 await _repo.Update(matched, cancellationToken);
 
                 //atualiza profile (passive interactions)
                 await _repo.Update(profileInteraction, cancellationToken);
+                await _repo.Update(profileUser, cancellationToken);
 
                 return mergeUser1;
             }
@@ -95,6 +98,7 @@ namespace VerusDate.Api.Mediator.Command.Interaction
             {
                 //atualiza profile (passive interactions)
                 await _repo.Update(profileInteraction, cancellationToken);
+                await _repo.Update(profileUser, cancellationToken);
 
                 return result;
             }

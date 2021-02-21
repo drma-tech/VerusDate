@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Azure.Cosmos;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
@@ -19,6 +20,12 @@ namespace VerusDate.Api.Mediator.Command.Support
 
         public async Task<TicketModel> Handle(TicketInsertCommand request, CancellationToken cancellationToken)
         {
+            var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+
+            obj.Gamification.AddXP(5);
+
+            await _repo.Update(obj, cancellationToken);
+
             return await _repo.Add(request, cancellationToken);
         }
     }

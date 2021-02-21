@@ -11,7 +11,7 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Mediator.Commands.Interaction
 {
-    public class InteractionBlinkCommand : CosmosBase, IRequest<InteractionModel>
+    public class InteractionBlinkCommand : CosmosBase, IRequest<bool>
     {
         public InteractionBlinkCommand() : base(CosmosType.Interaction)
         {
@@ -30,7 +30,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
         }
     }
 
-    public class InteractionBlinkHandler : IRequestHandler<InteractionBlinkCommand, InteractionModel>
+    public class InteractionBlinkHandler : IRequestHandler<InteractionBlinkCommand, bool>
     {
         private readonly IRepository _repo;
 
@@ -39,7 +39,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
             _repo = repo;
         }
 
-        public async Task<InteractionModel> Handle(InteractionBlinkCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(InteractionBlinkCommand request, CancellationToken cancellationToken)
         {
             if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
 
@@ -64,7 +64,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
                 obj.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo.Main);
                 obj.ExecuteBlink(profileUser.Basic.NickName, profileUser.Photo.Main);
 
-                return await _repo.Add(obj, cancellationToken);
+                return await _repo.Add(obj, cancellationToken) != null;
             }
             else //caso existe uma interação (like)
             {

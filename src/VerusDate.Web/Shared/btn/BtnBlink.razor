@@ -21,10 +21,8 @@
     {
         try
         {
-            var result = await Http.Interation_Blink(IdUserView, SessionStorage);
-            await result.ProcessResponse(Toast, msgInfo: "-1 Diamante");
+            await Http.Interation_Blink(IdUserView, SessionStorage, Toast);
             await OnClick.InvokeAsync(null);
-            RefreshCore.RefreshHead(); //precisa atualizar os diamantes
         }
         catch (Exception ex)
         {

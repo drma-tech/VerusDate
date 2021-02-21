@@ -29,7 +29,7 @@
                         </Field>
                         <Field ColumnSize="ColumnSize.Is6.OnDesktop">
                             <FieldLabel>Mobile</FieldLabel>
-                            <TextEdit @bind-Text="@principal.Mobile" />
+                            <TextEdit @bind-Text="@principal.Mobile" Disabled="true" />
                             <ValidationMessage For="@(() => principal.Mobile)"></ValidationMessage>
                         </Field>
                     </Fields>

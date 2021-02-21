@@ -7,9 +7,9 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileUpdateCommand : ProfileModel, IRequest<ProfileModel> { }
+    public class ProfileUpdateCommand : ProfileModel, IRequest<bool> { }
 
-    public class ProfileUpdateHandler : IRequestHandler<ProfileUpdateCommand, ProfileModel>
+    public class ProfileUpdateHandler : IRequestHandler<ProfileUpdateCommand, bool>
     {
         private readonly IRepository _repo;
 
@@ -18,11 +18,14 @@ namespace VerusDate.Api.Mediator.Command.Profile
             _repo = repo;
         }
 
-        public async Task<ProfileModel> Handle(ProfileUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(ProfileUpdateCommand request, CancellationToken cancellationToken)
         {
-            //await _gamificationApp.RemoveXP(request.Id, EventRemoveXP.UpdateProfile, cancellationToken);
-
             var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+
+            if (obj.DtUpdate != null) //terceira vez que atualiza
+            {
+                obj.Gamification.RemoveXP(100);
+            }
 
             obj.UpdateProfile(request.Basic, request.Bio, request.Lifestyle, request.Interest);
 

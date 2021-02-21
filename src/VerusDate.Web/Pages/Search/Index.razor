@@ -83,11 +83,7 @@ else
     {
         try
         {
-            var result = await Http.Interation_Blink(IdUserInteraction, SessionStorage);
-
-            await result.ProcessResponse(Toast, msgInfo: "-1 Diamante");
-
-            RefreshCore.RefreshHead();
+            await Http.Interation_Blink(IdUserInteraction, SessionStorage, Toast);
         }
         catch (Exception ex)
         {

@@ -1,32 +1,60 @@
 ﻿using Blazored.SessionStorage;
-using System;
+using Blazored.Toast.Services;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using VerusDate.Shared.Model;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api
 {
+    public struct StorageEndpoint
+    {
+        public const string UploadPhotoFace = "Storage/UploadPhotoFace";
+        public const string UploadPhotoGallery = "Storage/UploadPhotoGallery";
+        public const string UploadPhotoValidation = "Storage/UploadPhotoValidation";
+    }
+
     public static class StorageApi
     {
-        public async static Task<HttpResponseMessage> Storage_UploadPhotoFace(this HttpClient http, byte[] bytes, ISyncSessionStorageService storage)
+        public async static Task Storage_UploadPhotoFace(this HttpClient http, byte[] bytes, ISyncSessionStorageService storage, IToastService toast)
         {
-            if (bytes == null || bytes.Length == 0) throw new ArgumentNullException(nameof(bytes));
+            var response = await http.Put(StorageEndpoint.UploadPhotoFace, new { MainPhoto = bytes });
 
-            return await http.Put<ProfileModel>("Storage/UploadPhotoFace", new { MainPhoto = bytes }, storage, "Profile/Get");
+            if (response.IsSuccessStatusCode)
+            {
+                storage.RemoveItem(ProfileEndpoint.Get);
+                await http.Profile_Get(storage);
+
+                RefreshCore.RefreshMenu();
+            }
+
+            await response.ProcessResponse(toast, "Foto atualizada com sucesso!");
         }
 
-        public async static Task<HttpResponseMessage> Storage_UploadPhotoGallery(this HttpClient http, List<byte[]> Streams, ISyncSessionStorageService storage)
+        public async static Task Storage_UploadPhotoGallery(this HttpClient http, List<byte[]> Streams, ISyncSessionStorageService storage, IToastService toast)
         {
-            return await http.Put<ProfileModel>("Storage/UploadPhotoGallery", new { Streams }, storage, "Profile/Get");
+            var response = await http.Put(StorageEndpoint.UploadPhotoGallery, new { Streams });
+
+            if (response.IsSuccessStatusCode)
+            {
+                storage.RemoveItem(ProfileEndpoint.Get);
+                await http.Profile_Get(storage);
+            }
+
+            await response.ProcessResponse(toast, "Foto atualizada com sucesso!");
         }
 
-        public async static Task<HttpResponseMessage> Storage_UploadPhotoValidation(this HttpClient http, byte[] bytes)
+        public async static Task Storage_UploadPhotoValidation(this HttpClient http, byte[] bytes, ISyncSessionStorageService storage, IToastService toast)
         {
-            if (bytes == null || bytes.Length == 0) throw new ArgumentNullException(nameof(bytes));
+            var response = await http.Put(StorageEndpoint.UploadPhotoValidation, new { Stream = bytes });
 
-            return await http.Put<ProfileModel>("Storage/UploadPhotoValidation", new { Stream = bytes }, null, null);
+            if (response.IsSuccessStatusCode)
+            {
+                storage.RemoveItem(ProfileEndpoint.Get);
+                await http.Profile_Get(storage);
+            }
+
+            await response.ProcessResponse(toast, "Foto atualizada com sucesso!");
         }
     }
 }

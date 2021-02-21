@@ -14,7 +14,7 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Mediator.Commands.Profile
 {
-    public class UploadPhotoValidationCommand : CosmosBase, IRequest<ProfileModel>
+    public class UploadPhotoValidationCommand : CosmosBase, IRequest<bool>
     {
         public UploadPhotoValidationCommand() : base(CosmosType.Profile)
         {
@@ -29,7 +29,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
         }
     }
 
-    public class UploadPhotoVaildationHandler : IRequestHandler<UploadPhotoValidationCommand, ProfileModel>
+    public class UploadPhotoVaildationHandler : IRequestHandler<UploadPhotoValidationCommand, bool>
     {
         private readonly IRepository _repo;
         private readonly StorageHelper storageHelper;
@@ -42,7 +42,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
             this.faceHelper = faceHelper;
         }
 
-        public async Task<ProfileModel> Handle(UploadPhotoValidationCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UploadPhotoValidationCommand request, CancellationToken cancellationToken)
         {
             var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
             if (obj == null || string.IsNullOrEmpty(obj.Photo.Main)) throw new NotificationException("Foto para validação não encontrada. Favor, inserir primeiro sua foto de rosto.");
@@ -62,7 +62,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
                         obj.Photo.Validation = photoName;
 
-                    return    await _repo.Update(obj, cancellationToken);
+                        return await _repo.Update(obj, cancellationToken);
                         //await _appValidation.ValidatePhotoFace(request.Id, true, cancellationToken);
                     }
                 }

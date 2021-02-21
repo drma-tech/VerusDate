@@ -318,7 +318,7 @@
         }
         else
         {
-            affinities = ProfileApi.GetAffinity(user, view);
+            affinities = AffinityCore.GetAffinity(user, view);
             if (view?.Badge != null) badge = view.Badge;
             interaction = await Http.Interation_Get(SessionStorage, IdUserView);
         }
@@ -334,7 +334,7 @@
             interaction.AddChat(chat);
             Message = "";
 
-            await Http.Interaction_AddChat(chat, IdUserView, SessionStorage); //TODO: encontrar maneira mais eficiente de salvar
+            await Http.Interaction_AddChat(chat, IdUserView, Toast);
         }
         catch (Exception ex)
         {

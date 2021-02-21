@@ -44,11 +44,14 @@
                 @if (DisableHelp || Disabled)
                 {
                     <div @attributes="@GetAttributes(For, disabled: Disabled, customStyle: "height: auto; min-height: 38px;")">
-                        @foreach (var item in SelectedValues)
+                        @if (SelectedValues != null)
                         {
-                            <Badge Color="Color.Secondary" Margin="Margin.Is1.FromRight" Style="font-size: 90%;">
-                                @item.GetName()
-                            </Badge>
+                            @foreach (var item in SelectedValues)
+                            {
+                                <Badge Color="Color.Secondary" Margin="Margin.Is1.FromRight" Style="font-size: 90%;">
+                                    @item.GetName()
+                                </Badge>
+                            }
                         }
                     </div>
                 }

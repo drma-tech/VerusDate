@@ -111,35 +111,35 @@ namespace VerusDate.Api.Mediator.Command.Profile
             //INTERESSES
 
             RuleFor(x => x.Interest.Food)
-                .Must((value) => value.Count <= 3)
+                .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
             RuleFor(x => x.Interest.Holidays)
-                .Must((value) => value.Count <= 3)
+                .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
             RuleFor(x => x.Interest.Sports)
-                .Must((value) => value.Count <= 3)
+                .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
             RuleFor(x => x.Interest.LeisureActivities)
-                .Must((value) => value.Count <= 3)
+                .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
             RuleFor(x => x.Interest.MusicGenre)
-                .Must((value) => value.Count <= 3)
+                .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
             RuleFor(x => x.Interest.MovieGenre)
-                .Must((value) => value.Count <= 3)
+                .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
             RuleFor(x => x.Interest.TVGenre)
-                .Must((value) => value.Count <= 3)
+                .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
             RuleFor(x => x.Interest.ReadingGenre)
-                .Must((value) => value.Count <= 3)
+                .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
         }
     }

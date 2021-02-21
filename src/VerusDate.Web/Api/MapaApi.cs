@@ -1,5 +1,4 @@
 ﻿using Blazored.SessionStorage;
-using System;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,14 +7,16 @@ using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api
 {
+    public struct MapEndpoint
+    {
+        public static string GetLocation(double Latitude, double Longitude) => $"External/GetLocation?latitude={Latitude.ToString(CultureInfo.InvariantCulture)}&longitude={Longitude.ToString(CultureInfo.InvariantCulture)}";
+    }
+
     public static class MapApi
     {
         public async static Task<HereJson> Map_GetLocation(this HttpClient http, ISyncSessionStorageService storage, double Latitude, double Longitude)
         {
-            if (Latitude == 0) throw new ArgumentNullException(nameof(Latitude));
-            if (Longitude == 0) throw new ArgumentNullException(nameof(Longitude));
-
-            return await http.Get<HereJson>($"External/GetLocation?latitude={Latitude.ToString(CultureInfo.InvariantCulture)}&longitude={Longitude.ToString(CultureInfo.InvariantCulture)}", storage);
+            return await http.Get<HereJson>(MapEndpoint.GetLocation(Latitude, Longitude), storage);
         }
     }
 }

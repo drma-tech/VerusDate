@@ -13,7 +13,7 @@
             </CardHeader>
             <CardBody>
                 <Figure Margin="Margin.Is0.Is2.FromBottom" Style="text-align: center; width: 100%; background-color: black;">
-                    <FigureImage Margin="Margin.Is0" Source="@imageDataUri" AlternateText="No User" Style="height: 450px" />
+                    <FigureImage Margin="Margin.Is0" Source="@imageDataUri" AlternateText="No User" Style="max-height: 450px" />
                 </Figure>
                 <div class="custom-file">
                     <InputFile OnChange="@OnInputFileChange" @attributes="@GetAttributes()"></InputFile>
@@ -97,22 +97,15 @@
 
                 if (ImageHelper.ValidImage(buffer))
                 {
-                    var response = await Http.Storage_UploadPhotoFace(buffer, SessionStorage);
+                    await Http.Storage_UploadPhotoFace(buffer, SessionStorage, Toast);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        _profile = await Http.Profile_Get(SessionStorage);
-                    }
-
-                    await response.ProcessResponse(Toast, "Foto atualizada com sucesso!");
+                    _profile = await Http.Profile_Get(SessionStorage);
                 }
                 else
                 {
                     imageDataUri = null;
                     Toast.ShowError("Foto inválida, favor tentar novamente");
                 }
-
-                RefreshCore.RefreshMenu();
             }
         }
         catch (Exception ex)
@@ -150,14 +143,9 @@
 
             if (imageDataUriGallery.Any())
             {
-                var response = await Http.Storage_UploadPhotoGallery(buffers, SessionStorage);
+                await Http.Storage_UploadPhotoGallery(buffers, SessionStorage, Toast);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    _profile = await Http.Profile_Get(SessionStorage);
-                }
-
-                await response.ProcessResponse(Toast, "Foto atualizada com sucesso!");
+                _profile = await Http.Profile_Get(SessionStorage);
             }
 
             RefreshCore.RefreshMenu();

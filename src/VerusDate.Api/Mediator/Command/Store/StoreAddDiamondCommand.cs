@@ -9,9 +9,9 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Store
 {
-    public class StoreExchangeFoodCommand : CosmosBase, IRequest<bool>
+    public class StoreAddDiamondCommand : CosmosBase, IRequest<bool>
     {
-        public StoreExchangeFoodCommand() : base(CosmosType.Profile)
+        public StoreAddDiamondCommand() : base(CosmosType.Profile)
         {
         }
 
@@ -25,20 +25,20 @@ namespace VerusDate.Api.Mediator.Command.Store
         }
     }
 
-    public class StoreExchangeFoodHandler : IRequestHandler<StoreExchangeFoodCommand, bool>
+    public class StoreAddDiamondHandler : IRequestHandler<StoreAddDiamondCommand, bool>
     {
         private readonly IRepository _repo;
 
-        public StoreExchangeFoodHandler(IRepository repo)
+        public StoreAddDiamondHandler(IRepository repo)
         {
             _repo = repo;
         }
 
-        public async Task<bool> Handle(StoreExchangeFoodCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(StoreAddDiamondCommand request, CancellationToken cancellationToken)
         {
             var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
 
-            obj.Gamification.ExchangeFood(request.QtdDiamond);
+            obj.Gamification.AddDiamond(request.QtdDiamond);
 
             return await _repo.Update(obj, cancellationToken);
         }

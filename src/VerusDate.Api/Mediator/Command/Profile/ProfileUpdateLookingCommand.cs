@@ -7,9 +7,9 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileUpdateLookingCommand : ProfileModel, IRequest<ProfileModel> { }
+    public class ProfileUpdateLookingCommand : ProfileModel, IRequest<bool> { }
 
-    public class ProfileLookingAddHandler : IRequestHandler<ProfileUpdateLookingCommand, ProfileModel>
+    public class ProfileLookingAddHandler : IRequestHandler<ProfileUpdateLookingCommand, bool>
     {
         private readonly IRepository _repo;
 
@@ -18,18 +18,18 @@ namespace VerusDate.Api.Mediator.Command.Profile
             _repo = repo;
         }
 
-        public async Task<ProfileModel> Handle(ProfileUpdateLookingCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(ProfileUpdateLookingCommand request, CancellationToken cancellationToken)
         {
-            //var obj = await _profileValidationApp.Get(request.Id, cancellationToken);
-
-            //if (!obj.ProfileCriteria.HasValue)
-            //{
-            //    await _gamificationApp.AddXP(request.Id, EventAddXP.ValidateProfileCriteria, cancellationToken);
-            //}
-
-            //await _profileValidationApp.ValidateProfileCriteria(request.Id, true, cancellationToken);
-
             var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+
+            if (obj.Looking == null) //primeira vez que atualiza a busca
+            {
+                obj.Gamification.AddXP(30);
+            }
+            else
+            {
+                obj.Gamification.RemoveXP(100);
+            }
 
             obj.UpdateLooking(request.Looking);
 

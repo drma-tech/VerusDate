@@ -72,6 +72,14 @@
         await base.OnInitializedAsync();
 
         await LoadData();
+
+        RefreshCore.RefreshRequestedMenu += Refresh;
+    }
+
+    private async Task Refresh()
+    {
+        await LoadData();
+        StateHasChanged();
     }
 
     protected async Task LoadData()

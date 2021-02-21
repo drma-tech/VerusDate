@@ -13,21 +13,9 @@
     <Layout>
         <LayoutHeader Fixed="true">
             <Bar Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
-                <AuthorizeView>
-                    <Authorized>
-                        <BarBrand Display="Display.Always">
-                            <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #D4AF37; color: #fff !important;" Pill="true">
-                                <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown" /> 2
-                            </Badge>
-                            <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #5c7cfa; color: #fff !important;" Pill="true">
-                                <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" /> 2
-                            </Badge>
-                            <Badge Color="Color.Secondary" Float="Float.Left" Style="background-color: #dc3545; color: #fff !important;" Pill="true">
-                                <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt" /> 2
-                            </Badge>
-                        </BarBrand>
-                    </Authorized>
-                </AuthorizeView>
+                <BarBrand Display="Display.Always">
+                    <HeadLayout></HeadLayout>
+                </BarBrand>
                 <BarMenu Display="Display.InlineBlock" Style="flex-basis: unset !important;">
                     <BarEnd Display="Display.Block">
                         <LoginDisplay />
@@ -90,4 +78,4 @@
                 IconType="IconType.FontAwesome"
                 SuccessIcon="far fa-check-circle"
                 ErrorIcon="fa fa-bug"
-                WarningIcon="fas fa-exclamation-circle"  />
+                WarningIcon="fas fa-exclamation-circle" />

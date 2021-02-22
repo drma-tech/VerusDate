@@ -146,7 +146,7 @@ else
                     <Divider DividerType="DividerType.TextContent" Text="Bio"></Divider>
 
                     <ItemDataProfile For="@(() => view.Age)" Value="@ProfileHelper.GetAgeExtension(view.Age)" ClassIcon="fas fa-birthday-cake" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="null" Value="@view.Bio.BirthDate.GetZodiac()" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Bio.Zodiac)" Value="@view.Bio.Zodiac" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Bio.RaceCategory)" Value="@view.Bio.RaceCategory" ClassIcon="fas fa-globe" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Bio.Height)" Value="@view.Bio.Height" ClassIcon="fas fa-ruler" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Bio.BodyMass)" Value="@view.Bio.BodyMass" ClassIcon="fas fa-weight" Affinities="@affinities"></ItemDataProfile>
@@ -173,7 +173,7 @@ else
                     <ItemDataProfile For="@(() => view.Interest.LeisureActivities)" Values="@view.Interest.LeisureActivities" ClassIcon="fas fa-umbrella-beach" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Interest.MusicGenre)" Values="@view.Interest.MusicGenre" ClassIcon="fas fa-music" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Interest.MovieGenre)" Values="@view.Interest.MovieGenre" ClassIcon="fas fa-film" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => view.Interest.TVGenre)" Values="@view.Interest.TVGenre" ClassIcon="fas fa-film" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Interest.TVGenre)" Values="@view.Interest.TVGenre" ClassIcon="fas fa-tv" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Interest.ReadingGenre)" Values="@view.Interest.ReadingGenre" ClassIcon="fas fa-book-reader" Affinities="@affinities"></ItemDataProfile>
                 </CardBody>
             </Card>
@@ -188,8 +188,8 @@ else
     public string IdUserView { get; set; }
 
     private ProfileModel user;
-    private VerusDate.Shared.Model.ProfileView view;
-    private List<VerusDate.Shared.AffinityVM> affinities = new();
+    private ProfileView view;
+    private List<AffinityVM> affinities = new();
     private ProfileGamificationModel gamification;
     private ProfileBadgeModel badge = new();
     private InteractionModel InteractionVM;
@@ -294,6 +294,8 @@ else
         {
             double totCheck = affinities.Where(w => w.Category == category).Count(w => w.HaveAffinity);
             double totItens = affinities.Where(w => w.Category == category).Count();
+
+            if (totCheck == 0 || totItens == 0) return 0;
 
             return Convert.ToInt32(Math.Round((totCheck / totItens) * 100, 0));
         }

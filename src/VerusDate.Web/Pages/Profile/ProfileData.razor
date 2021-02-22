@@ -22,7 +22,10 @@ else
                 </Button>
             </CardHeader>
             <CardBody>
-                <Divider DividerType="DividerType.TextContent" Text="Básico"></Divider>
+                <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
+                    <AlertMessage>Básico</AlertMessage>
+                    @*<AlertDescription>Os itens deste tópico são opcionais, mas a falta deles poderá afetar o índice de compatibilidade. (3 opções para cada)</AlertDescription>*@
+                </Alert>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomField Type="FieldType.TextEdit" For="@(() => profile.Basic.NickName)" @bind-Value="@profile.Basic.NickName"
@@ -48,7 +51,10 @@ else
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language"></CustomFieldSelect>
                     </Column>
                 </Row>
-                <Divider DividerType="DividerType.TextContent" Text="Bio"></Divider>
+                <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
+                    <AlertMessage>Bio</AlertMessage>
+                    @*<AlertDescription>Os itens deste tópico são opcionais, mas a falta deles poderá afetar o índice de compatibilidade. (3 opções para cada)</AlertDescription>*@
+                </Alert>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <div class="form-group row">
@@ -75,17 +81,20 @@ else
                                 <input class="form-control" value="@profile.Bio.BirthDate.GetZodiac().GetName()" disabled />
                             </div>
                         </div>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Bio.BodyMass)" TValue="BodyMass" TEnum="BodyMass" @bind-SelectedValue="@profile.Bio.BodyMass"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight" DisableHelp="true"></CustomFieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Bio.RaceCategory)" TValue="RaceCategory" TEnum="RaceCategory" @bind-SelectedValue="@profile.Bio.RaceCategory"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Globe"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Bio.Height)" TValue="Height" TEnum="Height" @bind-SelectedValue="@profile.Bio.Height"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler" DisableHelp="true"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Bio.BodyMass)" TValue="BodyMass" TEnum="BodyMass" @bind-SelectedValue="@profile.Bio.BodyMass"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight" DisableHelp="true"></CustomFieldSelect>
                     </Column>
                 </Row>
-                <Divider DividerType="DividerType.TextContent" Text="Lifestyle"></Divider>
+                <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
+                    <AlertMessage>Lifestyle</AlertMessage>
+                    <AlertDescription>Disponível apenas para intenções de relacionamento do tipo Longo Prazo</AlertDescription>
+                </Alert>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Drink)" TValue="Drink?" TEnum="Drink" @bind-SelectedValue="@profile.Lifestyle.Drink"
@@ -98,12 +107,12 @@ else
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Child" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.WantChildren)" TValue="WantChildren?" TEnum="WantChildren" @bind-SelectedValue="@profile.Lifestyle.WantChildren"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Baby" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
-                    </Column>
-                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.EducationLevel)" TValue="EducationLevel?" TEnum="EducationLevel" @bind-SelectedValue="@profile.Lifestyle.EducationLevel"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GraduationCap" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.CareerCluster)" TValue="CareerCluster?" TEnum="CareerCluster" @bind-SelectedValue="@profile.Lifestyle.CareerCluster"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Briefcase" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Religion)" TValue="Religion?" TEnum="Religion" @bind-SelectedValue="@profile.Lifestyle.Religion"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PrayingHands" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.MoneyPersonality)" TValue="MoneyPersonality?" TEnum="MoneyPersonality" @bind-SelectedValue="@profile.Lifestyle.MoneyPersonality"
@@ -111,10 +120,15 @@ else
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@profile.Lifestyle.RelationshipPersonality"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@profile.Lifestyle.MyersBriggsTypeIndicator"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.16personalities.com/br"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.16personalities.com/"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.SexPersonality)" TValue="SexPersonality?" TEnum="SexPersonality" @bind-SelectedValue="@profile.Lifestyle.SexPersonality"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.vmtherapy.com/personality-type/"></CustomFieldSelect>
                     </Column>
                 </Row>
-                <Divider DividerType="DividerType.TextContent" Text="Interesses"></Divider>
+                <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
+                    <AlertMessage>Interesses</AlertMessage>
+                    <AlertDescription>Os itens deste tópico são opcionais, mas a falta deles poderá afetar o índice de compatibilidade. (3 opções para cada)</AlertDescription>
+                </Alert>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Food)" TValue="IReadOnlyList<Food>" TEnum="Food" @bind-SelectedValues="@profile.Interest.Food"
@@ -275,6 +289,8 @@ else
         try
         {
             profile.ClearSimpleView();
+
+            profile.Bio.Zodiac = profile.Bio.BirthDate.GetZodiac();
 
             if (profile.GetDataStatus() == DataStatus.New)
             {

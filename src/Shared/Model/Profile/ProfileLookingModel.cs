@@ -7,7 +7,7 @@ namespace VerusDate.Shared.Model
 {
     public class ProfileLookingModel
     {
-        [Display(Name = "Intenções", Description = "Campo obrigatório (múltipla escolha)")]
+        [Display(Name = "Intenções", Description = "Selecionado automaticamente de acordo com seu perfil")]
         public IReadOnlyList<Intent> Intent { get; set; } = Array.Empty<Intent>();
 
         [Display(Name = "Idiomas")]
@@ -49,10 +49,10 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Altura (Min - Máx)")]
         public Height? MaxHeight { get; set; }
 
-        [Display(Name = "Corpo", Description = "Esta informação poderá ser subjetiva")]
+        [Display(Name = "Corpo", Description = "Esta informação é subjetiva (cada um tem uma visão diferente)")]
         public BodyMass? BodyMass { get; set; }
 
-        [Display(Name = "Raça", Description = "Classificação por US OMB")]
+        [Display(Name = "Raça", Description = "Classificação definida por US OMB")]
         public RaceCategory? RaceCategory { get; set; }
 
         [Display(Name = "Tem Filho(s)")]
@@ -69,6 +69,9 @@ namespace VerusDate.Shared.Model
 
         [Display(Name = "Carreira")]
         public CareerCluster? CareerCluster { get; set; }
+
+        [Display(Name = "Personalidade Sexual")]
+        public IReadOnlyList<SexPersonality> SexPersonality { get; set; } = Array.Empty<SexPersonality>();
 
         public void UpdateData(ProfileLookingModel vm)
         {

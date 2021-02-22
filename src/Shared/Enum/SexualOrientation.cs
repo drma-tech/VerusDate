@@ -35,6 +35,6 @@ namespace VerusDate.Shared.Enum
         //Solossexual = não sente atração por terceiros, independente de sexo e genero (apenas por si mesmo)
         //Lithsexual = sente atração por outra pessoa, mas não a necessidade de ser correspondido
         [Display(Name = "Outra", Description = "menossexual, graysexual, quoisexual, pomosexual, solossexual, lithsexual, etc")]
-        Other = 255
+        Other = 99
     }
 }

@@ -14,7 +14,7 @@ namespace VerusDate.Web.Core
 
             looking.Distance = 20;
             looking.MaritalStatus = GetMaritalStatus(profile);
-            looking.Intent = profile.Basic.Intent;
+            //looking.Intent = profile.Basic.Intent; //selecionado ao carregar a tela
             looking.BiologicalSex = GetBiologicalSex(profile);
             //looking.GenderIdentity = null;
             looking.SexualOrientation = GetSexualOrientation(profile);
@@ -41,15 +41,15 @@ namespace VerusDate.Web.Core
         private static int GetAgeDifference(int CurrentAge)
         {
             if (CurrentAge <= 25)
-                return 3;
-            if (CurrentAge <= 30)
                 return 5;
-            else if (CurrentAge <= 40)
+            if (CurrentAge <= 30)
                 return 7;
-            else if (CurrentAge <= 50)
+            else if (CurrentAge <= 40)
                 return 10;
-            else
+            else if (CurrentAge <= 50)
                 return 15;
+            else
+                return 25;
         }
 
         private static int GetMinAge(ProfileModel profile)

@@ -5,16 +5,16 @@
         /// <summary>
         /// Registro ainda não salvo
         /// </summary>
-        New,
+        New = 1,
 
         /// <summary>
         /// Registro inserido
         /// </summary>
-        Inserted,
+        Inserted = 2,
 
         /// <summary>
         /// Registro inserido e atualizado
         /// </summary>
-        Inserted_Updated
+        Inserted_Updated = 3
     }
 }

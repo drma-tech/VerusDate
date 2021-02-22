@@ -29,6 +29,7 @@ namespace VerusDate.Web.Core
 
             //BIO
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Age), CheckAge(profView.Age, profUser.Looking.MinimalAge, profUser.Looking.MaxAge)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.Zodiac), CheckEnumZodiac(profView.Bio.Zodiac, profUser.Bio.Zodiac)));
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.RaceCategory), CheckEnum((int)profView.Bio.RaceCategory, (int?)profUser.Looking.RaceCategory)));
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.Height), CheckHeight(profView.Bio.Height, profUser.Looking.MinimalHeight, profUser.Looking.MaxHeight)));
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.BodyMass), CheckEnum((int)profView.Bio.BodyMass, (int?)profUser.Looking.BodyMass)));
@@ -80,6 +81,26 @@ namespace VerusDate.Web.Core
             {
                 return true;
             }
+        }
+
+        private static bool CheckEnumZodiac(Zodiac view, Zodiac user)
+        {
+            return view switch
+            {
+                Zodiac.Aries => user == Zodiac.Leo || user == Zodiac.Sagittarius,
+                Zodiac.Taurus => user == Zodiac.Virgo || user == Zodiac.Capricorn,
+                Zodiac.Gemini => user == Zodiac.Libra || user == Zodiac.Aquarius,
+                Zodiac.Cancer => user == Zodiac.Scorpio || user == Zodiac.Pisces,
+                Zodiac.Leo => user == Zodiac.Aries || user == Zodiac.Sagittarius,
+                Zodiac.Virgo => user == Zodiac.Taurus || user == Zodiac.Capricorn,
+                Zodiac.Libra => user == Zodiac.Gemini || user == Zodiac.Aquarius,
+                Zodiac.Scorpio => user == Zodiac.Cancer || user == Zodiac.Scorpio || user == Zodiac.Pisces,
+                Zodiac.Sagittarius => user == Zodiac.Aries || user == Zodiac.Leo,
+                Zodiac.Capricorn => user == Zodiac.Taurus || user == Zodiac.Virgo,
+                Zodiac.Aquarius => user == Zodiac.Gemini || user == Zodiac.Libra,
+                Zodiac.Pisces => user == Zodiac.Cancer || user == Zodiac.Scorpio,
+                _ => false,
+            };
         }
 
         private static bool CheckHeight(Height Height, Height? Looking_MinimalHeight, Height? Looking_MaxHeight)

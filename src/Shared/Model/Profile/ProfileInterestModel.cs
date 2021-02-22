@@ -7,28 +7,28 @@ namespace VerusDate.Shared.Model
 {
     public class ProfileInterestModel
     {
-        [Display(Name = "Comidas", Description = "Este campo é opcional (escolha até 3 opções)")]
+        [Display(Name = "Comidas")]
         public IReadOnlyList<Food> Food { get; set; } = Array.Empty<Food>();
 
-        [Display(Name = "Férias", Description = "Este campo é opcional (escolha até 3 opções)")]
+        [Display(Name = "Férias")]
         public IReadOnlyList<Holidays> Holidays { get; set; } = Array.Empty<Holidays>();
 
-        [Display(Name = "Esportes", Description = "Este campo é opcional (escolha até 3 opções)")]
+        [Display(Name = "Esportes")]
         public IReadOnlyList<Sports> Sports { get; set; } = Array.Empty<Sports>();
 
-        [Display(Name = "Lazer", Description = "Este campo é opcional (escolha até 3 opções)")]
+        [Display(Name = "Lazer")]
         public IReadOnlyList<LeisureActivities> LeisureActivities { get; set; } = Array.Empty<LeisureActivities>();
 
-        [Display(Name = "Música", Description = "Este campo é opcional (escolha até 3 opções)")]
+        [Display(Name = "Música")]
         public IReadOnlyList<MusicGenre> MusicGenre { get; set; } = Array.Empty<MusicGenre>();
 
-        [Display(Name = "Filme", Description = "Este campo é opcional (escolha até 3 opções)")]
+        [Display(Name = "Filme")]
         public IReadOnlyList<MovieGenre> MovieGenre { get; set; } = Array.Empty<MovieGenre>();
 
-        [Display(Name = "TV", Description = "Este campo é opcional (escolha até 3 opções)")]
+        [Display(Name = "TV")]
         public IReadOnlyList<TVGenre> TVGenre { get; set; } = Array.Empty<TVGenre>();
 
-        [Display(Name = "Leitura", Description = "Este campo é opcional (escolha até 3 opções)")]
+        [Display(Name = "Leitura")]
         public IReadOnlyList<ReadingGenre> ReadingGenre { get; set; } = Array.Empty<ReadingGenre>();
     }
 }

@@ -34,6 +34,6 @@ namespace VerusDate.Shared.Enum
         //genero fluido = identificação varia atraves do tempo --GENDER FLUID
         //agenero = não se identifica como nenhum genero
         [Display(Name = "Outro", Description = "bigêneros, demigênero, genero fluído, agênero")]
-        Other = 255
+        Other = 99
     }
 }

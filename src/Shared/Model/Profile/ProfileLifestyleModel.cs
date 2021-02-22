@@ -36,7 +36,10 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Personalidade no Relacionamento")]
         public RelationshipPersonality? RelationshipPersonality { get; set; }
 
-        [Display(Name = "Personalidade MBTI", Description = "Este campo é opcional (é necessário fazer um teste em site de terceiros)")]
+        [Display(Name = "Personalidade MBTI", Description = "Este campo é opcional (é necessário fazer um teste em site de terceiros / multi-idiomas)")]
         public MyersBriggsTypeIndicator? MyersBriggsTypeIndicator { get; set; }
+
+        [Display(Name = "Personalidade Sexual", Description = "Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês)")]
+        public SexPersonality? SexPersonality { get; set; }
     }
 }

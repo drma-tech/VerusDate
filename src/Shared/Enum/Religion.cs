@@ -29,6 +29,6 @@ namespace VerusDate.Shared.Enum
         Folk_Religion = 16,
 
         [Display(Name = "Outra religião ", Description = "Xintoísmo, Sikhismo, Espiritismo, Judaísmo, Wicca e Neopaganismo, etc.")]
-        Other = 255
+        Other = 99
     }
 }

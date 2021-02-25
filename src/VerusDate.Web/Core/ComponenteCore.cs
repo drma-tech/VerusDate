@@ -119,12 +119,12 @@ namespace VerusDate.Web.Core
 
         protected void FeatureUnavailable()
         {
-            Toast.ShowWarning("Recurso em desenvolvimento. Aguarde novidades...", "Verus Date");
+            Toast.ShowWarning("", "Recurso em desenvolvimento. Aguarde novidades...");
         }
 
         protected void PrivateData()
         {
-            Toast.ShowWarning("Esta informação não será compartilhada no seu perfil e em nenhum tipo de busca dentro da plataforma", "Privacidade de Dados");
+            Toast.ShowWarning("", "Esta informação não será compartilhada no seu perfil e em nenhum tipo de busca dentro da plataforma");
         }
     }
 }

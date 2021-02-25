@@ -12,17 +12,6 @@ namespace VerusDate.Shared.Helper
             return System.Enum.GetValues(typeof(T)).Cast<T>().ToArray();
         }
 
-        public static string GetDescription(this System.Enum value)
-        {
-            if (value == null) return null;
-
-            var fieldInfo = value.GetType().GetField(value.ToString());
-
-            if (fieldInfo == null) return null;
-
-            return ((DisplayAttribute[])fieldInfo.GetCustomAttributes(typeof(DisplayAttribute), false))[0].Description;
-        }
-
         public static List<EnumList> GetList(Type enumType)
         {
             if (enumType == null) throw new ArgumentNullException(nameof(enumType));
@@ -36,6 +25,7 @@ namespace VerusDate.Shared.Helper
             {
                 output.Add(new EnumList()
                 {
+                    Group = GetGroup((System.Enum)val),
                     Value = (int)val,
                     ValueObject = val,
                     Name = GetName((System.Enum)val),
@@ -56,10 +46,33 @@ namespace VerusDate.Shared.Helper
 
             return ((DisplayAttribute[])fieldInfo.GetCustomAttributes(typeof(DisplayAttribute), false))[0].Name;
         }
+
+        public static string GetDescription(this System.Enum value)
+        {
+            if (value == null) return null;
+
+            var fieldInfo = value.GetType().GetField(value.ToString());
+
+            if (fieldInfo == null) return null;
+
+            return ((DisplayAttribute[])fieldInfo.GetCustomAttributes(typeof(DisplayAttribute), false))[0].Description;
+        }
+
+        public static string GetGroup(this System.Enum value)
+        {
+            if (value == null) return null;
+
+            var fieldInfo = value.GetType().GetField(value.ToString());
+
+            if (fieldInfo == null) return null;
+
+            return ((DisplayAttribute[])fieldInfo.GetCustomAttributes(typeof(DisplayAttribute), false))[0].GroupName;
+        }
     }
 
     public class EnumList
     {
+        public string Group { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
         public int Value { get; set; }

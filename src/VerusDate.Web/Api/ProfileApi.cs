@@ -49,7 +49,7 @@ namespace VerusDate.Web.Api
             var response = await http.Post(ProfileEndpoint.Add, obj, storage, ProfileEndpoint.Get);
 
             await http.Session_AddXP(storage, 30);
-            toast.ShowSuccess("+30 XP");
+            toast.ShowSuccess("", "Ganhou 30 XP");
 
             await response.ProcessResponse(toast, "Perfil criado com sucesso");
         }
@@ -63,7 +63,7 @@ namespace VerusDate.Web.Api
                 if (obj.DtUpdate != null) //terceira vez que atualiza
                 {
                     await http.Session_RemoveXP(storage, 100);
-                    toast.ShowWarning("-100 XP");
+                    toast.ShowWarning("", "Perdeu 100 XP");
                 }
 
                 obj.UpdateProfile(obj.Basic, obj.Bio, obj.Lifestyle, obj.Interest);
@@ -87,12 +87,12 @@ namespace VerusDate.Web.Api
                 if (fistUpdate)
                 {
                     await http.Session_AddXP(storage, 30);
-                    toast.ShowSuccess("+30 XP");
+                    toast.ShowSuccess("", "Ganhou 30 XP");
                 }
                 else
                 {
                     await http.Session_RemoveXP(storage, 100);
-                    toast.ShowWarning("-100 XP");
+                    toast.ShowWarning("", "Perdeu 100 XP");
                 }
 
                 storage.RemoveItem(ProfileEndpoint.ListMatch);

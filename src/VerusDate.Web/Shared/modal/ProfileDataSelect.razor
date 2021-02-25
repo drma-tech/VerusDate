@@ -12,15 +12,39 @@
         <ModalBody MaxHeight="70">
             @if (TypeEnum != null)
             {
-                @foreach (var item in EnumHelper.GetList(TypeEnum))
+                @if (HasGroup)
                 {
-                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is2.FromBottom">
-                        <Check TValue="bool" Checked="Checked(item)" CheckedChanged="@(()=>CheckedChanged(item, !Checked(item)))" Size="Size.Medium">@item.Name</Check>
-                        @if (!string.IsNullOrEmpty(@item.Description))
+                    var previousGroup = "";
+                    @foreach (var item in EnumHelper.GetList(TypeEnum).OrderBy(o => o.Group))
+                    {
+                        if (previousGroup != @item.Group)
                         {
-                            <FieldHelp>@item.Description</FieldHelp>
+                            <Alert Visible="true" Color="Color.Info" Padding="Padding.Is1">
+                                <AlertMessage>@item.Group</AlertMessage>
+                            </Alert>
                         }
-                    </Paragraph>
+                        <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is2.FromBottom">
+                            <Check TValue="bool" Checked="Checked(item)" CheckedChanged="@(()=>CheckedChanged(item, !Checked(item)))" Size="Size.Medium">@item.Name</Check>
+                            @if (!string.IsNullOrEmpty(@item.Description))
+                            {
+                                <FieldHelp>@item.Description</FieldHelp>
+                            }
+                        </Paragraph>
+                        previousGroup = @item.Group;
+                    }
+                }
+                else
+                {
+                    @foreach (var item in EnumHelper.GetList(TypeEnum))
+                    {
+                        <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is2.FromBottom">
+                            <Check TValue="bool" Checked="Checked(item)" CheckedChanged="@(()=>CheckedChanged(item, !Checked(item)))" Size="Size.Medium">@item.Name</Check>
+                            @if (!string.IsNullOrEmpty(@item.Description))
+                            {
+                                <FieldHelp>@item.Description</FieldHelp>
+                            }
+                        </Paragraph>
+                    }
                 }
             }
         </ModalBody>
@@ -35,6 +59,8 @@
     private Modal modal;
     private Expression<Func<TValue>> For;
     private System.Type TypeEnum;
+
+    [Parameter] public bool HasGroup { get; set; }
 
     [Parameter] public IReadOnlyList<TEnum> SelectedValues { get; set; }
     [Parameter] public EventCallback<IReadOnlyList<TEnum>> SelectedValuesChanged { get; set; }
@@ -54,7 +80,7 @@
 
     void CheckedChanged(EnumList item, bool value)
     {
-        if(value) //add
+        if (value) //add
         {
             SelectedValues = SelectedValues.ToArray().Concat(new TEnum[] { (TEnum)item.ValueObject }).ToList().AsReadOnly();
         }

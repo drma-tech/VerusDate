@@ -15,6 +15,7 @@ namespace VerusDate.Web.Shared
         [Parameter] public IReadOnlyList<TEnum> SelectedValues { get; set; }
         [Parameter] public EventCallback<IReadOnlyList<TEnum>> SelectedValuesChanged { get; set; }
 
+        [Parameter] public bool HasGroup { get; set; }
         [Parameter] public bool DisableHelp { get; set; }
         [Parameter] public string HelpLink { get; set; }
 

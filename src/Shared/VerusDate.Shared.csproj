@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazored.FluentValidation" Version="1.3.2" />
+    <PackageReference Include="Blazored.FluentValidation" Version="1.4.1" />
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   

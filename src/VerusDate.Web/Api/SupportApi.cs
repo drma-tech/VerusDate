@@ -39,7 +39,7 @@ namespace VerusDate.Web.Api
             if (response.IsSuccessStatusCode)
             {
                 await http.Session_AddXP(storage, 5);
-                toast.ShowSuccess("+5 XP");
+                toast.ShowSuccess("", "Ganhou 5 XP");
             }
 
             await response.ProcessResponse(toast, "Salvo com sucesso");
@@ -52,7 +52,7 @@ namespace VerusDate.Web.Api
             if (response.IsSuccessStatusCode)
             {
                 await http.Session_AddXP(storage, 1);
-                toast.ShowSuccess("+1 XP");
+                toast.ShowSuccess("", "Ganhou 1 XP");
             }
 
             await response.ProcessResponse(toast, "Voto registrado com sucesso");

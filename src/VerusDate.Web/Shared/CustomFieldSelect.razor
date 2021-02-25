@@ -14,9 +14,25 @@
                 {
                     <InputSelect TValue="TValue" Value="@SelectedValue" ValueChanged="@SetValue" ValueExpression="@For" @attributes="@GetAttributes(For, disabled: Disabled)">
                         <option></option>
-                        @foreach (var item in EnumHelper.GetArray<TEnum>())
+                        @if (HasGroup)
                         {
-                            <option value="@item">@item.GetName()</option>
+                            var previousGroup = "";
+                            @foreach (var item in EnumHelper.GetList(typeof(TEnum)).OrderBy(o => o.Group))
+                            {
+                                if (previousGroup != @item.Group)
+                                {
+                                    <optgroup label="@item.Group"></optgroup>
+                                }
+                                <option value="@item.ValueObject">@item.Name</option>
+                                previousGroup = @item.Group;
+                            }
+                        }
+                        else
+                        {
+                            @foreach (var item in EnumHelper.GetArray<TEnum>())
+                            {
+                                <option value="@item">@item.GetName()</option>
+                            }
                         }
                     </InputSelect>
                 }
@@ -25,9 +41,25 @@
                     <div class="input-group">
                         <InputSelect TValue="TValue" Value="@SelectedValue" ValueChanged="@SetValue" ValueExpression="@For" @attributes="@GetAttributes(For, disabled: Disabled)">
                             <option></option>
-                            @foreach (var item in EnumHelper.GetArray<TEnum>())
+                            @if (HasGroup)
                             {
-                                <option value="@item">@item.GetName()</option>
+                                var previousGroup = "";
+                                @foreach (var item in EnumHelper.GetList(typeof(TEnum)).OrderBy(o => o.Group))
+                                {
+                                    if (previousGroup != @item.Group)
+                                    {
+                                        <optgroup label="@item.Group"></optgroup>
+                                    }
+                                    <option value="@item.ValueObject">@item.Name</option>
+                                    previousGroup = @item.Group;
+                                }
+                            }
+                            else
+                            {
+                                @foreach (var item in EnumHelper.GetArray<TEnum>())
+                                {
+                                    <option value="@item">@item.GetName()</option>
+                                }
                             }
                         </InputSelect>
                         <span class="input-group-append">
@@ -97,5 +129,5 @@
     }
 </Field>
 
-<VerusDate.Web.Shared.modal.ProfileDataHelp TValue="TValue" @ref="dataHelp"></VerusDate.Web.Shared.modal.ProfileDataHelp>
-<VerusDate.Web.Shared.modal.ProfileDataSelect TValue="TValue" TEnum="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SetValues" @ref="dataSelect"></VerusDate.Web.Shared.modal.ProfileDataSelect>
+<VerusDate.Web.Shared.modal.ProfileDataHelp TValue="TValue" HasGroup="HasGroup" @ref="dataHelp"></VerusDate.Web.Shared.modal.ProfileDataHelp>
+<VerusDate.Web.Shared.modal.ProfileDataSelect TValue="TValue" HasGroup="HasGroup" TEnum="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SetValues" @ref="dataSelect"></VerusDate.Web.Shared.modal.ProfileDataSelect>

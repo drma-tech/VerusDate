@@ -11,12 +11,33 @@
         <ModalBody MaxHeight="80">
             @if (TypeEnum != null)
             {
-                @foreach (var item in EnumHelper.GetList(TypeEnum))
+                @if (HasGroup)
                 {
-                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
-                        <Badge Color="Color.Primary">@item.Name</Badge>
-                        <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
-                    </Paragraph>
+                    var previousGroup = "";
+                    @foreach (var item in EnumHelper.GetList(TypeEnum).OrderBy(o => o.Group))
+                    {
+                        if (previousGroup != @item.Group)
+                        {
+                            <Alert Visible="true" Color="Color.Info" Padding="Padding.Is1">
+                                <AlertMessage>@item.Group</AlertMessage>
+                            </Alert>
+                        }
+                        <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
+                            <Badge Color="Color.Primary">@item.Name</Badge>
+                            <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
+                        </Paragraph>
+                        previousGroup = @item.Group;
+                    }
+                }
+                else
+                {
+                    @foreach (var item in EnumHelper.GetList(TypeEnum))
+                    {
+                        <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
+                            <Badge Color="Color.Primary">@item.Name</Badge>
+                            <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
+                        </Paragraph>
+                    }
                 }
             }
         </ModalBody>
@@ -27,6 +48,8 @@
     private Modal modal;
     private Expression<Func<TValue>> For;
     private System.Type TypeEnum;
+
+    [Parameter] public bool HasGroup { get; set; }
 
     private string label => VerusDate.Shared.Helper.AttributeHelper.GetName(For);
 

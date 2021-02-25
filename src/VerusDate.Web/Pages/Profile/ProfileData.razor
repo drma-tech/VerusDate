@@ -9,7 +9,7 @@
 }
 else
 {
-    <EditForm Model="@profile" OnValidSubmit="HandleValidSubmit">
+    <EditForm Model="@profile" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
         <FluentValidationValidator />
         <Card>
             <CardHeader>
@@ -40,11 +40,11 @@ else
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.MaritalStatus)" TValue="MaritalStatus" TEnum="MaritalStatus" @bind-SelectedValue="@profile.Basic.MaritalStatus"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Basic.Intent)" TValue="IReadOnlyList<Intent>" TEnum="Intent" @bind-SelectedValues="@profile.Basic.Intent"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" HasGroup="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.BiologicalSex)" TValue="BiologicalSex" TEnum="BiologicalSex" @bind-SelectedValue="@profile.Basic.BiologicalSex"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.GenderIdentity)" TValue="GenderIdentity" TEnum="GenderIdentity" @bind-SelectedValue="@profile.Basic.GenderIdentity"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" HasGroup="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.SexualOrientation)" TValue="SexualOrientation" TEnum="SexualOrientation" @bind-SelectedValue="@profile.Basic.SexualOrientation"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Basic.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@profile.Basic.Languages"
@@ -110,7 +110,7 @@ else
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.EducationLevel)" TValue="EducationLevel?" TEnum="EducationLevel" @bind-SelectedValue="@profile.Lifestyle.EducationLevel"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GraduationCap" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.CareerCluster)" TValue="CareerCluster?" TEnum="CareerCluster" @bind-SelectedValue="@profile.Lifestyle.CareerCluster"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Briefcase" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Briefcase" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HasGroup="true"></CustomFieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Religion)" TValue="Religion?" TEnum="Religion" @bind-SelectedValue="@profile.Lifestyle.Religion"
@@ -120,7 +120,7 @@ else
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@profile.Lifestyle.RelationshipPersonality"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@profile.Lifestyle.MyersBriggsTypeIndicator"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.16personalities.com/"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.16personalities.com/" HasGroup="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.SexPersonality)" TValue="SexPersonality?" TEnum="SexPersonality" @bind-SelectedValue="@profile.Lifestyle.SexPersonality"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.vmtherapy.com/personality-type/"></CustomFieldSelect>
                     </Column>
@@ -232,7 +232,7 @@ else
 
             if (position.Error != null)
             {
-                Toast.ShowWarning(position.Error.Message, "alerta");
+                Toast.ShowWarning("", position.Error.Message);
             }
             else if (position.Location != null)
             {
@@ -259,12 +259,12 @@ else
 
                 if (GPS.Accuracy > 500)
                 {
-                    Toast.ShowWarning($"A posição do GPS foi recuperada, mas a precisão é de apenas: {Math.Round(GPS.Accuracy / 1000, 1)} km. Tente novamente mais tarde ou use um dispositivo mais preciso.", "alerta");
+                    Toast.ShowWarning("", $"A posição do GPS foi recuperada, mas a precisão é de apenas: {Math.Round(GPS.Accuracy / 1000, 1)} km. Tente novamente mais tarde ou use um dispositivo mais preciso.");
                 }
             }
             else
             {
-                Toast.ShowWarning($"Não foi possível detectar um sistema GPS no seu dispositivo. Favor, tentar novamente ou liberar acesso ao GPS do seu dispositivo.", "alerta");
+                Toast.ShowWarning("", $"Não foi possível detectar um sistema GPS no seu dispositivo. Favor, tentar novamente ou liberar acesso ao GPS do seu dispositivo.");
             }
         }
     }
@@ -307,5 +307,10 @@ else
         {
             ex.ProcessException(Toast, Logger);
         }
+    }
+
+    private void HandleInvalidSubmit()
+    {
+        Toast.ShowWarning("", "Foram detectados erros de validação");
     }
 }

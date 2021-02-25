@@ -1,74 +1,51 @@
 ﻿@inherits ComponenteCore<ProfileReport>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="modalReport">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Profile report</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="form-group">
-                            <label>Info</label>
-                            <select class="form-control">
-                                <option value="0">Marital Status</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Current value</label>
-                            <select class="form-control" Value="@MaritalStatus.Single" disabled>
-                                @foreach (var item in EnumHelper.GetArray<MaritalStatus>())
-                                {
-                                    <option value="@item">@item.GetName()</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Expected value</label>
-                            <select class="form-control">
-                                @foreach (var item in EnumHelper.GetArray<MaritalStatus>())
-                                {
-                                    <option value="@item">@item.GetName()</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm">
-                        <div class="form-group">
-                            <label>Files</label>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" />
-                                <label class="custom-file-label" for="customFile">Choose file</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Details</label>
-                            <textarea rows="5" class="form-control" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" @onclick="HandleValidSubmit" disabled>Report</button>
-            </div>
-        </div>
-    </div>
-</div>
+<Modal @ref="modal">
+    <ModalBackdrop />
+    <ModalContent Centered="true" Size="ModalSize.Default">
+        <ModalHeader>
+            <ModalTitle>Desfazer match e reportar</ModalTitle>
+            <CloseButton Clicked="@modal.Hide" />
+        </ModalHeader>
+        <ModalBody MaxHeight="50">
+            <RadioGroup TValue="int" Name="report" CheckedValue="@checkedValue" CheckedValueChanged="@OnCheckedValueChanged">
+                @foreach (var item in EnumHelper.GetArray<ReportType>())
+                {
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is2.FromBottom">
+                        <Radio TValue="int" Size="Size.Medium" Value="@((int)item)">@item.GetName()</Radio>
+                        <FieldHelp>@item.GetDescription()</FieldHelp>
+                    </Paragraph>
+                }
+            </RadioGroup>
+        </ModalBody>
+        <ModalFooter>
+            <Button Color="Color.Secondary" Clicked="@modal.Hide">Cancelar</Button>
+            <Button Color="Color.Primary" Clicked="@Confirmar">Confirmar</Button>
+        </ModalFooter>
+    </ModalContent>
+</Modal>
 
 @code {
 
-    private void HandleValidSubmit()
+    private Modal modal;
+    private int checkedValue = 1;
+
+    public void ShowModal()
     {
-        try
-        {
-            Toast.ShowWarning("Feature unavailable", "alerta");
-        }
-        catch (Exception ex)
-        {
-            ex.ProcessException(Toast, Logger);
-        }
+        modal.Show();
+    }
+
+    void OnCheckedValueChanged(int value)
+    {
+        checkedValue = value;
+    }
+
+    private async Task Confirmar()
+    {
+        //report
+
+        //delete match
+
+        modal.Hide();
     }
 }

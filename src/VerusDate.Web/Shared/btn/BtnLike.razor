@@ -27,7 +27,7 @@
 
             if (interaction.Match.Value.HasValue && interaction.Match.Value.Value == true)
             {
-                Toast.ShowSuccess("Match");
+                Toast.ShowSuccess("", "Match");
             }
 
             await OnClick.InvokeAsync(null);

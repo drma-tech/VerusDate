@@ -44,8 +44,8 @@ namespace VerusDate.Web.Core
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.WantChildren), CheckEnum((int)profView.Lifestyle.WantChildren.Value, (int?)profUser.Lifestyle.WantChildren)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Religion), CheckEnum((int)profView.Lifestyle.Religion.Value, (int?)profUser.Lifestyle.Religion)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.EducationLevel), CheckEnum((int)profView.Lifestyle.EducationLevel.Value, (int?)profUser.Lifestyle.EducationLevel)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.CareerCluster), CheckEnum((int)profView.Lifestyle.CareerCluster.Value, (int?)profUser.Lifestyle.CareerCluster)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int)profView.Lifestyle.MoneyPersonality.Value, (int?)profUser.Lifestyle.MoneyPersonality)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.CareerCluster), CheckEnumCareer(profView.Lifestyle.CareerCluster.Value, profUser.Lifestyle.CareerCluster.Value)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MoneyPersonality), CheckMoneyPersonality(profView.Lifestyle.MoneyPersonality.Value, profUser.Lifestyle.MoneyPersonality.Value)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator, profUser.Lifestyle.MyersBriggsTypeIndicator)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality.Value)));
 
@@ -101,6 +101,23 @@ namespace VerusDate.Web.Core
                 Zodiac.Pisces => user == Zodiac.Cancer || user == Zodiac.Scorpio,
                 _ => false,
             };
+        }
+
+        private static bool CheckMoneyPersonality(MoneyPersonality view, MoneyPersonality user)
+        {
+            return view switch
+            {
+                MoneyPersonality.BigSpender => user == MoneyPersonality.BigSpender,
+                MoneyPersonality.Avoider => user == MoneyPersonality.Avoider,
+                MoneyPersonality.Saver => user == MoneyPersonality.Saver || user == MoneyPersonality.Investor,
+                MoneyPersonality.Investor => user == MoneyPersonality.Saver || user == MoneyPersonality.Investor,
+                _ => false,
+            };
+        }
+
+        private static bool CheckEnumCareer(CareerCluster view, CareerCluster user)
+        {
+            return view.GetGroup() == user.GetGroup();
         }
 
         private static bool CheckHeight(Height Height, Height? Looking_MinimalHeight, Height? Looking_MaxHeight)

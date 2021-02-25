@@ -19,8 +19,8 @@ namespace VerusDate.Web.Core
             }
             else if ((short)response.StatusCode >= 200 && (short)response.StatusCode <= 299) //Respostas de sucesso
             {
-                if (!string.IsNullOrEmpty(msgSuccess)) toast.ShowSuccess(msgSuccess);
-                if (!string.IsNullOrEmpty(msgInfo)) toast.ShowInfo(msgInfo);
+                if (!string.IsNullOrEmpty(msgSuccess)) toast.ShowSuccess("", msgSuccess);
+                if (!string.IsNullOrEmpty(msgInfo)) toast.ShowInfo("", msgInfo);
             }
             else if ((short)response.StatusCode >= 300 && (short)response.StatusCode <= 399) //Redirecionamentos
             {
@@ -40,12 +40,12 @@ namespace VerusDate.Web.Core
         {
             if (ex is NotificationException)
             {
-                toast.ShowWarning(ex.Message);
+                toast.ShowWarning("", ex.Message);
             }
             else
             {
                 logger.LogError(ex, "ProcessException");
-                toast.ShowError(ex.Message);
+                toast.ShowError("", ex.Message);
             }
         }
     }

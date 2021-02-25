@@ -60,8 +60,8 @@ else
                 </CardBody>
                 <CardBody>
                     <BtnChat IdUserView="@IdUserView"></BtnChat>
-                    <Button Color="Color.Danger" title="Reportar este perfil" Float="Float.Right" data-toggle="modal" data-target="#modalReport">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon> Reportar
+                    <Button Color="Color.Danger" title="Desfazer match e reportar" Float="Float.Right" Clicked="report.ShowModal">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon>
                     </Button>
                 </CardBody>
             </Card>
@@ -91,7 +91,12 @@ else
                 </Column>
                 <Column ColumnSize="ColumnSize.IsFull.Is4.OnFullHD">
                     <Card Margin="Margin.Is3.FromBottom">
-                        <CardHeader>Compatibilidade</CardHeader>
+                        <CardHeader>
+                            Compatibilidade
+                            <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromLeft">
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon>
+                            </Button>
+                        </CardHeader>
                         <CardBody>
                             <Row>
                                 <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
@@ -179,7 +184,13 @@ else
             </Card>
         </Column>
     </Row>
-    <VerusDate.Web.Shared.modal.ProfileReport></VerusDate.Web.Shared.modal.ProfileReport>
+    <VerusDate.Web.Shared.modal.ProfileReport @ref="report"></VerusDate.Web.Shared.modal.ProfileReport>
+    <VerusDate.Web.Shared.modal.BasicModal @ref="help" Title="Ajuda">
+        <ul>
+            <li>O cálculo é baseado em pesquisas e estatísticas, podendo não refletir com precisão todos os casos e/ou contextos;</li>
+            <li>Caso tenha dúvidas e/ou sugestões de melhorias, favor abrir um ticket na nossa página de suporte;</li>
+        </ul>
+    </VerusDate.Web.Shared.modal.BasicModal>
 }
 
 @code {
@@ -197,6 +208,9 @@ else
     string selectedImage;
     string[] imageDataUriGallery = Array.Empty<string>();
 
+    private Shared.modal.BasicModal help;
+    private Shared.modal.ProfileReport report;
+
     private VisibilityOptions Options => new VisibilityOptions()
     {
         Loading = IsLoading,
@@ -210,7 +224,7 @@ else
 
         if (view == null)
         {
-            Toast.ShowError("Perfil não encontrado. Favor, tentar novamente.");
+            Toast.ShowError("", "Perfil não encontrado. Favor, tentar novamente.");
         }
         else
         {
@@ -288,7 +302,14 @@ else
             var pesoLifestyle = 4;
             var pesoInterest = 2;
 
-            return (totBasic * pesoBasic + totBio * pesoBio + totLifestyle * pesoLifestyle + totInterest * pesoInterest) / (pesoBasic + pesoBio + pesoLifestyle + pesoInterest);
+            if (user.Basic.Intent.IsLongTerm() && view.Basic.Intent.IsLongTerm())
+            {
+                return (totBasic * pesoBasic + totBio * pesoBio + totLifestyle * pesoLifestyle + totInterest * pesoInterest) / (pesoBasic + pesoBio + pesoLifestyle + pesoInterest);
+            }
+            else
+            {
+                return (totBasic * pesoBasic + totBio * pesoBio) / (pesoBasic + pesoBio);
+            }
         }
         else
         {

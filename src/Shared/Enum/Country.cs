@@ -4,7 +4,7 @@ namespace VerusDate.Shared.Enum
 {
     public enum Country
     {
-        [Display(Name = "Brazil")]
+        [Display(GroupName = "América do Sul", Name = "Brazil")]
         BRA = 1,
     }
 }

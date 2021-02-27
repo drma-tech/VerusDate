@@ -1,6 +1,6 @@
-﻿@page "/Interaction"
+﻿@page "/Profile/Interactions"
 @attribute [Authorize]
-@inherits PageCore<Interaction.Index>
+@inherits PageCore<Profile.Interactions>
 
 <Row>
     <Column>
@@ -17,7 +17,7 @@
                         @foreach (var item in NewMatches)
                         {
                             <Column ColumnSize="ColumnSize.Is3.OnFullHD.Is4.OnWidescreen.Is6.OnDesktop.Is12.OnMobile">
-                                <Blazorise.Link To="@("/Interaction/View/" + item.IdUserInteraction)">
+                                <Blazorise.Link To="@("/Explore/View/" + item.IdUserInteraction)">
                                     <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
                                         <CardImage Source="@item.GetMainPhoto(TypeUser.InteractionUser)" Alt="Photo Image"></CardImage>
                                         <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">
@@ -44,7 +44,7 @@
                         @foreach (var item in Likes)
                         {
                             <Column ColumnSize="ColumnSize.Is3.OnFullHD.Is4.OnWidescreen.Is6.OnDesktop.Is12.OnMobile">
-                                <Blazorise.Link To="@("/Interaction/View/" + item.IdLoggedUser)">
+                                <Blazorise.Link To="@("/Explore/View/" + item.IdLoggedUser)">
                                     <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
                                         <CardImage Source="@item.GetMainPhoto(TypeUser.LoggedUser)" Alt="Photo Image"></CardImage>
                                         <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">
@@ -73,7 +73,7 @@
                         @foreach (var item in MsgMatches)
                         {
                             <Column ColumnSize="ColumnSize.Is3.OnFullHD.Is4.OnWidescreen.Is6.OnDesktop.Is12.OnMobile">
-                                <Blazorise.Link To="@("/Interaction/View/Chat/" + item.IdUserInteraction)">
+                                <Blazorise.Link To="@("/Explore/Chat/" + item.IdUserInteraction)">
                                     <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
                                         <CardImage Source="@item.GetMainPhoto(TypeUser.InteractionUser)" Alt="Photo Image"></CardImage>
                                         <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">
@@ -100,7 +100,7 @@
                         @foreach (var item in Blinks)
                         {
                             <Column ColumnSize="ColumnSize.Is3.OnFullHD.Is4.OnWidescreen.Is6.OnDesktop.Is12.OnMobile">
-                                <Blazorise.Link To="@("/Interaction/View/" + item.IdLoggedUser)">
+                                <Blazorise.Link To="@("/Explore/View/" + item.IdLoggedUser)">
                                     <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
                                         <CardImage Source="@item.GetMainPhoto(TypeUser.LoggedUser)" Alt="Photo Image"></CardImage>
                                         <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">

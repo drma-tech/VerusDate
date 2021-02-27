@@ -4,12 +4,20 @@
 <Layout Sider="true">
     <LayoutSider>
         <LayoutSiderContent>
-            <NavMenu />
+            <AuthorizeView>
+                <Authorized>
+                    <NavMenu />
+                </Authorized>
+            </AuthorizeView>
         </LayoutSiderContent>
     </LayoutSider>
     <Layout>
         <LayoutHeader Fixed="true">
-            <HeadLayout></HeadLayout>
+            <AuthorizeView>
+                <Authorized>
+                    <HeadLayout></HeadLayout>
+                </Authorized>
+            </AuthorizeView>
         </LayoutHeader>
         <LayoutContent>
             <Container Fluid="true" Padding="Padding.Is3.FromTop">

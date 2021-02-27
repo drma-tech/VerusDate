@@ -19,7 +19,7 @@ else
         @foreach (var item in listaUsers)
         {
             <Column ColumnSize="ColumnSize.Is2.OnFullHD.Is3.OnWidescreen.Is4.OnDesktop.Is6.OnMobile" Margin="Margin.Is3.FromBottom">
-                <Blazorise.Link To="@("/Interaction/View/" + item.Id)">
+                <Blazorise.Link To="@("/View/" + item.Id)">
                     <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
                         <CardImage Source="@item.GetMainPhoto()" Alt="Photo Image"></CardImage>
                         @*<Badge Color="Color.Success" Style="position: absolute; top: 10px; left: 10px; z-index: 2;">@(GetPercentAffinity(null) + "%")</Badge>

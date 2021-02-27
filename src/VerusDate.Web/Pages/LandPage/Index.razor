@@ -1,0 +1,645 @@
+﻿@page "/LandPage"
+
+<Jumbotron Background="Background.Primary" Margin="Margin.Is3.FromBottom" Padding="Padding.Is3.FromBottom.Is3.FromTop">
+    <JumbotronTitle Size="JumbotronTitleSize.Is4">Bem vindo ao Verus Date!</JumbotronTitle>
+    <JumbotronSubtitle>
+        Está é uma versão MVP (Minimum viable product). Algum dos recursos existentes servem apenas de demonstração de funcionalidade.
+    </JumbotronSubtitle>
+</Jumbotron>
+@*<CardDeck Margin="Margin.Is3.FromBottom">
+    <Card>
+        <CardBody>
+            <CardTitle Size="5" Color="TextColor.Info">Sem Perfis Falsos</CardTitle>
+            <Paragraph Alignment="TextAlignment.Justified" Color="TextColor.Secondary">
+                Nós garantimos que não haverá perfis falsos ou inativos. Com tecnologia para reconhecimento facil e um avançado sistema para controle dos dados
+            </Paragraph>
+            <Button Color="Color.Info" Type="ButtonType.Link" To="#head_perfil" Target="Target.Top">Saiba Mais</Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardBody>
+            <CardTitle Size="5" Color="TextColor.Info">Gamificação</CardTitle>
+            <Paragraph Alignment="TextAlignment.Justified" Color="TextColor.Secondary">
+                Todos os nossos recursos são baseados em elementos de jogos para deixar tudo mais leve e divertido
+            </Paragraph>
+            <Button Color="Color.Info" Type="ButtonType.Link" To="#head_gamificacao" Target="Target.Top">Saiba Mais</Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardBody>
+            <CardTitle Size="5" Color="TextColor.Info">Livre de Preconceitos</CardTitle>
+            <Paragraph Alignment="TextAlignment.Justified" Color="TextColor.Secondary">
+                Independente de suas intenções, gênero, orientação sexual, raça, idade etc., nós temos um sistema completo e inteligente para encontrar o que você está procurando
+            </Paragraph>
+            <Button Color="Color.Info" Type="ButtonType.Link" To="#head_preconceito" Target="Target.Top">Saiba Mais</Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardBody>
+            <CardTitle Size="5" Color="TextColor.Info">Eventos</CardTitle>
+            <Paragraph Alignment="TextAlignment.Justified" Color="TextColor.Secondary">
+                Com nossa exclusiva seção de eventos, você terá novas oportunidades de interação com seus pretendentes
+            </Paragraph>
+            <Button Color="Color.Info" Type="ButtonType.Link" To="#head_evento" Target="Target.Top">Saiba Mais</Button>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardBody>
+            <CardTitle Size="5" Color="TextColor.Info">Segurança e Privacidade</CardTitle>
+            <Paragraph Alignment="TextAlignment.Justified" Color="TextColor.Secondary">
+                Um dos nossos pilares é a segurança e privacidade dos dados dos nossos usuários
+            </Paragraph>
+            <Button Color="Color.Info" Type="ButtonType.Link" To="#head_seguranca" Target="Target.Top">Saiba Mais</Button>
+        </CardBody>
+    </Card>
+</CardDeck>*@
+
+<Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is4.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_perfil">Sem Perfis Falsos</Heading>
+<Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Nós garantimos que não haverá perfis falsos ou inativos. Com tecnologia para reconhecimento facil e um avançado sistema para controle dos dados</Paragraph>
+<Row>
+    <Column ColumnSize="ColumnSize.Is1.OnMobile.Is2.OnDesktop"></Column>
+    <Column ColumnSize="ColumnSize.Is12.OnMobile.Is8.OnDesktop">
+        <Alert Color="Color.Info" Visible="true">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Todos os perfis são verificados com reconhecimento facial
+        </Alert>
+        <Alert Color="Color.Info" Visible="true">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Perfis com mais de 30 dias sem acesso são automaticamente desativados
+        </Alert>
+        <Alert Color="Color.Info" Visible="true">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Todas as informações dos perfis são passíveis de denúncias (punições e/ou notificações serão avaliadas de acordo com o cenário)
+        </Alert>
+    </Column>
+</Row>
+
+<Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is4.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_gamificacao">Gamificação</Heading>
+<Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Todos os nossos recursos são baseados em elementos de jogos para deixar tudo mais leve e divertido</Paragraph>
+<CardDeck>
+    <Card>
+        <CardHeader>
+            <CardTitle Color="TextColor.Info" Size="5" Margin="Margin.Is0.FromBottom">
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon> Ranking
+            </CardTitle>
+        </CardHeader>
+        <CardBody>
+            <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
+                Para cada novo nível alcançado, será desbloqueado novas funcionalidades
+            </Paragraph>
+            <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 100 XP acumulados
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Caso perca todos XP do ranking atual + 1
+                    </AlertMessage>
+                </Alert>
+            </Paragraph>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader>
+            <CardTitle Color="TextColor.Info" Size="5" Margin="Margin.Is0.FromBottom">
+                XP
+            </CardTitle>
+        </CardHeader>
+        <CardBody>
+            <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
+                Ganhe experiência, suba de nível e tenha acesso a novos recursos
+            </Paragraph>
+            <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Ganhe cumprindo tarefas
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Avaliando um perfil
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Interagindo com seus matches
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Respondendo todas as interações
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Ignorar seus matches
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Receber denúncias
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Repetir mensagens enviadas
+                    </AlertMessage>
+                </Alert>
+            </Paragraph>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader>
+            <CardTitle Color="TextColor.Info" Size="5" Margin="Margin.Is0.FromBottom">
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt"></Icon> Food
+            </CardTitle>
+        </CardHeader>
+        <CardBody>
+            <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
+                Com as maças você pode selecionar seus pretendentes e esperar novos matches
+            </Paragraph>
+            <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 24 horas (não acumulável)
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada anúncio visto
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Dar like em alguém
+                    </AlertMessage>
+                </Alert>
+            </Paragraph>
+        </CardBody>
+    </Card>
+    <Card>
+        <CardHeader>
+            <CardTitle Color="TextColor.Info" Size="5" Margin="Margin.Is0.FromBottom">
+                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem"></Icon> Diamond
+            </CardTitle>
+        </CardHeader>
+        <CardBody>
+            <Paragraph Alignment="TextAlignment.Center" Color="TextColor.Secondary">
+                Com os diamantes você tem acesso a recursos exclusivos
+            </Paragraph>
+            <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> A cada 24 horas
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Cada amigo convidado
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Success" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleUp"></Icon> Comprando de forma avulsa
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Dar uma piscadinha
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Subir para o top 1 da sua cidade
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Trocar por 10 maças
+                    </AlertMessage>
+                </Alert>
+                <Alert Color="Color.Danger" Display="Display.Block" Visible="true" Margin="Margin.Is2.FromBottom" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+                    <AlertMessage>
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDoubleDown"></Icon> Criar ou se inscrever em um evento
+                    </AlertMessage>
+                </Alert>
+            </Paragraph>
+        </CardBody>
+    </Card>
+</CardDeck>
+<Paragraph Margin="Margin.Is3.FromTop" Alignment="TextAlignment.Center">
+    <Alert Color="Color.Warning" Display="Display.InlineBlock" Visible="true" Margin="Margin.Is1.FromBottom.Is1.FromTop" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+        <AlertMessage>* Alguns recursos e funcionalidades podem exigir que certos pré-requisitos sejam cumpridos ou que precisem ser pagos</AlertMessage>
+    </Alert>
+    <Alert Color="Color.Warning" Display="Display.InlineBlock" Visible="true" Margin="Margin.Is1.FromBottom.Is1.FromTop" Padding="Padding.Is1" Style="font-size: 75%; line-height: 1;">
+        <AlertMessage>* A quantidade de ganhos/perdas de recursos pode variar para cada nível e o tipo de conta (básica / premium)</AlertMessage>
+    </Alert>
+</Paragraph>
+
+<Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is4.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_preconceito">Livre de Preconceitos</Heading>
+<Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Independente de suas intenções, gênero, orientação sexual, raça, idade etc., nós temos um sistema completo e inteligente para encontrar o que você está procurando</Paragraph>
+<Row>
+    <Column ColumnSize="ColumnSize.Is1.OnMobile.Is2.OnDesktop"></Column>
+    <Column ColumnSize="ColumnSize.Is12.OnMobile.Is8.OnDesktop">
+        <Alert Color="Color.Info" Visible="true">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Aceitamos todos os perfis e sem nenhuma restrição (com muito respeito, claro)
+        </Alert>
+        <Alert Color="Color.Info" Visible="true">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Todos os filtros são liberados gratuitamente para que se ache o que esteja procurando
+        </Alert>
+        <Alert Color="Color.Info" Visible="true">
+            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Icon> Não toleramos nenhum tipo de preconceito dentro da plataforma (poderá ser banido em definitivo)
+        </Alert>
+    </Column>
+</Row>
+
+<Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is4.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_evento">Eventos</Heading>
+<Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Com nossa exclusiva seção de eventos, você terá novas oportunidades de interação com seus pretendentes</Paragraph>
+<Row>
+    <Column ColumnSize="ColumnSize.Is1.OnMobile.Is2.OnDesktop"></Column>
+    <Column ColumnSize="ColumnSize.Is12.OnMobile.Is8.OnDesktop">
+        <CardDeck Margin="Margin.Is3.FromBottom">
+            <Card>
+                <CardBody>
+                    <CardTitle Size="5" Color="TextColor.Info">BLIND DATE (Encontro às cegas)</CardTitle>
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash" Class="fa-4x" Style="color: #17a2b8;" Float="Float.Right" Margin="Margin.Is2.FromLeft"></Icon>
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                        Conheça alguém por sua essência, não sua aparência. Participe de um grupo e conheça pessoas sem saber suas aparências e escolha com quem quer se relacionar.
+                    </Paragraph>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardBody>
+                    <CardTitle Size="5" Color="TextColor.Info">SPEED DATING (Encontro Rápido)</CardTitle>
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserClock" Class="fa-4x" Style="color: #17a2b8;" Float="Float.Right" Margin="Margin.Is2.FromLeft"></Icon>
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                        Conheça várias pessoas em encontros rápidos. Participe de um grupo e conheça pessoas em vídeo chamadas com 5 minutos de duraçao e escolha seus potenciais pretendentes.
+                    </Paragraph>
+                </CardBody>
+            </Card>
+        </CardDeck>
+        <CardDeck>
+            <Card>
+                <CardBody>
+                    <CardTitle Size="5" Color="TextColor.Info">GROUP DATING (Encontro em grupo)</CardTitle>
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Users" Class="fa-4x" Style="color: #17a2b8;" Float="Float.Right" Margin="Margin.Is2.FromLeft"></Icon>
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                        Muitos participantes com interesses parecidos e com livre interação. Único evento com encontros reais. Conheça várias pessoas legais e veja o que rola.
+                    </Paragraph>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardBody>
+                    <CardTitle Size="5" Color="TextColor.Info">Totalmente customizado</CardTitle>
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.CalendarAlt" Class="fa-4x" Style="color: #17a2b8;" Float="Float.Right" Margin="Margin.Is2.FromLeft"></Icon>
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                        Você mesmo cria seus eventos como achar necessário. Com diversos filtros e com um mínimo de participantes para ser realizado.
+                    </Paragraph>
+                </CardBody>
+            </Card>
+        </CardDeck>
+    </Column>
+</Row>
+
+<Heading Size="HeadingSize.Is2" Color="TextColor.Info" Margin="Margin.Is4.FromTop.Is1.FromBottom" Alignment="TextAlignment.Center" id="head_seguranca">Segurança e Privacidade</Heading>
+<Paragraph Color="TextColor.Secondary" Margin="Margin.Is5.FromBottom" Alignment="TextAlignment.Center">Um dos nossos pilares é a segurança e privacidade dos dados dos nossos usuários</Paragraph>
+<Row>
+    <Column ColumnSize="ColumnSize.Is1.OnMobile.Is2.OnDesktop"></Column>
+    <Column ColumnSize="ColumnSize.Is12.OnMobile.Is8.OnDesktop">
+        <CardDeck Margin="Margin.Is3.FromBottom">
+            <Card>
+                <CardBody>
+                    <CardTitle Size="5" Color="TextColor.Info">Autenticação e Autorização</CardTitle>
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                        Não guardamos nenhuma informação sensível que possa ser de alguma maneira extraviada, como senhas e dados financeiros. Utilizamos serviços de terceiros reconhecidos pelo mercado para tais operações.
+                    </Paragraph>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardBody>
+                    <CardTitle Size="5" Color="TextColor.Info">Privacidade dos Dados</CardTitle>
+                    <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is0.FromBottom" Color="TextColor.Secondary">
+                        Não compartilhamos seus dados pessoais com terceiros de forma alguma. Também temos recursos para garantir mais privacidade dos dados antes do match.
+                    </Paragraph>
+                </CardBody>
+            </Card>
+        </CardDeck>
+    </Column>
+</Row>
+
+@*<div class="row">
+        <div class="col-lg-3 col-6">
+            <div class="widget style1" style="background-color: #D4AF37; color: #fff!important;">
+                <div class="row">
+                    <div class="col-4">
+                        <i class="fa fa-crown fa-4x"></i>
+                    </div>
+                    <div class="col-8 text-right">
+                        <span> Nível (XP) </span>
+                        <h3 class="font-bold" style="font-size: 23px;">@gamification?.Rank (@gamification?.XP%)</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox" style="margin-bottom: 10px;">
+                <div class="ibox-title">
+                    <h5>Como ganhar XP</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" style="display: none;">
+                    <ul class="list-group clear-list show">
+                        <li class="list-group-item fist-item">
+                            <span class="label label-primary">+ 30</span> Completar cada item da lista de pendências
+                        </li>
+                        <li class="list-group-item">
+                            <span class="float-right">
+                                <i class="fas fa-info-circle" title="este recurso só é liberado depois de um encontro físico"></i>
+                            </span>
+                            <span class="label label-primary">+ 30</span> Comentar sobre a pessoa no perfil dela
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-primary">+ 10</span> Conversar com a mesma pessoa por 3 dias consecutivos
+                        </li>
+                        <li class="list-group-item">
+                            <span class="float-right">
+                                <i class="fas fa-info-circle" title="respondendo sim ou não"></i>
+                            </span>
+                            <span class="label label-primary">+ 05</span> Responder a uma piscadinha
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Como perder XP</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" style="display: none;">
+                    <ul class="list-group clear-list show">
+                        <li class="list-group-item fist-item">
+                            <span class="float-right">
+                                <i class="fas fa-info-circle" title="caso não tenha dado deslike"></i>
+                            </span>
+                            <span class="label label-danger">- 10</span> Ignorar uma pessoa por mais de 3 dias
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-danger">- 50</span> Receber denúncia (confirmada) de ter uma informação não verídica no perfil
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-danger">- 01</span> Repetir mensagens enviadas (copiar e colar)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="widget style1" style="background-color: #5c7cfa; color: #fff!important;">
+                <div class="row">
+                    <div class="col-4">
+                        <i class="fa fa-gem fa-4x"></i>
+                    </div>
+                    <div class="col-8 text-right">
+                        <span> Diamante </span>
+                        <h2 class="font-bold" style="font-size: 23px;">@gamification?.Diamond</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox" style="margin-bottom: 10px;">
+                <div class="ibox-title">
+                    <h5>Como ganhar Diamante</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" style="display: none;">
+                    <ul class="list-group clear-list show">
+                        <li class="list-group-item fist-item">
+                            <span class="float-right">
+                                <i class="fas fa-info-circle" title="A quantidade pode variar para cada nível"></i>
+                            </span>
+                            <span class="label label-primary">+ 05</span> A cada 24h na conta premium
+                        </li>
+                        <li class="list-group-item">
+                            <span class="float-right">
+                                <i class="fas fa-info-circle" title="que tenha resolvido pelo menos 6 itens da lista de pendências"></i>
+                            </span>
+                            <span class="label label-primary">+ 10</span> Cada amigo convidado
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-primary">+ XX</span> Comprando na nossa loja
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Como gastar diamante</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" style="display: none;">
+                    <ul class="list-group clear-list show">
+                        <li class="list-group-item fist-item">
+                            <span class="label label-danger">- 01</span> Dar uma piscadinha
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-danger">- 01</span> Subir para o top 1 na sua cidade
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-danger">- 01</span> Trocar por 10 maças
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-danger">- 05</span> Aparecer nos destaques
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="widget style1" style="background-color: #dc3545; color: #fff!important;">
+                <div class="row">
+                    <div class="col-4">
+                        <i class="fa fa-apple-alt fa-4x"></i>
+                    </div>
+                    <div class="col-8 text-right">
+                        <span> Maça </span>
+                        <h2 class="font-bold" style="font-size: 23px;">@gamification?.Food/@GamificationApi.GetMaxFood(gamification)</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox" style="margin-bottom: 10px;">
+                <div class="ibox-title">
+                    <h5>Como ganhar Maças</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" style="display: none;">
+                    <ul class="list-group clear-list show">
+                        <li class="list-group-item fist-item">
+                            <span class="float-right">
+                                <i class="fas fa-info-circle" title="A quantidade pode variar para cada nível"></i>
+                            </span>
+                            <span class="label label-primary">+ 20</span> A cada 24h na conta básica
+                        </li>
+                        <li class="list-group-item">
+                            <span class="float-right">
+                                <i class="fas fa-info-circle" title="A quantidade pode variar para cada nível"></i>
+                            </span>
+                            <span class="label label-primary">+ 20</span> A cada 12h na conta premium
+                        </li>
+                        <li class="list-group-item">
+                            <span class="float-right">
+                                <i class="fas fa-info-circle" title="Tem um limite de 3 por dia"></i>
+                            </span>
+                            <span class="label label-primary">+ 05</span> A cada anúncio visto
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Como gastar Maças</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" style="display: none;">
+                    <ul class="list-group clear-list show">
+                        <li class="list-group-item fist-item">
+                            <span class="label label-danger">- 01</span> Dar like
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+            <div class="widget style1 bg-info">
+                <div class="row">
+                    <div class="col-4">
+                        <i class="fa fa-thumbs-up fa-4x"></i>
+                    </div>
+                    <div class="col-8 text-right">
+                        <span> Popularidade </span>
+                        <h2 class="font-bold" style="font-size: 23px;">75%</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox" style="margin-bottom: 10px;">
+                <div class="ibox-title">
+                    <h5>Como ganhar Popularidade</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" style="display: none;">
+                    <ul class="list-group clear-list show">
+                        <li class="list-group-item fist-item">
+                            <span class="label label-primary"><i class="fas fa-check"></i></span> Esteja sempre ativo, para não ter seu perfil desativado
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-primary"><i class="fas fa-check"></i></span> Crie um perfil legal e com fotos interessantes
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Como perder Popularidade</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content" style="display: none;">
+                    <ul class="list-group clear-list show">
+                        <li class="list-group-item fist-item">
+                            <span class="float-right">
+                                <i class="fas fa-info-circle" title="Ser bloqueado também irá influenciar negativamente neste índice"></i>
+                            </span>
+                            <span class="label label-danger">- 01</span> Ser bloqueado por alguém
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<div class="row">
+    <div class="col-sm-6">
+        @*<div class="ibox">
+                <div class="ibox-content">
+                    <h3>Lista de Pendências</h3>
+                    @if (OptionsValidation.HasCustomVisibility)
+                    {
+                        <CustomVisibility Options="OptionsValidation"></CustomVisibility>
+                    }
+                    else
+                    {
+                        <ul class="todo-list m-t small-list ui-sortable">
+                            <li>
+                                <input type="checkbox" @bind="@validation.ProfileData" />
+                                <a href="/ProfileData" class="m-l-xs"> Cadastrar perfil </a><small class="badge badge-success">30xp</small>
+                            </li>
+                            <li>
+                                <input type="checkbox" @bind="@validation.ProfileCriteria" />
+                                <a href="/ProfileSearchCriteria" class="m-l-xs"> Cadastrar critérios de busca </a><small class="badge badge-success">30xp</small>
+                            </li>
+                            <li>
+                                <input type="checkbox" @bind="@validation.PhotoFace" />
+                                <a href="/PhotoValidation" class="m-l-xs"> Validar foto </a><small class="badge badge-success">30xp</small>
+                            </li>
+                            <li>
+                                <input type="checkbox" @bind="@validation.Email" />
+                                <a href="#" class="m-l-xs"> Validar Email </a><small class="badge badge-success">30xp</small>
+                            </li>
+                            <li>
+                                <input type="checkbox" @bind="@validation.Phone" />
+                                <a href="#" class="m-l-xs"> Validar Celular </a><small class="badge badge-success">30xp</small>
+                            </li>
+                            <li>
+                                <input type="checkbox" @bind="@validation.Facebook" />
+                                <a href="#" class="m-l-xs"> Validar Facebook </a><small class="badge badge-success">30xp</small>
+                            </li>
+                            <li>
+                                <input type="checkbox" @bind="@validation.Instagram" />
+                                <a href="#" class="m-l-xs"> Validar Instagram </a><small class="badge badge-success">30xp</small>
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>*@
+    </div>
+    @*<div class="col-sm-6">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h3>Vantagens da Conta Premium</h3>
+                    <ul class="list-group clear-list m-t show">
+                        <li class="list-group-item fist-item">
+                            <span class="label label-primary"><i class="fas fa-check"></i></span> Ganhe diamantes diariamente e o dobro de maças
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-primary"><i class="fas fa-check"></i></span> Suba na lista uma vez por semana (assim irá aparecer para mais pessoas)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+</div>

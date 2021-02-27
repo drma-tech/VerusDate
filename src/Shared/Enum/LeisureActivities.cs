@@ -73,7 +73,7 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Fotografia")]
         Photography = 23,
 
-        [Display(Name = "Projetos Faça Você Mesmo")]
+        [Display(Name = "DIY (Projetos Faça Você Mesmo)")]
         DIY = 24,
 
         [Display(Name = "Moda")]

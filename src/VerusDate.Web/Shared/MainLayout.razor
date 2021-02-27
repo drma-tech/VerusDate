@@ -1,78 +1,91 @@
 @inherits LayoutComponentBase
+@inject NavigationManager Navigation
 
 <Layout Sider="true">
-    <AuthorizeView>
-        <Authorized>
-            <LayoutSider>
-                <LayoutSiderContent>
-                    <NavMenu />
-                </LayoutSiderContent>
-            </LayoutSider>
-        </Authorized>
-    </AuthorizeView>
+    <LayoutSider>
+        <LayoutSiderContent>
+            <NavMenu />
+        </LayoutSiderContent>
+    </LayoutSider>
     <Layout>
         <LayoutHeader Fixed="true">
-            <Bar Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
-                <BarBrand Display="Display.Always">
-                    <HeadLayout></HeadLayout>
-                </BarBrand>
-                <BarMenu Display="Display.InlineBlock" Style="flex-basis: unset !important;">
-                    <BarEnd Display="Display.Block">
-                        <LoginDisplay />
-                    </BarEnd>
-                </BarMenu>
-            </Bar>
+            <HeadLayout></HeadLayout>
         </LayoutHeader>
         <LayoutContent>
             <Container Fluid="true" Padding="Padding.Is3.FromTop">
                 @Body
             </Container>
         </LayoutContent>
-        <AuthorizeView>
-            <Authorized>
-                <LayoutFooter Fixed="true" Display="Display.Block.None.OnDesktop">
-                    <Bar Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light" Padding="Padding.Is0" Display="Display.Block" Style="text-align: center;">
-                        <BarBrand Display="Display.None.OnDesktop" Margin="Margin.Is0.FromRight">
-                            <Buttons>
-                                <Button Color="Color.Secondary" To="/" Type="ButtonType.Link">
-                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThLarge" />
-                                </Button>
-                                <Button Color="Color.Secondary" To="Profile" Type="ButtonType.Link">
-                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AddressCard" />
-                                </Button>
-                                <Button Color="Color.Secondary" To="Match" Type="ButtonType.Link">
-                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Fire" />
-                                </Button>
-                                <Button Color="Color.Secondary" To="Search" Type="ButtonType.Link">
-                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" />
-                                </Button>
-                                <Button Color="Color.Secondary" To="Event" Type="ButtonType.Link">
-                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.CalendarAlt" />
-                                </Button>
-                                <Button Color="Color.Secondary" To="Store" Type="ButtonType.Link">
-                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ShoppingCart" />
-                                </Button>
-                                <Button Color="Color.Secondary" To="Support" Type="ButtonType.Link">
-                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug" />
-                                </Button>
-                            </Buttons>
-                        </BarBrand>
-                    </Bar>
-                </LayoutFooter>
-                <LayoutFooter Margin="Margin.Is2" Display="Display.None.Block.OnDesktop">
-                    @*<Badge Color="Color.Secondary" Float="Float.Left">©2021 DRMA Technologies. All rights reserved.</Badge>*@
-                    <Badge Color="Color.Danger" Float="Float.Right">Versão MVP</Badge>
-                </LayoutFooter>
-            </Authorized>
-            <NotAuthorized>
-                <LayoutFooter Margin="Margin.Is2" Display="Display.Block">
-                    @*<Badge Color="Color.Secondary" Float="Float.Left">©2021 DRMA Technologies. All rights reserved.</Badge>*@
-                    <Badge Color="Color.Danger" Float="Float.Right">Versão MVP</Badge>
-                </LayoutFooter>
-            </NotAuthorized>
-        </AuthorizeView>
+        <LayoutFooter Fixed="true" Display="Display.Block.None.OnWidescreen">
+            <Bar Mode="BarMode.Horizontal" Breakpoint="Breakpoint.Mobile" CollapseMode="BarCollapseMode.Small" Background="Background.Secondary" ThemeContrast="ThemeContrast.Dark"
+                 Padding="Padding.Is0.FromBottom.Is0.FromTop" Style="text-align: center; display: block;">
+                <BarBrand>
+                    <Button Color="GetColor(TypeButton.Home)" To="/" Type="ButtonType.Link" title="Home">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThLarge" />
+                    </Button>
+                    <Button Color="GetColor(TypeButton.Profile)" To="/Profile" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AddressCard" />
+                    </Button>
+                    <Button Color="GetColor(TypeButton.Explore)" To="/Explore" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" />
+                    </Button>
+                    <Button Color="GetColor(TypeButton.Event)" To="/Event" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.CalendarAlt" />
+                    </Button>
+                    <Button Color="GetColor(TypeButton.Store)" To="/Store" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ShoppingCart" />
+                    </Button>
+                    <Button Color="GetColor(TypeButton.Support)" To="/Support" Type="ButtonType.Link">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug" />
+                    </Button>
+                </BarBrand>
+            </Bar>
+        </LayoutFooter>
     </Layout>
 </Layout>
 
 <BlazoredToasts Position="ToastPosition.BottomRight" ShowProgressBar="true" Timeout="10"
                 IconType="IconType.FontAwesome" />
+
+@code{
+    private enum TypeButton
+    {
+        Home, Profile, Explore, Event, Store, Support
+    }
+
+    private TypeButton CurrentButton;
+
+    protected override void OnInitialized()
+    {
+        Navigation.LocationChanged += OnLocationChanged;
+
+        //ChangeCurrentButton(Navigation.BaseUri);
+
+        //StateHasChanged();
+    }
+
+    private void OnLocationChanged(object sender, LocationChangedEventArgs args)
+    {
+        ChangeCurrentButton(args.Location);
+
+        StateHasChanged();
+    }
+
+    private void ChangeCurrentButton(string location)
+    {
+        if (location.Contains("/Profile")) CurrentButton = TypeButton.Profile;
+        else if (location.Contains("/Explore")) CurrentButton = TypeButton.Explore;
+        else if (location.Contains("/Event")) CurrentButton = TypeButton.Event;
+        else if (location.Contains("/Store")) CurrentButton = TypeButton.Store;
+        else if (location.Contains("/Support")) CurrentButton = TypeButton.Support;
+        else CurrentButton = TypeButton.Home;
+    }
+
+    private Color GetColor(TypeButton type)
+    {
+        if (CurrentButton == type)
+            return Color.Dark;
+        else
+            return Color.Secondary;
+    }
+}

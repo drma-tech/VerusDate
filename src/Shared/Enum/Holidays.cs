@@ -25,7 +25,7 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Relaxar / Bem estar")]
         RelaxingWellness = 7,
 
-        [Display(Name = "Mochilão")]
+        [Display(Name = "Mochilão", Description = "É a recreação ao ar livre de carregar coisas pessoais nas costas, enquanto caminha por mais de um dia. Freqüentemente, mas nem sempre, é uma viagem longa e pode ou não envolver acampar ao ar livre.")]
         Backpacking = 8,
 
         [Display(Name = "Cruzeiro de férias")]
@@ -43,16 +43,16 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Eventos / Festivais de música")]
         MusicEventsFestivals = 13,
 
-        [Display(Name = "Home Swap (Troca de Casa)")]
+        [Display(Name = "Home Swap", Description = "Um arranjo em que duas famílias trocam de casas nas férias")]
         HomeSwap = 14,
 
-        [Display(Name = "Couch Surfing (Surfe de Sofá)")]
+        [Display(Name = "Couch Surfing", Description = "A prática de viajar e ficar hospedadas na casa de pessoas que você não conhece, que anunciam suas casas na internet")]
         CouchSurfing = 15,
 
-        [Display(Name = "Camping")]
+        [Display(Name = "Camping", Description = "Um local com acomodações temporárias de cabanas, tendas ou outras estruturas, normalmente usadas por soldados, refugiados, prisioneiros ou viajantes")]
         Camping = 16,
 
-        [Display(Name = "Viagens de carro")]
+        [Display(Name = "Viagens de carro / trailer")]
         RoadTtrips = 17,
 
         [Display(Name = "Safári")]

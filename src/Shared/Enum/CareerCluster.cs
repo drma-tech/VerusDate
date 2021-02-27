@@ -51,5 +51,8 @@ namespace VerusDate.Shared.Enum
 
         [Display(GroupName = "Tecnologia Industrial e de Engenharia", Name = "Transporte, Distribuição e Logística", Description = "planejar e gerenciar o movimento de pessoas, materiais e mercadorias por estrada, oleoduto, ar, ferrovia e água. Serviços de suporte profissional, como serviços de logística e manutenção de equipamentos e instalações móveis, também fazem parte desse cluster (Motorista de caminhão, gerente de logística, piloto, etc.)")]
         Transportation_Distribution_Logistics = 16,
+
+        [Display(Name = "Sem carreira consolidada", Description = "Pode estar em início de carreira, estagiando, apenas estudando ou até sem estar trabalhando no momento.")]
+        Student = 99
     }
 }

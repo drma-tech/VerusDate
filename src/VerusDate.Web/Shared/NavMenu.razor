@@ -1,71 +1,53 @@
 @inherits ComponenteCore<NavMenu>
 @inject HttpClient Http
 
-<Sidebar @ref="sidebar">
-    <SidebarContent>
-        <SidebarBrand Style="text-align: center;">
-            <Blazorise.Link To="">Verus Date</Blazorise.Link>
-            <AuthorizeView>
-                <Authorized>
-                    <Figure Margin="Margin.Is0" Size="FigureSize.Is128x128">
-                        <FigureImage Source="@MainPhoto" Rounded="true" AlternateText="No User" />
-                    </Figure>
-                    <Blazorise.Link To="Profile/Account" Title="Gerenciar Perfil" Style="font-size: 0.80rem; padding: 0.70rem;">
-                        @context.User.Identity.Name
-                    </Blazorise.Link>
-                </Authorized>
-            </AuthorizeView>
-        </SidebarBrand>
-        <SidebarNavigation Padding="Padding.Is2.FromBottom">
-            <SidebarItem>
-                <SidebarLink To="" Title="Home">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThLarge" Margin="Margin.Is3.FromRight" />Home
-                </SidebarLink>
-            </SidebarItem>
-            <SidebarItem>
-                <SidebarLink To="Profile" Title="Profile">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AddressCard" Margin="Margin.Is3.FromRight" />Perfil
-                </SidebarLink>
-            </SidebarItem>
-            <SidebarItem>
-                <SidebarLink To="Match" Title="Match">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Fire" Margin="Margin.Is3.FromRight" />Match
-                </SidebarLink>
-            </SidebarItem>
-            <SidebarItem>
-                <SidebarLink To="Search" Title="Search">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" Margin="Margin.Is3.FromRight" />Busca
-                </SidebarLink>
-            </SidebarItem>
-            <SidebarItem>
-                <SidebarLink To="Event" Title="Event">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.CalendarAlt" Margin="Margin.Is3.FromRight" />Eventos
-                </SidebarLink>
-            </SidebarItem>
-            <SidebarItem>
-                <SidebarLink To="Store" Title="Store">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ShoppingCart" Margin="Margin.Is3.FromRight" />Loja
-                </SidebarLink>
-            </SidebarItem>
-            <SidebarItem>
-                <SidebarLink To="Support" Title="Support">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug" Margin="Margin.Is3.FromRight" />Suporte
-                </SidebarLink>
-            </SidebarItem>
-        </SidebarNavigation>
-    </SidebarContent>
-</Sidebar>
+<Bar Mode="BarMode.VerticalInline" CollapseMode="BarCollapseMode.Hide" Breakpoint="Breakpoint.Desktop" NavigationBreakpoint="Breakpoint.Tablet" Display="Display.None.Block.OnDesktop" Background="Background.Dark" ThemeContrast="ThemeContrast.Dark">
+    <BarBrand>
+        <BarItem>
+            <BarLink To="">
+                <BarIcon IconName="IconName.Heart" />
+                Verus Date
+            </BarLink>
+        </BarItem>
+    </BarBrand>
+    <BarMenu>
+        <BarStart>
+            <BarItem>
+                <BarLink To="/" Match="Match.All">
+                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ThLarge" /> Home
+                </BarLink>
+            </BarItem>
+            <BarItem>
+                <BarLink To="/Profile" Match="Match.Prefix">
+                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AddressCard" /> Perfil
+                </BarLink>
+            </BarItem>
+            <BarItem>
+                <BarLink To="/Explore" Match="Match.Prefix">
+                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" /> Explorar
+                </BarLink>
+            </BarItem>
+            <BarItem>
+                <BarLink To="/Event" Match="Match.Prefix">
+                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.CalendarAlt" /> Eventos
+                </BarLink>
+            </BarItem>
+            <BarItem>
+                <BarLink To="/Store" Match="Match.Prefix">
+                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ShoppingCart" /> Loja
+                </BarLink>
+            </BarItem>
+            <BarItem>
+                <BarLink To="/Support" Match="Match.Prefix">
+                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug" /> Suporte
+                </BarLink>
+            </BarItem>
+        </BarStart>
+    </BarMenu>
+</Bar>
 
 @code {
-    Sidebar sidebar;
     private string MainPhoto = ImageHelper.GetNoUserPhoto;
-
-    //protected override bool ShouldRender() => false;
-
-    void ToggleSidebar()
-    {
-        sidebar.Toggle();
-    }
 
     protected override async Task OnInitializedAsync()
     {

@@ -16,7 +16,7 @@
                     var previousGroup = "";
                     @foreach (var item in EnumHelper.GetList(TypeEnum).OrderBy(o => o.Group))
                     {
-                        if (previousGroup != @item.Group)
+                        if (!string.IsNullOrEmpty(@item.Group) && previousGroup != @item.Group)
                         {
                             <Alert Visible="true" Color="Color.Info" Padding="Padding.Is1">
                                 <AlertMessage>@item.Group</AlertMessage>

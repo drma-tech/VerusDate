@@ -7,7 +7,7 @@
             <Column ColumnSize="ColumnSize.Is12">
                 <Card Margin="Margin.Is3.FromBottom">
                     <CardHeader>
-                        Destaques da Semana (@profile?.Basic?.Location)
+                        Destaques da Semana (@profile?.Basic?.GetLocation(LocationType.City))
                     </CardHeader>
                     <CardBody>
                         @if (OptionsDestaques.HasCustomVisibility)

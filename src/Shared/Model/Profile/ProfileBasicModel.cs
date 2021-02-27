@@ -5,6 +5,14 @@ using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Model
 {
+    public enum LocationType
+    {
+        Full,
+        Country,
+        State,
+        City
+    }
+
     public class ProfileBasicModel
     {
         [Display(Name = "Nome / Apelido", Prompt = "Ex: Paulo ou Paulinho")]
@@ -39,5 +47,31 @@ namespace VerusDate.Shared.Model
 
         [Display(Name = "Idiomas", Description = "Escolhido automaticamente de acordo com os idiomas oficiais do pais (caso disponível)")]
         public IReadOnlyList<Language> Languages { get; set; } = Array.Empty<Language>();
+
+        public string GetLocation(LocationType type)
+        {
+            var parts = Location.Split(" - ");
+
+            switch (type)
+            {
+                case LocationType.Full:
+                    return Location;
+
+                case LocationType.Country:
+                    return parts[0];
+
+                case LocationType.State:
+                    return parts[1];
+
+                case LocationType.City:
+                    if (parts.Length == 4)
+                        return parts[2] + " - " + parts[3]; //county - city
+                    else
+                        return parts[2];
+
+                default:
+                    return null;
+            }
+        }
     }
 }

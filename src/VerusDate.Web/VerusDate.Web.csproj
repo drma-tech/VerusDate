@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Content Remove="Pages\Interaction\ProfileChatList.razor" />
+    <Content Remove="Pages\Match\Index.razor" />
     <Content Remove="Shared\modal\NewTicket_old.razor" />
   </ItemGroup>
 
@@ -43,6 +44,10 @@
 
   <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Match\" />
   </ItemGroup>
 
 </Project>

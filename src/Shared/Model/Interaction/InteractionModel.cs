@@ -101,7 +101,7 @@ namespace VerusDate.Shared.Model
 
         public void AddChat(ChatModel chat)
         {
-            if (IsChatActive())
+            if (IsActiveInteraction())
             {
                 Chat.Add(chat);
             }
@@ -111,7 +111,11 @@ namespace VerusDate.Shared.Model
             }
         }
 
-        public bool IsChatActive()
+        /// <summary>
+        /// Possui match e não está bloqueado
+        /// </summary>
+        /// <returns></returns>
+        public bool IsActiveInteraction()
         {
             var matched = Match.Value.HasValue && Match.Value.Value;
             var blocked = Block.Value.HasValue && Block.Value.Value;

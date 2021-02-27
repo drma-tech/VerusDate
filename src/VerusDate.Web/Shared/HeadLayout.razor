@@ -1,9 +1,8 @@
-﻿@using Microsoft.AspNetCore.Components.Authorization
-@inherits ComponenteCore<HeadLayout>
+﻿@inherits ComponenteCore<HeadLayout>
 @inject HttpClient Http
 
-<AuthorizeView>
-    <Authorized>
+<Bar Mode="BarMode.Horizontal" Background="Background.Secondary" ThemeContrast="ThemeContrast.Dark">
+    <BarBrand>
         <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #D4AF37; color: #fff !important;" Pill="true">
             <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown" /> @gamification?.Ranking
         </Badge>
@@ -13,8 +12,26 @@
         <Badge Color="Color.Secondary" Float="Float.Left" Style="background-color: #dc3545; color: #fff !important;" Pill="true">
             <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt" /> @gamification?.Food
         </Badge>
-    </Authorized>
-</AuthorizeView>
+    </BarBrand>
+    <BarMenu Style="flex-basis: unset !important;">
+        <BarEnd>
+            <BarItem>
+                <AuthorizeView>
+                    <Authorized>
+                        <Button Color="Color.Danger" Type="ButtonType.Link" To="/.auth/logout" Float="Float.Right" Size="Size.ExtraSmall">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignOutAlt" /> Sair
+                        </Button>
+                    </Authorized>
+                    <NotAuthorized>
+                        <Button Color="Color.Primary" Type="ButtonType.Link" To="/login-providers" Float="Float.Right" Size="Size.ExtraSmall">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt" /> Entrar
+                        </Button>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </BarItem>
+        </BarEnd>
+    </BarMenu>
+</Bar>
 
 @*<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0; background-color: #fff;">
         <div class="navbar-header">

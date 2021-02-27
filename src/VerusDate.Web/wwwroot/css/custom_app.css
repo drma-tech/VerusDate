@@ -24,7 +24,7 @@
 
 /*Blazored.Toast*/
 .blazored-toast-container {
-    z-index: 3 !important;
+    z-index: 4 !important;
 }
 
 .blazored-toast {
@@ -52,7 +52,10 @@
 
 /*BLAZORIZE*/
 
-/*Blazorise Header e Footer*/
+.b-layout-sider-content {
+    z-index: 4 !important;
+}
+
 .b-layout-header-fixed {
     z-index: 3 !important;
 }

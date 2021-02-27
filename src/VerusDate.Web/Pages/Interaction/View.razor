@@ -59,7 +59,14 @@ else
                     </Paragraph>
                 </CardBody>
                 <CardBody>
-                    <BtnChat IdUserView="@IdUserView"></BtnChat>
+                    @if (interaction != null && interaction.IsActiveInteraction())
+                    {
+                        <BtnChat IdUserView="@IdUserView"></BtnChat>
+                    }
+                    else
+                    {
+                        <BtnBlink IdUserView="@IdUserView"></BtnBlink>
+                    }
                     <Button Color="Color.Danger" title="Desfazer match e reportar" Float="Float.Right" Clicked="report.ShowModal">
                         <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon>
                     </Button>
@@ -203,7 +210,7 @@ else
     private List<AffinityVM> affinities = new();
     private ProfileGamificationModel gamification;
     private ProfileBadgeModel badge = new();
-    private InteractionModel InteractionVM;
+    private InteractionModel interaction;
 
     string selectedImage;
     string[] imageDataUriGallery = Array.Empty<string>();
@@ -234,7 +241,7 @@ else
             affinities = AffinityCore.GetAffinity(user, view);
             gamification = view.Gamification;
             if (view?.Badge != null) badge = view.Badge;
-            //InteractionVM = await Http.Interation_Get(IdUserView.ToString());
+            //interaction = await Http.Interation_Get(IdUserView.ToString());
         }
     }
 

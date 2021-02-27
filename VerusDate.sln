@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30608.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VerusDate.Shared", "src\Shared\VerusDate.Shared.csproj", "{9CC18EAC-C52D-42FF-810D-2568EA083A39}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7213301A-981C-4251-A66D-0C0084AFD840}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{39C5B597-67BE-4FBB-9E75-DEF242032C60}"
@@ -18,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VerusDate.Shared", "src\VerusDate.Shared\VerusDate.Shared.csproj", "{9CC18EAC-C52D-42FF-810D-2568EA083A39}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VerusDate.Web", "src\VerusDate.Web\VerusDate.Web.csproj", "{BE7700D4-9B69-4034-B6DA-0E441BD252DA}"
 EndProject

@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\VerusDate.Shared.csproj" />
+    <ProjectReference Include="..\VerusDate.Shared\VerusDate.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

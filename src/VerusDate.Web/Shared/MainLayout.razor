@@ -13,11 +13,7 @@
     </LayoutSider>
     <Layout>
         <LayoutHeader Fixed="true">
-            <AuthorizeView>
-                <Authorized>
-                    <HeadLayout></HeadLayout>
-                </Authorized>
-            </AuthorizeView>
+            <HeadLayout></HeadLayout>
         </LayoutHeader>
         <LayoutContent>
             <Container Fluid="true" Padding="Padding.Is3.FromTop">
@@ -94,6 +90,6 @@
         if (CurrentButton == type)
             return Color.Dark;
         else
-            return Color.Secondary;
+        return Color.Secondary;
     }
 }

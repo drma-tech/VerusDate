@@ -3,15 +3,19 @@
 
 <Bar Mode="BarMode.Horizontal" Background="Background.Secondary" ThemeContrast="ThemeContrast.Dark">
     <BarBrand>
-        <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #D4AF37; color: #fff !important;" Pill="true">
-            <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown" /> @gamification?.Ranking
-        </Badge>
-        <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #5c7cfa; color: #fff !important;" Pill="true">
-            <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" /> @gamification?.Diamond
-        </Badge>
-        <Badge Color="Color.Secondary" Float="Float.Left" Style="background-color: #dc3545; color: #fff !important;" Pill="true">
-            <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt" /> @gamification?.Food
-        </Badge>
+        <AuthorizeView>
+            <Authorized>
+                <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #D4AF37; color: #fff !important;" Pill="true">
+                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown" /> @gamification?.Ranking
+                </Badge>
+                <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #5c7cfa; color: #fff !important;" Pill="true">
+                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" /> @gamification?.Diamond
+                </Badge>
+                <Badge Color="Color.Secondary" Float="Float.Left" Style="background-color: #dc3545; color: #fff !important;" Pill="true">
+                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt" /> @gamification?.Food
+                </Badge>
+            </Authorized>
+        </AuthorizeView>       
     </BarBrand>
     <BarMenu Style="flex-basis: unset !important;">
         <BarEnd>

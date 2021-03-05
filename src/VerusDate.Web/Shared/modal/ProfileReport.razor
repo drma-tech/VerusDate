@@ -1,11 +1,10 @@
 ﻿@inherits ComponenteCore<ProfileReport>
 
 <Modal @ref="modal">
-    <ModalBackdrop />
     <ModalContent Centered="true" Size="ModalSize.Default">
         <ModalHeader>
             <ModalTitle>Desfazer match e reportar</ModalTitle>
-            <CloseButton Clicked="@modal.Hide" />
+            <CloseButton />
         </ModalHeader>
         <ModalBody MaxHeight="50">
             <RadioGroup TValue="int" Name="report" CheckedValue="@checkedValue" CheckedValueChanged="@OnCheckedValueChanged">

@@ -1,9 +1,8 @@
 ﻿<Modal @ref="modal">
-    <ModalBackdrop />
     <ModalContent IsCentered="true">
         <ModalHeader>
             <ModalTitle>@Title</ModalTitle>
-            <CloseButton Clicked="@modal.Hide" />
+            <CloseButton />
         </ModalHeader>
         <ModalBody Style="text-align: justify !important;">
             @ChildContent

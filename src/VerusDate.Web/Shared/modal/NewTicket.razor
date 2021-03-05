@@ -2,11 +2,10 @@
 @inject HttpClient Http
 
 <Modal @ref="modal">
-    <ModalBackdrop />
     <ModalContent IsCentered="true">
         <ModalHeader>
             <ModalTitle>Novo Ticket</ModalTitle>
-            <CloseButton Clicked="@modal.Hide" />
+            <CloseButton />
         </ModalHeader>
         <ModalBody>
             <EditForm Model="@Ticket" OnValidSubmit="SubmitForm">

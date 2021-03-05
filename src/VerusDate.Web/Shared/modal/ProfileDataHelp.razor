@@ -2,11 +2,10 @@
 @typeparam TValue
 
 <Modal @ref="modal">
-    <ModalBackdrop />
     <ModalContent Centered="true" Size="ModalSize.Default">
         <ModalHeader>
             <ModalTitle>@label</ModalTitle>
-            <CloseButton Clicked="@modal.Hide" />
+            <CloseButton />
         </ModalHeader>
         <ModalBody MaxHeight="80">
             @if (TypeEnum != null)
@@ -18,7 +17,7 @@
                     {
                         if (!string.IsNullOrEmpty(@item.Group) && previousGroup != @item.Group)
                         {
-                            <Alert Visible="true" Color="Color.Info" Padding="Padding.Is1">
+                            <Alert Visible="true" Color="Color.Info" Padding="Padding.Is1" Margin="Margin.Is2.FromBottom.Is2.FromTop">
                                 <AlertMessage>@item.Group</AlertMessage>
                             </Alert>
                         }

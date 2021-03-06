@@ -63,19 +63,19 @@ namespace VerusDate.Web.Core
             return obj;
         }
 
-        private static bool CheckAge(int age, int? MinAge, int? MaxAge)
+        private static bool CheckAge(int age, int? Looking_MinAge, int? Looking_MaxAge)
         {
-            if (MinAge.HasValue && MaxAge.HasValue)
+            if (Looking_MinAge.HasValue && Looking_MaxAge.HasValue)
             {
-                return MinAge <= age && MaxAge >= age;
+                return Looking_MinAge <= age && Looking_MaxAge >= age;
             }
-            else if (MinAge.HasValue)
+            else if (Looking_MinAge.HasValue)
             {
-                return MinAge <= age;
+                return Looking_MinAge <= age;
             }
-            else if (MaxAge.HasValue)
+            else if (Looking_MaxAge.HasValue)
             {
-                return MaxAge >= age;
+                return Looking_MaxAge >= age;
             }
             else
             {
@@ -85,32 +85,32 @@ namespace VerusDate.Web.Core
 
         private static bool CheckEnumZodiac(Zodiac view, Zodiac user)
         {
-            return view switch
+            return user switch
             {
-                Zodiac.Aries => user == Zodiac.Leo || user == Zodiac.Sagittarius,
-                Zodiac.Taurus => user == Zodiac.Virgo || user == Zodiac.Capricorn,
-                Zodiac.Gemini => user == Zodiac.Libra || user == Zodiac.Aquarius,
-                Zodiac.Cancer => user == Zodiac.Scorpio || user == Zodiac.Pisces,
-                Zodiac.Leo => user == Zodiac.Aries || user == Zodiac.Sagittarius,
-                Zodiac.Virgo => user == Zodiac.Taurus || user == Zodiac.Capricorn,
-                Zodiac.Libra => user == Zodiac.Gemini || user == Zodiac.Aquarius,
-                Zodiac.Scorpio => user == Zodiac.Cancer || user == Zodiac.Scorpio || user == Zodiac.Pisces,
-                Zodiac.Sagittarius => user == Zodiac.Aries || user == Zodiac.Leo,
-                Zodiac.Capricorn => user == Zodiac.Taurus || user == Zodiac.Virgo,
-                Zodiac.Aquarius => user == Zodiac.Gemini || user == Zodiac.Libra,
-                Zodiac.Pisces => user == Zodiac.Cancer || user == Zodiac.Scorpio,
+                Zodiac.Aries => view == Zodiac.Leo || view == Zodiac.Sagittarius,
+                Zodiac.Taurus => view == Zodiac.Virgo || view == Zodiac.Capricorn,
+                Zodiac.Gemini => view == Zodiac.Libra || view == Zodiac.Aquarius,
+                Zodiac.Cancer => view == Zodiac.Scorpio || view == Zodiac.Pisces,
+                Zodiac.Leo => view == Zodiac.Aries || view == Zodiac.Sagittarius,
+                Zodiac.Virgo => view == Zodiac.Taurus || view == Zodiac.Capricorn,
+                Zodiac.Libra => view == Zodiac.Gemini || view == Zodiac.Aquarius,
+                Zodiac.Scorpio => view == Zodiac.Cancer || view == Zodiac.Scorpio || view == Zodiac.Pisces,
+                Zodiac.Sagittarius => view == Zodiac.Aries || view == Zodiac.Leo,
+                Zodiac.Capricorn => view == Zodiac.Taurus || view == Zodiac.Virgo,
+                Zodiac.Aquarius => view == Zodiac.Gemini || view == Zodiac.Libra,
+                Zodiac.Pisces => view == Zodiac.Cancer || view == Zodiac.Scorpio,
                 _ => false,
             };
         }
 
         private static bool CheckMoneyPersonality(MoneyPersonality view, MoneyPersonality user)
         {
-            return view switch
+            return user switch
             {
-                MoneyPersonality.BigSpender => user == MoneyPersonality.BigSpender,
-                MoneyPersonality.Avoider => user == MoneyPersonality.Avoider,
-                MoneyPersonality.Saver => user == MoneyPersonality.Saver || user == MoneyPersonality.Investor,
-                MoneyPersonality.Investor => user == MoneyPersonality.Saver || user == MoneyPersonality.Investor,
+                MoneyPersonality.BigSpender => view == MoneyPersonality.BigSpender,
+                MoneyPersonality.Avoider => view == MoneyPersonality.Avoider,
+                MoneyPersonality.Saver => view == MoneyPersonality.Saver || view == MoneyPersonality.Investor,
+                MoneyPersonality.Investor => view == MoneyPersonality.Saver || view == MoneyPersonality.Investor,
                 _ => false,
             };
         }
@@ -140,28 +140,28 @@ namespace VerusDate.Web.Core
             }
         }
 
-        private static bool CheckEnum(int user, int? looking)
+        private static bool CheckEnum(int view, int? looking)
         {
             if (!looking.HasValue) return true; //If the user has not defined, then it is an affinity
 
-            return user == looking;
+            return view == looking;
         }
 
-        private static bool CheckEnumArray<T>(IEnumerable<T> user, IEnumerable<T> looking) where T : System.Enum
+        private static bool CheckEnumArray<T>(IEnumerable<T> view, IEnumerable<T> looking) where T : System.Enum
         {
             if (!looking.Any()) return true; //If the user has not defined, then it is an affinity
 
-            return user.Intersect(looking).Any();
+            return view.Intersect(looking).Any();
         }
 
         private static bool CheckEnumRelationshipPersonality(RelationshipPersonality view, RelationshipPersonality user)
         {
-            return view switch
+            return user switch
             {
-                RelationshipPersonality.Explorers => user == RelationshipPersonality.Explorers,
-                RelationshipPersonality.Directors => user == RelationshipPersonality.Negotiator,
-                RelationshipPersonality.Builders => user == RelationshipPersonality.Builders,
-                RelationshipPersonality.Negotiator => user == RelationshipPersonality.Directors,
+                RelationshipPersonality.Explorers => view == RelationshipPersonality.Explorers,
+                RelationshipPersonality.Directors => view == RelationshipPersonality.Negotiator,
+                RelationshipPersonality.Builders => view == RelationshipPersonality.Builders,
+                RelationshipPersonality.Negotiator => view == RelationshipPersonality.Directors,
                 _ => false,
             };
         }
@@ -174,27 +174,27 @@ namespace VerusDate.Web.Core
             if (!user.HasValue) return false;
             if (!view.HasValue) return false;
 
-            return view switch
+            return user switch
             {
-                MyersBriggsTypeIndicator.INTJ => user.Value == MyersBriggsTypeIndicator.ENTP || user.Value == MyersBriggsTypeIndicator.ENFP,
-                MyersBriggsTypeIndicator.INTP => user.Value == MyersBriggsTypeIndicator.ENTJ || user.Value == MyersBriggsTypeIndicator.ENFJ,
-                MyersBriggsTypeIndicator.ENTJ => user.Value == MyersBriggsTypeIndicator.INTP || user.Value == MyersBriggsTypeIndicator.INFP,
-                MyersBriggsTypeIndicator.ENTP => user.Value == MyersBriggsTypeIndicator.INTJ || user.Value == MyersBriggsTypeIndicator.INFJ,
+                MyersBriggsTypeIndicator.INTJ => view.Value == MyersBriggsTypeIndicator.ENTP || view.Value == MyersBriggsTypeIndicator.ENFP,
+                MyersBriggsTypeIndicator.INTP => view.Value == MyersBriggsTypeIndicator.ENTJ || view.Value == MyersBriggsTypeIndicator.ENFJ,
+                MyersBriggsTypeIndicator.ENTJ => view.Value == MyersBriggsTypeIndicator.INTP || view.Value == MyersBriggsTypeIndicator.INFP,
+                MyersBriggsTypeIndicator.ENTP => view.Value == MyersBriggsTypeIndicator.INTJ || view.Value == MyersBriggsTypeIndicator.INFJ,
 
-                MyersBriggsTypeIndicator.INFJ => user.Value == MyersBriggsTypeIndicator.ENFP || user.Value == MyersBriggsTypeIndicator.ENTP || user.Value == MyersBriggsTypeIndicator.INTJ || user.Value == MyersBriggsTypeIndicator.INFJ,
-                MyersBriggsTypeIndicator.INFP => user.Value == MyersBriggsTypeIndicator.ENFJ || user.Value == MyersBriggsTypeIndicator.ENTJ,
-                MyersBriggsTypeIndicator.ENFJ => user.Value == MyersBriggsTypeIndicator.INFP || user.Value == MyersBriggsTypeIndicator.INTP,
-                MyersBriggsTypeIndicator.ENFP => user.Value == MyersBriggsTypeIndicator.INFJ || user.Value == MyersBriggsTypeIndicator.INTJ,
+                MyersBriggsTypeIndicator.INFJ => view.Value == MyersBriggsTypeIndicator.ENFP || view.Value == MyersBriggsTypeIndicator.ENTP || view.Value == MyersBriggsTypeIndicator.INTJ || view.Value == MyersBriggsTypeIndicator.INFJ,
+                MyersBriggsTypeIndicator.INFP => view.Value == MyersBriggsTypeIndicator.ENFJ || view.Value == MyersBriggsTypeIndicator.ENTJ,
+                MyersBriggsTypeIndicator.ENFJ => view.Value == MyersBriggsTypeIndicator.INFP || view.Value == MyersBriggsTypeIndicator.INTP,
+                MyersBriggsTypeIndicator.ENFP => view.Value == MyersBriggsTypeIndicator.INFJ || view.Value == MyersBriggsTypeIndicator.INTJ,
 
-                MyersBriggsTypeIndicator.ISTJ => user.Value == MyersBriggsTypeIndicator.ESTP || user.Value == MyersBriggsTypeIndicator.ESFP,
-                MyersBriggsTypeIndicator.ISFJ => user.Value == MyersBriggsTypeIndicator.ESFP || user.Value == MyersBriggsTypeIndicator.ESTP,
-                MyersBriggsTypeIndicator.ESTJ => user.Value == MyersBriggsTypeIndicator.ISTP || user.Value == MyersBriggsTypeIndicator.ISFP,
-                MyersBriggsTypeIndicator.ESFJ => user.Value == MyersBriggsTypeIndicator.ISFP || user.Value == MyersBriggsTypeIndicator.ISTP,
+                MyersBriggsTypeIndicator.ISTJ => view.Value == MyersBriggsTypeIndicator.ESTP || view.Value == MyersBriggsTypeIndicator.ESFP,
+                MyersBriggsTypeIndicator.ISFJ => view.Value == MyersBriggsTypeIndicator.ESFP || view.Value == MyersBriggsTypeIndicator.ESTP,
+                MyersBriggsTypeIndicator.ESTJ => view.Value == MyersBriggsTypeIndicator.ISTP || view.Value == MyersBriggsTypeIndicator.ISFP,
+                MyersBriggsTypeIndicator.ESFJ => view.Value == MyersBriggsTypeIndicator.ISFP || view.Value == MyersBriggsTypeIndicator.ISTP,
 
-                MyersBriggsTypeIndicator.ISTP => user.Value == MyersBriggsTypeIndicator.ESFJ || user.Value == MyersBriggsTypeIndicator.ESTJ,
-                MyersBriggsTypeIndicator.ISFP => user.Value == MyersBriggsTypeIndicator.ESTJ || user.Value == MyersBriggsTypeIndicator.ESFJ,
-                MyersBriggsTypeIndicator.ESTP => user.Value == MyersBriggsTypeIndicator.ISTJ || user.Value == MyersBriggsTypeIndicator.ISFJ,
-                MyersBriggsTypeIndicator.ESFP => user.Value == MyersBriggsTypeIndicator.ISTJ || user.Value == MyersBriggsTypeIndicator.ISFJ,
+                MyersBriggsTypeIndicator.ISTP => view.Value == MyersBriggsTypeIndicator.ESFJ || view.Value == MyersBriggsTypeIndicator.ESTJ,
+                MyersBriggsTypeIndicator.ISFP => view.Value == MyersBriggsTypeIndicator.ESTJ || view.Value == MyersBriggsTypeIndicator.ESFJ,
+                MyersBriggsTypeIndicator.ESTP => view.Value == MyersBriggsTypeIndicator.ISTJ || view.Value == MyersBriggsTypeIndicator.ISFJ,
+                MyersBriggsTypeIndicator.ESFP => view.Value == MyersBriggsTypeIndicator.ISTJ || view.Value == MyersBriggsTypeIndicator.ISFJ,
                 _ => false,
             };
         }

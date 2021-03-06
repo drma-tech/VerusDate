@@ -65,7 +65,8 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             SQL.Append("	c ");
             SQL.Append("WHERE ");
             SQL.Append("	c.type = " + (int)CosmosType.Profile + " ");
-            SQL.Append("	AND c.id != '" + request.Type + ":" + request.IdLoggedUser + "' ");
+            SQL.Append("    AND c.id != '" + request.Type + ":" + request.IdLoggedUser + "' "); //não seja o próprio usuário
+            SQL.Append("    AND NOT EXISTS (SELECT VALUE t FROM t IN c.passiveInteractions WHERE t = '" + request.IdLoggedUser + "') "); //não exista interação com este usuário
 
             //BASIC
             SQL.Append("	AND ROUND(ST_DISTANCE({'type': 'Point', 'coordinates':[@latitude, @longitude]},{'type': 'Point', 'coordinates':[c.basic.latitude, c.basic.longitude]}) / @valueCalDistance) <= @distance ");

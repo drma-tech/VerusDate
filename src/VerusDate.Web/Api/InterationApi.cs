@@ -32,9 +32,9 @@ namespace VerusDate.Web.Api
             return await http.Get<InteractionModel>(InterationEndpoint.Get(IdUserInteraction), storage);
         }
 
-        public async static Task<ChatModel> Interation_GetChat(this HttpClient http, ISyncSessionStorageService storage, string IdChat)
+        public async static Task<ChatModel> Interation_GetChat(this HttpClient http, string IdChat)
         {
-            return await http.Get<ChatModel>(InterationEndpoint.GetChat(IdChat), storage);
+            return await http.Get<ChatModel>(InterationEndpoint.GetChat(IdChat));
         }
 
         public async static Task<List<InteractionQuery>> Interation_GetLikes(this HttpClient http, ISyncSessionStorageService storage)

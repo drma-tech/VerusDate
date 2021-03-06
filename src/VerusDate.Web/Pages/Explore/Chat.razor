@@ -258,7 +258,7 @@
                 .WithAutomaticReconnect()
                 .Build();
 
-            hubConnection.On<ChatItem>(interaction.Id, (item) =>
+            hubConnection.On<ChatItem>(interaction.IdChat, (item) =>
             {
                 chat.Itens.Add(item);
                 StateHasChanged();
@@ -298,7 +298,7 @@
             affinities = AffinityCore.GetAffinity(user, view);
             if (view?.Badge != null) badge = view.Badge;
             interaction = await Http.Interation_Get(SessionStorage, IdUserView);
-            chat = await Http.Interation_GetChat(SessionStorage, interaction.IdChat);
+            chat = await Http.Interation_GetChat(interaction.IdChat);
         }
     }
 

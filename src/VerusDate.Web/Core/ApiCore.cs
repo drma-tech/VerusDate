@@ -27,16 +27,25 @@ namespace VerusDate.Web.Core
             return new JsonSerializerOptions();
         }
 
-        public async static Task<T> Get<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage) where T : class
+        public async static Task<T> Get<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage = null) where T : class
         {
-            if (!storage.ContainKey(requestUri))
+            if (storage == null)
             {
                 var response = await http.GetAsync(http.BaseApi() + requestUri);
 
-                storage.SetItem(requestUri, await response.ReturnResponse<T>());
+                return await response.ReturnResponse<T>();
             }
+            else
+            {
+                if (!storage.ContainKey(requestUri))
+                {
+                    var response = await http.GetAsync(http.BaseApi() + requestUri);
 
-            return storage.GetItem<T>(requestUri);
+                    storage.SetItem(requestUri, await response.ReturnResponse<T>());
+                }
+
+                return storage.GetItem<T>(requestUri);
+            }
         }
 
         public async static Task<List<T>> GetList<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage) where T : class
@@ -63,7 +72,7 @@ namespace VerusDate.Web.Core
             return response;
         }
 
-        public async static Task<HttpResponseMessage> Put(this HttpClient http, string requestUri, object obj) 
+        public async static Task<HttpResponseMessage> Put(this HttpClient http, string requestUri, object obj)
         {
             return await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
         }

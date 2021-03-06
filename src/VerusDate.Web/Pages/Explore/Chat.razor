@@ -191,7 +191,7 @@
                     <Divider DividerType="DividerType.TextContent" Text="Bio"></Divider>
 
                     <ItemDataProfile For="@(() => view.Age)" Value="@ProfileHelper.GetAgeExtension(view.Age)" ClassIcon="fas fa-birthday-cake" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="null" Value="@view.Bio.BirthDate.GetZodiac()" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Bio.Zodiac)" Value="@view.Bio.Zodiac" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Bio.RaceCategory)" Value="@view.Bio.RaceCategory" ClassIcon="fas fa-globe" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Bio.Height)" Value="@view.Bio.Height" ClassIcon="fas fa-ruler" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Bio.BodyMass)" Value="@view.Bio.BodyMass" ClassIcon="fas fa-weight" Affinities="@affinities"></ItemDataProfile>
@@ -317,7 +317,7 @@
             Message = "";
 
             await Http.PostAsJsonAsync($"{Http.BaseApi()}messages", new ChatModel(Guid.Parse(chat.Key)) { Itens = new List<ChatItem>() { item } }); //envia pro usuário
-            await Http.Interaction_AddChat(interaction.IdChat, item, Toast); //envia pro banco
+            await Http.Interaction_AddChat(interaction.IdChat, view.Id, item, Toast); //envia pro banco
         }
         catch (Exception ex)
         {

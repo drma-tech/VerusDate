@@ -151,8 +151,8 @@
     protected override async Task LoadData()
     {
         var interactions = await Http.Interation_GetMyMatches(SessionStorage);
-        NewMatches = interactions.Where(w => !w.Chat.Any()).ToList();
-        MsgMatches = interactions.Where(w => w.Chat.Any()).ToList();
+        NewMatches = interactions.Where(w => !w.StartedChat).ToList();
+        MsgMatches = interactions.Where(w => w.StartedChat).ToList();
 
         Likes = await Http.Interation_GetLikes(SessionStorage);
         Blinks = await Http.Interation_GetBlinks(SessionStorage);

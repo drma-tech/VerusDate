@@ -80,9 +80,9 @@ namespace VerusDate.Web.Api
             await response.ProcessResponse(toast, msgInfo: "-1 Maça");
         }
 
-        public async static Task Interaction_AddChat(this HttpClient http, string IdChat, ChatItem Item, IToastService toast)
+        public async static Task Interaction_AddChat(this HttpClient http, string IdChat, string IdUserInteraction, ChatItem Item, IToastService toast)
         {
-            var response = await http.Put(InterationEndpoint.AddChat, new { IdChat, Item });
+            var response = await http.Put(InterationEndpoint.AddChat, new { IdChat, IdUserInteraction, Item });
 
             await response.ProcessResponse(toast);
         }

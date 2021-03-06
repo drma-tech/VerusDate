@@ -35,6 +35,7 @@ namespace VerusDate.Shared.Model
         public Action Block { get; set; } = new Action();
 
         public string IdChat { get; set; }
+        public bool StartedChat { get; set; }
 
         public void ExecuteLike(string NickNameLoggedUser, string MainPhotoLoggedUser)
         {

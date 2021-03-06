@@ -28,7 +28,7 @@ else
                 <CardBody>
                     <Badge Color="Color.Secondary">@view.Basic.NickName</Badge>
                     <Badge Color="Color.Secondary">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Icon> @view.Basic.Location.Split(" - ").Last()
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Icon> @view.Basic.GetLocation(LocationType.City)
                     </Badge>
                     @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                     {
@@ -241,7 +241,7 @@ else
             affinities = AffinityCore.GetAffinity(user, view);
             gamification = view.Gamification;
             if (view?.Badge != null) badge = view.Badge;
-            //interaction = await Http.Interation_Get(IdUserView.ToString());
+            interaction = await Http.Interation_Get(SessionStorage, IdUserView.ToString());
         }
     }
 

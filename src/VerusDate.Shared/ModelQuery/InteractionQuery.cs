@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using VerusDate.Shared.Core;
+﻿using VerusDate.Shared.Core;
 using static VerusDate.Shared.Helper.ImageHelper;
 
 namespace VerusDate.Shared.Model
@@ -29,7 +28,8 @@ namespace VerusDate.Shared.Model
         public Action Match { get; set; } = new Action();
         public Action Block { get; set; } = new Action();
 
-        public List<ChatModel> Chat { get; set; } = new List<ChatModel>();
+        public string IdChat { get; set; }
+        public bool StartedChat { get; set; }
 
         public string GetMainPhoto(TypeUser type)
         {

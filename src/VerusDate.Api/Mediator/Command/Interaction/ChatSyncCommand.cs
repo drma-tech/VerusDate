@@ -37,7 +37,7 @@ namespace VerusDate.Api.Mediator.Command.Interaction
 
         public async Task<ChatItem> Handle(ChatSyncCommand request, CancellationToken cancellationToken)
         {
-            var chat = await _repo.Get<ChatModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var chat = await _repo.Get<ChatModel>(request.IdChat, new PartitionKey(request.IdChat.Split(":")[1]), cancellationToken);
 
             chat.Itens.Add(request.Item);
 

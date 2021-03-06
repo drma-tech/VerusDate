@@ -21,6 +21,7 @@ namespace VerusDate.Web.Api
         public const string AddChat = "Interaction/AddChat";
 
         public static string Get(string IdUserInteraction) => $"Interaction/Get?id={IdUserInteraction}";
+
         public static string GetChat(string IdChat) => $"Interaction/GetChat?id={IdChat}";
     }
 
@@ -79,9 +80,9 @@ namespace VerusDate.Web.Api
             await response.ProcessResponse(toast, msgInfo: "-1 Maça");
         }
 
-        public async static Task Interaction_AddChat(this HttpClient http, ChatModel chat, string IdUserInteraction, IToastService toast)
+        public async static Task Interaction_AddChat(this HttpClient http, string IdChat, ChatItem Item, IToastService toast)
         {
-            var response = await http.Put(InterationEndpoint.AddChat, new { IdUserInteraction, chat });
+            var response = await http.Put(InterationEndpoint.AddChat, new { IdChat, Item });
 
             await response.ProcessResponse(toast);
         }

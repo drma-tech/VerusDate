@@ -312,7 +312,7 @@
             Message = "";
 
             await Http.PostAsJsonAsync($"{Http.BaseApi()}messages", new ChatModel() { Itens = new List<ChatItem>() { item } }); //envia pro usuário
-            await Http.Interaction_AddChat(chat, IdUserView, Toast); //envia pro banco
+            await Http.Interaction_AddChat(interaction.IdChat, item, Toast); //envia pro banco
         }
         catch (Exception ex)
         {

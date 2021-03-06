@@ -244,9 +244,9 @@
 
     private string labelPhoto => $"{view.Basic.NickName}, {view.Age}, {ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)}";
 
+    private readonly string functionAppBaseUri = "http://localhost:7071/api/"; //URL for function app. Leave this as is for now.
     private HubConnection hubConnection;
-    //public bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
-    public bool IsConnected => true;
+    public bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
 
     protected override async Task OnInitializedAsync()
     {
@@ -258,31 +258,25 @@
 
             //if (tokenResult.TryGetToken(out var token))
             //{
-            //    hubConnection = new HubConnectionBuilder()
-            //    .WithUrl(NavigationManager.ToAbsoluteUri("/chathub"), opt =>
-            //    {
-            //        opt.AccessTokenProvider = () => Task.FromResult(token.Value);
-            //    })
-            //    .WithAutomaticReconnect()
-            //    .Build();
+            hubConnection = new HubConnectionBuilder()
+            //.WithUrl(NavigationManager.ToAbsoluteUri("/chathub"), opt =>
+            //{
+            //    opt.AccessTokenProvider = () => Task.FromResult(token.Value);
+            //})
+            .WithUrl(functionAppBaseUri)
+            .WithAutomaticReconnect()
+            .Build();
 
-            //    hubConnection.On<string, string>("ReceivePrivateMessage", (user, message) =>
-            //    {
-            //        try
-            //        {
-            //            //if (user == CurrentUser.Id) //só recebe se quem mandou for o mesmo do chat
-            //            //{
-            //            //    ListChat.Add(new VerusDate.Shared.Model.Interaction.Chat() { IdChat = InteractionVM.IdChat, IdUserSender = user, TypeContent = TypeContent.Message, Content = message });
-            //            //    StateHasChanged();
-            //            //}
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            ex.ProcessException(Toast, Logger);
-            //        }
-            //    });
+            hubConnection.On<ChatModel>("clientMessage", (chat) =>
+            {
+                if (chat.IdUserSender == view.Id) //só recebe se quem mandou for o mesmo do chat
+                {
+                    interaction.Chat.Add(chat);
+                    StateHasChanged();
+                }
+            });
 
-            //    await hubConnection.StartAsync();
+            await hubConnection.StartAsync();
             //}
             //else
             //{
@@ -328,9 +322,11 @@
     {
         try
         {
-            //await hubConnection.SendAsync("SendPrivateMessage", ComponenteUtils.IdUser, Message, CurrentUser.Id);
-
             var chat = new ChatModel(ComponenteUtils.IdUser, TypeContent.Message, Message);
+
+            await Http.PostAsJsonAsync($"{functionAppBaseUri}messages", chat); // post to the function app
+                                                                               //await hubConnection.SendAsync("SendPrivateMessage", ComponenteUtils.IdUser, Message, user.Id);
+
             interaction.AddChat(chat);
             Message = "";
 

@@ -244,7 +244,6 @@
 
     private string labelPhoto => $"{view.Basic.NickName}, {view.Age}, {ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)}";
 
-    private readonly string functionAppBaseUri = "http://localhost:7071/api/"; //URL for function app. Leave this as is for now.
     private HubConnection hubConnection;
     public bool IsConnected => hubConnection?.State == HubConnectionState.Connected;
 
@@ -263,14 +262,14 @@
             //{
             //    opt.AccessTokenProvider = () => Task.FromResult(token.Value);
             //})
-            .WithUrl(functionAppBaseUri)
+            .WithUrl(Http.BaseApi())
             .WithAutomaticReconnect()
             .Build();
 
             hubConnection.On<ChatModel>("clientMessage", (chat) =>
             {
                 if (chat.IdUserSender == view.Id) //só recebe se quem mandou for o mesmo do chat
-                {
+            {
                     interaction.Chat.Add(chat);
                     StateHasChanged();
                 }
@@ -324,8 +323,7 @@
         {
             var chat = new ChatModel(ComponenteUtils.IdUser, TypeContent.Message, Message);
 
-            await Http.PostAsJsonAsync($"{functionAppBaseUri}messages", chat); // post to the function app
-                                                                               //await hubConnection.SendAsync("SendPrivateMessage", ComponenteUtils.IdUser, Message, user.Id);
+            await Http.PostAsJsonAsync($"{Http.BaseApi()}messages", chat); // post to the function app
 
             interaction.AddChat(chat);
             Message = "";

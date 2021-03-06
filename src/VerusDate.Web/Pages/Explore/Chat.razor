@@ -275,7 +275,7 @@
     private VisibilityOptions Options => new VisibilityOptions()
     {
         Invalid = interaction == null || !interaction.ActiveInteraction(),
-        Loading = interaction == null,
+        Loading = chat == null,
         NoData = chat == null || !chat.Itens.Any()
     };
 

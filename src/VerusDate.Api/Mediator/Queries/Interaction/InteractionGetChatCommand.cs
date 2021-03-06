@@ -34,7 +34,7 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
 
         public async Task<ChatModel> Handle(InteractionGetChatCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.Get<ChatModel>(request.IdChat, new PartitionKey(request.IdChat), cancellationToken);
+            return await _repo.Get<ChatModel>(request.IdChat, new PartitionKey(request.IdChat.Split(":")[1]), cancellationToken);
         }
     }
 }

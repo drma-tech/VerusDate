@@ -10,9 +10,12 @@ namespace VerusDate.Shared.Model
     {
         public ChatModel() : base(CosmosType.Chat)
         {
-            var guid = Guid.NewGuid().ToString();
-            this.SetId(guid);
-            this.SetPartitionKey(guid);
+        }
+
+        public ChatModel(Guid guid) : base(CosmosType.Chat)
+        {
+            this.SetId(guid.ToString());
+            this.SetPartitionKey(guid.ToString());
         }
 
         public List<ChatItem> Itens { get; set; } = new List<ChatItem>();

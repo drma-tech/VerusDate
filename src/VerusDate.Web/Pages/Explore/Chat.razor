@@ -258,10 +258,15 @@
                 .WithAutomaticReconnect()
                 .Build();
 
-            hubConnection.On<ChatItem>(interaction.IdChat, (item) =>
+            hubConnection.On<ChatModel>(interaction.IdChat, (chatModel) =>
             {
-                chat.Itens.Add(item);
-                StateHasChanged();
+                var item = chatModel.Itens.First();
+
+                if (item.IdUserSender != user.Key) //evitar que o usuário receba a própria mensagem
+                {
+                    chat.Itens.Add(item);
+                    StateHasChanged();
+                }
             });
 
             await hubConnection.StartAsync();
@@ -311,7 +316,7 @@
             chat.Itens.Add(item);
             Message = "";
 
-            await Http.PostAsJsonAsync($"{Http.BaseApi()}messages", new ChatModel() { Itens = new List<ChatItem>() { item } }); //envia pro usuário
+            await Http.PostAsJsonAsync($"{Http.BaseApi()}messages", new ChatModel(Guid.Parse(chat.Key)) { Itens = new List<ChatItem>() { item } }); //envia pro usuário
             await Http.Interaction_AddChat(interaction.IdChat, item, Toast); //envia pro banco
         }
         catch (Exception ex)

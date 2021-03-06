@@ -3,7 +3,6 @@
 @implements IDisposable
 @attribute [Authorize]
 @inherits PageCore<Explore.Chat>
-@*@inject IAccessTokenProvider TokenProvider*@
 
 <Row>
     <Column ColumnSize="ColumnSize.Is7.OnDesktop.Is6.OnFullHD">
@@ -17,7 +16,7 @@
                 }
                 else
                 {
-                    @foreach (var item in interaction.Chat.OrderByDescending(o => o.DtMessage))
+                    @foreach (var item in chat.Itens.OrderByDescending(o => o.DtMessage))
                     {
                         if (item.IdUserSender == ComponenteUtils.IdUser) //usuário logado como sender
                         {
@@ -235,6 +234,7 @@
     private ProfileModel user { get; set; }
     private ProfileView view { get; set; }
     private InteractionModel interaction { get; set; }
+    private ChatModel chat { get; set; }
     private List<AffinityVM> affinities = new();
     private ProfileBadgeModel badge = new();
 
@@ -253,34 +253,18 @@
 
         try
         {
-            //var tokenResult = await TokenProvider.RequestAccessToken();
-
-            //if (tokenResult.TryGetToken(out var token))
-            //{
             hubConnection = new HubConnectionBuilder()
-            //.WithUrl(NavigationManager.ToAbsoluteUri("/chathub"), opt =>
-            //{
-            //    opt.AccessTokenProvider = () => Task.FromResult(token.Value);
-            //})
-            .WithUrl(Http.BaseApi())
-            .WithAutomaticReconnect()
-            .Build();
+                .WithUrl(Http.BaseApi())
+                .WithAutomaticReconnect()
+                .Build();
 
-            hubConnection.On<ChatModel>("clientMessage", (chat) =>
+            hubConnection.On<ChatItem>(interaction.Id, (item) =>
             {
-                if (chat.IdUserSender == view.Id) //só recebe se quem mandou for o mesmo do chat
-            {
-                    interaction.Chat.Add(chat);
-                    StateHasChanged();
-                }
+                chat.Itens.Add(item);
+                StateHasChanged();
             });
 
             await hubConnection.StartAsync();
-            //}
-            //else
-            //{
-            //    throw new InvalidOperationException(nameof(tokenResult));
-            //}
         }
         catch (Exception ex)
         {
@@ -291,13 +275,13 @@
     private VisibilityOptions Options => new VisibilityOptions()
     {
         Invalid = interaction == null || !interaction.ActiveInteraction(),
-        Loading = IsLoading,
-        NoData = interaction == null || !interaction.Chat.Any()
+        Loading = interaction == null,
+        NoData = chat == null || !chat.Itens.Any()
     };
 
     private VisibilityOptions OptionsProfile => new VisibilityOptions()
     {
-        Loading = IsLoading
+        Loading = view == null
     };
 
     protected override async Task LoadData()
@@ -314,6 +298,7 @@
             affinities = AffinityCore.GetAffinity(user, view);
             if (view?.Badge != null) badge = view.Badge;
             interaction = await Http.Interation_Get(SessionStorage, IdUserView);
+            chat = await Http.Interation_GetChat(SessionStorage, interaction.IdChat);
         }
     }
 
@@ -321,14 +306,13 @@
     {
         try
         {
-            var chat = new ChatModel(ComponenteUtils.IdUser, TypeContent.Message, Message);
+            var item = new ChatItem(ComponenteUtils.IdUser, TypeContent.Message, Message);
 
-            await Http.PostAsJsonAsync($"{Http.BaseApi()}messages", chat); // post to the function app
-
-            interaction.AddChat(chat);
+            chat.Itens.Add(item);
             Message = "";
 
-            await Http.Interaction_AddChat(chat, IdUserView, Toast);
+            await Http.PostAsJsonAsync($"{Http.BaseApi()}messages", new ChatModel() { Itens = new List<ChatItem>() { item } }); //envia pro usuário
+            await Http.Interaction_AddChat(chat, IdUserView, Toast); //envia pro banco
         }
         catch (Exception ex)
         {

@@ -21,6 +21,7 @@ namespace VerusDate.Web.Api
         public const string AddChat = "Interaction/AddChat";
 
         public static string Get(string IdUserInteraction) => $"Interaction/Get?id={IdUserInteraction}";
+        public static string GetChat(string IdChat) => $"Interaction/GetChat?id={IdChat}";
     }
 
     public static class InterationApi
@@ -28,6 +29,11 @@ namespace VerusDate.Web.Api
         public async static Task<InteractionModel> Interation_Get(this HttpClient http, ISyncSessionStorageService storage, string IdUserInteraction)
         {
             return await http.Get<InteractionModel>(InterationEndpoint.Get(IdUserInteraction), storage);
+        }
+
+        public async static Task<ChatModel> Interation_GetChat(this HttpClient http, ISyncSessionStorageService storage, string IdChat)
+        {
+            return await http.Get<ChatModel>(InterationEndpoint.GetChat(IdChat), storage);
         }
 
         public async static Task<List<InteractionQuery>> Interation_GetLikes(this HttpClient http, ISyncSessionStorageService storage)

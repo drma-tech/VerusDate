@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
-using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Model
 {
@@ -37,7 +34,7 @@ namespace VerusDate.Shared.Model
         public Action Match { get; set; } = new Action();
         public Action Block { get; set; } = new Action();
 
-        public List<ChatModel> Chat { get; set; } = new List<ChatModel>();
+        public string IdChat { get; set; }
 
         public void ExecuteLike(string NickNameLoggedUser, string MainPhotoLoggedUser)
         {
@@ -61,12 +58,13 @@ namespace VerusDate.Shared.Model
             DtUpdate = DateTime.UtcNow;
         }
 
-        public void ExecuteMatch(string NickNameInteraction, string MainPhotoInteraction)
+        public void ExecuteMatch(string NickNameInteraction, string MainPhotoInteraction, string IdChat)
         {
             if (!Like.Value.Value) throw new InvalidOperationException("Ação só poderá ser feita depois do like");
 
             this.NickNameInteraction = NickNameInteraction;
             this.MainPhotoInteraction = MainPhotoInteraction;
+            this.IdChat = IdChat;
             Match.Execute();
             DtUpdate = DateTime.UtcNow;
         }
@@ -99,18 +97,6 @@ namespace VerusDate.Shared.Model
             this.IdUserInteraction = IdUserInteraction;
         }
 
-        public void AddChat(ChatModel chat)
-        {
-            if (IsActiveInteraction())
-            {
-                Chat.Add(chat);
-            }
-            else
-            {
-                throw new InvalidOperationException("Operação não permitida");
-            }
-        }
-
         /// <summary>
         /// Possui match e não está bloqueado
         /// </summary>
@@ -133,30 +119,6 @@ namespace VerusDate.Shared.Model
         {
             Value = true;
             Date = DateTime.UtcNow;
-        }
-    }
-
-    public class ChatModel
-    {
-        protected ChatModel()
-        {
-        }
-
-        public DateTime DtMessage { get; set; } = DateTime.UtcNow;
-
-        [Required]
-        public string IdUserSender { get; set; }
-
-        public TypeContent TypeContent { get; set; }
-
-        [MaxLength(512)]
-        public string Content { get; set; }
-
-        public ChatModel(string IdUserSender, TypeContent TypeContent, string Content)
-        {
-            this.IdUserSender = IdUserSender;
-            this.TypeContent = TypeContent;
-            this.Content = Content;
         }
     }
 }

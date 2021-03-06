@@ -80,9 +80,11 @@ namespace VerusDate.Api.Mediator.Command.Interaction
 
             if (matched != null && matched.Like.Value.Value) //se a outra pessoa deu like também
             {
+                var chat = await _repo.Add(new ChatModel(), cancellationToken);
+
                 //registra o match nos dois
-                interactionUser.ExecuteMatch(profileInteraction.Basic.NickName, profileInteraction.Photo?.Main);
-                matched.ExecuteMatch(profileUser.Basic.NickName, profileUser.Photo?.Main);
+                interactionUser.ExecuteMatch(profileInteraction.Basic.NickName, profileInteraction.Photo?.Main, chat.Id);
+                matched.ExecuteMatch(profileUser.Basic.NickName, profileUser.Photo?.Main, chat.Id);
 
                 //atualiza as interações
                 var mergeUser1 = await _repo.Update(interactionUser, cancellationToken);

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.Azure.Cosmos;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,28 +9,24 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Interaction
 {
-    public class ChatSyncCommand : CosmosBase, IRequest<ChatModel>
+    public class ChatSyncCommand : CosmosBase, IRequest<ChatItem>
     {
         public ChatSyncCommand() : base(CosmosType.Interaction)
         {
         }
 
         [Required]
-        public string IdUserInteraction { get; set; }
+        public string IdChat { get; set; }
 
-        public string IdLoggedUser { get; private set; }
-
-        public ChatModel chat { get; set; }
+        public ChatItem Item { get; set; }
 
         public override void SetIds(string IdLoggedUser)
         {
-            this.SetId($"{IdLoggedUser}-{IdUserInteraction}");
-            this.SetPartitionKey(IdLoggedUser);
-            this.IdLoggedUser = IdLoggedUser;
+            //do nothing
         }
     }
 
-    public class ChatSyncChatHandler : IRequestHandler<ChatSyncCommand, ChatModel>
+    public class ChatSyncChatHandler : IRequestHandler<ChatSyncCommand, ChatItem>
     {
         private readonly IRepository _repo;
 
@@ -40,20 +35,15 @@ namespace VerusDate.Api.Mediator.Command.Interaction
             _repo = repo;
         }
 
-        public async Task<ChatModel> Handle(ChatSyncCommand request, CancellationToken cancellationToken)
+        public async Task<ChatItem> Handle(ChatSyncCommand request, CancellationToken cancellationToken)
         {
-            if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
+            var chat = await _repo.Get<ChatModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
 
-            var interaction1 = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
-            var interaction2 = await _repo.Get<InteractionModel>(interaction1.GetInvertedId(), new PartitionKey(request.IdUserInteraction), cancellationToken);
+            chat.Itens.Add(request.Item);
 
-            interaction1.AddChat(request.chat);
-            interaction2.AddChat(request.chat);
+            await _repo.Update(chat, cancellationToken);
 
-            await _repo.Update(interaction1, cancellationToken);
-            await _repo.Update(interaction2, cancellationToken);
-
-            return request.chat;
+            return request.Item;
         }
     }
 }

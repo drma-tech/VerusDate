@@ -22,13 +22,13 @@ namespace VerusDate.Api.Function
         //Send the messages!
         [FunctionName("messages")]
         public static Task SendMessage(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post")] ChatModel chat,
+            [HttpTrigger(AuthorizationLevel.Anonymous, FunctionMethod.POST)] ChatModel chat,
             [SignalR(HubName = "chatHub")] IAsyncCollector<SignalRMessage> signalRMessages)
         {
             return signalRMessages.AddAsync(
                 new SignalRMessage
                 {
-                    Target = "clientMessage",
+                    Target = chat.Id,
                     Arguments = new[] { chat }
                 });
         }

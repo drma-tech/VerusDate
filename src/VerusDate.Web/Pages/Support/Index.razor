@@ -11,13 +11,13 @@
 
 <Alert Color="Color.Warning" Visible="true">
     <AlertDescription>
-        Fique a vontade para sugerir melhorias ou informar quaisquer erros. Os mais votados terão prioridades.
+        Sugira aqui melhorias ou informe erros (os mais votados terão prioridades)
     </AlertDescription>
 </Alert>
 
 <Row>
     <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen">
-        <Card>
+        <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>
                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smile"></Icon> Sugestões de Melhorias
                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => NewTicket.ShowModal(TicketType.FeatureRequest)">
@@ -91,7 +91,7 @@
         </Card>
     </Column>
     <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen">
-        <Card>
+        <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>
                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug"></Icon> Erros
                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => NewTicket.ShowModal(TicketType.Bug)">

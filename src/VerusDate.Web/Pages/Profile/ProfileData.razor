@@ -11,7 +11,7 @@ else
 {
     <EditForm Model="@profile" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
         <FluentValidationValidator />
-        <Card>
+        <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>
                 Perfil
                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromLeft">
@@ -57,9 +57,11 @@ else
                 </Alert>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <div class="form-group row">
-                            <CustomLabel For="@(() => profile.Bio.BirthDate)" CssIcon="fas fa-birthday-cake"></CustomLabel>
-                            <div class="col-sm-8">
+                        <Field Horizontal="true">
+                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.BirthdayCake"></Icon> @VerusDate.Shared.Helper.AttributeHelper.GetName(() => profile.Bio.BirthDate)
+                            </FieldLabel>
+                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
                                 <Addons>
                                     <Addon AddonType="AddonType.Body">
                                         <InputDate @bind-Value="@profile.Bio.BirthDate" @attributes='new Dictionary<string, object>() { { "class", "form-control" } }'></InputDate>
@@ -71,16 +73,18 @@ else
                                     </Addon>
                                 </Addons>
                                 <ValidationMessage For="@(()=>profile.Bio.BirthDate)"></ValidationMessage>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-4 offset-sm-4">
-                                <input class="form-control" value="@profile.Bio.BirthDate.GetAge() Anos" disabled />
-                            </div>
-                            <div class="col-sm-4">
-                                <input class="form-control" value="@profile.Bio.BirthDate.GetZodiac().GetName()" disabled />
-                            </div>
-                        </div>
+                            </FieldBody>
+                        </Field>
+                        <Field Horizontal="true">
+                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD" Display="Display.None.Block.OnFullHD">
+                            </FieldLabel>
+                            <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
+                                <TextEdit Text="@(profile.Bio.BirthDate.GetAge() + " Anos")" Disabled="true"></TextEdit>
+                            </FieldBody>
+                            <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
+                                <TextEdit Text="@profile.Bio.BirthDate.GetZodiac().GetName()" Disabled="true"></TextEdit>
+                            </FieldBody>
+                        </Field>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Bio.BodyMass)" TValue="BodyMass" TEnum="BodyMass" @bind-SelectedValue="@profile.Bio.BodyMass"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight" DisableHelp="true"></CustomFieldSelect>
                     </Column>

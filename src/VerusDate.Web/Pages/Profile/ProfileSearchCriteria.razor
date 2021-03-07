@@ -10,7 +10,7 @@ else
 {
     <EditForm Model="@looking" OnValidSubmit="HandleValidSubmit">
         <FluentValidationValidator />
-        <Card>
+        <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>
                 Critérios de Busca
                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromLeft">
@@ -64,11 +64,11 @@ else
                                 <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BirthdayCake"></Icon> @AttributeHelper.GetName(() => looking.MinimalAge)
                                 <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(() => looking.MinimalAge)</FieldHelp>
                             </FieldLabel>
-                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                            <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
                                 <NumericEdit @bind-Value="@looking.MinimalAge"></NumericEdit>
                                 <ValidationMessage For="@(() => looking.MinimalAge)"></ValidationMessage>
                             </FieldBody>
-                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                            <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
                                 <NumericEdit @bind-Value="@looking.MaxAge"></NumericEdit>
                                 <ValidationMessage For="@(() => looking.MaxAge)"></ValidationMessage>
                             </FieldBody>
@@ -78,7 +78,7 @@ else
                             <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
                                 <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler"></Icon> @AttributeHelper.GetName(() => looking.MinimalHeight)
                             </FieldLabel>
-                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                            <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
                                 <InputSelect TValue="Height?" @bind-Value="@looking.MinimalHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Height>())
@@ -88,7 +88,7 @@ else
                                 </InputSelect>
                                 <ValidationMessage For="@(() => looking.MinimalHeight)"></ValidationMessage>
                             </FieldBody>
-                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                            <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
                                 <InputSelect TValue="Height?" @bind-Value="@looking.MaxHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
                                     <option></option>
                                     @foreach (var item in EnumHelper.GetArray<Height>())
@@ -134,11 +134,11 @@ else
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.SexPersonality)" TValue="IReadOnlyList<SexPersonality>" TEnum="SexPersonality" @bind-SelectedValues="@looking.SexPersonality"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         @*<CustomFieldSelect Type="FieldType.Select" For="@(() => looking.MoneyPersonality)" TValue="MoneyPersonality?" TEnum="MoneyPersonality" @bind-SelectedValue="@looking.MoneyPersonality"
-                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>
-        <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@looking.MyersBriggsTypeIndicator"
-                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@looking.Intent.IsShortTerm(true)" HasGroup="true"></CustomFieldSelect>
-        <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@looking.RelationshipPersonality"
-                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>*@
+                                        CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                    <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@looking.MyersBriggsTypeIndicator"
+                                        CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@looking.Intent.IsShortTerm(true)" HasGroup="true"></CustomFieldSelect>
+                    <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@looking.RelationshipPersonality"
+                                        CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>*@
                     </Column>
                 </Row>
             </CardBody>

@@ -77,7 +77,7 @@
 
 <Card Margin="Margin.Is3.FromBottom">
     <CardHeader>
-        Eventos disponíveis na sua localidade (@profile?.Basic.Location)
+        Eventos disponíveis (@profile?.Basic.GetLocation(LocationType.City))
         <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="FeatureUnavailable" title="Preencher automaticamente">
             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
         </Button>

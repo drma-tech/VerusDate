@@ -144,17 +144,16 @@ var RealDate = function () {
                 'Content-Type': 'application/json; charset=utf-8',
             }
         })
-            .then(response => {
-                if (response.ok) { // if HTTP-status is 200-299
-                    RealDate.Notification.Success("Rosto reconhecido com sucesso!");
-                } else {
-                    RealDate.Notification.Error("Não foi possível reconhecer seu rosto. Favor, tentar novamente");
+            .then(function (response) {
+                if (!response.ok) {
+                    return response.text().then(result => {
+                        throw new Error(result)
+                    })
                 }
-            })
-            .then(function (result) {
-                //RealDate.Notification.Info(result);
-            })
-            .catch(function (error) {
+                return response.text();
+            }).then(function (response) {
+                RealDate.Notification.Success(response);
+            }).catch(function (error) {
                 RealDate.Notification.Error(error);
             });
     }

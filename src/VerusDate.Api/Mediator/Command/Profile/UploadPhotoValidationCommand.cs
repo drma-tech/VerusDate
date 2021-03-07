@@ -44,32 +44,31 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
         public async Task<bool> Handle(UploadPhotoValidationCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
-            if (obj == null || string.IsNullOrEmpty(obj.Photo.Main)) throw new NotificationException("Foto para validação não encontrada. Favor, inserir primeiro sua foto de rosto.");
+            var profile = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            if (profile == null || string.IsNullOrEmpty(profile.Photo.Main)) throw new NotificationException("Foto para validação não encontrada. Favor, inserir primeiro sua foto de rosto.");
+            if (profile.Photo.DtMainUpload < DateTime.UtcNow.AddHours(-24)) throw new NotificationException("Foto postada a mais de 24 horas. Favor, reenviar sua foto principal.");
 
-            using (var streamValidation = new MemoryStream(request.Stream))
+            using var streamValidation = new MemoryStream(request.Stream);
+
+            var identical = await faceHelper.IsPhotoIdentical(profile, streamValidation, cancellationToken);
+
+            if (identical)
             {
-                var validated = await faceHelper.IsPhotoValid(obj, streamValidation, cancellationToken);
+                using var streamStorage = new MemoryStream(request.Stream);
 
-                if (validated)
-                {
-                    using (var streamStorage = new MemoryStream(request.Stream))
-                    {
-                        var photoName = Guid.NewGuid().ToString() + ".jpg";
+                var photoName = Guid.NewGuid().ToString() + ".jpg";
 
-                        await storageHelper.UploadPhoto(ImageHelper.PhotoType.PhotoValidation, streamStorage, photoName, cancellationToken);
-                        //await storageHelper.DeletePhoto(StorageHelper.PhotoType.PhotoValidation, obj.PhotoFaceValidation);
+                await storageHelper.UploadPhoto(ImageHelper.PhotoType.PhotoValidation, streamStorage, photoName, cancellationToken);
+                //await storageHelper.DeletePhoto(StorageHelper.PhotoType.PhotoValidation, obj.PhotoFaceValidation);
 
-                        obj.Photo.Validation = photoName;
+                profile.Photo.Validation = photoName;
 
-                        return await _repo.Update(obj, cancellationToken);
-                        //await _appValidation.ValidatePhotoFace(request.Id, true, cancellationToken);
-                    }
-                }
-                else
-                {
-                    throw new ValidationException("Não foi possível validar sua foto. Favor, tentar novamente.");
-                }
+                return await _repo.Update(profile, cancellationToken);
+                //await _appValidation.ValidatePhotoFace(request.Id, true, cancellationToken);
+            }
+            else
+            {
+                throw new ValidationException("Não foi possível validar sua foto. Favor, tentar novamente.");
             }
         }
     }

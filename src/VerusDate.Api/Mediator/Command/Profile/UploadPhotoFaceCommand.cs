@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Server.Core.Helper;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Helper;
 using VerusDate.Shared.Model;
@@ -31,40 +32,42 @@ namespace VerusDate.Server.Mediator.Commands.Profile
     {
         private readonly IRepository _repo;
         private readonly StorageHelper storageHelper;
+        private readonly FaceHelper faceHelper;
 
-        public UploadPhotoFaceHandler(IRepository repo, StorageHelper storageHelper)
+        public UploadPhotoFaceHandler(IRepository repo, StorageHelper storageHelper, FaceHelper faceHelper)
         {
             _repo = repo;
             this.storageHelper = storageHelper;
+            this.faceHelper = faceHelper;
         }
 
         public async Task<bool> Handle(UploadPhotoFaceCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
-            if (obj == null) throw new NotificationException("Perfil não encontrado");
+            var profile = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            if (profile == null) throw new NotificationException("Perfil não encontrado");
 
-            using (var stream = new MemoryStream(request.MainPhoto))
+            using var stream1 = new MemoryStream(request.MainPhoto);
+
+            if (profile.Photo == null) profile.Photo = new ProfilePhotoModel();
+
+            var photoName = Guid.NewGuid().ToString() + ".jpg";
+            profile.Photo.UpdateMainPhoto(photoName); //reseta dados da foto atual
+
+            await faceHelper.DetectFace(profile, stream1, true, cancellationToken); //valida a foto enviada e salva dados relativos a ela
+
+            if (!string.IsNullOrEmpty(profile.Photo.Main)) //foto já existente
             {
-                if (obj.Photo != null && !string.IsNullOrEmpty(obj.Photo.Main)) //foto já existente
-                {
-                    //se manter a foto com o mesmo id, o cache do browser não vai atualizar a foto
-                    await storageHelper.DeletePhoto(ImageHelper.PhotoType.PhotoFace, obj.Photo.Main, cancellationToken);
-                }
-                else
-                {
-                    obj.Photo = new ProfilePhotoModel();
-                }
-
-                var photoName = Guid.NewGuid().ToString() + ".jpg";
-
-                await storageHelper.UploadPhoto(ImageHelper.PhotoType.PhotoFace, stream, photoName, cancellationToken);
-
-                obj.Photo.Main = photoName;
-
-                obj.UpdatePhoto(obj.Photo);
+                //se manter a foto com o mesmo id, o cache do browser não vai atualizar a foto
+                await storageHelper.DeletePhoto(ImageHelper.PhotoType.PhotoFace, profile.Photo.Main, cancellationToken);
             }
 
-            return await _repo.Update(obj, cancellationToken);
+            using var stream2 = new MemoryStream(request.MainPhoto);
+
+            await storageHelper.UploadPhoto(ImageHelper.PhotoType.PhotoFace, stream2, photoName, cancellationToken);
+
+            profile.UpdatePhoto(profile.Photo);
+
+            return await _repo.Update(profile, cancellationToken);
         }
     }
 }

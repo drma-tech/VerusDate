@@ -79,7 +79,10 @@ namespace VerusDate.Api.Function
 
                 var result = await _mediator.Send(request, source.Token);
 
-                return new OkObjectResult(result);
+                if (result)
+                    return new OkObjectResult("Rosto reconhecido com sucesso!");
+                else
+                    return new BadRequestObjectResult("Não foi possível reconhecer seu rosto. Favor, tentar novamente");
             }
             catch (Exception ex)
             {

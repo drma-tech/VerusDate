@@ -10,7 +10,7 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Flexitária", Description = "A dieta flexitária está entre onívora e vegetariana. É alguém que segue uma dieta principalmente vegetariana, com exceção de algumas carnes de animais. Também é chamada de dieta semi-vegetariana.")]
         Flexitarian = 2,
 
-        [Display(Name = "Cegetariana", Description = "A dieta vegetariana não consiste em carne de animal, mas inclui outros produtos de origem animal, como laticínios, como leite, queijo, iogurte, e pode até incluir ovos ou não.")]
+        [Display(Name = "Vegetariana", Description = "A dieta vegetariana não consiste em carne de animal, mas inclui outros produtos de origem animal, como laticínios, como leite, queijo, iogurte, e pode até incluir ovos ou não.")]
         Vegetarian = 3,
 
         [Display(Name = "Vegana", Description = "A dieta vegana é semelhante à dieta vegetariana, pois não inclui carne animal. Mas também não inclui produtos de origem animal.")]

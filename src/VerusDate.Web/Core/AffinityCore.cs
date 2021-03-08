@@ -18,7 +18,7 @@ namespace VerusDate.Web.Core
 
             var obj = new List<AffinityVM>();
 
-            //BASIC
+            //BASIC - DEFINIÇÕES DE BUSCA
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.BiologicalSex), CheckEnum((int)profView.Basic.BiologicalSex, (int?)profUser.Looking.BiologicalSex)));
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.MaritalStatus), CheckEnum((int)profView.Basic.MaritalStatus, (int?)profUser.Looking.MaritalStatus)));
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Intent), CheckEnumArray(profView.Basic.Intent, profUser.Looking.Intent), profView.Basic.Intent.Intersect(profUser.Looking.Intent).Select(s => (int)s)));
@@ -27,7 +27,7 @@ namespace VerusDate.Web.Core
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Distance), profView.Distance <= profUser.Looking.Distance));
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Languages), CheckEnumArray(profView.Basic.Languages, profUser.Looking.Languages), profView.Basic.Languages.Intersect(profUser.Looking.Languages).Select(s => (int)s)));
 
-            //BIO
+            //BIO - DEFINIÇÕES DE BUSCA
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Age), CheckAge(profView.Age, profUser.Looking.MinimalAge, profUser.Looking.MaxAge)));
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.Zodiac), CheckEnumZodiac(profView.Bio.Zodiac, profUser.Bio.Zodiac)));
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.RaceCategory), CheckEnum((int)profView.Bio.RaceCategory, (int?)profUser.Looking.RaceCategory)));
@@ -36,20 +36,22 @@ namespace VerusDate.Web.Core
 
             if (profView.Basic.Intent.IsLongTerm())
             {
-                //LIFESTYLE (compatibilidade independe das definições de busca)
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Smoke), CheckEnum((int)profView.Lifestyle.Smoke, (int?)profUser.Lifestyle.Smoke)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Drink), CheckEnum((int)profView.Lifestyle.Drink, (int?)profUser.Lifestyle.Drink)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Diet), CheckEnum((int)profView.Lifestyle.Diet, (int?)profUser.Lifestyle.Diet)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.HaveChildren), CheckEnum((int)profView.Lifestyle.HaveChildren.Value, (int?)profUser.Lifestyle.HaveChildren)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.WantChildren), CheckEnum((int)profView.Lifestyle.WantChildren.Value, (int?)profUser.Lifestyle.WantChildren)));
+                //LIFESTYLE - COMPATIBILIDADE DE PERFIL
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Smoke), CheckSmoke(profView.Lifestyle.Smoke.Value, profUser.Lifestyle.Smoke.Value)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Drink), CheckDrink(profView.Lifestyle.Drink.Value, profUser.Lifestyle.Drink.Value)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Diet), CheckDiet(profView.Lifestyle.Diet.Value, profUser.Lifestyle.Diet.Value)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.HaveChildren), CheckHaveChildren(profView.Lifestyle.HaveChildren.Value, profUser.Lifestyle.HaveChildren.Value)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.WantChildren), CheckWantChildren(profView.Lifestyle.WantChildren.Value, profUser.Lifestyle.WantChildren.Value)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Religion), CheckEnum((int)profView.Lifestyle.Religion.Value, (int?)profUser.Lifestyle.Religion)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.EducationLevel), CheckEnum((int)profView.Lifestyle.EducationLevel.Value, (int?)profUser.Lifestyle.EducationLevel)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.CareerCluster), CheckEnumCareer(profView.Lifestyle.CareerCluster.Value, profUser.Lifestyle.CareerCluster.Value)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MoneyPersonality), CheckMoneyPersonality(profView.Lifestyle.MoneyPersonality.Value, profUser.Lifestyle.MoneyPersonality.Value)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator, profUser.Lifestyle.MyersBriggsTypeIndicator)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality.Value)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.LoveLanguage), CheckEnum((int)profView.Lifestyle.LoveLanguage.Value, (int?)profUser.Lifestyle.LoveLanguage)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator, profUser.Lifestyle.MyersBriggsTypeIndicator)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.SexPersonality), CheckEnum((int)profView.Lifestyle.SexPersonality.Value, (int?)profUser.Lifestyle.SexPersonality)));
 
-                //INTEREST (com uma opção de cada categoria já indica compatibilidade)
+                //INTEREST - COMPATIBILIDADE DE PERFIL / UMA OPÇAO IGUAL JÁ INDICA COMPATIBILIDADE
                 obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Food), CheckEnumArray(profView.Interest.Food, profUser.Interest.Food), profView.Interest.Food.Intersect(profUser.Interest.Food).Select(s => (int)s)));
                 obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Holidays), CheckEnumArray(profView.Interest.Holidays, profUser.Interest.Holidays), profView.Interest.Holidays.Intersect(profUser.Interest.Holidays).Select(s => (int)s)));
                 obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Sports), CheckEnumArray(profView.Interest.Sports, profUser.Interest.Sports), profView.Interest.Sports.Intersect(profUser.Interest.Sports).Select(s => (int)s)));
@@ -62,6 +64,22 @@ namespace VerusDate.Web.Core
 
             return obj;
         }
+
+        private static bool CheckEnum(int view, int? looking)
+        {
+            if (!looking.HasValue) return true; //If the user has not defined, then it is an affinity
+
+            return view == looking;
+        }
+
+        private static bool CheckEnumArray<T>(IEnumerable<T> view, IEnumerable<T> looking) where T : System.Enum
+        {
+            if (!looking.Any()) return true; //If the user has not defined, then it is an affinity
+
+            return view.Intersect(looking).Any();
+        }
+
+        #region BIO
 
         private static bool CheckAge(int age, int? Looking_MinAge, int? Looking_MaxAge)
         {
@@ -99,25 +117,8 @@ namespace VerusDate.Web.Core
                 Zodiac.Capricorn => view == Zodiac.Taurus || view == Zodiac.Virgo,
                 Zodiac.Aquarius => view == Zodiac.Gemini || view == Zodiac.Libra,
                 Zodiac.Pisces => view == Zodiac.Cancer || view == Zodiac.Scorpio,
-                _ => false,
+                _ => throw new System.NotImplementedException()
             };
-        }
-
-        private static bool CheckMoneyPersonality(MoneyPersonality view, MoneyPersonality user)
-        {
-            return user switch
-            {
-                MoneyPersonality.BigSpender => view == MoneyPersonality.BigSpender,
-                MoneyPersonality.Avoider => view == MoneyPersonality.Avoider,
-                MoneyPersonality.Saver => view == MoneyPersonality.Saver || view == MoneyPersonality.Investor,
-                MoneyPersonality.Investor => view == MoneyPersonality.Saver || view == MoneyPersonality.Investor,
-                _ => false,
-            };
-        }
-
-        private static bool CheckEnumCareer(CareerCluster view, CareerCluster user)
-        {
-            return view.GetGroup() == user.GetGroup();
         }
 
         private static bool CheckHeight(Height Height, Height? Looking_MinimalHeight, Height? Looking_MaxHeight)
@@ -140,29 +141,90 @@ namespace VerusDate.Web.Core
             }
         }
 
-        private static bool CheckEnum(int view, int? looking)
-        {
-            if (!looking.HasValue) return true; //If the user has not defined, then it is an affinity
+        #endregion BIO
 
-            return view == looking;
-        }
+        #region LIFESTYLE
 
-        private static bool CheckEnumArray<T>(IEnumerable<T> view, IEnumerable<T> looking) where T : System.Enum
-        {
-            if (!looking.Any()) return true; //If the user has not defined, then it is an affinity
-
-            return view.Intersect(looking).Any();
-        }
-
-        private static bool CheckEnumRelationshipPersonality(RelationshipPersonality view, RelationshipPersonality user)
+        private static bool CheckSmoke(Smoke view, Smoke user)
         {
             return user switch
             {
-                RelationshipPersonality.Explorers => view == RelationshipPersonality.Explorers,
-                RelationshipPersonality.Directors => view == RelationshipPersonality.Negotiator,
-                RelationshipPersonality.Builders => view == RelationshipPersonality.Builders,
-                RelationshipPersonality.Negotiator => view == RelationshipPersonality.Directors,
-                _ => false,
+                Smoke.No => view == Smoke.No,
+                Smoke.Yes_Occasionally => view == Smoke.Yes_Occasionally || view == Smoke.Yes_Often,
+                Smoke.Yes_Often => view == Smoke.Yes_Occasionally || view == Smoke.Yes_Often,
+                _ => throw new System.NotImplementedException()
+            };
+        }
+
+        private static bool CheckDrink(Drink view, Drink user)
+        {
+            return user switch
+            {
+                Drink.No => view == Drink.No || view == Drink.Yes_Light,
+                Drink.Yes_Light => view == Drink.No || view == Drink.Yes_Light,
+                Drink.Yes_Moderate => view == Drink.Yes_Moderate || view == Drink.Yes_Heavy,
+                Drink.Yes_Heavy => view == Drink.Yes_Moderate || view == Drink.Yes_Heavy,
+                _ => throw new System.NotImplementedException()
+            };
+        }
+
+        private static bool CheckDiet(Diet view, Diet user)
+        {
+            var group01 = view == Diet.Omnivore || view == Diet.Flexitarian || view == Diet.GlutenFree;
+            var group02 = view == Diet.Vegetarian || view == Diet.Vegan;
+            var group03 = view == Diet.RawFood || view == Diet.OrganicAllnaturalLocal;
+
+            return user switch
+            {
+                Diet.Omnivore => group01,
+                Diet.Flexitarian => group01,
+                Diet.Vegetarian => group02,
+                Diet.Vegan => group02,
+                Diet.RawFood => group03,
+                Diet.GlutenFree => group01,
+                Diet.OrganicAllnaturalLocal => group03,
+                Diet.DetoxWwightLoss => view == Diet.DetoxWwightLoss,
+                _ => throw new System.NotImplementedException()
+            };
+        }
+
+        private static bool CheckHaveChildren(HaveChildren view, HaveChildren user)
+        {
+            return user switch
+            {
+                HaveChildren.No => view == HaveChildren.No || view == HaveChildren.Yes_No,
+                HaveChildren.Yes_No => view == HaveChildren.No || view == HaveChildren.Yes_No,
+                HaveChildren.Yes => view == HaveChildren.Yes,
+                _ => throw new System.NotImplementedException()
+            };
+        }
+
+        private static bool CheckWantChildren(WantChildren view, WantChildren user)
+        {
+            return user switch
+            {
+                WantChildren.No => view == WantChildren.No,
+                WantChildren.Maybe => view == WantChildren.Maybe || view == WantChildren.Yes,
+                WantChildren.Yes => view == WantChildren.Maybe || view == WantChildren.Yes,
+                _ => throw new System.NotImplementedException()
+            };
+        }
+
+        private static bool CheckEnumCareer(CareerCluster view, CareerCluster user)
+        {
+            return view.GetGroup() == user.GetGroup();
+        }
+
+        private static bool CheckMoneyPersonality(MoneyPersonality view, MoneyPersonality user)
+        {
+            return user switch
+            {
+                MoneyPersonality.Debtor => view == MoneyPersonality.Debtor || view == MoneyPersonality.Avoider,
+                MoneyPersonality.BigSpender => view == MoneyPersonality.BigSpender,
+                MoneyPersonality.Avoider => view == MoneyPersonality.Debtor || view == MoneyPersonality.Avoider,
+                MoneyPersonality.Saver => view == MoneyPersonality.Saver || view == MoneyPersonality.Investor,
+                MoneyPersonality.Investor => view == MoneyPersonality.Saver || view == MoneyPersonality.Investor,
+                _ => throw new System.NotImplementedException()
             };
         }
 
@@ -195,8 +257,22 @@ namespace VerusDate.Web.Core
                 MyersBriggsTypeIndicator.ISFP => view.Value == MyersBriggsTypeIndicator.ESTJ || view.Value == MyersBriggsTypeIndicator.ESFJ,
                 MyersBriggsTypeIndicator.ESTP => view.Value == MyersBriggsTypeIndicator.ISTJ || view.Value == MyersBriggsTypeIndicator.ISFJ,
                 MyersBriggsTypeIndicator.ESFP => view.Value == MyersBriggsTypeIndicator.ISTJ || view.Value == MyersBriggsTypeIndicator.ISFJ,
-                _ => false,
+                _ => throw new System.NotImplementedException()
             };
         }
+
+        private static bool CheckEnumRelationshipPersonality(RelationshipPersonality view, RelationshipPersonality user)
+        {
+            return user switch
+            {
+                RelationshipPersonality.Explorers => view == RelationshipPersonality.Explorers,
+                RelationshipPersonality.Directors => view == RelationshipPersonality.Negotiator,
+                RelationshipPersonality.Builders => view == RelationshipPersonality.Builders,
+                RelationshipPersonality.Negotiator => view == RelationshipPersonality.Directors,
+                _ => throw new System.NotImplementedException()
+            };
+        }
+
+        #endregion LIFESTYLE
     }
 }

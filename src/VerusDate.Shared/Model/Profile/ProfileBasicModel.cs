@@ -30,6 +30,9 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Localização", Prompt = "Favor clicar no botão ao lado", Description = "Informação automática (deve-se liberar acesso a localização do aparelho)")]
         public string Location { get; set; }
 
+        [Display(Name = "Idiomas", Description = "Escolhido automaticamente de acordo com os idiomas oficiais do pais (caso disponível)")]
+        public IReadOnlyList<Language> Languages { get; set; } = Array.Empty<Language>();
+
         [Display(Name = "Status de Relacionamento")]
         public MaritalStatus MaritalStatus { get; set; }
 
@@ -39,14 +42,11 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Sexo Biológico")]
         public BiologicalSex BiologicalSex { get; set; }
 
-        [Display(Name = "Identidade de Gênero", Description = "Alteração opcional (opção mais comum selecionada automaticamente)")]
+        [Display(Name = "Identidade de Gênero", Description = "Opção mais comum selecionada automaticamente")]
         public GenderIdentity GenderIdentity { get; set; }
 
-        [Display(Name = "Orientação Sexual", Description = "Alteração opcional (opção mais comum selecionada automaticamente)")]
+        [Display(Name = "Orientação Sexual", Description = "Opção mais comum selecionada automaticamente")]
         public SexualOrientation SexualOrientation { get; set; }
-
-        [Display(Name = "Idiomas", Description = "Escolhido automaticamente de acordo com os idiomas oficiais do pais (caso disponível)")]
-        public IReadOnlyList<Language> Languages { get; set; } = Array.Empty<Language>();
 
         public string GetLocation(LocationType type)
         {

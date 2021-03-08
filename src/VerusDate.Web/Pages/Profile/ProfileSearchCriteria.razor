@@ -37,20 +37,20 @@ else
                                 <ValidationMessage For="@(() => looking.Distance)"></ValidationMessage>
                             </FieldBody>
                         </Field>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@looking.Languages"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.MaritalStatus)" TValue="MaritalStatus?" TEnum="MaritalStatus" @bind-SelectedValue="@looking.MaritalStatus"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.Intent)" TValue="IReadOnlyList<Intent>" TEnum="Intent" @bind-SelectedValues="@looking.Intent"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" Disabled="true" DisableHelp="true" HasGroup="true"></CustomFieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        @*<CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.Intent)" TValue="IReadOnlyList<Intent>" TEnum="Intent" @bind-SelectedValues="@looking.Intent"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" Disabled="true" DisableHelp="true" HasGroup="true"></CustomFieldSelect>*@
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.BiologicalSex)" TValue="BiologicalSex?" TEnum="BiologicalSex" @bind-SelectedValue="@looking.BiologicalSex"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.GenderIdentity)" TValue="GenderIdentity?" TEnum="GenderIdentity" @bind-SelectedValue="@looking.GenderIdentity"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" HasGroup="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.SexualOrientation)" TValue="SexualOrientation?" TEnum="SexualOrientation" @bind-SelectedValue="@looking.SexualOrientation"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@looking.Languages"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">

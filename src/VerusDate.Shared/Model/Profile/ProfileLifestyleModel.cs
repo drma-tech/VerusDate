@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Model
@@ -12,7 +11,7 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Fuma")]
         public Smoke? Smoke { get; set; }
 
-        [Display(Name = "Dieta", Description = "Alteração opcional (opção mais comum selecionada automaticamente)")]
+        [Display(Name = "Dieta", Description = "Opção mais comum selecionada automaticamente")]
         public Diet? Diet { get; set; }
 
         [Display(Name = "Tem Filho(s)")]
@@ -35,6 +34,9 @@ namespace VerusDate.Shared.Model
 
         [Display(Name = "Personalidade no Relacionamento")]
         public RelationshipPersonality? RelationshipPersonality { get; set; }
+
+        [Display(Name = "Linguagem do Amor", Description = "Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês)")]
+        public LoveLanguage? LoveLanguage { get; set; }
 
         [Display(Name = "Personalidade MBTI", Description = "Este campo é opcional (é necessário fazer um teste em site de terceiros / multi-idiomas)")]
         public MyersBriggsTypeIndicator? MyersBriggsTypeIndicator { get; set; }

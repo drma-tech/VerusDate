@@ -15,7 +15,7 @@
                     <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt" /> @gamification?.Food
                 </Badge>
             </Authorized>
-        </AuthorizeView>       
+        </AuthorizeView>
     </BarBrand>
     <BarMenu Style="flex-basis: unset !important;">
         <BarEnd>
@@ -117,12 +117,15 @@
 
     protected async Task LoadData()
     {
-        var profile = await Http.Profile_Get(SessionStorage);
-        gamification = profile?.Gamification;
-
-        if (gamification == null) //usuário ainda sem perfil
+        if (ComponenteUtils.IsAuthenticated)
         {
-            gamification = new();
+            var profile = await Http.Profile_Get(SessionStorage);
+            gamification = profile?.Gamification;
+
+            if (gamification == null) //usuário ainda sem perfil
+            {
+                gamification = new();
+            }
         }
     }
 }

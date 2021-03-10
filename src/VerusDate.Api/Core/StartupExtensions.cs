@@ -25,6 +25,11 @@ namespace VerusDate.Api.Core
                 return new CosmosRepository(config);
             });
 
+            services.AddScoped(func =>
+            {
+                return new CosmosLogRepository(config);
+            });
+
             services.AddScoped(typeof(StorageHelper), typeof(StorageHelper));
             services.AddScoped(typeof(FaceHelper), typeof(FaceHelper));
         }

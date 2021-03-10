@@ -33,7 +33,7 @@ namespace VerusDate.Api.Mediator.Behavior
 
                 if (_timer.ElapsedMilliseconds > 500)
                 {
-                    _log.LogInformation($"Processing time: {_timer.ElapsedMilliseconds} milliseconds", typeof(TRequest).Name, request);
+                    _log.LogWarning($"Processing time: {_timer.ElapsedMilliseconds} milliseconds", typeof(TRequest).Name, request);
                 }
             }
 

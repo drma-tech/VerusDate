@@ -1,7 +1,6 @@
 ﻿using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace VerusDate.Api.Repository
@@ -16,8 +15,10 @@ namespace VerusDate.Api.Repository
 
         public string Id { get; set; }
         public string Key { get; set; }
+        public string Name { get; set; }
+        public string State { get; set; }
         public string Message { get; set; }
-        public string InnerException { get; set; }
+        public string StackTrace { get; set; }
     }
 
     public class CosmosLogRepository
@@ -41,9 +42,9 @@ namespace VerusDate.Api.Repository
             Container = _client.GetContainer(databaseId, containerId);
         }
 
-        public async Task Add(LogContainer log, CancellationToken cancellationToken)
+        public async Task Add(LogContainer log)
         {
-            await Container.CreateItemAsync(log, new PartitionKey(log.Key), null, cancellationToken);
+            await Container.CreateItemAsync(log, new PartitionKey(log.Key), null);
         }
     }
 }

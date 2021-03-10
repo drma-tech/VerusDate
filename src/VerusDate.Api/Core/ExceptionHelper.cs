@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Cosmos;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Cosmos;
 using System;
 using System.Linq;
 using System.Text.Json;
@@ -24,6 +25,11 @@ namespace VerusDate.Api.Core
             {
                 return ex.Message;
             }
+        }
+
+        public static string BuildMessage(this IQueryCollection query)
+        {
+            return string.Join("", query.Select((s, index) => $"{{{index}}}"));
         }
     }
 }

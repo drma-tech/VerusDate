@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using VerusDate.Api.Core;
 
 [assembly: FunctionsStartup(typeof(VerusDate.Api.Startup))]
@@ -38,11 +39,11 @@ namespace VerusDate.Api
             //    options.SendGridKey = Configuration.GetValue<string>("Authentication:Sendgrid:SendGridKey");
             //});
 
-            //services.AddLogging(options =>
-            //{
-            //    options.ClearProviders();
-            //    options.AddAzureWebAppDiagnostics();
-            //});
+            builder.Services.AddLogging(logging =>
+            {
+                logging.AddProvider(new CosmosLoggerProvider(new LoggerConfiguration(), new Repository.CosmosLogRepository(config)));
+                //logging.AddAzureWebAppDiagnostics();
+            });
         }
     }
 }

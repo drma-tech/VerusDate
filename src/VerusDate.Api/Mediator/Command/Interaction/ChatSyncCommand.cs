@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.Azure.Cosmos;
-using SendGrid.Helpers.Errors.Model;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;

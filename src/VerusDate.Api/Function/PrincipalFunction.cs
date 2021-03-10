@@ -41,7 +41,7 @@ namespace VerusDate.Api.Function
             }
             catch (Exception ex)
             {
-                log.LogError(ex, null, req.Query.ToList());
+                log.LogError(ex, req.Query.BuildMessage(), req.Query.ToList());
                 return new BadRequestObjectResult(ex.ProcessException());
             }
         }
@@ -63,7 +63,7 @@ namespace VerusDate.Api.Function
             }
             catch (Exception ex)
             {
-                log.LogError(ex, null, req.Query.ToList());
+                log.LogError(ex, req.Query.BuildMessage(), req.Query.ToList());
                 return new BadRequestObjectResult(ex.ProcessException());
             }
         }

@@ -223,19 +223,26 @@
 
     private async Task Vote(string IdTicket)
     {
-        if (anyVote(IdTicket))
+        try
         {
-            Toast.ShowError("", "Você já votou neste ticket");
+            if (anyVote(IdTicket))
+            {
+                Toast.ShowError("", "Você já votou neste ticket");
+            }
+            else
+            {
+                var vote = new TicketVoteModel();
+                vote.SetKey(IdTicket);
+
+                await Http.Ticket_Vote(vote, SessionStorage, Toast);
+                tickets.Single(s => s.Id == IdTicket).Vote();
+
+                myVotes.Add(vote);
+            }
         }
-        else
+        catch (Exception ex)
         {
-            var vote = new TicketVoteModel();
-            vote.SetKey(IdTicket);
-
-            await Http.Ticket_Vote(vote, SessionStorage, Toast);
-            tickets.Single(s => s.Id == IdTicket).Vote();
-
-            myVotes.Add(vote);
+            ex.ProcessException(Toast, Logger);
         }
     }
 

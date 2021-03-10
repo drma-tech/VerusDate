@@ -41,7 +41,7 @@ namespace VerusDate.Api
 
             builder.Services.AddLogging(logging =>
             {
-                logging.AddProvider(new CosmosLoggerProvider(new LoggerConfiguration(), new Repository.CosmosLogRepository(config)));
+                logging.AddProvider(new CosmosLoggerProvider(new Repository.CosmosLogRepository(config)));
                 //logging.AddAzureWebAppDiagnostics();
             });
         }

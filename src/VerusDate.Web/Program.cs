@@ -6,9 +6,11 @@ using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using VerusDate.Web.Core;
 
 namespace VerusDate.Web
 {
@@ -37,6 +39,11 @@ namespace VerusDate.Web
             //    .AddBrowserConsole()
             //    .SetMinimumLevel(LogLevel.Error)
             //);
+
+            builder.Services.AddLogging(logging =>
+            {
+                logging.AddProvider(new CosmosLoggerProvider());
+            });
 
             var host = builder.Build();
 

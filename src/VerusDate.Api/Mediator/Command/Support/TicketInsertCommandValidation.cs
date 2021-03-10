@@ -8,7 +8,7 @@ namespace VerusDate.Api.Mediator.Command.Support
         {
             RuleFor(x => x.Description)
                 .NotEmpty()
-                .MaximumLength(512);
+                .MaximumLength(4000);
         }
     }
 }

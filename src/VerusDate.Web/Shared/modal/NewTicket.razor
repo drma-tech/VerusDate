@@ -31,6 +31,11 @@
     {
         this.TicketType = TicketType;
         modal.Show();
+
+        if (TicketType == TicketType.Bug)
+        {
+            Ticket.Description = System.Text.Json.JsonSerializer.Serialize(SessionStorage.GetItem<List<LogContainer>>("LogErrosVD"));
+        }
     }
 
     public async Task SubmitForm()

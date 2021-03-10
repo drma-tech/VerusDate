@@ -25,6 +25,7 @@ namespace VerusDate.Web.Core
     {
         public static string IdUser { get; set; }
         public static bool IsAuthenticated { get; set; }
+        public static ISyncSessionStorageService Storage { get; set; }
 
         //public static string GetStorageKey(string key) => string.IsNullOrEmpty(IdUser) ? throw new ArgumentException(IdUser) : $"{key}({IdUser})";
 
@@ -63,6 +64,7 @@ namespace VerusDate.Web.Core
 
                     ComponenteUtils.IsAuthenticated = user.Identity != null && user.Identity.IsAuthenticated;
                     ComponenteUtils.IdUser = user.FindFirst(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                    ComponenteUtils.Storage = SessionStorage;
                 }
             }
             catch (Exception ex)

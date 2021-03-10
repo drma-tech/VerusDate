@@ -40,11 +40,12 @@ namespace VerusDate.Web.Core
         {
             if (ex is NotificationException)
             {
+                logger.LogWarning(ex, null);
                 toast.ShowWarning("", ex.Message);
             }
             else
             {
-                logger.LogError(ex, "ProcessException");
+                logger.LogError(ex, null);
                 toast.ShowError("", ex.Message);
             }
         }

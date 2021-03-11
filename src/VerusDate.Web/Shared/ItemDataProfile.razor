@@ -114,11 +114,11 @@ else
         {
             if (value == null) return Color.Secondary;
 
-            if (value is string resultS)
+            if (value is string resultS) //campo do tipo texto
             {
                 return Color.Success;
             }
-            else if (value is Enum resultE)
+            else if (value is Enum resultE) //campo do tipo enum array
             {
                 var affinity = Affinities.Single(s => s.AttributeName == fieldName);
 

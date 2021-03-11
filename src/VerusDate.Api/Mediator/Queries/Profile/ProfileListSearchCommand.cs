@@ -68,40 +68,51 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             SQL.Append("    AND c.id != '" + request.Type + ":" + request.IdLoggedUser + "' "); //não seja o próprio usuário
             SQL.Append("    AND NOT EXISTS (SELECT VALUE t FROM t IN c.passiveInteractions WHERE t = '" + request.IdLoggedUser + "') "); //não exista interação com este usuário
 
-            //BASIC
-            SQL.Append("	AND ROUND(ST_DISTANCE({'type': 'Point', 'coordinates':[@latitude, @longitude]},{'type': 'Point', 'coordinates':[c.basic.latitude, c.basic.longitude]}) / @valueCalDistance) <= @distance ");
-            filter.Add("@latitude", user.Basic.Latitude);
-            filter.Add("@longitude", user.Basic.Longitude);
-            filter.Add("@valueCalDistance", valueCalDistance);
-            filter.Add("@distance", user.Looking.Distance);
+            // *** BASIC ***
 
-            if (looking.MaritalStatus.HasValue)
+            if (user.Looking.Distance == Shared.Enum.Distance.Country)
             {
-                SQL.Append("	AND c.basic.maritalStatus = @maritalStatus ");
-                filter.Add("@maritalStatus", (int)looking.MaritalStatus.Value);
+                SQL.Append("	AND SUBSTRING(c.basic.location, 0, INDEX_OF(c.basic.location, ' - ')) = @location ");
+                filter.Add("@location", user.Basic.GetLocation(LocationType.Country));
+            }
+            else if (user.Looking.Distance == Shared.Enum.Distance.City)
+            {
+                SQL.Append("	AND c.basic.location = @location ");
+                filter.Add("@location", user.Basic.Location);
+            }
+            else
+            {
+                SQL.Append("	AND ROUND(ST_DISTANCE({'type': 'Point', 'coordinates':[@latitude, @longitude]},{'type': 'Point', 'coordinates':[c.basic.latitude, c.basic.longitude]}) / @valueCalDistance) <= @distance ");
+                filter.Add("@latitude", user.Basic.Latitude);
+                filter.Add("@longitude", user.Basic.Longitude);
+                filter.Add("@valueCalDistance", valueCalDistance);
+                filter.Add("@distance", user.Looking.Distance);
+            }
+
+            if (looking.CurrentSituation.Any())
+            {
+                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.currentSituation WHERE n in (" + string.Join(",", user.Looking.CurrentSituation.Cast<int>()) + ")) ");
             }
             SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.intent WHERE n in (" + string.Join(",", user.Looking.Intent.Cast<int>()) + ")) ");
-            if (looking.BiologicalSex.HasValue)
+            if (looking.BiologicalSex.Any())
             {
-                SQL.Append("	AND c.basic.biologicalSex = @biologicalSex ");
-                filter.Add("@biologicalSex", (int)looking.BiologicalSex.Value);
+                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.biologicalSex WHERE n in (" + string.Join(",", user.Looking.BiologicalSex.Cast<int>()) + ")) ");
             }
-            if (looking.GenderIdentity.HasValue)
+            if (looking.GenderIdentity.Any())
             {
-                SQL.Append("	AND c.basic.genderIdentity = @genderIdentity ");
-                filter.Add("@genderIdentity", (int)looking.GenderIdentity.Value);
+                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.genderIdentity WHERE n in (" + string.Join(",", user.Looking.GenderIdentity.Cast<int>()) + ")) ");
             }
-            if (looking.SexualOrientation.HasValue)
+            if (looking.SexualOrientation.Any())
             {
-                SQL.Append("	AND c.basic.sexualOrientation = @sexualOrientation ");
-                filter.Add("@sexualOrientation", (int)looking.SexualOrientation.Value);
+                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.sexualOrientation WHERE n in (" + string.Join(",", user.Looking.SexualOrientation.Cast<int>()) + ")) ");
             }
             if (looking.Languages.Any())
             {
                 SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.languages WHERE n in (" + string.Join(",", user.Looking.Languages.Cast<int>()) + ")) ");
             }
 
-            //BIO
+            // *** BIO ***
+            
             SQL.Append("    AND TRUNC(DateTimeDiff('month',c.bio.birthDate,GetCurrentDateTime())/12) >= @minAge ");
             SQL.Append("    AND TRUNC(DateTimeDiff('month',c.bio.birthDate,GetCurrentDateTime())/12) <= @maxAge ");
             filter.Add("@minAge", user.Looking.MinimalAge);
@@ -116,18 +127,17 @@ namespace VerusDate.Api.Mediator.Queries.Profile
                 SQL.Append("	AND c.bio.height <= @MaxHeight ");
                 filter.Add("@MaxHeight", (int)looking.MaxHeight.Value);
             }
-            if (looking.RaceCategory.HasValue)
+            if (looking.RaceCategory.Any())
             {
-                SQL.Append("	AND c.bio.raceCategory = @RaceCategory ");
-                filter.Add("@RaceCategory", (int)looking.RaceCategory.Value);
+                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.bio.raceCategory WHERE n in (" + string.Join(",", user.Looking.RaceCategory.Cast<int>()) + ")) ");
             }
-            if (looking.BodyMass.HasValue)
+            if (looking.BodyMass.Any())
             {
-                SQL.Append("	AND c.bio.bodyMass = @BodyMass ");
-                filter.Add("@BodyMass", (int)looking.BodyMass.Value);
+                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.bio.bodyMass WHERE n in (" + string.Join(",", user.Looking.BodyMass.Cast<int>()) + ")) ");
             }
 
-            //LIFESTYLE
+            // *** LIFESTYLE ***
+
             if (looking.Drink.HasValue)
             {
                 SQL.Append("	AND c.lifestyle.drink = @Drink ");
@@ -167,6 +177,10 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             {
                 SQL.Append("	AND c.lifestyle.religion = @Religion ");
                 filter.Add("@Religion", (int)looking.Religion.Value);
+            }
+            if (looking.SexPersonality.Any())
+            {
+                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.lifestyle.sexPersonality WHERE n in (" + string.Join(",", user.Looking.SexPersonality.Cast<int>()) + ")) ");
             }
 
             SQL.Append("ORDER BY ");

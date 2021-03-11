@@ -19,20 +19,20 @@ namespace VerusDate.Web.Core
             var obj = new List<AffinityVM>();
 
             //BASIC - DEFINIÇÕES DE BUSCA
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.BiologicalSex), CheckEnum((int)profView.Basic.BiologicalSex, (int?)profUser.Looking.BiologicalSex)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.MaritalStatus), CheckEnum((int)profView.Basic.MaritalStatus, (int?)profUser.Looking.MaritalStatus)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.BiologicalSex), CheckEnumArray(profView.Basic.BiologicalSex, profUser.Looking.BiologicalSex)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.CurrentSituation), CheckEnumArray(profView.Basic.CurrentSituation, profUser.Looking.CurrentSituation)));
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Intent), CheckEnumArray(profView.Basic.Intent, profUser.Looking.Intent), profView.Basic.Intent.Intersect(profUser.Looking.Intent).Select(s => (int)s)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.GenderIdentity), CheckEnum((int)profView.Basic.GenderIdentity, (int?)profUser.Looking.GenderIdentity)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.SexualOrientation), CheckEnum((int)profView.Basic.SexualOrientation, (int?)profUser.Looking.SexualOrientation)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Distance), profView.Distance <= profUser.Looking.Distance));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.GenderIdentity), CheckEnumArray(profView.Basic.GenderIdentity, profUser.Looking.GenderIdentity)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.SexualOrientation), CheckEnumArray(profView.Basic.SexualOrientation, profUser.Looking.SexualOrientation)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Distance), profView.Distance <= (double)profUser.Looking.Distance));
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Languages), CheckEnumArray(profView.Basic.Languages, profUser.Looking.Languages), profView.Basic.Languages.Intersect(profUser.Looking.Languages).Select(s => (int)s)));
 
             //BIO - DEFINIÇÕES DE BUSCA
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Age), CheckAge(profView.Age, profUser.Looking.MinimalAge, profUser.Looking.MaxAge)));
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.Zodiac), CheckEnumZodiac(profView.Bio.Zodiac, profUser.Bio.Zodiac)));
-            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.RaceCategory), CheckEnum((int)profView.Bio.RaceCategory, (int?)profUser.Looking.RaceCategory)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.RaceCategory), CheckEnumArray(profView.Bio.RaceCategory, profUser.Looking.RaceCategory)));
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.Height), CheckHeight(profView.Bio.Height, profUser.Looking.MinimalHeight, profUser.Looking.MaxHeight)));
-            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.BodyMass), CheckEnum((int)profView.Bio.BodyMass, (int?)profUser.Looking.BodyMass)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.BodyMass), CheckEnumArray(profView.Bio.BodyMass, profUser.Looking.BodyMass)));
 
             if (profView.Basic.Intent.IsLongTerm())
             {
@@ -70,6 +70,13 @@ namespace VerusDate.Web.Core
             if (!looking.HasValue) return true; //If the user has not defined, then it is an affinity
 
             return view == looking;
+        }
+
+        private static bool CheckEnumArray<T>(T view, IEnumerable<T> looking) where T : System.Enum
+        {
+            if (!looking.Any()) return true; //If the user has not defined, then it is an affinity
+
+            return new T[] { view }.Intersect(looking).Any();
         }
 
         private static bool CheckEnumArray<T>(IEnumerable<T> view, IEnumerable<T> looking) where T : System.Enum

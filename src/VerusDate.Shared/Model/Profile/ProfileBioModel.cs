@@ -6,7 +6,7 @@ namespace VerusDate.Shared.Model
 {
     public class ProfileBioModel
     {
-        [Display(Name = "Nascimento", Description = "Confira a idade e signo")]
+        [Display(Name = "Nascimento")]
         public DateTime BirthDate { get; set; }
 
         [Display(Name = "Signo")]

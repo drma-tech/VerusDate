@@ -23,45 +23,36 @@ else
             <CardBody>
                 <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
                     <AlertMessage>Básico</AlertMessage>
-                    @*<AlertDescription>Os itens deste tópico são opcionais, mas a falta deles poderá afetar o índice de compatibilidade. (3 opções para cada)</AlertDescription>*@
                 </Alert>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <Field Horizontal="true">
-                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
-                                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Icon> @AttributeHelper.GetName(() => looking.Distance)
-                                <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(() => looking.Distance)</FieldHelp>
-                            </FieldLabel>
-                            <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
-                                <NumericEdit @bind-Value="@looking.Distance"></NumericEdit>
-                                <ValidationMessage For="@(() => looking.Distance)"></ValidationMessage>
-                            </FieldBody>
-                        </Field>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.Distance)" TValue="Distance" TEnum="Distance" @bind-SelectedValue="@looking.Distance"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt" DisableHelp="true" Required="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@looking.Languages"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.MaritalStatus)" TValue="MaritalStatus?" TEnum="MaritalStatus" @bind-SelectedValue="@looking.MaritalStatus"
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.CurrentSituation)" TValue="IReadOnlyList<CurrentSituation>" TEnum="CurrentSituation" @bind-SelectedValues="@looking.CurrentSituation"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart"></CustomFieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         @*<CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.Intent)" TValue="IReadOnlyList<Intent>" TEnum="Intent" @bind-SelectedValues="@looking.Intent"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" Disabled="true" DisableHelp="true" HasGroup="true"></CustomFieldSelect>*@
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.BiologicalSex)" TValue="BiologicalSex?" TEnum="BiologicalSex" @bind-SelectedValue="@looking.BiologicalSex"
+                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" Disabled="true" DisableHelp="true" HasGroup="true" Required="true"></CustomFieldSelect>*@
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.BiologicalSex)" TValue="IReadOnlyList<BiologicalSex>" TEnum="BiologicalSex" @bind-SelectedValues="@looking.BiologicalSex"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.GenderIdentity)" TValue="GenderIdentity?" TEnum="GenderIdentity" @bind-SelectedValue="@looking.GenderIdentity"
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.GenderIdentity)" TValue="IReadOnlyList<GenderIdentity>" TEnum="GenderIdentity" @bind-SelectedValues="@looking.GenderIdentity"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" HasGroup="true"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.SexualOrientation)" TValue="SexualOrientation?" TEnum="SexualOrientation" @bind-SelectedValue="@looking.SexualOrientation"
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.SexualOrientation)" TValue="IReadOnlyList<SexualOrientation>" TEnum="SexualOrientation" @bind-SelectedValues="@looking.SexualOrientation"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
                     <AlertMessage>Bio</AlertMessage>
-                    @*<AlertDescription>Os itens deste tópico são opcionais, mas a falta deles poderá afetar o índice de compatibilidade. (3 opções para cada)</AlertDescription>*@
                 </Alert>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <Field Horizontal="true">
                             <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
                                 <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BirthdayCake"></Icon> @AttributeHelper.GetName(() => looking.MinimalAge)
+                                <div style="color: red; display: initial;"> *</div>
                                 <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(() => looking.MinimalAge)</FieldHelp>
                             </FieldLabel>
                             <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
@@ -101,14 +92,14 @@ else
                         </Field>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.RaceCategory)" TValue="RaceCategory?" TEnum="RaceCategory" @bind-SelectedValue="@looking.RaceCategory"
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.RaceCategory)" TValue="IReadOnlyList<RaceCategory>" TEnum="RaceCategory" @bind-SelectedValues="@looking.RaceCategory"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Globe"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.BodyMass)" TValue="BodyMass?" TEnum="BodyMass" @bind-SelectedValue="@looking.BodyMass"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight" DisableHelp="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.BodyMass)" TValue="IReadOnlyList<BodyMass>" TEnum="BodyMass" @bind-SelectedValues="@looking.BodyMass"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
-                    <AlertMessage>Lifestyle</AlertMessage>
+                    <AlertMessage>Lifestyle / Personalidades</AlertMessage>
                     <AlertDescription>Disponível apenas para intenções de relacionamento do tipo Longo Prazo</AlertDescription>
                 </Alert>
                 <Row>
@@ -134,11 +125,11 @@ else
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => looking.SexPersonality)" TValue="IReadOnlyList<SexPersonality>" TEnum="SexPersonality" @bind-SelectedValues="@looking.SexPersonality"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>
                         @*<CustomFieldSelect Type="FieldType.Select" For="@(() => looking.MoneyPersonality)" TValue="MoneyPersonality?" TEnum="MoneyPersonality" @bind-SelectedValue="@looking.MoneyPersonality"
-                                        CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>
-                    <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@looking.MyersBriggsTypeIndicator"
-                                        CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@looking.Intent.IsShortTerm(true)" HasGroup="true"></CustomFieldSelect>
-                    <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@looking.RelationshipPersonality"
-                                        CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>*@
+                                                CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                            <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@looking.MyersBriggsTypeIndicator"
+                                                CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@looking.Intent.IsShortTerm(true)" HasGroup="true"></CustomFieldSelect>
+                            <CustomFieldSelect Type="FieldType.Select" For="@(() => looking.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@looking.RelationshipPersonality"
+                                                CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@looking.Intent.IsShortTerm(true)"></CustomFieldSelect>*@
                     </Column>
                 </Row>
             </CardBody>
@@ -159,7 +150,7 @@ else
     <VerusDate.Web.Shared.modal.BasicModal @ref="help" Title="Ajuda">
         <ul>
             <li>Aqui você pode definir seu tipo ideal de perfil, para que possamos sugerir perfis mais compativeis com o que você procura</li>
-            <li>É importante salientar que cada escolha influenciará no nosso calculo do índice de compatibilidade (inclusive deixando em branco)</li>
+            <li>É importante salientar que algumas escolhas poderão influenciar no nosso calculo do índice de compatibilidade (inclusive deixando em branco)</li>
         </ul>
     </VerusDate.Web.Shared.modal.BasicModal>
 }
@@ -218,7 +209,7 @@ else
         {
             SmartLookingCore.PopulateFields(profile, looking);
 
-            Toast.ShowWarning("", "Este processo está em constante evolução. Caso queira informar um erro ou melhoria, favor abrir um tiket no nosso suporte.");
+            Toast.ShowWarning("Este processo está em constante evolução. Caso queira informar um erro ou melhoria, favor abrir um tiket no nosso suporte.", "Campos populados automaticamente");
         }
         catch (Exception ex)
         {

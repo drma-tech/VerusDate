@@ -5,6 +5,8 @@
 <Field Horizontal="true">
     <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
         <Icon Name="@CssIcon"></Icon> @Label
+        @if (Required)
+        {<div style="color: red; display: initial;"> *</div>}
     </FieldLabel>
     <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
         @switch (Type)

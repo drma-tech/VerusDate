@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
 using VerusDate.Shared.Model;
@@ -12,8 +14,8 @@ namespace VerusDate.Web.Core
             if (profile == null) throw new NotificationException("Preenchimento de cadastro do perfil não encontrado");
             if (looking == null) looking = new ProfileLookingModel();
 
-            looking.Distance = 20;
-            looking.MaritalStatus = GetMaritalStatus(profile);
+            looking.Distance = Distance._20;
+            looking.CurrentSituation = GetCurrentSituation(profile);
             //looking.Intent = profile.Basic.Intent; //selecionado ao carregar a tela
             looking.BiologicalSex = GetBiologicalSex(profile);
             //looking.GenderIdentity = null;
@@ -66,52 +68,58 @@ namespace VerusDate.Web.Core
             return maxAge;
         }
 
-        private static MaritalStatus? GetMaritalStatus(ProfileModel profile)
+        private static IReadOnlyList<CurrentSituation> GetCurrentSituation(ProfileModel profile)
         {
             if (profile.Basic.Intent.IsLongTerm())
             {
-                if (profile.Basic.MaritalStatus == MaritalStatus.Polyamorous) return null;
-                else if (profile.Basic.MaritalStatus == MaritalStatus.Monogamous) return null;
-                else return MaritalStatus.Single;
+                return profile.Basic.CurrentSituation switch
+                {
+                    CurrentSituation.Single => new CurrentSituation[] { CurrentSituation.Single },
+                    CurrentSituation.Monogamous => new CurrentSituation[] { CurrentSituation.Monogamous },
+                    _ => Array.Empty<CurrentSituation>(),
+                };
             }
             else
             {
-                return null;
+                return Array.Empty<CurrentSituation>();
             }
         }
 
-        private static BiologicalSex? GetBiologicalSex(ProfileModel profile)
+        private static IReadOnlyList<BiologicalSex> GetBiologicalSex(ProfileModel profile)
         {
-            if (profile.Basic.GenderIdentity == GenderIdentity.Cisgender) //binary
+            if (profile.Basic.GenderIdentity == GenderIdentity.Cisgender) //BINARY
             {
                 if (profile.Basic.SexualOrientation == SexualOrientation.Heteressexual)
                 {
-                    if (profile.Basic.BiologicalSex == BiologicalSex.Female) return BiologicalSex.Male;
-                    else if (profile.Basic.BiologicalSex == BiologicalSex.Male) return BiologicalSex.Female;
-                    else return null;
+                    if (profile.Basic.BiologicalSex == BiologicalSex.Female) return new BiologicalSex[] { BiologicalSex.Male };
+                    else if (profile.Basic.BiologicalSex == BiologicalSex.Male) return new BiologicalSex[] { BiologicalSex.Female };
+                    else return Array.Empty<BiologicalSex>();
                 }
                 else if (profile.Basic.SexualOrientation == SexualOrientation.Homossexual)
                 {
-                    if (profile.Basic.BiologicalSex == BiologicalSex.Female) return BiologicalSex.Female;
-                    else if (profile.Basic.BiologicalSex == BiologicalSex.Male) return BiologicalSex.Male;
-                    else return null;
+                    if (profile.Basic.BiologicalSex == BiologicalSex.Female) return new BiologicalSex[] { BiologicalSex.Female };
+                    else if (profile.Basic.BiologicalSex == BiologicalSex.Male) return new BiologicalSex[] { BiologicalSex.Male };
+                    else return Array.Empty<BiologicalSex>();
                 }
                 else
                 {
-                    return null;
+                    return Array.Empty<BiologicalSex>();
                 }
             }
-            else //non-binary
+            else //NON-BINARY
             {
-                return null;
+                return Array.Empty<BiologicalSex>();
             }
         }
 
-        private static SexualOrientation? GetSexualOrientation(ProfileModel profile)
+        private static IReadOnlyList<SexualOrientation> GetSexualOrientation(ProfileModel profile)
         {
-            if (profile.Basic.SexualOrientation == SexualOrientation.Heteressexual) return SexualOrientation.Heteressexual;
-            else if (profile.Basic.SexualOrientation == SexualOrientation.Homossexual) return SexualOrientation.Homossexual;
-            else return null;
+            return profile.Basic.SexualOrientation switch
+            {
+                SexualOrientation.Heteressexual => new SexualOrientation[] { SexualOrientation.Heteressexual },
+                SexualOrientation.Homossexual => new SexualOrientation[] { SexualOrientation.Homossexual },
+                _ => Array.Empty<SexualOrientation>(),
+            };
         }
 
         private static Height GetMinHeight(ProfileModel profile)

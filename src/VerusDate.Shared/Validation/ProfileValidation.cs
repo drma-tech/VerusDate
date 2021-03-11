@@ -28,7 +28,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
             RuleFor(x => x.Basic.Latitude)
                 .NotEmpty();
 
-            RuleFor(x => x.Basic.MaritalStatus)
+            RuleFor(x => x.Basic.CurrentSituation)
                 .NotEmpty();
 
             RuleFor(x => x.Basic.Intent)

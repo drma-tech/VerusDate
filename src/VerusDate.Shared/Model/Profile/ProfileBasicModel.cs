@@ -33,8 +33,8 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Idiomas", Description = "Escolhido automaticamente de acordo com os idiomas oficiais do pais (caso disponível)")]
         public IReadOnlyList<Language> Languages { get; set; } = Array.Empty<Language>();
 
-        [Display(Name = "Status de Relacionamento")]
-        public MaritalStatus MaritalStatus { get; set; }
+        [Display(Name = "Situação Atual")]
+        public CurrentSituation CurrentSituation { get; set; }
 
         [Display(Name = "Intenções", Description = "De acordo com a seleção, poderá alterar os campos disponíveis e/ou obrigatórios (escolha até 2 opções)")]
         public IReadOnlyList<Intent> Intent { get; set; } = Array.Empty<Intent>();

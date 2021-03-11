@@ -28,26 +28,26 @@ else
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomField Type="FieldType.TextEdit" For="@(() => profile.Basic.NickName)" @bind-Value="@profile.Basic.NickName"
-                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User"></CustomField>
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Required="true"></CustomField>
                         <CustomField Type="FieldType.MemoEdit" For="@(() => profile.Basic.Description)" @bind-Value="@profile.Basic.Description"
-                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.QuoteLeft" Rows="7"></CustomField>
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.QuoteLeft" Rows="7" Required="true"></CustomField>
                         <CustomField Type="FieldType.TextEditButtom" For="@(() => profile.Basic.Location)" @bind-Value="@profile.Basic.Location"
-                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkerAlt" Disabled="true"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkerAlt" Disabled="true" Required="true"
                                      ButtomClicked="async ()=> { await SetLocation(profile); }" ButtomCssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt" ButtomTitle="Recuperar posição GPS"></CustomField>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Basic.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@profile.Basic.Languages"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language" Required="true"></CustomFieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.MaritalStatus)" TValue="MaritalStatus" TEnum="MaritalStatus" @bind-SelectedValue="@profile.Basic.MaritalStatus"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.CurrentSituation)" TValue="CurrentSituation" TEnum="CurrentSituation" @bind-SelectedValue="@profile.Basic.CurrentSituation"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart" Required="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Basic.Intent)" TValue="IReadOnlyList<Intent>" TEnum="Intent" @bind-SelectedValues="@profile.Basic.Intent"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" HasGroup="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" HasGroup="true" Required="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.BiologicalSex)" TValue="BiologicalSex" TEnum="BiologicalSex" @bind-SelectedValue="@profile.Basic.BiologicalSex"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" Required="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.GenderIdentity)" TValue="GenderIdentity" TEnum="GenderIdentity" @bind-SelectedValue="@profile.Basic.GenderIdentity"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" HasGroup="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" HasGroup="true" Required="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Basic.SexualOrientation)" TValue="SexualOrientation" TEnum="SexualOrientation" @bind-SelectedValue="@profile.Basic.SexualOrientation"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" Required="true"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
@@ -56,7 +56,7 @@ else
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomDate Type="FieldType.Date" For="@(() => profile.Bio.BirthDate)" @bind-Value="@profile.Bio.BirthDate"
-                                    CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BirthdayCake"></CustomDate>
+                                    CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BirthdayCake" Required="true"></CustomDate>
                         <Field Horizontal="true">
                             <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD" Display="Display.None.Block.OnFullHD">
                             </FieldLabel>
@@ -68,49 +68,49 @@ else
                             </FieldBody>
                         </Field>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Bio.BodyMass)" TValue="BodyMass" TEnum="BodyMass" @bind-SelectedValue="@profile.Bio.BodyMass"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight" DisableHelp="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight" DisableHelp="true" Required="true"></CustomFieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Bio.RaceCategory)" TValue="RaceCategory" TEnum="RaceCategory" @bind-SelectedValue="@profile.Bio.RaceCategory"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Globe"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Globe" Required="true"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Bio.Height)" TValue="Height" TEnum="Height" @bind-SelectedValue="@profile.Bio.Height"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler" DisableHelp="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler" DisableHelp="true" Required="true"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
-                    <AlertMessage>Lifestyle</AlertMessage>
+                    <AlertMessage>Lifestyle / Personalidades</AlertMessage>
                     <AlertDescription>Disponível apenas para intenções de relacionamento do tipo Longo Prazo</AlertDescription>
                 </Alert>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Drink)" TValue="Drink?" TEnum="Drink" @bind-SelectedValue="@profile.Lifestyle.Drink"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GlassCheers" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GlassCheers" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Smoke)" TValue="Smoke?" TEnum="Smoke" @bind-SelectedValue="@profile.Lifestyle.Smoke"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smoking" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smoking" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Diet)" TValue="Diet?" TEnum="Diet" @bind-SelectedValue="@profile.Lifestyle.Diet"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Utensils" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Utensils" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.HaveChildren)" TValue="HaveChildren?" TEnum="HaveChildren" @bind-SelectedValue="@profile.Lifestyle.HaveChildren"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Child" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Child" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.WantChildren)" TValue="WantChildren?" TEnum="WantChildren" @bind-SelectedValue="@profile.Lifestyle.WantChildren"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Baby" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Baby" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.EducationLevel)" TValue="EducationLevel?" TEnum="EducationLevel" @bind-SelectedValue="@profile.Lifestyle.EducationLevel"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GraduationCap" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.GraduationCap" Disabled="@profile.Basic.Intent.IsShortTerm(true)" DisableHelp="true" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.CareerCluster)" TValue="CareerCluster?" TEnum="CareerCluster" @bind-SelectedValue="@profile.Lifestyle.CareerCluster"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Briefcase" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HasGroup="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Briefcase" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HasGroup="true" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.Religion)" TValue="Religion?" TEnum="Religion" @bind-SelectedValue="@profile.Lifestyle.Religion"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PrayingHands" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PrayingHands" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.MoneyPersonality)" TValue="MoneyPersonality?" TEnum="MoneyPersonality" @bind-SelectedValue="@profile.Lifestyle.MoneyPersonality"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@profile.Lifestyle.RelationshipPersonality"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.SexPersonality)" TValue="SexPersonality?" TEnum="SexPersonality" @bind-SelectedValue="@profile.Lifestyle.SexPersonality"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()" HelpLink="https://www.vmtherapy.com/personality-type/"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.LoveLanguage)" TValue="LoveLanguage?" TEnum="LoveLanguage" @bind-SelectedValue="@profile.Lifestyle.LoveLanguage"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.HandHoldingHeart" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.5lovelanguages.com/quizzes/singles-quiz/"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.HandHoldingHeart" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()" HelpLink="https://www.5lovelanguages.com/quizzes/singles-quiz/"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@profile.Lifestyle.MyersBriggsTypeIndicator"
                                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.16personalities.com/" HasGroup="true"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.SexPersonality)" TValue="SexPersonality?" TEnum="SexPersonality" @bind-SelectedValue="@profile.Lifestyle.SexPersonality"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.vmtherapy.com/personality-type/"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">

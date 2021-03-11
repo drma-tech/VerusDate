@@ -3,6 +3,8 @@
 <Field Horizontal="true">
     <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
         <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.BirthdayCake"></Icon> @Label
+        @if (Required)
+        {<div style="color: red; display: initial;"> *</div>}
     </FieldLabel>
     <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
         <Addons>
@@ -46,6 +48,8 @@
     public EventCallback<int> DayChanged { get; set; }
     public EventCallback<int> MonthChanged { get; set; }
     public EventCallback<int> YearChanged { get; set; }
+
+    [Parameter] public bool Required { get; set; }
 
     private int day = DateTime.Now.Day;
     private int month = DateTime.Now.Month;

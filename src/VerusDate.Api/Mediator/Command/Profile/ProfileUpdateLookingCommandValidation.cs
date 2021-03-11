@@ -9,11 +9,6 @@ namespace VerusDate.Api.Mediator.Command.Profile
             RuleFor(x => x.Looking.Intent)
                .NotEmpty();
 
-            RuleFor(x => x.Looking.Distance)
-               .NotEmpty()
-               .GreaterThanOrEqualTo(0.5)
-               .LessThanOrEqualTo(100);
-
             RuleFor(x => x.Looking.MinimalAge)
                 .NotEmpty()
                 .GreaterThanOrEqualTo(18);

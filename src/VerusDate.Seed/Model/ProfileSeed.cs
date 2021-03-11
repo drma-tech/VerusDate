@@ -52,7 +52,7 @@ namespace VerusDate.Seed.Model
                     //p.Latitude = s.Address.Latitude();
                     //p.Longitude = s.Address.Longitude();
                     p.Location = $"{s.Address.Country()} - {s.Address.State()} - {s.Address.City()}";
-                    p.MaritalStatus = s.PickRandom<MaritalStatus>();
+                    p.CurrentSituation = s.PickRandom<CurrentSituation>();
                     p.Intent = s.Random.ArrayElements(new Intent[] { Intent.OneNightStand, Intent.FriendsWithBenefits, Intent.Relationship, Intent.Married }, s.Random.Number(1, 4));
                     p.BiologicalSex = s.PickRandom<BiologicalSex>();
                     p.GenderIdentity = s.PickRandom<GenderIdentity>();
@@ -108,19 +108,19 @@ namespace VerusDate.Seed.Model
                 {
                     p.MinimalAge = s.Random.Int(18, 120);
                     p.MaxAge = s.Random.Int(18, 120);
-                    p.BiologicalSex = s.PickRandom<BiologicalSex>();
-                    p.MaritalStatus = s.PickRandom<MaritalStatus>();
+                    p.BiologicalSex = s.Random.ArrayElements(new BiologicalSex[] { BiologicalSex.Male, BiologicalSex.Female, BiologicalSex.Other });
+                    p.CurrentSituation = s.Random.ArrayElements(new CurrentSituation[] { CurrentSituation.Single, CurrentSituation.Monogamous, CurrentSituation.NonMonogamous });
                     p.Intent = s.Random.ArrayElements(new Intent[] { Intent.OneNightStand, Intent.FriendsWithBenefits, Intent.Relationship, Intent.Married });
-                    p.GenderIdentity = s.PickRandom<GenderIdentity>();
-                    p.SexualOrientation = s.PickRandom<SexualOrientation>();
+                    p.GenderIdentity = s.Random.ArrayElements(new GenderIdentity[] { GenderIdentity.Cisgender, GenderIdentity.Transexuais, GenderIdentity.Transgender, GenderIdentity.Travestis });
+                    p.SexualOrientation = s.Random.ArrayElements(new SexualOrientation[] { SexualOrientation.Heteressexual, SexualOrientation.Homossexual, SexualOrientation.Bissexual, SexualOrientation.Demissexual });
                     p.Smoke = s.PickRandom<Smoke>();
                     p.Drink = s.PickRandom<Drink>();
                     p.Diet = s.PickRandom<Diet>();
                     p.MinimalHeight = s.PickRandom<Height>();
                     p.MaxHeight = s.PickRandom<Height>();
-                    p.BodyMass = s.PickRandom<BodyMass>();
-                    p.RaceCategory = s.PickRandom<RaceCategory>();
-                    p.Distance = s.Random.Int(0, 10000);
+                    p.BodyMass = s.Random.ArrayElements(new BodyMass[] { BodyMass.UnderWeight, BodyMass.NormalWeight, BodyMass.Athletic, BodyMass.OverWeight });
+                    p.RaceCategory = s.Random.ArrayElements(new RaceCategory[] { RaceCategory.White, RaceCategory.Black_AfricanAmerican, RaceCategory.Asian, RaceCategory.MixedRaces });
+                    p.Distance = s.PickRandom<Distance>();
                     p.CareerCluster = s.PickRandom<CareerCluster>();
                     p.EducationLevel = s.PickRandom<EducationLevel>();
                     p.HaveChildren = s.PickRandom<HaveChildren>();

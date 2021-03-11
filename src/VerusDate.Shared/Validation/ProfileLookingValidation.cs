@@ -10,11 +10,6 @@ namespace VerusDate.Api.Mediator.Command.Profile
             RuleFor(x => x.Intent)
                .NotEmpty();
 
-            RuleFor(x => x.Distance)
-               .NotEmpty()
-               .GreaterThanOrEqualTo(0.5)
-               .LessThanOrEqualTo(100);
-
             RuleFor(x => x.MinimalAge)
                 .NotEmpty()
                 .GreaterThanOrEqualTo(18);

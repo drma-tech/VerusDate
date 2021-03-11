@@ -18,6 +18,7 @@ namespace VerusDate.Web.Shared
         [Parameter] public bool HasGroup { get; set; }
         [Parameter] public bool DisableHelp { get; set; }
         [Parameter] public string HelpLink { get; set; }
+        [Parameter] public bool Required { get; set; }
 
         private modal.ProfileDataHelp<TValue> dataHelp;
         private modal.ProfileDataSelect<TValue, TEnum> dataSelect;

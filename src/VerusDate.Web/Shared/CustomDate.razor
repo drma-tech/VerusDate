@@ -1,0 +1,102 @@
+﻿@inherits BaseCustomField<DateTime, CustomDate>
+
+<Field Horizontal="true">
+    <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.BirthdayCake"></Icon> @Label
+    </FieldLabel>
+    <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
+        <Addons>
+            <Addon AddonType="AddonType.Body">
+                <InputSelect TValue="int" Value="@day" ValueChanged="@SetDay" ValueExpression="@(()=>day)" @attributes='new Dictionary<string, object>() { { "class", "form-control" } }'>
+                    @for (int i = 1; i <= DateTime.DaysInMonth(year, month); i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </InputSelect>
+                <InputSelect TValue="int" Value="@month" ValueChanged="@SetMonth" ValueExpression="@(()=>month)" @attributes='new Dictionary<string, object>() { { "class", "form-control" } }'>
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        <option value="@i">@(new DateTime(year, i, 1).ToString("MMM"))</option>
+                    }
+                </InputSelect>
+                <InputSelect TValue="int" Value="@year" ValueChanged="@SetYear" ValueExpression="@(()=>year)" @attributes='new Dictionary<string, object>() { { "class", "form-control" } }'>
+                    @for (int i = DateTime.Now.AddYears(-18).Year; i >= DateTime.Now.AddYears(-100).Year; i--)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </InputSelect>
+            </Addon>
+            <Addon AddonType="AddonType.End">
+                <Button Color="Color.Warning" Outline="true" Clicked="PrivateData">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash"></Icon>
+                </Button>
+            </Addon>
+        </Addons>
+        <ValidationMessage For="@For"></ValidationMessage>
+    </FieldBody>
+    <Column ColumnSize="ColumnSize.IsFull">
+        <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(For)</FieldHelp>
+    </Column>
+</Field>
+
+@code {
+    [Parameter] public DateTime Value { get; set; }
+    [Parameter] public EventCallback<DateTime> ValueChanged { get; set; }
+
+    public EventCallback<int> DayChanged { get; set; }
+    public EventCallback<int> MonthChanged { get; set; }
+    public EventCallback<int> YearChanged { get; set; }
+
+    private int day = DateTime.Now.Day;
+    private int month = DateTime.Now.Month;
+    private int year = DateTime.Now.AddYears(-18).Year;
+
+    protected override void OnInitialized()
+    {
+        day = Value.Day;
+        month = Value.Month;
+        year = Value.Year;
+    }
+
+    private async Task SetDay(int value)
+    {
+        try
+        {
+            day = value;
+            Value = new DateTime(year, month, day);
+            await ValueChanged.InvokeAsync(Value);
+        }
+        catch (Exception ex)
+        {
+            Toast.ShowError("", "Ocorreu um erro ao processar a data");
+        }
+    }
+
+    private async Task SetMonth(int value)
+    {
+        try
+        {
+            month = value;
+            Value = new DateTime(year, month, day);
+            await ValueChanged.InvokeAsync(Value);
+        }
+        catch (Exception ex)
+        {
+            Toast.ShowError("", "Ocorreu um erro ao processar a data");
+        }
+    }
+
+    private async Task SetYear(int value)
+    {
+        try
+        {
+            year = value;
+            Value = new DateTime(year, month, day);
+            await ValueChanged.InvokeAsync(Value);
+        }
+        catch (Exception ex)
+        {
+            Toast.ShowError("", "Ocorreu um erro ao processar a data");
+        }
+    }
+}

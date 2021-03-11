@@ -10,7 +10,7 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Exploradora", Description = "A turista sexual: curiosa e ávida por aprender coisas novas. Gosta de ir além da sua zona de conforto e não leva o sexo demasiado a sério.")]
         Explorer = 2,
 
-        [Display(Name = "Comerciante Justo", Description = "A que dá extrema importância à equação dar-receber, de modo que esta seja equilibrada. Gosta de saber que ambos estão atentos quanto às necessidades um do outro e dispostos a trabalhar em equipa.")]
+        [Display(Name = "Comerciante Justo", Description = "A que dá extrema importância à equação dar-receber, de modo que esta seja equilibrada. Gosta de saber que ambos estão atentos quanto às necessidades um do outro e dispostos a trabalhar em equipe.")]
         FairTrader = 3,
 
         [Display(Name = "Dadora", Description = "A que dá mais do que recebe e está em sintonia com as experiências e necessidades do seu parceiro. Pessoa para quem é importante saber que consegue fazer o outro sentir-se bem.")]

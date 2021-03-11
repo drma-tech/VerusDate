@@ -12,7 +12,7 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Signo")]
         public Zodiac Zodiac { get; set; }
 
-        [Display(Name = "Altura", Description = "(Pode ser um valor aproximado)")]
+        [Display(Name = "Altura")]
         public Height Height { get; set; }
 
         [Display(Name = "Raça", Description = "Classificação definida por US OMB")]

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazorise;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -7,6 +8,13 @@ using VerusDate.Shared.Helper;
 
 namespace VerusDate.Web.Shared
 {
+    public enum LabelSize
+    {
+        Short,
+        Normal,
+        Big
+    }
+
     public partial class CustomFieldSelect<TValue, TEnum> where TEnum : struct, Enum, IConvertible
     {
         [Parameter] public TValue SelectedValue { get; set; }
@@ -19,6 +27,7 @@ namespace VerusDate.Web.Shared
         [Parameter] public bool DisableHelp { get; set; }
         [Parameter] public string HelpLink { get; set; }
         [Parameter] public bool Required { get; set; }
+        [Parameter] public LabelSize LabelSize { get; set; } = LabelSize.Normal;
 
         private modal.ProfileDataHelp<TValue> dataHelp;
         private modal.ProfileDataSelect<TValue, TEnum> dataSelect;
@@ -72,6 +81,28 @@ namespace VerusDate.Web.Shared
         {
             dataSelect.ChangeContent(For, TypeEnum);
             dataSelect.ShowModal();
+        }
+
+        private IFluentColumn GetLabelSize()
+        {
+            return LabelSize switch
+            {
+                LabelSize.Short => ColumnSize.IsFull.OnWidescreen.Is3.OnFullHD,
+                LabelSize.Normal => ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD,
+                LabelSize.Big => ColumnSize.IsFull.OnWidescreen.Is5.OnFullHD,
+                _ => ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD,
+            };
+        }
+
+        private IFluentColumn GetBodySize()
+        {
+            return LabelSize switch
+            {
+                LabelSize.Short => ColumnSize.IsFull.OnWidescreen.Is9.OnFullHD,
+                LabelSize.Normal => ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD,
+                LabelSize.Big => ColumnSize.IsFull.OnWidescreen.Is7.OnFullHD,
+                _ => ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD,
+            };
         }
     }
 }

@@ -3,12 +3,12 @@
 @typeparam TEnum
 
 <Field Horizontal="true">
-    <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+    <FieldLabel ColumnSize="@GetLabelSize()">
         <Icon Name="@CssIcon"></Icon> @Label
         @if (Required)
         {<div style="color: red; display: initial;"> *</div>}
     </FieldLabel>
-    <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
+    <FieldBody ColumnSize="@GetBodySize()">
         @switch (Type)
         {
             case FieldType.Select:

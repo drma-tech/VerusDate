@@ -102,15 +102,17 @@ else
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.MoneyPersonality)" TValue="MoneyPersonality?" TEnum="MoneyPersonality" @bind-SelectedValue="@profile.Lifestyle.MoneyPersonality"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Wallet" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()" LabelSize="LabelSize.Big"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@profile.Lifestyle.RelationshipPersonality"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PeopleArrows" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()" LabelSize="LabelSize.Big"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.SexPersonality)" TValue="SexPersonality?" TEnum="SexPersonality" @bind-SelectedValue="@profile.Lifestyle.SexPersonality"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()" HelpLink="https://www.vmtherapy.com/personality-type/"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()" LabelSize="LabelSize.Big" HelpLink="https://www.vmtherapy.com/personality-type/"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Lifestyle.SexPersonalityPreferences)" TValue="IReadOnlyList<SexPersonality>" TEnum="SexPersonality" @bind-SelectedValues="@profile.Lifestyle.SexPersonalityPreferences"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart" Disabled="@profile.Basic.Intent.IsShortTerm(true)" LabelSize="LabelSize.Big"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.LoveLanguage)" TValue="LoveLanguage?" TEnum="LoveLanguage" @bind-SelectedValue="@profile.Lifestyle.LoveLanguage"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.HandHoldingHeart" Disabled="@profile.Basic.Intent.IsShortTerm(true)" Required="@profile.Basic.Intent.IsLongTerm()" HelpLink="https://www.5lovelanguages.com/quizzes/singles-quiz/"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.HandHoldingHeart" Disabled="@profile.Basic.Intent.IsShortTerm(true)" LabelSize="LabelSize.Big" Required="@profile.Basic.Intent.IsLongTerm()" HelpLink="https://www.5lovelanguages.com/quizzes/singles-quiz/"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.Select" For="@(() => profile.Lifestyle.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@profile.Lifestyle.MyersBriggsTypeIndicator"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)" HelpLink="https://www.16personalities.com/" HasGroup="true"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.User" Disabled="@profile.Basic.Intent.IsShortTerm(true)" LabelSize="LabelSize.Big" HelpLink="https://www.16personalities.com/" HasGroup="true"></CustomFieldSelect>
                     </Column>
                 </Row>
                 <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
@@ -120,23 +122,23 @@ else
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Food)" TValue="IReadOnlyList<Food>" TEnum="Food" @bind-SelectedValues="@profile.Interest.Food"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PizzaSlice" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PizzaSlice" Disabled="@profile.Basic.Intent.IsShortTerm(true)" LabelSize="LabelSize.Short"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Holidays)" TValue="IReadOnlyList<Holidays>" TEnum="Holidays" @bind-SelectedValues="@profile.Interest.Holidays"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlaneDeparture" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlaneDeparture" Disabled="@profile.Basic.Intent.IsShortTerm(true)" LabelSize="LabelSize.Short"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.Sports)" TValue="IReadOnlyList<Sports>" TEnum="Sports" @bind-SelectedValues="@profile.Interest.Sports"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Swimmer" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Swimmer" Disabled="@profile.Basic.Intent.IsShortTerm(true)" LabelSize="LabelSize.Short"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.LeisureActivities)" TValue="IReadOnlyList<LeisureActivities>" TEnum="LeisureActivities" @bind-SelectedValues="@profile.Interest.LeisureActivities"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.UmbrellaBeach" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.UmbrellaBeach" Disabled="@profile.Basic.Intent.IsShortTerm(true)" LabelSize="LabelSize.Short"></CustomFieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.MusicGenre)" TValue="IReadOnlyList<MusicGenre>" TEnum="MusicGenre" @bind-SelectedValues="@profile.Interest.MusicGenre"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Music" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Music" Disabled="@profile.Basic.Intent.IsShortTerm(true)" LabelSize="LabelSize.Short"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.MovieGenre)" TValue="IReadOnlyList<MovieGenre>" TEnum="MovieGenre" @bind-SelectedValues="@profile.Interest.MovieGenre"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Film" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Film" Disabled="@profile.Basic.Intent.IsShortTerm(true)" LabelSize="LabelSize.Short"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.TVGenre)" TValue="IReadOnlyList<TVGenre>" TEnum="TVGenre" @bind-SelectedValues="@profile.Interest.TVGenre"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Tv" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Tv" Disabled="@profile.Basic.Intent.IsShortTerm(true)" LabelSize="LabelSize.Short"></CustomFieldSelect>
                         <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => profile.Interest.ReadingGenre)" TValue="IReadOnlyList<ReadingGenre>" TEnum="ReadingGenre" @bind-SelectedValues="@profile.Interest.ReadingGenre"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BookReader" Disabled="@profile.Basic.Intent.IsShortTerm(true)"></CustomFieldSelect>
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BookReader" Disabled="@profile.Basic.Intent.IsShortTerm(true)" LabelSize="LabelSize.Short"></CustomFieldSelect>
                     </Column>
                 </Row>
             </CardBody>

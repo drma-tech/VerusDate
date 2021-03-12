@@ -70,9 +70,6 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Religião")]
         public Religion? Religion { get; set; }
 
-        [Display(Name = "Person. Sexual")]
-        public IReadOnlyList<SexPersonality> SexPersonality { get; set; } = Array.Empty<SexPersonality>();
-
         public void UpdateData(ProfileLookingModel vm)
         {
             Intent = vm.Intent;

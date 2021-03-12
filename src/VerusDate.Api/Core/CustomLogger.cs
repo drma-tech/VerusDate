@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using VerusDate.Api.Repository;
+using VerusDate.Shared.Helper;
 
 namespace VerusDate.Api.Core
 {
@@ -23,6 +24,11 @@ namespace VerusDate.Api.Core
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
             if (!IsEnabled(logLevel))
+            {
+                return;
+            }
+
+            if (exception is NotificationException)
             {
                 return;
             }

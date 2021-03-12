@@ -178,10 +178,6 @@ namespace VerusDate.Api.Mediator.Queries.Profile
                 SQL.Append("	AND c.lifestyle.religion = @Religion ");
                 filter.Add("@Religion", (int)looking.Religion.Value);
             }
-            if (looking.SexPersonality.Any())
-            {
-                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.lifestyle.sexPersonality WHERE n in (" + string.Join(",", user.Looking.SexPersonality.Cast<int>()) + ")) ");
-            }
 
             SQL.Append("ORDER BY ");
             SQL.Append("	c.dtTopList DESC");

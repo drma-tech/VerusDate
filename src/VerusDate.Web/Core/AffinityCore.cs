@@ -46,6 +46,7 @@ namespace VerusDate.Web.Core
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.EducationLevel), CheckEnum((int)profView.Lifestyle.EducationLevel.Value, (int?)profUser.Lifestyle.EducationLevel)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.CareerCluster), CheckEnumCareer(profView.Lifestyle.CareerCluster.Value, profUser.Lifestyle.CareerCluster.Value)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MoneyPersonality), CheckMoneyPersonality(profView.Lifestyle.MoneyPersonality.Value, profUser.Lifestyle.MoneyPersonality.Value)));
+                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.SplitTheBill), CheckSplitTheBill(profView.Lifestyle.SplitTheBill.Value, profUser.Lifestyle.SplitTheBill.Value)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality.Value)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.LoveLanguage), CheckEnum((int)profView.Lifestyle.LoveLanguage.Value, (int?)profUser.Lifestyle.LoveLanguage)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator, profUser.Lifestyle.MyersBriggsTypeIndicator)));
@@ -231,6 +232,19 @@ namespace VerusDate.Web.Core
                 MoneyPersonality.Avoider => view == MoneyPersonality.Debtor || view == MoneyPersonality.Avoider,
                 MoneyPersonality.Saver => view == MoneyPersonality.Saver || view == MoneyPersonality.Investor,
                 MoneyPersonality.Investor => view == MoneyPersonality.Saver || view == MoneyPersonality.Investor,
+                _ => throw new System.NotImplementedException()
+            };
+        }
+
+        private static bool CheckSplitTheBill(SplitTheBill view, SplitTheBill user)
+        {
+            return user switch
+            {
+                SplitTheBill.Dependent => view == SplitTheBill.Provider,
+                SplitTheBill.GetGifts => view == SplitTheBill.SendGifts,
+                SplitTheBill.Balanced => view == SplitTheBill.Balanced,
+                SplitTheBill.SendGifts => view == SplitTheBill.GetGifts,
+                SplitTheBill.Provider => view == SplitTheBill.Dependent,
                 _ => throw new System.NotImplementedException()
             };
         }

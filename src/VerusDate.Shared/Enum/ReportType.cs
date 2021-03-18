@@ -7,7 +7,7 @@ namespace VerusDate.Shared.Enum
         [Display(Name = "Desfazer o match", Description = "Apenas perdi o interesse por este perfil e quero desfazer o match")]
         NotInterested = 1,
 
-        [Display(Name = "Curving", Description = "O 'curver' é aquele pessoa que te deixa em banho-maria; manda mensagens esporádicas, mas nunca está disposto a te ver, não convida pra sair e nem aceita convite. E, quando finalmente vocês combinam de sair, desmarca o encontro de última hora.")]
+        [Display(Name = "Curving", Description = "O 'curver' é aquela pessoa que te deixa em banho-maria; manda mensagens esporádicas, mas nunca está disposto a te ver, não convida pra sair e nem aceita convite. E, quando finalmente vocês combinam de sair, desmarca o encontro de última hora.")]
         Curving = 10,
 
         [Display(Name = "Ghosting", Description = "O ghosting acontece quando a outra pessoa começa a ignorar, evitar, e também deixa de responder mensagens, não atende mais ligações e, sem aviso, desaparece sem apresentar motivos.")]

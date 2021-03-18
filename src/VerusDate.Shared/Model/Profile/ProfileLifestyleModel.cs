@@ -34,6 +34,9 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Personalidade Financeira")]
         public MoneyPersonality? MoneyPersonality { get; set; }
 
+        [Display(Name = "Dividindo as Contas")]
+        public SplitTheBill? SplitTheBill { get; set; }
+
         [Display(Name = "Personalidade na Relação")]
         public RelationshipPersonality? RelationshipPersonality { get; set; }
 

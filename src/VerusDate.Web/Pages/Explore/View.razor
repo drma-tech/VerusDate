@@ -20,7 +20,7 @@ else
                         @foreach (var item in imageDataUriGallery)
                         {
                             <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
-                                <Image Source="@item" Style="max-height: 450px" />
+                                <Image Source="@item" Style="max-height: 450px !important;" />
                             </CarouselSlide>
                         }
                     </Carousel>

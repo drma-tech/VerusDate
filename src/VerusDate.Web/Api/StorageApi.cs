@@ -12,6 +12,8 @@ namespace VerusDate.Web.Api
         public const string UploadPhotoFace = "Storage/UploadPhotoFace";
         public const string UploadPhotoGallery = "Storage/UploadPhotoGallery";
         public const string UploadPhotoValidation = "Storage/UploadPhotoValidation";
+
+        public static string DeletePhotoGallery(string IdPhoto) => $"Storage/DeletePhotoGallery?IdPhoto={IdPhoto}";
     }
 
     public static class StorageApi
@@ -25,7 +27,7 @@ namespace VerusDate.Web.Api
                 storage.RemoveItem(ProfileEndpoint.Get);
                 await http.Profile_Get(storage);
 
-                RefreshCore.RefreshMenu();
+                //RefreshCore.RefreshMenu();
             }
 
             await response.ProcessResponse(toast, "Foto atualizada com sucesso!");
@@ -34,6 +36,19 @@ namespace VerusDate.Web.Api
         public async static Task Storage_UploadPhotoGallery(this HttpClient http, List<byte[]> Streams, ISyncSessionStorageService storage, IToastService toast)
         {
             var response = await http.Put(StorageEndpoint.UploadPhotoGallery, new { Streams });
+
+            if (response.IsSuccessStatusCode)
+            {
+                storage.RemoveItem(ProfileEndpoint.Get);
+                await http.Profile_Get(storage);
+            }
+
+            await response.ProcessResponse(toast, "Foto atualizada com sucesso!");
+        }
+
+        public async static Task Storage_DeletePhotoGallery(this HttpClient http, string IdPhoto, ISyncSessionStorageService storage, IToastService toast)
+        {
+            var response = await http.Delete(StorageEndpoint.DeletePhotoGallery(IdPhoto));
 
             if (response.IsSuccessStatusCode)
             {

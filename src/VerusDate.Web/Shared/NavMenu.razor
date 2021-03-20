@@ -55,14 +55,14 @@
 
         await LoadData();
 
-        RefreshCore.RefreshRequestedMenu += Refresh;
+        //RefreshCore.RefreshRequestedMenu += Refresh;
     }
 
-    private async Task Refresh()
-    {
-        await LoadData();
-        StateHasChanged();
-    }
+    //private async Task Refresh()
+    //{
+    //    await LoadData();
+    //    StateHasChanged();
+    //}
 
     protected async Task LoadData()
     {

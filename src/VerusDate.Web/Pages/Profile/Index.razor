@@ -10,7 +10,7 @@
                     @foreach (var item in imageDataUriGallery)
                     {
                         <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
-                            <Image Source="@item" Style="max-height: 450px" />
+                            <Image Source="@item" Style="max-height: 450px !important;" />
                         </CarouselSlide>
                     }
                 </Carousel>
@@ -82,7 +82,7 @@
                             <Button Color="Color.Primary" Type="ButtonType.Link" Block="true" To="/Profile/Interactions" Disabled="true">
                                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Comments"></Icon> Mensagens
                                 @*<Badge Color="Color.Light">@GlobalInteractionsVM?.TotalMessages</Badge>
-                                <Badge Color="Color.Danger">@GlobalInteractionsVM?.UnreadMessages</Badge>*@
+                                    <Badge Color="Color.Danger">@GlobalInteractionsVM?.UnreadMessages</Badge>*@
                             </Button>
                         </Tooltip>
                     </Column>
@@ -115,7 +115,7 @@
     private ProfileBadgeModel badge = new();
 
     string selectedImage;
-    string[] imageDataUriGallery = new string[] { ImageHelper.GetNoUserPhoto };
+    string[] imageDataUriGallery = new string[] { };
 
     protected override async Task LoadData()
     {
@@ -124,8 +124,13 @@
         if (profile != null)
         {
             imageDataUriGallery = new string[] { profile.GetMainPhoto() }.Concat(profile.GetGalleryPhotos()).ToArray();
-            selectedImage = imageDataUriGallery.FirstOrDefault();
         }
+        else
+        {
+            imageDataUriGallery = new string[] { ImageHelper.GetNoUserPhoto };
+        }
+
+        selectedImage = imageDataUriGallery.FirstOrDefault();
 
         gamification = profile?.Gamification;
         if (profile?.Badge != null) badge = profile.Badge;

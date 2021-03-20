@@ -13,7 +13,7 @@
             </CardHeader>
             <CardBody>
                 <Figure Margin="Margin.Is0.Is2.FromBottom" Style="text-align: center; width: 100%; background-color: black;">
-                    <FigureImage Margin="Margin.Is0" Source="@imageDataUri" AlternateText="No User" Style="max-height: 450px" />
+                    <FigureImage Margin="Margin.Is0" Source="@imageDataUri" AlternateText="No User" Style="max-height: 450px !important;" />
                 </Figure>
                 <div class="custom-file">
                     <InputFile OnChange="@OnInputFileChange" @attributes="@GetAttributes()"></InputFile>
@@ -33,6 +33,9 @@
                     {
                         <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
                             <Image Source="@item" Style="height: 450px" />
+                            <Button Color="Color.Danger" Style="position: absolute; right: 10px; top: 10px; z-index:2;" Clicked="DeletePhotoGallery">
+                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Trash"></Icon>
+                            </Button>
                         </CarouselSlide>
                     }
                 </Carousel>
@@ -147,8 +150,25 @@
 
                 _profile = await Http.Profile_Get(SessionStorage);
             }
+        }
+        catch (Exception ex)
+        {
+            imageDataUriGallery = Array.Empty<string>();
+            ex.ProcessException(Toast, Logger);
+        }
+    }
 
-            RefreshCore.RefreshMenu();
+    private async Task DeletePhotoGallery()
+    {
+        try
+        {
+            var fileName = System.IO.Path.GetFileName(selectedImage);
+
+            await Http.Storage_DeletePhotoGallery(fileName, SessionStorage, Toast);
+
+            imageDataUriGallery = imageDataUriGallery.Where(w => w != selectedImage).ToArray();
+
+            StateHasChanged();
         }
         catch (Exception ex)
         {

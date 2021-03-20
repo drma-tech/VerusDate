@@ -7,16 +7,16 @@ namespace VerusDate.Web.Core
     {
         public static event Func<Task> RefreshRequestedHead;
 
-        public static event Func<Task> RefreshRequestedMenu;
+        //public static event Func<Task> RefreshRequestedMenu;
 
         public static void RefreshHead()
         {
             RefreshRequestedHead?.Invoke();
         }
 
-        public static void RefreshMenu()
-        {
-            RefreshRequestedMenu?.Invoke();
-        }
+        //public static void RefreshMenu()
+        //{
+        //    RefreshRequestedMenu?.Invoke();
+        //}
     }
 }

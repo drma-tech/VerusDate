@@ -66,6 +66,28 @@ namespace VerusDate.Api.Function
             }
         }
 
+        [FunctionName("StorageDeletePhotoGallery")]
+        public async Task<IActionResult> DeletePhotoGallery(
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.DELETE, Route = "Storage/DeletePhotoGallery")] HttpRequest req,
+            ILogger log, CancellationToken cancellationToken)
+        {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
+            try
+            {
+                var request = req.BuildRequestDelete<DeletePhotoGalleryCommand, bool>();
+
+                var result = await _mediator.Send(request, source.Token);
+
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, req.Query.BuildMessage(), req.Query.ToList());
+                return new BadRequestObjectResult(ex.ProcessException());
+            }
+        }
+
         [FunctionName("StorageUploadPhotoValidation")]
         public async Task<IActionResult> UploadPhotoValidation(
            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Storage/UploadPhotoValidation")] HttpRequest req,

@@ -76,5 +76,10 @@ namespace VerusDate.Web.Core
         {
             return await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
         }
+
+        public async static Task<HttpResponseMessage> Delete(this HttpClient http, string requestUri)
+        {
+            return await http.DeleteAsync(http.BaseApi() + requestUri);
+        }
     }
 }

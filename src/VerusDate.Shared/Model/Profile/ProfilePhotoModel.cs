@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Model
@@ -32,6 +33,11 @@ namespace VerusDate.Shared.Model
         public void UpdatePhotoGallery(string[] Gallery)
         {
             this.Gallery = Gallery;
+        }
+
+        public void RemovePhotoGallery(string IdPhoto)
+        {
+            this.Gallery = Gallery.Where(w => w != IdPhoto).ToArray();
         }
     }
 }

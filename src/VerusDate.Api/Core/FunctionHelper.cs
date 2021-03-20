@@ -9,6 +9,16 @@ namespace VerusDate.Api.Core
 {
     public static class FunctionHelper
     {
+        public static I BuildRequestDelete<I, O>(this HttpRequest req) where I : MediatorQuery<O>, new()
+        {
+            var obj = new I();
+
+            obj.SetIds(req.GetUserId());
+            obj.SetParameters(req.Query);
+
+            return obj;
+        }
+
         /// <summary>
         /// Cria uma instancia de classe mediator do tipo Query
         /// </summary>

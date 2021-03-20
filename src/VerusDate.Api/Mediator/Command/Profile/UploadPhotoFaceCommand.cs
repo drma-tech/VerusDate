@@ -45,6 +45,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
         {
             var profile = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
             if (profile == null) throw new NotificationException("Perfil não encontrado");
+            var IdOldPhoto = profile.Photo.Main;
 
             using var stream1 = new MemoryStream(request.MainPhoto);
 
@@ -58,7 +59,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
             if (!string.IsNullOrEmpty(profile.Photo.Main)) //foto já existente
             {
                 //se manter a foto com o mesmo id, o cache do browser não vai atualizar a foto
-                await storageHelper.DeletePhoto(ImageHelper.PhotoType.PhotoFace, profile.Photo.Main, cancellationToken);
+                await storageHelper.DeletePhoto(ImageHelper.PhotoType.PhotoFace, IdOldPhoto, cancellationToken);
             }
 
             using var stream2 = new MemoryStream(request.MainPhoto);

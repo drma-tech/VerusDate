@@ -3,8 +3,8 @@
     "relation": [ "delegate_permission/common.handle_all_urls" ],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.verusdate.www.twa",
-      "sha256_cert_fingerprints": [ "19:1A:E7:5D:3A:DC:5F:55:FF:18:82:DC:94:68:2F:F6:75:AB:76:83:FD:1C:11:9A:FF:87:65:9C:05:0B:51:1E" ]
+      "package_name": "com.verusdate.app.twa",
+      "sha256_cert_fingerprints": [ "CE:EE:C3:C3:2F:3E:22:5B:3D:A7:55:99:14:0B:91:80:11:04:D6:67:04:C1:BF:3E:E1:5B:85:AB:21:2B:7C:08" ]
     }
   }
 ]

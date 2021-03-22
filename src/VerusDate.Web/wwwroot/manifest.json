@@ -7,17 +7,17 @@
   "theme_color": "#03173d",
   "icons": [
     {
-      "src": "https://www.verusdate.com/icon-192.png",
+      "src": "/icon-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "https://www.verusdate.com/icon-300.png",
+      "src": "/icon-300.png",
       "type": "image/png",
       "sizes": "300x300"
     },
     {
-      "src": "https://www.verusdate.com/icon-512.png",
+      "src": "/icon-512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
@@ -37,7 +37,7 @@
       "url": "/match",
       "icons": [
         {
-          "src": "https://www.verusdate.com/icon-192.png",
+          "src": "/icon-192.png",
           "type": "image/png",
           "sizes": "192x192"
         }
@@ -50,7 +50,7 @@
       "url": "/search",
       "icons": [
         {
-          "src": "https://www.verusdate.com/icon-192.png",
+          "src": "/icon-192.png",
           "type": "image/png",
           "sizes": "192x192"
         }
@@ -59,16 +59,16 @@
   ],
   "screenshots": [
     {
-      "src": "https://www.verusdate.com/screenshots01.png",
+      "src": "/screenshots01.png",
       "sizes": "1280x800",
       "type": "image/png"
     },
     {
-      "src": "https://www.verusdate.com/screenshots02.png",
+      "src": "/screenshots02.png",
       "sizes": "750x1334",
       "type": "image/png"
     }
   ],
-  "url": "https://www.verusdate.com/",
+  "url": "https://app.verusdate.com/",
   "orientation": "portrait"
 }

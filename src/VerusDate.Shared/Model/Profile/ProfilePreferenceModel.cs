@@ -5,8 +5,10 @@ using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Model
 {
-    public class ProfileLookingModel
+    public class ProfilePreferenceModel
     {
+        #region BASIC
+
         [Display(Name = "Distância")]
         public Distance Distance { get; set; }
 
@@ -28,6 +30,10 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Orientação Sexual")]
         public IReadOnlyList<SexualOrientation> SexualOrientation { get; set; } = Array.Empty<SexualOrientation>();
 
+        #endregion BASIC
+
+        #region BIO
+
         [Display(Name = "Idade (Min - Máx)")]
         public int MinimalAge { get; set; }
 
@@ -46,51 +52,25 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Corpo")]
         public IReadOnlyList<BodyMass> BodyMass { get; set; } = Array.Empty<BodyMass>();
 
-        [Display(Name = "Bebe")]
-        public Drink? Drink { get; set; }
+        #endregion BIO
 
-        [Display(Name = "Fuma")]
-        public Smoke? Smoke { get; set; }
-
-        [Display(Name = "Dieta")]
-        public Diet? Diet { get; set; }
-
-        [Display(Name = "Tem Filho(s)")]
-        public HaveChildren? HaveChildren { get; set; }
-
-        [Display(Name = "Quer Filho(s)")]
-        public WantChildren? WantChildren { get; set; }
-
-        [Display(Name = "Educação")]
-        public EducationLevel? EducationLevel { get; set; }
-
-        [Display(Name = "Carreira")]
-        public CareerCluster? CareerCluster { get; set; }
-
-        [Display(Name = "Religião")]
-        public Religion? Religion { get; set; }
-
-        public void UpdateData(ProfileLookingModel vm)
+        public void UpdateData(ProfilePreferenceModel vm)
         {
-            Intent = vm.Intent;
+            //BASIC
             Distance = vm.Distance;
-            MinimalAge = vm.MinimalAge;
-            MaxAge = vm.MaxAge;
-            BiologicalSex = vm.BiologicalSex;
+            Languages = vm.Languages;
             CurrentSituation = vm.CurrentSituation;
+            Intent = vm.Intent;
+            BiologicalSex = vm.BiologicalSex;
             GenderIdentity = vm.GenderIdentity;
             SexualOrientation = vm.SexualOrientation;
-            Smoke = vm.Smoke;
-            Drink = vm.Drink;
-            Diet = vm.Diet;
-            MinimalHeight = vm.MaxHeight;
-            BodyMass = vm.BodyMass;
+            //BIO
+            MinimalAge = vm.MinimalAge;
+            MaxAge = vm.MaxAge;
+            MinimalHeight = vm.MinimalHeight;
+            MaxHeight = vm.MaxHeight;
             RaceCategory = vm.RaceCategory;
-            HaveChildren = vm.HaveChildren;
-            WantChildren = vm.WantChildren;
-            Religion = vm.Religion;
-            EducationLevel = vm.EducationLevel;
-            CareerCluster = vm.CareerCluster;
+            BodyMass = vm.BodyMass;
         }
     }
 }

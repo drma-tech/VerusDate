@@ -22,12 +22,13 @@ namespace VerusDate.Shared.Model
         public ProfileBioModel Bio { get; set; }
         public ProfileLifestyleModel Lifestyle { get; set; }
         public ProfileInterestModel Interest { get; set; }
-        public ProfileLookingModel Looking { get; set; }
+        public ProfilePreferenceModel Preference { get; set; }
         public ProfileGamificationModel Gamification { get; set; }
         public ProfileBadgeModel Badge { get; set; }
         public ProfilePhotoModel Photo { get; set; }
+        public ProfileReportModel[] Reports { get; set; } = Array.Empty<ProfileReportModel>();
 
-        //public string[] ActiveInteractions { get; set; }
+        //public string[] ActiveInteractions { get; set; } = Array.Empty<string>();
         public string[] PassiveInteractions { get; set; } = Array.Empty<string>();
 
         public void UpList()
@@ -50,9 +51,9 @@ namespace VerusDate.Shared.Model
             DtUpdate = DateTime.UtcNow;
         }
 
-        public void UpdateLooking(ProfileLookingModel obj)
+        public void UpdateLooking(ProfilePreferenceModel obj)
         {
-            Looking = obj;
+            Preference = obj;
 
             DtUpdate = DateTime.UtcNow;
         }

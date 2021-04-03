@@ -13,26 +13,26 @@ namespace VerusDate.Web.Core
         {
             if (profUser == null) throw new NotificationException("Não foi possível identificar seu perfil");
             if (profView == null) throw new NotificationException("Não foi possível identificar o perfil deste usuário");
-            if (profUser.Looking == null) throw new NotificationException("Não foi possível identificar seu perfil de busca");
-            if (profView.Looking == null) throw new NotificationException("Não foi possível identificar o perfil de busca deste usuário");
+            if (profUser.Preference == null) throw new NotificationException("Não foi possível identificar suas preferências");
+            if (profView.Preference == null) throw new NotificationException("Não foi possível identificar as preferências deste usuário");
 
             var obj = new List<AffinityVM>();
 
             //BASIC - DEFINIÇÕES DE BUSCA
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.BiologicalSex), CheckEnumArray(profView.Basic.BiologicalSex, profUser.Looking.BiologicalSex)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.CurrentSituation), CheckEnumArray(profView.Basic.CurrentSituation, profUser.Looking.CurrentSituation)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Intent), CheckEnumArray(profView.Basic.Intent, profUser.Looking.Intent), profView.Basic.Intent.Intersect(profUser.Looking.Intent).Select(s => (int)s)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.GenderIdentity), CheckEnumArray(profView.Basic.GenderIdentity, profUser.Looking.GenderIdentity)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.SexualOrientation), CheckEnumArray(profView.Basic.SexualOrientation, profUser.Looking.SexualOrientation)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Distance), profView.Distance <= (double)profUser.Looking.Distance));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Languages), CheckEnumArray(profView.Basic.Languages, profUser.Looking.Languages), profView.Basic.Languages.Intersect(profUser.Looking.Languages).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.BiologicalSex), CheckEnumArray(profView.Basic.BiologicalSex, profUser.Preference.BiologicalSex)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.CurrentSituation), CheckEnumArray(profView.Basic.CurrentSituation, profUser.Preference.CurrentSituation)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Intent), CheckEnumArray(profView.Basic.Intent, profUser.Preference.Intent), profView.Basic.Intent.Intersect(profUser.Preference.Intent).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.GenderIdentity), CheckEnumArray(profView.Basic.GenderIdentity, profUser.Preference.GenderIdentity)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.SexualOrientation), CheckEnumArray(profView.Basic.SexualOrientation, profUser.Preference.SexualOrientation)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Distance), profView.Distance <= (double)profUser.Preference.Distance));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Languages), CheckEnumArray(profView.Basic.Languages, profUser.Preference.Languages), profView.Basic.Languages.Intersect(profUser.Preference.Languages).Select(s => (int)s)));
 
             //BIO - DEFINIÇÕES DE BUSCA
-            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Age), CheckAge(profView.Age, profUser.Looking.MinimalAge, profUser.Looking.MaxAge)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Age), CheckAge(profView.Age, profUser.Preference.MinimalAge, profUser.Preference.MaxAge)));
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.Zodiac), CheckEnumZodiac(profView.Bio.Zodiac, profUser.Bio.Zodiac)));
-            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.RaceCategory), CheckEnumArray(profView.Bio.RaceCategory, profUser.Looking.RaceCategory)));
-            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.Height), CheckHeight(profView.Bio.Height, profUser.Looking.MinimalHeight, profUser.Looking.MaxHeight)));
-            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.BodyMass), CheckEnumArray(profView.Bio.BodyMass, profUser.Looking.BodyMass)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.RaceCategory), CheckEnumArray(profView.Bio.RaceCategory, profUser.Preference.RaceCategory)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.Height), CheckHeight(profView.Bio.Height, profUser.Preference.MinimalHeight, profUser.Preference.MaxHeight)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.BodyMass), CheckEnumArray(profView.Bio.BodyMass, profUser.Preference.BodyMass)));
 
             if (profView.Basic.Intent.IsLongTerm())
             {

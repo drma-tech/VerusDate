@@ -39,7 +39,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
         public async Task<List<ProfileSearch>> Handle(ProfileListSearchCommand request, CancellationToken cancellationToken)
         {
             var user = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.IdLoggedUser), cancellationToken);
-            var looking = user?.Looking;
+            var looking = user?.Preference;
 
             if (looking == null) throw new NotificationException("Critérios de busca ainda não definidos");
 
@@ -70,12 +70,12 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 
             // *** BASIC ***
 
-            if (user.Looking.Distance == Shared.Enum.Distance.Country)
+            if (user.Preference.Distance == Shared.Enum.Distance.Country)
             {
                 SQL.Append("	AND SUBSTRING(c.basic.location, 0, INDEX_OF(c.basic.location, ' - ')) = @location ");
                 filter.Add("@location", user.Basic.GetLocation(LocationType.Country));
             }
-            else if (user.Looking.Distance == Shared.Enum.Distance.City)
+            else if (user.Preference.Distance == Shared.Enum.Distance.City)
             {
                 SQL.Append("	AND c.basic.location = @location ");
                 filter.Add("@location", user.Basic.Location);
@@ -86,37 +86,37 @@ namespace VerusDate.Api.Mediator.Queries.Profile
                 filter.Add("@latitude", user.Basic.Latitude);
                 filter.Add("@longitude", user.Basic.Longitude);
                 filter.Add("@valueCalDistance", valueCalDistance);
-                filter.Add("@distance", user.Looking.Distance);
+                filter.Add("@distance", user.Preference.Distance);
             }
 
             if (looking.CurrentSituation.Any())
             {
-                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.currentSituation WHERE n in (" + string.Join(",", user.Looking.CurrentSituation.Cast<int>()) + ")) ");
+                SQL.Append("	AND c.basic.currentSituation IN (" + string.Join(",", user.Preference.CurrentSituation.Cast<int>()) + ") ");
             }
-            SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.intent WHERE n in (" + string.Join(",", user.Looking.Intent.Cast<int>()) + ")) ");
+            SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.intent WHERE n in (" + string.Join(",", user.Preference.Intent.Cast<int>()) + ")) ");
             if (looking.BiologicalSex.Any())
             {
-                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.biologicalSex WHERE n in (" + string.Join(",", user.Looking.BiologicalSex.Cast<int>()) + ")) ");
+                SQL.Append("	AND c.basic.biologicalSex IN (" + string.Join(",", user.Preference.BiologicalSex.Cast<int>()) + ") ");
             }
             if (looking.GenderIdentity.Any())
             {
-                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.genderIdentity WHERE n in (" + string.Join(",", user.Looking.GenderIdentity.Cast<int>()) + ")) ");
+                SQL.Append("	AND c.basic.genderIdentity IN (" + string.Join(",", user.Preference.GenderIdentity.Cast<int>()) + ") ");
             }
             if (looking.SexualOrientation.Any())
             {
-                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.sexualOrientation WHERE n in (" + string.Join(",", user.Looking.SexualOrientation.Cast<int>()) + ")) ");
+                SQL.Append("	AND c.basic.sexualOrientation IN (" + string.Join(",", user.Preference.SexualOrientation.Cast<int>()) + ") ");
             }
             if (looking.Languages.Any())
             {
-                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.languages WHERE n in (" + string.Join(",", user.Looking.Languages.Cast<int>()) + ")) ");
+                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.languages WHERE n in (" + string.Join(",", user.Preference.Languages.Cast<int>()) + ")) ");
             }
 
             // *** BIO ***
-            
+
             SQL.Append("    AND TRUNC(DateTimeDiff('month',c.bio.birthDate,GetCurrentDateTime())/12) >= @minAge ");
             SQL.Append("    AND TRUNC(DateTimeDiff('month',c.bio.birthDate,GetCurrentDateTime())/12) <= @maxAge ");
-            filter.Add("@minAge", user.Looking.MinimalAge);
-            filter.Add("@maxAge", user.Looking.MaxAge);
+            filter.Add("@minAge", user.Preference.MinimalAge);
+            filter.Add("@maxAge", user.Preference.MaxAge);
             if (looking.MinimalHeight.HasValue)
             {
                 SQL.Append("	AND c.bio.height >= @MinimalHeight ");
@@ -129,55 +129,55 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             }
             if (looking.RaceCategory.Any())
             {
-                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.bio.raceCategory WHERE n in (" + string.Join(",", user.Looking.RaceCategory.Cast<int>()) + ")) ");
+                SQL.Append("	AND c.bio.raceCategory IN (" + string.Join(",", user.Preference.RaceCategory.Cast<int>()) + ") ");
             }
             if (looking.BodyMass.Any())
             {
-                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.bio.bodyMass WHERE n in (" + string.Join(",", user.Looking.BodyMass.Cast<int>()) + ")) ");
+                SQL.Append("	AND c.bio.bodyMass IN (" + string.Join(",", user.Preference.BodyMass.Cast<int>()) + ") ");
             }
 
             // *** LIFESTYLE ***
 
-            if (looking.Drink.HasValue)
-            {
-                SQL.Append("	AND c.lifestyle.drink = @Drink ");
-                filter.Add("@Drink", (int)looking.Drink.Value);
-            }
-            if (looking.Smoke.HasValue)
-            {
-                SQL.Append("	AND c.lifestyle.smoke = @Smoke ");
-                filter.Add("@Smoke", (int)looking.Smoke.Value);
-            }
-            if (looking.Diet.HasValue)
-            {
-                SQL.Append("	AND c.lifestyle.diet = @Diet ");
-                filter.Add("@Diet", (int)looking.Diet.Value);
-            }
-            if (looking.HaveChildren.HasValue)
-            {
-                SQL.Append("	AND c.lifestyle.haveChildren = @HaveChildren ");
-                filter.Add("@HaveChildren", (int)looking.HaveChildren.Value);
-            }
-            if (looking.WantChildren.HasValue)
-            {
-                SQL.Append("	AND c.lifestyle.wantChildren = @WantChildren ");
-                filter.Add("@WantChildren", (int)looking.WantChildren.Value);
-            }
-            if (looking.EducationLevel.HasValue)
-            {
-                SQL.Append("	AND c.lifestyle.educationLevel = @EducationLevel ");
-                filter.Add("@EducationLevel", (int)looking.EducationLevel.Value);
-            }
-            if (looking.CareerCluster.HasValue)
-            {
-                SQL.Append("	AND c.lifestyle.careerCluster = @CareerCluster ");
-                filter.Add("@CareerCluster", (int)looking.CareerCluster.Value);
-            }
-            if (looking.Religion.HasValue)
-            {
-                SQL.Append("	AND c.lifestyle.religion = @Religion ");
-                filter.Add("@Religion", (int)looking.Religion.Value);
-            }
+            //if (looking.Drink.HasValue)
+            //{
+            //    SQL.Append("	AND c.lifestyle.drink = @Drink ");
+            //    filter.Add("@Drink", (int)looking.Drink.Value);
+            //}
+            //if (looking.Smoke.HasValue)
+            //{
+            //    SQL.Append("	AND c.lifestyle.smoke = @Smoke ");
+            //    filter.Add("@Smoke", (int)looking.Smoke.Value);
+            //}
+            //if (looking.Diet.HasValue)
+            //{
+            //    SQL.Append("	AND c.lifestyle.diet = @Diet ");
+            //    filter.Add("@Diet", (int)looking.Diet.Value);
+            //}
+            //if (looking.HaveChildren.HasValue)
+            //{
+            //    SQL.Append("	AND c.lifestyle.haveChildren = @HaveChildren ");
+            //    filter.Add("@HaveChildren", (int)looking.HaveChildren.Value);
+            //}
+            //if (looking.WantChildren.HasValue)
+            //{
+            //    SQL.Append("	AND c.lifestyle.wantChildren = @WantChildren ");
+            //    filter.Add("@WantChildren", (int)looking.WantChildren.Value);
+            //}
+            //if (looking.EducationLevel.HasValue)
+            //{
+            //    SQL.Append("	AND c.lifestyle.educationLevel = @EducationLevel ");
+            //    filter.Add("@EducationLevel", (int)looking.EducationLevel.Value);
+            //}
+            //if (looking.CareerCluster.HasValue)
+            //{
+            //    SQL.Append("	AND c.lifestyle.careerCluster = @CareerCluster ");
+            //    filter.Add("@CareerCluster", (int)looking.CareerCluster.Value);
+            //}
+            //if (looking.Religion.HasValue)
+            //{
+            //    SQL.Append("	AND c.lifestyle.religion = @Religion ");
+            //    filter.Add("@Religion", (int)looking.Religion.Value);
+            //}
 
             SQL.Append("ORDER BY ");
             SQL.Append("	c.dtTopList DESC");

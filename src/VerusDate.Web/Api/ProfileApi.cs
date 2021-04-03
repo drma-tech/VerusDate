@@ -69,11 +69,11 @@ namespace VerusDate.Web.Api
             await response.ProcessResponse(toast, "Perfil atualizado com sucesso");
         }
 
-        public async static Task Profile_UpdateLooking(this HttpClient http, ProfileModel obj, ProfileLookingModel looking, ISyncSessionStorageService storage, IToastService toast)
+        public async static Task Profile_UpdateLooking(this HttpClient http, ProfileModel obj, ProfilePreferenceModel preference, ISyncSessionStorageService storage, IToastService toast)
         {
-            var fistUpdate = obj.Looking == null;
+            var fistUpdate = obj.Preference == null;
 
-            obj.Looking = looking;
+            obj.Preference = preference;
 
             var response = await http.Put(ProfileEndpoint.UpdateLooking, obj);
 

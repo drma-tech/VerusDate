@@ -3,7 +3,7 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileLookingValidation : AbstractValidator<ProfileLookingModel>
+    public class ProfileLookingValidation : AbstractValidator<ProfilePreferenceModel>
     {
         public ProfileLookingValidation()
         {

@@ -12,65 +12,29 @@
         @switch (Type)
         {
             case FieldType.Select:
-                @if (DisableHelp || Disabled)
-                {
-                    <InputSelect TValue="TValue" Value="@SelectedValue" ValueChanged="@SetValue" ValueExpression="@For" @attributes="@GetAttributes(For, disabled: Disabled)">
-                        <option></option>
-                        @if (HasGroup)
-                        {
-                            var previousGroup = "";
-                            @foreach (var item in EnumHelper.GetList(typeof(TEnum)).OrderBy(o => o.Group))
-                            {
-                                if (previousGroup != @item.Group)
-                                {
-                                    <optgroup label="@item.Group"></optgroup>
-                                }
-                                <option value="@item.ValueObject">@item.Name</option>
-                                previousGroup = @item.Group;
-                            }
-                        }
-                        else
-                        {
-                            @foreach (var item in EnumHelper.GetArray<TEnum>())
-                            {
-                                <option value="@item">@item.GetName()</option>
-                            }
-                        }
-                    </InputSelect>
-                }
-                else
-                {
-                    <div class="input-group">
-                        <InputSelect TValue="TValue" Value="@SelectedValue" ValueChanged="@SetValue" ValueExpression="@For" @attributes="@GetAttributes(For, disabled: Disabled)">
-                            <option></option>
-                            @if (HasGroup)
-                            {
-                                var previousGroup = "";
-                                @foreach (var item in EnumHelper.GetList(typeof(TEnum)).OrderBy(o => o.Group))
-                                {
-                                    if (previousGroup != @item.Group)
-                                    {
-                                        <optgroup label="@item.Group"></optgroup>
-                                    }
-                                    <option value="@item.ValueObject">@item.Name</option>
-                                    previousGroup = @item.Group;
-                                }
-                            }
-                            else
-                            {
-                                @foreach (var item in EnumHelper.GetArray<TEnum>())
-                                {
-                                    <option value="@item">@item.GetName()</option>
-                                }
-                            }
-                        </InputSelect>
-                        <span class="input-group-append">
-                            <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataHelp(For, typeof(TEnum))">
+
+                <Addons>
+                    <Addon AddonType="AddonType.Body">
+                        <CustomSelect TValue="TValue" TEnum="TEnum" SelectedValue="@SelectedValue" SelectedValueChanged="@SelectedValueChanged" 
+                                      ShowGroup="@ShowGroup" Disabled="@Disabled"></CustomSelect>
+                    </Addon>
+                    @if (ShowSwitch)
+                    {
+                        <Addon AddonType="AddonType.End">
+                            <AddonLabel Style="padding-right: 2px;">
+                                <Switch TValue="bool"></Switch>
+                            </AddonLabel>
+                        </Addon>
+                    }
+                    @if (ShowHelper)
+                    {
+                        <Addon AddonType="AddonType.End">
+                            <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataHelp(For, typeof(TEnum))" Disabled="@Disabled">
                                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Question"></Icon>
                             </Button>
-                        </span>
-                    </div>
-                }
+                        </Addon>
+                    }
+                </Addons>
 
                 break;
 
@@ -131,5 +95,5 @@
     }
 </Field>
 
-<VerusDate.Web.Shared.modal.ProfileDataHelp TValue="TValue" HasGroup="HasGroup" @ref="dataHelp"></VerusDate.Web.Shared.modal.ProfileDataHelp>
-<VerusDate.Web.Shared.modal.ProfileDataSelect TValue="TValue" HasGroup="HasGroup" TEnum="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SetValues" @ref="dataSelect"></VerusDate.Web.Shared.modal.ProfileDataSelect>
+<VerusDate.Web.Shared.modal.ProfileDataHelp TValue="TValue" HasGroup="@ShowGroup" @ref="dataHelp"></VerusDate.Web.Shared.modal.ProfileDataHelp>
+<VerusDate.Web.Shared.modal.ProfileDataSelect TValue="TValue" HasGroup="@ShowGroup" TEnum="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SetValues" @ref="dataSelect"></VerusDate.Web.Shared.modal.ProfileDataSelect>

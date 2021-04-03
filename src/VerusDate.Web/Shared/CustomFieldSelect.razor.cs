@@ -17,26 +17,29 @@ namespace VerusDate.Web.Shared
 
     public partial class CustomFieldSelect<TValue, TEnum> where TEnum : struct, Enum, IConvertible
     {
+        #region CustomSelect
+
         [Parameter] public TValue SelectedValue { get; set; }
         [Parameter] public EventCallback<TValue> SelectedValueChanged { get; set; }
+
+        #endregion CustomSelect
+
+        #region CustomSelectMultiple
 
         [Parameter] public IReadOnlyList<TEnum> SelectedValues { get; set; }
         [Parameter] public EventCallback<IReadOnlyList<TEnum>> SelectedValuesChanged { get; set; }
 
-        [Parameter] public bool HasGroup { get; set; }
-        [Parameter] public bool DisableHelp { get; set; }
+        #endregion CustomSelectMultiple
+
+        [Parameter] public bool ShowGroup { get; set; } = false;
+        [Parameter] public bool ShowSwitch { get; set; } = false;
+        [Parameter] public bool ShowHelper { get; set; } = true;
         [Parameter] public string HelpLink { get; set; }
-        [Parameter] public bool Required { get; set; }
+        [Parameter] public bool Required { get; set; } = false;
         [Parameter] public LabelSize LabelSize { get; set; } = LabelSize.Normal;
 
         private modal.ProfileDataHelp<TValue> dataHelp;
         private modal.ProfileDataSelect<TValue, TEnum> dataSelect;
-
-        private async Task SetValue(TValue value)
-        {
-            SelectedValue = value;
-            await SelectedValueChanged.InvokeAsync(SelectedValue);
-        }
 
         private async Task SetValues(IReadOnlyList<TEnum> value)
         {

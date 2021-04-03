@@ -32,27 +32,38 @@ else
                     </Badge>
                     @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                     {
-                        <Badge Color="Color.Success" Style="cursor: help;" Margin="Margin.Is2.FromLeft">
+                        <Badge Color="Color.Success" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> logado hoje
                         </Badge>
                     }
                     else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
                     {
-                        <Badge Color="Color.Warning" Style="cursor: help;" Margin="Margin.Is2.FromLeft">
+                        <Badge Color="Color.Warning" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> logado esta semana
                         </Badge>
                     }
                     else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
                     {
-                        <Badge Color="Color.Danger" Style="cursor: help;" Margin="Margin.Is2.FromLeft">
+                        <Badge Color="Color.Danger" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> logado este mês
                         </Badge>
                     }
                     else
                     {
-                        <Badge Color="Color.Dark" Style="cursor: help;" Margin="Margin.Is2.FromLeft">
+                        <Badge Color="Color.Dark" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> usuário desativado
                         </Badge>
+                    }
+                    @if (view.Reports.Any())
+                    {
+                        <Paragraph Margin="Margin.Is0.FromTop.Is0.FromBottom">
+                            @foreach (var item in view.Reports)
+                            {
+                                <Badge Color="Color.Warning" Style="cursor: help;">
+                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon> @item.Type.GetName()
+                                </Badge>
+                            }
+                        </Paragraph>
                     }
                     <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is2.FromTop.Is0.FromBottom">
                         @view.Basic.Description
@@ -67,9 +78,15 @@ else
                     {
                         <BtnBlink IdUserView="@IdUserView"></BtnBlink>
                     }
-                    <Button Color="Color.Danger" title="Desfazer match e reportar" Float="Float.Right" Clicked="report.ShowModal">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon>
-                    </Button>
+                    <Dropdown Float="Float.Right">
+                        <Button Color="Color.Danger" Clicked="report.ShowModal">
+                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Trash"></Icon> Deletar
+                        </Button>
+                        <DropdownToggle Split="true" Color="Color.Danger" />
+                        <DropdownMenu>
+                            <DropdownItem Clicked="report.ShowModal">Deletar e Denunciar</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 </CardBody>
             </Card>
         </Column>

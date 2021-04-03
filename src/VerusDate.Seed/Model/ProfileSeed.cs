@@ -101,9 +101,9 @@ namespace VerusDate.Seed.Model
                 });
         }
 
-        public static Faker<ProfileLookingModel> GetProfileLookingVM()
+        public static Faker<ProfilePreferenceModel> GetProfileLookingVM()
         {
-            return new Faker<ProfileLookingModel>("pt_BR")
+            return new Faker<ProfilePreferenceModel>("pt_BR")
                 .Rules((s, p) =>
                 {
                     p.MinimalAge = s.Random.Int(18, 120);
@@ -113,19 +113,19 @@ namespace VerusDate.Seed.Model
                     p.Intent = s.Random.ArrayElements(new Intent[] { Intent.OneNightStand, Intent.FriendsWithBenefits, Intent.Relationship, Intent.Married });
                     p.GenderIdentity = s.Random.ArrayElements(new GenderIdentity[] { GenderIdentity.Cisgender, GenderIdentity.Transexuais, GenderIdentity.Transgender, GenderIdentity.Travestis });
                     p.SexualOrientation = s.Random.ArrayElements(new SexualOrientation[] { SexualOrientation.Heteressexual, SexualOrientation.Homossexual, SexualOrientation.Bissexual, SexualOrientation.Demissexual });
-                    p.Smoke = s.PickRandom<Smoke>();
-                    p.Drink = s.PickRandom<Drink>();
-                    p.Diet = s.PickRandom<Diet>();
+                    //p.Smoke = s.PickRandom<Smoke>();
+                    //p.Drink = s.PickRandom<Drink>();
+                    //p.Diet = s.PickRandom<Diet>();
                     p.MinimalHeight = s.PickRandom<Height>();
                     p.MaxHeight = s.PickRandom<Height>();
                     p.BodyMass = s.Random.ArrayElements(new BodyMass[] { BodyMass.UnderWeight, BodyMass.NormalWeight, BodyMass.Athletic, BodyMass.OverWeight });
                     p.RaceCategory = s.Random.ArrayElements(new RaceCategory[] { RaceCategory.White, RaceCategory.Black_AfricanAmerican, RaceCategory.Asian, RaceCategory.MixedRaces });
                     p.Distance = s.PickRandom<Distance>();
-                    p.CareerCluster = s.PickRandom<CareerCluster>();
-                    p.EducationLevel = s.PickRandom<EducationLevel>();
-                    p.HaveChildren = s.PickRandom<HaveChildren>();
-                    p.Religion = s.PickRandom<Religion>();
-                    p.WantChildren = s.PickRandom<WantChildren>();
+                    //p.CareerCluster = s.PickRandom<CareerCluster>();
+                    //p.EducationLevel = s.PickRandom<EducationLevel>();
+                    //p.HaveChildren = s.PickRandom<HaveChildren>();
+                    //p.Religion = s.PickRandom<Religion>();
+                    //p.WantChildren = s.PickRandom<WantChildren>();
                 });
         }
 

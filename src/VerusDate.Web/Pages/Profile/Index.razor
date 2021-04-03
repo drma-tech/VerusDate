@@ -29,7 +29,7 @@
                     <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
                         <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/SearchCriteria">
                             <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Users"></Icon> Busca
-                            @if (profile?.Looking == null)
+                            @if (profile?.Preference == null)
                             {
                                 <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Icon>
                             }

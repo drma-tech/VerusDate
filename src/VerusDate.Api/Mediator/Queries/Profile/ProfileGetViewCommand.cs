@@ -53,6 +53,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             SQL.Append("  , c.gamification ");
             SQL.Append("  , c.badge ");
             SQL.Append("  , c.photo ");
+            SQL.Append("  , c.reports ");
             SQL.Append("  , TRUNC(DateTimeDiff('month',c.bio.birthDate,GetCurrentDateTime())/12) Age ");
             SQL.Append("  , c.dtLastLogin >= DateTimeAdd('d',-1,GetCurrentDateTime()) ? 1 ");
             SQL.Append("        : c.dtLastLogin >= DateTimeAdd('d',-7,GetCurrentDateTime()) ? 2 ");

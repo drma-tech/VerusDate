@@ -9,35 +9,24 @@ namespace VerusDate.Web.Core
 {
     public static class SmartLookingCore
     {
-        public static void PopulateFields(ProfileModel profile, ProfileLookingModel looking)
+        public static void PopulateFields(ProfileModel profile, ProfilePreferenceModel preference)
         {
             if (profile == null) throw new NotificationException("Preenchimento de cadastro do perfil não encontrado");
-            if (looking == null) looking = new ProfileLookingModel();
+            if (preference == null) preference = new ProfilePreferenceModel();
 
-            looking.Distance = Distance._20;
-            looking.CurrentSituation = GetCurrentSituation(profile);
+            preference.Distance = Distance._20;
+            preference.Languages = profile.Basic.Languages;
+            preference.CurrentSituation = GetCurrentSituation(profile);
             //looking.Intent = profile.Basic.Intent; //selecionado ao carregar a tela
-            looking.BiologicalSex = GetBiologicalSex(profile);
+            preference.BiologicalSex = GetBiologicalSex(profile);
             //looking.GenderIdentity = null;
-            looking.SexualOrientation = GetSexualOrientation(profile);
-            looking.MinimalAge = GetMinAge(profile);
-            looking.MaxAge = GetMaxAge(profile);
-            looking.MinimalHeight = GetMinHeight(profile);
-            looking.MaxHeight = GetMaxHeight(profile);
-            //looking.BodyMass = null;
-            //looking.HairColor = null;
-            //looking.EyeColor = null;
+            preference.SexualOrientation = GetSexualOrientation(profile);
+            preference.MinimalAge = GetMinAge(profile);
+            preference.MaxAge = GetMaxAge(profile);
+            preference.MinimalHeight = GetMinHeight(profile);
+            preference.MaxHeight = GetMaxHeight(profile);
             //looking.RaceCategory = null;
-            //looking.EducationLevel = null;
-            //looking.HaveChildren = null;
-            looking.WantChildren = GetWantChildren(profile);
-            //looking.Drink = null;
-            //looking.Smoke = null;
-            //looking.CareerCluster = null;
-            //looking.Religion = null;
-            //looking.MoneyPersonality = GetMoneyPersonality(profile);
-            //looking.MyersBriggsTypeIndicator = GetMyersBriggsTypeIndicator(profile);
-            //looking.RelationshipPersonality = GetRelationshipPersonality(profile);
+            //looking.BodyMass = null;
         }
 
         private static int GetAgeDifference(int CurrentAge)

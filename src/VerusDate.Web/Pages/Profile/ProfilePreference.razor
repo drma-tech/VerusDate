@@ -1,0 +1,186 @@
+﻿@page "/Profile/Preference"
+@attribute [Authorize]
+@inherits PageCore<ProfilePreference>
+
+@if (Options.HasCustomVisibility)
+{
+    <CustomVisibility Options="Options"></CustomVisibility>
+}
+else
+{
+    <EditForm Model="@preference" OnValidSubmit="HandleValidSubmit">
+        <FluentValidationValidator />
+        <Card Margin="Margin.Is3.FromBottom">
+            <CardHeader>
+                Preferências
+                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromLeft">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon>
+                </Button>
+                <Button Size="Size.ExtraSmall" Color="Color.Success" Float="Float.Right" Clicked="PopulateFields" title="Preencher automaticamente">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Magic"></Icon>
+                </Button>
+            </CardHeader>
+            <CardBody>
+                <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
+                    <AlertMessage>Básico</AlertMessage>
+                </Alert>
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <CustomFieldSelect Type="FieldType.Select" For="@(() => preference.Distance)" TValue="Distance" TEnum="Distance" @bind-SelectedValue="@preference.Distance"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt" DisableHelp="true" Required="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@preference.Languages"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.CurrentSituation)" TValue="IReadOnlyList<CurrentSituation>" TEnum="CurrentSituation" @bind-SelectedValues="@preference.CurrentSituation"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart"></CustomFieldSelect>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        @*<CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.Intent)" TValue="IReadOnlyList<Intent>" TEnum="Intent" @bind-SelectedValues="@looking.Intent"
+                            CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" Disabled="true" DisableHelp="true" HasGroup="true" Required="true"></CustomFieldSelect>*@
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.BiologicalSex)" TValue="IReadOnlyList<BiologicalSex>" TEnum="BiologicalSex" @bind-SelectedValues="@preference.BiologicalSex"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.GenderIdentity)" TValue="IReadOnlyList<GenderIdentity>" TEnum="GenderIdentity" @bind-SelectedValues="@preference.GenderIdentity"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" HasGroup="true"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.SexualOrientation)" TValue="IReadOnlyList<SexualOrientation>" TEnum="SexualOrientation" @bind-SelectedValues="@preference.SexualOrientation"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                    </Column>
+                </Row>
+                <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
+                    <AlertMessage>Bio</AlertMessage>
+                </Alert>
+                <Row>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <Field Horizontal="true">
+                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BirthdayCake"></Icon> @AttributeHelper.GetName(() => preference.MinimalAge)
+                                <div style="color: red; display: initial;"> *</div>
+                                <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(() => preference.MinimalAge)</FieldHelp>
+                            </FieldLabel>
+                            <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
+                                <NumericEdit @bind-Value="@preference.MinimalAge"></NumericEdit>
+                                <ValidationMessage For="@(() => preference.MinimalAge)"></ValidationMessage>
+                            </FieldBody>
+                            <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
+                                <NumericEdit @bind-Value="@preference.MaxAge"></NumericEdit>
+                                <ValidationMessage For="@(() => preference.MaxAge)"></ValidationMessage>
+                            </FieldBody>
+                        </Field>
+
+                        <Field Horizontal="true">
+                            <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler"></Icon> @AttributeHelper.GetName(() => preference.MinimalHeight)
+                            </FieldLabel>
+                            <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
+                                <InputSelect TValue="Height?" @bind-Value="@preference.MinimalHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
+                                    <option></option>
+                                    @foreach (var item in EnumHelper.GetArray<Height>())
+                                    {
+                                        <option value="@item">@item.GetName()</option>
+                                    }
+                                </InputSelect>
+                                <ValidationMessage For="@(() => preference.MinimalHeight)"></ValidationMessage>
+                            </FieldBody>
+                            <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
+                                <InputSelect TValue="Height?" @bind-Value="@preference.MaxHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
+                                    <option></option>
+                                    @foreach (var item in EnumHelper.GetArray<Height>())
+                                    {
+                                        <option value="@item">@item.GetName()</option>
+                                    }
+                                </InputSelect>
+                                <ValidationMessage For="@(() => preference.MaxHeight)"></ValidationMessage>
+                            </FieldBody>
+                        </Field>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.RaceCategory)" TValue="IReadOnlyList<RaceCategory>" TEnum="RaceCategory" @bind-SelectedValues="@preference.RaceCategory"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Globe"></CustomFieldSelect>
+                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.BodyMass)" TValue="IReadOnlyList<BodyMass>" TEnum="BodyMass" @bind-SelectedValues="@preference.BodyMass"
+                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight"></CustomFieldSelect>
+                    </Column>
+                </Row>                
+            </CardBody>
+            <CardFooter>
+                <Button Type="ButtonType.Submit" Color="Color.Primary">
+                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
+                </Button>
+                
+                @if (profile.Preference != null)
+                {
+                    <Badge Color="Color.Danger" Margin="Margin.Is3.FromLeft">
+                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon> -100 XP
+                    </Badge>
+                }
+            </CardFooter>
+        </Card>
+    </EditForm>
+
+    <VerusDate.Web.Shared.modal.BasicModal @ref="help" Title="Ajuda">
+        <ul>
+            <li>Aqui você pode definir seu tipo ideal de perfil, para que possamos calcular adequadamente seu índice de compatibilidade</li>
+            <li>Quando você escolhe o 'Deal Breaker' não mostraremos valores diferentes da sua escolha</li>
+        </ul>
+    </VerusDate.Web.Shared.modal.BasicModal>
+}
+
+@code {
+
+    private ProfileModel profile;
+    private ProfilePreferenceModel preference;
+
+    private Shared.modal.BasicModal help;
+
+    //private Shared.modal.ProfileDataHelp<object> ProfileDataHelp;
+
+    private VisibilityOptions Options => new VisibilityOptions()
+    {
+        Loading = preference == null,
+    };
+
+    protected override async Task LoadData()
+    {
+        profile = await Http.Profile_Get(SessionStorage);
+
+        if (profile == null)
+        {
+            Toast.ShowWarning("", "Favor, atualizar primeiro seu perfil");
+            return;
+        }
+
+        preference = profile.Preference;
+
+        if (preference == null)
+        {
+            preference = new();
+        }
+
+        preference.Intent = profile.Basic.Intent;
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await Http.Profile_UpdateLooking(profile, preference, SessionStorage, Toast);
+
+            profile = await Http.Profile_Get(SessionStorage);
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+
+    private void PopulateFields()
+    {
+        try
+        {
+            SmartLookingCore.PopulateFields(profile, preference);
+
+            Toast.ShowWarning("Este processo está em constante evolução. Caso queira informar um erro ou melhoria, favor abrir um tiket no nosso suporte.", "Campos populados automaticamente");
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+        }
+    }
+}

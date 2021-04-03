@@ -5,7 +5,7 @@
 </button>
 
 @code {
-    [Parameter] public ProfileLookingModel Looking { get; set; }
+    [Parameter] public ProfilePreferenceModel Preference { get; set; }
     [Parameter] public ProfileModel ProfView { get; set; }
 
     private List<AffinityVM> affinities = new();
@@ -30,7 +30,7 @@
         }
     }
 
-    public void RefreshComponente(ProfileLookingModel Looking, ProfileModel ProfView)
+    public void RefreshComponente(ProfilePreferenceModel Preference, ProfileModel ProfView)
     {
         if (ProfView == null) return;
 

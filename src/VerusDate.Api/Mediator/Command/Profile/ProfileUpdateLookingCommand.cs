@@ -22,7 +22,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
         {
             var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
 
-            if (obj.Looking == null) //primeira vez que atualiza a busca
+            if (obj.Preference == null) //primeira vez que atualiza a busca
             {
                 obj.Gamification.AddXP(30);
             }
@@ -31,7 +31,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
                 obj.Gamification.RemoveXP(100);
             }
 
-            obj.UpdateLooking(request.Looking);
+            obj.UpdateLooking(request.Preference);
 
             return await _repo.Update(obj, cancellationToken);
         }

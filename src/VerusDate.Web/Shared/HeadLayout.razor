@@ -6,13 +6,13 @@
         <AuthorizeView>
             <Authorized>
                 <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #D4AF37; color: #fff !important;" Pill="true">
-                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown" /> @gamification?.Ranking
+                    <BarIcon IconName="FontAwesomeIcons.Crown" /> @gamification?.Ranking
                 </Badge>
                 <Badge Color="Color.Secondary" Float="Float.Left" Margin="Margin.Is2.FromRight" Style="background-color: #5c7cfa; color: #fff !important;" Pill="true">
-                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Gem" /> @gamification?.Diamond
+                    <BarIcon IconName="FontAwesomeIcons.Gem" /> @gamification?.Diamond
                 </Badge>
                 <Badge Color="Color.Secondary" Float="Float.Left" Style="background-color: #dc3545; color: #fff !important;" Pill="true">
-                    <BarIcon IconName="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AppleAlt" /> @gamification?.Food
+                    <BarIcon IconName="FontAwesomeIcons.AppleAlt" /> @gamification?.Food
                 </Badge>
             </Authorized>
         </AuthorizeView>
@@ -23,12 +23,12 @@
                 <AuthorizeView>
                     <Authorized>
                         <Button Color="Color.Danger" Type="ButtonType.Link" To="/.auth/logout" Float="Float.Right" Size="Size.ExtraSmall">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignOutAlt" /> Sair
+                            <Blazorise.Icon Name="FontAwesomeIcons.SignOutAlt" /> Sair
                         </Button>
                     </Authorized>
                     <NotAuthorized>
                         <Button Color="Color.Primary" Type="ButtonType.Link" To="/login-providers" Float="Float.Right" Size="Size.ExtraSmall">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt" /> Entrar
+                            <Blazorise.Icon Name="FontAwesomeIcons.SignInAlt" /> Entrar
                         </Button>
                     </NotAuthorized>
                 </AuthorizeView>

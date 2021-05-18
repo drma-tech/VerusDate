@@ -21,36 +21,36 @@ else
             <Column ColumnSize="ColumnSize.Is2.OnFullHD.Is3.OnWidescreen.Is4.OnDesktop.Is6.OnMobile" Margin="Margin.Is3.FromBottom">
 
                 <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
-                    <Blazorise.Link To="@("/Explore/View/" + item.Id)">
+                    <Blazorise.Link Clicked="@(async()=> await _PopupProfile.ShowModal(item.Id))" Style="cursor: pointer;">
                         <CardImage Source="@item.GetMainPhoto()" Alt="Photo Image"></CardImage>
                     </Blazorise.Link>
                     @*<Badge Color="Color.Success" Style="position: absolute; top: 10px; left: 10px; z-index: 2;">@(GetPercentAffinity(null) + "%")</Badge>
                         <Badge Color="Color.Dark" Style="position: absolute; top: 10px; right: 10px; z-index: 2;">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Icon> @imageDataUriGallery.Count()
+                            <Blazorise.Icon Name="FontAwesomeIcons.Camera"></Blazorise.Icon> @imageDataUriGallery.Count()
                         </Badge>*@
                     <Badge Color="Color.Secondary" Style="position: absolute; bottom: 58px; left: 5px;">@item.NickName, @item.Age, @item.Distance Km</Badge>
                     @if (item.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                     {
                         <Badge Color="Color.Success" Style="position: absolute; top: 5px; left: 5px;" title="logado recentemente">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                            <Blazorise.Icon Name="FontAwesomeIcons.DotCircle"></Blazorise.Icon>
                         </Badge>
                     }
                     else if (item.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
                     {
                         <Badge Color="Color.Warning" Style="position: absolute; top: 5px; left: 5px;" title="logado essa semana">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                            <Blazorise.Icon Name="FontAwesomeIcons.DotCircle"></Blazorise.Icon>
                         </Badge>
                     }
                     else if (item.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
                     {
                         <Badge Color="Color.Danger" Style="position: absolute; top: 5px; left: 5px;" title="logado esse mês">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                            <Blazorise.Icon Name="FontAwesomeIcons.DotCircle"></Blazorise.Icon>
                         </Badge>
                     }
                     else
                     {
                         <Badge Color="Color.Dark" Style="position: absolute; top: 5px; left: 5px;" title="usuário desativado">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                            <Blazorise.Icon Name="FontAwesomeIcons.DotCircle"></Blazorise.Icon>
                         </Badge>
                     }
                     <CardBody Padding="Padding.Is2" Style="text-align: center;">
@@ -64,8 +64,12 @@ else
     </Row>
 }
 
+<PopupProfile @ref="_PopupProfile" Http="@Http"></PopupProfile>
+
 @code
 {
+    public PopupProfile _PopupProfile { get; set; }
+
     private ProfileModel profile;
     private ProfileGamificationModel gamification;
     private List<ProfileSearch> listaUsers;

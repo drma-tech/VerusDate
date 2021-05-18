@@ -4,7 +4,7 @@
 {
     <Tooltip Text="@Type.Description" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="display: block;">
         <Button Type="ButtonType.Button" Color="Color.Success" Block="true">
-            <Icon Name="@Type.ClassIcon" Class="fa-3x"></Icon>
+            <Blazorise.Icon Name="@Type.ClassIcon" Class="fa-3x"></Blazorise.Icon>
             <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is2.FromTop.Is1.FromBottom">
                 <Badge Color="Color.Light">@Type.Title</Badge>
                 @if (Type.MaxLevel != 1)
@@ -19,7 +19,7 @@ else
 {
     <Tooltip Text="@Type.Description" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="display: block;">
         <Button Type="ButtonType.Button" Color="Color.Secondary" Block="true">
-            <Icon Name="@Type.ClassIcon" Class="fa-3x"></Icon>
+            <Blazorise.Icon Name="@Type.ClassIcon" Class="fa-3x"></Blazorise.Icon>
             <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is2.FromTop.Is1.FromBottom">
                 <Badge Color="Color.Light">@Type.Title</Badge>
                 @if (Type.MaxLevel != 1)

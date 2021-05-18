@@ -8,7 +8,7 @@
             <CardHeader>
                 Validação da foto principal
                 <Button Size="Size.ExtraSmall" Color="Color.Danger" Float="Float.Right" Clicked="privacy.ShowModal" title="Privacidade">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserShield"></Icon>
+                    <Blazorise.Icon Name="FontAwesomeIcons.UserShield"></Blazorise.Icon>
                 </Button>
             </CardHeader>
             <CardBody>
@@ -22,20 +22,20 @@
                 @if (ActiveCamera)
                 {
                     <Button Color="Color.Danger" Clicked="FinishDetection">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Icon> Desativar Câmera
+                        <Blazorise.Icon Name="FontAwesomeIcons.Camera"></Blazorise.Icon> Desativar Câmera
                     </Button>
                 }
                 else
                 {
                     <Button Color="Color.Primary" Clicked="StartDetection">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Icon> Ativar Câmera
+                        <Blazorise.Icon Name="FontAwesomeIcons.Camera"></Blazorise.Icon> Ativar Câmera
                     </Button>
                 }
                 <Button Color="Color.Primary" Clicked="TakeShot" Disabled="!ActiveCamera" Margin="Margin.Is2.FromLeft">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Portrait"></Icon> Tirar Foto
+                    <Blazorise.Icon Name="FontAwesomeIcons.Portrait"></Blazorise.Icon> Tirar Foto
                 </Button>
                 <Button Color="Color.Primary" Clicked="SendPhoto" Float="Float.Right" Disabled="!TakedPhoto">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ShareSquare"></Icon> Enviar
+                    <Blazorise.Icon Name="FontAwesomeIcons.ShareSquare"></Blazorise.Icon> Enviar
                 </Button>
             </CardFooter>
         </Card>

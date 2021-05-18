@@ -1,0 +1,39 @@
+﻿@inherits FormBase<string, FieldText>
+
+<Field Horizontal="true">
+    <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+        <Blazorise.Icon Name="@CssIcon"></Blazorise.Icon> @GetName()
+        @if (Required)
+        {<div style="color: red; display: initial;"> *</div>}
+    </FieldLabel>
+    <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
+        <Addons>
+            <Addon AddonType="AddonType.Body">
+                @if (Rows == 0)
+                {
+                    <InputText Value="@Value" ValueChanged="@SetValue" ValueExpression="@For" @attributes="@GetAttributes(null)"></InputText>
+                }
+                else
+                {
+                    <InputTextArea Value="@Value" ValueChanged="@SetValue" ValueExpression="@For" @attributes="@GetAttributes(null)"></InputTextArea>
+                }
+            </Addon>
+            @if (ButtomClicked.HasDelegate)
+            {
+                <Addon AddonType="AddonType.End">
+                    <Button Color="Color.Primary" Outline="true" Clicked="@ButtomClicked" title="@ButtomTitle">
+                        <Blazorise.Icon Name="@ButtomCssIcon"></Blazorise.Icon>
+                    </Button>
+                </Addon>
+            }
+        </Addons>
+
+        <ValidationMessage For="@For"></ValidationMessage>
+    </FieldBody>
+    @if (!string.IsNullOrEmpty(Description))
+    {
+        <Column>
+            <FieldHelp Style="color: #17a2b8 !important">@Description</FieldHelp>
+        </Column>
+    }
+</Field>

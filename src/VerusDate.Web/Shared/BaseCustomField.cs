@@ -16,7 +16,7 @@ namespace VerusDate.Web.Shared
         SelectMultiple
     }
 
-    public class BaseCustomField<TValue, T> : ComponenteCore<T> where T : class
+    public class BaseCustomField<TValue, TClass> : ComponenteCore<TClass> where TClass : class
     {
         [Parameter] public FieldType Type { get; set; }
         [Parameter] public object CssIcon { get; set; }

@@ -12,7 +12,7 @@
                 <Row>
                     <Column ColumnSize="ColumnSize.Is4">
                         <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash" Class="fa-3x"></Icon>
+                            <Blazorise.Icon Name="FontAwesomeIcons.EyeSlash" Class="fa-3x"></Blazorise.Icon>
                             <br />
                             Blind Date
                         </Paragraph>
@@ -31,7 +31,7 @@
                 <Row>
                     <Column ColumnSize="ColumnSize.Is4">
                         <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.UserClock" Class="fa-3x"></Icon>
+                            <Blazorise.Icon Name="FontAwesomeIcons.UserClock" Class="fa-3x"></Blazorise.Icon>
                             <br />
                             Speed Dating
                         </Paragraph>
@@ -50,7 +50,7 @@
                 <Row>
                     <Column ColumnSize="ColumnSize.Is4">
                         <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Users" Class="fa-3x"></Icon>
+                            <Blazorise.Icon Name="FontAwesomeIcons.Users" Class="fa-3x"></Blazorise.Icon>
                             <br />
                             Group Dating
                         </Paragraph>
@@ -79,7 +79,7 @@
     <CardHeader>
         Eventos disponíveis (@profile?.Basic.GetLocation(LocationType.City))
         <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="FeatureUnavailable" title="Preencher automaticamente">
-            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Icon> Novo
+            <Blazorise.Icon Name="FontAwesomeIcons.PlusCircle"></Blazorise.Icon> Novo
         </Button>
     </CardHeader>
     <CardBody>
@@ -106,7 +106,9 @@
                     @foreach (var item in AvailableEvents)
                     {
                         <TableRow>
-                            <TableRowCell><Icon Class="@item.GetIcon()"></Icon> @item.EventType.GetName()</TableRowCell>
+                            <TableRowCell>
+                                <Blazorise.Icon Class="@item.GetIcon()"></Blazorise.Icon> @item.EventType.GetName()
+                            </TableRowCell>
                             <TableRowCell>
                                 @item.DtStart.Date.ToShortDateString() (@item.DtStart.ToLocalTime().ToShortTimeString() - @item.DtEnd.ToLocalTime().ToShortTimeString())
                             </TableRowCell>
@@ -116,12 +118,12 @@
                             <TableRowCell>@(item.Intent.Count() > 0 ? item.Intent.First().GetName() : "-")</TableRowCell>
                             <TableRowCell>
                                 <Badge Color="Color.Primary">10</Badge>
-                                <Badge Color="Color.Primary"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Male"></Icon> 5</Badge>
-                                <Badge Color="Color.Danger"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Female"></Icon> 5</Badge>
+                                <Badge Color="Color.Primary"><Blazorise.Icon Name="FontAwesomeIcons.Male"></Blazorise.Icon> 5</Badge>
+                                <Badge Color="Color.Danger"><Blazorise.Icon Name="FontAwesomeIcons.Female"></Blazorise.Icon> 5</Badge>
                             </TableRowCell>
                             <TableRowCell>
                                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Disabled="true">
-                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.SignInAlt"></Icon> Inscrever
+                                    <Blazorise.Icon Name="FontAwesomeIcons.SignInAlt"></Blazorise.Icon> Inscrever
                                 </Button>
                             </TableRowCell>
                         </TableRow>

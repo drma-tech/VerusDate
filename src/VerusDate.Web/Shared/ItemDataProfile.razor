@@ -7,10 +7,10 @@
     foreach (var item in Values)
     {
         <Badge Color="@GetColor(item)" Pill="true" title="@GetDescription(item)" Style="@GetCursor(item)" @onclick="@(() =>  BadgeClick(item))">
-            <Icon Name="@ClassIcon"></Icon> @GetValue(item)
+            <Blazorise.Icon Name="@ClassIcon"></Blazorise.Icon> @GetValue(item)
             @if (!string.IsNullOrEmpty(GetDescription(item)))
             {
-                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
+                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Blazorise.Icon>
             }
         </Badge>
     }
@@ -18,10 +18,10 @@
 else
 {
     <Badge Color="@GetColor(Value)" Pill="true" title="@GetDescription(Value)" Style="@GetCursor(Value)" @onclick="@(() =>  BadgeClick(Value))">
-        <Icon Name="@ClassIcon"></Icon> @GetValue(Value)
+        <Blazorise.Icon Name="@ClassIcon"></Blazorise.Icon> @GetValue(Value)
         @if (!string.IsNullOrEmpty(GetDescription(Value)))
         {
-            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Icon>
+            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Blazorise.Icon>
         }
     </Badge>
 }

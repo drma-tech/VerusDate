@@ -35,11 +35,11 @@ namespace VerusDate.Web.Core
     /// <summary>
     /// if you implement the OnInitializedAsync method, call 'await base.OnInitializedAsync();'
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class ComponenteCore<T> : ComponentBase where T : class
+    /// <typeparam name="TClass"></typeparam>
+    public abstract class ComponenteCore<TClass> : ComponentBase where TClass : class
     {
         [Inject]
-        protected ILogger<T> Logger { get; set; }
+        protected ILogger<TClass> Logger { get; set; }
 
         [Inject]
         protected NavigationManager Navigation { get; set; }
@@ -52,6 +52,8 @@ namespace VerusDate.Web.Core
 
         [Inject]
         protected ISyncSessionStorageService SessionStorage { get; set; }
+
+        public bool IsLoading { get; set; } = true;
 
         protected override async Task OnInitializedAsync()
         {
@@ -85,8 +87,6 @@ namespace VerusDate.Web.Core
 
         [Inject]
         protected HttpClient Http { get; set; }
-
-        public bool IsLoading { get; set; } = true;
 
         protected abstract Task LoadData();
 

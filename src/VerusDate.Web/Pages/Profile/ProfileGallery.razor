@@ -8,7 +8,7 @@
             <CardHeader>
                 Foto Principal
                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="helpMain.ShowModal" title="Ajuda" Margin="Margin.Is2.FromLeft">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon>
+                    <Blazorise.Icon Name="FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon>
                 </Button>
             </CardHeader>
             <CardBody>
@@ -34,7 +34,7 @@
                         <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
                             <Image Source="@item" Style="height: 450px" />
                             <Button Color="Color.Danger" Style="position: absolute; right: 10px; top: 10px; z-index:2;" Clicked="DeletePhotoGallery">
-                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Trash"></Icon>
+                                <Blazorise.Icon Name="FontAwesomeIcons.Trash"></Blazorise.Icon>
                             </Button>
                         </CarouselSlide>
                     }

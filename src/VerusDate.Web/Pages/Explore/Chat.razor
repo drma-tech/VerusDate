@@ -24,7 +24,7 @@
                                 <Column ColumnSize="ColumnSize.Is9.Is1.WithOffset">
                                     <Alert Color="Color.Secondary" Visible="true" Padding="Padding.Is2" Margin="Margin.Is0.FromBottom">
                                         <Badge Float="Float.Left">Eu</Badge>
-                                        <Badge Float="Float.Right"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Icon> @item.DtMessage.GetElapsedTime()</Badge>
+                                        <Badge Float="Float.Right"><Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Blazorise.Icon> @item.DtMessage.GetElapsedTime()</Badge>
                                         <br />
                                         @if (item.TypeContent == TypeContent.Message)
                                         {
@@ -56,7 +56,7 @@
                                 <Column ColumnSize="ColumnSize.Is9">
                                     <Alert Color="Color.Success" Visible="true" Padding="Padding.Is2" Margin="Margin.Is0.FromBottom">
                                         <Badge Float="Float.Left">@view.Basic.NickName</Badge>
-                                        <Badge Float="Float.Right"><Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Icon> @item.DtMessage.GetElapsedTime()</Badge>
+                                        <Badge Float="Float.Right"><Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Blazorise.Icon> @item.DtMessage.GetElapsedTime()</Badge>
                                         <br />
                                         @if (item.TypeContent == TypeContent.Message)
                                         {
@@ -82,26 +82,26 @@
                     </Addon>
                     <Addon AddonType="AddonType.End">
                         <Button Color="Color.Primary" Clicked="SendPrivateMessage" Disabled="@BtnDisabled">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Share"></Icon>
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Share"></Blazorise.Icon>
                         </Button>
                     </Addon>
                 </Addons>
             </CardBody>
             <CardBody>
                 <Button Color="Color.Primary" Disabled="true" title="Enviar Áudio">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MicrophoneAlt"></Icon>
+                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MicrophoneAlt"></Blazorise.Icon>
                 </Button>
                 <Button Color="Color.Primary" Disabled="true" title="Enviar Imagem">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Images"></Icon>
+                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Images"></Blazorise.Icon>
                 </Button>
                 <Button Color="Color.Primary" Disabled="true" title="Enviar Celular">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MobileAlt"></Icon>
+                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MobileAlt"></Blazorise.Icon>
                 </Button>
                 <Button Color="Color.Primary" Disabled="true" title="Enviar Facebook">
-                    <Icon Name="@("fab fa-facebook")"></Icon>
+                    <Blazorise.Icon Name="@("fab fa-facebook")"></Blazorise.Icon>
                 </Button>
                 <Button Color="Color.Primary" Disabled="true" title="Enviar Instagram">
-                    <Icon Name="@("fab fa-instagram")"></Icon>
+                    <Blazorise.Icon Name="@("fab fa-instagram")"></Blazorise.Icon>
                 </Button>
                 <Badge Color="Color.Danger" hidden="@(IsConnected)">Chat desconectado</Badge>
             </CardBody>
@@ -124,7 +124,7 @@
                 {
                     <Tooltip Text="logado recentemente" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
                         <Badge Color="Color.Success">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon>
                         </Badge>
                     </Tooltip>
                 }
@@ -132,7 +132,7 @@
                 {
                     <Tooltip Text="logado essa semana" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
                         <Badge Color="Color.Warning">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon>
                         </Badge>
                     </Tooltip>
                 }
@@ -140,7 +140,7 @@
                 {
                     <Tooltip Text="logado esse mês" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
                         <Badge Color="Color.Danger">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon>
                         </Badge>
                     </Tooltip>
                 }
@@ -148,7 +148,7 @@
                 {
                     <Tooltip Text="usuário desativado" Multiline="true" Fade="true" Placement="Placement.Left" Style="position: absolute; top: 5px; right: 10px; cursor: help;">
                         <Badge Color="Color.Dark">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon>
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon>
                         </Badge>
                     </Tooltip>
                 }
@@ -160,10 +160,10 @@
                 </CardBody>
                 <CardBody>
                     <Button Color="Color.Danger" title="Desfazer match">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Trash"></Icon> Match
+                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Trash"></Blazorise.Icon> Match
                     </Button>
                     <Button Color="Color.Danger" title="Reportar este perfil" Float="Float.Right" data-toggle="modal" data-target="#modalReport">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon> Reportar
+                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon> Reportar
                     </Button>
                 </CardBody>
             </Card>

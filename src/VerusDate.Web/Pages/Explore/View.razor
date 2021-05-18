@@ -14,7 +14,7 @@ else
                 <CardBody Padding="Padding.Is0">
                     <Badge Color="Color.Success" Style="position: absolute; top: 10px; left: 10px; z-index: 2;">@(GetPercentAffinity(null) + "%")</Badge>
                     <Badge Color="Color.Dark" Style="position: absolute; top: 10px; right: 10px; z-index: 2;">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Icon> @imageDataUriGallery.Count()
+                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Blazorise.Icon> @imageDataUriGallery.Count()
                     </Badge>
                     <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1" ShowIndicators="imageDataUriGallery.Count() > 1">
                         @foreach (var item in imageDataUriGallery)
@@ -28,30 +28,30 @@ else
                 <CardBody>
                     <Badge Color="Color.Secondary">@view.Basic.NickName</Badge>
                     <Badge Color="Color.Secondary">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Icon> @view.Basic.GetLocation(LocationType.City)
+                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view.Basic.GetLocation(LocationType.City)
                     </Badge>
                     @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                     {
                         <Badge Color="Color.Success" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> logado hoje
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado hoje
                         </Badge>
                     }
                     else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
                     {
                         <Badge Color="Color.Warning" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> logado esta semana
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado esta semana
                         </Badge>
                     }
                     else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
                     {
                         <Badge Color="Color.Danger" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> logado este mês
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado este mês
                         </Badge>
                     }
                     else
                     {
                         <Badge Color="Color.Dark" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Icon> usuário desativado
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> usuário desativado
                         </Badge>
                     }
                     @if (view.Reports.Any())
@@ -60,7 +60,7 @@ else
                             @foreach (var item in view.Reports)
                             {
                                 <Badge Color="Color.Warning" Style="cursor: help;">
-                                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon> @item.Type.GetName()
+                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon> @item.Type.GetName()
                                 </Badge>
                             }
                         </Paragraph>
@@ -80,7 +80,7 @@ else
                     }
                     <Dropdown Float="Float.Right">
                         <Button Color="Color.Danger" Clicked="report.ShowModal">
-                            <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Trash"></Icon> Deletar
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Trash"></Blazorise.Icon> Deletar
                         </Button>
                         <DropdownToggle Split="true" Color="Color.Danger" />
                         <DropdownMenu>
@@ -118,7 +118,7 @@ else
                         <CardHeader>
                             Compatibilidade
                             <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromLeft">
-                                <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon>
+                                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon>
                             </Button>
                         </CardHeader>
                         <CardBody>

@@ -1,0 +1,101 @@
+﻿@inherits FormBase<TValue, FieldSelect<TValue, TEnum>>
+@typeparam TValue
+@typeparam TEnum
+
+<Field Horizontal="true">
+    <FieldLabel ColumnSize="@GetLabelSize()">
+        <Blazorise.Icon Name="@CssIcon"></Blazorise.Icon> @GetName()
+        @if (Required)
+        {<div style="color: red; display: initial;"> *</div>}
+    </FieldLabel>
+    <FieldBody ColumnSize="@GetBodySize()">
+        <Addons>
+            <Addon AddonType="AddonType.Body">
+                @if (Multiple)
+                {
+                    <div @attributes="@GetAttributes("height: auto; min-height: 38px;")">
+                        @foreach (var item in SelectedValues)
+                        {
+                            <Badge Color="Color.Secondary" Margin="Margin.Is1.FromRight" Style="font-size: 90%;">
+                                @item.GetName()
+                            </Badge>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <Select TValue="TValue" SelectedValue="@SelectedValue" SelectedValueChanged="@SetValue" Disabled="@Disabled">
+                        @if (ShowGroup)
+                        {
+                            @foreach (var group in EnumHelper.GetList(typeof(TEnum)).Select(s => s.Group).Distinct())
+                            {
+                                <SelectGroup Label="@group">
+                                    @foreach (var item in EnumHelper.GetList(typeof(TEnum)).Where(w => w.Group == group))
+                                    {
+                                        <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>
+                                    }
+                                </SelectGroup>
+                            }
+                        }
+                        else
+                        {
+                            @foreach (var item in EnumHelper.GetList(typeof(TEnum)))
+                            {
+                                <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>
+                            }
+                        }
+                    </Select>
+                }
+            </Addon>
+            @if (ButtomClicked.HasDelegate) //custom button
+            {
+                <Addon AddonType="AddonType.End">
+                    <Button Color="Color.Primary" Outline="true" Clicked="@ButtomClicked" title="@ButtomTitle"Disabled="@Disabled">
+                        <Blazorise.Icon Name="@ButtomCssIcon"></Blazorise.Icon>
+                    </Button>
+                </Addon>
+            }
+            @if (ShowSwitch) //switch
+            {
+                <Addon AddonType="AddonType.End">
+                    <AddonLabel Style="padding-right: 2px;">
+                        <Switch TValue="bool" Disabled="@Disabled"></Switch>
+                    </AddonLabel>
+                </Addon>
+            }
+            @if (ShowHelper & !Multiple) //help
+            {
+                <Addon AddonType="AddonType.End">
+                    <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataHelp(For, typeof(TEnum))" Disabled="@Disabled">
+                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Question"></Blazorise.Icon>
+                    </Button>
+                </Addon>
+            }
+            @if (Multiple) //add
+            {
+                <Addon AddonType="AddonType.End">
+                    <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataSelect(For, typeof(TEnum))"Disabled="@Disabled">
+                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Plus"></Blazorise.Icon>
+                    </Button>
+                </Addon>
+            }
+        </Addons>
+
+        <ValidationMessage For="@For"></ValidationMessage>
+    </FieldBody>
+    @if (!string.IsNullOrEmpty(Description))
+    {
+        <Column>
+            <FieldHelp Style="color: #17a2b8 !important">@Description</FieldHelp>
+        </Column>
+    }
+    @if (!string.IsNullOrEmpty(HelpLink))
+    {
+        <Column ColumnSize="ColumnSize.IsFull">
+            <a href="@HelpLink" target="_blank" style="display: block; font-size: 80%;" rel="noopener">@(new Uri(@HelpLink).Host)</a>
+        </Column>
+    }
+</Field>
+
+<ProfileDataHelp TValue="TValue" HasGroup="@ShowGroup" @ref="dataHelp"></ProfileDataHelp>
+<ProfileDataSelect TValue="TValue" HasGroup="@ShowGroup" TEnum="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SelectedValuesChanged" @ref="dataSelect"></ProfileDataSelect>

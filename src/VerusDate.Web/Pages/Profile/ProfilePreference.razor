@@ -14,10 +14,10 @@ else
             <CardHeader>
                 Preferências
                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromLeft">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Icon>
+                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon>
                 </Button>
                 <Button Size="Size.ExtraSmall" Color="Color.Success" Float="Float.Right" Clicked="PopulateFields" title="Preencher automaticamente">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Magic"></Icon>
+                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Magic"></Blazorise.Icon>
                 </Button>
             </CardHeader>
             <CardBody>
@@ -26,22 +26,22 @@ else
                 </Alert>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <CustomFieldSelect Type="FieldType.Select" For="@(() => preference.Distance)" TValue="Distance" TEnum="Distance" @bind-SelectedValue="@preference.Distance"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt" DisableHelp="true" Required="true"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@preference.Languages"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.CurrentSituation)" TValue="IReadOnlyList<CurrentSituation>" TEnum="CurrentSituation" @bind-SelectedValues="@preference.CurrentSituation"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart"></CustomFieldSelect>
+                        <FieldSelect For="@(() => preference.Distance)" TValue="Distance" TEnum="Distance" @bind-SelectedValue="@preference.Distance"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt" ShowHelper="false" Required="true"></FieldSelect>
+                        <FieldSelect For="@(() => preference.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@preference.Languages"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Language" Multiple="true"></FieldSelect>
+                        <FieldSelect For="@(() => preference.CurrentSituation)" TValue="IReadOnlyList<CurrentSituation>" TEnum="CurrentSituation" @bind-SelectedValues="@preference.CurrentSituation"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Heart" Multiple="true"></FieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         @*<CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.Intent)" TValue="IReadOnlyList<Intent>" TEnum="Intent" @bind-SelectedValues="@looking.Intent"
                             CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Search" Disabled="true" DisableHelp="true" HasGroup="true" Required="true"></CustomFieldSelect>*@
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.BiologicalSex)" TValue="IReadOnlyList<BiologicalSex>" TEnum="BiologicalSex" @bind-SelectedValues="@preference.BiologicalSex"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.GenderIdentity)" TValue="IReadOnlyList<GenderIdentity>" TEnum="GenderIdentity" @bind-SelectedValues="@preference.GenderIdentity"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" HasGroup="true"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.SexualOrientation)" TValue="IReadOnlyList<SexualOrientation>" TEnum="SexualOrientation" @bind-SelectedValues="@preference.SexualOrientation"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter"></CustomFieldSelect>
+                        <FieldSelect For="@(() => preference.BiologicalSex)" TValue="IReadOnlyList<BiologicalSex>" TEnum="BiologicalSex" @bind-SelectedValues="@preference.BiologicalSex"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" Multiple="true"></FieldSelect>
+                        <FieldSelect For="@(() => preference.GenderIdentity)" TValue="IReadOnlyList<GenderIdentity>" TEnum="GenderIdentity" @bind-SelectedValues="@preference.GenderIdentity"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" ShowGroup="true" Multiple="true"></FieldSelect>
+                        <FieldSelect For="@(() => preference.SexualOrientation)" TValue="IReadOnlyList<SexualOrientation>" TEnum="SexualOrientation" @bind-SelectedValues="@preference.SexualOrientation"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Neuter" Multiple="true"></FieldSelect>
                     </Column>
                 </Row>
                 <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
@@ -51,7 +51,7 @@ else
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <Field Horizontal="true">
                             <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
-                                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BirthdayCake"></Icon> @AttributeHelper.GetName(() => preference.MinimalAge)
+                                <Blazorise.Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.BirthdayCake"></Blazorise.Icon> @AttributeHelper.GetName(() => preference.MinimalAge)
                                 <div style="color: red; display: initial;"> *</div>
                                 <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(() => preference.MinimalAge)</FieldHelp>
                             </FieldLabel>
@@ -67,7 +67,7 @@ else
 
                         <Field Horizontal="true">
                             <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
-                                <Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler"></Icon> @AttributeHelper.GetName(() => preference.MinimalHeight)
+                                <Blazorise.Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler"></Blazorise.Icon> @AttributeHelper.GetName(() => preference.MinimalHeight)
                             </FieldLabel>
                             <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
                                 <InputSelect TValue="Height?" @bind-Value="@preference.MinimalHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
@@ -92,22 +92,22 @@ else
                         </Field>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.RaceCategory)" TValue="IReadOnlyList<RaceCategory>" TEnum="RaceCategory" @bind-SelectedValues="@preference.RaceCategory"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Globe"></CustomFieldSelect>
-                        <CustomFieldSelect Type="FieldType.SelectMultiple" For="@(() => preference.BodyMass)" TValue="IReadOnlyList<BodyMass>" TEnum="BodyMass" @bind-SelectedValues="@preference.BodyMass"
-                                           CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight"></CustomFieldSelect>
+                        <FieldSelect For="@(() => preference.RaceCategory)" TValue="IReadOnlyList<RaceCategory>" TEnum="RaceCategory" @bind-SelectedValues="@preference.RaceCategory"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Globe" Multiple="true"></FieldSelect>
+                        <FieldSelect For="@(() => preference.BodyMass)" TValue="IReadOnlyList<BodyMass>" TEnum="BodyMass" @bind-SelectedValues="@preference.BodyMass"
+                                     CssIcon="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Weight" Multiple="true"></FieldSelect>
                     </Column>
-                </Row>                
+                </Row>
             </CardBody>
             <CardFooter>
                 <Button Type="ButtonType.Submit" Color="Color.Primary">
-                    <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Icon> Salvar Dados
+                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Save"></Blazorise.Icon> Salvar Dados
                 </Button>
-                
+
                 @if (profile.Preference != null)
                 {
                     <Badge Color="Color.Danger" Margin="Margin.Is3.FromLeft">
-                        <Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Icon> -100 XP
+                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Blazorise.Icon> -100 XP
                     </Badge>
                 }
             </CardFooter>

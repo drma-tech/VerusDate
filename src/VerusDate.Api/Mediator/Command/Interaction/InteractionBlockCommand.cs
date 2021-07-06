@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.Azure.Cosmos;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
@@ -42,7 +41,7 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
         {
             if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException();
 
-            var obj = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var obj = await _repo.Get<InteractionModel>(request.Id, request.Key, cancellationToken);
 
             if (obj == null)
             {

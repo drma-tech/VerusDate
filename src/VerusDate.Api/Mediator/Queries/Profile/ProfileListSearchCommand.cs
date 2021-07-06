@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using VerusDate.Api.Core;
 using VerusDate.Api.Core.Interfaces;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Helper;
@@ -38,7 +39,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 
         public async Task<List<ProfileSearch>> Handle(ProfileListSearchCommand request, CancellationToken cancellationToken)
         {
-            var user = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.IdLoggedUser), cancellationToken);
+            var user = await _repo.Get<ProfileModel>(request.Id, request.IdLoggedUser, cancellationToken);
             var looking = user?.Preference;
 
             if (looking == null) throw new NotificationException("Critérios de busca ainda não definidos");
@@ -65,8 +66,8 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             SQL.Append("	c ");
             SQL.Append("WHERE ");
             SQL.Append("	c.type = " + (int)CosmosType.Profile + " ");
-            SQL.Append("    AND c.id != '" + request.Type + ":" + request.IdLoggedUser + "' "); //não seja o próprio usuário
-            SQL.Append("    AND NOT EXISTS (SELECT VALUE t FROM t IN c.passiveInteractions WHERE t = '" + request.IdLoggedUser + "') "); //não exista interação com este usuário
+            SQL.Append("    AND c.id != '" + request.Type + ":" + request.IdLoggedUser + "' "); //can't be himself
+            SQL.Append("    AND NOT EXISTS (SELECT VALUE t FROM t IN c.passiveInteractions WHERE t = '" + request.IdLoggedUser + "') "); //there can be no interaction with this user
 
             // *** BASIC ***
 
@@ -89,27 +90,19 @@ namespace VerusDate.Api.Mediator.Queries.Profile
                 filter.Add("@distance", user.Preference.Distance);
             }
 
-            if (looking.CurrentSituation.Any())
-            {
-                SQL.Append("	AND c.basic.currentSituation IN (" + string.Join(",", user.Preference.CurrentSituation.Cast<int>()) + ") ");
-            }
-            SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.intent WHERE n in (" + string.Join(",", user.Preference.Intent.Cast<int>()) + ")) ");
-            if (looking.BiologicalSex.Any())
-            {
-                SQL.Append("	AND c.basic.biologicalSex IN (" + string.Join(",", user.Preference.BiologicalSex.Cast<int>()) + ") ");
-            }
-            if (looking.GenderIdentity.Any())
-            {
-                SQL.Append("	AND c.basic.genderIdentity IN (" + string.Join(",", user.Preference.GenderIdentity.Cast<int>()) + ") ");
-            }
-            if (looking.SexualOrientation.Any())
-            {
-                SQL.Append("	AND c.basic.sexualOrientation IN (" + string.Join(",", user.Preference.SexualOrientation.Cast<int>()) + ") ");
-            }
-            if (looking.Languages.Any())
-            {
-                SQL.Append("    AND EXISTS(SELECT VALUE n FROM n IN c.basic.languages WHERE n in (" + string.Join(",", user.Preference.Languages.Cast<int>()) + ")) ");
-            }
+            SQL.AddEnumFilter(looking.CurrentSituation, "c.basic.currentSituation");
+
+            SQL.AddArrayFilter(looking.Intent, "c.basic.intent");
+
+            SQL.AddEnumFilter(looking.BiologicalSex, "c.basic.biologicalSex");
+
+            SQL.AddEnumFilter(looking.GenderIdentity, "c.basic.genderIdentity");
+
+            SQL.AddEnumFilter(looking.SexualOrientation, "c.basic.sexualOrientation");
+
+            SQL.AddEnumFilter(looking.SexualOrientation, "c.basic.sexualOrientation");
+
+            SQL.AddArrayFilter(looking.Languages, "c.basic.languages");
 
             // *** BIO ***
 
@@ -117,6 +110,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             SQL.Append("    AND TRUNC(DateTimeDiff('month',c.bio.birthDate,GetCurrentDateTime())/12) <= @maxAge ");
             filter.Add("@minAge", user.Preference.MinimalAge);
             filter.Add("@maxAge", user.Preference.MaxAge);
+
             if (looking.MinimalHeight.HasValue)
             {
                 SQL.Append("	AND c.bio.height >= @MinimalHeight ");
@@ -127,14 +121,10 @@ namespace VerusDate.Api.Mediator.Queries.Profile
                 SQL.Append("	AND c.bio.height <= @MaxHeight ");
                 filter.Add("@MaxHeight", (int)looking.MaxHeight.Value);
             }
-            if (looking.RaceCategory.Any())
-            {
-                SQL.Append("	AND c.bio.raceCategory IN (" + string.Join(",", user.Preference.RaceCategory.Cast<int>()) + ") ");
-            }
-            if (looking.BodyMass.Any())
-            {
-                SQL.Append("	AND c.bio.bodyMass IN (" + string.Join(",", user.Preference.BodyMass.Cast<int>()) + ") ");
-            }
+
+            SQL.AddEnumFilter(looking.RaceCategory, "c.bio.raceCategory");
+
+            SQL.AddEnumFilter(looking.BodyMass, "c.bio.bodyMass");
 
             // *** LIFESTYLE ***
 

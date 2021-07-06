@@ -24,16 +24,6 @@ namespace VerusDate.Shared.Core
         }
 
         /// <summary>
-        /// Data de inserção do registro
-        /// </summary>
-        public DateTime? DtInsert { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
-        /// Data de atualização de um ou mais campos (após o insert)
-        /// </summary>
-        public DateTime? DtUpdate { get; set; }
-
-        /// <summary>
         /// Campo único dentro do container (tem distinção por tipo)
         /// </summary>
         public string Id { get; set; }
@@ -47,6 +37,16 @@ namespace VerusDate.Shared.Core
         /// Tipo da estrutura (geralmente o nome da classe)
         /// </summary>
         public CosmosType Type { get; set; }
+
+        /// <summary>
+        /// Data de inserção do registro
+        /// </summary>
+        public DateTime? DtInsert { get; set; } = DateTime.UtcNow;
+
+        /// <summary>
+        /// Data de atualização de um ou mais campos (após o insert)
+        /// </summary>
+        public DateTime? DtUpdate { get; set; }
 
         /// <summary>
         /// Recupera o status dos dados atuais

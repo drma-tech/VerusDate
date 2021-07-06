@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.Azure.Cosmos;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -43,8 +42,8 @@ namespace VerusDate.Api.Mediator.Command.Interaction
         {
             if (request.IdLoggedUser == request.IdUserInteraction) throw new InvalidOperationException("Você não pode interagir com você mesmo");
 
-            var interactionUser = await _repo.Get<InteractionModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
-            var profileUser = await _repo.Get<ProfileModel>(CosmosType.Profile + ":" + request.IdLoggedUser, new PartitionKey(request.IdLoggedUser), cancellationToken);
+            var interactionUser = await _repo.Get<InteractionModel>(request.Id, request.Key, cancellationToken);
+            var profileUser = await _repo.Get<ProfileModel>(CosmosType.Profile + ":" + request.IdLoggedUser, request.IdLoggedUser, cancellationToken);
             bool result;
 
             profileUser.Gamification.RemoveFood();
@@ -69,14 +68,14 @@ namespace VerusDate.Api.Mediator.Command.Interaction
             }
 
             //registra a interação. necessário, pois o cosmos não faz cross join com outros documentos (list match)
-            var profileInteraction = await _repo.Get<ProfileModel>(CosmosType.Profile + ":" + request.IdUserInteraction, new PartitionKey(request.IdUserInteraction), cancellationToken);
+            var profileInteraction = await _repo.Get<ProfileModel>(CosmosType.Profile + ":" + request.IdUserInteraction, request.IdUserInteraction, cancellationToken);
             if (!Array.Exists(profileInteraction.PassiveInteractions, x => x == request.IdLoggedUser))
             {
                 profileInteraction.PassiveInteractions = profileInteraction.PassiveInteractions.Concat(new string[] { request.IdLoggedUser }).ToArray();
             }
 
             //recupera a interação e executa o possível match
-            var matched = await _repo.Get<InteractionModel>(interactionUser.GetInvertedId(), new PartitionKey(request.IdUserInteraction), cancellationToken);
+            var matched = await _repo.Get<InteractionModel>(interactionUser.GetInvertedId(), request.IdUserInteraction, cancellationToken);
 
             if (matched != null && matched.Like.Value.Value) //se a outra pessoa deu like também
             {

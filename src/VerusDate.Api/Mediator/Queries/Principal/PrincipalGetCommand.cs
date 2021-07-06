@@ -32,7 +32,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 
         public async Task<ClientePrincipal> Handle(PrincipalGetCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.Get<ClientePrincipal>(request.Id, new PartitionKey(request.IdLoggedUser), cancellationToken);
+            return await _repo.Get<ClientePrincipal>(request.Id, request.IdLoggedUser, cancellationToken);
         }
     }
 }

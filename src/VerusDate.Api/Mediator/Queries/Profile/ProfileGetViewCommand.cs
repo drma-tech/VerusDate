@@ -37,10 +37,6 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 
         public async Task<ProfileView> Handle(ProfileGetViewCommand request, CancellationToken cancellationToken)
         {
-            //var result = await _repo.Get<ProfileView>(request.Type + ":" + request.IdUserView, new PartitionKey(request.IdUserView), cancellationToken);
-
-            //return result;
-
             var SQL = new StringBuilder();
 
             SQL.Append("SELECT ");
@@ -64,11 +60,11 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             SQL.Append("FROM ");
             SQL.Append("	c ");
             SQL.Append("WHERE ");
-            SQL.Append("	c.id = '" + request.Type + ":" + request.IdUserView + "' ");
+            SQL.Append($"	c.id = '{request.Type}:{ request.IdUserView}'");
 
             var query = new QueryDefinition(SQL.ToString());
 
-            return await _repo.Get<ProfileView>(query, cancellationToken);
+            return await _repo.Get<ProfileView>(query, request.IdUserView, cancellationToken);
         }
     }
 }

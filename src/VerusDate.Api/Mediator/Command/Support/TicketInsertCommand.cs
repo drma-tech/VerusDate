@@ -20,7 +20,7 @@ namespace VerusDate.Api.Mediator.Command.Support
 
         public async Task<TicketModel> Handle(TicketInsertCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ProfileModel>("Profile:" + request.IdUserOwner, new PartitionKey(request.IdUserOwner), cancellationToken);
+            var obj = await _repo.Get<ProfileModel>("Profile:" + request.IdUserOwner, request.IdUserOwner, cancellationToken);
 
             obj.Gamification.AddXP(5);
 

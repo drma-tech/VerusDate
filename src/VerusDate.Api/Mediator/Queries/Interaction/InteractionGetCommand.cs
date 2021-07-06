@@ -36,7 +36,7 @@ namespace VerusDate.Api.Mediator.Queries.Interaction
         {
             var Id = InteractionModel.GetId(CosmosType.Interaction, request.IdLoggedUser, request.IdUserInteraction);
 
-            return await _repo.Get<InteractionModel>(Id, new PartitionKey(request.IdLoggedUser), cancellationToken);
+            return await _repo.Get<InteractionModel>(Id, request.IdLoggedUser, cancellationToken);
         }
     }
 }

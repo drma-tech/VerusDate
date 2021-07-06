@@ -44,7 +44,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
         public async Task<bool> Handle(UploadPhotoValidationCommand request, CancellationToken cancellationToken)
         {
-            var profile = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var profile = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
             if (profile == null || string.IsNullOrEmpty(profile.Photo.Main)) throw new NotificationException("Foto para validação não encontrada. Favor, inserir primeiro sua foto de rosto.");
             if (profile.Photo.DtMainUpload < DateTime.UtcNow.AddHours(-24)) throw new NotificationException("Foto postada a mais de 24 horas. Favor, reenviar sua foto principal.");
 

@@ -10,12 +10,17 @@ using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Core.Interfaces;
 using VerusDate.Shared.Core;
+using VerusDate.Shared.Helper;
 
 namespace VerusDate.Api.Repository
 {
     public class CosmosRepository : IRepository
     {
         public Container Container { get; private set; }
+
+        private const double ru_limit_get = 3;
+        private const double ru_limit_query = 5;
+        private const double ru_limit_save = 15;
 
         public CosmosRepository(IConfiguration config)
         {
@@ -34,11 +39,13 @@ namespace VerusDate.Api.Repository
             Container = _client.GetContainer(databaseId, containerId);
         }
 
-        public async Task<T> Get<T>(string id, PartitionKey key, CancellationToken cancellationToken) where T : CosmosBase
+        public async Task<T> Get<T>(string id, string partitionKeyValue, CancellationToken cancellationToken) where T : CosmosBase
         {
             try
             {
-                var response = await Container.ReadItemAsync<T>(id, key, null, cancellationToken);
+                var response = await Container.ReadItemAsync<T>(id, new PartitionKey(partitionKeyValue), null, cancellationToken);
+
+                if (response.RequestCharge > ru_limit_get) throw new NotificationException("RU limit exceeded");
 
                 return response.Resource;
             }
@@ -48,21 +55,21 @@ namespace VerusDate.Api.Repository
             }
         }
 
-        public async Task<T> Get<T>(QueryDefinition query, CancellationToken cancellationToken) where T : class
+        public async Task<T> Get<T>(QueryDefinition query, string partitionKeyValue, CancellationToken cancellationToken) where T : class
         {
-            using (var iterator = Container.GetItemQueryIterator<T>(query))
+            using var iterator = Container.GetItemQueryIterator<T>(query, requestOptions: CosmosRepositoryExtensions.GetDefaultOptions(partitionKeyValue));
+
+            if (iterator.HasMoreResults)
             {
-                T result = null;
+                var response = await iterator.ReadNextAsync(cancellationToken);
 
-                while (iterator.HasMoreResults)
-                {
-                    foreach (var item in await iterator.ReadNextAsync(cancellationToken))
-                    {
-                        result = item;
-                    }
-                }
+                if (response.RequestCharge > ru_limit_get) throw new NotificationException("RU limit exceeded");
 
-                return result;
+                return response.Resource.FirstOrDefault();
+            }
+            else
+            {
+                return null;
             }
         }
 
@@ -81,43 +88,43 @@ namespace VerusDate.Api.Repository
                     .Where(predicate.Compose(item => item.Type == Type, Expression.AndAlso));
             }
 
-            using (var iterator = query.ToFeedIterator())
+            using var iterator = query.ToFeedIterator();
+            List<T> results = new List<T>();
+
+            while (iterator.HasMoreResults)
             {
-                List<T> results = new List<T>();
+                var response = await iterator.ReadNextAsync(cancellationToken);
 
-                while (iterator.HasMoreResults)
-                {
-                    foreach (var item in await iterator.ReadNextAsync(cancellationToken))
-                    {
-                        results.Add(item);
-                    }
-                }
+                if (response.RequestCharge > ru_limit_query) throw new NotificationException("RU limit exceeded");
 
-                return results;
+                results.AddRange(response.Resource);
             }
+
+            return results;
         }
 
         public async Task<List<T>> Query<T>(QueryDefinition query, CancellationToken cancellationToken) where T : CosmosBaseQuery
         {
-            using (var iterator = Container.GetItemQueryIterator<T>(query))
+            using var iterator = Container.GetItemQueryIterator<T>(query);
+            List<T> results = new List<T>();
+
+            while (iterator.HasMoreResults)
             {
-                List<T> results = new List<T>();
+                var response = await iterator.ReadNextAsync(cancellationToken);
 
-                while (iterator.HasMoreResults)
-                {
-                    foreach (var item in await iterator.ReadNextAsync(cancellationToken))
-                    {
-                        results.Add(item);
-                    }
-                }
+                if (response.RequestCharge > ru_limit_query) throw new NotificationException("RU limit exceeded");
 
-                return results;
+                results.AddRange(response.Resource);
             }
+
+            return results;
         }
 
         public async Task<T> Add<T>(T item, CancellationToken cancellationToken) where T : CosmosBase
         {
             var response = await Container.CreateItemAsync(item, new PartitionKey(item.Key), null, cancellationToken);
+
+            if (response.RequestCharge > ru_limit_save) throw new NotificationException("RU limit exceeded");
 
             return response.Resource;
         }
@@ -125,6 +132,8 @@ namespace VerusDate.Api.Repository
         public async Task<bool> Update<T>(T item, CancellationToken cancellationToken) where T : CosmosBase
         {
             var response = await Container.ReplaceItemAsync(item, item.Id, new PartitionKey(item.Key), null, cancellationToken);
+
+            if (response.RequestCharge > ru_limit_save) throw new NotificationException("RU limit exceeded");
 
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }

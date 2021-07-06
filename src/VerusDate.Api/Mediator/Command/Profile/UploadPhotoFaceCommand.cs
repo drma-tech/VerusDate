@@ -43,7 +43,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
         public async Task<bool> Handle(UploadPhotoFaceCommand request, CancellationToken cancellationToken)
         {
-            var profile = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var profile = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
             if (profile == null) throw new NotificationException("Perfil não encontrado");
             var IdOldPhoto = profile.Photo.Main;
 

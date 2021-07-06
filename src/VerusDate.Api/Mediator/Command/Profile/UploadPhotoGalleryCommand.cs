@@ -42,7 +42,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
         public async Task<bool> Handle(UploadPhotoGalleryCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
             if (obj == null) throw new NotificationException("Perfil não encontrado");
 
             //if (obj.Photo != null && obj.Photo.Gallery.Any())

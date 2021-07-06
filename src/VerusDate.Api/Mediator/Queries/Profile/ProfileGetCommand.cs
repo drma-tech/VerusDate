@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.Cosmos;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
@@ -32,7 +31,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 
         public async Task<ProfileModel> Handle(ProfileGetCommand request, CancellationToken cancellationToken)
         {
-            return await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.IdLoggedUser), cancellationToken);
+            return await _repo.Get<ProfileModel>(request.Id, request.IdLoggedUser, cancellationToken);
         }
     }
 }

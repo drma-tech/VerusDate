@@ -25,7 +25,7 @@ namespace VerusDate.Api.Mediator.Command.Support
 
             request.SetKey(request.Key);
 
-            var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
 
             obj.Gamification.AddXP(1);
 

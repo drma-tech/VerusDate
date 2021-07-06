@@ -40,7 +40,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
         public async Task<bool> Handle(DeletePhotoGalleryCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.IdLoggedUser), cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, request.IdLoggedUser, cancellationToken);
             if (obj == null) throw new NotificationException("Perfil não encontrado");
 
             await storageHelper.DeletePhoto(ImageHelper.PhotoType.PhotoGallery, request.IdPhoto, cancellationToken);

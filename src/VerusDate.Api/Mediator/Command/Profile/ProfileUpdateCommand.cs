@@ -20,7 +20,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
         public async Task<bool> Handle(ProfileUpdateCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
 
             if (obj.DtUpdate != null) //terceira vez que atualiza
             {

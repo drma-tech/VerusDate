@@ -36,7 +36,7 @@ namespace VerusDate.Api.Mediator.Command.Store
 
         public async Task<bool> Handle(StoreAddDiamondCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ProfileModel>(request.Id, new PartitionKey(request.Key), cancellationToken);
+            var obj = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
 
             obj.Gamification.AddDiamond(request.QtdDiamond);
 

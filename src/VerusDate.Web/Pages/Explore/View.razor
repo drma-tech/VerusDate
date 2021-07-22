@@ -26,45 +26,51 @@ else
                     </Carousel>
                 </CardBody>
                 <CardBody>
-                    <Badge Color="Color.Secondary">@view.Basic.NickName</Badge>
-                    <Badge Color="Color.Secondary">
-                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view.Basic.GetLocation(LocationType.City)
-                    </Badge>
-                    @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
-                    {
-                        <Badge Color="Color.Success" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
-                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado hoje
-                        </Badge>
-                    }
-                    else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
-                    {
-                        <Badge Color="Color.Warning" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
-                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado esta semana
-                        </Badge>
-                    }
-                    else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
-                    {
-                        <Badge Color="Color.Danger" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
-                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado este mês
-                        </Badge>
-                    }
-                    else
-                    {
-                        <Badge Color="Color.Dark" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
-                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> usuário desativado
-                        </Badge>
-                    }
-                    @if (view.Reports.Any())
-                    {
-                        <Paragraph Margin="Margin.Is0.FromTop.Is0.FromBottom">
-                            @foreach (var item in view.Reports)
+                    <Row Margin="Margin.Is3">
+                        <Column ColumnSize="ColumnSize.IsAuto">
+                            <Badge Color="Color.Secondary">@view.Basic.NickName</Badge>
+                            <Badge Color="Color.Secondary">
+                                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view.Basic.GetLocation(LocationType.City)
+                            </Badge>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.IsAuto">
+                            @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                             {
-                                <Badge Color="Color.Warning" Style="cursor: help;">
-                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon> @item.Type.GetName()
+                                <Badge Color="Color.Success" Style="cursor: help;">
+                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado hoje
                                 </Badge>
                             }
-                        </Paragraph>
-                    }
+                            else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
+                            {
+                                <Badge Color="Color.Warning" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
+                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado esta semana
+                                </Badge>
+                            }
+                            else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
+                            {
+                                <Badge Color="Color.Danger" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
+                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado este mês
+                                </Badge>
+                            }
+                            else
+                            {
+                                <Badge Color="Color.Dark" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
+                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> usuário desativado
+                                </Badge>
+                            }
+                            @if (view.Reports.Any())
+                            {
+                                <Paragraph Margin="Margin.Is0.FromTop.Is0.FromBottom">
+                                    @foreach (var item in view.Reports)
+                                    {
+                                        <Badge Color="Color.Warning" Style="cursor: help;">
+                                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon> @item.Type.GetName()
+                                        </Badge>
+                                    }
+                                </Paragraph>
+                            }
+                        </Column>
+                    </Row>
                     <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is2.FromTop.Is0.FromBottom">
                         @view.Basic.Description
                     </Paragraph>

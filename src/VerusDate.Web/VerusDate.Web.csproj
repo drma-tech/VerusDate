@@ -17,6 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\.well-known\assetlinks.json" />
+    <Content Include="wwwroot\.well-known\microsoft-identity-association.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="bundleconfig.json" />
   </ItemGroup>
 

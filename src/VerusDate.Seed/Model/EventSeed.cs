@@ -18,8 +18,8 @@ namespace VerusDate.Seed.Model
                     p.Location = s.Address.City();
                     p.MinimalAge = s.Random.Number(18, 40);
                     p.MaxAge = s.Random.Number(30, 120);
-                    p.Intent = s.Random.ArrayElements(new Intent[] { Intent.OneNightStand, Intent.FriendsWithBenefits, Intent.Relationship, Intent.Married });
-                    p.SexualOrientation = s.Random.ArrayElements(new SexualOrientation[] { SexualOrientation.Assexual, SexualOrientation.Heteressexual, SexualOrientation.Bissexual, SexualOrientation.Bissexual });
+                    p.Intentions = s.Random.ArrayElements(new Intentions[] { Intentions.Casual, Intentions.Serious, Intentions.Married });
+                    p.SexualOrientation = s.Random.ArrayElements(new SexualOrientation[] { SexualOrientation.Asexual, SexualOrientation.Heterosexual, SexualOrientation.Bisexual, SexualOrientation.Bisexual });
                     p.GenderDivision = s.Random.Bool();
                 });
         }

@@ -13,10 +13,10 @@ else
         <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>
                 Preferências
-                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromLeft">
+                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromStart">
                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon>
                 </Button>
-                <Button Size="Size.ExtraSmall" Color="Color.Success" Float="Float.Right" Clicked="PopulateFields" title="Preencher automaticamente">
+                <Button Size="Size.ExtraSmall" Color="Color.Success" Float="Float.End" Clicked="PopulateFields" title="Preencher automaticamente">
                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Magic"></Blazorise.Icon>
                 </Button>
             </CardHeader>
@@ -70,9 +70,9 @@ else
                                 <Blazorise.Icon Name="@Blazorise.Icons.FontAwesome.FontAwesomeIcons.Ruler"></Blazorise.Icon> @AttributeHelper.GetName(() => preference.MinimalHeight)
                             </FieldLabel>
                             <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
-                                <InputSelect TValue="Height?" @bind-Value="@preference.MinimalHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
+                                <InputSelect TValue="VerusDate.Shared.Enum.Height?" @bind-Value="@preference.MinimalHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
                                     <option></option>
-                                    @foreach (var item in EnumHelper.GetArray<Height>())
+                                    @foreach (var item in EnumHelper.GetArray<VerusDate.Shared.Enum.Height>())
                                     {
                                         <option value="@item">@item.GetName()</option>
                                     }
@@ -80,9 +80,9 @@ else
                                 <ValidationMessage For="@(() => preference.MinimalHeight)"></ValidationMessage>
                             </FieldBody>
                             <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
-                                <InputSelect TValue="Height?" @bind-Value="@preference.MaxHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
+                                <InputSelect TValue="VerusDate.Shared.Enum.Height?" @bind-Value="@preference.MaxHeight" @attributes="@(new Dictionary<string, object>() { { "class", "form-control" } })">
                                     <option></option>
-                                    @foreach (var item in EnumHelper.GetArray<Height>())
+                                    @foreach (var item in EnumHelper.GetArray<VerusDate.Shared.Enum.Height>())
                                     {
                                         <option value="@item">@item.GetName()</option>
                                     }
@@ -106,7 +106,7 @@ else
 
                 @if (profile.Preference != null)
                 {
-                    <Badge Color="Color.Danger" Margin="Margin.Is3.FromLeft">
+                    <Badge Color="Color.Danger" Margin="Margin.Is3.FromStart">
                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Blazorise.Icon> -100 XP
                     </Badge>
                 }
@@ -153,7 +153,7 @@ else
             preference = new();
         }
 
-        preference.Intent = profile.Basic.Intent;
+        preference.Intentions = profile.Basic.Intentions;
     }
 
     private async Task HandleValidSubmit()

@@ -19,7 +19,7 @@ namespace VerusDate.Shared.Model
         public IReadOnlyList<CurrentSituation> CurrentSituation { get; set; } = Array.Empty<CurrentSituation>();
 
         [Display(Name = "Intenções", Description = "Selecionado automaticamente de acordo com seu perfil")]
-        public IReadOnlyList<Intent> Intent { get; set; } = Array.Empty<Intent>();
+        public IReadOnlyList<Intentions> Intentions { get; set; } = Array.Empty<Intentions>();
 
         [Display(Name = "Sexo Biológico")]
         public IReadOnlyList<BiologicalSex> BiologicalSex { get; set; } = Array.Empty<BiologicalSex>();
@@ -60,7 +60,7 @@ namespace VerusDate.Shared.Model
             Distance = vm.Distance;
             Languages = vm.Languages;
             CurrentSituation = vm.CurrentSituation;
-            Intent = vm.Intent;
+            Intentions = vm.Intentions;
             BiologicalSex = vm.BiologicalSex;
             GenderIdentity = vm.GenderIdentity;
             SexualOrientation = vm.SexualOrientation;

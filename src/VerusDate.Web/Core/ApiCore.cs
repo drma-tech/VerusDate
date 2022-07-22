@@ -1,16 +1,13 @@
 ﻿using Blazored.SessionStorage;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
-using System.Threading.Tasks;
 using VerusDate.Shared.Helper;
 
 namespace VerusDate.Web.Core
 {
     public static class ApiCore
     {
-        private async static Task<T> ReturnResponse<T>(this HttpResponseMessage response)
+        private static async Task<T> ReturnResponse<T>(this HttpResponseMessage response)
         {
             if (response.IsSuccessStatusCode)
             {
@@ -27,7 +24,7 @@ namespace VerusDate.Web.Core
             return new JsonSerializerOptions();
         }
 
-        public async static Task<T> Get<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage = null) where T : class
+        public static async Task<T> Get<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage = null) where T : class
         {
             if (storage == null)
             {
@@ -48,7 +45,7 @@ namespace VerusDate.Web.Core
             }
         }
 
-        public async static Task<List<T>> GetList<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage) where T : class
+        public static async Task<List<T>> GetList<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage) where T : class
         {
             if (!storage.ContainKey(requestUri))
             {
@@ -60,7 +57,7 @@ namespace VerusDate.Web.Core
             return storage.GetItem<List<T>>(requestUri);
         }
 
-        public async static Task<HttpResponseMessage> Post<T>(this HttpClient http, string requestUri, T obj, ISyncSessionStorageService storage, string urlGet) where T : class
+        public static async Task<HttpResponseMessage> Post<T>(this HttpClient http, string requestUri, T obj, ISyncSessionStorageService storage, string urlGet) where T : class
         {
             var response = await http.PostAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
 
@@ -72,12 +69,12 @@ namespace VerusDate.Web.Core
             return response;
         }
 
-        public async static Task<HttpResponseMessage> Put(this HttpClient http, string requestUri, object obj)
+        public static async Task<HttpResponseMessage> Put(this HttpClient http, string requestUri, object obj)
         {
             return await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
         }
 
-        public async static Task<HttpResponseMessage> Delete(this HttpClient http, string requestUri)
+        public static async Task<HttpResponseMessage> Delete(this HttpClient http, string requestUri)
         {
             return await http.DeleteAsync(http.BaseApi() + requestUri);
         }

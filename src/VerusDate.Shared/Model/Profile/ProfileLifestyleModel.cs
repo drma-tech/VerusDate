@@ -31,25 +31,25 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Religião")]
         public Religion? Religion { get; set; }
 
-        [Display(Name = "Personalidade Financeira")]
+        [Display(Name = "Personalidade Financeira", Description = "Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês)")]
         public MoneyPersonality? MoneyPersonality { get; set; }
 
         [Display(Name = "Dividindo as Contas")]
         public SplitTheBill? SplitTheBill { get; set; }
 
-        [Display(Name = "Personalidade na Relação")]
+        [Display(Name = "Personalidade na Relação", Description = "Caso tenha dúvidas, poderá fazer um teste em site de terceiros (somente em inglês)")]
         public RelationshipPersonality? RelationshipPersonality { get; set; }
+
+        [Display(Name = "Personalidade MBTI", Description = "Este campo é opcional (é necessário fazer um teste em site de terceiros / multi-idiomas)")]
+        public MyersBriggsTypeIndicator? MyersBriggsTypeIndicator { get; set; }
+
+        [Display(Name = "Linguagem do Amor", Description = "Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês)")]
+        public LoveLanguage? LoveLanguage { get; set; }
 
         [Display(Name = "Personalidade Sexual", Description = "Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês)")]
         public SexPersonality? SexPersonality { get; set; }
 
         [Display(Name = "Person. Sexual (Preferências)", Description = "Diferentemente das outras personalidades, a compatibilidade desta é uma preferência pessoal")]
         public IReadOnlyList<SexPersonality> SexPersonalityPreferences { get; set; } = Array.Empty<SexPersonality>();
-
-        [Display(Name = "Linguagem do Amor", Description = "Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês)")]
-        public LoveLanguage? LoveLanguage { get; set; }
-
-        [Display(Name = "Personalidade MBTI", Description = "Este campo é opcional (é necessário fazer um teste em site de terceiros / multi-idiomas)")]
-        public MyersBriggsTypeIndicator? MyersBriggsTypeIndicator { get; set; }
     }
 }

@@ -1,58 +1,78 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
+    /// <summary>
+    /// https://www.education.ne.gov/nce/careerdevelopment/nce-career-fields-career-clusters/
+    /// https://www.education.ne.gov/wp-content/uploads/2019/08/CTEModel17X22-RGB-2.pdf
+    ///
+    /// https://careerwise.minnstate.edu/careers/clusters.html
+    /// https://careertech.org/career-clusters
+    /// https://www.asvabprogram.com/career-cluster
+    /// </summary>
     public enum CareerCluster
     {
-        [Display(GroupName = "Agricultura de recursos naturais", Name = "Agricultura, Alimentação e Recursos Naturais", Description = "produção, processamento, distribuição, financiamento e comercialização de produtos agrícolas, incluindo alimentos, plantas, fibras, animais, madeira e outros recursos vegetais e animais (Veterinário, oficial ambiental, manipulador de materiais perigosos, etc.)")]
-        Agriculture_Food_NaturalResources = 1,
+        [Custom(Name = "NoCareer_Name", Description = "NoCareer_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        NoCareer = 0,
 
-        [Display(GroupName = "Tecnologia Industrial e de Engenharia", Name = "Arquitetura e Construção", Description = "projetar, planejar, gerenciar, construir e manter um ambiente de construção (Arquiteto, encanador, paisagista etc.)")]
-        Architecture_Construction = 2,
+        //AGRICULTURE, FOOD & NATURAL RESOURCES
 
-        [Display(GroupName = "Artes e Comunicação", Name = "Artes, tecnologia de áudio / vídeo e comunicações", Description = "projetar, produzir, exibir, executar, escrever e publicar conteúdo multimídia, incluindo artes visuais e cênicas e serviços de design, jornalismo e entretenimento (Ator, assistente de produção, fotógrafo, etc.)")]
-        Arts_AudioVideoTechnology_Communications = 3,
+        [Custom(Group = "AgricultureFoodNaturalResources_Group", Name = "AgricultureFoodNaturalResources_Name", Description = "AgricultureFoodNaturalResources_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        AgricultureFoodNaturalResources = 1,
 
-        [Display(GroupName = "Negócios, Gestão e Tecnologia", Name = "Gestão e Administração de Negócios", Description = "planejar, organizar, dirigir e avaliar funções de negócios essenciais para operações de negócios eficazes e produtivas (Gerente de desenvolvimento de negócios, gerente de recursos humanos, assistente de marketing, etc.)")]
-        BusinessManagement_Administration = 4,
+        //COMMUNICATION & INFORMATION SYSTEMS
 
-        [Display(GroupName = "Serviços Humanos", Name = "Educação e treinamento", Description = "planejar, gerenciar e fornecer serviços de educação e treinamento e serviços de suporte à aprendizagem relacionados, incluindo serviços de administração e biblioteca (Professor pré-escolar, auxiliar do professor, conselheiro escolar, etc.)")]
-        Education_Training = 5,
+        [Custom(Group = "CommunicationArts_Group", Name = "CommunicationArts_Name", Description = "CommunicationArts_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        CommunicationArts = 2,
 
-        [Display(GroupName = "Negócios, Gestão e Tecnologia", Name = "Finanças", Description = "planejamento financeiro e de investimentos, bancos, seguros e gestão financeira de negócios (Caixa de banco, contador, consultor financeiro, etc.)")]
-        Finance = 6,
+        [Custom(Group = "InformationTechnology_Group", Name = "InformationTechnology_Name", Description = "InformationTechnology_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        InformationTechnology = 3,
 
-        [Display(GroupName = "Serviços Humanos", Name = "Governo e Administração Pública", Description = "planejar e fornecer serviços governamentais nos níveis federal, estadual e local, incluindo serviços relacionados à segurança nacional, legislação, serviço externo, receita e tributação e regulamentos (Controlador financeiro, comissário de bordo, funcionário administrativo, etc.)")]
-        Government_PublicAdministration = 7,
+        //BUSINESS, MARKETING AND MANAGEMENT
 
-        [Display(GroupName = "Serviços de saúde", Name = "Ciência da Saúde", Description = "planejamento, gerenciamento e prestação de serviços terapêuticos, serviços de diagnóstico, informática em saúde, serviços de suporte e pesquisa e desenvolvimento biotecnológico (Diretor de Enfermagem, Anestesiologista, Dentista, etc)")]
-        Health_Science = 8,
+        [Custom(Group = "BusinessManagementAdministration_Group", Name = "BusinessManagementAdministration_Name", Description = "BusinessManagementAdministration_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        BusinessManagementAdministration = 4,
 
-        [Display(GroupName = "Serviços Humanos", Name = "Hospitalidade e Turismo", Description = "gerenciamento, marketing e operações de restaurantes e outros serviços de alimentação, hospedagem, atrações, eventos recreativos e serviços relacionados a viagens (Recepcionista de hotel, gerente de restaurante, agente de viagens, etc.)")]
-        Hospitality_Tourism = 9,
+        [Custom(Group = "Finance_Group", Name = "Finance_Name", Description = "Finance_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        Finance = 5,
 
-        [Display(GroupName = "Serviços Humanos", Name = "Serviços Humanos", Description = "fornecer serviços familiares e individuais, como aconselhamento e saúde mental, cuidados pessoais e aconselhamento ao consumidor (Psicólogo, assistente social, cabeleireiro, etc.)")]
+        [Custom(Group = "HospitalityTourism_Group", Name = "HospitalityTourism_Name", Description = "HospitalityTourism_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        HospitalityTourism = 6,
+
+        [Custom(Group = "Marketing_Group", Name = "Marketing_Name", Description = "Marketing_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        Marketing = 7,
+
+        //HUMAN SCIENCES AND EDUCATION
+
+        [Custom(Group = "EducationTraining_Group", Name = "EducationTraining_Name", Description = "EducationTraining_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        EducationTraining = 8,
+
+        [Custom(Group = "GovernmentPublicAdministration_Group", Name = "GovernmentPublicAdministration_Name", Description = "GovernmentPublicAdministration_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        GovernmentPublicAdministration = 9,
+
+        [Custom(Group = "HumanServices_Group", Name = "HumanServices_Name", Description = "HumanServices_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
         HumanServices = 10,
 
-        [Display(GroupName = "Negócios, Gestão e Tecnologia", Name = "Tecnologia da informação", Description = "design, desenvolvimento, suporte e gerenciamento de serviços de hardware, software, Internet, multimídia e integração de sistemas (Engenheiro de computação, desenvolvedor de software, web designer, etc.)")]
-        InformationTechnology = 11,
+        [Custom(Group = "LawPublicSafetyCorrectionsSecurity_Group", Name = "LawPublicSafetyCorrectionsSecurity_Name", Description = "LawPublicSafetyCorrectionsSecurity_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        LawPublicSafetyCorrectionsSecurity = 11,
 
-        [Display(GroupName = "Serviços Humanos", Name = "Direito, Segurança Pública, Correções e Segurança", Description = "planejar, gerenciar e fornecer segurança jurídica, pública, correções, serviços de proteção e segurança nacional, incluindo suporte técnico e profissional (Advogado, assistente jurídico, policial, etc.)")]
-        Law_PublicSafety_Corrections_Security = 12,
+        //HEALTH SCIENCES
 
-        [Display(GroupName = "Tecnologia Industrial e de Engenharia", Name = "Manufatura", Description = "planejar, gerenciar e executar o processamento de materiais em produtos intermediários ou finais e atividades de suporte técnico e profissional relacionadas, como planejamento e controle de produção, manutenção e engenharia de fabricação/processo (Engenheiro de manufatura, trabalhador de produção, eletricista, etc.)")]
-        Manufacturing = 13,
+        [Custom(Group = "HealthScience_Group", Name = "HealthScience_Name", Description = "HealthScience_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        HealthScience = 12,
 
-        [Display(GroupName = "Negócios, Gestão e Tecnologia", Name = "Marketing, Vendas e Serviços", Description = "planejar, gerenciar e executar atividades de marketing/vendas para atingir os objetivos organizacionais (Representante de vendas, diretor de marketing, agente imobiliário, etc.)")]
-        Marketing_Sales_Service = 14,
+        //SKILLED & TECHNICAL SCIENCES
 
-        [Display(GroupName = "Tecnologia Industrial e de Engenharia", Name = "Ciência, Tecnologia, Engenharia e Matemática", Description = "planejar, gerenciar e fornecer pesquisa científica e serviços profissionais e técnicos (por exemplo, ciências físicas, ciências sociais, engenharia), incluindo serviços de laboratório e testes e serviços de pesquisa e desenvolvimento (Técnico de laboratório, cientista de dados, assistente de pesquisa, etc.)")]
-        Science_Technology_Engineering_Mathematics = 15,
+        [Custom(Group = "ArchitectureConstruction_Group", Name = "ArchitectureConstruction_Name", Description = "ArchitectureConstruction_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        ArchitectureConstruction = 13,
 
-        [Display(GroupName = "Tecnologia Industrial e de Engenharia", Name = "Transporte, Distribuição e Logística", Description = "planejar e gerenciar o movimento de pessoas, materiais e mercadorias por estrada, oleoduto, ar, ferrovia e água. Serviços de suporte profissional, como serviços de logística e manutenção de equipamentos e instalações móveis, também fazem parte desse cluster (Motorista de caminhão, gerente de logística, piloto, etc.)")]
-        Transportation_Distribution_Logistics = 16,
+        [Custom(Group = "EnergyEngineering_Group", Name = "EnergyEngineering_Name", Description = "EnergyEngineering_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        EnergyEngineering = 14,
 
-        [Display(Name = "Sem carreira consolidada", Description = "Pode estar em início de carreira, estagiando, apenas estudando ou até sem estar trabalhando no momento.")]
-        Student = 99
+        [Custom(Group = "Manufacturing_Group", Name = "Manufacturing_Name", Description = "Manufacturing_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        Manufacturing = 15,
+
+        [Custom(Group = "TransportationDistributionLogistics_Group", Name = "TransportationDistributionLogistics_Name", Description = "TransportationDistributionLogistics_Description", ResourceType = typeof(Resources.Enum.CareerCluster))]
+        TransportationDistributionLogistics = 16
     }
 }

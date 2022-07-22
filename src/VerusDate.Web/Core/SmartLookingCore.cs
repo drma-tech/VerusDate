@@ -59,7 +59,7 @@ namespace VerusDate.Web.Core
 
         private static IReadOnlyList<CurrentSituation> GetCurrentSituation(ProfileModel profile)
         {
-            if (profile.Basic.Intent.IsLongTerm())
+            if (profile.Basic.Intentions.IsLongTerm())
             {
                 return profile.Basic.CurrentSituation switch
                 {
@@ -78,13 +78,13 @@ namespace VerusDate.Web.Core
         {
             if (profile.Basic.GenderIdentity == GenderIdentity.Cisgender) //BINARY
             {
-                if (profile.Basic.SexualOrientation == SexualOrientation.Heteressexual)
+                if (profile.Basic.SexualOrientation == SexualOrientation.Heterosexual)
                 {
                     if (profile.Basic.BiologicalSex == BiologicalSex.Female) return new BiologicalSex[] { BiologicalSex.Male };
                     else if (profile.Basic.BiologicalSex == BiologicalSex.Male) return new BiologicalSex[] { BiologicalSex.Female };
                     else return Array.Empty<BiologicalSex>();
                 }
-                else if (profile.Basic.SexualOrientation == SexualOrientation.Homossexual)
+                else if (profile.Basic.SexualOrientation == SexualOrientation.Homosexual)
                 {
                     if (profile.Basic.BiologicalSex == BiologicalSex.Female) return new BiologicalSex[] { BiologicalSex.Female };
                     else if (profile.Basic.BiologicalSex == BiologicalSex.Male) return new BiologicalSex[] { BiologicalSex.Male };
@@ -105,15 +105,15 @@ namespace VerusDate.Web.Core
         {
             return profile.Basic.SexualOrientation switch
             {
-                SexualOrientation.Heteressexual => new SexualOrientation[] { SexualOrientation.Heteressexual },
-                SexualOrientation.Homossexual => new SexualOrientation[] { SexualOrientation.Homossexual },
+                SexualOrientation.Heterosexual => new SexualOrientation[] { SexualOrientation.Heterosexual },
+                SexualOrientation.Homosexual => new SexualOrientation[] { SexualOrientation.Homosexual },
                 _ => Array.Empty<SexualOrientation>(),
             };
         }
 
         private static Height GetMinHeight(ProfileModel profile)
         {
-            var list = EnumHelper.GetList(typeof(Height));
+            var list = EnumHelper.GetList<Height>();
 
             var minHeight = (int)profile.Bio.Height - 15;
             if (!list.Any(a => a.Value == minHeight)) minHeight = (int)profile.Bio.Height - 16;
@@ -124,7 +124,7 @@ namespace VerusDate.Web.Core
 
         private static Height GetMaxHeight(ProfileModel profile)
         {
-            var list = EnumHelper.GetList(typeof(Height));
+            var list = EnumHelper.GetList<Height>();
 
             var maxHeight = (int)profile.Bio.Height + 15;
             if (!list.Any(a => a.Value == maxHeight)) maxHeight = (int)profile.Bio.Height + 16;

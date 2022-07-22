@@ -37,7 +37,7 @@ namespace VerusDate.Shared.Model
         public CurrentSituation CurrentSituation { get; set; }
 
         [Display(Name = "Intenções", Description = "De acordo com a seleção, poderá alterar os campos disponíveis e/ou obrigatórios (escolha até 2 opções)")]
-        public IReadOnlyList<Intent> Intent { get; set; } = Array.Empty<Intent>();
+        public IReadOnlyList<Intentions> Intentions { get; set; } = Array.Empty<Intentions>();
 
         [Display(Name = "Sexo Biológico")]
         public BiologicalSex BiologicalSex { get; set; }

@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AfricanTraditionalReligions_Description" xml:space="preserve">
+    <value>Generally, these traditions are oral rather than scriptural and passed down from one generation to another through folk tales, songs, and festivals, include belief in an amount of higher and lower gods, sometimes including a supreme creator or force, belief in spirits, veneration of the dead, use of magic and traditional African medicine.</value>
+  </data>
+  <data name="AfricanTraditionalReligions_Name" xml:space="preserve">
+    <value>African Traditional Religions</value>
+  </data>
+  <data name="Buddhism_Description" xml:space="preserve">
+    <value>Non-theistic philosophy or religion that originally emerged in India around the 6th century BC. and encompasses diverse traditions, beliefs and practices based on the teachings, the Dharma, of Siddhartha Gautama, entitled Buddha.</value>
+  </data>
+  <data name="Buddhism_Name" xml:space="preserve">
+    <value>Buddhism</value>
+  </data>
+  <data name="ChineseTraditionalReligion_Description" xml:space="preserve">
+    <value>Chinese folk religion, also known as Chinese popular religion is a general term covering a range of traditional religious practices of Han Chinese, including the Chinese diaspora.</value>
+  </data>
+  <data name="ChineseTraditionalReligion_Name" xml:space="preserve">
+    <value>Chinese Traditional Religion</value>
+  </data>
+  <data name="Christianity_Description" xml:space="preserve">
+    <value>It is a monotheistic Abrahamic religion centered on the life and teachings of Jesus of Nazareth as presented in the New Testament. The Christian faith essentially believes in Jesus as the Christ, Son of God, Savior and Lord.</value>
+  </data>
+  <data name="Christianity_Name" xml:space="preserve">
+    <value>Christianity</value>
+  </data>
+  <data name="EthnicReligions_Description" xml:space="preserve">
+    <value>Ethnic religion or indigenous religion is a term that may include officially sanctioned civil religions organized with an organized clergy, but which are characterized by the fact that their adherents are often defined by a common ethnicity and conversion essentially amounts to a cultural assimilation for the people in question.</value>
+  </data>
+  <data name="EthnicReligions_Name" xml:space="preserve">
+    <value>Ethnic Religions</value>
+  </data>
+  <data name="Hinduism_Description" xml:space="preserve">
+    <value>Hinduism encompasses Brahmanism, ie the belief in the 'Universal Soul', Brahman; in a more specific sense, the term refers to the caste-ordered cultural and religious world of post-Buddhist India.</value>
+  </data>
+  <data name="Hinduism_Name" xml:space="preserve">
+    <value>Hinduism</value>
+  </data>
+  <data name="Islam_Description" xml:space="preserve">
+    <value>It is a monotheistic Abrahamic religion articulated by the Quran, a text considered by its followers to be the literal word of God, and by the normative teachings and examples of Muhammad, considered by the faithful to be the last prophet of God.</value>
+  </data>
+  <data name="Islam_Name" xml:space="preserve">
+    <value>Islam</value>
+  </data>
+  <data name="Judaism_Description" xml:space="preserve">
+    <value>Judaism is an Abrahamic, monotheistic, and ethnic religion comprising the collective religious, cultural, and legal tradition and civilization of the Jewish people.</value>
+  </data>
+  <data name="Judaism_Name" xml:space="preserve">
+    <value>Judaism</value>
+  </data>
+  <data name="NonReligious_Description" xml:space="preserve">
+    <value>Irreligion (also referred to as unbelief, absence of religion, or people without religion) is the absence, indifference, or non-practice of a religion. (Agnostics, Atheists, Deists)</value>
+  </data>
+  <data name="NonReligious_Name" xml:space="preserve">
+    <value>Nonreligious / Agnostic / Atheist</value>
+  </data>
+  <data name="Other_Description" xml:space="preserve">
+    <value>May include: Baháʼí, Jainism, Shinto, Cao Dai, Zoroastrianism, Tenrikyo, Animism, Neo-Paganism, Unitarian Universalism, Rastafari, etc.</value>
+  </data>
+  <data name="Other_Name" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Sikhism_Description" xml:space="preserve">
+    <value>Sikhism emphasizes simran (ਸਿਮਰਨ, meditation and remembrance of the teachings of Gurus), which can be expressed musically through kirtan, or internally through naam japna ('meditation on His name') as a means to feel God's presence. It teaches followers to transform the 'Five Thieves' (i.e. lust, rage, greed, attachment, and ego).</value>
+  </data>
+  <data name="Sikhism_Name" xml:space="preserve">
+    <value>Sikhism</value>
+  </data>
+  <data name="Spiritism_Description" xml:space="preserve">
+    <value>Spiritist philosophy postulates that humans, along with all other living beings, are essentially immortal spirits that temporarily inhabit physical bodies for several necessary incarnations to attain moral and intellectual improvement.</value>
+  </data>
+  <data name="Spiritism_Name" xml:space="preserve">
+    <value>Spiritism</value>
+  </data>
+</root>

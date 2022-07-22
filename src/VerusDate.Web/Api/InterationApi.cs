@@ -1,8 +1,5 @@
 ﻿using Blazored.SessionStorage;
 using Blazored.Toast.Services;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
 using VerusDate.Shared.Model;
 using VerusDate.Web.Core;
 
@@ -27,32 +24,32 @@ namespace VerusDate.Web.Api
 
     public static class InterationApi
     {
-        public async static Task<InteractionModel> Interation_Get(this HttpClient http, ISyncSessionStorageService storage, string IdUserInteraction)
+        public static async Task<InteractionModel> Interation_Get(this HttpClient http, ISyncSessionStorageService storage, string IdUserInteraction)
         {
             return await http.Get<InteractionModel>(InterationEndpoint.Get(IdUserInteraction), storage);
         }
 
-        public async static Task<ChatModel> Interation_GetChat(this HttpClient http, string IdChat)
+        public static async Task<ChatModel> Interation_GetChat(this HttpClient http, string IdChat)
         {
             return await http.Get<ChatModel>(InterationEndpoint.GetChat(IdChat));
         }
 
-        public async static Task<List<InteractionQuery>> Interation_GetLikes(this HttpClient http, ISyncSessionStorageService storage)
+        public static async Task<List<InteractionQuery>> Interation_GetLikes(this HttpClient http, ISyncSessionStorageService storage)
         {
             return await http.GetList<InteractionQuery>(InterationEndpoint.GetLikes, storage);
         }
 
-        public async static Task<List<InteractionQuery>> Interation_GetBlinks(this HttpClient http, ISyncSessionStorageService storage)
+        public static async Task<List<InteractionQuery>> Interation_GetBlinks(this HttpClient http, ISyncSessionStorageService storage)
         {
             return await http.GetList<InteractionQuery>(InterationEndpoint.GetBlinks, storage);
         }
 
-        public async static Task<List<InteractionQuery>> Interation_GetMyMatches(this HttpClient http, ISyncSessionStorageService storage)
+        public static async Task<List<InteractionQuery>> Interation_GetMyMatches(this HttpClient http, ISyncSessionStorageService storage)
         {
             return await http.GetList<InteractionQuery>(InterationEndpoint.GetMyMatches, storage);
         }
 
-        public async static Task Interation_Blink(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage, IToastService toast)
+        public static async Task Interation_Blink(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage, IToastService toast)
         {
             await http.Session_RemoveDiamond(storage, 1);
 
@@ -61,17 +58,17 @@ namespace VerusDate.Web.Api
             await response.ProcessResponse(toast, msgInfo: "-1 Diamante");
         }
 
-        public async static Task Interation_Block(this HttpClient http, string IdUserInteraction)
+        public static async Task Interation_Block(this HttpClient http, string IdUserInteraction)
         {
             await http.Put(InterationEndpoint.Block, new { IdUserInteraction });
         }
 
-        public async static Task Interation_Deslike(this HttpClient http, string IdUserInteraction)
+        public static async Task Interation_Deslike(this HttpClient http, string IdUserInteraction)
         {
             await http.Put(InterationEndpoint.Deslike, new { IdUserInteraction });
         }
 
-        public async static Task Interation_Like(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage, IToastService toast)
+        public static async Task Interation_Like(this HttpClient http, string IdUserInteraction, ISyncSessionStorageService storage, IToastService toast)
         {
             await http.Session_RemoveFood(storage, 1);
 
@@ -80,7 +77,7 @@ namespace VerusDate.Web.Api
             await response.ProcessResponse(toast, msgInfo: "-1 Maça");
         }
 
-        public async static Task Interaction_AddChat(this HttpClient http, string IdChat, string IdUserInteraction, ChatItem Item, IToastService toast)
+        public static async Task Interaction_AddChat(this HttpClient http, string IdChat, string IdUserInteraction, ChatItem Item, IToastService toast)
         {
             var response = await http.Put(InterationEndpoint.AddChat, new { IdChat, IdUserInteraction, Item });
 

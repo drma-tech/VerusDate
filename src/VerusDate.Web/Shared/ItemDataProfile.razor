@@ -6,22 +6,22 @@
 {
     foreach (var item in Values)
     {
-        <Badge Color="@GetColor(item)" Pill="true" title="@GetDescription(item)" Style="@GetCursor(item)" @onclick="@(() =>  BadgeClick(item))">
+        <Badge Color="@GetColor(item)" Pill="true" title="@GetDescription(item)" Style="@GetCursor(item)" @onclick="@(() => BadgeClick(item))">
             <Blazorise.Icon Name="@ClassIcon"></Blazorise.Icon> @GetValue(item)
             @if (!string.IsNullOrEmpty(GetDescription(item)))
             {
-                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Blazorise.Icon>
+                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromStart"></Blazorise.Icon>
             }
         </Badge>
     }
 }
 else
 {
-    <Badge Color="@GetColor(Value)" Pill="true" title="@GetDescription(Value)" Style="@GetCursor(Value)" @onclick="@(() =>  BadgeClick(Value))">
+    <Badge Color="@GetColor(Value)" Pill="true" title="@GetDescription(Value)" Style="@GetCursor(Value)" @onclick="@(() => BadgeClick(Value))">
         <Blazorise.Icon Name="@ClassIcon"></Blazorise.Icon> @GetValue(Value)
         @if (!string.IsNullOrEmpty(GetDescription(Value)))
         {
-            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromLeft"></Blazorise.Icon>
+            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromStart"></Blazorise.Icon>
         }
     </Badge>
 }
@@ -46,7 +46,7 @@ else
         }
         else if (value is Enum resultE)
         {
-            var result = EnumHelper.GetName(resultE);
+            var result = resultE.GetName();
 
             if (string.IsNullOrEmpty(result))
                 return "Não Respondido";

@@ -2,14 +2,14 @@
 
 @if (Type.Completed())
 {
-    <Tooltip Text="@Type.Description" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="display: block;">
+    <Tooltip Text="@Type.Description" Multiline="true" Fade="true" Placement="TooltipPlacement.Bottom" Style="display: block;">
         <Button Type="ButtonType.Button" Color="Color.Success" Block="true">
             <Blazorise.Icon Name="@Type.ClassIcon" Class="fa-3x"></Blazorise.Icon>
-            <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+            <Paragraph TextAlignment="TextAlignment.Center" Margin="Margin.Is2.FromTop.Is1.FromBottom">
                 <Badge Color="Color.Light">@Type.Title</Badge>
                 @if (Type.MaxLevel != 1)
                 {
-                    <Badge Color="Color.Warning" Margin="Margin.Is1.FromLeft" Style="position: absolute; top: 5px; left: 5px;">@Type.Level</Badge>
+                    <Badge Color="Color.Warning" Margin="Margin.Is1.FromStart" Style="position: absolute; top: 5px; left: 15px;">@Type.Level</Badge>
                 }
             </Paragraph>
         </Button>
@@ -17,14 +17,14 @@
 }
 else
 {
-    <Tooltip Text="@Type.Description" Multiline="true" Fade="true" Placement="Placement.Bottom" Style="display: block;">
+    <Tooltip Text="@Type.Description" Multiline="true" Fade="true" Placement="TooltipPlacement.Bottom" Style="display: block;">
         <Button Type="ButtonType.Button" Color="Color.Secondary" Block="true">
             <Blazorise.Icon Name="@Type.ClassIcon" Class="fa-3x"></Blazorise.Icon>
-            <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+            <Paragraph TextAlignment="TextAlignment.Center" Margin="Margin.Is2.FromTop.Is1.FromBottom">
                 <Badge Color="Color.Light">@Type.Title</Badge>
                 @if (Type.MaxLevel != 1)
                 {
-                    <Badge Color="Color.Warning" Margin="Margin.Is1.FromLeft" Style="position: absolute; top: 5px; left: 5px;">@Type.Level</Badge>
+                    <Badge Color="Color.Warning" Margin="Margin.Is1.FromStart" Style="position: absolute; top: 5px; left: 15px;">@Type.Level</Badge>
                 }
             </Paragraph>
         </Button>

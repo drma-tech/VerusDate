@@ -20,7 +20,7 @@
         <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>
                 <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smile"></Blazorise.Icon> Sugestões de Melhorias
-                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => NewTicket.ShowModal(TicketType.FeatureRequest)">
+                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="() => NewTicket.ShowModal(TicketType.FeatureRequest)">
                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Blazorise.Icon> Novo
                 </Button>
             </CardHeader>
@@ -60,7 +60,7 @@
                                         <Paragraph Margin="Margin.Is2.FromBottom">
                                             <Badge Color="Color.Secondary"><Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Blazorise.Icon> @item.DtInsert.Value.GetElapsedTime()</Badge>
                                             <br />
-                                            <Badge Color="Color.Secondary" Margin="Margin.Is1.FromRight"><Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.VoteYea"></Blazorise.Icon> @item.TotalVotes</Badge>
+                                            <Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd"><Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.VoteYea"></Blazorise.Icon> @item.TotalVotes</Badge>
                                             @if (item.TicketStatus == TicketStatus.Published)
                                             {
                                                 <Badge Color="Color.Success"><Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle"></Blazorise.Icon> @item.TicketStatus.GetName()</Badge>
@@ -77,7 +77,7 @@
                                             {
                                                 <Badge Color="Color.Danger">@item.TicketStatus.GetName()</Badge>
                                             }
-                                            <Button Float="Float.Right" Size="Size.ExtraSmall" Color="Color.Primary" Clicked="()=>Vote(item.Id)" Disabled="@anyVote(item.Id)">
+                                            <Button Float="Float.End" Size="Size.ExtraSmall" Color="Color.Primary" Clicked="()=>Vote(item.Id)" Disabled="@anyVote(item.Id)">
                                                 <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Blazorise.Icon> Votar
                                             </Button>
                                         </Paragraph>
@@ -94,7 +94,7 @@
         <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>
                 <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug"></Blazorise.Icon> Erros
-                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="() => NewTicket.ShowModal(TicketType.Bug)">
+                <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="() => NewTicket.ShowModal(TicketType.Bug)">
                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Blazorise.Icon> Novo
                 </Button>
             </CardHeader>
@@ -134,7 +134,7 @@
                                         <Paragraph Margin="Margin.Is2.FromBottom">
                                             <Badge Color="Color.Secondary"><Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Clock"></Blazorise.Icon> @item.DtInsert.Value.GetElapsedTime()</Badge>
                                             <br />
-                                            <Badge Color="Color.Secondary" Margin="Margin.Is1.FromRight"><Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.VoteYea"></Blazorise.Icon> @item.TotalVotes</Badge>
+                                            <Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd"><Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.VoteYea"></Blazorise.Icon> @item.TotalVotes</Badge>
                                             @if (item.TicketStatus == TicketStatus.Published)
                                             {
                                                 <Badge Color="Color.Success"><Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle"></Blazorise.Icon> @item.TicketStatus.GetName()</Badge>
@@ -151,7 +151,7 @@
                                             {
                                                 <Badge Color="Color.Danger">@item.TicketStatus.GetName()</Badge>
                                             }
-                                            <Button Float="Float.Right" Size="Size.ExtraSmall" Color="Color.Primary" Clicked="()=>Vote(item.Id)" Disabled="@anyVote(item.Id)">
+                                            <Button Float="Float.End" Size="Size.ExtraSmall" Color="Color.Primary" Clicked="()=>Vote(item.Id)" Disabled="@anyVote(item.Id)">
                                                 <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Check"></Blazorise.Icon> Votar
                                             </Button>
                                         </Paragraph>

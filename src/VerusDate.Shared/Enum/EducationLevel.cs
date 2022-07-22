@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
     public enum EducationLevel
     {
-        [Display(Name = "Superior incompleto ou menos")]
-        HighSchool = 1,
+        [Custom(Name = "Basic", ResourceType = typeof(Resources.Enum.EducationLevel))]
+        Basic = 1,
 
-        [Display(Name = "Bacharelado / Licenciatura")]
-        College = 2,
+        [Custom(Name = "Intermediary", ResourceType = typeof(Resources.Enum.EducationLevel))]
+        Intermediary = 2,
 
-        [Display(Name = "Mestrado / Doutorado / PHD")]
-        Associate = 3
+        [Custom(Name = "Advanced", ResourceType = typeof(Resources.Enum.EducationLevel))]
+        Advanced = 3
     }
 }

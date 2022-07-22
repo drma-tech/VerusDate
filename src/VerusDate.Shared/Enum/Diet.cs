@@ -1,31 +1,34 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
+    /// <summary>
+    /// https://autumnasphodel.com/types-of-diets
+    /// </summary>
     public enum Diet
     {
-        [Display(Name = "Onívora", Description = "A dieta onívora consiste em produtos de origem animal e carne, além de frutas e legumes. Significa essencialmente que se pode comer tudo e nada se limita a eles.")]
+        [Custom(Name = "Omnivore_Name", Description = "Omnivore_Description", ResourceType = typeof(Resources.Enum.Diet))]
         Omnivore = 1,
 
-        [Display(Name = "Flexitária", Description = "A dieta flexitária está entre onívora e vegetariana. É alguém que segue uma dieta principalmente vegetariana, com exceção de algumas carnes de animais. Também é chamada de dieta semi-vegetariana.")]
+        [Custom(Name = "Flexitarian_Name", Description = "Flexitarian_Description", ResourceType = typeof(Resources.Enum.Diet))]
         Flexitarian = 2,
 
-        [Display(Name = "Vegetariana", Description = "A dieta vegetariana não consiste em carne de animal, mas inclui outros produtos de origem animal, como laticínios, como leite, queijo, iogurte, e pode até incluir ovos ou não.")]
+        [Custom(Name = "Vegetarian_Name", Description = "Vegetarian_Description", ResourceType = typeof(Resources.Enum.Diet))]
         Vegetarian = 3,
 
-        [Display(Name = "Vegana", Description = "A dieta vegana é semelhante à dieta vegetariana, pois não inclui carne animal. Mas também não inclui produtos de origem animal.")]
+        [Custom(Name = "Vegan_Name", Description = "Vegan_Description", ResourceType = typeof(Resources.Enum.Diet))]
         Vegan = 4,
 
-        [Display(Name = "Alimentos Crus", Description = "A dieta de alimentos crus consiste apenas de frutas frescas, não cozidas, legumes, nozes e/ou sementes. Em outras palavras, é puramente cru e não contém alimentos processados que geralmente perdem seu valor nutricional.")]
+        [Custom(Name = "RawFood_Name", Description = "RawFood_Description", ResourceType = typeof(Resources.Enum.Diet))]
         RawFood = 5,
 
-        [Display(Name = "Sem Glúten", Description = "A dieta sem glúten está essencialmente ligado a eliminação de glúten dos alimentos. O glúten é um tipo de proteína comumente encontrada no trigo e outros grãos.")]
+        [Custom(Name = "GlutenFree_Name", Description = "GlutenFree_Description", ResourceType = typeof(Resources.Enum.Diet))]
         GlutenFree = 6,
 
-        [Display(Name = "Orgânica / Totalmente Natural / Local", Description = "Uma dieta alimentar orgânica, totalmente natural e/ou local consiste em todos ou principalmente alimentos orgânicos e/ou produzidos localmente, geralmente por pequenas empresas ou fazendas.")]
+        [Custom(Name = "OrganicAllnaturalLocal_Name", Description = "OrganicAllnaturalLocal_Description", ResourceType = typeof(Resources.Enum.Diet))]
         OrganicAllnaturalLocal = 7,
 
-        [Display(Name = "Desintoxicação / Perda de Peso", Description = "A dieta de desintoxicação e/ou perda de peso pode ser combinada com outras dietas para desintoxicar o corpo de toxinas e/ou perder peso.")]
-        DetoxWwightLoss = 8
+        [Custom(Name = "DetoxWeightLoss_Name", Description = "DetoxWeightLoss_Description", ResourceType = typeof(Resources.Enum.Diet))]
+        DetoxWeightLoss = 8
     }
 }

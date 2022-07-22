@@ -1,81 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Helper
 {
     public static class EnumHelper
     {
-        public static T[] GetArray<T>() where T : struct, IConvertible
+        public static TEnum[] GetArray<TEnum>() where TEnum : struct, System.Enum
         {
-            return System.Enum.GetValues(typeof(T)).Cast<T>().ToArray();
+            return System.Enum.GetValues<TEnum>();
         }
 
-        public static List<EnumList> GetList(Type enumType)
+        public static IEnumerable<EnumObject> GetList<TEnum>(bool translate = true) where TEnum : struct, System.Enum
         {
-            if (enumType == null) throw new ArgumentNullException(nameof(enumType));
-
-            if (!enumType.IsEnum) throw new ArgumentException("Type must be an enum type.");
-
-            var items = System.Enum.GetValues(enumType);
-
-            var output = new List<EnumList>();
-            foreach (object val in items)
+            foreach (var val in GetArray<TEnum>())
             {
-                output.Add(new EnumList()
-                {
-                    Group = GetGroup((System.Enum)val),
-                    Value = (int)val,
-                    ValueObject = val,
-                    Name = GetName((System.Enum)val),
-                    Description = GetDescription((System.Enum)val),
-                });
+                var attr = val.GetCustomAttribute(translate);
+
+                yield return new EnumObject(Convert.ToInt32(val), val, attr.Name, attr.Description, attr.Group);
             }
-
-            return output;
-        }
-
-        public static string GetName(this System.Enum value)
-        {
-            if (value == null) return null;
-
-            var fieldInfo = value.GetType().GetField(value.ToString());
-
-            if (fieldInfo == null) return null;
-
-            return ((DisplayAttribute[])fieldInfo.GetCustomAttributes(typeof(DisplayAttribute), false))[0].Name;
-        }
-
-        public static string GetDescription(this System.Enum value)
-        {
-            if (value == null) return null;
-
-            var fieldInfo = value.GetType().GetField(value.ToString());
-
-            if (fieldInfo == null) return null;
-
-            return ((DisplayAttribute[])fieldInfo.GetCustomAttributes(typeof(DisplayAttribute), false))[0].Description;
-        }
-
-        public static string GetGroup(this System.Enum value)
-        {
-            if (value == null) return null;
-
-            var fieldInfo = value.GetType().GetField(value.ToString());
-
-            if (fieldInfo == null) return null;
-
-            return ((DisplayAttribute[])fieldInfo.GetCustomAttributes(typeof(DisplayAttribute), false))[0].GroupName;
         }
     }
 
-    public class EnumList
+    public class EnumObject
     {
-        public string Group { get; set; }
-        public string Description { get; set; }
-        public string Name { get; set; }
+        public EnumObject(int Value, object ValueObject, string Name, string Description, string Group)
+        {
+            this.Value = Value;
+            this.ValueObject = ValueObject;
+            this.Name = Name;
+            this.Description = Description;
+            this.Group = Group;
+        }
+
         public int Value { get; set; }
         public object ValueObject { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Group { get; set; }
     }
 }

@@ -92,7 +92,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 
             SQL.AddEnumFilter(looking.CurrentSituation, "c.basic.currentSituation");
 
-            SQL.AddArrayFilter(looking.Intent, "c.basic.intent");
+            SQL.AddArrayFilter(looking.Intentions, "c.basic.intentions");
 
             SQL.AddEnumFilter(looking.BiologicalSex, "c.basic.biologicalSex");
 

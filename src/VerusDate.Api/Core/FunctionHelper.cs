@@ -45,7 +45,7 @@ namespace VerusDate.Api.Core
         /// <returns></returns>
         public static async Task<I> BuildRequestCommand<I>(this HttpRequest req, CancellationToken cancellationToken) where I : CosmosBase
         {
-            var obj = await JsonSerializer.DeserializeAsync<I>(req.Body, null, cancellationToken);
+            var obj = await JsonSerializer.DeserializeAsync<I>(req.Body, options: null, cancellationToken);
 
             //bool.TryParse(req.Query["enable_seed"], out bool enable_seed);
 

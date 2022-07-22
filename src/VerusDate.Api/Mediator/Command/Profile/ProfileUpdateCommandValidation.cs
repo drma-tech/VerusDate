@@ -30,7 +30,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
             RuleFor(x => x.Basic.CurrentSituation)
                 .NotEmpty();
 
-            RuleFor(x => x.Basic.Intent)
+            RuleFor(x => x.Basic.Intentions)
                 .NotEmpty()
                 .Must((value) => value.Count <= 2)
                 .WithMessage("Escolha até no máximo duas intenções");
@@ -68,45 +68,45 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
             RuleFor(x => x.Lifestyle.Drink)
                 .NotEmpty()
-                .When(w => w.Basic.Intent.IsLongTerm());
+                .When(w => w.Basic.Intentions.IsLongTerm());
 
             RuleFor(x => x.Lifestyle.Smoke)
                 .NotEmpty()
-                .When(w => w.Basic.Intent.IsLongTerm());
+                .When(w => w.Basic.Intentions.IsLongTerm());
 
             RuleFor(x => x.Lifestyle.Diet)
                 .NotEmpty()
-                .When(w => w.Basic.Intent.IsLongTerm());
+                .When(w => w.Basic.Intentions.IsLongTerm());
 
             RuleFor(x => x.Lifestyle.HaveChildren)
                 .NotEmpty()
-                .When(w => w.Basic.Intent.IsLongTerm());
+                .When(w => w.Basic.Intentions.IsLongTerm());
 
             RuleFor(x => x.Lifestyle.WantChildren)
                 .NotEmpty()
-                .When(w => w.Basic.Intent.IsLongTerm());
+                .When(w => w.Basic.Intentions.IsLongTerm());
 
             RuleFor(x => x.Lifestyle.EducationLevel)
                 .NotEmpty()
-                .When(w => w.Basic.Intent.IsLongTerm());
+                .When(w => w.Basic.Intentions.IsLongTerm());
 
             RuleFor(x => x.Lifestyle.CareerCluster)
                .NotEmpty()
-               .When(w => w.Basic.Intent.IsLongTerm());
+               .When(w => w.Basic.Intentions.IsLongTerm());
 
             RuleFor(x => x.Lifestyle.Religion)
                 .NotEmpty()
-                .When(w => w.Basic.Intent.IsLongTerm());
+                .When(w => w.Basic.Intentions.IsLongTerm());
 
             RuleFor(x => x.Lifestyle.MoneyPersonality)
                 .NotEmpty()
-                .When(w => w.Basic.Intent.IsLongTerm());
+                .When(w => w.Basic.Intentions.IsLongTerm());
 
             //MTBI = OPCIONAL - TEM QUE FAZER TESTE
 
             RuleFor(x => x.Lifestyle.RelationshipPersonality)
                .NotEmpty()
-               .When(w => w.Basic.Intent.IsLongTerm());
+               .When(w => w.Basic.Intentions.IsLongTerm());
 
             //INTERESSES
 
@@ -114,7 +114,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
                .Must((value) => value == null || value.Count <= 3)
                .WithMessage("Escolha até no máximo três opções");
 
-            RuleFor(x => x.Interest.Holidays)
+            RuleFor(x => x.Interest.Vacation)
                 .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 

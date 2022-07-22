@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Agender_Description" xml:space="preserve">
+    <value>Agênero refere-se a uma pessoa que não se identifica com nenhuma identidade de gênero, muitas vezes preferindo pronomes de gênero neutro como eles.</value>
+  </data>
+  <data name="Agender_Name" xml:space="preserve">
+    <value>Agênero</value>
+  </data>
+  <data name="Androgyne_Description" xml:space="preserve">
+    <value>Uma pessoa cuja expressão de gênero incorpora elementos masculinos e femininos. Andrógino também pode descrever a expressão de gênero ou a identidade de gênero.</value>
+  </data>
+  <data name="Androgyne_Name" xml:space="preserve">
+    <value>Andrógino</value>
+  </data>
+  <data name="Bigender_Description" xml:space="preserve">
+    <value>Pessoa que se identifica com os gêneros feminino e masculino. Uma pessoa bigênero pode expressar dois gêneros simultaneamente ou flutuar entre dois gêneros.</value>
+  </data>
+  <data name="Bigender_Name" xml:space="preserve">
+    <value>Bigênero</value>
+  </data>
+  <data name="Cisgender_Description" xml:space="preserve">
+    <value>Uma pessoa cuja identidade de gênero corresponde ao gênero que lhe foi atribuído no nascimento, geralmente com base em seu sexo biológico.</value>
+  </data>
+  <data name="Cisgender_Name" xml:space="preserve">
+    <value>Cisgênero</value>
+  </data>
+  <data name="Genderfluid_Description" xml:space="preserve">
+    <value>Uma pessoa cuja identidade de gênero não é fixa e muda ao longo do tempo. As pessoas Gênero Fluido podem se identificar com diferentes gêneros em momentos diferentes ou com uma combinação de gêneros ao mesmo tempo.</value>
+  </data>
+  <data name="Genderfluid_Name" xml:space="preserve">
+    <value>Gênero Fluido</value>
+  </data>
+  <data name="GenderNonconforming_Description" xml:space="preserve">
+    <value>Um termo abrangente que descreve qualquer pessoa cuja expressão ou identidade de gênero não se alinha com as expectativas sociais tradicionais.</value>
+  </data>
+  <data name="GenderNonconforming_Name" xml:space="preserve">
+    <value>Inconformidade de Gênero</value>
+  </data>
+  <data name="Genderqueer_Description" xml:space="preserve">
+    <value>Um termo genérico para uma pessoa que não se identifica com uma única identidade de gênero. Este termo se sobrepõe ao não-binário e também pode descrever qualquer pessoa que não seja cisgênero.</value>
+  </data>
+  <data name="Genderqueer_Name" xml:space="preserve">
+    <value>Queer</value>
+  </data>
+  <data name="Intergender_Description" xml:space="preserve">
+    <value>Uma pessoa cuja identidade de gênero está no meio do caminho entre o masculino e o feminino.</value>
+  </data>
+  <data name="Intergender_Name" xml:space="preserve">
+    <value>Intergênero</value>
+  </data>
+  <data name="Intersex_Description" xml:space="preserve">
+    <value>Uma pessoa nascida com corpos de gênero ambíguo devido a anomalias cromossômicas ou genitália ambígua. As pessoas intersexuais geralmente recebem uma atribuição de gênero no nascimento por meio de intervenção médica, que pode ou não corresponder ao gênero com o qual se identificam à medida que envelhecem.</value>
+  </data>
+  <data name="Intersex_Name" xml:space="preserve">
+    <value>Intersexo</value>
+  </data>
+  <data name="NonBinary_Description" xml:space="preserve">
+    <value>Uma pessoa que não se enquadra no tradicional binário masculino-feminino. Uma pessoa não-binária pode se identificar como homem e mulher, ou nenhum dos dois.</value>
+  </data>
+  <data name="NonBinary_Name" xml:space="preserve">
+    <value>Não-binário</value>
+  </data>
+  <data name="Omnigender_Description" xml:space="preserve">
+    <value>Uma pessoa que se identifica como uma mistura de vários gêneros ou como todos os gêneros simultaneamente, incluindo aqueles fora do binário tradicional masculino-feminino. Pangender é outro termo para omnigênero.</value>
+  </data>
+  <data name="Omnigender_Name" xml:space="preserve">
+    <value>Omnigênero</value>
+  </data>
+  <data name="Questioning_Description" xml:space="preserve">
+    <value>Uma pessoa que está em processo de exploração ou descoberta em relação à sua expressão ou identidade de gênero.</value>
+  </data>
+  <data name="Questioning_Name" xml:space="preserve">
+    <value>Questionamento</value>
+  </data>
+  <data name="Transgender_Description" xml:space="preserve">
+    <value>Uma pessoa cuja identidade de gênero não corresponde ao sexo atribuído no nascimento (geralmente abreviado para “trans” ou listado com seu gênero afirmado, por exemplo, “mulher trans” ou “homem trans”). Algumas pessoas transexuais optam por se submeter a tratamentos hormonais ou cirurgias para combinar com sua identidade de gênero, mas outras não.</value>
+  </data>
+  <data name="Transgender_Name" xml:space="preserve">
+    <value>Transgênero</value>
+  </data>
+  <data name="Transsexual_Description" xml:space="preserve">
+    <value>Um termo mais antigo às vezes usado para descrever uma pessoa que optou por se submeter a tratamentos hormonais ou cirurgias anatômicas para corresponder à sua identidade de gênero. Enquanto algumas pessoas se identificam com esse termo, outras o consideram ofensivo ou desatualizado por causa de como a comunidade médica historicamente usou o rótulo.</value>
+  </data>
+  <data name="Transsexual_Name" xml:space="preserve">
+    <value>Transexual</value>
+  </data>
+  <data name="TwoSpirit_Description" xml:space="preserve">
+    <value>Um termo amplo que alguns indígenas norte-americanos usam para descrever pessoas em sua comunidade que se identificam como tendo um espírito masculino e feminino. Dois espíritos podem descrever a expressão de gênero e/ou identidade sexual.</value>
+  </data>
+  <data name="TwoSpirit_Name" xml:space="preserve">
+    <value>Dois espíritos</value>
+  </data>
+</root>

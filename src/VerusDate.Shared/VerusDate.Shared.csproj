@@ -1,13 +1,256 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazored.FluentValidation" Version="2.0.1" />
+    <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
     <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Enum\BiologicalSex.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BiologicalSex.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\BodyMass.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BodyMass.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\CareerCluster.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CareerCluster.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\CurrentSituation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CurrentSituation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\Diet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Diet.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\Drink.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Drink.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\EducationLevel.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EducationLevel.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\Food.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Food.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\GenderIdentity.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GenderIdentity.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\HaveChildren.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HaveChildren.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\Holidays.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Holidays.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\Intentions.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Intentions.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\Language.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Language.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\LeisureActivities.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LeisureActivities.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\LoveLanguage.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LoveLanguage.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\MoneyPersonality.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MoneyPersonality.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\RaceCategory.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RaceCategory.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\RelationshipPersonality.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RelationshipPersonality.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\Religion.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Religion.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\SexPersonality.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SexPersonality.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\SexualOrientation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SexualOrientation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\Smoke.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Smoke.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\SplitTheBill.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SplitTheBill.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\Sports.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Sports.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\Vacation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Vacation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\WantChildren.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WantChildren.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Enum\BiologicalSex.pt.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\BiologicalSex.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BiologicalSex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\BodyMass.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BodyMass.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\CareerCluster.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CareerCluster.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\CurrentSituation.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CurrentSituation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Diet.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Diet.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Drink.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Drink.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\EducationLevel.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EducationLevel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Food.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Food.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\GenderIdentity.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GenderIdentity.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\HaveChildren.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>HaveChildren.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Holidays.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Holidays.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Intentions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Intentions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Language.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Language.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\LeisureActivities.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LeisureActivities.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\LoveLanguage.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LoveLanguage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\MoneyPersonality.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MoneyPersonality.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\RaceCategory.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RaceCategory.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\RelationshipPersonality.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RelationshipPersonality.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Religion.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Religion.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\SexPersonality.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SexPersonality.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\SexualOrientation.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SexualOrientation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Smoke.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Smoke.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\SplitTheBill.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SplitTheBill.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Sports.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sports.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Vacation.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Vacation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\WantChildren.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WantChildren.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   
 </Project>

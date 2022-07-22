@@ -4,50 +4,33 @@ using Blazored.Toast;
 using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using VerusDate.Web.Core;
+using VerusDate.Web;
 
-namespace VerusDate.Web
-{
-    public class Program
-    {
-        public static async Task Main(string[] args)
-        {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-            builder.Services
-                .AddBlazorise(options => options.ChangeTextOnKeyPress = true)
-                .AddBootstrapProviders()
-                .AddFontAwesomeIcons()
-                .AddBlazoredToast();
+builder.Services
+    .AddBlazorise(options => options.Immediate = true)
+    .AddBootstrapProviders()
+    .AddFontAwesomeIcons()
+    .AddBlazoredToast();
 
-            builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<App>("#app");
+builder.RootComponents.Add<HeadOutlet>("head::after");
 
-            builder.Services
-                .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
-                .AddStaticWebAppsAuthentication();
+builder.Services
+    .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
+    .AddStaticWebAppsAuthentication();
 
-            builder.Services.AddBlazoredToast();
-            builder.Services.AddBlazoredSessionStorage(config => config.JsonSerializerOptions.WriteIndented = true);
+builder.Services.AddBlazoredToast();
+builder.Services.AddBlazoredSessionStorage(config => config.JsonSerializerOptions.WriteIndented = true);
 
-            //builder.Services.AddLogging(builder => builder
-            //    .AddBrowserConsole()
-            //    .SetMinimumLevel(LogLevel.Error)
-            //);
+//builder.Services.AddOidcAuthentication(options =>
+//{
+//    // Configure your authentication provider options here.
+//    // For more information, see https://aka.ms/blazor-standalone-auth
+//    builder.Configuration.Bind("Local", options.ProviderOptions);
+//});
 
-            builder.Services.AddLogging(logging =>
-            {
-                logging.AddProvider(new CosmosLoggerProvider());
-            });
-
-            var host = builder.Build();
-
-            await host.RunAsync();
-        }
-    }
-}
+await builder.Build().RunAsync();

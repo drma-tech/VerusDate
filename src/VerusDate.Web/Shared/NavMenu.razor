@@ -1,12 +1,11 @@
-@inherits ComponenteCore<NavMenu>
+﻿@inherits ComponenteCore<NavMenu>
 @inject HttpClient Http
 
 <Bar Mode="BarMode.VerticalInline" CollapseMode="BarCollapseMode.Hide" Breakpoint="Breakpoint.Desktop" NavigationBreakpoint="Breakpoint.Tablet" Display="Display.None.Block.OnDesktop" Background="Background.Dark" ThemeContrast="ThemeContrast.Dark">
     <BarBrand>
         <BarItem>
             <BarLink To="">
-                <BarIcon IconName="IconName.Heart" />
-                Verus Date
+                <BarIcon IconName="IconName.Heart" Margin="Margin.Is2.FromEnd" /> Verus Date
             </BarLink>
         </BarItem>
     </BarBrand>

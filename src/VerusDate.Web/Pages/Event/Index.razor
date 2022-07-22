@@ -11,14 +11,14 @@
             <CardBody Padding="Padding.Is2">
                 <Row>
                     <Column ColumnSize="ColumnSize.Is4">
-                        <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                        <Paragraph TextAlignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
                             <Blazorise.Icon Name="FontAwesomeIcons.EyeSlash" Class="fa-3x"></Blazorise.Icon>
                             <br />
                             Blind Date
                         </Paragraph>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is8">
-                        <Paragraph Alignment="TextAlignment.Justified">Conheça alguem por sua essência, não sua aparência</Paragraph>
+                        <Paragraph TextAlignment="TextAlignment.Justified">Conheça alguem por sua essência, não sua aparência</Paragraph>
                         <Button Color="Color.Primary" Block="true" Size="Size.ExtraSmall" Clicked="FeatureUnavailable">Saiba mais</Button>
                     </Column>
                 </Row>
@@ -30,14 +30,14 @@
             <CardBody Padding="Padding.Is2">
                 <Row>
                     <Column ColumnSize="ColumnSize.Is4">
-                        <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                        <Paragraph TextAlignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
                             <Blazorise.Icon Name="FontAwesomeIcons.UserClock" Class="fa-3x"></Blazorise.Icon>
                             <br />
                             Speed Dating
                         </Paragraph>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is8">
-                        <Paragraph Alignment="TextAlignment.Justified">Conheça várias pessoas em encontros rápidos</Paragraph>
+                        <Paragraph TextAlignment="TextAlignment.Justified">Conheça várias pessoas em encontros rápidos</Paragraph>
                         <Button Color="Color.Primary" Block="true" Size="Size.ExtraSmall" Clicked="FeatureUnavailable">Saiba mais</Button>
                     </Column>
                 </Row>
@@ -49,14 +49,14 @@
             <CardBody Padding="Padding.Is2">
                 <Row>
                     <Column ColumnSize="ColumnSize.Is4">
-                        <Paragraph Alignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
+                        <Paragraph TextAlignment="TextAlignment.Center" Margin="Margin.Is0.FromBottom">
                             <Blazorise.Icon Name="FontAwesomeIcons.Users" Class="fa-3x"></Blazorise.Icon>
                             <br />
                             Group Dating
                         </Paragraph>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is8">
-                        <Paragraph Alignment="TextAlignment.Justified">Participantes com mesmos interesses e livre interação</Paragraph>
+                        <Paragraph TextAlignment="TextAlignment.Justified">Participantes com mesmos interesses e livre interação</Paragraph>
                         <Button Color="Color.Primary" Block="true" Size="Size.ExtraSmall" Clicked="FeatureUnavailable">Saiba mais</Button>
                     </Column>
                 </Row>
@@ -78,7 +78,7 @@
 <Card Margin="Margin.Is3.FromBottom">
     <CardHeader>
         Eventos disponíveis (@profile?.Basic.GetLocation(LocationType.City))
-        <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="FeatureUnavailable" title="Preencher automaticamente">
+        <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="FeatureUnavailable" title="Preencher automaticamente">
             <Blazorise.Icon Name="FontAwesomeIcons.PlusCircle"></Blazorise.Icon> Novo
         </Button>
     </CardHeader>
@@ -115,7 +115,7 @@
                             <TableRowCell>@item.Location</TableRowCell>
                             <TableRowCell>@item.MinimalAge-@item.MaxAge</TableRowCell>
                             <TableRowCell>@(item.SexualOrientation.Count() > 0 ? item.SexualOrientation.First().GetName() : "-")</TableRowCell>
-                            <TableRowCell>@(item.Intent.Count() > 0 ? item.Intent.First().GetName() : "-")</TableRowCell>
+                            <TableRowCell>@(item.Intentions.Count() > 0 ? item.Intentions.First().GetName() : "-")</TableRowCell>
                             <TableRowCell>
                                 <Badge Color="Color.Primary">10</Badge>
                                 <Badge Color="Color.Primary"><Blazorise.Icon Name="FontAwesomeIcons.Male"></Blazorise.Icon> 5</Badge>

@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
     public enum Smoke
     {
-        [Display(Name = "Não")]
+        [Custom(Name = "No", ResourceType = typeof(Resources.Enum.Smoke))]
         No = 1,
 
-        [Display(Name = "Sim, socialmente")]
-        Yes_Occasionally = 2,
+        [Custom(Name = "YesOccasionally", ResourceType = typeof(Resources.Enum.Smoke))]
+        YesOccasionally = 2,
 
-        [Display(Name = "Sim, diariamente")]
-        Yes_Often = 3
+        [Custom(Name = "YesOften", ResourceType = typeof(Resources.Enum.Smoke))]
+        YesOften = 3
     }
 }

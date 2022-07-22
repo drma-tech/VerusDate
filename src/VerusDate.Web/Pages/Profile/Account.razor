@@ -35,17 +35,17 @@
         <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>Operações</CardHeader>
             <CardBody>
-                <Tooltip Text="Limpar o cache local, caso esteja com problemas dos dados sendo exibidos" Placement="Placement.Bottom" Multiline="true">
+                <Tooltip Text="Limpar o cache local, caso esteja com problemas dos dados sendo exibidos" Placement="TooltipPlacement.Bottom" Multiline="true">
                     <Button Color="Color.Primary" Block="true" Clicked="()=>{ ClearCache(); }">
                         <Blazorise.Icon Name="FontAwesomeIcons.Eraser" /> Limpar Cache
                     </Button>
                 </Tooltip>
-                <Tooltip Text="Desfaz todas as interações feitas com outros usuários (isso não afeta seus dados pessoais)" Placement="Placement.Bottom" Multiline="true">
+                <Tooltip Text="Desfaz todas as interações feitas com outros usuários (isso não afeta seus dados pessoais)" Placement="TooltipPlacement.Bottom" Multiline="true">
                     <Button Color="Color.Warning" Block="true" Clicked="()=>{ ResetInteractions(); }" Disabled="true">
                         <Blazorise.Icon Name="FontAwesomeIcons.FastBackward" /> Resetar Interações
                     </Button>
                 </Tooltip>
-                <Tooltip Text="Caso queira apagar seu perfil e todas as interações feitas (seu perfil não ficará mais disponível)" Placement="Placement.Bottom" Multiline="true">
+                <Tooltip Text="Caso queira apagar seu perfil e todas as interações feitas (seu perfil não ficará mais disponível)" Placement="TooltipPlacement.Bottom" Multiline="true">
                     <Button Color="Color.Danger" Block="true" Clicked="()=>{ DeleteAccount(principal.IdentityProvider); }">
                         <Blazorise.Icon Name="FontAwesomeIcons.UserSlash" /> Deletar Conta
                     </Button>

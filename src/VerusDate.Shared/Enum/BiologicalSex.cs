@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
     public enum BiologicalSex
     {
-        [Display(Name = "Masculino", Description = "A pessoa que nasceu com o órgão sexual masculino ou o mudou cirurgicamente")]
+        [Custom(Name = "MaleName", Description = "MaleDescription", ResourceType = typeof(Resources.Enum.BiologicalSex))]
         Male = 1,
 
-        [Display(Name = "Feminino", Description = "A pessoa que nasceu com o órgão sexual feminino ou o mudou cirurgicamente")]
+        [Custom(Name = "FemaleName", Description = "FemaleDescription", ResourceType = typeof(Resources.Enum.BiologicalSex))]
         Female = 2,
 
-        [Display(Name = "Outro (Intersexo)", Description = "hermafrodita, pseudo-hermafrodita feminina, pseudo-hermafrodita masculino")]
+        [Custom(Name = "OtherName", Description = "OtherDescription", ResourceType = typeof(Resources.Enum.BiologicalSex))]
         Other = 99
     }
 }

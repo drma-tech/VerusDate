@@ -42,19 +42,19 @@ else
                             }
                             else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
                             {
-                                <Badge Color="Color.Warning" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
+                                <Badge Color="Color.Warning" Style="cursor: help;" Margin="Margin.Is3.FromStart">
                                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado esta semana
                                 </Badge>
                             }
                             else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
                             {
-                                <Badge Color="Color.Danger" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
+                                <Badge Color="Color.Danger" Style="cursor: help;" Margin="Margin.Is3.FromStart">
                                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado este mês
                                 </Badge>
                             }
                             else
                             {
-                                <Badge Color="Color.Dark" Style="cursor: help;" Margin="Margin.Is3.FromLeft">
+                                <Badge Color="Color.Dark" Style="cursor: help;" Margin="Margin.Is3.FromStart">
                                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> usuário desativado
                                 </Badge>
                             }
@@ -84,7 +84,7 @@ else
                     {
                         <BtnBlink IdUserView="@IdUserView"></BtnBlink>
                     }
-                    <Dropdown Float="Float.Right">
+                    <Dropdown Float="Float.End">
                         <Button Color="Color.Danger" Clicked="report.ShowModal">
                             <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Trash"></Blazorise.Icon> Deletar
                         </Button>
@@ -123,7 +123,7 @@ else
                     <Card Margin="Margin.Is3.FromBottom">
                         <CardHeader>
                             Compatibilidade
-                            <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.Right" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromLeft">
+                            <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromStart">
                                 <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon>
                             </Button>
                         </CardHeader>
@@ -173,7 +173,7 @@ else
                     <ItemDataProfile For="@(() => view.Distance)" Value="@ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)" ClassIcon="fas fa-map-marker-alt" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.Languages)" Values="@view.Basic.Languages" ClassIcon="fas fa-language" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.CurrentSituation)" Value="@view.Basic.CurrentSituation" ClassIcon="far fa-heart" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => view.Basic.Intent)" Values="@view.Basic.Intent" ClassIcon="fas fa-search" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Basic.Intentions)" Values="@view.Basic.Intentions" ClassIcon="fas fa-search" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.BiologicalSex)" Value="@view.Basic.BiologicalSex" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.GenderIdentity)" Value="@view.Basic.GenderIdentity" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Basic.SexualOrientation)" Value="@view.Basic.SexualOrientation" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
@@ -206,7 +206,7 @@ else
                     <Divider DividerType="DividerType.TextContent" Text="Interesses"></Divider>
 
                     <ItemDataProfile For="@(() => view.Interest.Food)" Values="@view.Interest.Food" ClassIcon="fas fa-pizza-slice" Affinities="@affinities"></ItemDataProfile>
-                    <ItemDataProfile For="@(() => view.Interest.Holidays)" Values="@view.Interest.Holidays" ClassIcon="fas fa-plane-departure" Affinities="@affinities"></ItemDataProfile>
+                    <ItemDataProfile For="@(() => view.Interest.Vacation)" Values="@view.Interest.Vacation" ClassIcon="fas fa-plane-departure" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Interest.Sports)" Values="@view.Interest.Sports" ClassIcon="fas fa-swimmer" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Interest.LeisureActivities)" Values="@view.Interest.LeisureActivities" ClassIcon="fas fa-umbrella-beach" Affinities="@affinities"></ItemDataProfile>
                     <ItemDataProfile For="@(() => view.Interest.MusicGenre)" Values="@view.Interest.MusicGenre" ClassIcon="fas fa-music" Affinities="@affinities"></ItemDataProfile>
@@ -335,7 +335,7 @@ else
             var pesoLifestyle = 4;
             var pesoInterest = 2;
 
-            if (user.Basic.Intent.IsLongTerm() && view.Basic.Intent.IsLongTerm())
+            if (user.Basic.Intentions.IsLongTerm() && view.Basic.Intentions.IsLongTerm())
             {
                 return (totBasic * pesoBasic + totBio * pesoBio + totLifestyle * pesoLifestyle + totInterest * pesoInterest) / (pesoBasic + pesoBio + pesoLifestyle + pesoInterest);
             }

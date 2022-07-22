@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Decompresser_Description" xml:space="preserve">
+    <value>The one who sees sex as a form of relaxation, an outlet for moments when she feels tense, stressed or upset.</value>
+  </data>
+  <data name="Decompresser_Name" xml:space="preserve">
+    <value>Decompresser</value>
+  </data>
+  <data name="Explorer_Description" xml:space="preserve">
+    <value>The sex tourist: curious and eager to learn new things. She likes to go beyond her comfort zone and doesn't take sex too seriously.</value>
+  </data>
+  <data name="Explorer_Name" xml:space="preserve">
+    <value>Explorer</value>
+  </data>
+  <data name="FairTrader_Description" xml:space="preserve">
+    <value>The one that gives extreme importance to the give-receive equation, so that it is balanced. He likes to know that both are attentive to each other's needs and willing to work as a team.</value>
+  </data>
+  <data name="FairTrader_Name" xml:space="preserve">
+    <value>Fair Trader</value>
+  </data>
+  <data name="Giver_Description" xml:space="preserve">
+    <value>The one who gives more than receives and is in tune with her partner's experiences and needs. A person for whom it is important to know that they can make the other person feel good.</value>
+  </data>
+  <data name="Giver_Name" xml:space="preserve">
+    <value>Giver</value>
+  </data>
+  <data name="Guardian_Description" xml:space="preserve">
+    <value>The one that emphasizes safety more than anything. This characteristic is typical of those who have suffered some type of trauma or simply need the bond of trust with their partner in moments of intimacy.</value>
+  </data>
+  <data name="Guardian_Name" xml:space="preserve">
+    <value>Guardian</value>
+  </data>
+  <data name="PassionPursuer_Description" xml:space="preserve">
+    <value>The one who believes that sexual interaction should bring intense, almost animalistic experiences, and that you need to be totally in tune with your partner's energy.</value>
+  </data>
+  <data name="PassionPursuer_Name" xml:space="preserve">
+    <value>Passion Pursuer</value>
+  </data>
+  <data name="PleasureSeeker_Description" xml:space="preserve">
+    <value>The one that sees physical pleasure as the only objective, considering sex one of the simplest pleasures in life. Likes abundant physical contact, but does not feel the need for the emotional component to do so.</value>
+  </data>
+  <data name="PleasureSeeker_Name" xml:space="preserve">
+    <value>Pleasure Seeker</value>
+  </data>
+  <data name="Prioritizer_Description" xml:space="preserve">
+    <value>The one who highly values their sex lives and is willing to make sacrifices to maintain a routine, no excuses.</value>
+  </data>
+  <data name="Prioritizer_Name" xml:space="preserve">
+    <value>Prioritizer</value>
+  </data>
+  <data name="Romantic_Description" xml:space="preserve">
+    <value>The one whose sex is based on a deep connection between the two, it is common to maintain eye contact with the partner or tell him that you love him during sexual intercourse.</value>
+  </data>
+  <data name="Romantic_Name" xml:space="preserve">
+    <value>Romantic</value>
+  </data>
+  <data name="Spiritualist_Description" xml:space="preserve">
+    <value>To whose sex it is more than what happens in the body, and should be an almost transcendent experience, a communion of souls and not just of bodies.</value>
+  </data>
+  <data name="Spiritualist_Name" xml:space="preserve">
+    <value>Spiritualist</value>
+  </data>
+  <data name="ThrillSeeker_Description" xml:space="preserve">
+    <value>The one who sees the sexual act as something exciting, almost forbidden. These are the kind of people who need the taboo element, whether that means experiencing something unusual or satisfying a fetish.</value>
+  </data>
+  <data name="ThrillSeeker_Name" xml:space="preserve">
+    <value>Thrill Seeker</value>
+  </data>
+</root>

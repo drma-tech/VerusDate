@@ -1,19 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
     public enum TicketStatus
     {
-        [Display(Name = "Publicado")]
+        [Custom(Name = "Publicado")]
         Published = 1,
 
-        [Display(Name = "Em progresso")]
+        [Custom(Name = "Em progresso")]
         Progress = 2,
 
-        [Display(Name = "Finalizado")]
+        [Custom(Name = "Finalizado")]
         Done = 3,
 
-        [Display(Name = "Negado")]
+        [Custom(Name = "Negado")]
         Declined = 4
     }
 }

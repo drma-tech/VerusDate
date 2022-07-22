@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
     public enum TicketType
     {
-        [Display(Name = "Erro")]
+        [Custom(Name = "Erro")]
         Bug = 1,
 
-        [Display(Name = "Sugestão de Melhoria")]
+        [Custom(Name = "Sugestão de Melhoria")]
         FeatureRequest = 2
     }
 }

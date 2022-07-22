@@ -1,5 +1,6 @@
 ﻿@using System.Linq.Expressions;
 @typeparam TValue
+@typeparam TEnum where TEnum : struct, Enum, IConvertible
 
 <Modal @ref="modal">
     <ModalContent Centered="true" Size="ModalSize.Default">
@@ -8,35 +9,32 @@
             <CloseButton />
         </ModalHeader>
         <ModalBody MaxHeight="80">
-            @if (TypeEnum != null)
+            @if (HasGroup)
             {
-                @if (HasGroup)
+                var previousGroup = "";
+                @foreach (var item in EnumHelper.GetList<TEnum>().OrderBy(o => o.Value))
                 {
-                    var previousGroup = "";
-                    @foreach (var item in EnumHelper.GetList(TypeEnum).OrderBy(o => o.Group))
+                    if (!string.IsNullOrEmpty(@item.Group) && previousGroup != @item.Group)
                     {
-                        if (!string.IsNullOrEmpty(@item.Group) && previousGroup != @item.Group)
-                        {
-                            <Alert Visible="true" Color="Color.Info" Padding="Padding.Is1" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                                <AlertMessage>@item.Group</AlertMessage>
-                            </Alert>
-                        }
-                        <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
-                            <Badge Color="Color.Primary">@item.Name</Badge>
-                            <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
-                        </Paragraph>
-                        previousGroup = @item.Group;
+                        <Alert Visible="true" Color="Color.Info" Padding="Padding.Is1" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                            <AlertMessage>@item.Group</AlertMessage>
+                        </Alert>
                     }
+                    <Paragraph TextAlignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
+                        <Badge Color="Color.Primary">@item.Name</Badge>
+                        <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
+                    </Paragraph>
+                    previousGroup = @item.Group;
                 }
-                else
+            }
+            else
+            {
+                @foreach (var item in EnumHelper.GetList<TEnum>())
                 {
-                    @foreach (var item in EnumHelper.GetList(TypeEnum))
-                    {
-                        <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
-                            <Badge Color="Color.Primary">@item.Name</Badge>
-                            <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
-                        </Paragraph>
-                    }
+                    <Paragraph TextAlignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
+                        <Badge Color="Color.Primary">@item.Name</Badge>
+                        <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
+                    </Paragraph>
                 }
             }
         </ModalBody>
@@ -46,7 +44,6 @@
 @code {
     private Modal modal;
     private Expression<Func<TValue>> For;
-    private System.Type TypeEnum;
 
     [Parameter] public bool HasGroup { get; set; }
 
@@ -57,10 +54,9 @@
         modal.Show();
     }
 
-    public void ChangeContent(Expression<Func<TValue>> For, System.Type TypeEnum)
+    public void ChangeContent(Expression<Func<TValue>> For)
     {
         this.For = For;
-        this.TypeEnum = TypeEnum;
         StateHasChanged();
     }
 }

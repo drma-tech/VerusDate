@@ -1,22 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+    <Content Remove="Pages\Explore\Chat.razor" />
     <Content Remove="Pages\Profile\ProfileChatList.razor" />
-    <Content Remove="Shared\modal\NewTicket_old.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="wwwroot\.well-known\assetlinks.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="wwwroot\.well-known\microsoft-identity-association.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Remove="Shared\ActivityStatus.razor" />
+    <Content Remove="Shared\Affinity.razor" />
+    <Content Remove="Shared\PhotoFace.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,15 +22,15 @@
 
   <ItemGroup>
     <PackageReference Include="AnthonyChu.AzureStaticWebApps.Blazor.Authentication" Version="0.0.2-preview" />
-    <PackageReference Include="Blazored.FluentValidation" Version="2.0.1" />
-    <PackageReference Include="Blazored.SessionStorage" Version="2.1.0" />
-    <PackageReference Include="Blazored.Toast" Version="3.1.2" />
-    <PackageReference Include="Blazorise.Bootstrap" Version="0.9.3.10" />
-    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="0.9.3.10" />
+    <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
+    <PackageReference Include="Blazored.SessionStorage" Version="2.2.0" />
+    <PackageReference Include="Blazored.Toast" Version="3.2.2" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="1.0.5" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.0.5" />
     <PackageReference Include="BrowserInterop" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.7" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.7" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="6.0.7" />
   </ItemGroup>
 
   <ItemGroup>

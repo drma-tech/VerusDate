@@ -1,19 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
+    /// <summary>
+    /// https://helenfisher.com/personality/
+    /// https://theanatomyoflove.com/relationship-quizzes/helen-fishers-personality-test/
+    /// </summary>
     public enum RelationshipPersonality
     {
-        [Display(Name = "Exploradora", Description = "Estas pessoas tratam o amor como uma aventura. São impulsivas e autônomas, muito curiosas e estão sempre focadas em aproveitar o momento, mantendo uma atitude no estilo “deixa a vida me levar”. (Combinam com Exploradora)")]
-        Explorers = 1, //26.0%
+        [Custom(Name = "Explorers_Name", Description = "Explorers_Description", ResourceType = typeof(Resources.Enum.RelationshipPersonality))]
+        Explorers = 1,
 
-        [Display(Name = "Diretora", Description = "Trata-se de uma personalidade analítica, de pessoas que priorizam a lógica e o bom senso acima de tudo. São pessoas muito equilibradas e práticas, que costumam usar a razão para tomar suas decisões. (Combinam com Negociadora)")]
-        Directors = 2, //16.3%
+        [Custom(Name = "Directors_Name", Description = "Directors_Description", ResourceType = typeof(Resources.Enum.RelationshipPersonality))]
+        Directors = 2,
 
-        [Display(Name = "Construtora", Description = "Estas pessoas têm como principal valor na vida a família, os amigos e a união com as pessoas amadas. São pessoas serenas, sociáveis e muito pacíficas. Evitam ao máximo se envolver em conflitos e assumir riscos. (Combinam com Construtora)")]
-        Builders = 3, //28.6%
+        [Custom(Name = "Builders_Name", Description = "Builders_Description", ResourceType = typeof(Resources.Enum.RelationshipPersonality))]
+        Builders = 3,
 
-        [Display(Name = "Negociadora", Description = "As pessoas negociadoras são expressivas, empáticas e idealistas. Geralmente têm perfis muito sensíveis, mas possuem muita imaginação e a mente bem aberta. Além disso, precisam se aprofundar em seus sentimentos e gostam que as pessoas satisfaçam suas necessidades emocionais. (Combinam com Diretora)")]
-        Negotiator = 4 //29.1%
+        [Custom(Name = "Negotiator_Name", Description = "Negotiator_Description", ResourceType = typeof(Resources.Enum.RelationshipPersonality))]
+        Negotiator = 4
     }
 }

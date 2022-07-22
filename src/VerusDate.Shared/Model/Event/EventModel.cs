@@ -33,7 +33,7 @@ namespace VerusDate.Shared.Model
         public int MaxAge { get; set; } = 40;
 
         [Display(Name = "Intenções")]
-        public IReadOnlyList<Intent> Intent { get; set; } = new List<Intent>();
+        public IReadOnlyList<Intentions> Intentions { get; set; } = new List<Intentions>();
 
         [Display(Name = "Orientação Sexual")]
         public SexualOrientation[] SexualOrientation { get; set; }
@@ -41,7 +41,7 @@ namespace VerusDate.Shared.Model
         [Display(Name = "Equilibrar os gêneros?")]
         public bool GenderDivision { get; set; }
 
-        public void NewBlindDate(DateTime DtStart, string Location, int MinimalAge, int MaxAge, Intent[] Intent,
+        public void NewBlindDate(DateTime DtStart, string Location, int MinimalAge, int MaxAge, Intentions[] Intentions,
             SexualOrientation[] SexualOrientation, bool GenderDivision)
         {
             this.DtStart = DtStart;
@@ -50,12 +50,12 @@ namespace VerusDate.Shared.Model
             this.Location = Location;
             this.MinimalAge = MinimalAge;
             this.MaxAge = MaxAge;
-            this.Intent = Intent;
+            this.Intentions = Intentions;
             this.SexualOrientation = SexualOrientation;
             this.GenderDivision = GenderDivision;
         }
 
-        public void NewSpeedDating(DateTime DtStart, string Location, int MinimalAge, int MaxAge, Intent[] Intent,
+        public void NewSpeedDating(DateTime DtStart, string Location, int MinimalAge, int MaxAge, Intentions[] Intentions,
             SexualOrientation[] SexualOrientation, bool GenderDivision)
         {
             this.DtStart = DtStart;
@@ -64,12 +64,12 @@ namespace VerusDate.Shared.Model
             this.Location = Location;
             this.MinimalAge = MinimalAge;
             this.MaxAge = MaxAge;
-            this.Intent = Intent;
+            this.Intentions = Intentions;
             this.SexualOrientation = SexualOrientation;
             this.GenderDivision = GenderDivision;
         }
 
-        public void NewGroupDate(DateTime DtStart, DateTime DtEnd, string Location, int MinimalAge, int MaxAge, Intent[] Intent,
+        public void NewGroupDate(DateTime DtStart, DateTime DtEnd, string Location, int MinimalAge, int MaxAge, Intentions[] Intentions,
             SexualOrientation[] SexualOrientation, bool GenderDivision)
         {
             this.DtStart = DtStart;
@@ -78,7 +78,7 @@ namespace VerusDate.Shared.Model
             this.Location = Location;
             this.MinimalAge = MinimalAge;
             this.MaxAge = MaxAge;
-            this.Intent = Intent;
+            this.Intentions = Intentions;
             this.SexualOrientation = SexualOrientation;
             this.GenderDivision = GenderDivision;
         }

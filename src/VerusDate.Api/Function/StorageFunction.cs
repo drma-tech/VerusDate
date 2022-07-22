@@ -22,27 +22,27 @@ namespace VerusDate.Api.Function
             _mediator = mediator;
         }
 
-        [FunctionName("StorageUploadPhotoFace")]
-        public async Task<IActionResult> UploadPhotoFace(
-            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Storage/UploadPhotoFace")] HttpRequest req,
-            ILogger log, CancellationToken cancellationToken)
-        {
-            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+        //[FunctionName("StorageUploadPhotoFace")]
+        //public async Task<IActionResult> UploadPhotoFace(
+        //    [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Storage/UploadPhotoFace")] HttpRequest req,
+        //    ILogger log, CancellationToken cancellationToken)
+        //{
+        //    using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
 
-            try
-            {
-                var request = await req.BuildRequestCommand<UploadPhotoFaceCommand>(source.Token);
+        //    try
+        //    {
+        //        var request = await req.BuildRequestCommand<UploadPhotoFaceCommand>(source.Token);
 
-                var result = await _mediator.Send(request, source.Token);
+        //        var result = await _mediator.Send(request, source.Token);
 
-                return new OkObjectResult(result);
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, req.Query.BuildMessage(), req.Query.ToList());
-                return new BadRequestObjectResult(ex.ProcessException());
-            }
-        }
+        //        return new OkObjectResult(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.LogError(ex, req.Query.BuildMessage(), req.Query.ToList());
+        //        return new BadRequestObjectResult(ex.ProcessException());
+        //    }
+        //}
 
         [FunctionName("StorageUploadPhotoGallery")]
         public async Task<IActionResult> UploadPhotoGallery(
@@ -88,29 +88,29 @@ namespace VerusDate.Api.Function
             }
         }
 
-        [FunctionName("StorageUploadPhotoValidation")]
-        public async Task<IActionResult> UploadPhotoValidation(
-           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Storage/UploadPhotoValidation")] HttpRequest req,
-           ILogger log, CancellationToken cancellationToken)
-        {
-            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+        //[FunctionName("StorageUploadPhotoValidation")]
+        //public async Task<IActionResult> UploadPhotoValidation(
+        //   [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Storage/UploadPhotoValidation")] HttpRequest req,
+        //   ILogger log, CancellationToken cancellationToken)
+        //{
+        //    using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
 
-            try
-            {
-                var request = await req.BuildRequestCommand<UploadPhotoValidationCommand>(source.Token);
+        //    try
+        //    {
+        //        var request = await req.BuildRequestCommand<UploadPhotoValidationCommand>(source.Token);
 
-                var result = await _mediator.Send(request, source.Token);
+        //        var result = await _mediator.Send(request, source.Token);
 
-                if (result)
-                    return new OkObjectResult("Rosto reconhecido com sucesso!");
-                else
-                    return new BadRequestObjectResult("Não foi possível reconhecer seu rosto. Favor, tentar novamente");
-            }
-            catch (Exception ex)
-            {
-                log.LogError(ex, req.Query.BuildMessage(), req.Query.ToList());
-                return new BadRequestObjectResult(ex.ProcessException());
-            }
-        }
+        //        if (result)
+        //            return new OkObjectResult("Rosto reconhecido com sucesso!");
+        //        else
+        //            return new BadRequestObjectResult("Não foi possível reconhecer seu rosto. Favor, tentar novamente");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        log.LogError(ex, req.Query.BuildMessage(), req.Query.ToList());
+        //        return new BadRequestObjectResult(ex.ProcessException());
+        //    }
+        //}
     }
 }

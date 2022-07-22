@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AmericanFootball" xml:space="preserve">
+    <value>Futebol Americano</value>
+  </data>
+  <data name="Archery" xml:space="preserve">
+    <value>Arco e Flecha</value>
+  </data>
+  <data name="ArmWrestling" xml:space="preserve">
+    <value>Queda de Braço</value>
+  </data>
+  <data name="AutoRacing" xml:space="preserve">
+    <value>Automobilismo</value>
+  </data>
+  <data name="Badminton" xml:space="preserve">
+    <value>Badminton</value>
+  </data>
+  <data name="Baseball" xml:space="preserve">
+    <value>Beisebol</value>
+  </data>
+  <data name="Basketball" xml:space="preserve">
+    <value>Basquetebol</value>
+  </data>
+  <data name="BMX" xml:space="preserve">
+    <value>BMX</value>
+  </data>
+  <data name="Bobsledding" xml:space="preserve">
+    <value>Bobsledding</value>
+  </data>
+  <data name="Bodyboarding" xml:space="preserve">
+    <value>Bodyboarding</value>
+  </data>
+  <data name="Bowling" xml:space="preserve">
+    <value>Boliche</value>
+  </data>
+  <data name="Boxing" xml:space="preserve">
+    <value>Boxe</value>
+  </data>
+  <data name="Canoeing" xml:space="preserve">
+    <value>Canoagem</value>
+  </data>
+  <data name="CompetitiveDancing" xml:space="preserve">
+    <value>Dança Competitiva</value>
+  </data>
+  <data name="Cricket" xml:space="preserve">
+    <value>Críquete</value>
+  </data>
+  <data name="CrossCountrySkiing" xml:space="preserve">
+    <value>Esqui Cross-country</value>
+  </data>
+  <data name="Curling" xml:space="preserve">
+    <value>Curling</value>
+  </data>
+  <data name="Cycling" xml:space="preserve">
+    <value>Ciclismo</value>
+  </data>
+  <data name="Diving" xml:space="preserve">
+    <value>Mergulho</value>
+  </data>
+  <data name="Dodgeball" xml:space="preserve">
+    <value>Queimada</value>
+  </data>
+  <data name="DragonBoatRacing" xml:space="preserve">
+    <value>Corrida de Barco Dragão</value>
+  </data>
+  <data name="ElectronicSports" xml:space="preserve">
+    <value>eSports</value>
+  </data>
+  <data name="FieldHockey" xml:space="preserve">
+    <value>Hóquei em campo</value>
+  </data>
+  <data name="FigureSkating" xml:space="preserve">
+    <value>Patinação Artística</value>
+  </data>
+  <data name="Fishing" xml:space="preserve">
+    <value>Pesca</value>
+  </data>
+  <data name="FootbagHackySack" xml:space="preserve">
+    <value>Footbag (Hacky Sack)</value>
+  </data>
+  <data name="FootballSoccer" xml:space="preserve">
+    <value>Futebol</value>
+  </data>
+  <data name="Frisbee" xml:space="preserve">
+    <value>Frisbee</value>
+  </data>
+  <data name="Gliding" xml:space="preserve">
+    <value>Voo à vela</value>
+  </data>
+  <data name="Golf" xml:space="preserve">
+    <value>Golfe</value>
+  </data>
+  <data name="Gymnastics" xml:space="preserve">
+    <value>Ginástica</value>
+  </data>
+  <data name="HangGliding" xml:space="preserve">
+    <value>Asa Delta</value>
+  </data>
+  <data name="Hiking" xml:space="preserve">
+    <value>Caminhada (Hiking)</value>
+  </data>
+  <data name="HorseRacing" xml:space="preserve">
+    <value>Corrida de Cavalo</value>
+  </data>
+  <data name="IceFishing" xml:space="preserve">
+    <value>Pesca no gelo</value>
+  </data>
+  <data name="IceHockey" xml:space="preserve">
+    <value>Hockey no gelo</value>
+  </data>
+  <data name="Kayaking" xml:space="preserve">
+    <value>Caiaque</value>
+  </data>
+  <data name="Lacrosse" xml:space="preserve">
+    <value>Lacrosse</value>
+  </data>
+  <data name="Logrolling" xml:space="preserve">
+    <value>Logrolling</value>
+  </data>
+  <data name="Luge" xml:space="preserve">
+    <value>Luge</value>
+  </data>
+  <data name="MartialArts" xml:space="preserve">
+    <value>Artes Marciais</value>
+  </data>
+  <data name="MiniatureGolf" xml:space="preserve">
+    <value>Minigolfe</value>
+  </data>
+  <data name="Mountaineering" xml:space="preserve">
+    <value>Montanhismo</value>
+  </data>
+  <data name="Paragliding" xml:space="preserve">
+    <value>Parapente</value>
+  </data>
+  <data name="Polo" xml:space="preserve">
+    <value>Pólo</value>
+  </data>
+  <data name="Racquetball" xml:space="preserve">
+    <value>Raquetebol</value>
+  </data>
+  <data name="Rafting" xml:space="preserve">
+    <value>Rafting</value>
+  </data>
+  <data name="Ringette" xml:space="preserve">
+    <value>Ringette</value>
+  </data>
+  <data name="RockClimbing" xml:space="preserve">
+    <value>Escalada</value>
+  </data>
+  <data name="RollerSkatingInlineSkating" xml:space="preserve">
+    <value>Patinação</value>
+  </data>
+  <data name="Rowing" xml:space="preserve">
+    <value>Remo</value>
+  </data>
+  <data name="Rugby" xml:space="preserve">
+    <value>Rugby</value>
+  </data>
+  <data name="Running" xml:space="preserve">
+    <value>Corrida</value>
+  </data>
+  <data name="Sailing" xml:space="preserve">
+    <value>Navegação</value>
+  </data>
+  <data name="Skateboarding" xml:space="preserve">
+    <value>Skate</value>
+  </data>
+  <data name="Skydiving" xml:space="preserve">
+    <value>Paraquedismo</value>
+  </data>
+  <data name="Snorkelling" xml:space="preserve">
+    <value>Mergulho com snorkel</value>
+  </data>
+  <data name="Snowboarding" xml:space="preserve">
+    <value>Snowboarding</value>
+  </data>
+  <data name="Snowshoeing" xml:space="preserve">
+    <value>Raquete de neve</value>
+  </data>
+  <data name="Squash" xml:space="preserve">
+    <value>Squash</value>
+  </data>
+  <data name="StreetHockey" xml:space="preserve">
+    <value>Hóquei de rua</value>
+  </data>
+  <data name="Sumo" xml:space="preserve">
+    <value>Sumô</value>
+  </data>
+  <data name="Surfing" xml:space="preserve">
+    <value>Surfe</value>
+  </data>
+  <data name="Swimming" xml:space="preserve">
+    <value>Natação</value>
+  </data>
+  <data name="TableTennis" xml:space="preserve">
+    <value>Tênis de Mesa</value>
+  </data>
+  <data name="Tag" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="Tennis" xml:space="preserve">
+    <value>Tênis</value>
+  </data>
+  <data name="TrackField" xml:space="preserve">
+    <value>Track &amp; Field</value>
+  </data>
+  <data name="Trampolining" xml:space="preserve">
+    <value>Cama Elástica</value>
+  </data>
+  <data name="Triathlon" xml:space="preserve">
+    <value>Triatlo</value>
+  </data>
+  <data name="Unicycling" xml:space="preserve">
+    <value>Monociclismo</value>
+  </data>
+  <data name="Volleyball" xml:space="preserve">
+    <value>Vôlei</value>
+  </data>
+  <data name="Wakesurfing" xml:space="preserve">
+    <value>Wakesurfing</value>
+  </data>
+  <data name="Walking" xml:space="preserve">
+    <value>Andar</value>
+  </data>
+  <data name="WaterPolo" xml:space="preserve">
+    <value>Pólo Aquático</value>
+  </data>
+  <data name="Weightlifting" xml:space="preserve">
+    <value>Halterofilismo</value>
+  </data>
+  <data name="Windsurfing" xml:space="preserve">
+    <value>Windsurf</value>
+  </data>
+  <data name="WoodChopping" xml:space="preserve">
+    <value>Corte de lenha</value>
+  </data>
+  <data name="Wrestling" xml:space="preserve">
+    <value>Wrestling</value>
+  </data>
+</root>

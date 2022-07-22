@@ -20,13 +20,13 @@ namespace VerusDate.Api.Repository
 
         private const double ru_limit_get = 3;
         private const double ru_limit_query = 5;
-        private const double ru_limit_save = 15;
+        private const double ru_limit_save = 20; //TODO: DECREASE THIS VALUE
 
         public CosmosRepository(IConfiguration config)
         {
-            var connString = config.GetValue<string>("RepositoryOptions:CosmosConnectionString");
-            var databaseId = config.GetValue<string>("RepositoryOptions:DatabaseId");
-            var containerId = config.GetValue<string>("RepositoryOptions:ContainerId");
+            var connString = config.GetValue<string>("RepositoryOptions_CosmosConnectionString");
+            var databaseId = config.GetValue<string>("RepositoryOptions_DatabaseId");
+            var containerId = config.GetValue<string>("RepositoryOptions_ContainerId");
 
             var _client = new CosmosClient(connString, new CosmosClientOptions()
             {
@@ -112,7 +112,7 @@ namespace VerusDate.Api.Repository
             {
                 var response = await iterator.ReadNextAsync(cancellationToken);
 
-                if (response.RequestCharge > ru_limit_query) throw new NotificationException("RU limit exceeded");
+                if (response.RequestCharge > ru_limit_query) throw new NotificationException($"RU limit exceeded ({response.RequestCharge})");
 
                 results.AddRange(response.Resource);
             }
@@ -124,7 +124,7 @@ namespace VerusDate.Api.Repository
         {
             var response = await Container.CreateItemAsync(item, new PartitionKey(item.Key), null, cancellationToken);
 
-            if (response.RequestCharge > ru_limit_save) throw new NotificationException("RU limit exceeded");
+            if (response.RequestCharge > ru_limit_save) throw new NotificationException($"RU limit exceeded ({response.RequestCharge})");
 
             return response.Resource;
         }
@@ -133,7 +133,7 @@ namespace VerusDate.Api.Repository
         {
             var response = await Container.ReplaceItemAsync(item, item.Id, new PartitionKey(item.Key), null, cancellationToken);
 
-            if (response.RequestCharge > ru_limit_save) throw new NotificationException("RU limit exceeded");
+            if (response.RequestCharge > ru_limit_save) throw new NotificationException($"RU limit exceeded ({response.RequestCharge})");
 
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }

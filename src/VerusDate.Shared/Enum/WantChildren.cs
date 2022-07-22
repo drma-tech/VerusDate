@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
     public enum WantChildren
     {
-        [Display(Name = "Não")]
+        [Custom(Name = "No", ResourceType = typeof(Resources.Enum.WantChildren))]
         No = 1,
 
-        [Display(Name = "Talvez / Provavelmente")]
+        [Custom(Name = "Maybe", ResourceType = typeof(Resources.Enum.WantChildren))]
         Maybe = 2,
 
-        [Display(Name = "Sim")]
+        [Custom(Name = "Yes", ResourceType = typeof(Resources.Enum.WantChildren))]
         Yes = 3
     }
 }

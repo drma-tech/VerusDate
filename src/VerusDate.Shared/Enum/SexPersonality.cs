@@ -1,40 +1,43 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
+    /// <summary>
+    /// https://aindasolteira.blogs.sapo.pt/qual-a-tua-personalidade-sexual-200268
+    /// </summary>
     public enum SexPersonality
     {
-        [Display(Name = "Descompressora", Description = "A que vê o sexo como uma forma de descontração, um tubo de escape para momentos em que se sente tensa, estressada ou chateada.")]
+        [Custom(Name = "Decompresser_Name", Description = "Decompresser_Description", ResourceType = typeof(Resources.Enum.SexPersonality))]
         Decompresser = 1,
 
-        [Display(Name = "Exploradora", Description = "A turista sexual: curiosa e ávida por aprender coisas novas. Gosta de ir além da sua zona de conforto e não leva o sexo demasiado a sério.")]
+        [Custom(Name = "Explorer_Name", Description = "Explorer_Description", ResourceType = typeof(Resources.Enum.SexPersonality))]
         Explorer = 2,
 
-        [Display(Name = "Comerciante Justo", Description = "A que dá extrema importância à equação dar-receber, de modo que esta seja equilibrada. Gosta de saber que ambos estão atentos quanto às necessidades um do outro e dispostos a trabalhar em equipe.")]
+        [Custom(Name = "FairTrader_Name", Description = "FairTrader_Description", ResourceType = typeof(Resources.Enum.SexPersonality))]
         FairTrader = 3,
 
-        [Display(Name = "Dadora", Description = "A que dá mais do que recebe e está em sintonia com as experiências e necessidades do seu parceiro. Pessoa para quem é importante saber que consegue fazer o outro sentir-se bem.")]
+        [Custom(Name = "Giver_Name", Description = "Giver_Description", ResourceType = typeof(Resources.Enum.SexPersonality))]
         Giver = 4,
 
-        [Display(Name = "Guardiã", Description = "A que enfatiza a segurança mais do que tudo. Esta característica é típica de quem tenha sofrido algum tipo de trauma ou simplesmente precise do elo de confiança com o seu parceiro nos momentos de intimidade.")]
+        [Custom(Name = "Guardian_Name", Description = "Guardian_Description", ResourceType = typeof(Resources.Enum.SexPersonality))]
         Guardian = 5,
 
-        [Display(Name = "Apaixonada", Description = "A que crê que a interação sexual deve trazer experiências intensas, quase animalescas, e que é preciso estar em sintonia total com a energia do seu parceiro.")]
+        [Custom(Name = "PassionPursuer_Name", Description = "PassionPursuer_Description", ResourceType = typeof(Resources.Enum.SexPersonality))]
         PassionPursuer = 6,
 
-        [Display(Name = "Prazerosa", Description = "A que encara o prazer físico como único objetivo, considerando o sexo um dos prazeres mais simples da vida. Gosta de contacto físico abundante, mas não sente necessidade da componente emocional para o fazer.")]
+        [Custom(Name = "PleasureSeeker_Name", Description = "PleasureSeeker_Description", ResourceType = typeof(Resources.Enum.SexPersonality))]
         PleasureSeeker = 7,
 
-        [Display(Name = "Prioritária", Description = "A que valoriza muito a vida sexual de ambos e está disposta a fazer sacrifícios para manter uma rotina, sem desculpas.")]
+        [Custom(Name = "Prioritizer_Name", Description = "Prioritizer_Description", ResourceType = typeof(Resources.Enum.SexPersonality))]
         Prioritizer = 8,
 
-        [Display(Name = "Romântica", Description = "A cujo sexo baseia-se numa conexão profunda entre os dois, sendo comum manter contacto visual com o parceiro ou dizer-lhe que o ama durante a relação sexual.")]
+        [Custom(Name = "Romantic_Name", Description = "Romantic_Description", ResourceType = typeof(Resources.Enum.SexPersonality))]
         Romantic = 9,
 
-        [Display(Name = "Espiritualista", Description = "A cujo sexo é mais do que aquilo que se passa no corpo, devendo ser uma experiência quase transcendente, uma comunhão de almas e não apenas de corpos.")]
+        [Custom(Name = "Spiritualist_Name", Description = "Spiritualist_Description", ResourceType = typeof(Resources.Enum.SexPersonality))]
         Spiritualist = 10,
 
-        [Display(Name = "Aventureira", Description = "A que encara o ato sexual como algo entusiasmante, quase interdito. Trata-se do tipo de pessoa que precisa do elemento tabu, quer isto signifique experimentar algo inusitado ou satisfazer um fetiche.")]
+        [Custom(Name = "ThrillSeeker_Name", Description = "ThrillSeeker_Description", ResourceType = typeof(Resources.Enum.SexPersonality))]
         ThrillSeeker = 11
     }
 }

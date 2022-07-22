@@ -1,12 +1,14 @@
 ﻿@inherits FormBase<TValue, FieldSelect<TValue, TEnum>>
 @typeparam TValue
-@typeparam TEnum
+@typeparam TEnum where TEnum : struct, Enum, IConvertible
 
 <Field Horizontal="true">
     <FieldLabel ColumnSize="@GetLabelSize()">
         <Blazorise.Icon Name="@CssIcon"></Blazorise.Icon> @GetName()
         @if (Required)
-        {<div style="color: red; display: initial;"> *</div>}
+        {
+            <div style="color: red; display: initial;"> *</div>
+        }
     </FieldLabel>
     <FieldBody ColumnSize="@GetBodySize()">
         <Addons>
@@ -16,7 +18,7 @@
                     <div @attributes="@GetAttributes("height: auto; min-height: 38px;")">
                         @foreach (var item in SelectedValues)
                         {
-                            <Badge Color="Color.Secondary" Margin="Margin.Is1.FromRight" Style="font-size: 90%;">
+                            <Badge Color="Color.Secondary" Margin="Margin.Is1.OnWidescreen" Style="font-size: 90%;">
                                 @item.GetName()
                             </Badge>
                         }
@@ -27,19 +29,29 @@
                     <Select TValue="TValue" SelectedValue="@SelectedValue" SelectedValueChanged="@SetValue" Disabled="@Disabled">
                         @if (ShowGroup)
                         {
-                            @foreach (var group in EnumHelper.GetList(typeof(TEnum)).Select(s => s.Group).Distinct())
+                            @foreach (var group in EnumHelper.GetList<TEnum>().Select(s => s.Group).Distinct())
                             {
-                                <SelectGroup Label="@group">
-                                    @foreach (var item in EnumHelper.GetList(typeof(TEnum)).Where(w => w.Group == group))
+                                if (string.IsNullOrEmpty(group))
+                                {
+                                    @foreach (var item in EnumHelper.GetList<TEnum>().Where(w => w.Group == group))
                                     {
                                         <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>
                                     }
-                                </SelectGroup>
+                                }
+                                else
+                                {
+                                    <SelectGroup Label="@group">
+                                        @foreach (var item in EnumHelper.GetList<TEnum>().Where(w => w.Group == group))
+                                        {
+                                            <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>
+                                        }
+                                    </SelectGroup>
+                                }
                             }
                         }
                         else
                         {
-                            @foreach (var item in EnumHelper.GetList(typeof(TEnum)))
+                            @foreach (var item in EnumHelper.GetList<TEnum>())
                             {
                                 <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>
                             }
@@ -50,7 +62,7 @@
             @if (ButtomClicked.HasDelegate) //custom button
             {
                 <Addon AddonType="AddonType.End">
-                    <Button Color="Color.Primary" Outline="true" Clicked="@ButtomClicked" title="@ButtomTitle"Disabled="@Disabled">
+                    <Button Color="Color.Primary" Outline="true" Clicked="@ButtomClicked" title="@ButtomTitle" Disabled="@Disabled">
                         <Blazorise.Icon Name="@ButtomCssIcon"></Blazorise.Icon>
                     </Button>
                 </Addon>
@@ -66,7 +78,7 @@
             @if (ShowHelper & !Multiple) //help
             {
                 <Addon AddonType="AddonType.End">
-                    <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataHelp(For, typeof(TEnum))" Disabled="@Disabled">
+                    <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataHelp(For)" Disabled="@Disabled">
                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Question"></Blazorise.Icon>
                     </Button>
                 </Addon>
@@ -74,7 +86,7 @@
             @if (Multiple) //add
             {
                 <Addon AddonType="AddonType.End">
-                    <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataSelect(For, typeof(TEnum))"Disabled="@Disabled">
+                    <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataSelect(For)" Disabled="@Disabled">
                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Plus"></Blazorise.Icon>
                     </Button>
                 </Addon>
@@ -97,5 +109,5 @@
     }
 </Field>
 
-<ProfileDataHelp TValue="TValue" HasGroup="@ShowGroup" @ref="dataHelp"></ProfileDataHelp>
-<ProfileDataSelect TValue="TValue" HasGroup="@ShowGroup" TEnum="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SelectedValuesChanged" @ref="dataSelect"></ProfileDataSelect>
+<ProfileDataHelp TValue="TValue" HasGroup="@ShowGroup" TEnum="TEnum" @ref="dataHelp"></ProfileDataHelp>
+<ProfileDataSelect TValue="TValue" HasGroup="@ShowGroup" TEnum="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SelectedValuesChanged" Order="Order" @ref="dataSelect"></ProfileDataSelect>

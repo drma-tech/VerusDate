@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AmericanFood" xml:space="preserve">
+    <value>Comida Americana</value>
+  </data>
+  <data name="ArgentinianFood" xml:space="preserve">
+    <value>Comida Argentina</value>
+  </data>
+  <data name="BrazilianBarbecue" xml:space="preserve">
+    <value>Churrasco Brasileiro</value>
+  </data>
+  <data name="BrazilianFood" xml:space="preserve">
+    <value>Comida Brasileira</value>
+  </data>
+  <data name="CajunFood" xml:space="preserve">
+    <value>Comida Cajun</value>
+  </data>
+  <data name="CanadianCuisine" xml:space="preserve">
+    <value>Culinária Canadense</value>
+  </data>
+  <data name="CaribbeanFood" xml:space="preserve">
+    <value>Comida Caribenha</value>
+  </data>
+  <data name="ChineseFood" xml:space="preserve">
+    <value>Comida Chinesa</value>
+  </data>
+  <data name="CubanFood" xml:space="preserve">
+    <value>Comida Cubana</value>
+  </data>
+  <data name="FilipinoCuisine" xml:space="preserve">
+    <value>Cozinha Filipina</value>
+  </data>
+  <data name="FrenchFood" xml:space="preserve">
+    <value>Comida Francesa</value>
+  </data>
+  <data name="GermanFood" xml:space="preserve">
+    <value>Comida Alemã</value>
+  </data>
+  <data name="GreekFood" xml:space="preserve">
+    <value>Comida Grega</value>
+  </data>
+  <data name="IndianCuisine" xml:space="preserve">
+    <value>Cozinha Indiana</value>
+  </data>
+  <data name="IndonesianCuisine" xml:space="preserve">
+    <value>Cozinha Indonésia</value>
+  </data>
+  <data name="IranianCuisine" xml:space="preserve">
+    <value>Cozinha Iraniana</value>
+  </data>
+  <data name="IrishFood" xml:space="preserve">
+    <value>Comida Irlandesa</value>
+  </data>
+  <data name="ItalianFood" xml:space="preserve">
+    <value>Comida Italiana</value>
+  </data>
+  <data name="JamaicanFood" xml:space="preserve">
+    <value>Comida Jamaicana</value>
+  </data>
+  <data name="JapaneseCuisine" xml:space="preserve">
+    <value>Culinária Japonesa</value>
+  </data>
+  <data name="JewishCuisine" xml:space="preserve">
+    <value>Cozinha Judaica</value>
+  </data>
+  <data name="JunkFood" xml:space="preserve">
+    <value>Comida não saudável</value>
+  </data>
+  <data name="KoreanBarbecue" xml:space="preserve">
+    <value>Churrasco Coreano</value>
+  </data>
+  <data name="LebaneseFood" xml:space="preserve">
+    <value>Comida Libanesa</value>
+  </data>
+  <data name="MalaysianFood" xml:space="preserve">
+    <value>Comida da Malásia</value>
+  </data>
+  <data name="MediterraneanFood" xml:space="preserve">
+    <value>Comida Mediterrânea</value>
+  </data>
+  <data name="MexicanFood" xml:space="preserve">
+    <value>Comida Mexicana</value>
+  </data>
+  <data name="MiddleEasternFood" xml:space="preserve">
+    <value>Comida do Oriente Médio</value>
+  </data>
+  <data name="MidwesternFood" xml:space="preserve">
+    <value>Midwestern Food</value>
+  </data>
+  <data name="MoroccanFood" xml:space="preserve">
+    <value>Comida Marroquina</value>
+  </data>
+  <data name="PortugueseFood" xml:space="preserve">
+    <value>Comida Portuguesa</value>
+  </data>
+  <data name="Seafood" xml:space="preserve">
+    <value>Frutos Do Mar</value>
+  </data>
+  <data name="ShanghaineseCuisine" xml:space="preserve">
+    <value>Cozinha de Xangai</value>
+  </data>
+  <data name="SichuanCuisine" xml:space="preserve">
+    <value>Cozinha de Sichuan</value>
+  </data>
+  <data name="SicilianCuisine" xml:space="preserve">
+    <value>Cozinha Siciliana</value>
+  </data>
+  <data name="SingaporeanFood" xml:space="preserve">
+    <value>Comida de Singapura</value>
+  </data>
+  <data name="SoulFood" xml:space="preserve">
+    <value>Soul Food</value>
+  </data>
+  <data name="SouthernAmericanFood" xml:space="preserve">
+    <value>Comida Sul-Americana</value>
+  </data>
+  <data name="SouthIndianCuisine" xml:space="preserve">
+    <value>Culinária do Sul da Índia</value>
+  </data>
+  <data name="SouthKoreanFood" xml:space="preserve">
+    <value>Comida Sul-Coreana</value>
+  </data>
+  <data name="SpanishCuisine" xml:space="preserve">
+    <value>Cozinha Espanhola</value>
+  </data>
+  <data name="SwissCuisine" xml:space="preserve">
+    <value>Cozinha Suíça</value>
+  </data>
+  <data name="TexasBarbecue" xml:space="preserve">
+    <value>Churrasco do Texas</value>
+  </data>
+  <data name="TexMexFood" xml:space="preserve">
+    <value>Comida Tex-Mex</value>
+  </data>
+  <data name="ThaiFood" xml:space="preserve">
+    <value>Comida Tailandesa</value>
+  </data>
+  <data name="TunisianCuisine" xml:space="preserve">
+    <value>Cozinha Tunisina</value>
+  </data>
+  <data name="TurkishFood" xml:space="preserve">
+    <value>Comida Turca</value>
+  </data>
+  <data name="UnitedKingdomCuisine" xml:space="preserve">
+    <value>Cozinha do Reino Unido</value>
+  </data>
+  <data name="VegetarianFood" xml:space="preserve">
+    <value>Comida Vegetariana</value>
+  </data>
+  <data name="VietnameseFood" xml:space="preserve">
+    <value>Comida Vietnamita</value>
+  </data>
+</root>

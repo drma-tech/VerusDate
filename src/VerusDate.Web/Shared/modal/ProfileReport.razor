@@ -10,7 +10,7 @@
             <RadioGroup TValue="int" Name="report" CheckedValue="@checkedValue" CheckedValueChanged="@OnCheckedValueChanged">
                 @{
                     string previousGroup = "";
-                    @foreach (var item in EnumHelper.GetList(typeof(ReportType)))
+                    @foreach (var item in EnumHelper.GetList<ReportType>())
                     {
                         if (!string.IsNullOrEmpty(@item.Group) && previousGroup != @item.Group)
                         {
@@ -19,7 +19,7 @@
                                 <AlertDescription>@item.Group.Split("|")[1]</AlertDescription>
                             </Alert>
                         }
-                        <Paragraph Alignment="TextAlignment.Justified" Margin="Margin.Is2.FromBottom">
+                        <Paragraph TextAlignment="TextAlignment.Justified" Margin="Margin.Is2.FromBottom">
                             <Radio TValue="int" Size="Size.Medium" Value="@item.Value">@item.Name</Radio>
                             <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
                         </Paragraph>

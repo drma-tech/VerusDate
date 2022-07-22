@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using VerusDate.Shared.Helper;
 using VerusDate.Shared.Model;
 
-namespace VerusDate.Server.Core.Helper
+namespace VerusDate.Api.Core
 {
     public class FaceHelper
     {

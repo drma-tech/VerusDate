@@ -1,19 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
     public enum Drink
     {
-        [Display(Name = "Não", Description = "Não consome nenhum tipo de bebida alcoólica")]
+        [Custom(Name = "No_Name", Description = "No_Description", ResourceType = typeof(Resources.Enum.Drink))]
         No = 1,
 
-        [Display(Name = "Sim, socialmente", Description = "É a pessoa que bebe raramente e/ou apenas em ocasiões sociais, não ultrapassando duas vezes ao mês")]
-        Yes_Light = 2,
+        [Custom(Name = "YesLight_Name", Description = "YesLight_Description", ResourceType = typeof(Resources.Enum.Drink))]
+        YesLight = 2,
 
-        [Display(Name = "Sim, moderadamente", Description = "É a pessoa que bebe aproximadamente uma vez por semana, podendo chegar a seis vezes ao mês")]
-        Yes_Moderate = 3,
+        [Custom(Name = "YesModerate_Name", Description = "YesModerate_Description", ResourceType = typeof(Resources.Enum.Drink))]
+        YesModerate = 3,
 
-        [Display(Name = "Sim, frequentemente", Description = "É a pessoa que bebe pelo menos duas vezes por semana")]
-        Yes_Heavy = 4
+        [Custom(Name = "YesHeavy_Name", Description = "YesHeavy_Description", ResourceType = typeof(Resources.Enum.Drink))]
+        YesHeavy = 4
     }
 }

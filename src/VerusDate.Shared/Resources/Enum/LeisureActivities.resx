@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AfternoonTea" xml:space="preserve">
+    <value>Afternoon Tea</value>
+  </data>
+  <data name="Aquariums" xml:space="preserve">
+    <value>Aquariums</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Art</value>
+  </data>
+  <data name="Astronomy" xml:space="preserve">
+    <value>Astronomy</value>
+  </data>
+  <data name="Beekeeping" xml:space="preserve">
+    <value>Beekeeping</value>
+  </data>
+  <data name="Bicycling" xml:space="preserve">
+    <value>Bicycling</value>
+  </data>
+  <data name="Birdwatching" xml:space="preserve">
+    <value>Birdwatching</value>
+  </data>
+  <data name="Bonsai" xml:space="preserve">
+    <value>Bonsai</value>
+  </data>
+  <data name="Bowling" xml:space="preserve">
+    <value>Bowling</value>
+  </data>
+  <data name="Calligraphy" xml:space="preserve">
+    <value>Calligraphy</value>
+  </data>
+  <data name="Camping" xml:space="preserve">
+    <value>Camping</value>
+  </data>
+  <data name="Canoeing" xml:space="preserve">
+    <value>Canoeing</value>
+  </data>
+  <data name="Chess" xml:space="preserve">
+    <value>Chess</value>
+  </data>
+  <data name="Cleaning" xml:space="preserve">
+    <value>Cleaning</value>
+  </data>
+  <data name="CodingComputing" xml:space="preserve">
+    <value>Coding Computing</value>
+  </data>
+  <data name="Collecting" xml:space="preserve">
+    <value>Collecting (e.g. Coin Collecting)</value>
+  </data>
+  <data name="Concerts" xml:space="preserve">
+    <value>Concerts</value>
+  </data>
+  <data name="Conversation" xml:space="preserve">
+    <value>Conversation</value>
+  </data>
+  <data name="CookingBaking" xml:space="preserve">
+    <value>Cooking / Baking</value>
+  </data>
+  <data name="Cosplaying" xml:space="preserve">
+    <value>Cosplaying</value>
+  </data>
+  <data name="Crafts" xml:space="preserve">
+    <value>Crafts</value>
+  </data>
+  <data name="CreativeWriting" xml:space="preserve">
+    <value>Creative Writing</value>
+  </data>
+  <data name="CulturalActivities" xml:space="preserve">
+    <value>Cultural Activities</value>
+  </data>
+  <data name="Dancing" xml:space="preserve">
+    <value>Dancing</value>
+  </data>
+  <data name="Debate" xml:space="preserve">
+    <value>Debate</value>
+  </data>
+  <data name="DiningOut" xml:space="preserve">
+    <value>Dining Out</value>
+  </data>
+  <data name="DoItYourself" xml:space="preserve">
+    <value>DIY (Do It Yourself)</value>
+  </data>
+  <data name="Drama" xml:space="preserve">
+    <value>Drama</value>
+  </data>
+  <data name="DrawingPainting" xml:space="preserve">
+    <value>Drawing / Painting</value>
+  </data>
+  <data name="Driving" xml:space="preserve">
+    <value>Driving</value>
+  </data>
+  <data name="Electronics" xml:space="preserve">
+    <value>Electronics</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="Exercising" xml:space="preserve">
+    <value>Exercising</value>
+  </data>
+  <data name="FashionDesign" xml:space="preserve">
+    <value>Fashion Design</value>
+  </data>
+  <data name="Festivals" xml:space="preserve">
+    <value>Festivals</value>
+  </data>
+  <data name="Filmmaking" xml:space="preserve">
+    <value>Filmmaking</value>
+  </data>
+  <data name="Fishing" xml:space="preserve">
+    <value>Fishing</value>
+  </data>
+  <data name="Games" xml:space="preserve">
+    <value>Games (e.g. Cards, Board, Puzzles)</value>
+  </data>
+  <data name="Gardening" xml:space="preserve">
+    <value>Gardening</value>
+  </data>
+  <data name="Gymnastics" xml:space="preserve">
+    <value>Gymnastics</value>
+  </data>
+  <data name="Hiking" xml:space="preserve">
+    <value>Hiking</value>
+  </data>
+  <data name="HomeImprovement" xml:space="preserve">
+    <value>Home Improvement</value>
+  </data>
+  <data name="IceSkating" xml:space="preserve">
+    <value>Ice Skating</value>
+  </data>
+  <data name="Jogging" xml:space="preserve">
+    <value>Jogging</value>
+  </data>
+  <data name="Karaoke" xml:space="preserve">
+    <value>Karaoke</value>
+  </data>
+  <data name="KnittingSewingPatchworking" xml:space="preserve">
+    <value>Knitting / Sewing / Patchworking</value>
+  </data>
+  <data name="Learning" xml:space="preserve">
+    <value>Learning (e.g. Languages)</value>
+  </data>
+  <data name="MartialArts" xml:space="preserve">
+    <value>Martial Arts</value>
+  </data>
+  <data name="Meditation" xml:space="preserve">
+    <value>Meditation</value>
+  </data>
+  <data name="MetalWorkingWoodWorking" xml:space="preserve">
+    <value>MetalWorking / WoodWorking</value>
+  </data>
+  <data name="ModelBuilding" xml:space="preserve">
+    <value>Model Building</value>
+  </data>
+  <data name="Movies" xml:space="preserve">
+    <value>Movies</value>
+  </data>
+  <data name="Museums" xml:space="preserve">
+    <value>Museums</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>Music</value>
+  </data>
+  <data name="ParksZoos" xml:space="preserve">
+    <value>Parks / Zoos</value>
+  </data>
+  <data name="PersonalReflection" xml:space="preserve">
+    <value>Personal Reflection</value>
+  </data>
+  <data name="Photography" xml:space="preserve">
+    <value>Photography</value>
+  </data>
+  <data name="Picnics" xml:space="preserve">
+    <value>Picnics</value>
+  </data>
+  <data name="Reading" xml:space="preserve">
+    <value>Reading</value>
+  </data>
+  <data name="Robotics" xml:space="preserve">
+    <value>Robotics</value>
+  </data>
+  <data name="Rollerblading" xml:space="preserve">
+    <value>Rollerblading</value>
+  </data>
+  <data name="SailingBoating" xml:space="preserve">
+    <value>Sailing &amp; Boating</value>
+  </data>
+  <data name="Shopping" xml:space="preserve">
+    <value>Shopping</value>
+  </data>
+  <data name="Sightseeing" xml:space="preserve">
+    <value>Sightseeing</value>
+  </data>
+  <data name="Singing" xml:space="preserve">
+    <value>Singing</value>
+  </data>
+  <data name="SkiingSnowboarding" xml:space="preserve">
+    <value>Skiing &amp; Snowboarding</value>
+  </data>
+  <data name="SnorkelingDiving" xml:space="preserve">
+    <value>Snorkeling &amp; Diving</value>
+  </data>
+  <data name="SocialMedia" xml:space="preserve">
+    <value>Social Media</value>
+  </data>
+  <data name="Sunbathing" xml:space="preserve">
+    <value>Sunbathing</value>
+  </data>
+  <data name="Surfing" xml:space="preserve">
+    <value>Surfing</value>
+  </data>
+  <data name="Swimming" xml:space="preserve">
+    <value>Swimming</value>
+  </data>
+  <data name="TeamSports" xml:space="preserve">
+    <value>Team Sports</value>
+  </data>
+  <data name="Television" xml:space="preserve">
+    <value>Television</value>
+  </data>
+  <data name="Tennis" xml:space="preserve">
+    <value>Tennis</value>
+  </data>
+  <data name="Theatre" xml:space="preserve">
+    <value>Theatre</value>
+  </data>
+  <data name="ThemeParks" xml:space="preserve">
+    <value>Theme Parks</value>
+  </data>
+  <data name="Travel" xml:space="preserve">
+    <value>Travel</value>
+  </data>
+  <data name="VideoGames" xml:space="preserve">
+    <value>Video Games</value>
+  </data>
+  <data name="VideoProduction" xml:space="preserve">
+    <value>Video Production</value>
+  </data>
+  <data name="Walking" xml:space="preserve">
+    <value>Walking</value>
+  </data>
+  <data name="Weightlifting" xml:space="preserve">
+    <value>Weightlifting</value>
+  </data>
+  <data name="Yoga" xml:space="preserve">
+    <value>Yoga</value>
+  </data>
+</root>

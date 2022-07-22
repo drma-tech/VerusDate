@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DetoxWeightLoss_Description" xml:space="preserve">
+    <value>A dieta de desintoxicação e/ou perda de peso pode ser combinada com outras dietas para desintoxicar o corpo de toxinas e/ou perder peso.</value>
+  </data>
+  <data name="DetoxWeightLoss_Name" xml:space="preserve">
+    <value>Desintoxicação / Perda de Peso</value>
+  </data>
+  <data name="Flexitarian_Description" xml:space="preserve">
+    <value>A dieta flexitariana está entre onívora e vegetariana. É alguém que come uma dieta principalmente vegetariana, com exceção de algumas carnes de animais. Também é conhecida como dieta semi-vegetariana.</value>
+  </data>
+  <data name="Flexitarian_Name" xml:space="preserve">
+    <value>Flexitariana</value>
+  </data>
+  <data name="GlutenFree_Description" xml:space="preserve">
+    <value>A dieta sem glúten é essencialmente eliminar o glúten dos alimentos. O glúten é um tipo de proteína comumente encontrada no trigo e outros grãos.</value>
+  </data>
+  <data name="GlutenFree_Name" xml:space="preserve">
+    <value>Sem glúten</value>
+  </data>
+  <data name="Omnivore_Description" xml:space="preserve">
+    <value>A dieta onívora consiste em produtos de origem animal e carne, além de frutas e vegetais. Significa essencialmente que se pode comer tudo e nada se limita a eles.</value>
+  </data>
+  <data name="Omnivore_Name" xml:space="preserve">
+    <value>Onívora</value>
+  </data>
+  <data name="OrganicAllnaturalLocal_Description" xml:space="preserve">
+    <value>Uma dieta alimentar orgânica, totalmente natural e/ou local consiste em todos ou principalmente alimentos orgânicos e/ou feitos localmente, muitas vezes por pequenas empresas ou fazendas.</value>
+  </data>
+  <data name="OrganicAllnaturalLocal_Name" xml:space="preserve">
+    <value>Orgânico / Tudo Natural / Local</value>
+  </data>
+  <data name="RawFood_Description" xml:space="preserve">
+    <value>A dieta de alimentos crus consiste apenas em frutas frescas, não cozidas, vegetais, nozes e/ou sementes. Em outras palavras, é puro cru e não contém alimentos processados que muitas vezes perdem seu valor nutricional.</value>
+  </data>
+  <data name="RawFood_Name" xml:space="preserve">
+    <value>Alimentos crus</value>
+  </data>
+  <data name="Vegan_Description" xml:space="preserve">
+    <value>A dieta vegana é semelhante à dieta vegetariana, pois não inclui carne animal. Mas também não inclui nenhum produto animal.</value>
+  </data>
+  <data name="Vegan_Name" xml:space="preserve">
+    <value>Vegana</value>
+  </data>
+  <data name="Vegetarian_Description" xml:space="preserve">
+    <value>A dieta vegetariana não consiste em carne animal, mas inclui outros produtos de origem animal, como laticínios, como leite, queijo, iogurte, e às vezes pode até incluir ovos ou não.</value>
+  </data>
+  <data name="Vegetarian_Name" xml:space="preserve">
+    <value>Vegetariana</value>
+  </data>
+</root>

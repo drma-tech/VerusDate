@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
+using VerusDate.Shared.Helper;
 
 namespace VerusDate.Web.Shared.Field
 {
@@ -28,8 +26,10 @@ namespace VerusDate.Web.Shared.Field
 
         private string Description => GetDescription();
 
-        private modal.ProfileDataHelp<TValue> dataHelp;
+        private modal.ProfileDataHelp<TValue, TEnum> dataHelp;
         private modal.ProfileDataSelect<TValue, TEnum> dataSelect;
+
+        [Parameter] public Func<EnumObject, object> Order { get; set; } = o => o.Value;
 
         protected async Task SetValue(TValue value)
         {
@@ -42,15 +42,15 @@ namespace VerusDate.Web.Shared.Field
             }
         }
 
-        protected void UpdateDataHelp(Expression<Func<TValue>> For, Type TypeEnum)
+        protected void UpdateDataHelp(Expression<Func<TValue>> For)
         {
-            dataHelp.ChangeContent(For, TypeEnum);
+            dataHelp.ChangeContent(For);
             dataHelp.ShowModal();
         }
 
-        protected void UpdateDataSelect(Expression<Func<TValue>> For, Type TypeEnum)
+        protected void UpdateDataSelect(Expression<Func<TValue>> For)
         {
-            dataSelect.ChangeContent(For, TypeEnum);
+            dataSelect.ChangeContent(For);
             dataSelect.ShowModal();
         }
     }

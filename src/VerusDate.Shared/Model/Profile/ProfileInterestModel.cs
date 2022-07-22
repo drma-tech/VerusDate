@@ -11,7 +11,7 @@ namespace VerusDate.Shared.Model
         public IReadOnlyList<Food> Food { get; set; } = Array.Empty<Food>();
 
         [Display(Name = "Férias")]
-        public IReadOnlyList<Holidays> Holidays { get; set; } = Array.Empty<Holidays>();
+        public IReadOnlyList<Vacation> Vacation { get; set; } = Array.Empty<Vacation>();
 
         [Display(Name = "Esportes")]
         public IReadOnlyList<Sports> Sports { get; set; } = Array.Empty<Sports>();

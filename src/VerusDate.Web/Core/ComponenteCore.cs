@@ -2,11 +2,7 @@
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using VerusDate.Web.Api;
 
 namespace VerusDate.Web.Core

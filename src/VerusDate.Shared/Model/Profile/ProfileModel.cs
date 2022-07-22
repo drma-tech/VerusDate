@@ -81,7 +81,7 @@ namespace VerusDate.Shared.Model
 
         public void ClearSimpleView()
         {
-            if (Basic.Intent.IsShortTerm(exclusive: true))
+            if (Basic.Intentions.IsShortTerm(exclusive: true))
             {
                 Lifestyle.Drink = null;
                 Lifestyle.Smoke = null;
@@ -96,7 +96,7 @@ namespace VerusDate.Shared.Model
                 Lifestyle.MyersBriggsTypeIndicator = null;
 
                 Interest.Food = null;
-                Interest.Holidays = null;
+                Interest.Vacation = null;
                 Interest.Sports = null;
                 Interest.LeisureActivities = null;
                 Interest.MusicGenre = null;

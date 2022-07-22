@@ -1,22 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 
 namespace VerusDate.Shared.Enum
 {
     public enum BodyMass
     {
-        [Display(Name = "Magro (a)")]
+        [Custom(Name = "UnderWeight", ResourceType = typeof(Resources.Enum.BodyMass))]
         UnderWeight = 1,
 
-        [Display(Name = "Normal")]
+        [Custom(Name = "NormalWeight", ResourceType = typeof(Resources.Enum.BodyMass))]
         NormalWeight = 2,
 
-        [Display(Name = "Atlético (a) / Musculuso (a)")]
+        [Custom(Name = "Athletic", ResourceType = typeof(Resources.Enum.BodyMass))]
         Athletic = 3,
 
-        [Display(Name = "Pouco acima do peso / Com curvas")]
+        [Custom(Name = "OverWeight", ResourceType = typeof(Resources.Enum.BodyMass))]
         OverWeight = 4,
 
-        [Display(Name = "Acima do peso / Obeso (a)")]
+        [Custom(Name = "Obese", ResourceType = typeof(Resources.Enum.BodyMass))]
         Obese = 5,
     }
 }

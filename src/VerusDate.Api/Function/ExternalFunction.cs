@@ -20,7 +20,7 @@ namespace VerusDate.Api.Function
 
         public ExternalFunction(IConfiguration config)
         {
-            HereApiKey = config.GetValue<string>("Here:ApiKey");
+            HereApiKey = config.GetValue<string>("Here_ApiKey");
         }
 
         [FunctionName("ExternalGetLocation")]

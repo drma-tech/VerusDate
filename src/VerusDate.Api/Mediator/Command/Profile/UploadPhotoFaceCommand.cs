@@ -1,12 +1,10 @@
 ﻿using MediatR;
-using Microsoft.Azure.Cosmos;
 using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Core.Interfaces;
-using VerusDate.Server.Core.Helper;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Helper;
 using VerusDate.Shared.Model;
@@ -45,20 +43,20 @@ namespace VerusDate.Server.Mediator.Commands.Profile
         {
             var profile = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
             if (profile == null) throw new NotificationException("Perfil não encontrado");
-            var IdOldPhoto = profile.Photo.Main;
+            var IdOldPhoto = profile.Photo?.Main;
 
             using var stream1 = new MemoryStream(request.MainPhoto);
 
             if (profile.Photo == null) profile.Photo = new ProfilePhotoModel();
 
             var photoName = Guid.NewGuid().ToString() + ".jpg";
-            profile.Photo.UpdateMainPhoto(photoName); //reseta dados da foto atual
+            profile.Photo.UpdateMainPhoto(photoName); //reset current photo data
 
-            await faceHelper.DetectFace(profile, stream1, true, cancellationToken); //valida a foto enviada e salva dados relativos a ela
+            await faceHelper.DetectFace(profile, stream1, true, cancellationToken); //validates the photo sent and saves data related to it
 
             if (!string.IsNullOrEmpty(profile.Photo.Main)) //foto já existente
             {
-                //se manter a foto com o mesmo id, o cache do browser não vai atualizar a foto
+                //if you keep the photo with the same id, the browser cache will not update the photo
                 await storageHelper.DeletePhoto(ImageHelper.PhotoType.PhotoFace, IdOldPhoto, cancellationToken);
             }
 

@@ -22,27 +22,27 @@ namespace VerusDate.Api.Function
             _mediator = mediator;
         }
 
-        //[FunctionName("StorageUploadPhotoFace")]
-        //public async Task<IActionResult> UploadPhotoFace(
-        //    [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Storage/UploadPhotoFace")] HttpRequest req,
-        //    ILogger log, CancellationToken cancellationToken)
-        //{
-        //    using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+        [FunctionName("StorageUploadPhotoFace")]
+        public async Task<IActionResult> UploadPhotoFace(
+            [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Storage/UploadPhotoFace")] HttpRequest req,
+            ILogger log, CancellationToken cancellationToken)
+        {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
 
-        //    try
-        //    {
-        //        var request = await req.BuildRequestCommand<UploadPhotoFaceCommand>(source.Token);
+            try
+            {
+                var request = await req.BuildRequestCommand<UploadPhotoFaceCommand>(source.Token);
 
-        //        var result = await _mediator.Send(request, source.Token);
+                var result = await _mediator.Send(request, source.Token);
 
-        //        return new OkObjectResult(result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        log.LogError(ex, req.Query.BuildMessage(), req.Query.ToList());
-        //        return new BadRequestObjectResult(ex.ProcessException());
-        //    }
-        //}
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, req.Query.BuildMessage(), req.Query.ToList());
+                return new BadRequestObjectResult(ex.ProcessException());
+            }
+        }
 
         [FunctionName("StorageUploadPhotoGallery")]
         public async Task<IActionResult> UploadPhotoGallery(

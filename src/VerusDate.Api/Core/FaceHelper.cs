@@ -14,12 +14,12 @@ namespace VerusDate.Api.Core
 {
     public class FaceHelper
     {
+        public IConfiguration Configuration { get; }
+
         public FaceHelper(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         public async Task DetectFace(ProfileModel profile, Stream StreamPhotoCamera, bool captureAttributes, CancellationToken cancellationToken)
         {
@@ -80,15 +80,15 @@ namespace VerusDate.Api.Core
             }
         }
 
-        private static List<FaceAttributeType?> GetAttributeTypes(bool captureAttributes)
+        private static List<FaceAttributeType> GetAttributeTypes(bool captureAttributes)
         {
             if (captureAttributes)
-                return new List<FaceAttributeType?> {
+                return new List<FaceAttributeType> {
                     FaceAttributeType.Age,
                     FaceAttributeType.Gender
                 };
             else
-                return new List<FaceAttributeType?>();
+                return new List<FaceAttributeType>();
         }
 
         private static async Task<VerifyResult> VerifyFaces(IFaceClient client, ProfileModel profile, Stream StreamPhotoCamera, bool captureAttributes, CancellationToken cancellationToken)

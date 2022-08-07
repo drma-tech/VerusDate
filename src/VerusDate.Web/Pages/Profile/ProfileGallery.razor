@@ -80,7 +80,7 @@
         {
             imageDataUri = _profile.GetMainPhoto();
             imageDataUriGallery = _profile.GetGalleryPhotos();
-            selectedImage = imageDataUriGallery.FirstOrDefault();
+            selectedImage = imageDataUriGallery?.FirstOrDefault();
         }
     }
 
@@ -149,6 +149,9 @@
                 await Http.Storage_UploadPhotoGallery(buffers, SessionStorage, Toast);
 
                 _profile = await Http.Profile_Get(SessionStorage);
+
+                selectedImage = imageDataUriGallery?.LastOrDefault();
+                StateHasChanged();
             }
         }
         catch (Exception ex)
@@ -168,6 +171,7 @@
 
             imageDataUriGallery = imageDataUriGallery.Where(w => w != selectedImage).ToArray();
 
+            selectedImage = imageDataUriGallery?.FirstOrDefault();
             StateHasChanged();
         }
         catch (Exception ex)

@@ -13,16 +13,16 @@
     <None Remove="Core\Hubs\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Core\FaceHelper.cs" />
     <Compile Remove="Function\SignalRFunction.cs" />
     <Compile Remove="Mediator\Behavior\UserSessionBehavior.cs" />
-    <Compile Remove="Mediator\Command\Profile\UploadPhotoFaceCommand.cs" />
     <Compile Remove="Mediator\Command\Profile\UploadPhotoValidationCommand.cs" />
     <Compile Remove="Mediator\Queries\Interaction\InteractionGetChatCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.13.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.ComputerVision" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face" Version="2.8.0-preview.2" />
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.29.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />

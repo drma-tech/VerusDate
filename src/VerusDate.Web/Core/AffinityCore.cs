@@ -12,7 +12,6 @@ namespace VerusDate.Web.Core
             if (profUser == null) throw new NotificationException("Não foi possível identificar seu perfil");
             if (profView == null) throw new NotificationException("Não foi possível identificar o perfil deste usuário");
             if (profUser.Preference == null) throw new NotificationException("Não foi possível identificar suas preferências");
-            if (profView.Preference == null) throw new NotificationException("Não foi possível identificar as preferências deste usuário");
 
             var obj = new List<AffinityVM>();
 

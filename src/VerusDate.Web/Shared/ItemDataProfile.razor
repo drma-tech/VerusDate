@@ -69,7 +69,7 @@ else
         }
         else if (value is Enum resultE)
         {
-            return resultE.GetCustomAttribute().Description;
+            return resultE.GetCustomAttribute()?.Description;
         }
         else
         {
@@ -87,7 +87,7 @@ else
         }
         else if (value is Enum resultE)
         {
-            if (string.IsNullOrEmpty(resultE.GetCustomAttribute().Description))
+            if (string.IsNullOrEmpty(resultE.GetCustomAttribute()?.Description))
             {
                 return "cursor: default";
             }

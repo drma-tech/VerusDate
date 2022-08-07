@@ -7,6 +7,7 @@ using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using VerusDate.Web;
+using VerusDate.Web.Core;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -32,5 +33,10 @@ builder.Services.AddBlazoredSessionStorage(config => config.JsonSerializerOption
 //    // For more information, see https://aka.ms/blazor-standalone-auth
 //    builder.Configuration.Bind("Local", options.ProviderOptions);
 //});
+
+builder.Services.AddLogging(logging =>
+{
+    logging.AddProvider(new CosmosLoggerProvider());
+});
 
 await builder.Build().RunAsync();

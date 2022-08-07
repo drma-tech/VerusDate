@@ -1,24 +1,24 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Model
 {
     public class ProfileBioModel
     {
-        [Display(Name = "Nascimento")]
+        [Custom(Name = "BirthDate_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
         public DateTime BirthDate { get; set; }
 
-        [Display(Name = "Signo")]
+        [Custom(Name = "Zodiac_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
         public Zodiac Zodiac { get; set; }
 
-        [Display(Name = "Altura")]
-        public Height Height { get; set; }
+        [Custom(Name = "Height_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
+        public Height? Height { get; set; }
 
-        [Display(Name = "Raça", Description = "Classificação definida por US OMB")]
-        public RaceCategory RaceCategory { get; set; }
+        [Custom(Name = "RaceCategory_Name", Description = "RaceCategory_Description", ResourceType = typeof(Resources.Model.ProfileBioModel))]
+        public RaceCategory? RaceCategory { get; set; }
 
-        [Display(Name = "Corpo")]
-        public BodyMass BodyMass { get; set; }
+        [Custom(Name = "BodyMass_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
+        public BodyMass? BodyMass { get; set; }
     }
 }

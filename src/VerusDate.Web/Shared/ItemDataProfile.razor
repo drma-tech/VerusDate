@@ -69,7 +69,7 @@ else
         }
         else if (value is Enum resultE)
         {
-            return resultE.GetDescription();
+            return resultE.GetCustomAttribute().Description;
         }
         else
         {
@@ -87,7 +87,7 @@ else
         }
         else if (value is Enum resultE)
         {
-            if (string.IsNullOrEmpty(resultE.GetDescription()))
+            if (string.IsNullOrEmpty(resultE.GetCustomAttribute().Description))
             {
                 return "cursor: default";
             }
@@ -155,7 +155,7 @@ else
         {
             var content = (MarkupString)GetDescription(Value);
             RenderFragment fragment =@<div>@content</div>;
-            Toast.ShowToast(Blazored.Toast.Services.ToastLevel.Info, fragment, AttributeHelper.GetName(For) + ": " + GetValue(Value));
+            Toast.ShowToast(Blazored.Toast.Services.ToastLevel.Info, fragment, For.GetCustomAttribute().Name + ": " + GetValue(Value));
         }
     }
 }

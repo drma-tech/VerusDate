@@ -34,10 +34,10 @@ namespace VerusDate.Shared.Helper
             }
         }
 
-        public static string GetPrompt<T>(Expression<Func<T>> expression)
-        {
-            return GetDisplayAttribute(expression)?.Prompt;
-        }
+        //public static string GetPrompt<T>(Expression<Func<T>> expression)
+        //{
+        //    return GetDisplayAttribute(expression)?.Prompt;
+        //}
 
         private static DisplayAttribute GetDisplayAttribute<T>(Expression<Func<T>> expression)
         {

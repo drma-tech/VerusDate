@@ -2,7 +2,7 @@
 
 <Field Horizontal="true">
     <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
-        <Blazorise.Icon Name="@CssIcon"></Blazorise.Icon> @GetName()
+        <Blazorise.Icon Name="@CssIcon"></Blazorise.Icon> @For.GetCustomAttribute().Name
         @if (Required)
         {<div style="color: red; display: initial;"> *</div>}
     </FieldLabel>

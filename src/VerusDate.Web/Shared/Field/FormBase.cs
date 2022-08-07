@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Reflection;
+using VerusDate.Shared.Core;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Shared.Field
@@ -37,43 +38,9 @@ namespace VerusDate.Web.Shared.Field
                 }
             }
 
-            dic.Add("placeholder", GetPrompt());
+            dic.Add("placeholder", For.GetCustomAttribute().Prompt);
 
             return dic;
-        }
-
-        public string GetDescription()
-        {
-            if (For == null) return null;
-
-            return GetDisplayAttribute(For)?.Description;
-        }
-
-        public string GetName()
-        {
-            if (For == null) return null;
-
-            return GetDisplayAttribute(For)?.Name;
-        }
-
-        public string GetPrompt()
-        {
-            if (For == null) return null;
-
-            return GetDisplayAttribute(For)?.Prompt;
-        }
-
-        private static DisplayAttribute GetDisplayAttribute<T>(Expression<Func<T>> expression)
-        {
-            if (expression.Body is MemberExpression body)
-            {
-                return body.Member.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
-            }
-            else
-            {
-                var op = ((UnaryExpression)expression.Body).Operand;
-                return ((MemberExpression)op).Member.GetCustomAttribute(typeof(DisplayAttribute)) as DisplayAttribute;
-            }
         }
 
         public IFluentColumn GetLabelSize()

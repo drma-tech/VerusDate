@@ -11,7 +11,7 @@
             <EditForm Model="@Ticket" OnValidSubmit="SubmitForm">
                 <FluentValidationValidator />
                 <div class="form-group">
-                    <MemoEdit @bind-Text="@Ticket.Description" Rows="7" MaxLength="512" Placeholder="@AttributeHelper.GetPrompt(()=>Ticket.Description)"></MemoEdit>
+                    <MemoEdit @bind-Text="@Ticket.Description" Rows="7" MaxLength="512" Placeholder="@CustomAttributeHelper.GetCustomAttribute(()=>Ticket.Description).Prompt"></MemoEdit>
                     <ValidationMessage For="@(()=>Ticket.Description)"></ValidationMessage>
                 </div>
                 <Button Type="ButtonType.Submit" Color="Color.Primary">Salvar</Button>

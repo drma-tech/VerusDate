@@ -47,7 +47,7 @@
 
     [Parameter] public bool HasGroup { get; set; }
 
-    private string label => VerusDate.Shared.Helper.AttributeHelper.GetName(For);
+    private string label => CustomAttributeHelper.GetCustomAttribute(For)?.Name;
 
     public void ShowModal()
     {

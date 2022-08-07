@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Model
@@ -9,47 +9,47 @@ namespace VerusDate.Shared.Model
     {
         #region BASIC
 
-        [Display(Name = "Distância")]
+        [Custom(Name = "Distância")]
         public Distance Distance { get; set; }
 
-        [Display(Name = "Idiomas")]
+        [Custom(Name = "Idiomas")]
         public IReadOnlyList<Language> Languages { get; set; } = Array.Empty<Language>();
 
-        [Display(Name = "Situação Atual")]
+        [Custom(Name = "Situação Atual")]
         public IReadOnlyList<CurrentSituation> CurrentSituation { get; set; } = Array.Empty<CurrentSituation>();
 
-        [Display(Name = "Intenções", Description = "Selecionado automaticamente de acordo com seu perfil")]
+        [Custom(Name = "Intenções", Description = "Selecionado automaticamente de acordo com seu perfil")]
         public IReadOnlyList<Intentions> Intentions { get; set; } = Array.Empty<Intentions>();
 
-        [Display(Name = "Sexo Biológico")]
+        [Custom(Name = "Sexo Biológico")]
         public IReadOnlyList<BiologicalSex> BiologicalSex { get; set; } = Array.Empty<BiologicalSex>();
 
-        [Display(Name = "Identidade de Gênero")]
+        [Custom(Name = "Identidade de Gênero")]
         public IReadOnlyList<GenderIdentity> GenderIdentity { get; set; } = Array.Empty<GenderIdentity>();
 
-        [Display(Name = "Orientação Sexual")]
+        [Custom(Name = "Orientação Sexual")]
         public IReadOnlyList<SexualOrientation> SexualOrientation { get; set; } = Array.Empty<SexualOrientation>();
 
         #endregion BASIC
 
         #region BIO
 
-        [Display(Name = "Idade (Min - Máx)")]
+        [Custom(Name = "Idade (Min - Máx)")]
         public int MinimalAge { get; set; }
 
-        [Display(Name = "Idade (Min - Máx)")]
+        [Custom(Name = "Idade (Min - Máx)")]
         public int MaxAge { get; set; }
 
-        [Display(Name = "Altura (Min - Máx)")]
+        [Custom(Name = "Altura (Min - Máx)")]
         public Height? MinimalHeight { get; set; }
 
-        [Display(Name = "Altura (Min - Máx)")]
+        [Custom(Name = "Altura (Min - Máx)")]
         public Height? MaxHeight { get; set; }
 
-        [Display(Name = "Raça")]
+        [Custom(Name = "Raça")]
         public IReadOnlyList<RaceCategory> RaceCategory { get; set; } = Array.Empty<RaceCategory>();
 
-        [Display(Name = "Corpo")]
+        [Custom(Name = "Corpo")]
         public IReadOnlyList<BodyMass> BodyMass { get; set; } = Array.Empty<BodyMass>();
 
         #endregion BIO

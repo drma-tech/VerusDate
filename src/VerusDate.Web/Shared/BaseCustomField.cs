@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Linq.Expressions;
-using VerusDate.Shared.Helper;
+using VerusDate.Shared.Core;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Shared
@@ -22,7 +22,7 @@ namespace VerusDate.Web.Shared
         [Parameter] public bool Disabled { get; set; }
         [Parameter] public Expression<Func<TValue>> For { get; set; }
 
-        public string Label => " " + AttributeHelper.GetName(For);
+        public string Label => " " + For.GetCustomAttribute().Name;
 
         protected void PrivateData()
         {

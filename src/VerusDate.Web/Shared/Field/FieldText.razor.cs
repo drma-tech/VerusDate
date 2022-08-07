@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using VerusDate.Shared.Core;
 
 namespace VerusDate.Web.Shared.Field
 {
@@ -17,7 +16,7 @@ namespace VerusDate.Web.Shared.Field
         [Parameter] public object ButtomCssIcon { get; set; }
         [Parameter] public string ButtomTitle { get; set; }
 
-        private string Description => GetDescription();
+        private string Description => For.GetCustomAttribute().Description;
 
         protected async Task SetValue(string value)
         {

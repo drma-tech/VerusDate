@@ -4,7 +4,7 @@
 
 <Field Horizontal="true">
     <FieldLabel ColumnSize="@GetLabelSize()">
-        <Blazorise.Icon Name="@CssIcon"></Blazorise.Icon> @GetName()
+        <Blazorise.Icon Name="@CssIcon"></Blazorise.Icon> @For.GetCustomAttribute().Name
         @if (Required)
         {
             <div style="color: red; display: initial;"> *</div>
@@ -16,11 +16,14 @@
                 @if (Multiple)
                 {
                     <div @attributes="@GetAttributes("height: auto; min-height: 38px;")">
-                        @foreach (var item in SelectedValues)
+                        @if (SelectedValues != null)
                         {
-                            <Badge Color="Color.Secondary" Margin="Margin.Is1.OnWidescreen" Style="font-size: 90%;">
-                                @item.GetName()
-                            </Badge>
+                            @foreach (var item in SelectedValues)
+                            {
+                                <Badge Color="Color.Secondary" Margin="Margin.Is1.OnWidescreen" Style="font-size: 90%;">
+                                    @item.GetName()
+                                </Badge>
+                            }
                         }
                     </div>
                 }
@@ -29,6 +32,7 @@
                     <Select TValue="TValue" SelectedValue="@SelectedValue" SelectedValueChanged="@SetValue" Disabled="@Disabled">
                         @if (ShowGroup)
                         {
+                            <SelectItem></SelectItem>
                             @foreach (var group in EnumHelper.GetList<TEnum>().Select(s => s.Group).Distinct())
                             {
                                 if (string.IsNullOrEmpty(group))
@@ -51,6 +55,7 @@
                         }
                         else
                         {
+                            <SelectItem></SelectItem>
                             @foreach (var item in EnumHelper.GetList<TEnum>())
                             {
                                 <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>

@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using VerusDate.Shared.Core;
 using VerusDate.Shared.Helper;
 
 namespace VerusDate.Shared.Model
@@ -9,16 +9,16 @@ namespace VerusDate.Shared.Model
 
         private static int MaxRankFood => 20;
 
-        [Display(Name = "Ranking")]
+        [Custom(Name = "Ranking")]
         public int Ranking { get; set; }
 
-        [Display(Name = "XP")]
+        [Custom(Name = "XP")]
         public int XP { get; set; }
 
-        [Display(Name = "Food")]
+        [Custom(Name = "Food")]
         public int Food { get; set; }
 
-        [Display(Name = "Diamond")]
+        [Custom(Name = "Diamond")]
         public int Diamond { get; set; }
 
         public int GetMaxFood()

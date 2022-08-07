@@ -37,7 +37,7 @@
         <ValidationMessage For="@For"></ValidationMessage>
     </FieldBody>
     <Column ColumnSize="ColumnSize.IsFull">
-        <FieldHelp Style="color: #17a2b8 !important">@AttributeHelper.GetDescription(For)</FieldHelp>
+        <FieldHelp Style="color: #17a2b8 !important">@For.GetCustomAttribute().Description</FieldHelp>
     </Column>
 </Field>
 

@@ -19,11 +19,11 @@ namespace VerusDate.Web.Core
             //BASIC - DEFINIÇÕES DE BUSCA
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.BiologicalSex), CheckEnumArray(profView.Basic.BiologicalSex, profUser.Preference.BiologicalSex)));
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.CurrentSituation), CheckEnumArray(profView.Basic.CurrentSituation, profUser.Preference.CurrentSituation)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Intentions), CheckEnumArray(profView.Basic.Intentions, profUser.Preference.Intentions), profView.Basic.Intentions.Intersect(profUser.Preference.Intentions).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Intentions), CheckEnumArrays(profView.Basic.Intentions, profUser.Preference.Intentions), profView.Basic.Intentions.Intersect(profUser.Preference.Intentions).Select(s => (int)s)));
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.GenderIdentity), CheckEnumArray(profView.Basic.GenderIdentity, profUser.Preference.GenderIdentity)));
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.SexualOrientation), CheckEnumArray(profView.Basic.SexualOrientation, profUser.Preference.SexualOrientation)));
             obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Distance), profView.Distance <= (double)profUser.Preference.Distance));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Languages), CheckEnumArray(profView.Basic.Languages, profUser.Preference.Languages), profView.Basic.Languages.Intersect(profUser.Preference.Languages).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Languages), CheckEnumArrays(profView.Basic.Languages, profUser.Preference.Languages), profView.Basic.Languages.Intersect(profUser.Preference.Languages).Select(s => (int)s)));
 
             //BIO - DEFINIÇÕES DE BUSCA
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Age), CheckAge(profView.Age, profUser.Preference.MinimalAge, profUser.Preference.MaxAge)));
@@ -51,14 +51,14 @@ namespace VerusDate.Web.Core
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.SexPersonality), CheckEnumArray(profView.Lifestyle.SexPersonality.Value, profUser.Lifestyle.SexPersonalityPreferences)));
 
                 //INTEREST - COMPATIBILIDADE DE PERFIL / UMA OPÇAO IGUAL JÁ INDICA COMPATIBILIDADE
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Food), CheckEnumArray(profView.Interest.Food, profUser.Interest.Food), profView.Interest.Food.Intersect(profUser.Interest.Food).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Vacation), CheckEnumArray(profView.Interest.Vacation, profUser.Interest.Vacation), profView.Interest.Vacation.Intersect(profUser.Interest.Vacation).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Sports), CheckEnumArray(profView.Interest.Sports, profUser.Interest.Sports), profView.Interest.Sports.Intersect(profUser.Interest.Sports).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.LeisureActivities), CheckEnumArray(profView.Interest.LeisureActivities, profUser.Interest.LeisureActivities), profView.Interest.LeisureActivities.Intersect(profUser.Interest.LeisureActivities).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.MusicGenre), CheckEnumArray(profView.Interest.MusicGenre, profUser.Interest.MusicGenre), profView.Interest.MusicGenre.Intersect(profUser.Interest.MusicGenre).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.MovieGenre), CheckEnumArray(profView.Interest.MovieGenre, profUser.Interest.MovieGenre), profView.Interest.MovieGenre.Intersect(profUser.Interest.MovieGenre).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.TVGenre), CheckEnumArray(profView.Interest.TVGenre, profUser.Interest.TVGenre), profView.Interest.TVGenre.Intersect(profUser.Interest.TVGenre).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.ReadingGenre), CheckEnumArray(profView.Interest.ReadingGenre, profUser.Interest.ReadingGenre), profView.Interest.ReadingGenre.Intersect(profUser.Interest.ReadingGenre).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Food), CheckEnumArrays(profView.Interest.Food, profUser.Interest.Food), profView.Interest.Food.Intersect(profUser.Interest.Food).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Vacation), CheckEnumArrays(profView.Interest.Vacation, profUser.Interest.Vacation), profView.Interest.Vacation.Intersect(profUser.Interest.Vacation).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Sports), CheckEnumArrays(profView.Interest.Sports, profUser.Interest.Sports), profView.Interest.Sports.Intersect(profUser.Interest.Sports).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.LeisureActivities), CheckEnumArrays(profView.Interest.LeisureActivities, profUser.Interest.LeisureActivities), profView.Interest.LeisureActivities.Intersect(profUser.Interest.LeisureActivities).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.MusicGenre), CheckEnumArrays(profView.Interest.MusicGenre, profUser.Interest.MusicGenre), profView.Interest.MusicGenre.Intersect(profUser.Interest.MusicGenre).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.MovieGenre), CheckEnumArrays(profView.Interest.MovieGenre, profUser.Interest.MovieGenre), profView.Interest.MovieGenre.Intersect(profUser.Interest.MovieGenre).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.TVGenre), CheckEnumArrays(profView.Interest.TVGenre, profUser.Interest.TVGenre), profView.Interest.TVGenre.Intersect(profUser.Interest.TVGenre).Select(s => (int)s)));
+                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.ReadingGenre), CheckEnumArrays(profView.Interest.ReadingGenre, profUser.Interest.ReadingGenre), profView.Interest.ReadingGenre.Intersect(profUser.Interest.ReadingGenre).Select(s => (int)s)));
             }
 
             return obj;
@@ -71,14 +71,17 @@ namespace VerusDate.Web.Core
             return view == looking;
         }
 
-        private static bool CheckEnumArray<T>(T view, IEnumerable<T> looking) where T : System.Enum
+        private static bool CheckEnumArray<T>(T? view, IEnumerable<T> looking) where T : struct, Enum
         {
             if (!looking.Any()) return true; //If the user has not defined, then it is an affinity
 
-            return new T[] { view }.Intersect(looking).Any();
+            if (view.HasValue)
+                return new T[] { view.Value }.Intersect(looking).Any();
+            else
+                return true;
         }
 
-        private static bool CheckEnumArray<T>(IEnumerable<T> view, IEnumerable<T> looking) where T : System.Enum
+        private static bool CheckEnumArrays<T>(IEnumerable<T> view, IEnumerable<T> looking) where T : System.Enum
         {
             if (!looking.Any()) return true; //if the user did not choose any, then all are an affinity
 
@@ -127,7 +130,7 @@ namespace VerusDate.Web.Core
             };
         }
 
-        private static bool CheckHeight(Height Height, Height? Looking_MinimalHeight, Height? Looking_MaxHeight)
+        private static bool CheckHeight(Height? Height, Height? Looking_MinimalHeight, Height? Looking_MaxHeight)
         {
             if (Looking_MinimalHeight.HasValue && Looking_MaxHeight.HasValue)
             {

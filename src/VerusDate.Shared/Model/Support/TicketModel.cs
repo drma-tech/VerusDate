@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
@@ -13,16 +12,16 @@ namespace VerusDate.Shared.Model
 
         public string IdUserOwner { get; set; }
 
-        [Display(Name = "Tipo")]
+        [Custom(Name = "Tipo")]
         public TicketType TicketType { get; set; }
 
-        [Display(Name = "Descrição", Prompt = "Descreva o mais detalhado possível para que possamos entender melhor o problema")]
+        [Custom(Name = "Descrição", Prompt = "Descreva o mais detalhado possível para que possamos entender melhor o problema")]
         public string Description { get; set; }
 
-        [Display(Name = "Status")]
+        [Custom(Name = "Status")]
         public TicketStatus TicketStatus { get; set; }
 
-        [Display(Name = "Total de Votos")]
+        [Custom(Name = "Total de Votos")]
         public int TotalVotes { get; set; }
 
         public void ChangeStatus(TicketStatus ticketStatus)

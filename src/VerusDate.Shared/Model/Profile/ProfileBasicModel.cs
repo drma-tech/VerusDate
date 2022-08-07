@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Model
@@ -15,38 +15,38 @@ namespace VerusDate.Shared.Model
 
     public class ProfileBasicModel
     {
-        [Display(Name = "Nome / Apelido", Prompt = "Ex: Paulo ou Paulinho")]
+        [Custom(Name = "NickName_Name", Prompt = "NickName_Prompt", ResourceType = typeof(Resources.Model.ProfileBasicModel))]
         public string NickName { get; set; }
 
-        [Display(Name = "Descrição", Prompt = "Para sua própria segurança, favor não incluir seu celular, email ou quaisquer informações de contato. \n\nOBS: Promover redes sociais, produtos, serviços e/ou conteúdos que violem direitos de terceiros estará sujeito a banimento da plataforma.")]
+        [Custom(Name = "Description_Name", Prompt = "Description_Prompt", ResourceType = typeof(Resources.Model.ProfileBasicModel))]
         public string Description { get; set; }
 
-        [Display(Name = "Longitude")]
+        [Custom(Name = "Longitude")]
         public double? Longitude { get; set; }
 
-        [Display(Name = "Latitude")]
+        [Custom(Name = "Latitude")]
         public double? Latitude { get; set; }
 
-        [Display(Name = "Localização", Prompt = "Favor clicar no botão ao lado", Description = "Informação automática (deve-se liberar acesso a localização do aparelho)")]
+        [Custom(Name = "Location_Name", Prompt = "Location_Prompt", Description = "Location_Description", ResourceType = typeof(Resources.Model.ProfileBasicModel))]
         public string Location { get; set; }
 
-        [Display(Name = "Idiomas", Description = "Escolhido automaticamente de acordo com os idiomas oficiais do pais (caso disponível)")]
+        [Custom(Name = "Languages_Name", Description = "Languages_Description", ResourceType = typeof(Resources.Model.ProfileBasicModel))]
         public IReadOnlyList<Language> Languages { get; set; } = Array.Empty<Language>();
 
-        [Display(Name = "Situação Atual")]
-        public CurrentSituation CurrentSituation { get; set; }
+        [Custom(Name = "CurrentSituation_Name", ResourceType = typeof(Resources.Model.ProfileBasicModel))]
+        public CurrentSituation? CurrentSituation { get; set; }
 
-        [Display(Name = "Intenções", Description = "De acordo com a seleção, poderá alterar os campos disponíveis e/ou obrigatórios (escolha até 2 opções)")]
+        [Custom(Name = "Intentions_Name", Description = "Intentions_Description", ResourceType = typeof(Resources.Model.ProfileBasicModel))]
         public IReadOnlyList<Intentions> Intentions { get; set; } = Array.Empty<Intentions>();
 
-        [Display(Name = "Sexo Biológico")]
-        public BiologicalSex BiologicalSex { get; set; }
+        [Custom(Name = "BiologicalSex_Name", ResourceType = typeof(Resources.Model.ProfileBasicModel))]
+        public BiologicalSex? BiologicalSex { get; set; }
 
-        [Display(Name = "Identidade de Gênero", Description = "Opção mais comum selecionada automaticamente")]
-        public GenderIdentity GenderIdentity { get; set; }
+        [Custom(Name = "GenderIdentity_Name", Description = "GenderIdentity_Description", ResourceType = typeof(Resources.Model.ProfileBasicModel))]
+        public GenderIdentity? GenderIdentity { get; set; }
 
-        [Display(Name = "Orientação Sexual", Description = "Opção mais comum selecionada automaticamente")]
-        public SexualOrientation SexualOrientation { get; set; }
+        [Custom(Name = "SexualOrientation_Name", Description = "SexualOrientation_Description", ResourceType = typeof(Resources.Model.ProfileBasicModel))]
+        public SexualOrientation? SexualOrientation { get; set; }
 
         public string GetLocation(LocationType type)
         {

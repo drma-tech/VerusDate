@@ -141,6 +141,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>WantChildren.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Model\ProfileBasicModel.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ProfileBasicModel.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Model\ProfileBioModel.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ProfileBioModel.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Model\ProfileLifestyleModel.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ProfileLifestyleModel.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -250,6 +265,18 @@
     <EmbeddedResource Update="Resources\Enum\WantChildren.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>WantChildren.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Model\ProfileBasicModel.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProfileBasicModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Model\ProfileBioModel.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProfileBioModel.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Model\ProfileLifestyleModel.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProfileLifestyleModel.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   

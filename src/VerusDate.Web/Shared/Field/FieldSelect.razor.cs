@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Linq.Expressions;
 using VerusDate.Shared.Helper;
+using VerusDate.Shared.Core;
 
 namespace VerusDate.Web.Shared.Field
 {
@@ -24,7 +25,7 @@ namespace VerusDate.Web.Shared.Field
         [Parameter] public IReadOnlyList<TEnum> SelectedValues { get; set; }
         [Parameter] public EventCallback<IReadOnlyList<TEnum>> SelectedValuesChanged { get; set; }
 
-        private string Description => GetDescription();
+        private string Description => For.GetCustomAttribute().Description;
 
         private modal.ProfileDataHelp<TValue, TEnum> dataHelp;
         private modal.ProfileDataSelect<TValue, TEnum> dataSelect;

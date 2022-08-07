@@ -14,31 +14,31 @@ namespace VerusDate.Shared.Model
 
         public string IdUserOwner { get; set; }
 
-        [Display(Name = "Data Início")]
+        [Custom(Name = "Data Início")]
         public DateTime DtStart { get; set; } = DateTime.UtcNow.AddDays(7);
 
-        [Display(Name = "Data Fim")]
+        [Custom(Name = "Data Fim")]
         public DateTime DtEnd { get; set; } = DateTime.UtcNow.AddDays(7).AddHours(3);
 
-        [Display(Name = "Tipo de Evento")]
+        [Custom(Name = "Tipo de Evento")]
         public EventType EventType { get; set; }
 
-        [Display(Name = "Localização")]
+        [Custom(Name = "Localização")]
         public string Location { get; set; }
 
-        [Display(Name = "Idade (Min - Máx)")]
+        [Custom(Name = "Idade (Min - Máx)")]
         public int MinimalAge { get; set; } = 18;
 
-        [Display(Name = "Idade (Min - Máx)")]
+        [Custom(Name = "Idade (Min - Máx)")]
         public int MaxAge { get; set; } = 40;
 
-        [Display(Name = "Intenções")]
+        [Custom(Name = "Intenções")]
         public IReadOnlyList<Intentions> Intentions { get; set; } = new List<Intentions>();
 
-        [Display(Name = "Orientação Sexual")]
+        [Custom(Name = "Orientação Sexual")]
         public SexualOrientation[] SexualOrientation { get; set; }
 
-        [Display(Name = "Equilibrar os gêneros?")]
+        [Custom(Name = "Equilibrar os gêneros?")]
         public bool GenderDivision { get; set; }
 
         public void NewBlindDate(DateTime DtStart, string Location, int MinimalAge, int MaxAge, Intentions[] Intentions,

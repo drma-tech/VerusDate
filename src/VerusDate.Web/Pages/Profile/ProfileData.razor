@@ -34,15 +34,15 @@ else
                                  CssIcon="@FontAwesomeIcons.Language" Required="true" Multiple="true"></FieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <FieldSelect For="@(() => profile.Basic.CurrentSituation)" TValue="CurrentSituation" TEnum="CurrentSituation" @bind-SelectedValue="@profile.Basic.CurrentSituation"
+                        <FieldSelect For="@(() => profile.Basic.CurrentSituation)" TValue="CurrentSituation?" TEnum="CurrentSituation" @bind-SelectedValue="@profile.Basic.CurrentSituation"
                                  CssIcon="@FontAwesomeIcons.Heart" Required="true"></FieldSelect>
                         <FieldSelect For="@(() => profile.Basic.Intentions)" TValue="IReadOnlyList<Intentions>" TEnum="Intentions" @bind-SelectedValues="@profile.Basic.Intentions"
                                  CssIcon="@FontAwesomeIcons.Search" ShowGroup="true" Required="true" Multiple="true"></FieldSelect>
-                        <FieldSelect For="@(() => profile.Basic.BiologicalSex)" TValue="BiologicalSex" TEnum="BiologicalSex" @bind-SelectedValue="@profile.Basic.BiologicalSex"
+                        <FieldSelect For="@(() => profile.Basic.BiologicalSex)" TValue="BiologicalSex?" TEnum="BiologicalSex" @bind-SelectedValue="@profile.Basic.BiologicalSex"
                                  CssIcon="@FontAwesomeIcons.Neuter" Required="true"></FieldSelect>
-                        <FieldSelect For="@(() => profile.Basic.GenderIdentity)" TValue="GenderIdentity" TEnum="GenderIdentity" @bind-SelectedValue="@profile.Basic.GenderIdentity"
+                        <FieldSelect For="@(() => profile.Basic.GenderIdentity)" TValue="GenderIdentity?" TEnum="GenderIdentity" @bind-SelectedValue="@profile.Basic.GenderIdentity"
                                  CssIcon="@FontAwesomeIcons.Neuter" ShowGroup="true" Required="true"></FieldSelect>
-                        <FieldSelect For="@(() => profile.Basic.SexualOrientation)" TValue="SexualOrientation" TEnum="SexualOrientation" @bind-SelectedValue="@profile.Basic.SexualOrientation"
+                        <FieldSelect For="@(() => profile.Basic.SexualOrientation)" TValue="SexualOrientation?" TEnum="SexualOrientation" @bind-SelectedValue="@profile.Basic.SexualOrientation"
                                  CssIcon="@FontAwesomeIcons.Neuter" Required="true"></FieldSelect>
                     </Column>
                 </Row>
@@ -63,13 +63,13 @@ else
                                 <TextEdit Text="@profile.Bio.BirthDate.GetZodiac().GetName()" Disabled="true"></TextEdit>
                             </FieldBody>
                         </Field>
-                        <FieldSelect For="@(() => profile.Bio.BodyMass)" TValue="BodyMass" TEnum="BodyMass" @bind-SelectedValue="@profile.Bio.BodyMass"
+                        <FieldSelect For="@(() => profile.Bio.BodyMass)" TValue="BodyMass?" TEnum="BodyMass" @bind-SelectedValue="@profile.Bio.BodyMass"
                                  CssIcon="@FontAwesomeIcons.Weight" Required="true" ShowHelper="false"></FieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                        <FieldSelect For="@(() => profile.Bio.RaceCategory)" TValue="RaceCategory" TEnum="RaceCategory" @bind-SelectedValue="@profile.Bio.RaceCategory"
+                        <FieldSelect For="@(() => profile.Bio.RaceCategory)" TValue="RaceCategory?" TEnum="RaceCategory" @bind-SelectedValue="@profile.Bio.RaceCategory"
                                  CssIcon="@FontAwesomeIcons.Globe" Required="true"></FieldSelect>
-                        <FieldSelect For="@(() => profile.Bio.Height)" TValue="VerusDate.Shared.Enum.Height" TEnum="VerusDate.Shared.Enum.Height" @bind-SelectedValue="@profile.Bio.Height"
+                        <FieldSelect For="@(() => profile.Bio.Height)" TValue="VerusDate.Shared.Enum.Height?" TEnum="VerusDate.Shared.Enum.Height" @bind-SelectedValue="@profile.Bio.Height"
                                  CssIcon="@FontAwesomeIcons.Ruler" Required="true" ShowHelper="false"></FieldSelect>
                     </Column>
                 </Row>

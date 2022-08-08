@@ -14,7 +14,7 @@ namespace VerusDate.Web.Core
             if (profile == null) throw new NotificationException("Preenchimento de cadastro do perfil não encontrado");
             if (preference == null) preference = new ProfilePreferenceModel();
 
-            preference.Distance = Distance._20;
+            preference.Distance = Distance._1;
             preference.Languages = profile.Basic.Languages;
             preference.CurrentSituation = GetCurrentSituation(profile);
             //looking.Intent = profile.Basic.Intent; //selecionado ao carregar a tela

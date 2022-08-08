@@ -71,24 +71,24 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 
             // *** BASIC ***
 
-            if (user.Preference.Distance == Shared.Enum.Distance.Country)
-            {
-                SQL.Append("	AND SUBSTRING(c.basic.location, 0, INDEX_OF(c.basic.location, ' - ')) = @location ");
-                filter.Add("@location", user.Basic.GetLocation(LocationType.Country));
-            }
-            else if (user.Preference.Distance == Shared.Enum.Distance.City)
-            {
-                SQL.Append("	AND c.basic.location = @location ");
-                filter.Add("@location", user.Basic.Location);
-            }
-            else
-            {
+            //if (user.Preference.Distance == Shared.Enum.Distance.Country)
+            //{
+            //    SQL.Append("	AND SUBSTRING(c.basic.location, 0, INDEX_OF(c.basic.location, ' - ')) = @location ");
+            //    filter.Add("@location", user.Basic.GetLocation(LocationType.Country));
+            //}
+            //else if (user.Preference.Distance == Shared.Enum.Distance.City)
+            //{
+            //    SQL.Append("	AND c.basic.location = @location ");
+            //    filter.Add("@location", user.Basic.Location);
+            //}
+            //else
+            //{
                 SQL.Append("	AND ROUND(ST_DISTANCE({'type': 'Point', 'coordinates':[@latitude, @longitude]},{'type': 'Point', 'coordinates':[c.basic.latitude, c.basic.longitude]}) / @valueCalDistance) <= @distance ");
                 filter.Add("@latitude", user.Basic.Latitude);
                 filter.Add("@longitude", user.Basic.Longitude);
                 filter.Add("@valueCalDistance", valueCalDistance);
                 filter.Add("@distance", user.Preference.Distance);
-            }
+            //}
 
             SQL.AddEnumFilter(looking.CurrentSituation, "c.basic.currentSituation");
 

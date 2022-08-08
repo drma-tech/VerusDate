@@ -8,7 +8,9 @@
     <Column ColumnSize="ColumnSize.Is12.OnMobile.Is10.OnDesktop.Is8.OnFullHD">
         @foreach (var provider in providers)
         {
-            <Button Block="true" Class="@("btn-" + @provider.Key)" Size="Size.Large" Margin="Margin.Is3.FromBottom" Type="ButtonType.Link" To="@("/.auth/login/" + @provider.Key)">
+            var link = provider.Key;
+            if (link == "microsoft") link = "aad";
+            <Button Block="true" Class="@("btn-" + @provider.Key)" Size="Size.Large" Margin="Margin.Is3.FromBottom" Type="ButtonType.Link" To="@("/.auth/login/" + @link)">
                 <span class="fab fa-@provider.Key"></span> Logar com @provider.Value
             </Button>
         }
@@ -19,7 +21,9 @@
     public Dictionary<string, string> providers = new Dictionary<string, string>
     {
         { "google", "Google" },
+        { "facebook", "Facebook" },
         { "twitter", "Twitter" },
-        { "facebook", "Facebook" }
+        { "github", "GitHub"},
+        { "microsoft", "Microsoft"}
     };
 }

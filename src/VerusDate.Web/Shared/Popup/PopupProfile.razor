@@ -18,7 +18,8 @@
                     <Column ColumnSize="ColumnSize.IsHalf.OnDesktop.Is4.OnWidescreen">
                         <Card Margin="Margin.Is3.FromBottom">
                             <CardBody Padding="Padding.Is0">
-                                <Badge Color="Color.Success" Style="position: absolute; top: 10px; left: 10px; z-index: 2;">@(GetPercentAffinity(null) + "%")</Badge>
+                                @{ int totPercAff = @GetPercentAffinity(null); }
+                                <Badge Color="GetColor(totPercAff)" Style="position: absolute; top: 10px; left: 10px; z-index: 2;">@(totPercAff + "%")</Badge>
                                 <Badge Color="Color.Dark" Style="position: absolute; top: 10px; right: 10px; z-index: 2;">
                                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Blazorise.Icon> @imageDataUriGallery.Count()
                                 </Badge>
@@ -128,7 +129,7 @@
                                         </Button>
                                     </CardHeader>
                                     <CardBody>
-                                        <Row>
+                                        <Row Gutter="(8,0)">
                                             <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
                                                 <Badge Color="Color.Secondary" Display="Display.Block">Básico</Badge>
                                             </Column>
@@ -151,6 +152,14 @@
                                             <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
                                                 <Progress>
                                                     <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Lifestyle)" Background="GetBackground(AffinityCategory.Lifestyle)" Striped="true">@GetPercentAffinity(AffinityCategory.Lifestyle)%</ProgressBar>
+                                                </Progress>
+                                            </Column>
+                                            <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
+                                                <Badge Color="Color.Secondary" Display="Display.Block">Personalidade</Badge>
+                                            </Column>
+                                            <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
+                                                <Progress>
+                                                    <ProgressBar Min="0" Max="100" Value="GetPercentAffinity(AffinityCategory.Personality)" Background="GetBackground(AffinityCategory.Personality)" Striped="true">@GetPercentAffinity(AffinityCategory.Personality)%</ProgressBar>
                                                 </Progress>
                                             </Column>
                                             <Column ColumnSize="ColumnSize.IsHalf" Margin="Margin.Is2.FromBottom">
@@ -196,9 +205,9 @@
                                 <ItemDataProfile For="@(() => view.Lifestyle.EducationLevel)" Value="@view.Lifestyle.EducationLevel" ClassIcon="fas fa-graduation-cap" Affinities="@affinities"></ItemDataProfile>
                                 <ItemDataProfile For="@(() => view.Lifestyle.CareerCluster)" Value="@view.Lifestyle.CareerCluster" ClassIcon="fas fa-briefcase" Affinities="@affinities"></ItemDataProfile>
                                 <ItemDataProfile For="@(() => view.Lifestyle.Religion)" Value="@view.Lifestyle.Religion" ClassIcon="fas fa-praying-hands" Affinities="@affinities"></ItemDataProfile>
-                                
+
                                 <Divider DividerType="DividerType.TextContent" Text="Personalidade"></Divider>
-                                
+
                                 <ItemDataProfile For="@(() => view.Lifestyle.MoneyPersonality)" Value="@view.Lifestyle.MoneyPersonality" ClassIcon="fas fa-wallet" Affinities="@affinities"></ItemDataProfile>
                                 <ItemDataProfile For="@(() => view.Lifestyle.SplitTheBill)" Value="@view.Lifestyle.SplitTheBill" ClassIcon="fas fa-hand-holding-usd" Affinities="@affinities"></ItemDataProfile>
                                 <ItemDataProfile For="@(() => view.Lifestyle.RelationshipPersonality)" Value="@view.Lifestyle.RelationshipPersonality" ClassIcon="fas fa-people-arrows" Affinities="@affinities"></ItemDataProfile>
@@ -269,10 +278,10 @@
     private Shared.modal.ProfileReport report;
 
     private VisibilityOptions Options => new VisibilityOptions()
-    {
-        Loading = IsLoading,
-        Invalid = IdUserView == ComponenteUtils.IdUser
-    };
+        {
+            Loading = IsLoading,
+            Invalid = IdUserView == ComponenteUtils.IdUser
+        };
 
     protected async Task LoadData()
     {
@@ -325,16 +334,19 @@
             var totBasic = GetPercentAffinity(AffinityCategory.Basic);
             var totBio = GetPercentAffinity(AffinityCategory.Bio);
             var totLifestyle = GetPercentAffinity(AffinityCategory.Lifestyle);
+            var totPersonality = GetPercentAffinity(AffinityCategory.Personality);
             var totInterest = GetPercentAffinity(AffinityCategory.Interest);
 
             var pesoBasic = 1;
             var pesoBio = 1;
-            var pesoLifestyle = 4;
+            var pesoLifestyle = 3;
+            var pesoPersonality = 3;
             var pesoInterest = 2;
 
             if (user.Basic.Intentions.IsLongTerm() && view.Basic.Intentions.IsLongTerm())
             {
-                return (totBasic * pesoBasic + totBio * pesoBio + totLifestyle * pesoLifestyle + totInterest * pesoInterest) / (pesoBasic + pesoBio + pesoLifestyle + pesoInterest);
+                return (totBasic * pesoBasic + totBio * pesoBio + totLifestyle * pesoLifestyle + totPersonality * pesoPersonality + totInterest * pesoInterest) /
+                (pesoBasic + pesoBio + pesoLifestyle + pesoPersonality + pesoInterest);
             }
             else
             {
@@ -367,6 +379,22 @@
         else
         {
             return Background.Danger;
+        }
+    }
+
+    public Color GetColor(int perc)
+    {
+        if (perc >= 80)
+        {
+            return Color.Success;
+        }
+        else if (perc >= 60)
+        {
+            return Color.Warning;
+        }
+        else
+        {
+            return Color.Danger;
         }
     }
 }

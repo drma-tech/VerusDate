@@ -7,6 +7,7 @@ namespace VerusDate.Shared
         Basic,
         Bio,
         Lifestyle,
+        Personality,
         Interest
     }
 

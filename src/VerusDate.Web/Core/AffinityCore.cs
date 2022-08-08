@@ -42,12 +42,14 @@ namespace VerusDate.Web.Core
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Religion), CheckEnum((int)profView.Lifestyle.Religion.Value, (int?)profUser.Lifestyle.Religion)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.EducationLevel), CheckEnum((int)profView.Lifestyle.EducationLevel.Value, (int?)profUser.Lifestyle.EducationLevel)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.CareerCluster), CheckEnum((int)profView.Lifestyle.CareerCluster.Value, (int)profUser.Lifestyle.CareerCluster.Value)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int)profView.Lifestyle.MoneyPersonality.Value, (int)profUser.Lifestyle.MoneyPersonality.Value)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.SplitTheBill), CheckSplitTheBill(profView.Lifestyle.SplitTheBill.Value, profUser.Lifestyle.SplitTheBill.Value)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality.Value)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.LoveLanguage), CheckEnum((int)profView.Lifestyle.LoveLanguage.Value, (int?)profUser.Lifestyle.LoveLanguage)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator, profUser.Lifestyle.MyersBriggsTypeIndicator)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.SexPersonality), CheckEnumArray(profView.Lifestyle.SexPersonality.Value, profUser.Lifestyle.SexPersonalityPreferences)));
+                
+                //PERSONALITY
+                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int)profView.Lifestyle.MoneyPersonality.Value, (int)profUser.Lifestyle.MoneyPersonality.Value)));
+                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.SplitTheBill), CheckSplitTheBill(profView.Lifestyle.SplitTheBill.Value, profUser.Lifestyle.SplitTheBill.Value)));
+                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality.Value, profUser.Lifestyle.RelationshipPersonality.Value)));
+                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.LoveLanguage), CheckEnum((int)profView.Lifestyle.LoveLanguage.Value, (int?)profUser.Lifestyle.LoveLanguage)));
+                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator, profUser.Lifestyle.MyersBriggsTypeIndicator)));
+                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.SexPersonality), CheckEnumArray(profView.Lifestyle.SexPersonality.Value, profUser.Lifestyle.SexPersonalityPreferences)));
 
                 //INTEREST - COMPATIBILIDADE DE PERFIL / UMA OPÇAO IGUAL JÁ INDICA COMPATIBILIDADE
                 obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Food), CheckEnumArrays(profView.Interest.Food, profUser.Interest.Food), profView.Interest.Food.Intersect(profUser.Interest.Food).Select(s => (int)s)));

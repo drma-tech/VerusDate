@@ -117,19 +117,94 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BirthDate_Name" xml:space="preserve">
-    <value>Birth Date</value>
+  <data name="Action_Description" xml:space="preserve">
+    <value>Action genre films are defined by risk and challenge. Including fight scenes, stunts, car chases and general danger. (Heroic Bloodshed, Military Action, Espionage, Wuxia, Disaster, Adventure, Superhero)</value>
   </data>
-  <data name="BodyMass_Name" xml:space="preserve">
-    <value>Body</value>
+  <data name="Action_Name" xml:space="preserve">
+    <value>Action</value>
   </data>
-  <data name="Height_Name" xml:space="preserve">
-    <value>Height</value>
+  <data name="Animation_Description" xml:space="preserve">
+    <value>The genre of animation is defined by inanimate objects being manipulated to appear alive. (Traditional, Stop Motion, Claymation, Cutout, Computer Generated Images - CGI, Puppetry, Live-Action)</value>
   </data>
-  <data name="RaceCategory_Description" xml:space="preserve">
-    <value>Classification defined by US OMB</value>
+  <data name="Animation_Name" xml:space="preserve">
+    <value>Animation</value>
   </data>
-  <data name="RaceCategory_Name" xml:space="preserve">
-    <value>Race</value>
+  <data name="Comedy_Description" xml:space="preserve">
+    <value>The comedy genre is defined by events that are intended to make someone laugh, whether the story is macabre, funny or silly. (Action Comedy, Dark Comedy, Romantic Comedy, Buddy Comedy, Road Comedy, Slap Comedy, Parody, Satire, Sitcom, Sketch Comedy, Mockumentary, prank)</value>
+  </data>
+  <data name="Comedy_Name" xml:space="preserve">
+    <value>Comedy</value>
+  </data>
+  <data name="Crime_Description" xml:space="preserve">
+    <value>The crime genre deals with both sides of the criminal justice system, but does not focus on legislative issues or civil cases and lawsuits. (Caper, Heist, Gangster, Policeman, Detective, Court, Procedural)</value>
+  </data>
+  <data name="Crime_Name" xml:space="preserve">
+    <value>Crime</value>
+  </data>
+  <data name="Drama_Description" xml:space="preserve">
+    <value>The dramatic genre is defined by conflict and often looks to reality rather than sensationalism. (Melodrama, Teen Drama, Philosophical Drama, Medical Drama, Legal Drama, Political Drama, Anthropological Drama, Religious Drama, Docudrama)</value>
+  </data>
+  <data name="Drama_Name" xml:space="preserve">
+    <value>Drama</value>
+  </data>
+  <data name="Experimental_Description" xml:space="preserve">
+    <value>The experimental genre is often defined by the idea that the work of art and entertainment does not fit into a particular genre or subgenre, and is conceived as such. (Surrealistic, Absurd)</value>
+  </data>
+  <data name="Experimental_Name" xml:space="preserve">
+    <value>Experimental</value>
+  </data>
+  <data name="Fantasy_Description" xml:space="preserve">
+    <value>The fantasy genre is defined by both the circumstances and the setting within a fictional universe with an unrealistic set of natural laws. (Contemporary Fantasy, Urban Fantasy, Dark Fantasy, Elevated Fantasy, Myth)</value>
+  </data>
+  <data name="Fantasy_Name" xml:space="preserve">
+    <value>Fantasy</value>
+  </data>
+  <data name="Historical_Description" xml:space="preserve">
+    <value>The historical genre can be divided into two sections. One deals with accurate representations of historical accounts, which may include biographies, autobiographies, and memoirs. The other section is made up of fictional films that are placed within an accurate representation of a historical setting. (Historical event, biography, historical epic, historical fiction, period piece, alternative history)</value>
+  </data>
+  <data name="Historical_Name" xml:space="preserve">
+    <value>Historical</value>
+  </data>
+  <data name="Horror_Description" xml:space="preserve">
+    <value>The horror genre is centered around the depiction of terrifying or macabre events for the sake of entertainment. (Ghost, Monster, Werewolf, Vampire, Hidden, Slasher, Splatter, Found footage, Zombie)</value>
+  </data>
+  <data name="Horror_Name" xml:space="preserve">
+    <value>Horror</value>
+  </data>
+  <data name="Musical_Description" xml:space="preserve">
+    <value>Musicals can incorporate any other genre, but they do incorporate characters who sing songs and perform dance numbers.</value>
+  </data>
+  <data name="Musical_Name" xml:space="preserve">
+    <value>Musical</value>
+  </data>
+  <data name="Romance_Description" xml:space="preserve">
+    <value>The romance genre is defined by intimate relationships. (romance drama, romance thriller, period romance)</value>
+  </data>
+  <data name="Romance_Name" xml:space="preserve">
+    <value>Romance</value>
+  </data>
+  <data name="ScienceFiction_Description" xml:space="preserve">
+    <value>Science fiction films are defined by a mixture of speculation and science. (Post-apocalyptic, Utopian, Dystopian, Cyberpunk, Steampunk, Tech Noir, Space Opera, Contemporary, Military)</value>
+  </data>
+  <data name="ScienceFiction_Name" xml:space="preserve">
+    <value>Science Fiction</value>
+  </data>
+  <data name="Thriller_Description" xml:space="preserve">
+    <value>A thriller story is primarily about emotional purpose, which is to provoke strong emotions, mainly dealing with generating suspense and anxiety. (Psychological, Mystery, Techno, Film Noir)</value>
+  </data>
+  <data name="Thriller_Name" xml:space="preserve">
+    <value>Thriller</value>
+  </data>
+  <data name="War_Description" xml:space="preserve">
+    <value>War movies revolve around large-scale conflicts between opposing forces within a universe that shares the same natural laws as our own.</value>
+  </data>
+  <data name="War_Name" xml:space="preserve">
+    <value>War</value>
+  </data>
+  <data name="Western_Description" xml:space="preserve">
+    <value>Westerns are defined by their setting and time period. The story needs to be set in the American West, which begins at the eastern end of Missouri and extends to the Pacific Ocean. (Epic Western, Empire Western, Marshal Western, Outlaw Western, Revenge Western, Revisionist Western, Spaghetti Western)</value>
+  </data>
+  <data name="Western_Name" xml:space="preserve">
+    <value>Western</value>
   </data>
 </root>

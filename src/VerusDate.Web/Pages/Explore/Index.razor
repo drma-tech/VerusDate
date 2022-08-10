@@ -15,11 +15,10 @@
 }
 else
 {
-    <Row>
+    <Row Gutter="(8,0)">
         @foreach (var item in listaUsers)
         {
             <Column ColumnSize="ColumnSize.Is2.OnFullHD.Is3.OnWidescreen.Is4.OnDesktop.Is6.OnMobile" Margin="Margin.Is3.FromBottom">
-
                 <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD">
                     <Blazorise.Link Clicked="@(async()=> await _PopupProfile.ShowModal(item.Id))" Style="cursor: pointer;">
                         <CardImage Source="@item.GetMainPhoto()" Alt="Photo Image"></CardImage>

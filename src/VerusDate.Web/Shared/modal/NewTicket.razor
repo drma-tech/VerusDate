@@ -26,6 +26,7 @@
     private TicketType TicketType;
 
     public TicketModel Ticket { get; set; } = new();
+    [Parameter] public EventCallback<bool> Inserted { get; set; }
 
     public void ShowModal(TicketType TicketType)
     {
@@ -49,7 +50,9 @@
             await Http.Ticket_Insert(Ticket, SessionStorage, Toast);
 
             Ticket = new();
-            modal.Hide();
+            await modal.Hide();
+
+            await Inserted.InvokeAsync();
         }
         catch (Exception ex)
         {

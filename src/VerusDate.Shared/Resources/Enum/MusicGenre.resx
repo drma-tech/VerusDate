@@ -117,55 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BiologicalSex_Name" xml:space="preserve">
-    <value>Biological Sex</value>
+  <data name="Alternative_Description" xml:space="preserve">
+    <value>Sub-Genres: Alternative Rock • College Rock • Experimental Rock • Goth Rock • Grunge • Hardcore Punk • Hard Rock • Indie Rock • New Wave • Progressive Rock • Punk • Shoegaze • Steampunk</value>
   </data>
-  <data name="CurrentSituation_Name" xml:space="preserve">
-    <value>Current Situation</value>
+  <data name="Alternative_Name" xml:space="preserve">
+    <value>Alternative</value>
   </data>
-  <data name="Description_Name" xml:space="preserve">
-    <value>Description</value>
+  <data name="Blues_Description" xml:space="preserve">
+    <value>Sub-Genres: Acoustic Blues • Chicago Blues • Classic Blues • Contemporary Blues • Country Blues • Delta Blues • Electric Blues</value>
   </data>
-  <data name="Description_Prompt" xml:space="preserve">
-    <value>For your own safety, please do not include contact information (mobile, email, etc.) or your location (where you are or have been). \n\nNOTE: Promoting social networks, products, services and/or content that violates the rights of third parties will be subject to banishment from the platform.</value>
+  <data name="Blues_Name" xml:space="preserve">
+    <value>Blues</value>
   </data>
-  <data name="GenderIdentity_Description" xml:space="preserve">
-    <value>Most common option selected automatically (applicable to most people)</value>
+  <data name="Childrens_Description" xml:space="preserve">
+    <value>Sub-Genres: Lullabies • Sing-Along • Stories</value>
   </data>
-  <data name="GenderIdentity_Name" xml:space="preserve">
-    <value>Gender Identity</value>
+  <data name="Childrens_Name" xml:space="preserve">
+    <value>Children</value>
   </data>
-  <data name="Intentions_Description" xml:space="preserve">
-    <value>Depending on the selection, you can change the available and/or mandatory fields (choose up to 2 options)</value>
+  <data name="Christian_Description" xml:space="preserve">
+    <value>Sub-Genres: CCM • Christian Metal • Christian Pop • Christian Rap • Christian Rock • Classic Christian • Contemporary Gospel • Gospel • Christian &amp; Gospel • Praise &amp; Worship • Qawwali • Southern Gospel • Traditional Gospel</value>
   </data>
-  <data name="Intentions_Name" xml:space="preserve">
-    <value>Intentions</value>
+  <data name="Christian_Name" xml:space="preserve">
+    <value>Christian</value>
   </data>
-  <data name="Languages_Description" xml:space="preserve">
-    <value>Automatically chosen according to the official languages of the country (if available)</value>
+  <data name="Classical_Description" xml:space="preserve">
+    <value>Sub-Genres: Avant-Garde • Baroque • Chamber Music • Chant • Choral • Classical Crossover • Early Music • High Classical • Impressionist • Medieval • Minimalism • Modern Composition • Opera • Orchestral • Renaissance • Romantic • Wedding Music</value>
   </data>
-  <data name="Languages_Name" xml:space="preserve">
-    <value>Languages</value>
+  <data name="Classical_Name" xml:space="preserve">
+    <value>Classical</value>
   </data>
-  <data name="Location_Description" xml:space="preserve">
-    <value>Automatic information (access to device location must be released)</value>
+  <data name="Country_Description" xml:space="preserve">
+    <value>Sub-Genres: Alternative Country • Americana • Bluegrass • Contemporary Bluegrass • Contemporary Country • Country Gospel • Honky Tonk • Outlaw Country • Traditional Bluegrass • Traditional Country • Urban Cowboy</value>
   </data>
-  <data name="Location_Name" xml:space="preserve">
-    <value>Location</value>
+  <data name="Country_Name" xml:space="preserve">
+    <value>Country</value>
   </data>
-  <data name="Location_Prompt" xml:space="preserve">
-    <value>Please click on the button to the side</value>
+  <data name="Electronic_Description" xml:space="preserve">
+    <value>Sub-Genres: Breakbeat • Dubstep • Exercise • Garage • Hardcore • Hard Dance • Hi-NRG / Eurodance • House • Jackin House • Jungle • Drum N Bass • Techno • Trance</value>
   </data>
-  <data name="NickName_Name" xml:space="preserve">
-    <value>Name / Nickname</value>
+  <data name="Electronic_Name" xml:space="preserve">
+    <value>Electronic</value>
   </data>
-  <data name="NickName_Prompt" xml:space="preserve">
-    <value>Ex: Paul</value>
+  <data name="Folk_Description" xml:space="preserve">
+    <value>Sub-Genres: Folk metal • Folk rock • Neo-Folk • Anti-folk • Indie Folk • Folk Punk • Contemporary Folk • Progressive Folk • Folk Country • Psychedelic Folk • Americana • Skiffle • Ballads</value>
   </data>
-  <data name="SexualOrientation_Description" xml:space="preserve">
-    <value>Most common option selected automatically (applicable to most people)</value>
+  <data name="Folk_Name" xml:space="preserve">
+    <value>Folk</value>
   </data>
-  <data name="SexualOrientation_Name" xml:space="preserve">
-    <value>Sexual Orientation</value>
+  <data name="HipHopRap_Description" xml:space="preserve">
+    <value>Sub-Genres: Alternative Rap • Bounce • Dirty South • East Coast Rap • Gangsta Rap • Hardcore Rap • Hip-Hop • Latin Rap • Old School Rap • Rap • Underground Rap • West Coast Rap • Mumble Rap</value>
+  </data>
+  <data name="HipHopRap_Name" xml:space="preserve">
+    <value>Hip-Hop/Rap</value>
+  </data>
+  <data name="Jazz_Description" xml:space="preserve">
+    <value>Sub-Genres: Acid Jazz • Avant-Garde Jazz • Big Band • Blue Note • Contemporary Jazz • Easy Listening • Crossover Jazz • Dixieland • Ethio-Jazz Fusion • Hard Bop • Latin Jazz • Mainstream Jazz • Ragtime • Smooth Jazz • Trad Jazz</value>
+  </data>
+  <data name="Jazz_Name" xml:space="preserve">
+    <value>Jazz</value>
+  </data>
+  <data name="Latino_Description" xml:space="preserve">
+    <value>Sub-Genres: Alternativo &amp; Rock Latino • Baladas y Boleros • Brazilian • Contemporary Latin • Latin Jazz • Pop Latino • Raíces • Reggaeton y Hip-Hop • Regional Mexicano • Salsa • Tropical • Bachata • Rumba • Tango</value>
+  </data>
+  <data name="Latino_Name" xml:space="preserve">
+    <value>Latino</value>
+  </data>
+  <data name="NewAge_Description" xml:space="preserve">
+    <value>Sub-Genres: Environmental • Healing • Meditation • Nature • Relaxation • Travel</value>
+  </data>
+  <data name="NewAge_Name" xml:space="preserve">
+    <value>New Age</value>
+  </data>
+  <data name="Pop_Description" xml:space="preserve">
+    <value>Sub-Genres: Baroque Pop • Country Pop • Contemporary R&amp;B • Cowboy Pop • Dancehall Pop • Electropop •emo Pop • Folk-Pop • Hip-Pop • Indie Pop • Pop Punk • Pop Rap • Ambient Pop • Pop Rock • Power Pop • Psychedelic Pop • Space Age Pop • Worldbeat • K Pop</value>
+  </data>
+  <data name="Pop_Name" xml:space="preserve">
+    <value>Pop</value>
+  </data>
+  <data name="RB_Description" xml:space="preserve">
+    <value>Sub-Genres: Contemporary R&amp;B • Disco • Doo Wop • Funk • Motown • Neo-Soul • Quiet Storm • Soul</value>
+  </data>
+  <data name="RB_Name" xml:space="preserve">
+    <value>R&amp;B</value>
+  </data>
+  <data name="Reggae_Description" xml:space="preserve">
+    <value>Sub-Genres: Dancehall • Dub • Roots Reggae • Ska • Mento • Reggaestep • Gospel Reggae • Contemporary Reggae</value>
+  </data>
+  <data name="Reggae_Name" xml:space="preserve">
+    <value>Reggae</value>
+  </data>
+  <data name="Rock_Description" xml:space="preserve">
+    <value>Sub-Genres: Adult Alternative • American Rock • Arena Rock • Blues-Rock • British Invasion • Death Metal/Black Metal • Glam Rock • Hair Metal • Hard Rock ! Metal • Jam Bands • Prog-Rock/Art Rock • Psychedelic • Rock &amp; Roll • Rockabilly • Roots Rock • Singer/Songwriter • Classic Rock • Southern Rock</value>
+  </data>
+  <data name="Rock_Name" xml:space="preserve">
+    <value>Rock</value>
   </data>
 </root>

@@ -91,10 +91,30 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MoneyPersonality.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Enum\MovieGenre.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MovieGenre.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\MusicGenre.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MusicGenre.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\MyersBriggsTypeIndicator.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MyersBriggsTypeIndicator.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Enum\RaceCategory.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>RaceCategory.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\ReadingGenre.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ReadingGenre.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Enum\RelationshipPersonality.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -130,6 +150,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Sports.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\TVGenre.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TVGenre.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Enum\Vacation.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -226,9 +251,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MoneyPersonality.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\MovieGenre.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MovieGenre.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\MusicGenre.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MusicGenre.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\MyersBriggsTypeIndicator.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MyersBriggsTypeIndicator.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enum\RaceCategory.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RaceCategory.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\ReadingGenre.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReadingGenre.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enum\RelationshipPersonality.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -257,6 +298,10 @@
     <EmbeddedResource Update="Resources\Enum\Sports.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Sports.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\TVGenre.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TVGenre.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enum\Vacation.resx">
       <Generator>ResXFileCodeGenerator</Generator>

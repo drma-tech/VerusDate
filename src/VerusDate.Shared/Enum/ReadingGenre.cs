@@ -4,37 +4,37 @@ namespace VerusDate.Shared.Enum
 {
     public enum ReadingGenre
     {
-        [Custom(Name = "Gêneros de ficção", Description = "A ficção geralmente é uma forma narrativa, em qualquer meio, consistindo em pessoas, eventos ou lugares que são imaginários, em outras palavras, não baseados estritamente na história ou fato.")]
+        [Custom(Name = "FictionGenres_Name", Description = "FictionGenres_Description", ResourceType = typeof(Resources.Enum.ReadingGenre))]
         FictionGenres = 10,
 
-        [Custom(Name = "Biografia", Description = "Uma narrativa da vida de uma pessoa; quando o autor também é o assunto principal, esta é uma autobiografia ou memória")]
+        [Custom(Name = "Biography_Name", Description = "Biography_Description", ResourceType = typeof(Resources.Enum.ReadingGenre))]
         Biography = 31,
 
-        [Custom(Name = "Histórias em quadrinhos", Description = "Uma revista que apresenta uma história serializada na forma de uma história em quadrinhos, normalmente apresentando as aventuras de um super-herói.")]
+        [Custom(Name = "Comics_Name", Description = "Comics_Description", ResourceType = typeof(Resources.Enum.ReadingGenre))]
         Comics = 32,
 
-        [Custom(Name = "Ensaio", Description = "Uma curta composição literária que reflete a perspectiva ou ponto de vista do autor")]
+        [Custom(Name = "Essay_Name", Description = "Essay_Description", ResourceType = typeof(Resources.Enum.ReadingGenre))]
         Essay = 33,
 
-        [Custom(Name = "Jornalismo", Description = "Reportagem de notícias e eventos atuais")]
+        [Custom(Name = "Journalism_Name", Description = "Journalism_Description", ResourceType = typeof(Resources.Enum.ReadingGenre))]
         Journalism = 34,
 
-        [Custom(Name = "Memórias", Description = "História factual que enfoca uma relação significativa entre o escritor e uma pessoa, lugar ou objeto; lê como um pequeno romance")]
+        [Custom(Name = "Memoir_Name", Description = "Memoir_Description", ResourceType = typeof(Resources.Enum.ReadingGenre))]
         Memoir = 35,
 
-        [Custom(Name = "Não-ficção narrativa / Narrativa pessoal", Description = "Informações factuais sobre um evento significativo apresentado em um formato que conta uma história")]
+        [Custom(Name = "NarrativeNonfictionPersonalNarrative_Name", Description = "NarrativeNonfictionPersonalNarrative_Description", ResourceType = typeof(Resources.Enum.ReadingGenre))]
         NarrativeNonfictionPersonalNarrative = 36,
 
-        [Custom(Name = "Referência", Description = "Como um dicionário, dicionário de sinônimos, enciclopédia, almanaque ou atlas")]
+        [Custom(Name = "Reference_Name", Description = "Reference_Description", ResourceType = typeof(Resources.Enum.ReadingGenre))]
         Reference = 37,
 
-        [Custom(Name = "Auto Ajuda", Description = "Informações com o intuito de instruir os leitores na solução de problemas pessoais")]
+        [Custom(Name = "SelfHelp_Name", Description = "SelfHelp_Description", ResourceType = typeof(Resources.Enum.ReadingGenre))]
         SelfHelp = 38,
 
-        [Custom(Name = "Artigo Científico", Description = "Relatório de estudo científico, inclusive nas disciplinas sociais, naturais ou outras disciplinas acadêmicas")]
+        [Custom(Name = "ScientificArticle_Name", Description = "ScientificArticle_Description", ResourceType = typeof(Resources.Enum.ReadingGenre))]
         ScientificArticle = 39,
 
-        [Custom(Name = "Livro Didático / Técnico", Description = "Descrição factual confiável e detalhada de uma coisa")]
+        [Custom(Name = "Textbook_Name", Description = "Textbook_Description", ResourceType = typeof(Resources.Enum.ReadingGenre))]
         Textbook = 40
     }
 }

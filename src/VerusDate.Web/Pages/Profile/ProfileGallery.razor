@@ -2,11 +2,11 @@
 @attribute [Authorize]
 @inherits PageCore<ProfileGallery>
 
-<Row>
+<Row Gutter="(8,0)">
     <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is4.OnWidescreen" Margin="Margin.Is3.FromBottom">
         <Card>
             <CardHeader>
-                Foto Principal
+                @Resources.CardHeader.ProfileGaleryMainPhoto
                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="helpMain.ShowModal" title="Ajuda" Margin="Margin.Is2.FromStart">
                     <Blazorise.Icon Name="FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon>
                 </Button>
@@ -25,7 +25,7 @@
     <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is8.OnWidescreen" Margin="Margin.Is3.FromBottom">
         <Card>
             <CardHeader>
-                Galeria de Fotos
+                @Resources.CardHeader.ProfileGaleryPhotoGallery
             </CardHeader>
             <CardBody>
                 <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" Margin="Margin.Is2.FromBottom">

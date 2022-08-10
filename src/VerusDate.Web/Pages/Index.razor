@@ -2,11 +2,11 @@
 @attribute [Authorize]
 @inherits PageCore<Index>
 
-<Row>
+<Row Gutter="(8,0)">
     <Column ColumnSize="ColumnSize.Is12">
-        <Card Margin="Margin.Is3.FromBottom">
+        <Card Margin="Margin.Is2.FromBottom">
             <CardHeader>
-                Destaques da Semana (@profile?.Basic?.GetLocation(LocationType.City))
+                @string.Format(Resources.CardHeader.IndexHighlights, profile?.Basic?.GetLocation(LocationType.City))
             </CardHeader>
             <CardBody>
                 @if (OptionsDestaques.HasCustomVisibility)
@@ -15,12 +15,12 @@
                 }
                 else
                 {
-                    <Row>
+                    <Row Gutter="(8,0)">
                         @foreach (var item in lstDestaques)
                         {
                             <Column ColumnSize="ColumnSize.Is1.OnFullHD.Is2.OnWidescreen.Is3.OnDesktop.Is4.OnMobile">
-                                <Blazorise.Link To="@("/Explore/View/" + item.Id)">
-                                    <Card Margin="Margin.Is3.FromBottom.OnMobile.Is0.OnFullHD" Style="display:block; text-align:center;">
+                                <Blazorise.Link Clicked="@(async()=> await _PopupProfile.ShowModal(item.Id))" Style="cursor: pointer;">
+                                    <Card Margin="Margin.Is2.FromBottom.OnMobile.Is0.OnFullHD" Style="display:block; text-align:center;">
                                         <Figure Margin="Margin.Is0" Size="FigureSize.Is64x64">
                                             <FigureImage Source="@item.GetMainPhoto()" Rounded="true" AlternateText="Photo Image" />
                                         </Figure>
@@ -38,14 +38,14 @@
         </Card>
     </Column>
 </Row>
-<Row>
+<Row Gutter="(8,0)">
     <Column ColumnSize="ColumnSize.Is12.Is6.OnDesktop">
-        <Row>
+        <Row Gutter="(8,0)">
             <Column ColumnSize="ColumnSize.Is6">
-                <Card Margin="Margin.Is3.FromBottom">
+                <Card Margin="Margin.Is2.FromBottom">
                     <CardHeader Style="background-color: #D4AF37; color: #fff !important;">
                         <Blazorise.Icon Name="FontAwesomeIcons.Crown"></Blazorise.Icon>
-                        Ranking
+                        @Resources.CardHeader.IndexRanking
                     </CardHeader>
                     <CardBody>
                         @if (OptionsGamification.HasCustomVisibility)
@@ -62,10 +62,10 @@
                 </Card>
             </Column>
             <Column ColumnSize="ColumnSize.Is6">
-                <Card Margin="Margin.Is3.FromBottom">
+                <Card Margin="Margin.Is2.FromBottom">
                     <CardHeader Style="background-color: #5c7cfa; color: #fff !important;">
                         <Blazorise.Icon Name="FontAwesomeIcons.Gem"></Blazorise.Icon>
-                        Diamante
+                        @Resources.CardHeader.IndexDiamond
                     </CardHeader>
                     <CardBody>
                         @if (OptionsGamification.HasCustomVisibility)
@@ -83,10 +83,10 @@
                 </Card>
             </Column>
             <Column ColumnSize="ColumnSize.Is6">
-                <Card Margin="Margin.Is3.FromBottom">
+                <Card Margin="Margin.Is2.FromBottom">
                     <CardHeader Style="background-color: #dc3545; color: #fff !important;">
                         <Blazorise.Icon Name="FontAwesomeIcons.AppleAlt"></Blazorise.Icon>
-                        Maça
+                        @Resources.CardHeader.IndexApple
                     </CardHeader>
                     <CardBody>
                         @if (OptionsGamification.HasCustomVisibility)
@@ -103,10 +103,10 @@
                 </Card>
             </Column>
             <Column ColumnSize="ColumnSize.Is6">
-                <Card Margin="Margin.Is3.FromBottom">
+                <Card Margin="Margin.Is2.FromBottom">
                     <CardHeader Class="bg-info" Style="color: #fff !important;">
                         <Blazorise.Icon Name="FontAwesomeIcons.ThumbsUp"></Blazorise.Icon>
-                        Popularidade
+                        @Resources.CardHeader.IndexPopularity
                     </CardHeader>
                     <CardBody>
                         @if (OptionsGamification.HasCustomVisibility)
@@ -126,13 +126,15 @@
     </Column>
 </Row>
 
+<PopupProfile @ref="_PopupProfile" Http="@Http"></PopupProfile>
+
 @code
 {
+    public PopupProfile _PopupProfile { get; set; }
+
     private ProfileModel profile = new();
     private ProfileGamificationModel gamification = new();
     private List<ProfileSearch> lstDestaques = new();
-
-    //protected override bool ShouldRender() => false;
 
     private VisibilityOptions OptionsDestaques => new VisibilityOptions()
     {

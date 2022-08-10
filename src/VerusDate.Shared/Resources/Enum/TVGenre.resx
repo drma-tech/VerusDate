@@ -117,19 +117,106 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BirthDate_Name" xml:space="preserve">
-    <value>Birth Date</value>
+  <data name="CartoonAnime_Description" xml:space="preserve">
+    <value>A programme that features animated characters.</value>
   </data>
-  <data name="BodyMass_Name" xml:space="preserve">
-    <value>Body</value>
+  <data name="CartoonAnime_Name" xml:space="preserve">
+    <value>Cartoon / Anime</value>
   </data>
-  <data name="Height_Name" xml:space="preserve">
-    <value>Height</value>
+  <data name="CookingShow_Description" xml:space="preserve">
+    <value>A television show that features the presentation of food in a kitchen television studio.</value>
   </data>
-  <data name="RaceCategory_Description" xml:space="preserve">
-    <value>Classification defined by US OMB</value>
+  <data name="CookingShow_Name" xml:space="preserve">
+    <value>Cooking Show</value>
   </data>
-  <data name="RaceCategory_Name" xml:space="preserve">
-    <value>Race</value>
+  <data name="Documentary_Description" xml:space="preserve">
+    <value>A feature or near-feature film depicting a real-world event or person, told in a journalistic style.</value>
+  </data>
+  <data name="Documentary_Name" xml:space="preserve">
+    <value>Documentary</value>
+  </data>
+  <data name="Educational_Description" xml:space="preserve">
+    <value>A type of program that helps kids learn their basics to go through school.</value>
+  </data>
+  <data name="Educational_Name" xml:space="preserve">
+    <value>Educational</value>
+  </data>
+  <data name="GameShow_Description" xml:space="preserve">
+    <value>On game shows, teams of competitors or participants called in from the audience try to solve puzzles or answer trivia questions, with prizes awarded if they win.</value>
+  </data>
+  <data name="GameShow_Name" xml:space="preserve">
+    <value>Game Show</value>
+  </data>
+  <data name="KidsChildren_Description" xml:space="preserve">
+    <value>TV programmes produced for children.</value>
+  </data>
+  <data name="KidsChildren_Name" xml:space="preserve">
+    <value>Kids / Children</value>
+  </data>
+  <data name="Lifestyle_Description" xml:space="preserve">
+    <value>A television show featuring topics such as fashion, diet, exercise, health and leisure pursuits.</value>
+  </data>
+  <data name="Lifestyle_Name" xml:space="preserve">
+    <value>Lifestyle</value>
+  </data>
+  <data name="MusicTelevision_Description" xml:space="preserve">
+    <value>A program where people can listen to music on their TV's. This is just like a radio station.</value>
+  </data>
+  <data name="MusicTelevision_Name" xml:space="preserve">
+    <value>Music Television</value>
+  </data>
+  <data name="NewsProgramm_Description" xml:space="preserve">
+    <value>News programming includes local nightly news, national daytime broadcasts on cable networks, and weekly programming that generally airs on Fridays or weekends.</value>
+  </data>
+  <data name="NewsProgramm_Name" xml:space="preserve">
+    <value>News Programm</value>
+  </data>
+  <data name="RealityTV_Description" xml:space="preserve">
+    <value>Reality TV tends to emphasize ordinary people rather than the big stars. Some reality shows are competitions, while others claim to show slices of real life.</value>
+  </data>
+  <data name="RealityTV_Name" xml:space="preserve">
+    <value>Reality TV</value>
+  </data>
+  <data name="Religious_Description" xml:space="preserve">
+    <value>Produced by religious organizations, usually with a religious message. May include church services, talk/variety shows, and dramatic films.</value>
+  </data>
+  <data name="Religious_Name" xml:space="preserve">
+    <value>Religious</value>
+  </data>
+  <data name="Shopping_Description" xml:space="preserve">
+    <value>Phone-in TV shows (often on shopping channels), where people can either buy featured items or bid for them.</value>
+  </data>
+  <data name="Shopping_Name" xml:space="preserve">
+    <value>Shopping</value>
+  </data>
+  <data name="SoapOpera_Description" xml:space="preserve">
+    <value>A television or radio drama series that typically deals with everyday events in the lives of the same group of characters.</value>
+  </data>
+  <data name="SoapOpera_Name" xml:space="preserve">
+    <value>Soap Opera</value>
+  </data>
+  <data name="Sports_Description" xml:space="preserve">
+    <value>Unlike many other formats, sports are often streamed live, bringing a sense of immediacy and urgency to the viewing experience.</value>
+  </data>
+  <data name="Sports_Name" xml:space="preserve">
+    <value>Sports</value>
+  </data>
+  <data name="TalkShow_Description" xml:space="preserve">
+    <value>Talk shows or chat shows are television shows based on discussions between presenters.</value>
+  </data>
+  <data name="TalkShow_Name" xml:space="preserve">
+    <value>Talk Show</value>
+  </data>
+  <data name="TVSeries_Description" xml:space="preserve">
+    <value>A group of episodes of a television program broadcast in regular intervals with a long break between each group, usually with one year between the beginning of each.</value>
+  </data>
+  <data name="TVSeries_Name" xml:space="preserve">
+    <value>TV Series</value>
+  </data>
+  <data name="VarietyShow_Description" xml:space="preserve">
+    <value>Variety shows highlight the talent of your guests. Variety shows include musical acts, dancing, stand-up comedy performances and comedy skits.</value>
+  </data>
+  <data name="VarietyShow_Name" xml:space="preserve">
+    <value>Variety Show</value>
   </data>
 </root>

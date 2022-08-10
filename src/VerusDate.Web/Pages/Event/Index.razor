@@ -66,7 +66,7 @@
 </Row>
 
 <Card Margin="Margin.Is3.FromBottom">
-    <CardHeader>Meus Eventos</CardHeader>
+    <CardHeader>@Resources.CardHeader.EventMyEvents</CardHeader>
     <CardBody>
         @if (OptionsMyEvents.HasCustomVisibility)
         {
@@ -77,7 +77,7 @@
 
 <Card Margin="Margin.Is3.FromBottom">
     <CardHeader>
-        Eventos disponíveis (@profile?.Basic.GetLocation(LocationType.City))
+        @string.Format(Resources.CardHeader.EventAvailableEvents, profile?.Basic.GetLocation(LocationType.City))
         <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="FeatureUnavailable" title="Preencher automaticamente">
             <Blazorise.Icon Name="FontAwesomeIcons.PlusCircle"></Blazorise.Icon> Novo
         </Button>

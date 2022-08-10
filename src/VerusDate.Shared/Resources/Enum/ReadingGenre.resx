@@ -117,19 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BirthDate_Name" xml:space="preserve">
-    <value>Birth Date</value>
+  <data name="Biography_Description" xml:space="preserve">
+    <value>A narrative of a person's life; when the author is also the main subject, this is an autobiography or memoir</value>
   </data>
-  <data name="BodyMass_Name" xml:space="preserve">
-    <value>Body</value>
+  <data name="Biography_Name" xml:space="preserve">
+    <value>Biography</value>
   </data>
-  <data name="Height_Name" xml:space="preserve">
-    <value>Height</value>
+  <data name="Comics_Description" xml:space="preserve">
+    <value>A magazine that features a serialized story in the form of a comic book, typically featuring the adventures of a superhero.</value>
   </data>
-  <data name="RaceCategory_Description" xml:space="preserve">
-    <value>Classification defined by US OMB</value>
+  <data name="Comics_Name" xml:space="preserve">
+    <value>Comics</value>
   </data>
-  <data name="RaceCategory_Name" xml:space="preserve">
-    <value>Race</value>
+  <data name="Essay_Description" xml:space="preserve">
+    <value>A short literary composition that reflects the author's perspective or point of view</value>
+  </data>
+  <data name="Essay_Name" xml:space="preserve">
+    <value>Essay</value>
+  </data>
+  <data name="FictionGenres_Description" xml:space="preserve">
+    <value>Fiction is generally a narrative form, in any medium, consisting of people, events, or places that are imaginary, in other words, not based strictly on history or fact.</value>
+  </data>
+  <data name="FictionGenres_Name" xml:space="preserve">
+    <value>Fiction Genres</value>
+  </data>
+  <data name="Journalism_Description" xml:space="preserve">
+    <value>News reporting and current events</value>
+  </data>
+  <data name="Journalism_Name" xml:space="preserve">
+    <value>Journalism</value>
+  </data>
+  <data name="Memoir_Description" xml:space="preserve">
+    <value>Factual story that focuses on a meaningful relationship between the writer and a person, place, or object; reads like a little novel</value>
+  </data>
+  <data name="Memoir_Name" xml:space="preserve">
+    <value>Memoir</value>
+  </data>
+  <data name="NarrativeNonfictionPersonalNarrative_Description" xml:space="preserve">
+    <value>Factual information about a significant event presented in a format that tells a story</value>
+  </data>
+  <data name="NarrativeNonfictionPersonalNarrative_Name" xml:space="preserve">
+    <value>Narrative Nonfiction / Personal Narrative</value>
+  </data>
+  <data name="Reference_Description" xml:space="preserve">
+    <value>Like a dictionary, thesaurus, encyclopedia, almanac or atlas</value>
+  </data>
+  <data name="Reference_Name" xml:space="preserve">
+    <value>Reference</value>
+  </data>
+  <data name="ScientificArticle_Description" xml:space="preserve">
+    <value>Scientific study report, including in social, natural or other academic disciplines</value>
+  </data>
+  <data name="ScientificArticle_Name" xml:space="preserve">
+    <value>Scientific Article</value>
+  </data>
+  <data name="SelfHelp_Description" xml:space="preserve">
+    <value>Information intended to instruct readers in solving personal problems</value>
+  </data>
+  <data name="SelfHelp_Name" xml:space="preserve">
+    <value>Self Help</value>
+  </data>
+  <data name="Textbook_Description" xml:space="preserve">
+    <value>Reliable and detailed factual description of a thing</value>
+  </data>
+  <data name="Textbook_Name" xml:space="preserve">
+    <value>Textbook</value>
   </data>
 </root>

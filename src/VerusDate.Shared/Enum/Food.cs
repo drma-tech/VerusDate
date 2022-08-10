@@ -3,7 +3,6 @@
 namespace VerusDate.Shared.Enum
 {
     /// <summary>
-    /// https://food.allwomenstalk.com/cuisines-of-the-world/
     /// https://www.ranker.com/crowdranked-list/favorite-types-of-cuisine
     /// </summary>
     public enum Food

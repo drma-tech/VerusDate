@@ -61,7 +61,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nascimento.
+        ///   Looks up a localized string similar to Birth Date.
         /// </summary>
         internal static string BirthDate_Name {
             get {
@@ -70,7 +70,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Corpo.
+        ///   Looks up a localized string similar to Body.
         /// </summary>
         internal static string BodyMass_Name {
             get {
@@ -79,7 +79,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Altura.
+        ///   Looks up a localized string similar to Height.
         /// </summary>
         internal static string Height_Name {
             get {
@@ -88,7 +88,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Classificação definida por US OMB.
+        ///   Looks up a localized string similar to Classification defined by US OMB.
         /// </summary>
         internal static string RaceCategory_Description {
             get {
@@ -97,20 +97,11 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Raça.
+        ///   Looks up a localized string similar to Race.
         /// </summary>
         internal static string RaceCategory_Name {
             get {
                 return ResourceManager.GetString("RaceCategory_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Signo.
-        /// </summary>
-        internal static string Zodiac_Name {
-            get {
-                return ResourceManager.GetString("Zodiac_Name", resourceCulture);
             }
         }
     }

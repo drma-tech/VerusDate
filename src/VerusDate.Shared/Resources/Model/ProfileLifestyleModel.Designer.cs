@@ -61,7 +61,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Carreira.
+        ///   Looks up a localized string similar to Career.
         /// </summary>
         internal static string CareerCluster_Name {
             get {
@@ -70,7 +70,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opção mais comum selecionada automaticamente (aplicável para a maioria das pessoas).
+        ///   Looks up a localized string similar to Most common option selected automatically (applicable to most people).
         /// </summary>
         internal static string Diet_Description {
             get {
@@ -79,7 +79,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dieta.
+        ///   Looks up a localized string similar to Diet.
         /// </summary>
         internal static string Diet_Name {
             get {
@@ -88,7 +88,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bebe.
+        ///   Looks up a localized string similar to Drink.
         /// </summary>
         internal static string Drink_Name {
             get {
@@ -97,7 +97,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Educação.
+        ///   Looks up a localized string similar to Education.
         /// </summary>
         internal static string EducationLevel_Name {
             get {
@@ -106,7 +106,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tem Filho(s).
+        ///   Looks up a localized string similar to Has Kids.
         /// </summary>
         internal static string HaveChildren_Name {
             get {
@@ -115,7 +115,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês).
+        ///   Looks up a localized string similar to If you have any doubts, you can take a test on the original website (English only).
         /// </summary>
         internal static string LoveLanguage_Description {
             get {
@@ -124,7 +124,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Linguagem do Amor.
+        ///   Looks up a localized string similar to Love Language.
         /// </summary>
         internal static string LoveLanguage_Name {
             get {
@@ -133,7 +133,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês).
+        ///   Looks up a localized string similar to If you have any doubts, you can take a test on the original website (English only).
         /// </summary>
         internal static string MoneyPersonality_Description {
             get {
@@ -142,7 +142,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personalidade Financeira.
+        ///   Looks up a localized string similar to Financial Personality.
         /// </summary>
         internal static string MoneyPersonality_Name {
             get {
@@ -151,7 +151,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Este campo é opcional (é necessário fazer um teste em site de terceiros / multi-idiomas).
+        ///   Looks up a localized string similar to This field is optional (it is necessary to test on a third-party site; multi-language).
         /// </summary>
         internal static string MyersBriggsTypeIndicator_Description {
             get {
@@ -160,7 +160,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personalidade MBTI.
+        ///   Looks up a localized string similar to MBTI Personality.
         /// </summary>
         internal static string MyersBriggsTypeIndicator_Name {
             get {
@@ -169,7 +169,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Caso tenha dúvidas, poderá fazer um teste em site de terceiros (somente em inglês).
+        ///   Looks up a localized string similar to If in doubt, you can take a test on a third-party site (English only).
         /// </summary>
         internal static string RelationshipPersonality_Description {
             get {
@@ -178,7 +178,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personalidade na Relação.
+        ///   Looks up a localized string similar to Personality in Relationship.
         /// </summary>
         internal static string RelationshipPersonality_Name {
             get {
@@ -187,7 +187,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Religião.
+        ///   Looks up a localized string similar to Religion.
         /// </summary>
         internal static string Religion_Name {
             get {
@@ -196,7 +196,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês).
+        ///   Looks up a localized string similar to If you have any doubts, you can take a test on the original website (English only).
         /// </summary>
         internal static string SexPersonality_Description {
             get {
@@ -205,7 +205,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personalidade Sexual.
+        ///   Looks up a localized string similar to Sexual Personality.
         /// </summary>
         internal static string SexPersonality_Name {
             get {
@@ -214,7 +214,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Diferentemente das outras personalidades, a compatibilidade desta é uma preferência pessoal.
+        ///   Looks up a localized string similar to Unlike other personalities, this one&apos;s compatibility is a personal preference..
         /// </summary>
         internal static string SexPersonalityPreferences_Description {
             get {
@@ -223,7 +223,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Person. Sexual (Preferências).
+        ///   Looks up a localized string similar to Sexual Person. (Preferences).
         /// </summary>
         internal static string SexPersonalityPreferences_Name {
             get {
@@ -232,7 +232,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fuma.
+        ///   Looks up a localized string similar to Smoke.
         /// </summary>
         internal static string Smoke_Name {
             get {
@@ -241,7 +241,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dividindo as Contas.
+        ///   Looks up a localized string similar to Splitting the Bills.
         /// </summary>
         internal static string SplitTheBill_Name {
             get {
@@ -250,7 +250,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quer Filho(s).
+        ///   Looks up a localized string similar to Want Kids.
         /// </summary>
         internal static string WantChildren_Name {
             get {

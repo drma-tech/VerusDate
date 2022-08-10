@@ -9,7 +9,6 @@ namespace VerusDate.Shared.Model
         [Custom(Name = "BirthDate_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
         public DateTime BirthDate { get; set; }
 
-        [Custom(Name = "Zodiac_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
         public Zodiac Zodiac { get; set; }
 
         [Custom(Name = "Height_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]

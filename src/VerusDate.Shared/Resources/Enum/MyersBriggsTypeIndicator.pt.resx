@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ENFJ_Description" xml:space="preserve">
+    <value>Pessoas que compartilham o tipo de personalidade de Protagonista se sentem mais em casa quando estão em um relacionamento, e poucos tipos estão mais ansiosos para estabelecer um compromisso amoroso com o parceiro escolhido. Os protagonistas levam o namoro e os relacionamentos a sério, selecionando parceiros com um olhar voltado para o longo prazo, em vez da abordagem mais casual que pode ser esperada de alguns tipos do grupo Explorador. Não há alegria maior para os Protagonistas do que ajudar ao longo dos objetivos de alguém de quem gostam, e o entrelaçamento de vidas que um relacionamento sério representa é a oportunidade perfeita para fazer exatamente isso. (Combinam com INFP e INTP)</value>
+  </data>
+  <data name="ENFJ_Group" xml:space="preserve">
+    <value>Diplomatas</value>
+  </data>
+  <data name="ENFJ_Name" xml:space="preserve">
+    <value>Protagonista (ENFJ)</value>
+  </data>
+  <data name="ENFP_Description" xml:space="preserve">
+    <value>Quando se trata de relacionamentos, dificilmente há alguém por perto que está mais animado do que os ativistas para compartilhar com seus parceiros a abundância de ideias e experiências reveladoras que a vida tem a oferecer. Para pessoas com o tipo de personalidade de Ativista, os relacionamentos são um processo alegre de exploração e imaginação mútuas, uma chance de se conectar com outra alma. Os ativistas levam seus relacionamentos a sério e são conhecidos por sua devoção desinibida e inabalável às pessoas a quem comprometeram seus corações. (Combinam com INFJ e INTJ)</value>
+  </data>
+  <data name="ENFP_Group" xml:space="preserve">
+    <value>Diplomatas</value>
+  </data>
+  <data name="ENFP_Name" xml:space="preserve">
+    <value>Ativista (ENFP)</value>
+  </data>
+  <data name="ENTJ_Description" xml:space="preserve">
+    <value>Como em outras áreas de suas vidas, os comandantes abordam o namoro e os relacionamentos com um conjunto de metas e um plano para alcançá-los, e agem assim com energia e entusiasmo impressionantes. Pessoas com o tipo de personalidade de Comandante querem vencer e, com prazer, assumirão papéis de liderança nos relacionamentos desde o início, assumindo responsabilidade pessoal por como as coisas vão bem e trabalhando ativamente para garantir uma experiência mutuamente gratificante. Relacionamentos românticos são um negócio sério, e os comandantes estão nisso por muito tempo. (Combinam com INTP e INFP)</value>
+  </data>
+  <data name="ENTJ_Group" xml:space="preserve">
+    <value>Analistas</value>
+  </data>
+  <data name="ENTJ_Name" xml:space="preserve">
+    <value>Comandante (ENTJ)</value>
+  </data>
+  <data name="ENTP_Description" xml:space="preserve">
+    <value>Se há uma coisa em que os Inovadores são bons, é apresentar um fluxo interminável de inovações e ideias para manter as coisas avançando, e isso é evidente em seus relacionamentos românticos também. Para as pessoas com o tipo de personalidade Inovador, o crescimento é a chave, e mesmo antes de encontrarem um parceiro de namoro, elas imaginam todas as maneiras pelas quais podem experimentar coisas novas juntos, para crescer em conjunto. Este pode ser um processo opressor se seu parceiro não corresponder, mas quando os Inovadores encontrarem alguém que compartilhe seu amor pela exploração intelectual, tome cuidado. (Combinam com INTJ e INFJ)</value>
+  </data>
+  <data name="ENTP_Group" xml:space="preserve">
+    <value>Analistas</value>
+  </data>
+  <data name="ENTP_Name" xml:space="preserve">
+    <value>Inovador (ENTP)</value>
+  </data>
+  <data name="ESFJ_Description" xml:space="preserve">
+    <value>Valorizando a validação social e um senso de pertencimento tão altamente, os relacionamentos românticos têm um nível especial de importância para os cônsules. Nenhum outro tipo de relacionamento fornece às pessoas com o tipo de personalidade Cônsul o mesmo nível de apoio e devoção, e os sentimentos de segurança e estabilidade que acompanham relacionamentos românticos fortes são extremamente calorosos. (Combinam com ISFP e ISTP)</value>
+  </data>
+  <data name="ESFJ_Group" xml:space="preserve">
+    <value>Sentinelas</value>
+  </data>
+  <data name="ESFJ_Name" xml:space="preserve">
+    <value>Cônsul (ESFJ)</value>
+  </data>
+  <data name="ESFP_Description" xml:space="preserve">
+    <value>Animadores são pessoas sociáveis, amantes da diversão e de espírito livre, que vivem a vida no momento e extraem cada pedacinho de emoção de tudo. Naturalmente, eles não poupam nada desse frescor e energia no namoro. Para pessoas com o tipo de personalidade de Animador, os relacionamentos não são sobre construir lentamente as bases para o futuro ou planejar uma vida - eles são coisas borbulhantes e imprevisíveis para serem desfrutadas enquanto houver prazer a ser desfrutado. (Combinam com ISTJ e ISFJ)</value>
+  </data>
+  <data name="ESFP_Group" xml:space="preserve">
+    <value>Exploradores</value>
+  </data>
+  <data name="ESFP_Name" xml:space="preserve">
+    <value>Animador (ESFP)</value>
+  </data>
+  <data name="ESTJ_Description" xml:space="preserve">
+    <value>Os executivos são bastante únicos no sentido de que seus relacionamentos não mudam realmente à medida que progridem da fase de namoro para relacionamentos mais estáveis e de longo prazo e ainda mais para o casamento. Por valorizarem tanto a honestidade e a franqueza, as pessoas com personalidade executiva tendem a ser claras sobre quem são, como são e quais são seus objetivos desde o início, e devem seguir essas afirmações a longo prazo. Contanto que seu parceiro seja capaz de acreditar em sua palavra e seguir o exemplo, eles tendem a ser relacionamentos extremamente estáveis. (Combinam com ISTP e ISFP)</value>
+  </data>
+  <data name="ESTJ_Group" xml:space="preserve">
+    <value>Sentinelas</value>
+  </data>
+  <data name="ESTJ_Name" xml:space="preserve">
+    <value>Executivo (ESTJ)</value>
+  </data>
+  <data name="ESTP_Description" xml:space="preserve">
+    <value>Quando se trata de relacionamentos românticos, dificilmente se pode dizer que as pessoas com o tipo de personalidade Empreendedor estão morrendo de saudades do dia do casamento. A vida é divertida e cheia de surpresas (algo que os empreendedores têm uma habilidade especial em entregar), e eles gostam de tudo aqui e agora. Os empreendedores podem não perder muito tempo planejando “algum dia”, mas seu entusiasmo e imprevisibilidade os tornam parceiros de namoro emocionantes. (Combinam com ISTJ e ISFJ)</value>
+  </data>
+  <data name="ESTP_Group" xml:space="preserve">
+    <value>Exploradores</value>
+  </data>
+  <data name="ESTP_Name" xml:space="preserve">
+    <value>Empresário (ESTP)</value>
+  </data>
+  <data name="INFJ_Description" xml:space="preserve">
+    <value>Os advogados (INFJs) tendem a levar a sério o processo de encontrar um parceiro romântico. Pessoas com este tipo de personalidade procuram profundidade e significado em seus relacionamentos, preferindo não se contentar com uma união que seja baseada em algo menos do que o amor verdadeiro. Pode levar algum tempo para que os advogados encontrem um parceiro compatível. Algumas pessoas podem pensar que os advogados são muito exigentes e é verdade que essas personalidades podem ter expectativas irrealistas. Alguns advogados podem esperar um parceiro ou relacionamento 'perfeito' que, em última análise, não existe. (Combinam com ENFP, ENTP, INTJ e INFJ)</value>
+  </data>
+  <data name="INFJ_Group" xml:space="preserve">
+    <value>Diplomatas</value>
+  </data>
+  <data name="INFJ_Name" xml:space="preserve">
+    <value>Advogado (INFJ)</value>
+  </data>
+  <data name="INFP_Description" xml:space="preserve">
+    <value>Mediadores (INFPs) são sonhadores e idealistas, especialmente quando se trata de romance. O conceito de amor verdadeiro ressoa com eles, e é improvável que sejam felizes em um relacionamento baseado em nada menos. Pessoas com esse tipo de personalidade podem sonhar acordadas com o relacionamento perfeito, imaginando como seria compartilhar seu eu mais íntimo com outra pessoa. (Combinam com ENFJ e ENTJ)</value>
+  </data>
+  <data name="INFP_Group" xml:space="preserve">
+    <value>Diplomatas</value>
+  </data>
+  <data name="INFP_Name" xml:space="preserve">
+    <value>Mediador (INFP)</value>
+  </data>
+  <data name="INTJ_Description" xml:space="preserve">
+    <value>Pessoas com o tipo de personalidade do Arquiteto (INTJ) abordam o romance da maneira como abordam a maioria dos desafios: estrategicamente, com objetivos bem definidos e um plano para alcançá-los. Em um mundo puramente racional, essa abordagem seria infalível. Infelizmente, ele ignora fatores importantes que os Arquitetos às vezes descartam - como a imprevisibilidade da natureza humana e do afeto. (Combinam com ENTP e ENFP)</value>
+  </data>
+  <data name="INTJ_Group" xml:space="preserve">
+    <value>Analistas</value>
+  </data>
+  <data name="INTJ_Name" xml:space="preserve">
+    <value>Arquiteto (INTJ)</value>
+  </data>
+  <data name="INTP_Description" xml:space="preserve">
+    <value>Quando se trata de relacionamentos românticos, os lógicos têm uma mistura interessante de características que costumam surpreender agradavelmente seus parceiros. Pessoas com esse tipo de personalidade estão sempre cheias de ideias, mas têm poucas oportunidades de explorar suas noções mais românticas. Como acontece com qualquer uma de suas teorias, os lógicos adoram compartilhar com os outros e, ao finalmente conhecer alguém onde pensamentos românticos são apropriados, eles se mostram excitados, entusiasmados e até brincalhões, flertando com jogos de palavras e jogos intelectuais. (Combinam com ENTJ e ENFJ)</value>
+  </data>
+  <data name="INTP_Group" xml:space="preserve">
+    <value>Analistas</value>
+  </data>
+  <data name="INTP_Name" xml:space="preserve">
+    <value>Lógico (INTP)</value>
+  </data>
+  <data name="ISFJ_Description" xml:space="preserve">
+    <value>Quando se trata de relacionamentos românticos, a bondade dos Defensores se transforma em uma alegria que só é encontrada em cuidar de sua família e casa, em estar lá para apoio emocional e prático sempre que necessário. O lar é onde o coração está para as pessoas com o tipo de personalidade Defensor, e em nenhuma outra área de suas vidas elas se esforçam com tanta dedicação para criar a harmonia e a beleza que desejam ver no mundo. (Combinam com ESFP e ESTP)</value>
+  </data>
+  <data name="ISFJ_Group" xml:space="preserve">
+    <value>Sentinelas</value>
+  </data>
+  <data name="ISFJ_Name" xml:space="preserve">
+    <value>Defensor (ISFJ)</value>
+  </data>
+  <data name="ISFP_Description" xml:space="preserve">
+    <value>Os aventureiros são bastante misteriosos e difíceis de conhecer. Embora sejam indivíduos muito emocionais, eles guardam esse núcleo sensível com cuidado, preferindo ouvir do que expressar. Pessoas com o tipo de personalidade Aventureiro se concentram em seus parceiros, com pouco interesse em ditar o clima de uma situação com seus próprios sentimentos. Embora isso às vezes possa ser frustrante, se eles forem aceitos pelo que são, os Aventureiros demonstram ser parceiros calorosos e entusiasmados. (Combinam com ESTJ e ESFJ)</value>
+  </data>
+  <data name="ISFP_Group" xml:space="preserve">
+    <value>Exploradores</value>
+  </data>
+  <data name="ISFP_Name" xml:space="preserve">
+    <value>Aventureiro (ISFP)</value>
+  </data>
+  <data name="ISTJ_Description" xml:space="preserve">
+    <value>Os logísticos são totalmente confiáveis e essa característica é claramente expressa quando se trata de seus relacionamentos românticos. Muitas vezes representando o epítome dos valores familiares, as pessoas com o tipo de personalidade da Logística sentem-se à vontade com, e muitas vezes até encorajam, os papéis domésticos e de gênero tradicionais, e procuram uma estrutura familiar guiada por expectativas claras e honestidade. Embora sua natureza reservada muitas vezes torne os logísticos de namoro um desafio, eles são parceiros verdadeiramente dedicados, dispostos a dedicar muito pensamento e energia para garantir relacionamentos estáveis e mutuamente satisfatórios. (Combinam com ESTP e ESFP)</value>
+  </data>
+  <data name="ISTJ_Group" xml:space="preserve">
+    <value>Sentinelas</value>
+  </data>
+  <data name="ISTJ_Name" xml:space="preserve">
+    <value>Logístico (ISTJ)</value>
+  </data>
+  <data name="ISTP_Description" xml:space="preserve">
+    <value>Quando se trata de relacionamentos românticos com Virtuosos, é um pouco como pregar gelatina em uma árvore. Namorar personalidades Virtuoso é um tango, complexo e interessante, com alternância de frieza e desapego, e paixão, espontaneidade e prazer do momento. Nada pode ser forçado nos relacionamentos do Virtuoso, mas, desde que recebam o espaço de que precisam para serem eles mesmos, eles terão prazer em desfrutar do conforto de um parceiro estável por toda a vida. (Combinam com ESFJ e ESTJ)</value>
+  </data>
+  <data name="ISTP_Group" xml:space="preserve">
+    <value>Exploradores</value>
+  </data>
+  <data name="ISTP_Name" xml:space="preserve">
+    <value>Virtuoso (ISTP)</value>
+  </data>
+</root>

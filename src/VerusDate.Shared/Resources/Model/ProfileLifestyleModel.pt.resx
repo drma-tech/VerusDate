@@ -117,19 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BirthDate_Name" xml:space="preserve">
-    <value>Birth Date</value>
+  <data name="CareerCluster_Name" xml:space="preserve">
+    <value>Carreira</value>
   </data>
-  <data name="BodyMass_Name" xml:space="preserve">
-    <value>Body</value>
+  <data name="Diet_Description" xml:space="preserve">
+    <value>Opção mais comum selecionada automaticamente (aplicável para a maioria das pessoas)</value>
   </data>
-  <data name="Height_Name" xml:space="preserve">
-    <value>Height</value>
+  <data name="Diet_Name" xml:space="preserve">
+    <value>Dieta</value>
   </data>
-  <data name="RaceCategory_Description" xml:space="preserve">
-    <value>Classification defined by US OMB</value>
+  <data name="Drink_Name" xml:space="preserve">
+    <value>Bebe</value>
   </data>
-  <data name="RaceCategory_Name" xml:space="preserve">
-    <value>Race</value>
+  <data name="EducationLevel_Name" xml:space="preserve">
+    <value>Educação</value>
+  </data>
+  <data name="HaveChildren_Name" xml:space="preserve">
+    <value>Tem Filho(s)</value>
+  </data>
+  <data name="LoveLanguage_Description" xml:space="preserve">
+    <value>Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês)</value>
+  </data>
+  <data name="LoveLanguage_Name" xml:space="preserve">
+    <value>Linguagem do Amor</value>
+  </data>
+  <data name="MoneyPersonality_Description" xml:space="preserve">
+    <value>Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês)</value>
+  </data>
+  <data name="MoneyPersonality_Name" xml:space="preserve">
+    <value>Personalidade Financeira</value>
+  </data>
+  <data name="MyersBriggsTypeIndicator_Description" xml:space="preserve">
+    <value>Este campo é opcional (é necessário fazer um teste em site de terceiros ; multi-idiomas)</value>
+  </data>
+  <data name="MyersBriggsTypeIndicator_Name" xml:space="preserve">
+    <value>Personalidade MBTI</value>
+  </data>
+  <data name="RelationshipPersonality_Description" xml:space="preserve">
+    <value>Caso tenha dúvidas, poderá fazer um teste em site de terceiros (somente em inglês)</value>
+  </data>
+  <data name="RelationshipPersonality_Name" xml:space="preserve">
+    <value>Personalidade na Relação</value>
+  </data>
+  <data name="Religion_Name" xml:space="preserve">
+    <value>Religião</value>
+  </data>
+  <data name="SexPersonalityPreferences_Description" xml:space="preserve">
+    <value>Diferentemente das outras personalidades, a compatibilidade desta é uma preferência pessoal</value>
+  </data>
+  <data name="SexPersonalityPreferences_Name" xml:space="preserve">
+    <value>Person. Sexual (Preferências)</value>
+  </data>
+  <data name="SexPersonality_Description" xml:space="preserve">
+    <value>Caso tenha dúvidas, poderá fazer um teste no site original (somente em inglês)</value>
+  </data>
+  <data name="SexPersonality_Name" xml:space="preserve">
+    <value>Personalidade Sexual</value>
+  </data>
+  <data name="Smoke_Name" xml:space="preserve">
+    <value>Fuma</value>
+  </data>
+  <data name="SplitTheBill_Name" xml:space="preserve">
+    <value>Dividindo as Contas</value>
+  </data>
+  <data name="WantChildren_Name" xml:space="preserve">
+    <value>Quer Filho(s)</value>
   </data>
 </root>

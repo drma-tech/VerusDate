@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Action_Description" xml:space="preserve">
+    <value>Os filmes do gênero de ação são definidos pelo risco e pelo desafio. Incluindo cenas de luta, acrobacias, perseguições de carro e perigo geral. (Derramamento de sangue heróico, ação militar, espionagem, wuxia, desastre, aventura, super-herói)</value>
+  </data>
+  <data name="Action_Name" xml:space="preserve">
+    <value>Ação</value>
+  </data>
+  <data name="Animation_Description" xml:space="preserve">
+    <value>O gênero da animação é definido por objetos inanimados sendo manipulados para parecerem vivos. (Tradicional, Stop Motion, Claymation, Cutout, Imagens Geradas por Computador - CGI, Puppetry, Live-Action)</value>
+  </data>
+  <data name="Animation_Name" xml:space="preserve">
+    <value>Animação</value>
+  </data>
+  <data name="Comedy_Description" xml:space="preserve">
+    <value>O gênero da comédia é definido por eventos que pretendem fazer alguém rir, não importa se a história é macabra, engraçada ou boba. (Comédia de ação, Dark Comedy, Comédia romântica, Buddy Comedy, Road Comedy, Comédia pastelão, paródia, sátira, sitcom, Sketch Comedy, Mockumentary, pegadinha)</value>
+  </data>
+  <data name="Comedy_Name" xml:space="preserve">
+    <value>Comédia</value>
+  </data>
+  <data name="Crime_Description" xml:space="preserve">
+    <value>O gênero crime lida com ambos os lados do sistema de justiça criminal, mas não se concentra em questões legislativas ou processos civis e ações judiciais. (Caper, Heist, Gangster, Policial, Detetive, Tribunal, Processual)</value>
+  </data>
+  <data name="Crime_Name" xml:space="preserve">
+    <value>Crime</value>
+  </data>
+  <data name="Drama_Description" xml:space="preserve">
+    <value>O gênero dramático é definido pelo conflito e muitas vezes olha para a realidade ao invés do sensacionalismo. (Melodrama, Drama Adolescente, Drama Filosófico, Drama Médico, Drama Jurídico, Drama Político, Drama Antropológico, Drama Religioso, Docudrama)</value>
+  </data>
+  <data name="Drama_Name" xml:space="preserve">
+    <value>Drama</value>
+  </data>
+  <data name="Experimental_Description" xml:space="preserve">
+    <value>O gênero experimental é frequentemente definido pela ideia de que a obra de arte e entretenimento não se enquadra em um gênero ou subgênero particular, e é concebida como tal. (Surrealista, Absurdo)</value>
+  </data>
+  <data name="Experimental_Name" xml:space="preserve">
+    <value>Experimental</value>
+  </data>
+  <data name="Fantasy_Description" xml:space="preserve">
+    <value>O gênero de fantasia é definido tanto pelas circunstâncias quanto pelo cenário dentro de um universo ficcional com um conjunto irreal de leis naturais. (Fantasia contemporânea, Fantasia urbana, Fantasia negra, Fantasia elevada, Mito)</value>
+  </data>
+  <data name="Fantasy_Name" xml:space="preserve">
+    <value>Fantasia</value>
+  </data>
+  <data name="Historical_Description" xml:space="preserve">
+    <value>O gênero histórico pode ser dividido em duas seções. Um trata de representações precisas de relatos históricos, que podem incluir biografias, autobiografias e memórias. A outra seção é composta por filmes de ficção que são colocados dentro de uma representação precisa de um cenário histórico. (Evento histórico, biografia, épico histórico, ficção histórica, peça de época, história alternativa)</value>
+  </data>
+  <data name="Historical_Name" xml:space="preserve">
+    <value>Histórico / Fatos Reais</value>
+  </data>
+  <data name="Horror_Description" xml:space="preserve">
+    <value>O gênero de terror é centrado na descrição de eventos aterrorizantes ou macabros por uma questão de entretenimento. (Fantasma, Monstro, Lobisomem, Vampiro, Oculto, Slasher, Splatter, Filmagem encontrada, Zumbi)</value>
+  </data>
+  <data name="Horror_Name" xml:space="preserve">
+    <value>Terror</value>
+  </data>
+  <data name="Musical_Description" xml:space="preserve">
+    <value>Os musicais podem incorporar qualquer outro gênero, mas incorporam personagens que cantam canções e executam números de dança.</value>
+  </data>
+  <data name="Musical_Name" xml:space="preserve">
+    <value>Musical</value>
+  </data>
+  <data name="Romance_Description" xml:space="preserve">
+    <value>O gênero romance é definido por relacionamentos íntimos. (Drama romance, suspense romance, romance de época)</value>
+  </data>
+  <data name="Romance_Name" xml:space="preserve">
+    <value>Romance</value>
+  </data>
+  <data name="ScienceFiction_Description" xml:space="preserve">
+    <value>Os filmes de ficção científica são definidos por uma mistura de especulação e ciência. (Pós-apocalíptico, Utópico, Distópico, Cyberpunk, Steampunk, Tech Noir, Space Opera, Contemporâneo, Militar)</value>
+  </data>
+  <data name="ScienceFiction_Name" xml:space="preserve">
+    <value>Ficção científica</value>
+  </data>
+  <data name="Thriller_Description" xml:space="preserve">
+    <value>Uma história de suspense é principalmente sobre o propósito emocional, que é provocar emoções fortes, lidando principalmente com a geração de suspense e ansiedade. (Psicológico, Mistério, Techno, Film Noir)</value>
+  </data>
+  <data name="Thriller_Name" xml:space="preserve">
+    <value>Suspense</value>
+  </data>
+  <data name="War_Description" xml:space="preserve">
+    <value>Os filmes do gênero guerra giram em torno de conflitos de grande escala entre forças opostas dentro de um universo que compartilha as mesmas leis naturais que o nosso.</value>
+  </data>
+  <data name="War_Name" xml:space="preserve">
+    <value>Guerra</value>
+  </data>
+  <data name="Western_Description" xml:space="preserve">
+    <value>Faroeste são definidos por sua configuração e período de tempo. A história precisa se passar no oeste americano, que começa no extremo leste do Missouri e se estende até o oceano Pacífico. (Western épico, Empire Western, Marshal Western, Outlaw Western, Revenge Western, Revisionist Western, Spaghetti Western)</value>
+  </data>
+  <data name="Western_Name" xml:space="preserve">
+    <value>Faroeste</value>
+  </data>
+</root>

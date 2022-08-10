@@ -15,17 +15,17 @@
     </AlertDescription>
 </Alert>
 
-<Row>
+<Row Gutter="(8,0)">
     <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen">
-        <Card Margin="Margin.Is3.FromBottom">
+        <Card Margin="Margin.Is2.FromBottom">
             <CardHeader>
-                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smile"></Blazorise.Icon> Sugestões de Melhorias
+                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Smile"></Blazorise.Icon> @Resources.CardHeader.SupportImprovementSuggestions
                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="() => NewTicket.ShowModal(TicketType.FeatureRequest)">
                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Blazorise.Icon> Novo
                 </Button>
             </CardHeader>
             <CardBody>
-                <Row>
+                <Row Gutter="(8,0)">
                     <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD">
                         <Field Horizontal="true">
                             <FieldLabel ColumnSize="ColumnSize.Is4">
@@ -48,7 +48,7 @@
                 }
                 else
                 {
-                    <Row Style="max-height: 330px; overflow: auto;">
+                    <Row Gutter="(8,0)" Style="max-height: 330px; overflow: auto;">
                         @foreach (var item in GetTicketList(TicketType.FeatureRequest))
                         {
                             <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD" Margin="Margin.Is1.FromBottom">
@@ -93,13 +93,13 @@
     <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen">
         <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>
-                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug"></Blazorise.Icon> Erros
+                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Bug"></Blazorise.Icon> @Resources.CardHeader.SupportErrors
                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="() => NewTicket.ShowModal(TicketType.Bug)">
                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.PlusCircle"></Blazorise.Icon> Novo
                 </Button>
             </CardHeader>
             <CardBody>
-                <Row>
+                <Row Gutter="(8,0)">
                     <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD">
                         <Field Horizontal="true">
                             <FieldLabel ColumnSize="ColumnSize.Is4">
@@ -122,7 +122,7 @@
                 }
                 else
                 {
-                    <Row Style="max-height: 330px; overflow: auto;">
+                    <Row Gutter="(8,0)" Style="max-height: 330px; overflow: auto;">
                         @foreach (var item in GetTicketList(TicketType.Bug))
                         {
                             <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD" Margin="Margin.Is1.FromBottom">
@@ -166,7 +166,7 @@
     </Column>
 </Row>
 
-<VerusDate.Web.Shared.modal.NewTicket @ref="NewTicket"></VerusDate.Web.Shared.modal.NewTicket>
+<VerusDate.Web.Shared.modal.NewTicket @ref="NewTicket" Inserted="@(async()=>{await LoadData();StateHasChanged();})"></VerusDate.Web.Shared.modal.NewTicket>
 
 @code {
     private List<TicketModel> tickets = new();
@@ -178,16 +178,16 @@
     private Shared.modal.NewTicket NewTicket;
 
     private VisibilityOptions OptionsBug => new VisibilityOptions()
-    {
-        Loading = tickets == null,
-        NoData = (tickets != null && !GetTicketList(TicketType.Bug).Any())
-    };
+        {
+            Loading = tickets == null,
+            NoData = (tickets != null && !GetTicketList(TicketType.Bug).Any())
+        };
 
     private VisibilityOptions OptionsFeature => new VisibilityOptions()
-    {
-        Loading = tickets == null,
-        NoData = (tickets != null && !GetTicketList(TicketType.FeatureRequest).Any())
-    };
+        {
+            Loading = tickets == null,
+            NoData = (tickets != null && !GetTicketList(TicketType.FeatureRequest).Any())
+        };
 
     protected override async Task LoadData()
     {

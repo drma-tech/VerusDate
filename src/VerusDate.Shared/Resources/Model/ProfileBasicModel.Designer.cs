@@ -61,7 +61,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sexo Biológico.
+        ///   Looks up a localized string similar to Biological Sex.
         /// </summary>
         internal static string BiologicalSex_Name {
             get {
@@ -70,7 +70,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Situação Atual.
+        ///   Looks up a localized string similar to Current Situation.
         /// </summary>
         internal static string CurrentSituation_Name {
             get {
@@ -79,7 +79,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Descrição.
+        ///   Looks up a localized string similar to Description.
         /// </summary>
         internal static string Description_Name {
             get {
@@ -88,7 +88,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Para sua própria segurança, favor não incluir informações de contato (celular, email, etc.) ou da sua localização (onde está ou já esteve). \n\nOBS: Promover redes sociais, produtos, serviços e/ou conteúdos que violem direitos de terceiros estará sujeito a banimento da plataforma..
+        ///   Looks up a localized string similar to For your own safety, please do not include contact information (mobile, email, etc.) or your location (where you are or have been). \n\nNOTE: Promoting social networks, products, services and/or content that violates the rights of third parties will be subject to banishment from the platform..
         /// </summary>
         internal static string Description_Prompt {
             get {
@@ -97,7 +97,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opção mais comum selecionada automaticamente (aplicável para a maioria das pessoas).
+        ///   Looks up a localized string similar to Most common option selected automatically (applicable to most people).
         /// </summary>
         internal static string GenderIdentity_Description {
             get {
@@ -106,7 +106,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Identidade de Gênero.
+        ///   Looks up a localized string similar to Gender Identity.
         /// </summary>
         internal static string GenderIdentity_Name {
             get {
@@ -115,7 +115,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to De acordo com a seleção, poderá alterar os campos disponíveis e/ou obrigatórios (escolha até 2 opções).
+        ///   Looks up a localized string similar to Depending on the selection, you can change the available and/or mandatory fields (choose up to 2 options).
         /// </summary>
         internal static string Intentions_Description {
             get {
@@ -124,7 +124,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Intenções.
+        ///   Looks up a localized string similar to Intentions.
         /// </summary>
         internal static string Intentions_Name {
             get {
@@ -133,7 +133,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Escolhido automaticamente de acordo com os idiomas oficiais do pais (caso disponível).
+        ///   Looks up a localized string similar to Automatically chosen according to the official languages of the country (if available).
         /// </summary>
         internal static string Languages_Description {
             get {
@@ -142,7 +142,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Idiomas.
+        ///   Looks up a localized string similar to Languages.
         /// </summary>
         internal static string Languages_Name {
             get {
@@ -151,7 +151,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Informação automática (deve-se liberar acesso a localização do aparelho).
+        ///   Looks up a localized string similar to Automatic information (access to device location must be released).
         /// </summary>
         internal static string Location_Description {
             get {
@@ -160,7 +160,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Localização.
+        ///   Looks up a localized string similar to Location.
         /// </summary>
         internal static string Location_Name {
             get {
@@ -169,7 +169,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Favor clicar no botão ao lado.
+        ///   Looks up a localized string similar to Please click on the button to the side.
         /// </summary>
         internal static string Location_Prompt {
             get {
@@ -178,7 +178,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nome / Apelido.
+        ///   Looks up a localized string similar to Name / Nickname.
         /// </summary>
         internal static string NickName_Name {
             get {
@@ -187,7 +187,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ex: Paulo ou Paulinho.
+        ///   Looks up a localized string similar to Ex: Paul.
         /// </summary>
         internal static string NickName_Prompt {
             get {
@@ -196,7 +196,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opção mais comum selecionada automaticamente (aplicável para a maioria das pessoas).
+        ///   Looks up a localized string similar to Most common option selected automatically (applicable to most people).
         /// </summary>
         internal static string SexualOrientation_Description {
             get {
@@ -205,7 +205,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Orientação Sexual.
+        ///   Looks up a localized string similar to Sexual Orientation.
         /// </summary>
         internal static string SexualOrientation_Name {
             get {

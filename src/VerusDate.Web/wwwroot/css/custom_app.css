@@ -72,3 +72,27 @@
     /* max-width: 128px;*/
     max-height: 100% !important;
 }
+
+.card-header {
+    padding: 0.5rem !important;
+}
+
+.card-body {
+    padding: 0.5rem !important;
+}
+
+.card-footer {
+    padding: 0.5rem !important;
+}
+
+.modal-header {
+    padding: 0.5rem !important;
+}
+
+.modal-body {
+    padding: 0.5rem !important;
+}
+
+.modal-footer {
+    padding: 0.5rem !important;
+}

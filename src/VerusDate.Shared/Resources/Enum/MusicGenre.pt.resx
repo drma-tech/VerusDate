@@ -117,70 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CareerCluster_Name" xml:space="preserve">
-    <value>Career</value>
+  <data name="Alternative_Description" xml:space="preserve">
+    <value>Subgêneros: Rock alternativo • Rock universitário • Rock experimental • Rock gótico • Grunge • Punk Hardcore • Hard Rock • Rock Indie • New Wave • Rock Progressivo • Punk • Shoegaze • Steampunk</value>
   </data>
-  <data name="Diet_Description" xml:space="preserve">
-    <value>Most common option selected automatically (applicable to most people)</value>
+  <data name="Alternative_Name" xml:space="preserve">
+    <value>Alternativa</value>
   </data>
-  <data name="Diet_Name" xml:space="preserve">
-    <value>Diet</value>
+  <data name="Blues_Description" xml:space="preserve">
+    <value>Subgêneros: Acoustic Blues • Chicago Blues • Classic Blues • Contemporâneo Blues • Country Blues • Delta Blues • Electric Blues</value>
   </data>
-  <data name="Drink_Name" xml:space="preserve">
-    <value>Drink</value>
+  <data name="Blues_Name" xml:space="preserve">
+    <value>Blues</value>
   </data>
-  <data name="EducationLevel_Name" xml:space="preserve">
-    <value>Education</value>
+  <data name="Childrens_Description" xml:space="preserve">
+    <value>Subgêneros: Canções de ninar • Cantar junto • Histórias</value>
   </data>
-  <data name="HaveChildren_Name" xml:space="preserve">
-    <value>Has Kids</value>
+  <data name="Childrens_Name" xml:space="preserve">
+    <value>Música infantil</value>
   </data>
-  <data name="LoveLanguage_Description" xml:space="preserve">
-    <value>If you have any doubts, you can take a test on the original website (English only)</value>
+  <data name="Christian_Description" xml:space="preserve">
+    <value>Sub-Gêneros: CCM • Metal Cristão • Pop Cristão • Rap Cristão • Rock Cristão • Cristão Clássico • Gospel Contemporâneo • Gospel • Cristão e Gospel • Louvor e Adoração • Qawwali • Southern Gospel • Gospel Tradicional</value>
   </data>
-  <data name="LoveLanguage_Name" xml:space="preserve">
-    <value>Love Language</value>
+  <data name="Christian_Name" xml:space="preserve">
+    <value>Cristã</value>
   </data>
-  <data name="MoneyPersonality_Description" xml:space="preserve">
-    <value>If you have any doubts, you can take a test on the original website (English only)</value>
+  <data name="Classical_Description" xml:space="preserve">
+    <value>Subgêneros: Vanguarda • Barroco • Música de Câmara • Canto • Coral • Crossover Clássico • Música Antiga • Alto Clássico • Impressionista • Medieval • Minimalismo • Composição Moderna • Ópera • Orquestral • Renascimento • Romântico • Música de Casamento</value>
   </data>
-  <data name="MoneyPersonality_Name" xml:space="preserve">
-    <value>Financial Personality</value>
+  <data name="Classical_Name" xml:space="preserve">
+    <value>Clássica</value>
   </data>
-  <data name="MyersBriggsTypeIndicator_Description" xml:space="preserve">
-    <value>This field is optional (it is necessary to test on a third-party site; multi-language)</value>
+  <data name="Country_Description" xml:space="preserve">
+    <value>Sub-Gêneros: Country Alternativo • Americana • Bluegrass • Bluegrass Contemporâneo • Country Contemporâneo • Country Gospel • Honky Tonk • Outlaw Country • Bluegrass Tradicional • Country Tradicional • Urban Cowboy</value>
   </data>
-  <data name="MyersBriggsTypeIndicator_Name" xml:space="preserve">
-    <value>MBTI Personality</value>
+  <data name="Country_Name" xml:space="preserve">
+    <value>Country</value>
   </data>
-  <data name="RelationshipPersonality_Description" xml:space="preserve">
-    <value>If in doubt, you can take a test on a third-party site (English only)</value>
+  <data name="Electronic_Description" xml:space="preserve">
+    <value>Sub-Gêneros: Breakbeat • Dubstep • Exercício • Garage • Hardcore • Hard Dance • Hi-NRG / Eurodance • House • Jackin House • Jungle • Drum N Bass • Techno • Trance</value>
   </data>
-  <data name="RelationshipPersonality_Name" xml:space="preserve">
-    <value>Personality in Relationship</value>
+  <data name="Electronic_Name" xml:space="preserve">
+    <value>Eletrônica</value>
   </data>
-  <data name="Religion_Name" xml:space="preserve">
-    <value>Religion</value>
+  <data name="Folk_Description" xml:space="preserve">
+    <value>Subgêneros: Folk metal • Folk rock • Neo-Folk • Anti-folk • Indie Folk • Folk Punk • Folk Contemporâneo • Folk Progressivo • Folk Country • Folk Psicodélico • Americana • Skiffle • Baladas</value>
   </data>
-  <data name="SexPersonalityPreferences_Description" xml:space="preserve">
-    <value>Unlike other personalities, this one's compatibility is a personal preference.</value>
+  <data name="Folk_Name" xml:space="preserve">
+    <value>Folk</value>
   </data>
-  <data name="SexPersonalityPreferences_Name" xml:space="preserve">
-    <value>Sexual Person. (Preferences)</value>
+  <data name="HipHopRap_Description" xml:space="preserve">
+    <value>Subgêneros: Rap Alternativo • Bounce • Dirty South • Rap da Costa Leste • Gangsta Rap • Rap Hardcore • Hip-Hop • Rap Latino • Rap da Velha Escola • Rap • Rap Underground • Rap da Costa Oeste • Rap Mumble</value>
   </data>
-  <data name="SexPersonality_Description" xml:space="preserve">
-    <value>If you have any doubts, you can take a test on the original website (English only)</value>
+  <data name="HipHopRap_Name" xml:space="preserve">
+    <value>Hip-Hop/Rap</value>
   </data>
-  <data name="SexPersonality_Name" xml:space="preserve">
-    <value>Sexual Personality</value>
+  <data name="Jazz_Description" xml:space="preserve">
+    <value>Subgêneros: Acid Jazz • Avant-Garde Jazz • Big Band • Blue Note • Jazz Contemporâneo • Easy Listening • Crossover Jazz • Dixieland • Ethio-Jazz Fusion • Hard Bop • Latin Jazz • Mainstream Jazz • Ragtime • Smooth Jazz • Trad Jazz</value>
   </data>
-  <data name="Smoke_Name" xml:space="preserve">
-    <value>Smoke</value>
+  <data name="Jazz_Name" xml:space="preserve">
+    <value>Jazz</value>
   </data>
-  <data name="SplitTheBill_Name" xml:space="preserve">
-    <value>Splitting the Bills</value>
+  <data name="Latino_Description" xml:space="preserve">
+    <value>Subgêneros: Alternativo e Rock Latino • Baladas e Boleros • Brasileiro • Latino Contemporâneo • Jazz Latino • Pop Latino • Raíces • Reggaeton e Hip-Hop • Regional Mexicano • Salsa • Tropical • Bachata • Rumba • Tango</value>
   </data>
-  <data name="WantChildren_Name" xml:space="preserve">
-    <value>Want Kids</value>
+  <data name="Latino_Name" xml:space="preserve">
+    <value>Latino</value>
+  </data>
+  <data name="NewAge_Description" xml:space="preserve">
+    <value>Subgêneros: Ambiental • Cura • Meditação • Natureza • Relaxamento • Viagem</value>
+  </data>
+  <data name="NewAge_Name" xml:space="preserve">
+    <value>Nova Era</value>
+  </data>
+  <data name="Pop_Description" xml:space="preserve">
+    <value>Subgêneros: Pop Barroco • Country Pop • R&amp;B Contemporâneo • Cowboy Pop • Dancehall Pop • Electropop • Emo Pop • Folk-Pop • Hip-Pop • Indie Pop • Pop Punk • Pop Rap • Pop Ambiente • Pop Rock • Power Pop • Pop Psicodélico • Pop da Era Espacial • Worldbeat • K Pop</value>
+  </data>
+  <data name="Pop_Name" xml:space="preserve">
+    <value>Pop</value>
+  </data>
+  <data name="RB_Description" xml:space="preserve">
+    <value>Subgêneros: R&amp;B Contemporâneo • Disco • Doo Wop • Funk • Motown • Neo-Soul • Quiet Storm • Soul</value>
+  </data>
+  <data name="RB_Name" xml:space="preserve">
+    <value>R&amp;B</value>
+  </data>
+  <data name="Reggae_Description" xml:space="preserve">
+    <value>Sub-Gêneros: Dancehall • Dub • Roots Reggae • Ska • Mento • Reggaestep • Gospel Reggae • Reggae Contemporâneo</value>
+  </data>
+  <data name="Reggae_Name" xml:space="preserve">
+    <value>Reggae</value>
+  </data>
+  <data name="Rock_Description" xml:space="preserve">
+    <value>Sub-Gêneros: Alternativa Adulto • Rock Americano • Arena Rock • Blues-Rock • Invasão Britânica • Death Metal/Black Metal • Glam Rock • Hair Metal • Hard Rock ! Metal • Jam Bands • Prog-Rock/Art Rock • Psicodélico • Rock &amp; Roll • Rockabilly • Roots Rock • Cantor/Compositor • Classic Rock • Southern Rock</value>
+  </data>
+  <data name="Rock_Name" xml:space="preserve">
+    <value>Rock</value>
   </data>
 </root>

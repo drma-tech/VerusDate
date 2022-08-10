@@ -12,22 +12,25 @@
             @if (HasGroup)
             {
                 var previousGroup = "";
-                @foreach (var item in EnumHelper.GetList<TEnum>().OrderBy(Order))
+                @foreach (var group in EnumHelper.GetList<TEnum>().DistinctBy(d => d.Group).Select(s => s.Group))
                 {
-                    if (!string.IsNullOrEmpty(@item.Group) && previousGroup != @item.Group)
+                    @foreach (var item in EnumHelper.GetList<TEnum>().Where(w => w.Group == group).OrderBy(Order))
                     {
-                        <Alert Visible="true" Color="Color.Info" Padding="Padding.Is1" Margin="Margin.Is2.FromBottom.Is2.FromTop">
-                            <AlertMessage>@item.Group</AlertMessage>
-                        </Alert>
-                    }
-                    <Paragraph TextAlignment="TextAlignment.Justified" Margin="Margin.Is2.FromBottom">
-                        <Check TValue="bool" Checked="Checked(item)" CheckedChanged="@(()=>CheckedChanged(item, !Checked(item)))" Size="Size.Medium">@item.Name</Check>
-                        @if (!string.IsNullOrEmpty(@item.Description))
+                        if (!string.IsNullOrEmpty(@item.Group) && previousGroup != @item.Group)
                         {
-                            <FieldHelp>@item.Description</FieldHelp>
+                            <Alert Visible="true" Color="Color.Info" Padding="Padding.Is1" Margin="Margin.Is2.FromBottom.Is2.FromTop">
+                                <AlertMessage>@item.Group</AlertMessage>
+                            </Alert>
                         }
-                    </Paragraph>
-                    previousGroup = @item.Group;
+                        <Paragraph TextAlignment="TextAlignment.Justified" Margin="Margin.Is2.FromBottom">
+                            <Check TValue="bool" Checked="Checked(item)" CheckedChanged="@(()=>CheckedChanged(item, !Checked(item)))" Size="Size.Medium">@item.Name</Check>
+                            @if (!string.IsNullOrEmpty(@item.Description))
+                            {
+                                <FieldHelp>@item.Description</FieldHelp>
+                            }
+                        </Paragraph>
+                        previousGroup = @item.Group;
+                    }
                 }
             }
             else

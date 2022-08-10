@@ -14,11 +14,13 @@
             }
             else
             {
-                <Row>
+                <Row Gutter="(8,0)">
                     <Column ColumnSize="ColumnSize.IsHalf.OnDesktop.Is4.OnWidescreen">
-                        <Card Margin="Margin.Is3.FromBottom">
+                        <Card Margin="Margin.Is2.FromBottom">
                             <CardBody Padding="Padding.Is0">
-                                @{ int totPercAff = @GetPercentAffinity(null); }
+                                @{
+                                    int totPercAff = @GetPercentAffinity(null);
+                                }
                                 <Badge Color="GetColor(totPercAff)" Style="position: absolute; top: 10px; left: 10px; z-index: 2;">@(totPercAff + "%")</Badge>
                                 <Badge Color="Color.Dark" Style="position: absolute; top: 10px; right: 10px; z-index: 2;">
                                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Blazorise.Icon> @imageDataUriGallery.Count()
@@ -39,19 +41,19 @@
                                 </Badge>
                                 @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                                 {
-                                    <Badge Color="Color.Success" Style="cursor: help;" Margin="Margin.Is3.FromStart">
+                                    <Badge Color="Color.Success" Style="cursor: help;" Margin="Margin.Is1.FromStart">
                                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado hoje
                                     </Badge>
                                 }
                                 else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
                                 {
-                                    <Badge Color="Color.Warning" Style="cursor: help;" Margin="Margin.Is3.FromStart">
+                                    <Badge Color="Color.Warning" Style="cursor: help;" Margin="Margin.Is1.FromStart">
                                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado esta semana
                                     </Badge>
                                 }
                                 else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
                                 {
-                                    <Badge Color="Color.Danger" Style="cursor: help;" Margin="Margin.Is3.FromStart">
+                                    <Badge Color="Color.Danger" Style="cursor: help;" Margin="Margin.Is1.FromStart">
                                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado este mês
                                     </Badge>
                                 }
@@ -76,7 +78,7 @@
                                     @view.Basic.Description
                                 </Paragraph>
                             </CardBody>
-                            @*<CardBody>
+                            <CardBody>
                                 @if (interaction != null && interaction.IsActiveInteraction())
                                 {
                                     <BtnChat IdUserView="@IdUserView"></BtnChat>
@@ -85,8 +87,8 @@
                                 {
                                     <BtnBlink IdUserView="@IdUserView"></BtnBlink>
                                 }
-                                <Dropdown Float="Float.End">
-                                    <Button Color="Color.Danger" Clicked="report.ShowModal">
+                                <Dropdown Float="Float.End" Disabled="true">
+                                    <Button Color="Color.Danger" Clicked="report.ShowModal" Disabled="true">
                                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Trash"></Blazorise.Icon> Deletar
                                     </Button>
                                     <DropdownToggle Split="true" Color="Color.Danger" />
@@ -94,16 +96,16 @@
                                         <DropdownItem Clicked="report.ShowModal">Deletar e Denunciar</DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>
-                            </CardBody>*@
+                            </CardBody>
                         </Card>
                     </Column>
                     <Column ColumnSize="ColumnSize.IsHalf.OnDesktop.Is8.OnWidescreen">
-                        <Row>
+                        <Row Gutter="(8,0)">
                             <Column ColumnSize="ColumnSize.IsFull.Is8.OnFullHD">
-                                <Card Margin="Margin.Is3.FromBottom">
+                                <Card Margin="Margin.Is2.FromBottom">
                                     <CardHeader>Conquistas</CardHeader>
                                     <CardBody>
-                                        <Row>
+                                        <Row Gutter="(8,0)">
                                             <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
                                                 <ProfileBadge Type="@badge.Ranking"></ProfileBadge>
                                             </Column>
@@ -121,7 +123,7 @@
                                 </Card>
                             </Column>
                             <Column ColumnSize="ColumnSize.IsFull.Is4.OnFullHD">
-                                <Card Margin="Margin.Is3.FromBottom">
+                                <Card Margin="Margin.Is2.FromBottom">
                                     <CardHeader>
                                         Compatibilidade
                                         <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromStart">
@@ -175,7 +177,7 @@
                                 </Card>
                             </Column>
                         </Row>
-                        <Card Margin="Margin.Is3.FromBottom">
+                        <Card Margin="Margin.Is2.FromBottom">
                             <CardBody>
                                 <Divider DividerType="DividerType.TextContent" Text="Básico"></Divider>
 

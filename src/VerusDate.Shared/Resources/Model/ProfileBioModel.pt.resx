@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BirthDate_Name" xml:space="preserve">
-    <value>Birth Date</value>
+    <value>Data de Nascimento</value>
   </data>
   <data name="BodyMass_Name" xml:space="preserve">
-    <value>Body</value>
+    <value>Corpo</value>
   </data>
   <data name="Height_Name" xml:space="preserve">
-    <value>Height</value>
+    <value>Altura</value>
   </data>
   <data name="RaceCategory_Description" xml:space="preserve">
-    <value>Classification defined by US OMB</value>
+    <value>Classificação definida por US OMB</value>
   </data>
   <data name="RaceCategory_Name" xml:space="preserve">
-    <value>Race</value>
+    <value>Raça</value>
   </data>
 </root>

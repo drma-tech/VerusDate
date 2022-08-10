@@ -12,7 +12,7 @@ else
         <FluentValidationValidator />
         <Card Margin="Margin.Is3.FromBottom">
             <CardHeader>
-                Preferências
+                @Resources.CardHeader.ProfilePreferences
                 <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="help.ShowModal" title="Ajuda" Margin="Margin.Is2.FromStart">
                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon>
                 </Button>
@@ -103,13 +103,6 @@ else
                 <Button Color="Color.Success" Clicked="PopulateFields" title="Preencher automaticamente">
                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Magic"></Blazorise.Icon> Preencher
                 </Button>
-
-                @if (profile.Preference != null)
-                {
-                    <Badge Color="Color.Danger" Margin="Margin.Is3.FromStart">
-                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Crown"></Blazorise.Icon> -100 XP
-                    </Badge>
-                }
             </CardFooter>
         </Card>
     </EditForm>

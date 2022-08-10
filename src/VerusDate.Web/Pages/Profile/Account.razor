@@ -3,10 +3,10 @@
 @inherits PageCore<Account>
 @using System.Security.Claims
 
-<Row>
+<Row Gutter="(8,0)">
     <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
-        <Card Margin="Margin.Is3.FromBottom">
-            <CardHeader>Dados Cadastrais</CardHeader>
+        <Card Margin="Margin.Is2.FromBottom">
+            <CardHeader>@Resources.CardHeader.ProfileAccountRegistrationData</CardHeader>
             <CardBody>
                 <Fields>
                     <Field ColumnSize="ColumnSize.Is6.OnDesktop">
@@ -32,8 +32,8 @@
         </Card>
     </Column>
     <Column ColumnSize="ColumnSize.Is6.OnWidescreen">
-        <Card Margin="Margin.Is3.FromBottom">
-            <CardHeader>Operações</CardHeader>
+        <Card Margin="Margin.Is2.FromBottom">
+            <CardHeader>@Resources.CardHeader.ProfileAccountActions</CardHeader>
             <CardBody>
                 <Tooltip Text="Limpar o cache local, caso esteja com problemas dos dados sendo exibidos" Placement="TooltipPlacement.Bottom" Multiline="true">
                     <Button Color="Color.Primary" Block="true" Clicked="()=>{ ClearCache(); }">

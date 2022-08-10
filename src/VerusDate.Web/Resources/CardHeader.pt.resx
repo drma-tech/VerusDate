@@ -117,19 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BirthDate_Name" xml:space="preserve">
-    <value>Birth Date</value>
+  <data name="EventAvailableEvents" xml:space="preserve">
+    <value>Eventos Disponíveis ({0})</value>
   </data>
-  <data name="BodyMass_Name" xml:space="preserve">
-    <value>Body</value>
+  <data name="EventMyEvents" xml:space="preserve">
+    <value>Meus Eventos</value>
   </data>
-  <data name="Height_Name" xml:space="preserve">
-    <value>Height</value>
+  <data name="IndexApple" xml:space="preserve">
+    <value>Maçã</value>
   </data>
-  <data name="RaceCategory_Description" xml:space="preserve">
-    <value>Classification defined by US OMB</value>
+  <data name="IndexDiamond" xml:space="preserve">
+    <value>Diamante</value>
   </data>
-  <data name="RaceCategory_Name" xml:space="preserve">
-    <value>Race</value>
+  <data name="IndexHighlights" xml:space="preserve">
+    <value>Destaques da Semana ({0})</value>
+  </data>
+  <data name="IndexPopularity" xml:space="preserve">
+    <value>Popularidade</value>
+  </data>
+  <data name="IndexRanking" xml:space="preserve">
+    <value>Classificação</value>
+  </data>
+  <data name="ProfileAccountActions" xml:space="preserve">
+    <value>Ações</value>
+  </data>
+  <data name="ProfileAccountRegistrationData" xml:space="preserve">
+    <value>Dados Cadastrais</value>
+  </data>
+  <data name="ProfileData" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="ProfileGaleryMainPhoto" xml:space="preserve">
+    <value>Foto Principal</value>
+  </data>
+  <data name="ProfileGaleryPhotoGallery" xml:space="preserve">
+    <value>Galeria de Fotos</value>
+  </data>
+  <data name="ProfileIndexAchievements" xml:space="preserve">
+    <value>Conquistas</value>
+  </data>
+  <data name="ProfileIndexInteractions" xml:space="preserve">
+    <value>Interações</value>
+  </data>
+  <data name="ProfilePreferences" xml:space="preserve">
+    <value>Preferências</value>
+  </data>
+  <data name="SupportErrors" xml:space="preserve">
+    <value>Erros</value>
+  </data>
+  <data name="SupportImprovementSuggestions" xml:space="preserve">
+    <value>Sugestões de Melhoria</value>
   </data>
 </root>

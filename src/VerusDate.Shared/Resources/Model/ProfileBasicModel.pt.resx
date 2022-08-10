@@ -117,19 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BirthDate_Name" xml:space="preserve">
-    <value>Birth Date</value>
+  <data name="BiologicalSex_Name" xml:space="preserve">
+    <value>Sexo Biológico</value>
   </data>
-  <data name="BodyMass_Name" xml:space="preserve">
-    <value>Body</value>
+  <data name="CurrentSituation_Name" xml:space="preserve">
+    <value>Situação Atual</value>
   </data>
-  <data name="Height_Name" xml:space="preserve">
-    <value>Height</value>
+  <data name="Description_Name" xml:space="preserve">
+    <value>Descrição</value>
   </data>
-  <data name="RaceCategory_Description" xml:space="preserve">
-    <value>Classification defined by US OMB</value>
+  <data name="Description_Prompt" xml:space="preserve">
+    <value>Para sua própria segurança, favor não incluir informações de contato (celular, email, etc.) ou da sua localização (onde está ou já esteve). \n\nOBS: Promover redes sociais, produtos, serviços e/ou conteúdos que violem direitos de terceiros estará sujeito a banimento da plataforma.</value>
   </data>
-  <data name="RaceCategory_Name" xml:space="preserve">
-    <value>Race</value>
+  <data name="GenderIdentity_Description" xml:space="preserve">
+    <value>Opção mais comum selecionada automaticamente (aplicável para a maioria das pessoas)</value>
+  </data>
+  <data name="GenderIdentity_Name" xml:space="preserve">
+    <value>Identidade de Gênero</value>
+  </data>
+  <data name="Intentions_Description" xml:space="preserve">
+    <value>De acordo com a seleção, poderá alterar os campos disponíveis e/ou obrigatórios (escolha até 2 opções)</value>
+  </data>
+  <data name="Intentions_Name" xml:space="preserve">
+    <value>Intenções</value>
+  </data>
+  <data name="Languages_Description" xml:space="preserve">
+    <value>Escolhido automaticamente de acordo com os idiomas oficiais do pais (caso disponível)</value>
+  </data>
+  <data name="Languages_Name" xml:space="preserve">
+    <value>Idiomas</value>
+  </data>
+  <data name="Location_Description" xml:space="preserve">
+    <value>Informação automática (deve-se liberar acesso a localização do aparelho)</value>
+  </data>
+  <data name="Location_Name" xml:space="preserve">
+    <value>Localização</value>
+  </data>
+  <data name="Location_Prompt" xml:space="preserve">
+    <value>Favor clicar no botão ao lado</value>
+  </data>
+  <data name="NickName_Name" xml:space="preserve">
+    <value>Nome / Apelido</value>
+  </data>
+  <data name="NickName_Prompt" xml:space="preserve">
+    <value>Ex: Paulo ou Paulinho</value>
+  </data>
+  <data name="SexualOrientation_Description" xml:space="preserve">
+    <value>Opção mais comum selecionada automaticamente (aplicável para a maioria das pessoas)</value>
+  </data>
+  <data name="SexualOrientation_Name" xml:space="preserve">
+    <value>Orientação Sexual</value>
   </data>
 </root>

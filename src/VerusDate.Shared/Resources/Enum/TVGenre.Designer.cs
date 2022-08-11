@@ -70,7 +70,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cartoon / Anime.
+        ///   Looks up a localized string similar to Anime / Cartoon.
         /// </summary>
         internal static string CartoonAnime_Name {
             get {

@@ -115,7 +115,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Depending on the selection, you can change the available and/or mandatory fields (choose up to 2 options).
+        ///   Looks up a localized string similar to Depending on the selection, you can change the mandatory fields (choose up to 2 options).
         /// </summary>
         internal static string Intentions_Description {
             get {

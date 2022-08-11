@@ -121,7 +121,7 @@
     <value>Um programa que apresenta personagens animados.</value>
   </data>
   <data name="CartoonAnime_Name" xml:space="preserve">
-    <value>Desenho animado / Anime</value>
+    <value>Anime / Desenho animado</value>
   </data>
   <data name="CookingShow_Description" xml:space="preserve">
     <value>Um programa de televisão que apresenta a apresentação de comida em um estúdio de televisão de cozinha.</value>
@@ -151,7 +151,7 @@
     <value>Programas de TV produzidos para crianças.</value>
   </data>
   <data name="KidsChildren_Name" xml:space="preserve">
-    <value>Crianças</value>
+    <value>Crianças / Infantil</value>
   </data>
   <data name="Lifestyle_Description" xml:space="preserve">
     <value>Um programa de televisão com temas como moda, dieta, exercício, saúde e atividades de lazer.</value>

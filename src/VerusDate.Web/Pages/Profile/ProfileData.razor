@@ -125,7 +125,7 @@ else
                 </Row>
                 <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2">
                     <AlertMessage>Interesses</AlertMessage>
-                    <AlertDescription>Os itens deste tópico são opcionais, mas a falta deles poderá afetar o índice de compatibilidade. (no máximo 3 opções para cada)</AlertDescription>
+                    <AlertDescription>Os itens deste tópico são opcionais, mas a falta deles afetará o índice de compatibilidade. (no máximo 3 opções para cada)</AlertDescription>
                 </Alert>
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
@@ -144,7 +144,7 @@ else
                         <FieldSelect For="@(() => profile.Interest.MovieGenre)" TValue="IReadOnlyList<MovieGenre>" TEnum="MovieGenre" @bind-SelectedValues="@profile.Interest.MovieGenre"
                                  CssIcon="@FontAwesomeIcons.Film" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
                         <FieldSelect For="@(() => profile.Interest.TVGenre)" TValue="IReadOnlyList<TVGenre>" TEnum="TVGenre" @bind-SelectedValues="@profile.Interest.TVGenre"
-                                 CssIcon="@FontAwesomeIcons.Tv" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
+                                 CssIcon="@FontAwesomeIcons.Tv" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Short" Multiple="true" Order="(o => o.Name)"></FieldSelect>
                         <FieldSelect For="@(() => profile.Interest.ReadingGenre)" TValue="IReadOnlyList<ReadingGenre>" TEnum="ReadingGenre" @bind-SelectedValues="@profile.Interest.ReadingGenre"
                                  CssIcon="@FontAwesomeIcons.BookReader" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
                     </Column>

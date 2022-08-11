@@ -121,30 +121,30 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
             //PERSONALIDADES
 
-            RuleFor(x => x.Lifestyle.MoneyPersonality)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm())
-                .WithName(Shared.Resources.Model.ProfileLifestyleModel.MoneyPersonality_Name);
+            //RuleFor(x => x.Lifestyle.MoneyPersonality)
+            //    .NotEmpty()
+            //    .When(w => w.Basic.Intentions.IsLongTerm())
+            //    .WithName(Shared.Resources.Model.ProfileLifestyleModel.MoneyPersonality_Name);
 
-            RuleFor(x => x.Lifestyle.SplitTheBill)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm())
-                .WithName(Shared.Resources.Model.ProfileLifestyleModel.SplitTheBill_Name);
+            //RuleFor(x => x.Lifestyle.SplitTheBill)
+            //    .NotEmpty()
+            //    .When(w => w.Basic.Intentions.IsLongTerm())
+            //    .WithName(Shared.Resources.Model.ProfileLifestyleModel.SplitTheBill_Name);
 
-            RuleFor(x => x.Lifestyle.RelationshipPersonality)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm())
-                .WithName(Shared.Resources.Model.ProfileLifestyleModel.RelationshipPersonality_Name);
+            //RuleFor(x => x.Lifestyle.RelationshipPersonality)
+            //    .NotEmpty()
+            //    .When(w => w.Basic.Intentions.IsLongTerm())
+            //    .WithName(Shared.Resources.Model.ProfileLifestyleModel.RelationshipPersonality_Name);
 
-            RuleFor(x => x.Lifestyle.LoveLanguage)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm())
-                .WithName(Shared.Resources.Model.ProfileLifestyleModel.LoveLanguage_Name);
+            //RuleFor(x => x.Lifestyle.LoveLanguage)
+            //    .NotEmpty()
+            //    .When(w => w.Basic.Intentions.IsLongTerm())
+            //    .WithName(Shared.Resources.Model.ProfileLifestyleModel.LoveLanguage_Name);
 
-            RuleFor(x => x.Lifestyle.SexPersonality)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm())
-                .WithName(Shared.Resources.Model.ProfileLifestyleModel.SexPersonality_Name);
+            //RuleFor(x => x.Lifestyle.SexPersonality)
+            //    .NotEmpty()
+            //    .When(w => w.Basic.Intentions.IsLongTerm())
+            //    .WithName(Shared.Resources.Model.ProfileLifestyleModel.SexPersonality_Name);
 
             //INTERESSES
 

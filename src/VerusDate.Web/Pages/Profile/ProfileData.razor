@@ -106,19 +106,19 @@ else
                 <Row>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <FieldSelect For="@(() => profile.Lifestyle.MoneyPersonality)" TValue="MoneyPersonality?" TEnum="MoneyPersonality" @bind-SelectedValue="@profile.Lifestyle.MoneyPersonality"
-                                 CssIcon="@FontAwesomeIcons.Wallet" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" Required="@profile.Basic.Intentions.IsLongTerm()" LabelSize="LabelSize.Big" HelpLink="https://empower.me/quiz/"></FieldSelect>
+                                 CssIcon="@FontAwesomeIcons.Wallet" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Big" HelpLink="https://empower.me/quiz/"></FieldSelect>
                         <FieldSelect For="@(() => profile.Lifestyle.SplitTheBill)" TValue="SplitTheBill?" TEnum="SplitTheBill" @bind-SelectedValue="@profile.Lifestyle.SplitTheBill"
-                                 CssIcon="@FontAwesomeIcons.HandHoldingUsd" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" Required="@profile.Basic.Intentions.IsLongTerm()" LabelSize="LabelSize.Big"></FieldSelect>
+                                 CssIcon="@FontAwesomeIcons.HandHoldingUsd" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Big"></FieldSelect>
                         <FieldSelect For="@(() => profile.Lifestyle.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@profile.Lifestyle.RelationshipPersonality"
-                                 CssIcon="@FontAwesomeIcons.PeopleArrows" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" Required="@profile.Basic.Intentions.IsLongTerm()" LabelSize="LabelSize.Big" HelpLink="https://theanatomyoflove.com/relationship-quizzes/helen-fishers-personality-test/"></FieldSelect>
+                                 CssIcon="@FontAwesomeIcons.PeopleArrows" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Big" HelpLink="https://theanatomyoflove.com/relationship-quizzes/helen-fishers-personality-test/"></FieldSelect>
                         <FieldSelect For="@(() => profile.Lifestyle.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@profile.Lifestyle.MyersBriggsTypeIndicator"
                                  CssIcon="@FontAwesomeIcons.User" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Big" HelpLink="https://www.16personalities.com/" ShowGroup="true"></FieldSelect>
                     </Column>
                     <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                         <FieldSelect For="@(() => profile.Lifestyle.LoveLanguage)" TValue="LoveLanguage?" TEnum="LoveLanguage" @bind-SelectedValue="@profile.Lifestyle.LoveLanguage"
-                                 CssIcon="@FontAwesomeIcons.HandHoldingHeart" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Big" Required="@profile.Basic.Intentions.IsLongTerm()" HelpLink="https://www.5lovelanguages.com/quizzes/singles-quiz/"></FieldSelect>
+                                 CssIcon="@FontAwesomeIcons.HandHoldingHeart" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Big" HelpLink="https://www.5lovelanguages.com/quizzes/singles-quiz/"></FieldSelect>
                         <FieldSelect For="@(() => profile.Lifestyle.SexPersonality)" TValue="SexPersonality?" TEnum="SexPersonality" @bind-SelectedValue="@profile.Lifestyle.SexPersonality"
-                                 CssIcon="@FontAwesomeIcons.Heart" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" Required="@profile.Basic.Intentions.IsLongTerm()" LabelSize="LabelSize.Big" HelpLink="https://www.vmtherapy.com/personality-type/"></FieldSelect>
+                                 CssIcon="@FontAwesomeIcons.Heart" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Big" HelpLink="https://www.vmtherapy.com/personality-type/"></FieldSelect>
                         <FieldSelect For="@(() => profile.Lifestyle.SexPersonalityPreferences)" TValue="IReadOnlyList<SexPersonality>" TEnum="SexPersonality" @bind-SelectedValues="@profile.Lifestyle.SexPersonalityPreferences"
                                  CssIcon="@FontAwesomeIcons.Heart" Disabled="@profile.Basic.Intentions.IsShortTerm(true)" LabelSize="LabelSize.Big" Multiple="true"></FieldSelect>
                     </Column>
@@ -152,8 +152,8 @@ else
             </CardBody>
             <CardFooter>
                 @*<Button Type="ButtonType.Submit" Color="Color.Primary" Disabled="@(profile.GetDataStatus() != DataStatus.New && profile.DaysUpdate() < 1)">
-                <Blazorise.Icon Name="FontAwesomeIcons.Save"></Blazorise.Icon> Salvar Dados
-                </Button>*@
+            <Blazorise.Icon Name="FontAwesomeIcons.Save"></Blazorise.Icon> Salvar Dados
+            </Button>*@
                 <Button Type="ButtonType.Submit" Color="Color.Primary">
                     <Blazorise.Icon Name="FontAwesomeIcons.Save"></Blazorise.Icon> Salvar Dados
                 </Button>

@@ -98,15 +98,15 @@ namespace VerusDate.Api.Mediator.Command.Profile
                 .NotEmpty()
                 .When(w => w.Basic.Intentions.IsLongTerm());
 
-            RuleFor(x => x.Lifestyle.MoneyPersonality)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm());
+            //RuleFor(x => x.Lifestyle.MoneyPersonality)
+            //    .NotEmpty()
+            //    .When(w => w.Basic.Intentions.IsLongTerm());
 
             //MTBI = OPCIONAL - TEM QUE FAZER TESTE
 
-            RuleFor(x => x.Lifestyle.RelationshipPersonality)
-               .NotEmpty()
-               .When(w => w.Basic.Intentions.IsLongTerm());
+            //RuleFor(x => x.Lifestyle.RelationshipPersonality)
+            //   .NotEmpty()
+            //   .When(w => w.Basic.Intentions.IsLongTerm());
 
             //INTERESSES
 

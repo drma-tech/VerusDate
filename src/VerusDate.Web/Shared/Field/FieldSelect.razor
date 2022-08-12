@@ -20,7 +20,7 @@
                         {
                             @foreach (var item in SelectedValues)
                             {
-                                <Badge Color="Color.Secondary" Margin="Margin.Is1.OnWidescreen" Style="font-size: 90%;">
+                                <Badge Color="Color.Secondary" Style="font-size: 90%;" Margin="Margin.Is1.FromEnd">
                                     @item.GetName()
                                 </Badge>
                             }
@@ -115,4 +115,5 @@
 </Field>
 
 <ProfileDataHelp TValue="TValue" HasGroup="@ShowGroup" TEnum="TEnum" @ref="dataHelp"></ProfileDataHelp>
-<ProfileDataSelect TValue="TValue" HasGroup="@ShowGroup" TEnum="TEnum" SelectedValues="SelectedValues" SelectedValuesChanged="SelectedValuesChanged" Order="Order" @ref="dataSelect"></ProfileDataSelect>
+<ProfileDataSelect TValue="TValue" HasGroup="@ShowGroup" TEnum="TEnum" SelectedValues="SelectedValues" 
+    SelectedValuesChanged="SelectedValuesChanged" Order="Order" @ref="dataSelect"></ProfileDataSelect>

@@ -22,10 +22,10 @@
                                     int totPercAff = @GetPercentAffinity(null);
                                 }
                                 <Badge Color="GetColor(totPercAff)" Style="position: absolute; top: 10px; left: 10px; z-index: 2;">@(totPercAff + "%")</Badge>
-                                <Badge Color="Color.Dark" Style="position: absolute; top: 10px; right: 10px; z-index: 2;">
-                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Blazorise.Icon> @imageDataUriGallery.Count()
-                                </Badge>
-                                <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1" ShowIndicators="imageDataUriGallery.Count() > 1">
+                                    <Badge Color="Color.Dark" Style="position: absolute; top: 10px; right: 10px; z-index: 2;">
+                                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Blazorise.Icon> @imageDataUriGallery.Count()
+                                    </Badge>
+                                    <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1" ShowIndicators="imageDataUriGallery.Count() > 1">
                                     @foreach (var item in imageDataUriGallery)
                                     {
                                         <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
@@ -35,31 +35,33 @@
                                 </Carousel>
                             </CardBody>
                             <CardBody>
-                                <Badge Color="Color.Secondary">@view.Basic.NickName</Badge>
                                 <Badge Color="Color.Secondary">
+                                    @view.Basic.NickName
+                                </Badge>
+                                <Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd">
                                     <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view.Basic.GetLocation(LocationType.City)
                                 </Badge>
                                 @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                                 {
-                                    <Badge Color="Color.Success" Style="cursor: help;" Margin="Margin.Is1.FromStart">
+                                    <Badge Color="Color.Success">
                                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado hoje
                                     </Badge>
                                 }
                                 else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
                                 {
-                                    <Badge Color="Color.Warning" Style="cursor: help;" Margin="Margin.Is1.FromStart">
+                                    <Badge Color="Color.Warning">
                                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado esta semana
                                     </Badge>
                                 }
                                 else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
                                 {
-                                    <Badge Color="Color.Danger" Style="cursor: help;" Margin="Margin.Is1.FromStart">
+                                    <Badge Color="Color.Danger">
                                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado este mês
                                     </Badge>
                                 }
                                 else
                                 {
-                                    <Badge Color="Color.Dark" Style="cursor: help;" Margin="Margin.Is3.FromStart">
+                                    <Badge Color="Color.Dark">
                                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> usuário desativado
                                     </Badge>
                                 }

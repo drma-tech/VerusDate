@@ -42,14 +42,14 @@ namespace VerusDate.Web.Core
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Religion), CheckEnum((int?)profView.Lifestyle.Religion, (int?)profUser.Lifestyle.Religion)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.EducationLevel), CheckEnum((int?)profView.Lifestyle.EducationLevel, (int?)profUser.Lifestyle.EducationLevel)));
                 obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.CareerCluster), CheckEnum((int?)profView.Lifestyle.CareerCluster, (int?)profUser.Lifestyle.CareerCluster)));
-                
+
                 //PERSONALITY
-                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int?)profView.Lifestyle.MoneyPersonality, (int?)profUser.Lifestyle.MoneyPersonality)));
+                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int?)profView.Lifestyle.MoneyPersonality, (int?)profUser.Lifestyle.MoneyPersonality, true)));
                 obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.SplitTheBill), CheckSplitTheBill(profView.Lifestyle.SplitTheBill, profUser.Lifestyle.SplitTheBill)));
                 obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality, profUser.Lifestyle.RelationshipPersonality)));
-                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.LoveLanguage), CheckEnum((int?)profView.Lifestyle.LoveLanguage, (int?)profUser.Lifestyle.LoveLanguage)));
+                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.LoveLanguage), CheckEnum((int?)profView.Lifestyle.LoveLanguage, (int?)profUser.Lifestyle.LoveLanguage, true)));
                 obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator, profUser.Lifestyle.MyersBriggsTypeIndicator)));
-                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.SexPersonality), CheckEnumArray(profView.Lifestyle.SexPersonality, profUser.Lifestyle.SexPersonalityPreferences)));
+                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.SexPersonality), CheckEnumArray(profView.Lifestyle.SexPersonality, profUser.Lifestyle.SexPersonalityPreferences, true)));
 
                 //INTEREST - COMPATIBILIDADE DE PERFIL / UMA OPÇAO IGUAL JÁ INDICA COMPATIBILIDADE
                 obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Food), CheckEnumArrays(profView.Interest.Food, profUser.Interest.Food), profView.Interest.Food.Intersect(profUser.Interest.Food).Select(s => (int)s)));
@@ -65,16 +65,30 @@ namespace VerusDate.Web.Core
             return obj;
         }
 
-        private static bool CheckEnum(int? view, int? looking)
+        private static bool CheckEnum(int? view, int? looking, bool force = false)
         {
-            if (!looking.HasValue) return true; //If the user has not defined, then it is an affinity
+            if (force)
+            {
+                if (!looking.HasValue) return false;
+            }
+            else
+            {
+                if (!looking.HasValue) return true; //If the user has not defined, then it is an affinity
+            }
 
             return view == looking;
         }
 
-        private static bool CheckEnumArray<T>(T? view, IEnumerable<T> looking) where T : struct, Enum
+        private static bool CheckEnumArray<T>(T? view, IEnumerable<T> looking, bool force = false) where T : struct, Enum
         {
-            if (!looking.Any()) return true; //If the user has not defined, then it is an affinity
+            if (force)
+            {
+                if (!looking.Any()) return false;
+            }
+            else
+            {
+                if (!looking.Any()) return true; //If the user has not defined, then it is an affinity
+            }
 
             if (view.HasValue)
                 return new T[] { view.Value }.Intersect(looking).Any();

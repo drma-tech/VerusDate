@@ -9,8 +9,8 @@ self.addEventListener('fetch', event => event.respondWith(onFetch(event)));
 const cacheNamePrefix = 'offline-cache-';
 const cacheName = `${cacheNamePrefix}${self.assetsManifest.version}`;
 const offlineAssetsInclude = [/\.dll$/, /\.pdb$/, /\.wasm/, /\.html/, /\.js$/, /\.json$/, /\.css$/, /\.woff$/, /\.png$/, /\.jpe?g$/, /\.gif$/, /\.ico$/, /\.blat$/, /\.dat$/ ];
-//const offlineAssetsExclude = [/^service-worker\.js$/, /^routes\.json$/];
-const offlineAssetsExclude = [/^service-worker\.js$/, /^routes\.json$/, /^index\.html$/];
+const offlineAssetsExclude = [/^service-worker\.js$/, /^routes\.json$/];
+//const offlineAssetsExclude = [/^service-worker\.js$/, /^routes\.json$/, /^index\.html$/];
 
 async function onInstall(event) {
     console.info('Service worker: Install');
@@ -38,7 +38,7 @@ async function onFetch(event) {
     if (event.request.method === 'GET') {
         // For all navigation requests, try to serve index.html from cache
         // If you need some URLs to be server-rendered, edit the following check to exclude those URLs
-        const shouldServeIndexHtml = event.request.mode === 'navigate';
+        const shouldServeIndexHtml = event.request.mode === 'navigate' && !event.request.url.includes('/.auth/login/');
 
         const request = shouldServeIndexHtml ? 'index.html' : event.request;
         const cache = await caches.open(cacheName);

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.Azure.Cosmos;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
@@ -7,7 +6,8 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Support
 {
-    public class TicketInsertCommand : TicketModel, IRequest<TicketModel> { }
+    public class TicketInsertCommand : TicketModel, IRequest<TicketModel>
+    { }
 
     public class TicketInsertHandler : IRequestHandler<TicketInsertCommand, TicketModel>
     {
@@ -22,9 +22,9 @@ namespace VerusDate.Api.Mediator.Command.Support
         {
             var obj = await _repo.Get<ProfileModel>("Profile:" + request.IdUserOwner, request.IdUserOwner, cancellationToken);
 
-            obj.Gamification.AddXP(5);
+            //obj.Gamification.AddXP(5);
 
-            await _repo.Update(obj, cancellationToken);
+            //await _repo.Update(obj, cancellationToken);
 
             return await _repo.Add(request, cancellationToken);
         }

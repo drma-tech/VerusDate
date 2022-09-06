@@ -7,8 +7,11 @@ namespace VerusDate.Api.Mediator.Command.Profile
     {
         public ProfileLookingValidation()
         {
-            RuleFor(x => x.Intentions)
-               .NotEmpty();
+            RuleFor(x => x.Region)
+                .NotEmpty();
+
+            RuleFor(x => x.Change)
+                .NotEmpty();
 
             RuleFor(x => x.MinimalAge)
                 .NotEmpty()

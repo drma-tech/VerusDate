@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Linq.Expressions;
-using VerusDate.Shared.Helper;
 using VerusDate.Shared.Core;
+using VerusDate.Shared.Helper;
 
 namespace VerusDate.Web.Shared.Field
 {
@@ -13,7 +13,9 @@ namespace VerusDate.Web.Shared.Field
         [Parameter] public bool ShowGroup { get; set; } = false;
         [Parameter] public bool ShowSwitch { get; set; } = false;
         [Parameter] public bool ShowHelper { get; set; } = true;
+        [Parameter] public bool ShowDescription { get; set; } = true;
         [Parameter] public string HelpLink { get; set; }
+        [Parameter] public string CustomInfo { get; set; }
 
         [Parameter] public EventCallback ButtomClicked { get; set; }
         [Parameter] public object ButtomCssIcon { get; set; }
@@ -45,6 +47,17 @@ namespace VerusDate.Web.Shared.Field
 
         protected void UpdateDataHelp(Expression<Func<TValue>> For)
         {
+            //await ModalService.Show<ProfileDataHelp<TValue, TEnum>>(CustomAttributeHelper.GetCustomAttribute(For)?.Name,
+            //    x =>
+            //    {
+            //        x.Add(x => x.HasGroup, ShowGroup);
+            //    },
+            //    new ModalInstanceOptions()
+            //    {
+            //        Centered = true,
+            //        Size = ModalSize.Default,
+            //    });
+
             dataHelp.ChangeContent(For);
             dataHelp.ShowModal();
         }

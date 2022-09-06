@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.Cosmos;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core;

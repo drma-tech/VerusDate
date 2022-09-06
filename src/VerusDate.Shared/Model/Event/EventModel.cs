@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
 

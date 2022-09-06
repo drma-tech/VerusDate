@@ -6,7 +6,8 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class PrincipalAddCommand : ClientePrincipal, IRequest<ClientePrincipal> { }
+    public class PrincipalAddCommand : ClientePrincipal, IRequest<ClientePrincipal>
+    { }
 
     public class PrincipalAddHandler : IRequestHandler<PrincipalAddCommand, ClientePrincipal>
     {

@@ -157,10 +157,10 @@
     <value>Favor clicar no botão ao lado</value>
   </data>
   <data name="NickName_Name" xml:space="preserve">
-    <value>Nome / Apelido</value>
+    <value>Apelido</value>
   </data>
   <data name="NickName_Prompt" xml:space="preserve">
-    <value>Ex: Paulo ou Paulinho</value>
+    <value>Ex: Paulinho</value>
   </data>
   <data name="SexualOrientation_Description" xml:space="preserve">
     <value>Opção mais comum selecionada automaticamente (aplicável para a maioria das pessoas)</value>

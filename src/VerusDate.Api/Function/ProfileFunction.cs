@@ -97,6 +97,8 @@ namespace VerusDate.Api.Function
             [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.POST, Route = "Profile/Add")] HttpRequest req,
             ILogger log, CancellationToken cancellationToken)
         {
+            //TODO: https://docs.microsoft.com/pt-br/learn/modules/configure-azure-cosmos-db-sql-api-sdk/3-handle-connection-errors
+
             using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
 
             try

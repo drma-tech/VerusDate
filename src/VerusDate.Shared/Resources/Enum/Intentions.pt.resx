@@ -117,29 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Casual_Description" xml:space="preserve">
-    <value>Esta é uma forma mais relaxada de namoro. É quando você está conversando com uma pessoa, ficando ou praticando sexo casual, mas você não está em algo sério e não há compromisso. Alguém que está casualmente se relacionando com alguém também pode estar saindo com outras pessoas.</value>
+  <data name="LiveTogether_Description" xml:space="preserve">
+    <value>Viver juntos por um curto/médio período de tempo.</value>
   </data>
-  <data name="Casual_Group" xml:space="preserve">
-    <value>Curto Prazo</value>
-  </data>
-  <data name="Casual_Name" xml:space="preserve">
-    <value>Relacionamento Casual</value>
+  <data name="LiveTogether_Name" xml:space="preserve">
+    <value>Morar juntos</value>
   </data>
   <data name="Married_Description" xml:space="preserve">
-    <value>Para quem pretende casar (vínculo estabelecido entre duas pessoas, através de reconhecimento governamental, cultural, religioso ou social) ou viver juntos em curto/médio período de tempo.</value>
-  </data>
-  <data name="Married_Group" xml:space="preserve">
-    <value>Longo Prazo</value>
+    <value>Para quem pretende casar (vínculo estabelecido entre duas pessoas, através de reconhecimento governamental, cultural, religioso ou social).</value>
   </data>
   <data name="Married_Name" xml:space="preserve">
-    <value>Morar junto / Casar</value>
+    <value>Casar</value>
   </data>
   <data name="Serious_Description" xml:space="preserve">
     <value>Namoro sério é quando você está comprometido com uma pessoa. Você tem sentimentos por ela, e ela têm sentimentos por você. Por causa disso, você não está saindo com mais ninguém e espera um dia levar o relacionamento para o próximo nível.</value>
-  </data>
-  <data name="Serious_Group" xml:space="preserve">
-    <value>Longo Prazo</value>
   </data>
   <data name="Serious_Name" xml:space="preserve">
     <value>Relacionamento Sério</value>

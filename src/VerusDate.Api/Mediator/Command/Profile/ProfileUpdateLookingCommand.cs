@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.Azure.Cosmos;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
@@ -7,7 +6,8 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileUpdateLookingCommand : ProfileModel, IRequest<bool> { }
+    public class ProfileUpdateLookingCommand : ProfileModel, IRequest<bool>
+    { }
 
     public class ProfileLookingAddHandler : IRequestHandler<ProfileUpdateLookingCommand, bool>
     {
@@ -22,14 +22,14 @@ namespace VerusDate.Api.Mediator.Command.Profile
         {
             var obj = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
 
-            if (obj.Preference == null) //primeira vez que atualiza a busca
-            {
-                obj.Gamification.AddXP(30);
-            }
-            else
-            {
-                obj.Gamification.RemoveXP(100);
-            }
+            //if (obj.Preference == null) //primeira vez que atualiza a busca
+            //{
+            //    obj.Gamification.AddXP(30);
+            //}
+            //else
+            //{
+            //    obj.Gamification.RemoveXP(100);
+            //}
 
             obj.UpdateLooking(request.Preference);
 

@@ -8,12 +8,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Store\**" />
+    <Content Remove="Pages\Store\**" />
+    <EmbeddedResource Remove="Pages\Store\**" />
+    <None Remove="Pages\Store\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Api\InterationApi.cs" />
+    <Compile Remove="Api\StoreApi.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="Pages\Explore\Chat.razor" />
+    <Content Remove="Pages\Profile\Interactions.razor" />
     <Content Remove="Pages\Profile\ProfileChatList.razor" />
     <Content Remove="Shared\ActivityStatus.razor" />
     <Content Remove="Shared\Affinity.razor" />
     <Content Remove="Shared\PhotoFace.razor" />
+    <Content Remove="Shared\ProfileBadge.razor" />
   </ItemGroup>
 
   <ItemGroup>

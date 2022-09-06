@@ -61,34 +61,25 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is a more relaxed form of dating. It’s when you’re talking to a person, dating them, or engaging in casual sex, but you are not serious and there is no commitment. Someone who is casually dating someone may also be seeing other people..
+        ///   Looks up a localized string similar to Live together in a short/medium period of time..
         /// </summary>
-        internal static string Casual_Description {
+        internal static string LiveTogether_Description {
             get {
-                return ResourceManager.GetString("Casual_Description", resourceCulture);
+                return ResourceManager.GetString("LiveTogether_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Short Term.
+        ///   Looks up a localized string similar to Live Together.
         /// </summary>
-        internal static string Casual_Group {
+        internal static string LiveTogether_Name {
             get {
-                return ResourceManager.GetString("Casual_Group", resourceCulture);
+                return ResourceManager.GetString("LiveTogether_Name", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Casual Relationship.
-        /// </summary>
-        internal static string Casual_Name {
-            get {
-                return ResourceManager.GetString("Casual_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to For those who intend to marry (bond established between two people, through governmental, cultural, religious or social recognition) or live together in a short/medium period of time..
+        ///   Looks up a localized string similar to For those who intend to marry (bond established between two people, through governmental, cultural, religious or social recognition)..
         /// </summary>
         internal static string Married_Description {
             get {
@@ -97,16 +88,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Long Term.
-        /// </summary>
-        internal static string Married_Group {
-            get {
-                return ResourceManager.GetString("Married_Group", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Live together / Get Married.
+        ///   Looks up a localized string similar to Get Married.
         /// </summary>
         internal static string Married_Name {
             get {
@@ -120,15 +102,6 @@ namespace VerusDate.Shared.Resources.Enum {
         internal static string Serious_Description {
             get {
                 return ResourceManager.GetString("Serious_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Long Term.
-        /// </summary>
-        internal static string Serious_Group {
-            get {
-                return ResourceManager.GetString("Serious_Group", resourceCulture);
             }
         }
         

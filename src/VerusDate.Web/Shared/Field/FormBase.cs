@@ -1,6 +1,5 @@
 ﻿using Blazorise;
 using Microsoft.AspNetCore.Components;
-using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Reflection;
 using VerusDate.Shared.Core;
@@ -20,6 +19,7 @@ namespace VerusDate.Web.Shared.Field
         [Parameter] public Expression<Func<TValue>> For { get; set; }
         [Parameter] public bool Disabled { get; set; }
         [Parameter] public LabelSize LabelSize { get; set; } = LabelSize.Normal;
+        [Parameter] public string PrivateInfo { get; set; }
 
         protected virtual Dictionary<string, object> GetAttributes(string customStyle)
         {

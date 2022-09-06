@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.Azure.Cosmos;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
@@ -7,7 +6,8 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Support
 {
-    public class TicketVoteCommand : TicketVoteModel, IRequest<TicketVoteModel> { }
+    public class TicketVoteCommand : TicketVoteModel, IRequest<TicketVoteModel>
+    { }
 
     public class TicketVoteHandler : IRequestHandler<TicketVoteCommand, TicketVoteModel>
     {
@@ -25,11 +25,11 @@ namespace VerusDate.Api.Mediator.Command.Support
 
             request.SetKey(request.Key);
 
-            var obj = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
+            //var obj = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
 
-            obj.Gamification.AddXP(1);
+            //obj.Gamification.AddXP(1);
 
-            await _repo.Update(obj, cancellationToken);
+            //await _repo.Update(obj, cancellationToken);
 
             return await _repo.Add(request, cancellationToken);
         }

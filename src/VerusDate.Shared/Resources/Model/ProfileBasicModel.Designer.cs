@@ -178,7 +178,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name / Nickname.
+        ///   Looks up a localized string similar to Nickname.
         /// </summary>
         internal static string NickName_Name {
             get {

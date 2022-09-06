@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="VerusDate.Api.Function.EventFunction">
+    <Position X="4.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Function\EventFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.ExternalFunction">
+    <Position X="11.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Function\ExternalFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.InteractionFunction">
+    <Position X="20.25" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAFAAAAAAAAAABAAAAAAAEAAAAAIAAAAAAAAACJCAA=</HashCode>
+      <FileName>Function\InteractionFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.PrincipalFunction">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIBAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Function\PrincipalFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.ProfileFunction">
+    <Position X="13.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYBAAAAIAAAAABAAAAQAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Function\ProfileFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.PublicFunction">
+    <Position X="22.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Function\PublicFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.StorageFunction">
+    <Position X="8.75" Y="2" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Function\StorageFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.StoreFunction">
+    <Position X="15.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Function\StoreFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerusDate.Api.Function.SupportFunction">
+    <Position X="18" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAEAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAABAAI=</HashCode>
+      <FileName>Function\SupportFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="13.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

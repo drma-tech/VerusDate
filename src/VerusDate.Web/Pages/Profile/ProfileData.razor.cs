@@ -1,7 +1,4 @@
 ﻿using BrowserInterop.Extensions;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using VerusDate.Shared;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
@@ -16,9 +13,6 @@ namespace VerusDate.Web.Pages.Profile
         private ProfileModel profile = new();
         private GeoLocation GPS = new();
 
-        protected bool IsShortTerm
-        { get { return !profile.Basic.Intentions.IsLongTerm(); } }
-
         protected override async Task LoadData()
         {
             profile = await Http.Profile_Get(SessionStorage);
@@ -27,22 +21,19 @@ namespace VerusDate.Web.Pages.Profile
             {
                 profile = new()
                 {
-                    Basic = new(),
-                    Bio = new(),
-                    Lifestyle = new(),
-                    Interest = new()
+                    GenderIdentity = GenderIdentity.Cisgender,
+                    SexualOrientation = SexualOrientation.Heterosexual,
+                    BirthDate = DateTime.UtcNow.AddYears(-18).AddDays(1).Date,
+                    Diet = Diet.Omnivore,
+                    //Neurodiversity = Neurodiversity.Neurotypical,
+                    //Disability = Disability.NoDisability
                 };
-
-                profile.Basic.GenderIdentity = GenderIdentity.Cisgender;
-                profile.Basic.SexualOrientation = SexualOrientation.Heterosexual;
-                profile.Bio.BirthDate = DateTime.UtcNow.AddYears(-18).AddDays(1).Date;
-                profile.Lifestyle.Diet = Diet.Omnivore;
             }
         }
 
         private async Task SetLocation(ProfileModel profile)
         {
-            if (profile != null && profile.Basic != null /*&& !profile.Basic.Longitude.HasValue*/)
+            if (profile != null /*&& !profile.Longitude.HasValue*/)
             {
                 var window = await JsRuntime.Window();
                 var navigator = await window.Navigator();
@@ -63,17 +54,17 @@ namespace VerusDate.Web.Pages.Profile
                     if (here.items.Any())
                     {
                         var address = here.items[0].address;
-                        profile.Basic.Location = address.GetLocation();
+                        profile.Location = address.GetLocation();
 
                         AddLanguages((Country)Enum.Parse(typeof(Country), address.countryCode));
                     }
                     else
                     {
-                        profile.Basic.Location = "Localização Desconhecida";
+                        profile.Location = "Localização Desconhecida";
                     }
 
-                    profile.Basic.Longitude = GPS.Longitude;
-                    profile.Basic.Latitude = GPS.Latitude;
+                    //profile.Longitude = GPS.Longitude;
+                    //profile.Latitude = GPS.Latitude;
 
                     if (GPS.Accuracy > 500)
                     {
@@ -91,52 +82,52 @@ namespace VerusDate.Web.Pages.Profile
         {
             //https://en.wikipedia.org/wiki/List_of_official_languages
             //https://en.wikipedia.org/wiki/List_of_official_languages_by_country_and_territory
-            if (profile.Basic.Languages.Any()) return;
+            if (profile.Languages.Any()) return;
 
             switch (country)
             {
                 case Country.CHN:
-                    profile.Basic.Languages = new Language[] { Language.StandardChinese };
+                    profile.Languages = new Language[] { Language.StandardChinese };
                     break;
 
                 case Country.IND:
-                    profile.Basic.Languages = new Language[] { Language.HindiUrdu };
+                    profile.Languages = new Language[] { Language.HindiUrdu };
                     break;
 
                 case Country.USA:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.IDN:
-                    profile.Basic.Languages = new Language[] { Language.Malay }; //Indonesian = It is a standardized variety of Malay
+                    profile.Languages = new Language[] { Language.Malay }; //Indonesian = It is a standardized variety of Malay
                     break;
 
                 case Country.PAK:
-                    profile.Basic.Languages = new Language[] { Language.HindiUrdu };
+                    profile.Languages = new Language[] { Language.HindiUrdu };
                     break;
 
                 case Country.NGA:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.BRA:
-                    profile.Basic.Languages = new Language[] { Language.Portuguese };
+                    profile.Languages = new Language[] { Language.Portuguese };
                     break;
 
                 case Country.BGD:
-                    //profile.Basic.Languages = new Language[] { Language.Bengali };
+                    //profile.Languages = new Language[] { Language.Bengali };
                     break;
 
                 case Country.RUS:
-                    profile.Basic.Languages = new Language[] { Language.Russian };
+                    profile.Languages = new Language[] { Language.Russian };
                     break;
 
                 case Country.MEX:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.JPN:
-                    //profile.Basic.Languages = new Language[] { Language.Japanese };
+                    //profile.Languages = new Language[] { Language.Japanese };
                     break;
 
                 case Country.ETH:
@@ -148,35 +139,35 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.EGY:
-                    profile.Basic.Languages = new Language[] { Language.Arabic };
+                    profile.Languages = new Language[] { Language.Arabic };
                     break;
 
                 case Country.VNM:
-                    //profile.Basic.Languages = new Language[] { Language.Vietnamese };
+                    //profile.Languages = new Language[] { Language.Vietnamese };
                     break;
 
                 case Country.COD:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.IRN:
-                    profile.Basic.Languages = new Language[] { Language.Persian };
+                    profile.Languages = new Language[] { Language.Persian };
                     break;
 
                 case Country.TUR:
-                    profile.Basic.Languages = new Language[] { Language.Turkish };
+                    profile.Languages = new Language[] { Language.Turkish };
                     break;
 
                 case Country.DEU:
-                    profile.Basic.Languages = new Language[] { Language.German };
+                    profile.Languages = new Language[] { Language.German };
                     break;
 
                 case Country.FRA:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.GBR:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.THA:
@@ -188,11 +179,11 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.TZA:
-                    profile.Basic.Languages = new Language[] { Language.Swahili, Language.English };
+                    profile.Languages = new Language[] { Language.Swahili, Language.English };
                     break;
 
                 case Country.ITA:
-                    profile.Basic.Languages = new Language[] { Language.Italian };
+                    profile.Languages = new Language[] { Language.Italian };
                     break;
 
                 case Country.MMR:
@@ -200,39 +191,39 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.KOR:
-                    profile.Basic.Languages = new Language[] { Language.Korean };
+                    profile.Languages = new Language[] { Language.Korean };
                     break;
 
                 case Country.COL:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.KEN:
-                    profile.Basic.Languages = new Language[] { Language.Swahili, Language.English };
+                    profile.Languages = new Language[] { Language.Swahili, Language.English };
                     break;
 
                 case Country.ESP:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.ARG:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.DZA:
-                    profile.Basic.Languages = new Language[] { Language.Arabic };
+                    profile.Languages = new Language[] { Language.Arabic };
                     break;
 
                 case Country.SDN:
-                    profile.Basic.Languages = new Language[] { Language.Arabic };
+                    profile.Languages = new Language[] { Language.Arabic };
                     break;
 
                 case Country.UGA:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.IRQ:
-                    profile.Basic.Languages = new Language[] { Language.Arabic };
+                    profile.Languages = new Language[] { Language.Arabic };
                     break;
 
                 case Country.UKR:
@@ -240,7 +231,7 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.CAN:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.POL:
@@ -248,7 +239,7 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.MAR:
-                    profile.Basic.Languages = new Language[] { Language.Arabic };
+                    profile.Languages = new Language[] { Language.Arabic };
                     break;
 
                 case Country.UZB:
@@ -256,36 +247,36 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.SAU:
-                    profile.Basic.Languages = new Language[] { Language.Arabic };
+                    profile.Languages = new Language[] { Language.Arabic };
                     break;
 
                 case Country.PER:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.AGO:
-                    profile.Basic.Languages = new Language[] { Language.Portuguese };
+                    profile.Languages = new Language[] { Language.Portuguese };
                     break;
 
                 case Country.AFG:
-                    profile.Basic.Languages = new Language[] { Language.Persian }; //Dari, which is a variety of and mutually intelligible with Persian
+                    profile.Languages = new Language[] { Language.Persian }; //Dari, which is a variety of and mutually intelligible with Persian
                     //Pashto, Dari
                     break;
 
                 case Country.MYS:
-                    profile.Basic.Languages = new Language[] { Language.Malay };
+                    profile.Languages = new Language[] { Language.Malay };
                     break;
 
                 case Country.MOZ:
-                    profile.Basic.Languages = new Language[] { Language.Portuguese };
+                    profile.Languages = new Language[] { Language.Portuguese };
                     break;
 
                 case Country.GHA:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.YEM:
-                    profile.Basic.Languages = new Language[] { Language.Arabic };
+                    profile.Languages = new Language[] { Language.Arabic };
                     break;
 
                 case Country.NPL:
@@ -293,11 +284,11 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.VEN:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.CIV:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.MDG:
@@ -305,23 +296,23 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.AUS:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.PRK:
-                    profile.Basic.Languages = new Language[] { Language.Korean };
+                    profile.Languages = new Language[] { Language.Korean };
                     break;
 
                 case Country.CMR:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.NER:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.TWN:
-                    profile.Basic.Languages = new Language[] { Language.StandardChinese };
+                    profile.Languages = new Language[] { Language.StandardChinese };
                     break;
 
                 case Country.LKA:
@@ -329,19 +320,19 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.BFA:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.MWI:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.MLI:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.CHL:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.KAZ:
@@ -349,39 +340,39 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.ROU:
-                    profile.Basic.Languages = new Language[] { Language.Romanian };
+                    profile.Languages = new Language[] { Language.Romanian };
                     break;
 
                 case Country.ZMB:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.SYR:
-                    profile.Basic.Languages = new Language[] { Language.Arabic };
+                    profile.Languages = new Language[] { Language.Arabic };
                     break;
 
                 case Country.ECU:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.NLD:
-                    profile.Basic.Languages = new Language[] { Language.Dutch };
+                    profile.Languages = new Language[] { Language.Dutch };
                     break;
 
                 case Country.SEN:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.GTM:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.TCD:
-                    profile.Basic.Languages = new Language[] { Language.French, Language.Arabic };
+                    profile.Languages = new Language[] { Language.French, Language.Arabic };
                     break;
 
                 case Country.SOM:
-                    profile.Basic.Languages = new Language[] { Language.Somali };
+                    profile.Languages = new Language[] { Language.Somali };
                     break;
 
                 case Country.ZWE:
@@ -393,7 +384,7 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.SSD:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.RWA:
@@ -401,7 +392,7 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.GIN:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.BDI:
@@ -409,39 +400,39 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.BEN:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.BOL:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.TUN:
-                    profile.Basic.Languages = new Language[] { Language.Arabic };
+                    profile.Languages = new Language[] { Language.Arabic };
                     break;
 
                 case Country.HTI:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.BEL:
-                    profile.Basic.Languages = new Language[] { Language.Dutch };
+                    profile.Languages = new Language[] { Language.Dutch };
                     break;
 
                 case Country.JOR:
-                    profile.Basic.Languages = new Language[] { Language.Arabic };
+                    profile.Languages = new Language[] { Language.Arabic };
                     break;
 
                 case Country.CUB:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.GRC:
-                    profile.Basic.Languages = new Language[] { Language.Greek };
+                    profile.Languages = new Language[] { Language.Greek };
                     break;
 
                 case Country.DOM:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.CZE:
@@ -449,11 +440,11 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.SWE:
-                    profile.Basic.Languages = new Language[] { Language.Swedish };
+                    profile.Languages = new Language[] { Language.Swedish };
                     break;
 
                 case Country.PRT:
-                    profile.Basic.Languages = new Language[] { Language.Portuguese };
+                    profile.Languages = new Language[] { Language.Portuguese };
                     break;
 
                 case Country.AZE:
@@ -465,7 +456,7 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.HND:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 case Country.ISR:
@@ -473,35 +464,35 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.TJK:
-                    profile.Basic.Languages = new Language[] { Language.Russian };
+                    profile.Languages = new Language[] { Language.Russian };
                     break;
 
                 case Country.BLR:
-                    profile.Basic.Languages = new Language[] { Language.Russian };
+                    profile.Languages = new Language[] { Language.Russian };
                     break;
 
                 case Country.ARE:
-                    profile.Basic.Languages = new Language[] { Language.Arabic };
+                    profile.Languages = new Language[] { Language.Arabic };
                     break;
 
                 case Country.PNG:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.AUT:
-                    profile.Basic.Languages = new Language[] { Language.German };
+                    profile.Languages = new Language[] { Language.German };
                     break;
 
                 case Country.CHE:
-                    profile.Basic.Languages = new Language[] { Language.German };
+                    profile.Languages = new Language[] { Language.German };
                     break;
 
                 case Country.SLE:
-                    profile.Basic.Languages = new Language[] { Language.English };
+                    profile.Languages = new Language[] { Language.English };
                     break;
 
                 case Country.TGO:
-                    profile.Basic.Languages = new Language[] { Language.French };
+                    profile.Languages = new Language[] { Language.French };
                     break;
 
                 case Country.HKG:
@@ -509,7 +500,7 @@ namespace VerusDate.Web.Pages.Profile
                     break;
 
                 case Country.PRY:
-                    profile.Basic.Languages = new Language[] { Language.Spanish };
+                    profile.Languages = new Language[] { Language.Spanish };
                     break;
 
                 default:
@@ -521,9 +512,7 @@ namespace VerusDate.Web.Pages.Profile
         {
             try
             {
-                profile.ClearSimpleView();
-
-                profile.Bio.Zodiac = profile.Bio.BirthDate.GetZodiac();
+                profile.Zodiac = profile.BirthDate.GetZodiac();
 
                 if (profile.GetDataStatus() == DataStatus.New)
                 {

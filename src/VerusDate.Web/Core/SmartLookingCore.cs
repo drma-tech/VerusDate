@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using VerusDate.Shared.Enum;
+﻿using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
 using VerusDate.Shared.Model;
 
@@ -14,80 +11,89 @@ namespace VerusDate.Web.Core
             if (profile == null) throw new NotificationException("Preenchimento de cadastro do perfil não encontrado");
             if (preference == null) preference = new ProfilePreferenceModel();
 
-            preference.Distance = Distance._1;
-            preference.Languages = profile.Basic.Languages;
+            //BASIC
+            preference.Region = Region.City;
+            preference.Languages = profile.Languages;
             preference.CurrentSituation = GetCurrentSituation(profile);
             //looking.Intent = profile.Basic.Intent; //selecionado ao carregar a tela
             preference.BiologicalSex = GetBiologicalSex(profile);
             //looking.GenderIdentity = null;
             preference.SexualOrientation = GetSexualOrientation(profile);
+
+            //BIO
             preference.MinimalAge = GetMinAge(profile);
             preference.MaxAge = GetMaxAge(profile);
             preference.MinimalHeight = GetMinHeight(profile);
             preference.MaxHeight = GetMaxHeight(profile);
             //looking.RaceCategory = null;
             //looking.BodyMass = null;
+
+            //LIFESTYLE
+            //preference.Drink = GetDrink(profile);
+            //preference.Smoke = GetSmoke(profile);
+            //preference.Diet = GetDiet(profile);
+            //preference.Religion = GetReligion(profile);
+
+            //preference.HaveChildren = GetHaveChildren(profile);
+            //preference.WantChildren = GetWantChildren(profile);
+            //preference.EducationLevel = GetEducationLevel(profile);
+            //preference.CareerCluster = GetCareerCluster(profile);
+            //preference.TravelFrequency = GetTravelFrequency(profile);
         }
 
         private static int GetAgeDifference(int CurrentAge)
         {
             if (CurrentAge <= 25)
-                return 5;
+                return 3;
             if (CurrentAge <= 30)
-                return 7;
+                return 4;
+            if (CurrentAge <= 35)
+                return 5;
             else if (CurrentAge <= 40)
-                return 10;
+                return 7;
             else if (CurrentAge <= 50)
-                return 15;
+                return 10;
             else
-                return 25;
+                return 15;
         }
 
         private static int GetMinAge(ProfileModel profile)
         {
-            var minAge = profile.Bio.BirthDate.GetAge() - GetAgeDifference(profile.Bio.BirthDate.GetAge());
+            var minAge = profile.BirthDate.GetAge() - GetAgeDifference(profile.BirthDate.GetAge());
             if (minAge < 18) minAge = 18;
             return minAge;
         }
 
         private static int GetMaxAge(ProfileModel profile)
         {
-            var maxAge = profile.Bio.BirthDate.GetAge() + GetAgeDifference(profile.Bio.BirthDate.GetAge());
+            var maxAge = profile.BirthDate.GetAge() + GetAgeDifference(profile.BirthDate.GetAge());
             if (maxAge > 120) maxAge = 120;
             return maxAge;
         }
 
         private static IReadOnlyList<CurrentSituation> GetCurrentSituation(ProfileModel profile)
         {
-            if (profile.Basic.Intentions.IsLongTerm())
+            return profile.CurrentSituation switch
             {
-                return profile.Basic.CurrentSituation switch
-                {
-                    CurrentSituation.Single => new CurrentSituation[] { CurrentSituation.Single },
-                    CurrentSituation.Monogamous => new CurrentSituation[] { CurrentSituation.Monogamous },
-                    _ => Array.Empty<CurrentSituation>(),
-                };
-            }
-            else
-            {
-                return Array.Empty<CurrentSituation>();
-            }
+                CurrentSituation.Single => new CurrentSituation[] { CurrentSituation.Single },
+                _ => Array.Empty<CurrentSituation>()
+            };
         }
 
         private static IReadOnlyList<BiologicalSex> GetBiologicalSex(ProfileModel profile)
         {
-            if (profile.Basic.GenderIdentity == GenderIdentity.Cisgender) //BINARY
+            if (profile.GenderIdentity == GenderIdentity.Cisgender) //BINARY
             {
-                if (profile.Basic.SexualOrientation == SexualOrientation.Heterosexual)
+                if (profile.SexualOrientation == SexualOrientation.Heterosexual)
                 {
-                    if (profile.Basic.BiologicalSex == BiologicalSex.Female) return new BiologicalSex[] { BiologicalSex.Male };
-                    else if (profile.Basic.BiologicalSex == BiologicalSex.Male) return new BiologicalSex[] { BiologicalSex.Female };
+                    if (profile.BiologicalSex == BiologicalSex.Female) return new BiologicalSex[] { BiologicalSex.Male };
+                    else if (profile.BiologicalSex == BiologicalSex.Male) return new BiologicalSex[] { BiologicalSex.Female };
                     else return Array.Empty<BiologicalSex>();
                 }
-                else if (profile.Basic.SexualOrientation == SexualOrientation.Homosexual)
+                else if (profile.SexualOrientation == SexualOrientation.Homosexual)
                 {
-                    if (profile.Basic.BiologicalSex == BiologicalSex.Female) return new BiologicalSex[] { BiologicalSex.Female };
-                    else if (profile.Basic.BiologicalSex == BiologicalSex.Male) return new BiologicalSex[] { BiologicalSex.Male };
+                    if (profile.BiologicalSex == BiologicalSex.Female) return new BiologicalSex[] { BiologicalSex.Female };
+                    else if (profile.BiologicalSex == BiologicalSex.Male) return new BiologicalSex[] { BiologicalSex.Male };
                     else return Array.Empty<BiologicalSex>();
                 }
                 else
@@ -103,11 +109,11 @@ namespace VerusDate.Web.Core
 
         private static IReadOnlyList<SexualOrientation> GetSexualOrientation(ProfileModel profile)
         {
-            return profile.Basic.SexualOrientation switch
+            return profile.SexualOrientation switch
             {
                 SexualOrientation.Heterosexual => new SexualOrientation[] { SexualOrientation.Heterosexual },
                 SexualOrientation.Homosexual => new SexualOrientation[] { SexualOrientation.Homosexual },
-                _ => Array.Empty<SexualOrientation>(),
+                _ => Array.Empty<SexualOrientation>()
             };
         }
 
@@ -115,9 +121,9 @@ namespace VerusDate.Web.Core
         {
             var list = EnumHelper.GetList<Height>();
 
-            var minHeight = (int)profile.Bio.Height - 15;
-            if (!list.Any(a => a.Value == minHeight)) minHeight = (int)profile.Bio.Height - 16;
-            if (!list.Any(a => a.Value == minHeight)) minHeight = (int)profile.Bio.Height - 17;
+            var minHeight = (int)profile.Height.Value - 15;
+            if (!list.Any(a => a.Value == minHeight)) minHeight = (int)profile.Height.Value - 16;
+            if (!list.Any(a => a.Value == minHeight)) minHeight = (int)profile.Height.Value - 17;
             if ((Height)minHeight < Height._150) minHeight = (int)Height._150;
             return (Height)minHeight;
         }
@@ -126,41 +132,124 @@ namespace VerusDate.Web.Core
         {
             var list = EnumHelper.GetList<Height>();
 
-            var maxHeight = (int)profile.Bio.Height + 15;
-            if (!list.Any(a => a.Value == maxHeight)) maxHeight = (int)profile.Bio.Height + 16;
-            if (!list.Any(a => a.Value == maxHeight)) maxHeight = (int)profile.Bio.Height + 17;
+            var maxHeight = (int)profile.Height.Value + 15;
+            if (!list.Any(a => a.Value == maxHeight)) maxHeight = (int)profile.Height.Value + 16;
+            if (!list.Any(a => a.Value == maxHeight)) maxHeight = (int)profile.Height.Value + 17;
             if ((Height)maxHeight > Height._192) maxHeight = (int)Height._192;
             return (Height)maxHeight;
         }
 
-        private static WantChildren? GetWantChildren(ProfileModel profile)
+        private static IReadOnlyList<Drink> GetDrink(ProfileModel profile)
         {
-            if (profile.Lifestyle.WantChildren == WantChildren.No)
-                return WantChildren.No;
-            else
-                return null;
+            return profile.Drink switch
+            {
+                Drink.No => new Drink[] { Drink.No, Drink.YesLight },
+                Drink.YesLight => new Drink[] { Drink.No, Drink.YesLight },
+                Drink.YesModerate => new Drink[] { Drink.YesModerate, Drink.YesHeavy },
+                Drink.YesHeavy => new Drink[] { Drink.YesModerate, Drink.YesHeavy },
+                _ => Array.Empty<Drink>()
+            };
         }
 
-        private static MoneyPersonality? GetMoneyPersonality(ProfileModel profile)
+        private static IReadOnlyList<Smoke> GetSmoke(ProfileModel profile)
         {
-            return null;
+            return profile.Smoke switch
+            {
+                Smoke.No => new Smoke[] { Smoke.No },
+                Smoke.YesOccasionally => new Smoke[] { Smoke.YesOccasionally, Smoke.YesOften },
+                Smoke.YesOften => new Smoke[] { Smoke.YesOccasionally, Smoke.YesOften },
+                _ => Array.Empty<Smoke>()
+            };
         }
 
-        private static MyersBriggsTypeIndicator? GetMyersBriggsTypeIndicator(ProfileModel profile)
+        private static IReadOnlyList<Diet> GetDiet(ProfileModel profile)
         {
-            return null;
+            var group01 = new Diet[] { Diet.Omnivore, Diet.Flexitarian, Diet.GlutenFree };
+            var group02 = new Diet[] { Diet.Vegetarian, Diet.Vegan };
+            var group03 = new Diet[] { Diet.RawFood, Diet.OrganicAllnaturalLocal };
+
+            return profile.Diet switch
+            {
+                Diet.Omnivore => group01,
+                Diet.Flexitarian => group01,
+                Diet.Vegetarian => group02,
+                Diet.Vegan => group02,
+                Diet.RawFood => group03,
+                Diet.GlutenFree => group01,
+                Diet.OrganicAllnaturalLocal => group03,
+                Diet.DetoxWeightLoss => new Diet[] { Diet.DetoxWeightLoss },
+                _ => Array.Empty<Diet>()
+            };
         }
 
-        private static RelationshipPersonality? GetRelationshipPersonality(ProfileModel profile)
+        private static IReadOnlyList<Religion> GetReligion(ProfileModel profile)
         {
-            if (profile.Lifestyle.RelationshipPersonality == RelationshipPersonality.Explorers)
-                return RelationshipPersonality.Explorers;
-            else if (profile.Lifestyle.RelationshipPersonality == RelationshipPersonality.Directors)
-                return RelationshipPersonality.Negotiator;
-            else if (profile.Lifestyle.RelationshipPersonality == RelationshipPersonality.Negotiator)
-                return RelationshipPersonality.Directors;
-            else
-                return RelationshipPersonality.Builders;
+            return new Religion[] { profile.Religion.Value };
         }
+
+        private static IReadOnlyList<HaveChildren> GetHaveChildren(ProfileModel profile)
+        {
+            return profile.HaveChildren switch
+            {
+                HaveChildren.No => new HaveChildren[] { HaveChildren.No, HaveChildren.YesNo },
+                HaveChildren.YesNo => new HaveChildren[] { HaveChildren.No, HaveChildren.YesNo },
+                HaveChildren.Yes => new HaveChildren[] { HaveChildren.Yes },
+                _ => Array.Empty<HaveChildren>()
+            };
+        }
+
+        private static IReadOnlyList<WantChildren> GetWantChildren(ProfileModel profile)
+        {
+            return profile.WantChildren switch
+            {
+                WantChildren.No => new WantChildren[] { WantChildren.No },
+                WantChildren.Maybe => new WantChildren[] { WantChildren.Maybe, WantChildren.Yes },
+                WantChildren.Yes => new WantChildren[] { WantChildren.Maybe, WantChildren.Yes },
+                _ => Array.Empty<WantChildren>()
+            };
+        }
+
+        private static IReadOnlyList<EducationLevel> GetEducationLevel(ProfileModel profile)
+        {
+            return new EducationLevel[] { profile.EducationLevel.Value };
+        }
+
+        private static IReadOnlyList<CareerCluster> GetCareerCluster(ProfileModel profile)
+        {
+            return new CareerCluster[] { profile.CareerCluster.Value };
+        }
+
+        private static IReadOnlyList<TravelFrequency> GetTravelFrequency(ProfileModel profile)
+        {
+            return profile.TravelFrequency switch
+            {
+                TravelFrequency.NeverRarely => new TravelFrequency[] { TravelFrequency.NeverRarely, TravelFrequency.SometimesFrequently },
+                TravelFrequency.SometimesFrequently => new TravelFrequency[] { TravelFrequency.NeverRarely, TravelFrequency.SometimesFrequently, TravelFrequency.UsuallyAlwaysNomad },
+                TravelFrequency.UsuallyAlwaysNomad => new TravelFrequency[] { TravelFrequency.SometimesFrequently, TravelFrequency.UsuallyAlwaysNomad },
+                _ => Array.Empty<TravelFrequency>()
+            };
+        }
+
+        //private static MoneyPersonality? GetMoneyPersonality(ProfileModel profile)
+        //{
+        //    return null;
+        //}
+
+        //private static MyersBriggsTypeIndicator? GetMyersBriggsTypeIndicator(ProfileModel profile)
+        //{
+        //    return null;
+        //}
+
+        //private static RelationshipPersonality? GetRelationshipPersonality(ProfileModel profile)
+        //{
+        //    if (profile.RelationshipPersonality == RelationshipPersonality.Explorers)
+        //        return RelationshipPersonality.Explorers;
+        //    else if (profile.RelationshipPersonality == RelationshipPersonality.Directors)
+        //        return RelationshipPersonality.Negotiator;
+        //    else if (profile.RelationshipPersonality == RelationshipPersonality.Negotiator)
+        //        return RelationshipPersonality.Directors;
+        //    else
+        //        return RelationshipPersonality.Builders;
+        //}
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace VerusDate.Web.Core
+﻿namespace VerusDate.Web.Core
 {
     public static class RefreshCore
     {

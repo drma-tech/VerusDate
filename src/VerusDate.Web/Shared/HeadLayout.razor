@@ -2,7 +2,7 @@
 @inject HttpClient Http
 
 <Bar Mode="BarMode.Horizontal" Background="Background.Secondary" ThemeContrast="ThemeContrast.Dark">
-    <BarBrand>
+    @*<BarBrand>
         <AuthorizeView>
             <Authorized>
                 <Badge Color="Color.Secondary" Float="Float.Start" Margin="Margin.Is2.FromEnd" Style="background-color: #D4AF37; color: #fff !important;" Pill="true">
@@ -16,7 +16,7 @@
                 </Badge>
             </Authorized>
         </AuthorizeView>
-    </BarBrand>
+    </BarBrand>*@
     <BarMenu Style="flex-basis: unset !important;">
         <BarEnd>
             <BarItem>
@@ -98,7 +98,7 @@
     </nav>*@
 
 @code{
-    private ProfileGamificationModel gamification;
+    //private ProfileGamificationModel gamification;
 
     protected override async Task OnInitializedAsync()
     {
@@ -120,12 +120,12 @@
         if (ComponenteUtils.IsAuthenticated)
         {
             var profile = await Http.Profile_Get(SessionStorage);
-            gamification = profile?.Gamification;
+            //gamification = profile?.Gamification;
 
-            if (gamification == null) //usuário ainda sem perfil
-            {
-                gamification = new();
-            }
+            //if (gamification == null) //usuário ainda sem perfil
+            //{
+            //    gamification = new();
+            //}
         }
     }
 }

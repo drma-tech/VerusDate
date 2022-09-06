@@ -60,15 +60,15 @@ namespace VerusDate.Server.Mediator.Commands.Interaction
                 obj.SetIds(request.IdLoggedUser);
                 obj.SetIdInteraction(request.IdUserInteraction);
 
-                obj.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo.Main);
-                obj.ExecuteBlink(profileUser.Basic.NickName, profileUser.Photo.Main);
+                obj.ExecuteLike(profileUser.NickName, profileUser.Photo.Main);
+                obj.ExecuteBlink(profileUser.NickName, profileUser.Photo.Main);
 
                 return await _repo.Add(obj, cancellationToken) != null;
             }
             else //caso existe uma interação (like)
             {
-                obj.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo.Main);
-                obj.ExecuteBlink(profileUser.Basic.NickName, profileUser.Photo.Main);
+                obj.ExecuteLike(profileUser.NickName, profileUser.Photo.Main);
+                obj.ExecuteBlink(profileUser.NickName, profileUser.Photo.Main);
 
                 return await _repo.Update(obj, cancellationToken);
             }

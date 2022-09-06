@@ -61,24 +61,6 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A relationship with only one partner at a time. A monogamous relationship can be sexual or emotional, usually both..
-        /// </summary>
-        internal static string Monogamous_Description {
-            get {
-                return ResourceManager.GetString("Monogamous_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Commited (Monogamous).
-        /// </summary>
-        internal static string Monogamous_Name {
-            get {
-                return ResourceManager.GetString("Monogamous_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Basically, non-monogamy is a category used to describe any relationship that isn’t monogamous. So, a couple who have an open relationship, or a couple who are polyamorous are examples. It’s important to mention that somebody being unfaithful to their partner isn’t non-monogamy – that’s infidelity. For non-monogamy to be applied, both partners must agree that this is something they want to participate in, and both feel comfortable with..
         /// </summary>
         internal static string NonMonogamous_Description {

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+<ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="VerusDate.Shared.Model.ProfileBadgeModel">
-    <Position X="22.75" Y="9" Width="2.25" />
+    <Position X="18" Y="13.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAIBABAAAAA=</HashCode>
       <FileName>Model\Profile\ProfileBadgeModel.cs</FileName>
@@ -11,106 +11,66 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="VerusDate.Shared.Model.BadgeType">
-    <Position X="23.25" Y="5.25" Width="2.25" />
+    <Position X="21" Y="12.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAgAEIAAAAAgAAAAAAAAAABAAAgAAAAAEA=</HashCode>
       <FileName>Model\Profile\ProfileBadgeModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VerusDate.Shared.Model.ProfileBasicModel">
-    <Position X="26.5" Y="4" Width="2.75" />
-    <TypeIdentifier>
-      <HashCode>AAABAAACCEAkAAAAAAIIAAAAIAAAAAEAAAQAAAAAAgA=</HashCode>
-      <FileName>Model\Profile\ProfileBasicModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="VerusDate.Shared.Model.ProfileBioModel">
-    <Position X="26.75" Y="8.75" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAAIAAAABAAAAAAAAAAAAAQAAAIAAAAAAIAAAAAAAAA=</HashCode>
-      <FileName>Model\Profile\ProfileBioModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="VerusDate.Shared.Model.ProfileGamificationModel">
-    <Position X="13.75" Y="12.75" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAhAAAAAAEAQAAABAAgAAAAAEyhiACAA=</HashCode>
-      <FileName>Model\Profile\ProfileGamificationModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="VerusDate.Shared.Model.ProfileInterestModel">
-    <Position X="12" Y="8.5" Width="3.5" />
-    <TypeIdentifier>
-      <HashCode>AAIAAAAABAAAAABAAAAEAAAAAAAAAAAEAACABgAAAAA=</HashCode>
-      <FileName>Model\Profile\ProfileInterestModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="VerusDate.Shared.Model.ProfileLifestyleModel">
-    <Position X="22.75" Y="11.75" Width="4" />
-    <TypeIdentifier>
-      <HashCode>BAAAAAAAACgIAAAAAgAAAAAAAYAAAAAAIAAABgQAAoA=</HashCode>
-      <FileName>Model\Profile\ProfileLifestyleModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="VerusDate.Shared.Model.ProfileModel">
-    <Position X="19.75" Y="7.25" Width="2.25" />
+    <Position X="15" Y="7.75" Width="2" />
+    <NestedTypes>
+      <Enum Name="VerusDate.Shared.Model.ProfileModel.LocationType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Model\Profile\ProfileModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>YBAAABIAAAAAICAICAAYACoAEACIAAAAACAYAICAgAA=</HashCode>
+      <HashCode>ZAIJAAICHGgoICBIAgIcAA4AMYKAAAEEIKSYBoQAgoA=</HashCode>
       <FileName>Model\Profile\ProfileModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Badge" />
-      <Property Name="Basic" />
-      <Property Name="Bio" />
-      <Property Name="Gamification" />
-      <Property Name="Interest" />
-      <Property Name="Lifestyle" />
-      <Property Name="Photo" />
       <Property Name="Preference" />
+      <Property Name="Badge" />
+      <Property Name="Photo" />
       <Property Name="Reports" />
     </ShowAsAssociation>
   </Class>
   <Class Name="VerusDate.Shared.Model.ProfileView">
-    <Position X="19.75" Y="13" Width="2.25" />
+    <Position X="15.25" Y="21.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAEAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
       <FileName>Model\Profile\ProfileModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VerusDate.Shared.Model.ProfilePhotoModel">
-    <Position X="16.75" Y="12" Width="2.25" />
+    <Position X="12" Y="12.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAACAgACAAGCAABAAAIAAAAAAgAAABAAAAAA=</HashCode>
       <FileName>Model\Profile\ProfilePhotoModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VerusDate.Shared.Model.ProfilePreferenceModel">
-    <Position X="15" Y="3.75" Width="3.75" />
+    <Position X="18" Y="16" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAEBAAAAGAAEAAAAAAAAAQAAIAIAAEBAAIQAAAAAEgA=</HashCode>
+      <HashCode>AAEBAAAAGAAAAAAIAAAAAQAAIAIAAEBAAIQAAAAAEgA=</HashCode>
       <FileName>Model\Profile\ProfilePreferenceModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VerusDate.Shared.Model.ProfileReportModel">
-    <Position X="17" Y="9" Width="1.75" />
+    <Position X="18" Y="10.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>Model\Profile\ProfileReportModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VerusDate.Shared.Core.CosmosBase">
-    <Position X="19.75" Y="3.5" Width="2.25" />
+    <Position X="15.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgCBAAAAAAAIAQAAAAAAAAIAAAAAAAAAQAAAAAACAA=</HashCode>
       <FileName>Core\ComosBase.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="VerusDate.Shared.Model.LocationType" Collapsed="true">
-    <Position X="30.25" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAIAAAAAAgAABAAAAAA=</HashCode>
-      <FileName>Model\Profile\ProfileBasicModel.cs</FileName>
-    </TypeIdentifier>
-  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

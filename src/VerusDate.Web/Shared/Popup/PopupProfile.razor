@@ -36,10 +36,10 @@
                             </CardBody>
                             <CardBody>
                                 <Badge Color="Color.Secondary">
-                                    @view.Basic.NickName
+                                    @view.NickName
                                 </Badge>
                                 <Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd">
-                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view.Basic.GetLocation(LocationType.City)
+                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view.GetLocation(ProfileModel.LocationType.City)
                                 </Badge>
                                 @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                                 {
@@ -77,18 +77,18 @@
                                     </Paragraph>
                                 }
                                 <Paragraph TextAlignment="TextAlignment.Justified" Margin="Margin.Is2.FromTop.Is0.FromBottom">
-                                    @view.Basic.Description
+                                    @view.Description
                                 </Paragraph>
                             </CardBody>
                             <CardBody>
-                                @if (interaction != null && interaction.IsActiveInteraction())
-                                {
-                                    <BtnChat IdUserView="@IdUserView"></BtnChat>
-                                }
-                                else
-                                {
-                                    <BtnBlink IdUserView="@IdUserView"></BtnBlink>
-                                }
+                                @* @if (interaction != null && interaction.IsActiveInteraction())
+                            {
+                            <BtnChat IdUserView="@IdUserView"></BtnChat>
+                            }
+                            else
+                            {
+                            <BtnBlink IdUserView="@IdUserView"></BtnBlink>
+                            }*@
                                 <Dropdown Float="Float.End" Disabled="true">
                                     <Button Color="Color.Danger" Clicked="report.ShowModal" Disabled="true">
                                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Trash"></Blazorise.Icon> Deletar
@@ -103,7 +103,7 @@
                     </Column>
                     <Column ColumnSize="ColumnSize.IsHalf.OnDesktop.Is8.OnWidescreen">
                         <Row Gutter="(8,0)">
-                            <Column ColumnSize="ColumnSize.IsFull.Is8.OnFullHD">
+                            @*<Column ColumnSize="ColumnSize.IsFull.Is8.OnFullHD">
                                 <Card Margin="Margin.Is2.FromBottom">
                                     <CardHeader>Conquistas</CardHeader>
                                     <CardBody>
@@ -123,7 +123,7 @@
                                         </Row>
                                     </CardBody>
                                 </Card>
-                            </Column>
+                            </Column>*@
                             <Column ColumnSize="ColumnSize.IsFull.Is4.OnFullHD">
                                 <Card Margin="Margin.Is2.FromBottom">
                                     <CardHeader>
@@ -184,51 +184,51 @@
                                 <Divider DividerType="DividerType.TextContent" Text="Básico"></Divider>
 
                                 <ItemDataProfile For="@(() => view.Distance)" Value="@ProfileHelper.GetDistanceExtension(view.Distance, ProfileHelper.DistanceType.Km)" ClassIcon="fas fa-map-marker-alt" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Basic.Languages)" Values="@view.Basic.Languages" ClassIcon="fas fa-language" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Basic.CurrentSituation)" Value="@view.Basic.CurrentSituation" ClassIcon="far fa-heart" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Basic.Intentions)" Values="@view.Basic.Intentions" ClassIcon="fas fa-search" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Basic.BiologicalSex)" Value="@view.Basic.BiologicalSex" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Basic.GenderIdentity)" Value="@view.Basic.GenderIdentity" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Basic.SexualOrientation)" Value="@view.Basic.SexualOrientation" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.Languages)" Values="@view.Languages" ClassIcon="fas fa-language" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.CurrentSituation)" Value="@view.CurrentSituation" ClassIcon="far fa-heart" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.Intentions)" Values="@view.Intentions" ClassIcon="fas fa-search" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.BiologicalSex)" Value="@view.BiologicalSex" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.GenderIdentity)" Value="@view.GenderIdentity" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.SexualOrientation)" Value="@view.SexualOrientation" ClassIcon="fas fa-neuter" Affinities="@affinities"></ItemDataProfile>
 
                                 <Divider DividerType="DividerType.TextContent" Text="Bio"></Divider>
 
                                 <ItemDataProfile For="@(() => view.Age)" Value="@ProfileHelper.GetAgeExtension(view.Age)" ClassIcon="fas fa-birthday-cake" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Bio.Zodiac)" Value="@view.Bio.Zodiac" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Bio.BodyMass)" Value="@view.Bio.BodyMass" ClassIcon="fas fa-weight" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Bio.RaceCategory)" Value="@view.Bio.RaceCategory" ClassIcon="fas fa-globe" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Bio.Height)" Value="@view.Bio.Height" ClassIcon="fas fa-ruler" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.Zodiac)" Value="@view.Zodiac" ClassIcon="fas fa-star-and-crescent" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.BodyMass)" Value="@view.BodyMass" ClassIcon="fas fa-weight" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.RaceCategory)" Value="@view.RaceCategory" ClassIcon="fas fa-globe" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.Height)" Value="@view.Height" ClassIcon="fas fa-ruler" Affinities="@affinities"></ItemDataProfile>
 
                                 <Divider DividerType="DividerType.TextContent" Text="Lifestyle"></Divider>
 
-                                <ItemDataProfile For="@(() => view.Lifestyle.Drink)" Value="@view.Lifestyle.Drink" ClassIcon="fas fa-glass-cheers" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.Smoke)" Value="@view.Lifestyle.Smoke" ClassIcon="fas fa-smoking" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.Diet)" Value="@view.Lifestyle.Diet" ClassIcon="fas fa-utensils" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.HaveChildren)" Value="@view.Lifestyle.HaveChildren" ClassIcon="fas fa-child" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.WantChildren)" Value="@view.Lifestyle.WantChildren" ClassIcon="fas fa-baby" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.EducationLevel)" Value="@view.Lifestyle.EducationLevel" ClassIcon="fas fa-graduation-cap" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.CareerCluster)" Value="@view.Lifestyle.CareerCluster" ClassIcon="fas fa-briefcase" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.Religion)" Value="@view.Lifestyle.Religion" ClassIcon="fas fa-praying-hands" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.Drink)" Value="@view.Drink" ClassIcon="fas fa-glass-cheers" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.Smoke)" Value="@view.Smoke" ClassIcon="fas fa-smoking" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.Diet)" Value="@view.Diet" ClassIcon="fas fa-utensils" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.HaveChildren)" Value="@view.HaveChildren" ClassIcon="fas fa-child" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.WantChildren)" Value="@view.WantChildren" ClassIcon="fas fa-baby" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.EducationLevel)" Value="@view.EducationLevel" ClassIcon="fas fa-graduation-cap" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.CareerCluster)" Value="@view.CareerCluster" ClassIcon="fas fa-briefcase" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.Religion)" Value="@view.Religion" ClassIcon="fas fa-praying-hands" Affinities="@affinities"></ItemDataProfile>
 
                                 <Divider DividerType="DividerType.TextContent" Text="Personalidade"></Divider>
 
-                                <ItemDataProfile For="@(() => view.Lifestyle.MoneyPersonality)" Value="@view.Lifestyle.MoneyPersonality" ClassIcon="fas fa-wallet" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.SplitTheBill)" Value="@view.Lifestyle.SplitTheBill" ClassIcon="fas fa-hand-holding-usd" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.RelationshipPersonality)" Value="@view.Lifestyle.RelationshipPersonality" ClassIcon="fas fa-people-arrows" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.SexPersonality)" Value="@view.Lifestyle.SexPersonality" ClassIcon="fas fa-heart" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.LoveLanguage)" Value="@view.Lifestyle.LoveLanguage" ClassIcon="fas fa-hand-holding-heart" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Lifestyle.MyersBriggsTypeIndicator)" Value="@view.Lifestyle.MyersBriggsTypeIndicator" ClassIcon="fas fa-user" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.MoneyPersonality)" Value="@view.MoneyPersonality" ClassIcon="fas fa-wallet" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.SplitTheBill)" Value="@view.SplitTheBill" ClassIcon="fas fa-hand-holding-usd" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.RelationshipPersonality)" Value="@view.RelationshipPersonality" ClassIcon="fas fa-people-arrows" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.SexPersonality)" Value="@view.SexPersonality" ClassIcon="fas fa-heart" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.LoveLanguage)" Value="@view.LoveLanguage" ClassIcon="fas fa-hand-holding-heart" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.MyersBriggsTypeIndicator)" Value="@view.MyersBriggsTypeIndicator" ClassIcon="fas fa-user" Affinities="@affinities"></ItemDataProfile>
 
                                 <Divider DividerType="DividerType.TextContent" Text="Interesses"></Divider>
 
-                                <ItemDataProfile For="@(() => view.Interest.Food)" Values="@view.Interest.Food" ClassIcon="fas fa-pizza-slice" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Interest.Vacation)" Values="@view.Interest.Vacation" ClassIcon="fas fa-plane-departure" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Interest.Sports)" Values="@view.Interest.Sports" ClassIcon="fas fa-swimmer" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Interest.LeisureActivities)" Values="@view.Interest.LeisureActivities" ClassIcon="fas fa-umbrella-beach" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Interest.MusicGenre)" Values="@view.Interest.MusicGenre" ClassIcon="fas fa-music" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Interest.MovieGenre)" Values="@view.Interest.MovieGenre" ClassIcon="fas fa-film" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Interest.TVGenre)" Values="@view.Interest.TVGenre" ClassIcon="fas fa-tv" Affinities="@affinities"></ItemDataProfile>
-                                <ItemDataProfile For="@(() => view.Interest.ReadingGenre)" Values="@view.Interest.ReadingGenre" ClassIcon="fas fa-book-reader" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.Food)" Values="@view.Food" ClassIcon="fas fa-pizza-slice" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.Vacation)" Values="@view.Vacation" ClassIcon="fas fa-plane-departure" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.Sports)" Values="@view.Sports" ClassIcon="fas fa-swimmer" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.LeisureActivities)" Values="@view.LeisureActivities" ClassIcon="fas fa-umbrella-beach" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.MusicGenre)" Values="@view.MusicGenre" ClassIcon="fas fa-music" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.MovieGenre)" Values="@view.MovieGenre" ClassIcon="fas fa-film" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.TVGenre)" Values="@view.TVGenre" ClassIcon="fas fa-tv" Affinities="@affinities"></ItemDataProfile>
+                                <ItemDataProfile For="@(() => view.ReadingGenre)" Values="@view.ReadingGenre" ClassIcon="fas fa-book-reader" Affinities="@affinities"></ItemDataProfile>
                             </CardBody>
                         </Card>
                     </Column>
@@ -271,9 +271,9 @@
     private ProfileModel user;
     private ProfileView view;
     private List<AffinityVM> affinities = new();
-    private ProfileGamificationModel gamification;
+    //private ProfileGamificationModel gamification;
     private ProfileBadgeModel badge = new();
-    private InteractionModel interaction;
+    //private InteractionModel interaction;
 
     string selectedImage;
     string[] imageDataUriGallery = Array.Empty<string>();
@@ -306,9 +306,9 @@
                 selectedImage = imageDataUriGallery.FirstOrDefault();
 
                 affinities = AffinityCore.GetAffinity(user, view);
-                gamification = view.Gamification;
+                //gamification = view.Gamification;
                 if (view?.Badge != null) badge = view.Badge;
-                interaction = await Http.Interation_Get(SessionStorage, IdUserView.ToString());
+                //interaction = await Http.Interation_Get(SessionStorage, IdUserView.ToString());
             }
         }
         catch (Exception ex)
@@ -347,15 +347,8 @@
             var pesoPersonality = 3;
             var pesoInterest = 2;
 
-            if (user.Basic.Intentions.IsLongTerm() && view.Basic.Intentions.IsLongTerm())
-            {
-                return (totBasic * pesoBasic + totBio * pesoBio + totLifestyle * pesoLifestyle + totPersonality * pesoPersonality + totInterest * pesoInterest) /
+            return (totBasic * pesoBasic + totBio * pesoBio + totLifestyle * pesoLifestyle + totPersonality * pesoPersonality + totInterest * pesoInterest) /
                 (pesoBasic + pesoBio + pesoLifestyle + pesoPersonality + pesoInterest);
-            }
-            else
-            {
-                return (totBasic * pesoBasic + totBio * pesoBio) / (pesoBasic + pesoBio);
-            }
         }
         else
         {

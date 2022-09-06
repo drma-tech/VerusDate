@@ -9,17 +9,17 @@ namespace VerusDate.Shared.Model
     {
         #region BASIC
 
-        [Custom(Name = "Distância")]
-        public Distance Distance { get; set; }
+        [Custom(Name = "Região")]
+        public Region Region { get; set; }
 
-        [Custom(Name = "Idiomas")]
+        [Custom(Name = "Mudança")]
+        public Change Change { get; set; }
+
+        [Custom(Name = "Idiomas", Description = "Filtra perfis que tenham pelo menos um dos idiomas selecionados")]
         public IReadOnlyList<Language> Languages { get; set; } = Array.Empty<Language>();
 
         [Custom(Name = "Situação Atual")]
         public IReadOnlyList<CurrentSituation> CurrentSituation { get; set; } = Array.Empty<CurrentSituation>();
-
-        [Custom(Name = "Intenções", Description = "Selecionado automaticamente de acordo com seu perfil")]
-        public IReadOnlyList<Intentions> Intentions { get; set; } = Array.Empty<Intentions>();
 
         [Custom(Name = "Sexo Biológico")]
         public IReadOnlyList<BiologicalSex> BiologicalSex { get; set; } = Array.Empty<BiologicalSex>();
@@ -34,6 +34,12 @@ namespace VerusDate.Shared.Model
 
         #region BIO
 
+        [Custom(Name = "Raça")]
+        public IReadOnlyList<RaceCategory> RaceCategory { get; set; } = Array.Empty<RaceCategory>();
+
+        [Custom(Name = "Corpo")]
+        public IReadOnlyList<BodyMass> BodyMass { get; set; } = Array.Empty<BodyMass>();
+
         [Custom(Name = "Idade (Min - Máx)")]
         public int MinimalAge { get; set; }
 
@@ -46,21 +52,58 @@ namespace VerusDate.Shared.Model
         [Custom(Name = "Altura (Min - Máx)")]
         public Height? MaxHeight { get; set; }
 
-        [Custom(Name = "Raça")]
-        public IReadOnlyList<RaceCategory> RaceCategory { get; set; } = Array.Empty<RaceCategory>();
-
-        [Custom(Name = "Corpo")]
-        public IReadOnlyList<BodyMass> BodyMass { get; set; } = Array.Empty<BodyMass>();
-
         #endregion BIO
+
+        #region LIFESTYLE
+
+        [Custom(Name = "Drink_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        public IReadOnlyList<Drink> Drink { get; set; }
+
+        [Custom(Name = "Smoke_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        public IReadOnlyList<Smoke> Smoke { get; set; }
+
+        [Custom(Name = "Diet_Name", Description = "Diet_Description", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        public IReadOnlyList<Diet> Diet { get; set; }
+
+        [Custom(Name = "HaveChildren_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        public IReadOnlyList<HaveChildren> HaveChildren { get; set; }
+
+        [Custom(Name = "WantChildren_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        public IReadOnlyList<WantChildren> WantChildren { get; set; }
+
+        [Custom(Name = "EducationLevel_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        public IReadOnlyList<EducationLevel> EducationLevel { get; set; }
+
+        [Custom(Name = "CareerCluster_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        public IReadOnlyList<CareerCluster> CareerCluster { get; set; }
+
+        [Custom(Name = "Religion_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        public IReadOnlyList<Religion> Religion { get; set; }
+
+        [Custom(Name = "Travel Frequency")]
+        public IReadOnlyList<TravelFrequency> TravelFrequency { get; set; }
+
+        #endregion LIFESTYLE
+
+        #region OTHERS
+
+        [Custom(Name = "SexPersonalityPreferences_Name", Description = "SexPersonalityPreferences_Description", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        public IReadOnlyList<SexPersonality> SexPersonality { get; set; } = Array.Empty<SexPersonality>();
+
+        [Custom(Name = "Neurodiversity")]
+        public Neurodiversity? Neurodiversity { get; set; }
+
+        [Custom(Name = "Disabilities")]
+        public IReadOnlyList<Disability> Disabilities { get; set; }
+
+        #endregion OTHERS
 
         public void UpdateData(ProfilePreferenceModel vm)
         {
             //BASIC
-            Distance = vm.Distance;
+            Region = vm.Region;
             Languages = vm.Languages;
             CurrentSituation = vm.CurrentSituation;
-            Intentions = vm.Intentions;
             BiologicalSex = vm.BiologicalSex;
             GenderIdentity = vm.GenderIdentity;
             SexualOrientation = vm.SexualOrientation;

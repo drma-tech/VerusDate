@@ -1,7 +1,5 @@
 ﻿using Blazored.SessionStorage;
 using Blazored.Toast.Services;
-using System.Net.Http;
-using System.Threading.Tasks;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api
@@ -14,7 +12,7 @@ namespace VerusDate.Web.Api
 
     public static class StoreApi
     {
-        public async static Task Store_AddDiamond(this HttpClient http, int QtdDiamond, ISyncSessionStorageService storage, IToastService toast)
+        public static async Task Store_AddDiamond(this HttpClient http, int QtdDiamond, ISyncSessionStorageService storage, IToastService toast)
         {
             var response = await http.Put(StoreEndpoint.AddDiamond, new { QtdDiamond });
 
@@ -26,7 +24,7 @@ namespace VerusDate.Web.Api
             await response.ProcessResponse(toast, "Compra realizada com sucesso!");
         }
 
-        public async static Task Store_ExchangeFood(this HttpClient http, int QtdDiamond, ISyncSessionStorageService storage, IToastService toast)
+        public static async Task Store_ExchangeFood(this HttpClient http, int QtdDiamond, ISyncSessionStorageService storage, IToastService toast)
         {
             var response = await http.Put(StoreEndpoint.ExchangeFood, new { QtdDiamond });
 

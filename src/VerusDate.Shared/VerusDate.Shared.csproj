@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Model\Interaction\**" />
+    <EmbeddedResource Remove="Model\Interaction\**" />
+    <None Remove="Model\Interaction\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ModelQuery\InteractionQuery.cs" />
+    <Compile Remove="Model\Profile\ProfileGamificationModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
     <SupportedPlatform Include="browser" />
   </ItemGroup>

@@ -6,7 +6,8 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class EventAddCommand : EventModel, IRequest<EventModel> { }
+    public class EventAddCommand : EventModel, IRequest<EventModel>
+    { }
 
     public class EventAddHandler : IRequestHandler<EventAddCommand, EventModel>
     {

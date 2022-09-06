@@ -117,29 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Casual_Description" xml:space="preserve">
-    <value>This is a more relaxed form of dating. It’s when you’re talking to a person, dating them, or engaging in casual sex, but you are not serious and there is no commitment. Someone who is casually dating someone may also be seeing other people.</value>
+  <data name="LiveTogether_Description" xml:space="preserve">
+    <value>Live together in a short/medium period of time.</value>
   </data>
-  <data name="Casual_Group" xml:space="preserve">
-    <value>Short Term</value>
-  </data>
-  <data name="Casual_Name" xml:space="preserve">
-    <value>Casual Relationship</value>
+  <data name="LiveTogether_Name" xml:space="preserve">
+    <value>Live Together</value>
   </data>
   <data name="Married_Description" xml:space="preserve">
-    <value>For those who intend to marry (bond established between two people, through governmental, cultural, religious or social recognition) or live together in a short/medium period of time.</value>
-  </data>
-  <data name="Married_Group" xml:space="preserve">
-    <value>Long Term</value>
+    <value>For those who intend to marry (bond established between two people, through governmental, cultural, religious or social recognition).</value>
   </data>
   <data name="Married_Name" xml:space="preserve">
-    <value>Live together / Get Married</value>
+    <value>Get Married</value>
   </data>
   <data name="Serious_Description" xml:space="preserve">
     <value>Serious dating is when you’re committed to a person. You have feelings for them, and they have feelings for you. Because of this, you’re not seeing anyone else and you hope to one day take the relationship to the next level.</value>
-  </data>
-  <data name="Serious_Group" xml:space="preserve">
-    <value>Long Term</value>
   </data>
   <data name="Serious_Name" xml:space="preserve">
     <value>Serious Relationship</value>

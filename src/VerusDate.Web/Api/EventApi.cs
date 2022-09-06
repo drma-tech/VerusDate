@@ -1,7 +1,4 @@
 ﻿using Blazored.SessionStorage;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
 using VerusDate.Shared.Model;
 using VerusDate.Web.Core;
 

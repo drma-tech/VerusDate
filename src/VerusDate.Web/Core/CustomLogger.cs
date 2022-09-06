@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using VerusDate.Shared.Helper;
 
 namespace VerusDate.Web.Core

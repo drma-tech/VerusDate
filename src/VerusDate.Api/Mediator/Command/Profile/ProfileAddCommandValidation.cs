@@ -10,135 +10,119 @@ namespace VerusDate.Api.Mediator.Command.Profile
         {
             //BASIC
 
-            RuleFor(x => x.Basic.NickName)
+            RuleFor(x => x.NickName)
                .NotEmpty()
                .MaximumLength(20);
 
-            RuleFor(x => x.Basic.Description)
+            RuleFor(x => x.Description)
                 .NotEmpty()
                 .MaximumLength(512);
 
-            RuleFor(x => x.Basic.Location)
+            RuleFor(x => x.Location)
                 .NotEmpty();
 
-            RuleFor(x => x.Basic.Longitude)
+            RuleFor(x => x.CurrentSituation)
                 .NotEmpty();
 
-            RuleFor(x => x.Basic.Latitude)
-                .NotEmpty();
-
-            RuleFor(x => x.Basic.CurrentSituation)
-                .NotEmpty();
-
-            RuleFor(x => x.Basic.Intentions)
+            RuleFor(x => x.Intentions)
                 .NotEmpty()
                 .Must((value) => value.Count <= 2)
                 .WithMessage("Escolha até no máximo duas intenções");
 
-            RuleFor(x => x.Basic.BiologicalSex)
+            RuleFor(x => x.BiologicalSex)
                 .NotEmpty();
 
-            RuleFor(x => x.Basic.GenderIdentity)
+            RuleFor(x => x.GenderIdentity)
                 .NotEmpty();
 
-            RuleFor(x => x.Basic.SexualOrientation)
+            RuleFor(x => x.SexualOrientation)
                 .NotEmpty();
 
-            RuleFor(x => x.Basic.Languages)
+            RuleFor(x => x.Languages)
                .NotEmpty()
                .Must((value) => value.Count <= 5)
                .WithMessage("Escolha até no máximo cinco idiomas");
 
             //BIO
 
-            RuleFor(x => x.Bio.BirthDate)
+            RuleFor(x => x.BirthDate)
                 .NotEmpty()
                 .LessThanOrEqualTo(DateTime.UtcNow.AddYears(-18).Date).WithMessage("Você deve ter 18 ou mais para se registrar");
 
-            RuleFor(x => x.Bio.RaceCategory)
+            RuleFor(x => x.RaceCategory)
                 .NotEmpty();
 
-            RuleFor(x => x.Bio.Height)
+            RuleFor(x => x.Height)
                 .NotEmpty();
 
-            RuleFor(x => x.Bio.BodyMass)
+            RuleFor(x => x.BodyMass)
                 .NotEmpty();
 
             //LIFESTYLE
 
-            RuleFor(x => x.Lifestyle.Drink)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm());
+            RuleFor(x => x.Drink)
+                .NotEmpty();
 
-            RuleFor(x => x.Lifestyle.Smoke)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm());
+            RuleFor(x => x.Smoke)
+                .NotEmpty();
 
-            RuleFor(x => x.Lifestyle.Diet)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm());
+            RuleFor(x => x.Diet)
+                .NotEmpty();
 
-            RuleFor(x => x.Lifestyle.HaveChildren)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm());
+            RuleFor(x => x.HaveChildren)
+                .NotEmpty();
 
-            RuleFor(x => x.Lifestyle.WantChildren)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm());
+            RuleFor(x => x.WantChildren)
+                .NotEmpty();
 
-            RuleFor(x => x.Lifestyle.EducationLevel)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm());
+            RuleFor(x => x.EducationLevel)
+                .NotEmpty();
 
-            RuleFor(x => x.Lifestyle.CareerCluster)
-               .NotEmpty()
-               .When(w => w.Basic.Intentions.IsLongTerm());
+            RuleFor(x => x.CareerCluster)
+               .NotEmpty();
 
-            RuleFor(x => x.Lifestyle.Religion)
-                .NotEmpty()
-                .When(w => w.Basic.Intentions.IsLongTerm());
+            RuleFor(x => x.Religion)
+                .NotEmpty();
 
             //RuleFor(x => x.Lifestyle.MoneyPersonality)
-            //    .NotEmpty()
-            //    .When(w => w.Basic.Intentions.IsLongTerm());
+            //    .NotEmpty();
 
             //MTBI = OPCIONAL - TEM QUE FAZER TESTE
 
             //RuleFor(x => x.Lifestyle.RelationshipPersonality)
-            //   .NotEmpty()
-            //   .When(w => w.Basic.Intentions.IsLongTerm());
+            //   .NotEmpty();
 
             //INTERESSES
 
-            RuleFor(x => x.Interest.Food)
+            RuleFor(x => x.Food)
                 .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
-            RuleFor(x => x.Interest.Vacation)
+            RuleFor(x => x.Vacation)
                 .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
-            RuleFor(x => x.Interest.Sports)
+            RuleFor(x => x.Sports)
                 .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
-            RuleFor(x => x.Interest.LeisureActivities)
+            RuleFor(x => x.LeisureActivities)
                 .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
-            RuleFor(x => x.Interest.MusicGenre)
+            RuleFor(x => x.MusicGenre)
                 .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
-            RuleFor(x => x.Interest.MovieGenre)
+            RuleFor(x => x.MovieGenre)
                 .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
-            RuleFor(x => x.Interest.TVGenre)
+            RuleFor(x => x.TVGenre)
                 .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
 
-            RuleFor(x => x.Interest.ReadingGenre)
+            RuleFor(x => x.ReadingGenre)
                 .Must((value) => value == null || value.Count <= 3)
                 .WithMessage("Escolha até no máximo três opções");
         }

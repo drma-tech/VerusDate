@@ -1,12 +1,14 @@
 ﻿@inherits FormBase<string, FieldText>
 
 <Field Horizontal="true">
-    <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+    <FieldLabel ColumnSize="@GetLabelSize()">
         <Blazorise.Icon Name="@CssIcon"></Blazorise.Icon> @For.GetCustomAttribute().Name
         @if (Required)
-        {<div style="color: red; display: initial;"> *</div>}
+        {
+            <div style="color: red; display: initial;"> *</div>
+        }
     </FieldLabel>
-    <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
+    <FieldBody ColumnSize="@GetBodySize()">
         <Addons>
             <Addon AddonType="AddonType.Body">
                 @if (Rows == 0)
@@ -26,6 +28,14 @@
                     </Button>
                 </Addon>
             }
+            @if (!string.IsNullOrEmpty(PrivateInfo))
+            {
+                <Addon AddonType="AddonType.End">
+                    <Button Color="Color.Warning" Outline="true" Clicked="PrivateData" title="Políticas de privacidade">
+                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash"></Blazorise.Icon>
+                    </Button>
+                </Addon>
+            }
         </Addons>
 
         <ValidationMessage For="@For"></ValidationMessage>
@@ -37,3 +47,10 @@
         </Column>
     }
 </Field>
+
+@code {
+    protected void PrivateData()
+    {
+        Toast.ShowWarning("", PrivateInfo);
+    }
+}

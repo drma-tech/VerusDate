@@ -19,9 +19,9 @@ namespace VerusDate.Seed.Model
                 .Rules((s, p) =>
                 {
                     p.SetIds(Id ?? s.Random.Guid().ToString());
-                    if (profile) p.UpdateProfile(GetProfileBasic<ProfileBasicModel>(), GetProfileBio(), GetProfileLifestyle(), new ProfileInterestModel());
+                    if (profile) p.UpdateData(GetProfile());
                     if (looking) p.UpdateLooking(GetProfileLookingVM());
-                    if (gamification) p.UpdateGamification(GetProfileGamification());
+                    //if (gamification) p.UpdateGamification(GetProfileGamification());
                     if (badge) p.UpdateBadge(GetProfileBadge());
                     if (photo) p.UpdatePhoto(GetProfilePhoto());
                     //p.ActivityStatus = s.PickRandom<ActivityStatus>();
@@ -40,53 +40,30 @@ namespace VerusDate.Seed.Model
                 });
         }
 
-        public static Faker<T> GetProfileBasic<T>() where T : ProfileBasicModel
+        public static Faker<T> GetProfileData<T>() where T : ProfileModel
         {
             return new Faker<T>("pt_BR")
                 .Rules((s, p) =>
                 {
+                    //BASIC
                     p.NickName = s.Name.FirstName();
                     p.Description = s.Lorem.Text();
-                    p.Latitude = s.Address.Latitude(-3.220192, -34.316614);
-                    p.Longitude = s.Address.Longitude(-35.039519, -69.421414);
+                    //p.Latitude = s.Address.Latitude(-3.220192, -34.316614);
+                    //p.Longitude = s.Address.Longitude(-35.039519, -69.421414);
                     //p.Latitude = s.Address.Latitude();
                     //p.Longitude = s.Address.Longitude();
                     p.Location = $"{s.Address.Country()} - {s.Address.State()} - {s.Address.City()}";
                     p.CurrentSituation = s.PickRandom<CurrentSituation>();
-                    p.Intentions = s.Random.ArrayElements(new Intentions[] { Intentions.Casual, Intentions.Serious, Intentions.Married }, s.Random.Number(1, 4));
+                    p.Intentions = s.Random.ArrayElements(new Intentions[] { Intentions.Serious, Intentions.LiveTogether, Intentions.Married }, s.Random.Number(1, 4));
                     p.BiologicalSex = s.PickRandom<BiologicalSex>();
                     p.GenderIdentity = s.PickRandom<GenderIdentity>();
                     p.SexualOrientation = s.PickRandom<SexualOrientation>();
-                });
-        }
-
-        public static Faker<ProfileBioModel> GetProfileBio()
-        {
-            return new Faker<ProfileBioModel>("pt_BR")
-                .Rules((s, p) =>
-                {
+                    //BIO
                     p.BirthDate = s.Date.Past(100, DateTime.UtcNow.AddYears(-18).Date);
                     p.Height = s.PickRandom<Height>();
                     p.RaceCategory = s.PickRandom<RaceCategory>();
                     p.BodyMass = s.PickRandom<BodyMass>();
-                });
-        }
-
-        public static Faker<ProfileGamificationModel> GetProfileGamification()
-        {
-            return new Faker<ProfileGamificationModel>("pt_BR")
-                .Rules((s, p) =>
-                {
-                    p.AddXP(s.Random.Number(1, 1000));
-                    p.AddDiamond(s.Random.Number(1, 100));
-                });
-        }
-
-        public static Faker<ProfileLifestyleModel> GetProfileLifestyle()
-        {
-            return new Faker<ProfileLifestyleModel>("pt_BR")
-                .Rules((s, p) =>
-                {
+                    //LIFESTYLE
                     p.Drink = s.PickRandom<Drink>();
                     p.Smoke = s.PickRandom<Smoke>();
                     p.Diet = s.PickRandom<Diet>();
@@ -95,11 +72,25 @@ namespace VerusDate.Seed.Model
                     p.EducationLevel = s.PickRandom<EducationLevel>();
                     p.CareerCluster = s.PickRandom<CareerCluster>();
                     p.Religion = s.PickRandom<Religion>();
+                    //PERSONALITY
                     p.MoneyPersonality = s.PickRandom<MoneyPersonality>();
                     p.RelationshipPersonality = s.PickRandom<RelationshipPersonality>();
                     p.MyersBriggsTypeIndicator = s.PickRandom<MyersBriggsTypeIndicator>();
+                    p.SplitTheBill = s.PickRandom<SplitTheBill>();
+                    p.LoveLanguage = s.PickRandom<LoveLanguage>();
+                    p.SexPersonality = s.PickRandom<SexPersonality>();
                 });
         }
+
+        //public static Faker<ProfileGamificationModel> GetProfileGamification()
+        //{
+        //    return new Faker<ProfileGamificationModel>("pt_BR")
+        //        .Rules((s, p) =>
+        //        {
+        //            p.AddXP(s.Random.Number(1, 1000));
+        //            p.AddDiamond(s.Random.Number(1, 100));
+        //        });
+        //}
 
         public static Faker<ProfilePreferenceModel> GetProfileLookingVM()
         {
@@ -109,8 +100,7 @@ namespace VerusDate.Seed.Model
                     p.MinimalAge = s.Random.Int(18, 120);
                     p.MaxAge = s.Random.Int(18, 120);
                     p.BiologicalSex = s.Random.ArrayElements(new BiologicalSex[] { BiologicalSex.Male, BiologicalSex.Female, BiologicalSex.Other });
-                    p.CurrentSituation = s.Random.ArrayElements(new CurrentSituation[] { CurrentSituation.Single, CurrentSituation.Monogamous, CurrentSituation.NonMonogamous });
-                    p.Intentions = s.Random.ArrayElements(new Intentions[] { Intentions.Casual, Intentions.Serious, Intentions.Married });
+                    p.CurrentSituation = s.Random.ArrayElements(new CurrentSituation[] { CurrentSituation.Single, CurrentSituation.NonMonogamous });
                     p.GenderIdentity = s.Random.ArrayElements(new GenderIdentity[] { GenderIdentity.Cisgender, GenderIdentity.Transsexual, GenderIdentity.Transgender, GenderIdentity.NonBinary });
                     p.SexualOrientation = s.Random.ArrayElements(new SexualOrientation[] { SexualOrientation.Heterosexual, SexualOrientation.Homosexual, SexualOrientation.Bisexual, SexualOrientation.Demisexual });
                     //p.Smoke = s.PickRandom<Smoke>();
@@ -120,7 +110,7 @@ namespace VerusDate.Seed.Model
                     p.MaxHeight = s.PickRandom<Height>();
                     p.BodyMass = s.Random.ArrayElements(new BodyMass[] { BodyMass.UnderWeight, BodyMass.NormalWeight, BodyMass.Athletic, BodyMass.OverWeight });
                     p.RaceCategory = s.Random.ArrayElements(new RaceCategory[] { RaceCategory.White, RaceCategory.BlackAfricanAmerican, RaceCategory.Asian, RaceCategory.TwoMoreRaces });
-                    p.Distance = s.PickRandom<Distance>();
+                    p.Region = s.PickRandom<Region>();
                     //p.CareerCluster = s.PickRandom<CareerCluster>();
                     //p.EducationLevel = s.PickRandom<EducationLevel>();
                     //p.HaveChildren = s.PickRandom<HaveChildren>();

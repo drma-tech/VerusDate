@@ -1,8 +1,5 @@
 ﻿using Blazored.SessionStorage;
 using Blazored.Toast.Services;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading.Tasks;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api
@@ -18,7 +15,7 @@ namespace VerusDate.Web.Api
 
     public static class StorageApi
     {
-        public async static Task Storage_UploadPhotoFace(this HttpClient http, byte[] bytes, ISyncSessionStorageService storage, IToastService toast)
+        public static async Task Storage_UploadPhotoFace(this HttpClient http, byte[] bytes, ISyncSessionStorageService storage, IToastService toast)
         {
             var response = await http.Put(StorageEndpoint.UploadPhotoFace, new { MainPhoto = bytes });
 
@@ -33,7 +30,7 @@ namespace VerusDate.Web.Api
             await response.ProcessResponse(toast, "Foto atualizada com sucesso!");
         }
 
-        public async static Task Storage_UploadPhotoGallery(this HttpClient http, List<byte[]> Streams, ISyncSessionStorageService storage, IToastService toast)
+        public static async Task Storage_UploadPhotoGallery(this HttpClient http, List<byte[]> Streams, ISyncSessionStorageService storage, IToastService toast)
         {
             var response = await http.Put(StorageEndpoint.UploadPhotoGallery, new { Streams });
 
@@ -46,7 +43,7 @@ namespace VerusDate.Web.Api
             await response.ProcessResponse(toast, "Foto atualizada com sucesso!");
         }
 
-        public async static Task Storage_DeletePhotoGallery(this HttpClient http, string IdPhoto, ISyncSessionStorageService storage, IToastService toast)
+        public static async Task Storage_DeletePhotoGallery(this HttpClient http, string IdPhoto, ISyncSessionStorageService storage, IToastService toast)
         {
             var response = await http.Delete(StorageEndpoint.DeletePhotoGallery(IdPhoto));
 
@@ -59,7 +56,7 @@ namespace VerusDate.Web.Api
             await response.ProcessResponse(toast, "Foto atualizada com sucesso!");
         }
 
-        public async static Task Storage_UploadPhotoValidation(this HttpClient http, byte[] bytes, ISyncSessionStorageService storage, IToastService toast)
+        public static async Task Storage_UploadPhotoValidation(this HttpClient http, byte[] bytes, ISyncSessionStorageService storage, IToastService toast)
         {
             var response = await http.Put(StorageEndpoint.UploadPhotoValidation, new { Stream = bytes });
 

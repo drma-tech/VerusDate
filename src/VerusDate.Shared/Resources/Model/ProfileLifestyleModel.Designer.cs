@@ -223,7 +223,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sexual Person. (Preferences).
+        ///   Looks up a localized string similar to Sexual Personality.
         /// </summary>
         internal static string SexPersonalityPreferences_Name {
             get {

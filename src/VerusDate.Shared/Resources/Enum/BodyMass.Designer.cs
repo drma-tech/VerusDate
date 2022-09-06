@@ -97,6 +97,15 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to test.
+        /// </summary>
+        internal static string test {
+            get {
+                return ResourceManager.GetString("test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thin.
         /// </summary>
         internal static string UnderWeight {

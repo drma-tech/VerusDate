@@ -6,7 +6,8 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileAddCommand : ProfileModel, IRequest<ProfileModel> { }
+    public class ProfileAddCommand : ProfileModel, IRequest<ProfileModel>
+    { }
 
     public class ProfileAddHandler : IRequestHandler<ProfileAddCommand, ProfileModel>
     {
@@ -19,10 +20,10 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
         public async Task<ProfileModel> Handle(ProfileAddCommand request, CancellationToken cancellationToken)
         {
-            request.Gamification = new ProfileGamificationModel();
-            
-            request.Gamification.ResetFood();
-            request.Gamification.AddXP(30);
+            //request.Gamification = new ProfileGamificationModel();
+
+            //request.Gamification.ResetFood();
+            //request.Gamification.AddXP(30);
 
             return await _repo.Add(request, cancellationToken);
         }

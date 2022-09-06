@@ -100,10 +100,16 @@
 
         <ValidationMessage For="@For"></ValidationMessage>
     </FieldBody>
-    @if (!string.IsNullOrEmpty(Description))
+    @if (!string.IsNullOrEmpty(Description) && ShowDescription)
     {
         <Column>
             <FieldHelp Style="color: #17a2b8 !important">@Description</FieldHelp>
+        </Column>
+    }
+    @if (!string.IsNullOrEmpty(CustomInfo))
+    {
+        <Column>
+            <FieldHelp Style="color: #17a2b8 !important">@CustomInfo</FieldHelp>
         </Column>
     }
     @if (!string.IsNullOrEmpty(HelpLink))

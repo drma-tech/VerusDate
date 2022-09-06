@@ -157,7 +157,7 @@
     <value>Please click on the button to the side</value>
   </data>
   <data name="NickName_Name" xml:space="preserve">
-    <value>Name / Nickname</value>
+    <value>Nickname</value>
   </data>
   <data name="NickName_Prompt" xml:space="preserve">
     <value>Ex: Paul</value>

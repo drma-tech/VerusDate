@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Monogamous_Description" xml:space="preserve">
-    <value>Um relacionamento com apenas um parceiro de cada vez. Um relacionamento monogâmico pode ser sexual ou emocional, geralmente ambos.</value>
-  </data>
-  <data name="Monogamous_Name" xml:space="preserve">
-    <value>Comprometido (Monogâmico)</value>
-  </data>
   <data name="NonMonogamous_Description" xml:space="preserve">
     <value>Basicamente, não-monogamia é uma categoria usada para descrever qualquer relacionamento que não seja monogâmico. Então, um casal que tem um relacionamento aberto, ou um casal que é poliamoroso são exemplos. É importante mencionar que alguém ser infiel ao seu parceiro não é não-monogamia – isso é infidelidade. Para que a não-monogamia seja aplicada, ambos os parceiros devem concordar que isso é algo em que desejam participar e ambos se sentem confortáveis.</value>
   </data>

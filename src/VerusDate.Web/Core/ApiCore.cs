@@ -11,7 +11,7 @@ namespace VerusDate.Web.Core
         {
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadFromJsonAsync<T>();
+                return await response?.Content?.ReadFromJsonAsync<T>();
             }
             else
             {

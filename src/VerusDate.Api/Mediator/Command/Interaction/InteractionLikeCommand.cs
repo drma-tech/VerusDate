@@ -56,13 +56,13 @@ namespace VerusDate.Api.Mediator.Command.Interaction
                 interactionUser.SetIds(request.IdLoggedUser);
                 interactionUser.SetIdInteraction(request.IdUserInteraction);
 
-                interactionUser.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo?.Main);
+                interactionUser.ExecuteLike(profileUser.NickName, profileUser.Photo?.Main);
 
                 result = await _repo.Add(interactionUser, cancellationToken) != null;
             }
             else //caso existe uma interação (blink)
             {
-                interactionUser.ExecuteLike(profileUser.Basic.NickName, profileUser.Photo?.Main);
+                interactionUser.ExecuteLike(profileUser.NickName, profileUser.Photo?.Main);
 
                 result = await _repo.Update(interactionUser, cancellationToken);
             }
@@ -82,8 +82,8 @@ namespace VerusDate.Api.Mediator.Command.Interaction
                 var chat = await _repo.Add(new ChatModel(Guid.NewGuid()), cancellationToken);
 
                 //registra o match nos dois
-                interactionUser.ExecuteMatch(profileInteraction.Basic.NickName, profileInteraction.Photo?.Main, chat.Id);
-                matched.ExecuteMatch(profileUser.Basic.NickName, profileUser.Photo?.Main, chat.Id);
+                interactionUser.ExecuteMatch(profileInteraction.NickName, profileInteraction.Photo?.Main, chat.Id);
+                matched.ExecuteMatch(profileUser.NickName, profileUser.Photo?.Main, chat.Id);
 
                 //atualiza as interações
                 var mergeUser1 = await _repo.Update(interactionUser, cancellationToken);

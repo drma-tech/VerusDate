@@ -7,25 +7,36 @@
   <ItemGroup>
     <Compile Remove="App\**" />
     <Compile Remove="Core\Hubs\**" />
+    <Compile Remove="Mediator\Command\Interaction\**" />
+    <Compile Remove="Mediator\Command\Store\**" />
+    <Compile Remove="Mediator\Queries\Interaction\**" />
     <EmbeddedResource Remove="App\**" />
     <EmbeddedResource Remove="Core\Hubs\**" />
+    <EmbeddedResource Remove="Mediator\Command\Interaction\**" />
+    <EmbeddedResource Remove="Mediator\Command\Store\**" />
+    <EmbeddedResource Remove="Mediator\Queries\Interaction\**" />
     <None Remove="App\**" />
     <None Remove="Core\Hubs\**" />
+    <None Remove="Mediator\Command\Interaction\**" />
+    <None Remove="Mediator\Command\Store\**" />
+    <None Remove="Mediator\Queries\Interaction\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Function\InteractionFunction.cs" />
     <Compile Remove="Function\SignalRFunction.cs" />
+    <Compile Remove="Function\StoreFunction.cs" />
     <Compile Remove="Mediator\Behavior\UserSessionBehavior.cs" />
     <Compile Remove="Mediator\Command\Profile\UploadPhotoValidationCommand.cs" />
-    <Compile Remove="Mediator\Queries\Interaction\InteractionGetChatCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.13.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.13.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face" Version="2.8.0-preview.2" />
-    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.29.0" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.30.1" />
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.OpenApi" Version="1.4.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.1" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.1.3" />
     <PackageReference Include="SendGrid" Version="9.28.1" />
   </ItemGroup>
   <ItemGroup>

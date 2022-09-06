@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Cosmos;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -69,6 +68,8 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             SQL.Append("    AND c.id != '" + request.Type + ":" + request.IdLoggedUser + "' "); //can't be himself
             SQL.Append("    AND NOT EXISTS (SELECT VALUE t FROM t IN c.passiveInteractions WHERE t = '" + request.IdLoggedUser + "') "); //there can be no interaction with this user
 
+            //TODO: primeiro filtros especificos, depois filtros de intervalo
+
             // *** BASIC ***
 
             //if (user.Preference.Distance == Shared.Enum.Distance.Country)
@@ -83,16 +84,16 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             //}
             //else
             //{
-                SQL.Append("	AND ROUND(ST_DISTANCE({'type': 'Point', 'coordinates':[@latitude, @longitude]},{'type': 'Point', 'coordinates':[c.basic.latitude, c.basic.longitude]}) / @valueCalDistance) <= @distance ");
-                filter.Add("@latitude", user.Basic.Latitude);
-                filter.Add("@longitude", user.Basic.Longitude);
-                filter.Add("@valueCalDistance", valueCalDistance);
-                filter.Add("@distance", user.Preference.Distance);
+            //SQL.Append("	AND ROUND(ST_DISTANCE({'type': 'Point', 'coordinates':[@latitude, @longitude]},{'type': 'Point', 'coordinates':[c.basic.latitude, c.basic.longitude]}) / @valueCalDistance) <= @distance ");
+            //filter.Add("@latitude", user.Latitude);
+            //filter.Add("@longitude", user.Longitude);
+            //filter.Add("@valueCalDistance", valueCalDistance);
+            //filter.Add("@distance", user.Preference.Distance);
             //}
 
             SQL.AddEnumFilter(looking.CurrentSituation, "c.basic.currentSituation");
 
-            SQL.AddArrayFilter(looking.Intentions, "c.basic.intentions");
+            SQL.AddArrayFilter(user.Intentions, "c.basic.intentions");
 
             SQL.AddEnumFilter(looking.BiologicalSex, "c.basic.biologicalSex");
 

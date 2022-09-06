@@ -70,9 +70,9 @@ else
     public PopupProfile _PopupProfile { get; set; }
 
     private ProfileModel profile;
-    private ProfileGamificationModel gamification;
+    //private ProfileGamificationModel gamification;
     private List<ProfileSearch> listaUsers;
-    private List<InteractionModel> interactions = new();
+    //private List<InteractionModel> interactions = new();
 
     private enum OrderBy
     {
@@ -98,13 +98,13 @@ else
     protected override async Task LoadData()
     {
         profile = await Http.Profile_Get(SessionStorage);
-        gamification = profile?.Gamification;
+        //gamification = profile?.Gamification;
         listaUsers = await Http.Profile_ListSearch(SessionStorage);
         //interactions = await Http.Interation_GetList();
     }
 
-    private InteractionModel getCurrentInteraction(string IdUserInteraction)
-    {
-        return interactions.SingleOrDefault(s => s.IdUserInteraction == IdUserInteraction);
-    }
+    //private InteractionModel getCurrentInteraction(string IdUserInteraction)
+    //{
+    //    return interactions.SingleOrDefault(s => s.IdUserInteraction == IdUserInteraction);
+    //}
 }

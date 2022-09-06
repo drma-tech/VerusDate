@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Monogamous_Description" xml:space="preserve">
-    <value>A relationship with only one partner at a time. A monogamous relationship can be sexual or emotional, usually both.</value>
-  </data>
-  <data name="Monogamous_Name" xml:space="preserve">
-    <value>Commited (Monogamous)</value>
-  </data>
   <data name="NonMonogamous_Description" xml:space="preserve">
     <value>Basically, non-monogamy is a category used to describe any relationship that isn’t monogamous. So, a couple who have an open relationship, or a couple who are polyamorous are examples. It’s important to mention that somebody being unfaithful to their partner isn’t non-monogamy – that’s infidelity. For non-monogamy to be applied, both partners must agree that this is something they want to participate in, and both feel comfortable with.</value>
   </data>

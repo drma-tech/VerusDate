@@ -21,14 +21,14 @@
     {
         try
         {
-            await Http.Interation_Like(IdUserView, SessionStorage, Toast);
+            //await Http.Interation_Like(IdUserView, SessionStorage, Toast);
 
-            var interaction = await Http.Interation_Get(SessionStorage, IdUserView);
+            //var interaction = await Http.Interation_Get(SessionStorage, IdUserView);
 
-            if (interaction.Match.Value.HasValue && interaction.Match.Value.Value == true)
-            {
-                Toast.ShowSuccess("", "Match");
-            }
+            //if (interaction.Match.Value.HasValue && interaction.Match.Value.Value == true)
+            //{
+            //    Toast.ShowSuccess("", "Match");
+            //}
 
             await OnClick.InvokeAsync(null);
         }

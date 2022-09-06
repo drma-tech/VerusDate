@@ -60,7 +60,7 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             SQL.Append("FROM ");
             SQL.Append("	c ");
             SQL.Append("WHERE ");
-            SQL.Append($"	c.id = '{request.Type}:{ request.IdUserView}'");
+            SQL.Append($"	c.id = '{request.Type}:{request.IdUserView}'");
 
             var query = new QueryDefinition(SQL.ToString());
 

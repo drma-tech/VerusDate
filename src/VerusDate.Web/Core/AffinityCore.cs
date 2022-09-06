@@ -16,51 +16,48 @@ namespace VerusDate.Web.Core
             var obj = new List<AffinityVM>();
 
             //BASIC - DEFINIÇÕES DE BUSCA
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.BiologicalSex), CheckEnumArray(profView.Basic.BiologicalSex, profUser.Preference.BiologicalSex)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.CurrentSituation), CheckEnumArray(profView.Basic.CurrentSituation, profUser.Preference.CurrentSituation)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Intentions), CheckEnumArrays(profView.Basic.Intentions, profUser.Preference.Intentions), profView.Basic.Intentions.Intersect(profUser.Preference.Intentions).Select(s => (int)s)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.GenderIdentity), CheckEnumArray(profView.Basic.GenderIdentity, profUser.Preference.GenderIdentity)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.SexualOrientation), CheckEnumArray(profView.Basic.SexualOrientation, profUser.Preference.SexualOrientation)));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Distance), profView.Distance <= (double)profUser.Preference.Distance));
-            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Basic.Languages), CheckEnumArrays(profView.Basic.Languages, profUser.Preference.Languages), profView.Basic.Languages.Intersect(profUser.Preference.Languages).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.BiologicalSex), CheckEnumArray(profView.BiologicalSex, profUser.Preference.BiologicalSex)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.CurrentSituation), CheckEnumArray(profView.CurrentSituation, profUser.Preference.CurrentSituation)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Intentions), CheckEnumArrays(profView.Intentions, profUser.Intentions), profView.Intentions.Intersect(profUser.Intentions).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.GenderIdentity), CheckEnumArray(profView.GenderIdentity, profUser.Preference.GenderIdentity)));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.SexualOrientation), CheckEnumArray(profView.SexualOrientation, profUser.Preference.SexualOrientation)));
+            //obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Distance), profView.Distance <= (double)profUser.Preference.Distance));
+            obj.Add(new AffinityVM(AffinityCategory.Basic, nameof(profView.Languages), CheckEnumArrays(profView.Languages, profUser.Preference.Languages), profView.Languages.Intersect(profUser.Preference.Languages).Select(s => (int)s)));
 
             //BIO - DEFINIÇÕES DE BUSCA
             obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Age), CheckAge(profView.Age, profUser.Preference.MinimalAge, profUser.Preference.MaxAge)));
-            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.Zodiac), CheckEnumZodiac(profView.Bio.Zodiac, profUser.Bio.Zodiac)));
-            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.RaceCategory), CheckEnumArray(profView.Bio.RaceCategory, profUser.Preference.RaceCategory)));
-            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.Height), CheckHeight(profView.Bio.Height, profUser.Preference.MinimalHeight, profUser.Preference.MaxHeight)));
-            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Bio.BodyMass), CheckEnumArray(profView.Bio.BodyMass, profUser.Preference.BodyMass)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Zodiac), CheckEnumZodiac(profView.Zodiac, profUser.Zodiac)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.RaceCategory), CheckEnumArray(profView.RaceCategory, profUser.Preference.RaceCategory)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.Height), CheckHeight(profView.Height, profUser.Preference.MinimalHeight, profUser.Preference.MaxHeight)));
+            obj.Add(new AffinityVM(AffinityCategory.Bio, nameof(profView.BodyMass), CheckEnumArray(profView.BodyMass, profUser.Preference.BodyMass)));
 
-            if (profView.Basic.Intentions.IsLongTerm())
-            {
-                //LIFESTYLE - COMPATIBILIDADE DE PERFIL
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Smoke), CheckSmoke(profView.Lifestyle.Smoke, profUser.Lifestyle.Smoke)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Drink), CheckDrink(profView.Lifestyle.Drink, profUser.Lifestyle.Drink)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Diet), CheckDiet(profView.Lifestyle.Diet, profUser.Lifestyle.Diet)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.HaveChildren), CheckHaveChildren(profView.Lifestyle.HaveChildren, profUser.Lifestyle.HaveChildren)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.WantChildren), CheckWantChildren(profView.Lifestyle.WantChildren, profUser.Lifestyle.WantChildren)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.Religion), CheckEnum((int?)profView.Lifestyle.Religion, (int?)profUser.Lifestyle.Religion)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.EducationLevel), CheckEnum((int?)profView.Lifestyle.EducationLevel, (int?)profUser.Lifestyle.EducationLevel)));
-                obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Lifestyle.CareerCluster), CheckEnum((int?)profView.Lifestyle.CareerCluster, (int?)profUser.Lifestyle.CareerCluster)));
+            //LIFESTYLE - COMPATIBILIDADE DE PERFIL
+            obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Smoke), CheckSmoke(profView.Smoke, profUser.Smoke)));
+            obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Drink), CheckDrink(profView.Drink, profUser.Drink)));
+            obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Diet), CheckDiet(profView.Diet, profUser.Diet)));
+            obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.HaveChildren), CheckHaveChildren(profView.HaveChildren, profUser.HaveChildren)));
+            obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.WantChildren), CheckWantChildren(profView.WantChildren, profUser.WantChildren)));
+            obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.Religion), CheckEnum((int?)profView.Religion, (int?)profUser.Religion)));
+            obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.EducationLevel), CheckEnum((int?)profView.EducationLevel, (int?)profUser.EducationLevel)));
+            obj.Add(new AffinityVM(AffinityCategory.Lifestyle, nameof(profView.CareerCluster), CheckEnum((int?)profView.CareerCluster, (int?)profUser.CareerCluster)));
 
-                //PERSONALITY
-                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.MoneyPersonality), CheckEnum((int?)profView.Lifestyle.MoneyPersonality, (int?)profUser.Lifestyle.MoneyPersonality, true)));
-                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.SplitTheBill), CheckSplitTheBill(profView.Lifestyle.SplitTheBill, profUser.Lifestyle.SplitTheBill)));
-                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.Lifestyle.RelationshipPersonality, profUser.Lifestyle.RelationshipPersonality)));
-                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.LoveLanguage), CheckEnum((int?)profView.Lifestyle.LoveLanguage, (int?)profUser.Lifestyle.LoveLanguage, true)));
-                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.Lifestyle.MyersBriggsTypeIndicator, profUser.Lifestyle.MyersBriggsTypeIndicator)));
-                obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.Lifestyle.SexPersonality), CheckEnumArray(profView.Lifestyle.SexPersonality, profUser.Lifestyle.SexPersonalityPreferences, true)));
+            //PERSONALITY
+            obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.MoneyPersonality), CheckEnum((int?)profView.MoneyPersonality, (int?)profUser.MoneyPersonality, true)));
+            obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.SplitTheBill), CheckSplitTheBill(profView.SplitTheBill, profUser.SplitTheBill)));
+            obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.RelationshipPersonality), CheckEnumRelationshipPersonality(profView.RelationshipPersonality, profUser.RelationshipPersonality)));
+            obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.LoveLanguage), CheckEnum((int?)profView.LoveLanguage, (int?)profUser.LoveLanguage, true)));
+            obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.MyersBriggsTypeIndicator), CheckEnumMBTI(profView.MyersBriggsTypeIndicator, profUser.MyersBriggsTypeIndicator)));
+            obj.Add(new AffinityVM(AffinityCategory.Personality, nameof(profView.SexPersonality), CheckEnumArray(profView.SexPersonality, profUser.Preference.SexPersonality, true)));
 
-                //INTEREST - COMPATIBILIDADE DE PERFIL / UMA OPÇAO IGUAL JÁ INDICA COMPATIBILIDADE
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Food), CheckEnumArrays(profView.Interest.Food, profUser.Interest.Food), profView.Interest.Food.Intersect(profUser.Interest.Food).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Vacation), CheckEnumArrays(profView.Interest.Vacation, profUser.Interest.Vacation), profView.Interest.Vacation.Intersect(profUser.Interest.Vacation).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.Sports), CheckEnumArrays(profView.Interest.Sports, profUser.Interest.Sports), profView.Interest.Sports.Intersect(profUser.Interest.Sports).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.LeisureActivities), CheckEnumArrays(profView.Interest.LeisureActivities, profUser.Interest.LeisureActivities), profView.Interest.LeisureActivities.Intersect(profUser.Interest.LeisureActivities).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.MusicGenre), CheckEnumArrays(profView.Interest.MusicGenre, profUser.Interest.MusicGenre), profView.Interest.MusicGenre.Intersect(profUser.Interest.MusicGenre).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.MovieGenre), CheckEnumArrays(profView.Interest.MovieGenre, profUser.Interest.MovieGenre), profView.Interest.MovieGenre.Intersect(profUser.Interest.MovieGenre).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.TVGenre), CheckEnumArrays(profView.Interest.TVGenre, profUser.Interest.TVGenre), profView.Interest.TVGenre.Intersect(profUser.Interest.TVGenre).Select(s => (int)s)));
-                obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Interest.ReadingGenre), CheckEnumArrays(profView.Interest.ReadingGenre, profUser.Interest.ReadingGenre), profView.Interest.ReadingGenre.Intersect(profUser.Interest.ReadingGenre).Select(s => (int)s)));
-            }
+            //INTEREST - COMPATIBILIDADE DE PERFIL / UMA OPÇAO IGUAL JÁ INDICA COMPATIBILIDADE
+            obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Food), CheckEnumArrays(profView.Food, profUser.Food), profView.Food.Intersect(profUser.Food).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Vacation), CheckEnumArrays(profView.Vacation, profUser.Vacation), profView.Vacation.Intersect(profUser.Vacation).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.Sports), CheckEnumArrays(profView.Sports, profUser.Sports), profView.Sports.Intersect(profUser.Sports).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.LeisureActivities), CheckEnumArrays(profView.LeisureActivities, profUser.LeisureActivities), profView.LeisureActivities.Intersect(profUser.LeisureActivities).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.MusicGenre), CheckEnumArrays(profView.MusicGenre, profUser.MusicGenre), profView.MusicGenre.Intersect(profUser.MusicGenre).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.MovieGenre), CheckEnumArrays(profView.MovieGenre, profUser.MovieGenre), profView.MovieGenre.Intersect(profUser.MovieGenre).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.TVGenre), CheckEnumArrays(profView.TVGenre, profUser.TVGenre), profView.TVGenre.Intersect(profUser.TVGenre).Select(s => (int)s)));
+            obj.Add(new AffinityVM(AffinityCategory.Interest, nameof(profView.ReadingGenre), CheckEnumArrays(profView.ReadingGenre, profUser.ReadingGenre), profView.ReadingGenre.Intersect(profUser.ReadingGenre).Select(s => (int)s)));
 
             return obj;
         }

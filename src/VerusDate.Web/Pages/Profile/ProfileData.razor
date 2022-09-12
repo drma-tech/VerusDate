@@ -17,7 +17,6 @@ else
             <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Lifestyle)" Clicked="(() => ChangeOrder(Tabs.Lifestyle))">Lifestyle</Button>
             <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Personality)" Clicked="(() => ChangeOrder(Tabs.Personality))">Personalidades</Button>
             <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Interests)" Clicked="(() => ChangeOrder(Tabs.Interests))">Interesses</Button>
-            <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Others)" Clicked="(() => ChangeOrder(Tabs.Others))">Outros</Button>
         </Div>
 
         @if (SelectedTab == Tabs.Basic)
@@ -73,6 +72,26 @@ else
                          CssIcon="@FontAwesomeIcons.Ruler" Required="true" ShowHelper="false"></FieldSelect>
                 </Column>
             </Row>
+            <Card>
+                <CardHeader>
+                    Outros (seção opcional)
+                </CardHeader>
+                <CardBody>
+                    <Alert Visible="true" Color="Color.Warning">
+                        <AlertDescription>Fazemos o possível para manter um ambiente saudável dentro da plataforma, mas não podemos garantir 100%. Então caso tenha dificuldades de interagir ou de identificar más intenções nas pessoas, não sinta vergonha de pedir ajuda a amigos ou familiares. E se sofrer qualquer tipo de assédio e/ou preconceito, denuncie o perfil imediatamente.</AlertDescription>
+                    </Alert>
+                    <Row>
+                        <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                            <FieldSelect For="@(() => profile.Neurodiversity)" TValue="Neurodiversity?" TEnum="Neurodiversity" @bind-SelectedValue="@profile.Neurodiversity"
+                                 CssIcon="@FontAwesomeIcons.Brain"></FieldSelect>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                            <FieldSelect For="@(() => profile.Disabilities)" TValue="IReadOnlyList<Disability>" TEnum="Disability" @bind-SelectedValues="@profile.Disabilities"
+                                 CssIcon="@FontAwesomeIcons.Wheelchair" Multiple="true"></FieldSelect>
+                        </Column>
+                    </Row>
+                </CardBody>
+            </Card>
         }
         else if (SelectedTab == Tabs.Lifestyle)
         {
@@ -103,7 +122,7 @@ else
         }
         else if (SelectedTab == Tabs.Personality)
         {
-            <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2.FromBottom">
+            <Alert Visible="true" Color="Color.Info">
                 <AlertDescription>Os campos deste tópico requerem um teste, mas alguns poderão facilmente ser escolhidos apenas lendo a descrição dos itens</AlertDescription>
             </Alert>
             <Row>
@@ -127,7 +146,7 @@ else
         }
         else if (SelectedTab == Tabs.Interests)
         {
-            <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2.FromBottom">
+            <Alert Visible="true" Color="Color.Info">
                 <AlertDescription>Escolha no máximo 3 itens para cada campo</AlertDescription>
             </Alert>
             <Row>
@@ -150,25 +169,6 @@ else
                          CssIcon="@FontAwesomeIcons.Tv" LabelSize="LabelSize.Short" Multiple="true" Order="(o => o.Name)"></FieldSelect>
                     <FieldSelect For="@(() => profile.ReadingGenre)" TValue="IReadOnlyList<ReadingGenre>" TEnum="ReadingGenre" @bind-SelectedValues="@profile.ReadingGenre"
                          CssIcon="@FontAwesomeIcons.BookReader" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
-                </Column>
-            </Row>
-        }
-        else if (SelectedTab == Tabs.Others)
-        {
-            <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2.FromBottom" Margin="Margin.Is2.FromBottom">
-                <AlertDescription>A intenção desse seção é única e exclusivamente ser transparente e ser o mais assertivo possível nas nossas sugestões. Não precisa responder, caso não se sinta confortável.</AlertDescription>
-            </Alert>
-            <Alert Visible="true" Color="Color.Warning" Padding="Padding.Is2.FromBottom">
-                <AlertDescription>Fazemos o possível para manter um ambiente saudável dentro da plataforma, mas não podemos garantir 100%. Então caso tenha dificuldades de interagir ou de identificar más intenções nas pessoas, não sinta vergonha de pedir ajuda a amigos ou familiares. E se sofrer qualquer tipo de assédio e/ou preconceito, denuncie o perfil imediatamente.</AlertDescription>
-            </Alert>
-            <Row>
-                <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                    <FieldSelect For="@(() => profile.Neurodiversity)" TValue="Neurodiversity?" TEnum="Neurodiversity" @bind-SelectedValue="@profile.Neurodiversity"
-                         CssIcon="@FontAwesomeIcons.Brain"></FieldSelect>
-                </Column>
-                <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                    <FieldSelect For="@(() => profile.Disabilities)" TValue="IReadOnlyList<Disability>" TEnum="Disability" @bind-SelectedValues="@profile.Disabilities"
-                         CssIcon="@FontAwesomeIcons.Wheelchair" Multiple="true"></FieldSelect>
                 </Column>
             </Row>
         }
@@ -224,8 +224,7 @@ else
         Bio,
         Lifestyle,
         Personality,
-        Interests,
-        Others
+        Interests
     }
 
     private Tabs SelectedTab = Tabs.Basic;

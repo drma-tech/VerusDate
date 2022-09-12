@@ -22,14 +22,14 @@ namespace VerusDate.Shared.Resources.Enum {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Intentions {
+    internal class TravelFrequency {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Intentions() {
+        internal TravelFrequency() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace VerusDate.Shared.Resources.Enum {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VerusDate.Shared.Resources.Enum.Intentions", typeof(Intentions).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VerusDate.Shared.Resources.Enum.TravelFrequency", typeof(TravelFrequency).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,56 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For those who do not intend to officially marry, but still want to live a life together (depending on the laws/cultures in force in the country, this can also entail responsibilities similar to a marriage)..
+        ///   Looks up a localized string similar to Someone who does not travel or travels infrequently (usually on vacation or in specific situations).
         /// </summary>
-        internal static string LiveTogether_Description {
+        internal static string NeverRarely_Description {
             get {
-                return ResourceManager.GetString("LiveTogether_Description", resourceCulture);
+                return ResourceManager.GetString("NeverRarely_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live Together.
+        ///   Looks up a localized string similar to Never / Rarely.
         /// </summary>
-        internal static string LiveTogether_Name {
+        internal static string NeverRarely_Name {
             get {
-                return ResourceManager.GetString("LiveTogether_Name", resourceCulture);
+                return ResourceManager.GetString("NeverRarely_Name", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For those who intend to marry (bond established between two people, through governmental, cultural, religious and/or social recognition)..
+        ///   Looks up a localized string similar to A person who travels with a certain frequency (between 30% and 70% of their time), either for work or for leisure on weekends.
         /// </summary>
-        internal static string Married_Description {
+        internal static string SometimesFrequently_Description {
             get {
-                return ResourceManager.GetString("Married_Description", resourceCulture);
+                return ResourceManager.GetString("SometimesFrequently_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get Married.
+        ///   Looks up a localized string similar to Sometimes / Frequently.
         /// </summary>
-        internal static string Married_Name {
+        internal static string SometimesFrequently_Name {
             get {
-                return ResourceManager.GetString("Married_Name", resourceCulture);
+                return ResourceManager.GetString("SometimesFrequently_Name", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Serious dating is when you’re committed to a person. You have feelings for them, and they have feelings for you. Because of this, you’re not seeing anyone else and you hope to one day take the relationship to the next level..
+        ///   Looks up a localized string similar to É alguém que está em constante movimento (muitas vezes não tem residência permanente), como uma estrela do rock que passa 365 dias por ano em ônibus de turismo e quartos de hotel ou um nômade digital que trabalha online e tem liberdade geográfica de viver onde quer..
         /// </summary>
-        internal static string Serious_Description {
+        internal static string UsuallyAlwaysNomad_Description {
             get {
-                return ResourceManager.GetString("Serious_Description", resourceCulture);
+                return ResourceManager.GetString("UsuallyAlwaysNomad_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Serious Relationship.
+        ///   Looks up a localized string similar to Usually / Always / Nomad.
         /// </summary>
-        internal static string Serious_Name {
+        internal static string UsuallyAlwaysNomad_Name {
             get {
-                return ResourceManager.GetString("Serious_Name", resourceCulture);
+                return ResourceManager.GetString("UsuallyAlwaysNomad_Name", resourceCulture);
             }
         }
     }

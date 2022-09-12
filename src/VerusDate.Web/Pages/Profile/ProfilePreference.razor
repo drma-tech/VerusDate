@@ -16,7 +16,6 @@ else
             <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Bio)" Clicked="(() => ChangeOrder(Tabs.Bio))">Bio</Button>
             <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Lifestyle)" Clicked="(() => ChangeOrder(Tabs.Lifestyle))">Lifestyle</Button>
             <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Personality)" Clicked="(() => ChangeOrder(Tabs.Personality))">Personalidades</Button>
-            <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Others)" Clicked="(() => ChangeOrder(Tabs.Others))">Outros</Button>
         </Div>
 
         @if (SelectedTab == Tabs.Basic)
@@ -96,6 +95,16 @@ else
                     </Field>
                 </Column>
             </Row>
+            <Row>
+                <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                    <FieldSelect For="@(() => preference.Neurodiversities)" TValue="IReadOnlyList<Neurodiversity>" TEnum="Neurodiversity" @bind-SelectedValues="@preference.Neurodiversities"
+                         CssIcon="@FontAwesomeIcons.Brain" Multiple="true"></FieldSelect>
+                </Column>
+                <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                    <FieldSelect For="@(() => preference.Disabilities)" TValue="IReadOnlyList<Disability>" TEnum="Disability" @bind-SelectedValues="@preference.Disabilities"
+                         CssIcon="@FontAwesomeIcons.Wheelchair" Multiple="true"></FieldSelect>
+                </Column>
+            </Row>
         }
         else if (SelectedTab == Tabs.Lifestyle)
         {
@@ -126,7 +135,7 @@ else
         }
         else if (SelectedTab == Tabs.Personality)
         {
-            <Alert Visible="true" Color="Color.Info" Padding="Padding.Is2.FromBottom" Margin="Margin.Is2.FromBottom">
+            <Alert Visible="true" Color="Color.Info">
                 <AlertDescription>Esta seção não funciona como filtro, apenas complementa o cálculo de compatibilidade de perfis.</AlertDescription>
             </Alert>
             <Row>
@@ -136,19 +145,6 @@ else
                 </Column>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
 
-                </Column>
-            </Row>
-        }
-        else if (SelectedTab == Tabs.Others)
-        {           
-            <Row>
-                <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                    <FieldSelect For="@(() => preference.Neurodiversity)" TValue="Neurodiversity?" TEnum="Neurodiversity" @bind-SelectedValue="@preference.Neurodiversity"
-                         CssIcon="@FontAwesomeIcons.Brain"></FieldSelect>
-                </Column>
-                <Column ColumnSize="ColumnSize.Is6.OnDesktop">
-                    <FieldSelect For="@(() => preference.Disabilities)" TValue="IReadOnlyList<Disability>" TEnum="Disability" @bind-SelectedValues="@preference.Disabilities"
-                         CssIcon="@FontAwesomeIcons.Wheelchair" Multiple="true"></FieldSelect>
                 </Column>
             </Row>
         }
@@ -239,8 +235,7 @@ else
         Basic,
         Bio,
         Lifestyle,
-        Personality,
-        Others
+        Personality
     }
 
     private Tabs SelectedTab = Tabs.Basic;

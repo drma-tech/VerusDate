@@ -97,6 +97,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>LoveLanguage.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Enum\Modality.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Modality.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Enum\MoneyPersonality.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -137,6 +142,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Religion.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Enum\Section.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Section.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Enum\SexPersonality.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -161,6 +171,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Sports.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\TravelFrequency.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TravelFrequency.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Enum\TVGenre.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -258,6 +273,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LoveLanguage.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Modality.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Modality.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enum\MoneyPersonality.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MoneyPersonality.Designer.cs</LastGenOutput>
@@ -290,6 +309,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Religion.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Section.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Section.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enum\SexPersonality.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SexPersonality.Designer.cs</LastGenOutput>
@@ -309,6 +332,10 @@
     <EmbeddedResource Update="Resources\Enum\Sports.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Sports.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\TravelFrequency.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TravelFrequency.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enum\TVGenre.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,28 +1,21 @@
 ﻿@using System.Linq.Expressions;
-@inherits ComponenteCore<ItemDataProfile<TValue>>
+@inherits ComponenteCore<ItemDataProfile<TValue, TValueUser>>
 @typeparam TValue
+@typeparam TValueUser
 
 @if (Values != null && Values.Any())
 {
     foreach (var item in Values)
     {
-        <Badge Color="@GetColor(item)" Pill="true" title="@GetDescription(item)" Style="@GetCursor(item)" @onclick="@(() => BadgeClick(item))">
+        <Badge Color="@GetColor(item)" Pill="true" Style="cursor: pointer" @onclick="InstantiateModal">
             <Blazorise.Icon Name="@ClassIcon"></Blazorise.Icon> @GetValue(item)
-            @if (!string.IsNullOrEmpty(GetDescription(item)))
-            {
-                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromStart"></Blazorise.Icon>
-            }
         </Badge>
     }
 }
 else
 {
-    <Badge Color="@GetColor(Value)" Pill="true" title="@GetDescription(Value)" Style="@GetCursor(Value)" @onclick="@(() => BadgeClick(Value))">
+    <Badge Color="@GetColor(Value)" Pill="true" Style="cursor: pointer" @onclick="InstantiateModal">
         <Blazorise.Icon Name="@ClassIcon"></Blazorise.Icon> @GetValue(Value)
-        @if (!string.IsNullOrEmpty(GetDescription(Value)))
-        {
-            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.InfoCircle" Margin="Margin.Is1.FromStart"></Blazorise.Icon>
-        }
     </Badge>
 }
 
@@ -30,8 +23,17 @@ else
     [Parameter] public Expression<Func<object>> For { get; set; }
     [Parameter] public TValue Value { get; set; }
     [Parameter] public IReadOnlyList<TValue> Values { get; set; }
+    [Parameter] public TValueUser ValueUser { get; set; }
+    [Parameter] public IReadOnlyList<TValueUser> ValuesUser { get; set; }
     [Parameter] public string ClassIcon { get; set; }
     [Parameter] public List<AffinityVM> Affinities { get; set; } = new();
+
+    [Parameter] public CompatibilityType Type { get; set; }
+    [Parameter] public CompatibilityItem Item { get; set; }
+    [Parameter] public ProfileModel? User { get; set; }
+    [Parameter] public ProfilePreferenceModel? Pref { get; set; }
+
+    [Inject] public IModalService ModalService { get; set; }
 
     private string GetValue(TValue value)
     {
@@ -44,6 +46,13 @@ else
             else
                 return resultS;
         }
+        else if (value is int resultI)
+        {
+            if (resultI <= 0)
+                return "Não Respondido";
+            else
+                return resultI.ToString();
+        }
         else if (value is Enum resultE)
         {
             var result = resultE.GetName();
@@ -55,107 +64,158 @@ else
         }
         else
         {
-            throw new InvalidOperationException("tipo inválido: " + value.GetType());
-        }
-    }
-
-    private string GetDescription(TValue value)
-    {
-        if (value == null) return null;
-
-        if (value is string resultS)
-        {
-            return null;
-        }
-        else if (value is Enum resultE)
-        {
-            return resultE.GetCustomAttribute()?.Description;
-        }
-        else
-        {
-            throw new InvalidOperationException("tipo inválido: " + value.GetType());
-        }
-    }
-
-    private string GetCursor(TValue value)
-    {
-        if (value == null) return "cursor: default";
-
-        if (value is string resultS)
-        {
-            return "cursor: default";
-        }
-        else if (value is Enum resultE)
-        {
-            if (string.IsNullOrEmpty(resultE.GetCustomAttribute()?.Description))
-            {
-                return "cursor: default";
-            }
-            else
-            {
-                return "cursor: help";
-            }
-        }
-        else
-        {
-            throw new InvalidOperationException("tipo inválido: " + value.GetType());
+            throw new InvalidOperationException("invalid type: " + value.GetType());
         }
     }
 
     private Color GetColor(TValue value)
     {
-        var fieldName = AttributeHelper.GetNameOf(For);
+        //var fieldName = AttributeHelper.GetNameOf(For);
 
-        if (!Affinities.Any(s => s.AttributeName == fieldName)) //se o atributo não está mapeado no affinity, fica neutro
+        if (!Affinities.Any(s => s.Item == Item)) //se o atributo não está mapeado no affinity, fica neutro
         {
             return Color.Secondary;
         }
-        else if (Affinities.Single(s => s.AttributeName == fieldName).HaveAffinity) //se está mapeado e tem affinity
+        else if (Affinities.Single(s => s.Item == Item).HaveAffinity) //se está mapeado e tem affinity
         {
-            if (value == null) return Color.Secondary;
-
-            if (value is string resultS) //campo do tipo texto
-            {
+            //if (value == null)
+            //    return Color.Warning;
+            //else
                 return Color.Success;
-            }
-            else if (value is Enum resultE) //campo do tipo enum array
-            {
-                var affinity = Affinities.Single(s => s.AttributeName == fieldName);
 
-                if (affinity.ArrayEnums != null && affinity.ArrayEnums.Any())
-                {
-                    if (affinity.ArrayEnums.Any(a => a == Convert.ToInt32(resultE)))
-                    {
-                        return Color.Success;
-                    }
-                    else
-                    {
-                        return Color.Secondary;
-                    }
-                }
-                else
-                {
-                    return Color.Success;
-                }
-            }
-            else
-            {
-                throw new InvalidOperationException("tipo inválido: " + value.GetType());
-            }
+            //if (value is string) //text field
+            //{
+            //    return Color.Success;
+            //}
+            //else if (value is int) //int field
+            //{
+            //    return Color.Success;
+            //}
+            //else if (value is Enum resultE) //enum array field
+            //{
+            //    var affinity = Affinities.Single(s => s.Item == Item);
+
+            //    if (affinity.ArrayEnums != null && affinity.ArrayEnums.Any())
+            //    {
+            //        if (affinity.ArrayEnums.Any(a => a == Convert.ToInt32(resultE))) //varios items do mesmo field, mas só com uma compatibilidade
+            //        {
+            //            return Color.Primary;
+            //        }
+            //        else
+            //        {
+            //            return Color.Warning;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        return Color.Dark;
+            //    }
+            //}
+            //else
+            //{
+            //    throw new InvalidOperationException("invalid type: " + value.GetType());
+            //}
         }
-        else //se não mapeado ou não tem afinidade
+        else //se mapeado mas sem afinidade
         {
             return Color.Danger;
         }
     }
 
-    private void BadgeClick(TValue Value)
+    public Task InstantiateModal()
     {
-        if (!string.IsNullOrEmpty(GetDescription(Value)))
+        if (Values == null) Values = new TValue[] { Value };
+
+        return ModalService.Show<AboutItemModal<TValue>>(CustomAttributeHelper.GetCustomAttribute(For)?.Name,
+            x =>
+            {
+                x.Add(x => x.PreferenceValues, GetPreferenceValues());
+                x.Add(x => x.ExpectedValues, GetExpectedValue());
+                x.Add(x => x.ViewValues, Values);
+                x.Add(x => x.User, User);
+                x.Add(x => x.Pref, Pref);
+                x.Add(x => x.Type, Type);
+                x.Add(x => x.Item, Item);
+                x.Add(x => x.FieldInfo, CustomAttributeHelper.GetCustomAttribute(For)?.FieldInfo);
+            },
+            new ModalInstanceOptions()
+                {
+                    UseModalStructure = true,
+                    Centered = true,
+                    Size = ModalSize.Large,
+                });
+    }
+
+    private List<string> GetPreferenceValues()
+    {
+        var result = new List<string>();
+
+        foreach (var item in ValuesUser ?? new TValueUser[] { ValueUser })
         {
-            var content = (MarkupString)GetDescription(Value);
-            RenderFragment fragment =@<div>@content</div>;
-            Toast.ShowToast(Blazored.Toast.Services.ToastLevel.Info, fragment, For.GetCustomAttribute().Name + ": " + GetValue(Value));
+            if (item is Enum resultE)
+            {
+                result.Add(resultE.GetName());
+            }
+            else if (item != null)
+            {
+                result.Add(item.ToString());
+            }
         }
+
+        return result;
+    }
+
+    private List<string> GetExpectedValue()
+    {
+        if (User == null) return new();
+
+        if (!GetPreferenceValues().Any()) return new();
+
+        return Item switch
+        {
+            //BASIC
+            CompatibilityItem.Location => AffinityCore.GetLocation(User).ToArray().ToList(),
+            CompatibilityItem.Language => AffinityCore.GetLanguages(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.CurrentSituation => AffinityCore.GetCurrentSituation(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.Intentions => AffinityCore.GetIntentions(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.BiologicalSex => AffinityCore.GetBiologicalSex(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.GenderIdentity => AffinityCore.GetGenderIdentity(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.SexualOrientation => AffinityCore.GetSexualOrientation(User, User.Preference).Select(s => s.GetName()).ToList(),
+            //BIO
+            CompatibilityItem.RaceCategory => AffinityCore.GetRaceCategory(User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.BodyMass => AffinityCore.GetBodyMass(User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.Age => AffinityCore.GetAge(User, User.Preference).Select(s => s.ToString()).ToList(),
+            CompatibilityItem.Zodiac => AffinityCore.GetZodiac(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.Height => AffinityCore.GetHeight(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.Neurodiversity => AffinityCore.GetNeurodiversity(User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.Disabilities => AffinityCore.GetDisability(User.Preference).Select(s => s.GetName()).ToList(),
+            //LIFESTYLE
+            CompatibilityItem.Drink => AffinityCore.GetDrink(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.Smoke => AffinityCore.GetSmoke(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.Diet => AffinityCore.GetDiet(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.Religion => AffinityCore.GetReligion(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.HaveChildren => AffinityCore.GetHaveChildren(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.WantChildren => AffinityCore.GetWantChildren(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.EducationLevel => AffinityCore.GetEducationLevel(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.CareerCluster => AffinityCore.GetCareerCluster(User, User.Preference).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.TravelFrequency => AffinityCore.GetTravelFrequency(User, User.Preference).Select(s => s.GetName()).ToList(),
+            //PERSONALITY
+            CompatibilityItem.MoneyPersonality => AffinityCore.GetMoneyPersonality(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.SplitTheBill => AffinityCore.GetSplitTheBill(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.RelationshipPersonality => AffinityCore.GetRelationshipPersonality(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.MyersBriggsTypeIndicator => AffinityCore.GetMyersBriggsTypeIndicator(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.LoveLanguage => AffinityCore.GetLoveLanguage(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.SexPersonality => AffinityCore.GetSexPersonality(User, Pref).Select(s => s.GetName()).ToList(),
+            //INTEREST
+            CompatibilityItem.Food => AffinityCore.GetFood(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.Vacation => AffinityCore.GetVacation(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.Sports => AffinityCore.GetSports(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.LeisureActivities => AffinityCore.GetLeisureActivities(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.MusicGenre => AffinityCore.GetMusicGenre(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.MovieGenre => AffinityCore.GetMovieGenre(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.TVGenre => AffinityCore.GetTVGenre(User).Select(s => s.GetName()).ToList(),
+            CompatibilityItem.ReadingGenre => AffinityCore.GetReadingGenre(User).Select(s => s.GetName()).ToList(),
+            _ => throw new InvalidOperationException("invalid CompatibilityItem: " + Item)
+        };
     }
 }

@@ -1,29 +1,21 @@
 ﻿using System.Collections.Generic;
+using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared
 {
-    public enum AffinityCategory
-    {
-        Basic,
-        Bio,
-        Lifestyle,
-        Personality,
-        Interest
-    }
-
     public class AffinityVM
     {
-        public AffinityVM(AffinityCategory Category, string AttributeName, bool HaveAffinity, IEnumerable<int> ArrayEnums = default)
+        public AffinityVM(Section section, CompatibilityItem Item, bool HaveAffinity)
         {
-            this.Category = Category;
-            this.AttributeName = AttributeName;
+            this.Section = section;
+            this.Item = Item;
             this.HaveAffinity = HaveAffinity;
-            this.ArrayEnums = ArrayEnums;
+            //this.ArrayEnums = ArrayEnums;
         }
 
-        public AffinityCategory Category { get; set; }
-        public string AttributeName { get; set; }
+        public Section Section { get; set; }
+        public CompatibilityItem Item { get; set; }
         public bool HaveAffinity { get; set; }
-        public IEnumerable<int> ArrayEnums { get; set; }
+        //public IEnumerable<int> ArrayEnums { get; set; }
     }
 }

@@ -117,22 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LiveTogether_Description" xml:space="preserve">
-    <value>Para quem não pretende casar oficialmente, mas mesmo assim quer viver uma vida a dois (dependendo das leis/culturas vigentes no pais, isso também pode acarretar responsabilidades semelhantes a um casamento).</value>
+  <data name="Matchmaker_Description" xml:space="preserve">
+    <value>Você está em busca do seu parceiro ideal (durar a vida toda)? Com nosso exclusivo e avançado sistema de compatibilidade, garantimos uma taxa de sucesso maior que qualquer outro sistema/site/app no mundo.</value>
   </data>
-  <data name="LiveTogether_Name" xml:space="preserve">
-    <value>Morar juntos</value>
+  <data name="Matchmaker_Name" xml:space="preserve">
+    <value>Matchmaker</value>
   </data>
-  <data name="Married_Description" xml:space="preserve">
-    <value>Para quem pretende casar (vínculo estabelecido entre duas pessoas, através de reconhecimento governamental, cultural, religioso e/ou social).</value>
+  <data name="RelationshipAnalysis_Description" xml:space="preserve">
+    <value>Você já está em um relacionamento sério, noivado ou casamento e quer saber o quanto vocês são compatíveis? Quais os pontos fracos que precisam trabalhar para fortalecer a relação? Saiba tudo disso e muito mais.</value>
   </data>
-  <data name="Married_Name" xml:space="preserve">
-    <value>Casar</value>
-  </data>
-  <data name="Serious_Description" xml:space="preserve">
-    <value>Namoro sério é quando você está comprometido com uma pessoa. Você tem sentimentos por ela, e ela têm sentimentos por você. Por causa disso, você não está saindo com mais ninguém e espera um dia levar o relacionamento para o próximo nível.</value>
-  </data>
-  <data name="Serious_Name" xml:space="preserve">
-    <value>Relacionamento Sério</value>
+  <data name="RelationshipAnalysis_Name" xml:space="preserve">
+    <value>Relationship Analysis</value>
   </data>
 </root>

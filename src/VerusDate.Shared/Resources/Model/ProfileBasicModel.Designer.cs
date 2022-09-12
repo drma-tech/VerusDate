@@ -178,6 +178,15 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modality.
+        /// </summary>
+        internal static string Modality_Name {
+            get {
+                return ResourceManager.GetString("Modality_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nickname.
         /// </summary>
         internal static string NickName_Name {

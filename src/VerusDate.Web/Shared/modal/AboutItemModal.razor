@@ -1,0 +1,89 @@
+﻿@using System.Linq.Expressions;
+@typeparam TValue
+
+@if (!string.IsNullOrEmpty(FieldInfo))
+{
+    <Alert Visible="true" Color="Color.Info" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is3.FromBottom">
+        <AlertMessage>Por que é importante:</AlertMessage>
+        <AlertDescription>@FieldInfo</AlertDescription>
+    </Alert>
+}
+<Row Gutter="(8,0)">
+    <Column>
+        <Alert Visible="true" Color="Color.Secondary" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+            <AlertMessage>Seu perfil (ou preferências)</AlertMessage>
+        </Alert>
+        @if (PreferenceValues.Any())
+        {
+            @foreach (var item in PreferenceValues)
+            {
+                <Badge Color="Color.Secondary" Pill="true">
+                    @item
+                </Badge>
+            }
+        }
+        else
+        {
+            <Badge Color="Color.Secondary" Pill="true">
+                Não respondido
+            </Badge>
+        }
+    </Column>
+    <Column>
+        <Alert Visible="true" Color="Color.Secondary" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+            <AlertMessage>Compatibilidades esperadas</AlertMessage>
+        </Alert>
+        @if (ExpectedValues.Any())
+        {
+            foreach (var item in ExpectedValues)
+            {
+                <Badge Color="Color.Secondary" Pill="true">
+                    @item
+                </Badge>
+            }
+        }
+        else
+        {
+            <Badge Color="Color.Secondary" Pill="true">
+                Indefinido
+            </Badge>
+        }
+    </Column>
+</Row>
+<Alert Visible="true" Color="Color.Secondary" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+    <AlertMessage>Perfil do seu parceiro</AlertMessage>
+</Alert>
+@foreach (var item in ViewValues)
+{
+    if (item is Enum resultE)
+    {
+        <Badge Color="Color.Secondary" Pill="true">
+            @resultE.GetName()
+        </Badge>
+        <FieldHelp Style="display: inline;">@resultE.GetCustomAttribute().Description</FieldHelp>
+    }
+    else if (item != null)
+    {
+        <Badge Color="Color.Secondary" Pill="true">
+            @(item)
+        </Badge>
+    }
+    else
+    {
+        <Badge Color="Color.Secondary" Pill="true">
+            Não respondido
+        </Badge>
+    }
+}
+
+@code {
+    [Parameter] public List<string> PreferenceValues { get; set; }
+    [Parameter] public List<string> ExpectedValues { get; set; }
+    [Parameter] public IReadOnlyList<TValue> ViewValues { get; set; }
+
+    [Parameter] public CompatibilityType Type { get; set; }
+    [Parameter] public CompatibilityItem Item { get; set; }
+    [Parameter] public ProfileModel? User { get; set; }
+    [Parameter] public ProfilePreferenceModel? Pref { get; set; }
+    [Parameter] public string FieldInfo { get; set; }
+}

@@ -22,14 +22,14 @@ namespace VerusDate.Shared.Resources.Enum {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Intentions {
+    internal class Modality {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Intentions() {
+        internal Modality() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace VerusDate.Shared.Resources.Enum {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VerusDate.Shared.Resources.Enum.Intentions", typeof(Intentions).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VerusDate.Shared.Resources.Enum.Modality", typeof(Modality).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,38 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For those who do not intend to officially marry, but still want to live a life together (depending on the laws/cultures in force in the country, this can also entail responsibilities similar to a marriage)..
+        ///   Looks up a localized string similar to Você está em busca do seu parceiro ideal (durar a vida toda)? Com nosso exclusivo e avançado sistema de compatibilidade, garantimos uma taxa de sucesso maior que qualquer outro sistema/site/app no mundo..
         /// </summary>
-        internal static string LiveTogether_Description {
+        internal static string Matchmaker_Description {
             get {
-                return ResourceManager.GetString("LiveTogether_Description", resourceCulture);
+                return ResourceManager.GetString("Matchmaker_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live Together.
+        ///   Looks up a localized string similar to Matchmaker.
         /// </summary>
-        internal static string LiveTogether_Name {
+        internal static string Matchmaker_Name {
             get {
-                return ResourceManager.GetString("LiveTogether_Name", resourceCulture);
+                return ResourceManager.GetString("Matchmaker_Name", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For those who intend to marry (bond established between two people, through governmental, cultural, religious and/or social recognition)..
+        ///   Looks up a localized string similar to Você já está em um relacionamento sério, noivado ou casamento e quer saber o quanto vocês são compatíveis? Quais os pontos fracos que precisam trabalhar para fortalecer a relação? Saiba tudo disso e muito mais..
         /// </summary>
-        internal static string Married_Description {
+        internal static string RelationshipAnalysis_Description {
             get {
-                return ResourceManager.GetString("Married_Description", resourceCulture);
+                return ResourceManager.GetString("RelationshipAnalysis_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get Married.
+        ///   Looks up a localized string similar to Relationship Analysis.
         /// </summary>
-        internal static string Married_Name {
+        internal static string RelationshipAnalysis_Name {
             get {
-                return ResourceManager.GetString("Married_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Serious dating is when you’re committed to a person. You have feelings for them, and they have feelings for you. Because of this, you’re not seeing anyone else and you hope to one day take the relationship to the next level..
-        /// </summary>
-        internal static string Serious_Description {
-            get {
-                return ResourceManager.GetString("Serious_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Serious Relationship.
-        /// </summary>
-        internal static string Serious_Name {
-            get {
-                return ResourceManager.GetString("Serious_Name", resourceCulture);
+                return ResourceManager.GetString("RelationshipAnalysis_Name", resourceCulture);
             }
         }
     }

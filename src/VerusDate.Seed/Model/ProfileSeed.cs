@@ -139,7 +139,7 @@ namespace VerusDate.Seed.Model
                     p.Age = s.Random.Number(18, 100);
                     p.UpdatePhoto(GetProfilePhoto());
                     p.ActivityStatus = s.PickRandom<ActivityStatus>();
-                    p.Distance = s.Random.Number(1, 100);
+                    //p.Distance = s.Random.Number(1, 100);
                 });
         }
     }

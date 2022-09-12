@@ -3,57 +3,53 @@
 @inherits PageCore<Index>
 
 <Row Gutter="(8,0)">
-    <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is4.OnWidescreen">
-        <Card Margin="Margin.Is2.FromBottom">
-            <CardBody Padding="Padding.Is0">
-                <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1" ShowIndicators="imageDataUriGallery.Count() > 1">
-                    @foreach (var item in imageDataUriGallery)
+    <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is4.OnWidescreen.Is3.OnFullHD">
+        <Alert Visible="true" Color="Color.Dark"><AlertMessage>Seu Perfil (@profile.NickName)</AlertMessage></Alert>
+        <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1"
+                  ShowIndicators="imageDataUriGallery.Count() > 1" Margin="Margin.Is2.FromBottom">
+            @foreach (var item in imageDataUriGallery)
+            {
+                <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
+                    <Image Source="@item" Style="max-height: 450px !important;" />
+                </CarouselSlide>
+            }
+        </Carousel>
+        <Row Gutter="(8,0)">
+            <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
+                <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/Data">
+                    <Blazorise.Icon Name="FontAwesomeIcons.UserEdit"></Blazorise.Icon> Dados
+                    @if (profile?.DtInsert == null)
                     {
-                        <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
-                            <Image Source="@item" Style="max-height: 450px !important;" />
-                        </CarouselSlide>
+                        <Blazorise.Icon Name="FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Blazorise.Icon>
                     }
-                </Carousel>
-            </CardBody>
-            <CardBody>
-                <Row Gutter="(8,0)">
-                    <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
-                        <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/Data">
-                            <Blazorise.Icon Name="FontAwesomeIcons.UserEdit"></Blazorise.Icon> Dados
-                            @if (profile?.DtInsert == null)
-                            {
-                                <Blazorise.Icon Name="FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Blazorise.Icon>
-                            }
-                        </Button>
-                    </Column>
-                    <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
-                        <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/Preference">
-                            <Blazorise.Icon Name="FontAwesomeIcons.UserCheck"></Blazorise.Icon> Busca
-                            @if (profile?.Preference == null)
-                            {
-                                <Blazorise.Icon Name="FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Blazorise.Icon>
-                            }
-                        </Button>
-                    </Column>
-                    <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
-                        <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/Gallery">
-                            <Blazorise.Icon Name="FontAwesomeIcons.Portrait"></Blazorise.Icon> Fotos
-                            @if (profile?.Photo == null)
-                            {
-                                <Blazorise.Icon Name="FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Blazorise.Icon>
-                            }
-                        </Button>
-                    </Column>
-                    <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
-                        <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/Account">
-                            <Blazorise.Icon Name="FontAwesomeIcons.UserCog"></Blazorise.Icon> Conta
-                        </Button>
-                    </Column>
-                </Row>
-            </CardBody>
-        </Card>
+                </Button>
+            </Column>
+            <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
+                <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/Preference">
+                    <Blazorise.Icon Name="FontAwesomeIcons.UserCheck"></Blazorise.Icon> Busca
+                    @if (profile?.Preference == null)
+                    {
+                        <Blazorise.Icon Name="FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Blazorise.Icon>
+                    }
+                </Button>
+            </Column>
+            <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
+                <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/Gallery">
+                    <Blazorise.Icon Name="FontAwesomeIcons.Portrait"></Blazorise.Icon> Fotos
+                    @if (profile?.Photo == null)
+                    {
+                        <Blazorise.Icon Name="FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Blazorise.Icon>
+                    }
+                </Button>
+            </Column>
+            <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
+                <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/Account">
+                    <Blazorise.Icon Name="FontAwesomeIcons.UserCog"></Blazorise.Icon> Conta
+                </Button>
+            </Column>
+        </Row>
     </Column>
-    <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is8.OnWidescreen">
+    <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is8.OnWidescreen.Is9.OnFullHD">
         @*<Card Margin="Margin.Is2.FromBottom">
         <CardHeader>@Resources.CardHeader.ProfileIndexAchievements</CardHeader>
         <CardBody>
@@ -73,70 +69,193 @@
         </Row>
         </CardBody>
         </Card>*@
-        <Card Margin="Margin.Is2.FromBottom">
-            <CardHeader>
-                @string.Format(Resources.CardHeader.IndexHighlights, GetSuggestionTitle())
-            </CardHeader>
-            <CardBody>
-                @if (OptionsDestaques.HasCustomVisibility)
-                {
-                    <CustomVisibility Options="OptionsDestaques"></CustomVisibility>
-                }
-                else
-                {
-                    <Row Gutter="(8,0)">
-                        @foreach (var item in lstDestaques)
-                        {
-                            <Column ColumnSize="ColumnSize.Is1.OnFullHD.Is2.OnWidescreen.Is3.OnDesktop.Is4.OnMobile">
-                                <Blazorise.Link Clicked="@(async()=> await _PopupProfile.ShowModal(item.Id))" Style="cursor: pointer;">
-                                    <Card Margin="Margin.Is2.FromBottom.OnMobile.Is0.OnFullHD" Style="display:block; text-align:center;">
-                                        <Figure Margin="Margin.Is0" Size="FigureSize.Is64x64">
-                                            <FigureImage Source="@item.GetMainPhoto()" Rounded="true" AlternateText="Photo Image" />
-                                        </Figure>
-                                        <Badge Color="Color.Light" Style="font-size: 9px; position: absolute; top: 5px; left: 5px;">99 XP</Badge>
-                                        <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">
-                                            @item.NickName
-                                        </CardText>
+        @if (profile.Modality == Modality.Matchmaker)
+        {
+            <Card Margin="Margin.Is2.FromBottom">
+                <CardHeader>
+                    @string.Format(Resources.CardHeader.IndexHighlights, GetSuggestionTitle())
+                </CardHeader>
+                <CardBody>
+                    @if (OptionsDestaques.HasCustomVisibility)
+                    {
+                        <CustomVisibility Options="OptionsDestaques"></CustomVisibility>
+                    }
+                    else
+                    {
+                        <Row Gutter="(8,0)">
+                            @foreach (var item in lstDestaques)
+                            {
+                                @*<Column ColumnSize="ColumnSize.Is2.OnFullHD.Is3.OnWidescreen.Is4.OnDesktop.Is6.OnMobile">
+                    <Blazorise.Link Clicked="@(async()=> await _PopupProfile.ShowModal(item.Id))" Style="cursor: pointer;">
+                    <Card Margin="Margin.Is2.FromBottom.OnMobile.Is0.OnFullHD" Style="display:block; text-align:center;">
+                    <Figure Margin="Margin.Is0" Size="FigureSize.Is64x64">
+                    <FigureImage Source="@item.GetMainPhoto()" Rounded="true" AlternateText="Photo Image" />
+                    </Figure>
+                    <CardText Color="TextColor.Secondary" Alignment="TextAlignment.Center" Weight="TextWeight.Bold" Style="font-size: 11px;">
+                    @item.NickName
+                    </CardText>
+                    </Card>
+                    </Blazorise.Link>
+                    </Column>*@
+                                <Column ColumnSize="ColumnSize.Is2.OnFullHD.Is3.OnWidescreen.Is6.OnDesktop.Is6.OnMobile" Margin="Margin.Is1.FromBottom">
+                                    <Card Margin="Margin.Is2.FromBottom.OnMobile.Is0.OnFullHD">
+                                        <Blazorise.Link Clicked="@(async()=> await _PopupProfile.ShowModal(item.Id))" Style="cursor: pointer;">
+                                            <CardImage Source="@item.GetMainPhoto()" Alt="Photo Image"></CardImage>
+                                        </Blazorise.Link>
+                                        @*<Badge Color="Color.Success" Style="position: absolute; top: 10px; left: 10px; z-index: 2;">@(GetPercentAffinity(null) + "%")</Badge>
+                            <Badge Color="Color.Dark" Style="position: absolute; top: 10px; right: 10px; z-index: 2;">
+                            <Blazorise.Icon Name="FontAwesomeIcons.Camera"></Blazorise.Icon> @imageDataUriGallery.Count()
+                            </Badge>*@
+                                        <Badge Color="Color.Secondary" Style="position: absolute; bottom: 58px; left: 5px;">@item.NickName, @item.Age</Badge>
+                                        @if (item.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
+                                        {
+                                            <Badge Color="Color.Success" Style="position: absolute; top: 5px; left: 5px;" title="logado recentemente">
+                                                <Blazorise.Icon Name="FontAwesomeIcons.DotCircle"></Blazorise.Icon>
+                                            </Badge>
+                                        }
+                                        else if (item.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
+                                        {
+                                            <Badge Color="Color.Warning" Style="position: absolute; top: 5px; left: 5px;" title="logado essa semana">
+                                                <Blazorise.Icon Name="FontAwesomeIcons.DotCircle"></Blazorise.Icon>
+                                            </Badge>
+                                        }
+                                        else if (item.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
+                                        {
+                                            <Badge Color="Color.Danger" Style="position: absolute; top: 5px; left: 5px;" title="logado esse mês">
+                                                <Blazorise.Icon Name="FontAwesomeIcons.DotCircle"></Blazorise.Icon>
+                                            </Badge>
+                                        }
+                                        else
+                                        {
+                                            <Badge Color="Color.Dark" Style="position: absolute; top: 5px; left: 5px;" title="usuário desativado">
+                                                <Blazorise.Icon Name="FontAwesomeIcons.DotCircle"></Blazorise.Icon>
+                                            </Badge>
+                                        }
+                                        <CardBody Padding="Padding.Is2" Style="text-align: center;">
+                                            <BtnDeslike IdUserView="@item.Id"></BtnDeslike>
+
+                                            <BtnLike IdUserView="@item.Id"></BtnLike>
+                                        </CardBody>
                                     </Card>
-                                </Blazorise.Link>
-                            </Column>
-                        }
+                                </Column>
+                            }
+                        </Row>
+                    }
+                </CardBody>
+            </Card>
+            <Card Margin="Margin.Is2.FromBottom">
+                <CardHeader>@Resources.CardHeader.ProfileIndexInteractions</CardHeader>
+                <CardBody>
+                    <Row Gutter="(8,0)">
+                        <Column ColumnSize="ColumnSize.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                            <Tooltip Text="ver caixa de mensagens" Multiline="true" Fade="true" Style="display: block;">
+                                <Button Color="Color.Primary" Type="ButtonType.Link" Block="true" To="/Profile/Interactions" Disabled="true">
+                                    <Blazorise.Icon Name="FontAwesomeIcons.Comments"></Blazorise.Icon> Mensagens
+                                    <Badge Color="Color.Light">0</Badge>
+                                    <Badge Color="Color.Danger">0</Badge>
+                                </Button>
+                            </Tooltip>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                            <Tooltip Text="ver likes recebidos" Multiline="true" Fade="true" Style="display: block;">
+                                <Button Color="Color.Primary" Type="ButtonType.Link" Block="true" To="/Profile/Interactions" Disabled="true">
+                                    <Blazorise.Icon Name="FontAwesomeIcons.ThumbsUp"></Blazorise.Icon> Likes
+                                    <Badge Color="Color.Light">0</Badge>
+                                </Button>
+                            </Tooltip>
+                        </Column>
+                        <Column ColumnSize="ColumnSize.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
+                            <Tooltip Text="ver piscadinhas recebidas" Multiline="true" Fade="true" Style="display: block;">
+                                <Button Color="Color.Primary" Type="ButtonType.Link" Block="true" To="/Profile/Interactions" Disabled="true">
+                                    <Blazorise.Icon Name="FontAwesomeIcons.KissWinkHeart"></Blazorise.Icon> Piscadinhas
+                                    <Badge Color="Color.Light">0</Badge>
+                                </Button>
+                            </Tooltip>
+                        </Column>
                     </Row>
-                }
-            </CardBody>
-        </Card>
-        <Card Margin="Margin.Is2.FromBottom">
-            <CardHeader>@Resources.CardHeader.ProfileIndexInteractions</CardHeader>
-            <CardBody>
-                <Row Gutter="(8,0)">
-                    <Column ColumnSize="ColumnSize.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
-                        <Tooltip Text="ver caixa de mensagens" Multiline="true" Fade="true" Style="display: block;">
-                            <Button Color="Color.Primary" Type="ButtonType.Link" Block="true" To="/Profile/Interactions" Disabled="true">
-                                <Blazorise.Icon Name="FontAwesomeIcons.Comments"></Blazorise.Icon> Mensagens
-                                <Badge Color="Color.Light">0</Badge>
-                                <Badge Color="Color.Danger">0</Badge>
-                            </Button>
-                        </Tooltip>
-                    </Column>
-                    <Column ColumnSize="ColumnSize.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
-                        <Tooltip Text="ver likes recebidos" Multiline="true" Fade="true" Style="display: block;">
-                            <Button Color="Color.Primary" Type="ButtonType.Link" Block="true" To="/Profile/Interactions" Disabled="true">
-                                <Blazorise.Icon Name="FontAwesomeIcons.ThumbsUp"></Blazorise.Icon> Likes
-                                <Badge Color="Color.Light">0</Badge>
-                            </Button>
-                        </Tooltip>
-                    </Column>
-                    <Column ColumnSize="ColumnSize.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
-                        <Tooltip Text="ver piscadinhas recebidas" Multiline="true" Fade="true" Style="display: block;">
-                            <Button Color="Color.Primary" Type="ButtonType.Link" Block="true" To="/Profile/Interactions" Disabled="true">
-                                <Blazorise.Icon Name="FontAwesomeIcons.KissWinkHeart"></Blazorise.Icon> Piscadinhas
-                                <Badge Color="Color.Light">0</Badge>
-                            </Button>
-                        </Tooltip>
-                    </Column>
-                </Row>
-            </CardBody>
-        </Card>
+                </CardBody>
+            </Card>
+        }
+        else if (profile.Modality == Modality.RelationshipAnalysis)
+        {
+            <Alert Visible="true" Color="Color.Dark"><AlertMessage>Seu Parceiro (@view?.NickName)</AlertMessage></Alert>
+
+            <Row Gutter="(8,0)">
+                <Column ColumnSize="ColumnSize.IsFull.OnDesktop.Is4.OnFullHD">
+                    <Card Margin="Margin.Is2.FromBottom">
+                        <CardBody Padding="Padding.Is0">
+                            @if (view != null)
+                            {
+                                @*<Badge Color="GetColor(totPercAff)" Style="position: absolute; top: 10px; left: 10px; z-index: 2;">@(totPercAff + "%")</Badge>
+                                <Badge Color="Color.Dark" Style="position: absolute; top: 10px; right: 10px; z-index: 2;">
+                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Blazorise.Icon> @imageDataUriGallery.Count()
+                                </Badge>*@
+                                <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1" ShowIndicators="imageDataUriGallery.Count() > 1">
+                                    @foreach (var item in imageDataUriGallery)
+                                    {
+                                        <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
+                                            <Image Source="@item" Style="max-height: 450px !important;" />
+                                        </CarouselSlide>
+                                    }
+                                </Carousel>
+                            }
+                        </CardBody>
+                        <CardBody>
+                            @if (view != null)
+                            {
+                                <Badge Color="Color.Secondary">
+                                    @view.NickName
+                                </Badge>
+                                <Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd">
+                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view?.GetLocation(ProfileModel.LocationType.City)
+                                </Badge>
+                                @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
+                                {
+                                    <Badge Color="Color.Success">
+                                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado hoje
+                                    </Badge>
+                                }
+                                else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
+                                {
+                                    <Badge Color="Color.Warning">
+                                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado esta semana
+                                    </Badge>
+                                }
+                                else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
+                                {
+                                    <Badge Color="Color.Danger">
+                                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado este mês
+                                    </Badge>
+                                }
+                                else
+                                {
+                                    <Badge Color="Color.Dark">
+                                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> usuário desativado
+                                    </Badge>
+                                }
+                                @if (view.Reports.Any())
+                                {
+                                    <Paragraph Margin="Margin.Is0.FromTop.Is0.FromBottom">
+                                        @foreach (var item in view?.Reports)
+                                        {
+                                            <Badge Color="Color.Warning" Style="cursor: help;">
+                                                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon> @item.Type.GetName()
+                                            </Badge>
+                                        }
+                                    </Paragraph>
+                                }
+                            }
+                        </CardBody>
+                    </Card>
+                   
+                </Column>
+                <Column ColumnSize="ColumnSize.IsFull.OnDesktop.Is8.OnFullHD">
+                    <VerusDate.Web.Shared.Card.CardCompatibility User="profile" View="view" Affinities="affinities"></VerusDate.Web.Shared.Card.CardCompatibility>
+                </Column>
+            </Row>
+
+            <VerusDate.Web.Shared.modal.ProfileReport @ref="report"></VerusDate.Web.Shared.modal.ProfileReport>
+        }
     </Column>
 </Row>
 
@@ -147,8 +266,12 @@
     public PopupProfile _PopupProfile { get; set; }
 
     private ProfileModel profile = new();
+    private ProfileView view;
+    private List<AffinityVM> affinities = new();
     //private ProfileGamificationModel gamification = new();
     private List<ProfileSearch> lstDestaques = new();
+
+    private Shared.modal.ProfileReport report;
 
     string selectedImage;
     string[] imageDataUriGallery = new string[] { };
@@ -170,8 +293,13 @@
         if (ComponenteUtils.IsAuthenticated)
         {
             //lstDestaques = await Http.Public_ListDestaques(SessionStorage);
+            //lstDestaques = await Http.Profile_ListSearch(SessionStorage);
             profile = await Http.Profile_Get(SessionStorage);
             //gamification = profile?.Gamification;
+
+            view = await Http.Profile_GetView(SessionStorage, "5e14a3bfd4be46b5a047130baabf6af9");
+
+            affinities = AffinityCore.GetAffinity(profile, view);
 
             if (profile != null)
             {
@@ -182,7 +310,7 @@
                 imageDataUriGallery = new string[] { ImageHelper.GetNoUserPhoto };
             }
 
-            selectedImage = imageDataUriGallery?.FirstOrDefault();
+            selectedImage = imageDataUriGallery.First();
         }
     }
 

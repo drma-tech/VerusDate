@@ -117,22 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LiveTogether_Description" xml:space="preserve">
-    <value>Para quem não pretende casar oficialmente, mas mesmo assim quer viver uma vida a dois (dependendo das leis/culturas vigentes no pais, isso também pode acarretar responsabilidades semelhantes a um casamento).</value>
+  <data name="NeverRarely_Description" xml:space="preserve">
+    <value>Alguém que não viaja ou viaja com pouca frequência (geralmente nas férias ou em situações específicas)</value>
   </data>
-  <data name="LiveTogether_Name" xml:space="preserve">
-    <value>Morar juntos</value>
+  <data name="NeverRarely_Name" xml:space="preserve">
+    <value>Nunca / Raramente</value>
   </data>
-  <data name="Married_Description" xml:space="preserve">
-    <value>Para quem pretende casar (vínculo estabelecido entre duas pessoas, através de reconhecimento governamental, cultural, religioso e/ou social).</value>
+  <data name="SometimesFrequently_Description" xml:space="preserve">
+    <value>Uma pessoa que viaja com uma certa frequência (entre 30% e 70% do seu tempo), seja por conta do trabalho ou a lazer nos finais de semana</value>
   </data>
-  <data name="Married_Name" xml:space="preserve">
-    <value>Casar</value>
+  <data name="SometimesFrequently_Name" xml:space="preserve">
+    <value>Às vezes / Frequentemente</value>
   </data>
-  <data name="Serious_Description" xml:space="preserve">
-    <value>Namoro sério é quando você está comprometido com uma pessoa. Você tem sentimentos por ela, e ela têm sentimentos por você. Por causa disso, você não está saindo com mais ninguém e espera um dia levar o relacionamento para o próximo nível.</value>
+  <data name="UsuallyAlwaysNomad_Description" xml:space="preserve">
+    <value>It is someone who is constantly on the move (often has no permanent residency), such as a rock star who spends 365 days a year in tour buses and hotel rooms or a digital nomad who works online and has the geographic freedom to live wherever he wants.</value>
   </data>
-  <data name="Serious_Name" xml:space="preserve">
-    <value>Relacionamento Sério</value>
+  <data name="UsuallyAlwaysNomad_Name" xml:space="preserve">
+    <value>Normalmente / Sempre / Nômade</value>
   </data>
 </root>

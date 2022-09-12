@@ -8,202 +8,202 @@ namespace VerusDate.Shared.Enum
     public enum Vacation
     {
         [Custom(Name = "AdventureTours_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        AdventureTours,
+        AdventureTours = 1,
 
         [Custom(Name = "Agriculture_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Agriculture,
+        Agriculture = 2,
 
         [Custom(Name = "Animals_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Animals,
+        Animals = 3,
 
         [Custom(Name = "ArtTourism_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        ArtTourism,
+        ArtTourism = 4,
 
         [Custom(Name = "Backpacking_Name", Description = "Backpacking_Description", ResourceType = typeof(Resources.Enum.Vacation))]
-        Backpacking,
+        Backpacking = 5,
 
         [Custom(Name = "Beach_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Beach,
+        Beach = 6,
 
         [Custom(Name = "BoatTours_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        BoatTours,
+        BoatTours = 7,
 
         [Custom(Name = "BusTours_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        BusTours,
+        BusTours = 8,
 
         [Custom(Name = "CampingGlamping_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        CampingGlamping,
+        CampingGlamping = 9,
 
         [Custom(Name = "CityBreak_Name", Description = "CityBreak_Description", ResourceType = typeof(Resources.Enum.Vacation))]
-        CityBreak,
+        CityBreak = 10,
 
         [Custom(Name = "Classes_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Classes,
+        Classes = 11,
 
         [Custom(Name = "ClimbingMountaineering_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        ClimbingMountaineering,
+        ClimbingMountaineering = 12,
 
         [Custom(Name = "Concerts_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Concerts,
+        Concerts = 13,
 
         [Custom(Name = "Conferences_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Conferences,
+        Conferences = 14,
 
         [Custom(Name = "Cottages_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Cottages,
+        Cottages = 15,
 
         [Custom(Name = "CouchSurfing_Name", Description = "CouchSurfing_Description", ResourceType = typeof(Resources.Enum.Vacation))]
-        CouchSurfing,
+        CouchSurfing = 16,
 
         [Custom(Name = "CreativeWork_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        CreativeWork,
+        CreativeWork = 17,
 
         [Custom(Name = "CruiseHolidays_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        CruiseHolidays,
+        CruiseHolidays = 18,
 
         [Custom(Name = "CulturalTourism_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        CulturalTourism,
+        CulturalTourism = 19,
 
         [Custom(Name = "CyclingTour_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        CyclingTour,
+        CyclingTour = 20,
 
         [Custom(Name = "DivingSnorkeling_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        DivingSnorkeling,
+        DivingSnorkeling = 21,
 
         [Custom(Name = "DIYProjects_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        DIYProjects,
+        DIYProjects = 22,
 
         [Custom(Name = "FamilyVisits_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        FamilyVisits,
+        FamilyVisits = 23,
 
         [Custom(Name = "FilmTourism_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        FilmTourism,
+        FilmTourism = 24,
 
         [Custom(Name = "Fishing_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Fishing,
+        Fishing = 25,
 
         [Custom(Name = "FitnessVacations_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        FitnessVacations,
+        FitnessVacations = 26,
 
         [Custom(Name = "Golf_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Golf,
+        Golf = 27,
 
         [Custom(Name = "Gourmet_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Gourmet,
+        Gourmet = 28,
 
         [Custom(Name = "HighCulture_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        HighCulture,
+        HighCulture = 29,
 
         [Custom(Name = "Hiking_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Hiking,
+        Hiking = 30,
 
         [Custom(Name = "HistoricalSites_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        HistoricalSites,
+        HistoricalSites = 31,
 
         [Custom(Name = "Hobbies_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Hobbies,
+        Hobbies = 32,
 
         [Custom(Name = "HomeImprovement_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        HomeImprovement,
+        HomeImprovement = 33,
 
         [Custom(Name = "Homecoming_Name", Description = "Homecoming_Description", ResourceType = typeof(Resources.Enum.Vacation))]
-        Homecoming,
+        Homecoming = 34,
 
         [Custom(Name = "HomeSwap_Name", Description = "HomeSwap_Description", ResourceType = typeof(Resources.Enum.Vacation))]
-        HomeSwap,
+        HomeSwap = 35,
 
         [Custom(Name = "HorseRiding_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        HorseRiding,
+        HorseRiding = 36,
 
         [Custom(Name = "InternationalTravel_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        InternationalTravel,
+        InternationalTravel = 37,
 
         [Custom(Name = "JustStayingHome_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        JustStayingHome,
+        JustStayingHome = 38,
 
         [Custom(Name = "LuxuryTravel_Name", Description = "LuxuryTravel_Description", ResourceType = typeof(Resources.Enum.Vacation))]
-        LuxuryTravel,
+        LuxuryTravel = 39,
 
         [Custom(Name = "MotorSports_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        MotorSports,
+        MotorSports = 40,
 
         [Custom(Name = "MountainsLakes_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        MountainsLakes,
+        MountainsLakes = 41,
 
         [Custom(Name = "MusicEventsFestivals_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        MusicEventsFestivals,
+        MusicEventsFestivals = 42,
 
         [Custom(Name = "NatureNationalParks_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        NatureNationalParks,
+        NatureNationalParks = 43,
 
         [Custom(Name = "Nightlife_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Nightlife,
+        Nightlife = 44,
 
         [Custom(Name = "Photography_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Photography,
+        Photography = 45,
 
         [Custom(Name = "PopCulture_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        PopCulture,
+        PopCulture = 46,
 
         [Custom(Name = "RVRoadTrips_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        RVRoadTrips,
+        RVRoadTrips = 47,
 
         [Custom(Name = "RelaxingWellness_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        RelaxingWellness,
+        RelaxingWellness = 48,
 
         [Custom(Name = "ReligionSpirituality_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        ReligionSpirituality,
+        ReligionSpirituality = 49,
 
         [Custom(Name = "Resorts_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Resorts,
+        Resorts = 50,
 
         [Custom(Name = "Retreats_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Retreats,
+        Retreats = 51,
 
         [Custom(Name = "Reunions_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Reunions,
+        Reunions = 52,
 
         [Custom(Name = "Romantic_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Romantic,
+        Romantic = 53,
 
         [Custom(Name = "Safaris_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Safaris,
+        Safaris = 54,
 
         [Custom(Name = "Sailing_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Sailing,
+        Sailing = 55,
 
         [Custom(Name = "Science_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Science,
+        Science = 56,
 
         [Custom(Name = "Shopping_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Shopping,
+        Shopping = 57,
 
         [Custom(Name = "SightseeingGuidedTours_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        SightseeingGuidedTours,
+        SightseeingGuidedTours = 58,
 
         [Custom(Name = "SnowboardSki_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        SnowboardSki,
+        SnowboardSki = 59,
 
         [Custom(Name = "SoloTravel_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        SoloTravel,
+        SoloTravel = 60,
 
         [Custom(Name = "SportsEvents_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        SportsEvents,
+        SportsEvents = 61,
 
         [Custom(Name = "Stargazing_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Stargazing,
+        Stargazing = 62,
 
         [Custom(Name = "ThemeParks_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        ThemeParks,
+        ThemeParks = 63,
 
         [Custom(Name = "TrainTravel_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        TrainTravel,
+        TrainTravel = 64,
 
         [Custom(Name = "Volunteering_Name", ResourceType = typeof(Resources.Enum.Vacation))]
-        Volunteering,
+        Volunteering = 65,
 
         [Custom(Name = "Working_Name", Description = "Working_Description", ResourceType = typeof(Resources.Enum.Vacation))]
-        Working,
+        Working = 66,
     }
 
     public enum HolidaysOld

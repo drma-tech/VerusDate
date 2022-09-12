@@ -52,51 +52,51 @@ namespace VerusDate.Shared.Model
         [Custom(Name = "Altura (Min - Máx)")]
         public Height? MaxHeight { get; set; }
 
+        [Custom(Name = "Neurodiversity")]
+        public IReadOnlyList<Neurodiversity> Neurodiversities { get; set; } = Array.Empty<Neurodiversity>();
+
+        [Custom(Name = "Disabilities")]
+        public IReadOnlyList<Disability> Disabilities { get; set; } = Array.Empty<Disability>();
+
         #endregion BIO
 
         #region LIFESTYLE
 
         [Custom(Name = "Drink_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
-        public IReadOnlyList<Drink> Drink { get; set; }
+        public IReadOnlyList<Drink> Drink { get; set; } = Array.Empty<Drink>();
 
         [Custom(Name = "Smoke_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
-        public IReadOnlyList<Smoke> Smoke { get; set; }
+        public IReadOnlyList<Smoke> Smoke { get; set; } = Array.Empty<Smoke>();
 
         [Custom(Name = "Diet_Name", Description = "Diet_Description", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
-        public IReadOnlyList<Diet> Diet { get; set; }
+        public IReadOnlyList<Diet> Diet { get; set; } = Array.Empty<Diet>();
 
         [Custom(Name = "HaveChildren_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
-        public IReadOnlyList<HaveChildren> HaveChildren { get; set; }
+        public IReadOnlyList<HaveChildren> HaveChildren { get; set; } = Array.Empty<HaveChildren>();
 
         [Custom(Name = "WantChildren_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
-        public IReadOnlyList<WantChildren> WantChildren { get; set; }
+        public IReadOnlyList<WantChildren> WantChildren { get; set; } = Array.Empty<WantChildren>();
 
         [Custom(Name = "EducationLevel_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
-        public IReadOnlyList<EducationLevel> EducationLevel { get; set; }
+        public IReadOnlyList<EducationLevel> EducationLevel { get; set; } = Array.Empty<EducationLevel>();
 
         [Custom(Name = "CareerCluster_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
-        public IReadOnlyList<CareerCluster> CareerCluster { get; set; }
+        public IReadOnlyList<CareerCluster> CareerCluster { get; set; } = Array.Empty<CareerCluster>();
 
         [Custom(Name = "Religion_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
-        public IReadOnlyList<Religion> Religion { get; set; }
+        public IReadOnlyList<Religion> Religion { get; set; } = Array.Empty<Religion>();
 
         [Custom(Name = "Travel Frequency")]
-        public IReadOnlyList<TravelFrequency> TravelFrequency { get; set; }
+        public IReadOnlyList<TravelFrequency> TravelFrequency { get; set; } = Array.Empty<TravelFrequency>();
 
         #endregion LIFESTYLE
 
-        #region OTHERS
+        #region PERSONALITY
 
         [Custom(Name = "SexPersonalityPreferences_Name", Description = "SexPersonalityPreferences_Description", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
         public IReadOnlyList<SexPersonality> SexPersonality { get; set; } = Array.Empty<SexPersonality>();
 
-        [Custom(Name = "Neurodiversity")]
-        public Neurodiversity? Neurodiversity { get; set; }
-
-        [Custom(Name = "Disabilities")]
-        public IReadOnlyList<Disability> Disabilities { get; set; }
-
-        #endregion OTHERS
+        #endregion PERSONALITY
 
         public void UpdateData(ProfilePreferenceModel vm)
         {
@@ -114,6 +114,20 @@ namespace VerusDate.Shared.Model
             MaxHeight = vm.MaxHeight;
             RaceCategory = vm.RaceCategory;
             BodyMass = vm.BodyMass;
+            Neurodiversities = vm.Neurodiversities;
+            Disabilities = vm.Disabilities;
+            //LIFESTYLE
+            Drink = vm.Drink;
+            Smoke = vm.Smoke;
+            Diet = vm.Diet;
+            HaveChildren = vm.HaveChildren;
+            WantChildren = vm.WantChildren;
+            EducationLevel = vm.EducationLevel;
+            CareerCluster = vm.CareerCluster;
+            Religion = vm.Religion;
+            TravelFrequency = vm.TravelFrequency;
+            //PERSONALITY
+            SexPersonality = vm.SexPersonality;
         }
     }
 }

@@ -23,10 +23,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Function\InteractionFunction.cs" />
+    <Compile Remove="Function\PublicFunction.cs" />
     <Compile Remove="Function\SignalRFunction.cs" />
     <Compile Remove="Function\StoreFunction.cs" />
     <Compile Remove="Mediator\Behavior\UserSessionBehavior.cs" />
     <Compile Remove="Mediator\Command\Profile\UploadPhotoValidationCommand.cs" />
+    <Compile Remove="Mediator\Queries\Profile\ProfileGetDestaquesCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.13.1" />

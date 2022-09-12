@@ -43,24 +43,25 @@ namespace VerusDate.Api.Mediator.Queries.Profile
 
             if (looking == null) throw new NotificationException("Critérios de busca ainda não definidos");
 
-            var typeDistance = DistanceType.Km;
-            var valueCalDistance = typeDistance == DistanceType.Km ? 1000 : 1609;
+            //var typeDistance = DistanceType.Km;
+            //var valueCalDistance = typeDistance == DistanceType.Km ? 1000 : 1609;
 
             var SQL = new StringBuilder();
             var filter = new Dictionary<string, object>();
 
-            SQL.Append("SELECT TOP 20 ");
+            SQL.Append("SELECT TOP 10 ");
             SQL.Append("	c.key as id ");
-            SQL.Append("  , c.basic.nickName ");
-            SQL.Append("  , c.bio.birthDate ");
-            SQL.Append("  , c.looking ");
+            SQL.Append("  , c.nickName ");
+            //SQL.Append("  , c.birthDate ");
+            SQL.Append("  , TRUNC(DateTimeDiff('month',c.birthDate,GetCurrentDateTime())/12) Age ");
+            //SQL.Append("  , c.looking ");
             SQL.Append("  , c.photo ");
             SQL.Append("  , c.dtLastLogin >= DateTimeAdd('d',-1,GetCurrentDateTime()) ? 1 ");
             SQL.Append("        : c.dtLastLogin >= DateTimeAdd('d',-7,GetCurrentDateTime()) ? 2 ");
             SQL.Append("        : c.dtLastLogin >= DateTimeAdd('m',-1,GetCurrentDateTime()) ? 3 ");
             SQL.Append("        : 4 ");
             SQL.Append("    as ActivityStatus ");
-            SQL.Append("  , ROUND(ST_DISTANCE({'type': 'Point', 'coordinates':[@latitude, @longitude]},{'type': 'Point', 'coordinates':[c.basic.latitude, c.basic.longitude]}) / @valueCalDistance) as Distance ");
+            //SQL.Append("  , ROUND(ST_DISTANCE({'type': 'Point', 'coordinates':[@latitude, @longitude]},{'type': 'Point', 'coordinates':[c.basic.latitude, c.basic.longitude]}) / @valueCalDistance) as Distance ");
             SQL.Append("FROM ");
             SQL.Append("	c ");
             SQL.Append("WHERE ");
@@ -91,41 +92,39 @@ namespace VerusDate.Api.Mediator.Queries.Profile
             //filter.Add("@distance", user.Preference.Distance);
             //}
 
-            SQL.AddEnumFilter(looking.CurrentSituation, "c.basic.currentSituation");
+            SQL.AddEnumFilter(looking.CurrentSituation, "c.currentSituation");
 
-            SQL.AddArrayFilter(user.Intentions, "c.basic.intentions");
+            SQL.AddArrayFilter(user.Intentions, "c.intentions");
 
-            SQL.AddEnumFilter(looking.BiologicalSex, "c.basic.biologicalSex");
+            SQL.AddEnumFilter(looking.BiologicalSex, "c.biologicalSex");
 
-            SQL.AddEnumFilter(looking.GenderIdentity, "c.basic.genderIdentity");
+            SQL.AddEnumFilter(looking.GenderIdentity, "c.genderIdentity");
 
-            SQL.AddEnumFilter(looking.SexualOrientation, "c.basic.sexualOrientation");
+            SQL.AddEnumFilter(looking.SexualOrientation, "c.sexualOrientation");
 
-            SQL.AddEnumFilter(looking.SexualOrientation, "c.basic.sexualOrientation");
-
-            SQL.AddArrayFilter(looking.Languages, "c.basic.languages");
+            SQL.AddArrayFilter(looking.Languages, "c.languages");
 
             // *** BIO ***
 
-            SQL.Append("    AND TRUNC(DateTimeDiff('month',c.bio.birthDate,GetCurrentDateTime())/12) >= @minAge ");
-            SQL.Append("    AND TRUNC(DateTimeDiff('month',c.bio.birthDate,GetCurrentDateTime())/12) <= @maxAge ");
+            SQL.Append("    AND TRUNC(DateTimeDiff('month',c.birthDate,GetCurrentDateTime())/12) >= @minAge ");
+            SQL.Append("    AND TRUNC(DateTimeDiff('month',c.birthDate,GetCurrentDateTime())/12) <= @maxAge ");
             filter.Add("@minAge", user.Preference.MinimalAge);
             filter.Add("@maxAge", user.Preference.MaxAge);
 
             if (looking.MinimalHeight.HasValue)
             {
-                SQL.Append("	AND c.bio.height >= @MinimalHeight ");
+                SQL.Append("	AND c.height >= @MinimalHeight ");
                 filter.Add("@MinimalHeight", (int)looking.MinimalHeight.Value);
             }
             if (looking.MaxHeight.HasValue)
             {
-                SQL.Append("	AND c.bio.height <= @MaxHeight ");
+                SQL.Append("	AND c.height <= @MaxHeight ");
                 filter.Add("@MaxHeight", (int)looking.MaxHeight.Value);
             }
 
-            SQL.AddEnumFilter(looking.RaceCategory, "c.bio.raceCategory");
+            SQL.AddEnumFilter(looking.RaceCategory, "c.raceCategory");
 
-            SQL.AddEnumFilter(looking.BodyMass, "c.bio.bodyMass");
+            SQL.AddEnumFilter(looking.BodyMass, "c.bodyMass");
 
             // *** LIFESTYLE ***
 

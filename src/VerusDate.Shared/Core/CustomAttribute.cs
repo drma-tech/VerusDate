@@ -18,6 +18,8 @@ namespace VerusDate.Shared.Core
 
         public string Prompt { get; set; }
 
+        public string FieldInfo { get; set; }
+
         /// <summary>
         /// Translations resource file
         /// </summary>
@@ -67,6 +69,7 @@ namespace VerusDate.Shared.Core
                 if (!string.IsNullOrEmpty(attr.Description)) attr.Description = rm.GetString(attr.Description) ?? attr.Description + " (error)";
                 if (!string.IsNullOrEmpty(attr.Group)) attr.Group = rm.GetString(attr.Group);
                 if (!string.IsNullOrEmpty(attr.Prompt)) attr.Prompt = rm.GetString(attr.Prompt).Replace(@"\n", Environment.NewLine);
+                if (!string.IsNullOrEmpty(attr.FieldInfo)) attr.FieldInfo = rm.GetString(attr.FieldInfo) ?? attr.FieldInfo + " (error)";
             }
 
             return attr;

@@ -19,7 +19,7 @@ namespace VerusDate.Shared.Model
 
         #region BASIC
 
-        [Custom(Name = "Modality", Prompt = "Modality")]
+        [Custom(Name = "Modality_Name", ResourceType = typeof(Resources.Model.ProfileBasicModel))]
         public Modality? Modality { get; set; }
 
         [Custom(Name = "NickName_Name", Prompt = "NickName_Prompt", ResourceType = typeof(Resources.Model.ProfileBasicModel))]
@@ -62,10 +62,17 @@ namespace VerusDate.Shared.Model
         [Custom(Name = "BirthDate_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
         public DateTime BirthDate { get; set; }
 
+        [Custom(Name = "Zodiac_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
         public Zodiac Zodiac { get; set; }
 
         [Custom(Name = "Height_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
         public Height? Height { get; set; }
+
+        [Custom(Name = "Neurodiversity_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
+        public Neurodiversity? Neurodiversity { get; set; }
+
+        [Custom(Name = "Disabilities_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
+        public IReadOnlyList<Disability> Disabilities { get; set; } = Array.Empty<Disability>();
 
         #endregion BIO
 
@@ -117,7 +124,8 @@ namespace VerusDate.Shared.Model
         [Custom(Name = "LoveLanguage_Name", Description = "LoveLanguage_Description", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
         public LoveLanguage? LoveLanguage { get; set; }
 
-        [Custom(Name = "SexPersonality_Name", Description = "SexPersonality_Description", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        //[Custom(Name = "SexPersonality_Name", Description = "SexPersonality_Description", FieldInfo = "Sexual compatibility is paramount to healthy relationships. We tend to push it aside in favor of other positive personal qualities such as kindness, a good sense of humor, etc. To be clear, sex isn't the most important thing in a relationship, but research tells us couples that are more happy with their sex life are more happy with their relationship overall. When your sexual interests don't align with your partner's and a satisfying sex life is hard to access together, you're not going to have a very happy partnership.", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        [Custom(Name = "SexPersonality_Name", Description = "SexPersonality_Description", FieldInfo = "A compatibilidade sexual é primordial para relacionamentos saudáveis. Nós tendemos a deixar isso de lado em favor de outras qualidades pessoais positivas, como gentileza, bom senso de humor, etc. Para ser claro, sexo não é a coisa mais importante em um relacionamento, mas pesquisas nos dizem que casais são mais felizes com sua vida sexual são mais felizes com seu relacionamento em geral. Quando os seus interesses sexuais não se alinham com os do seu parceiro e uma vida sexual satisfatória é difícil de alcançar juntos, você não terá uma parceria muito feliz.", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
         public SexPersonality? SexPersonality { get; set; }
 
         #endregion PERSONALITY
@@ -149,16 +157,6 @@ namespace VerusDate.Shared.Model
         public IReadOnlyList<ReadingGenre> ReadingGenre { get; set; } = Array.Empty<ReadingGenre>();
 
         #endregion INTEREST
-
-        #region OTHER
-
-        [Custom(Name = "Neurodiversity")]
-        public Neurodiversity? Neurodiversity { get; set; }
-
-        [Custom(Name = "Disabilities")]
-        public IReadOnlyList<Disability> Disabilities { get; set; }
-
-        #endregion OTHER
 
         public ProfilePreferenceModel Preference { get; set; }
 
@@ -342,7 +340,8 @@ namespace VerusDate.Shared.Model
     public class ProfileView : ProfileModel
     {
         public ActivityStatus ActivityStatus { get; set; }
-        public double Distance { get; set; }
+
+        [Custom(Name = "Age_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
         public int Age { get; set; }
     }
 }

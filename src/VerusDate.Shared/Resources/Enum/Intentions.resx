@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LiveTogether_Description" xml:space="preserve">
-    <value>Live together in a short/medium period of time.</value>
+    <value>For those who do not intend to officially marry, but still want to live a life together (depending on the laws/cultures in force in the country, this can also entail responsibilities similar to a marriage).</value>
   </data>
   <data name="LiveTogether_Name" xml:space="preserve">
     <value>Live Together</value>
   </data>
   <data name="Married_Description" xml:space="preserve">
-    <value>For those who intend to marry (bond established between two people, through governmental, cultural, religious or social recognition).</value>
+    <value>For those who intend to marry (bond established between two people, through governmental, cultural, religious and/or social recognition).</value>
   </data>
   <data name="Married_Name" xml:space="preserve">
     <value>Get Married</value>

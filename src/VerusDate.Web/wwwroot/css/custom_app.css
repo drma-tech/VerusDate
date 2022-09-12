@@ -100,3 +100,8 @@
 .modal-footer {
     padding: 0.5rem !important;
 }
+
+.alert {
+    padding: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}

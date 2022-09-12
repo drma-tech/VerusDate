@@ -1,0 +1,152 @@
+﻿@inherits ComponenteCore<CardCompatibility>
+
+<Alert Visible="true" Color="@GetColor(null)">
+    <Heading Size="HeadingSize.Is5">
+        Compatibilidade Geral (@(Affinities.GetPercentAffinity(null) + "%"))
+        <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="@(()=>help.ShowModal())" title="Ajuda" Margin="Margin.Is2.FromStart">
+            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon>
+        </Button>
+    </Heading>
+    @if (totPercAff <= 60)
+    {
+        <AlertDescription>Infelizmente vocês não tem tanta coisa em comum. Desejamos toda sorte para os dois, pois não vai ser uma tarefa fácil.</AlertDescription>
+    }
+    else if (totPercAff <= 80)
+    {
+        <AlertDescription>Quase lá, mas não significa que não possam dar certo. Analisem com cuidado nosso relatório e trabalhem juntos essas diferenças.</AlertDescription>
+    }
+    else
+    {
+        <AlertDescription>Parábens, vocês foram feitos um para o outro. Esse relacionamento tem um futuro brilhante pela frente.</AlertDescription>
+    }
+</Alert>
+
+<Alert Visible="true" Color="@GetColor(Section.Basic)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+    <AlertMessage>Basic</AlertMessage>
+    <AlertDescription>(@Affinities.GetPercentAffinity(Section.Basic)%)</AlertDescription>
+</Alert>
+@if (View != null)
+{
+    <ItemDataProfile For="@(() => View.Location)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Location" User="@User" Pref="@User.Preference" Value="@View.Location" ValueUser="@User.Location" ClassIcon="fas fa-map-marker-alt" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Languages)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Language" User="@User" Pref="@User.Preference" Values="@View.Languages" ValuesUser="@User.Preference.Languages" ClassIcon="fas fa-language" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.CurrentSituation)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.CurrentSituation" User="@User" Pref="@User.Preference" Value="@View.CurrentSituation" ValuesUser="@User.Preference.CurrentSituation" ClassIcon="far fa-heart" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Intentions)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Intentions" User="@User" Pref="@User.Preference" Values="@View.Intentions" ValuesUser="@User.Intentions" ClassIcon="fas fa-search" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.BiologicalSex)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.BiologicalSex" User="@User" Pref="@User.Preference" Value="@View.BiologicalSex" ValuesUser="@User.Preference.BiologicalSex" ClassIcon="fas fa-neuter" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.GenderIdentity)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.GenderIdentity" User="@User" Pref="@User.Preference" Value="@View.GenderIdentity" ValuesUser="@User.Preference.GenderIdentity" ClassIcon="fas fa-neuter" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.SexualOrientation)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.SexualOrientation" User="@User" Pref="@User.Preference" Value="@View.SexualOrientation" ValuesUser="@User.Preference.SexualOrientation" ClassIcon="fas fa-neuter" Affinities="@Affinities"></ItemDataProfile>
+}
+
+<Alert Visible="true" Color="@GetColor(Section.Bio)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+    <AlertMessage>Bio</AlertMessage>
+    <AlertDescription>(@Affinities.GetPercentAffinity(Section.Bio)%)</AlertDescription>
+</Alert>
+@if (View != null)
+{
+    <ItemDataProfile For="@(() => View.RaceCategory)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.RaceCategory" User="@User" Pref="@User.Preference" Value="@View.RaceCategory" ValuesUser="@User.Preference.RaceCategory" ClassIcon="fas fa-globe" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.BodyMass)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.BodyMass" User="@User" Pref="@User.Preference" Value="@View.BodyMass" ValuesUser="@User.Preference.BodyMass" ClassIcon="fas fa-weight" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Age)" Type="@CompatibilityType.Range" Item="CompatibilityItem.Age" User="@User" Pref="@User.Preference" Value="@View.Age" ValueUser="@ProfileHelper.GetAge(User.BirthDate)" ClassIcon="fas fa-birthday-cake" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Zodiac)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Zodiac" User="@User" Pref="@User.Preference" Value="@View.Zodiac" ValueUser="@User.Zodiac" ClassIcon="fas fa-star-and-crescent" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Height)" Type="@CompatibilityType.Range" Item="@CompatibilityItem.Height" User="@User" Pref="@User.Preference" Value="@View.Height" ValueUser="@User.Height" ClassIcon="fas fa-ruler" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Neurodiversity)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Neurodiversity" User="@User" Pref="@User.Preference" Value="@View.Neurodiversity" ValueUser="@User.Neurodiversity" ClassIcon="fas fa-brain" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Disabilities)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Disabilities" User="@User" Pref="@User.Preference" Value="@View.Disabilities" ValueUser="@User.Disabilities" ClassIcon="fas fa-wheelchair" Affinities="@Affinities"></ItemDataProfile>
+}
+
+<Alert Visible="true" Color="@GetColor(Section.Lifestyle)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+    <AlertMessage>Lifestyle</AlertMessage>
+    <AlertDescription>(@Affinities.GetPercentAffinity(Section.Lifestyle)%)</AlertDescription>
+</Alert>
+@if (View != null)
+{
+    <ItemDataProfile For="@(() => View.Drink)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Drink" User="@User" Pref="@User.Preference" Value="@View.Drink" ValuesUser="@(User.Preference.Drink.Any()?User.Preference.Drink:new Drink[]{User.Drink.Value})" ClassIcon="fas fa-glass-cheers" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Smoke)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Smoke" User="@User" Pref="@User.Preference" Value="@View.Smoke" ValuesUser="@(User.Preference.Smoke.Any()?User.Preference.Smoke:new Smoke[]{User.Smoke.Value})" ClassIcon="fas fa-smoking" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Diet)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Diet" User="@User" Pref="@User.Preference" Value="@View.Diet" ValuesUser="@(User.Preference.Diet.Any()?User.Preference.Diet:new Diet[]{User.Diet.Value})" ClassIcon="fas fa-utensils" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Religion)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Religion" User="@User" Pref="@User.Preference" Value="@View.Religion" ValuesUser="@(User.Preference.Religion.Any()?User.Preference.Religion:new Religion[]{User.Religion.Value})" ClassIcon="fas fa-praying-hands" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.HaveChildren)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.HaveChildren" User="@User" Pref="@User.Preference" Value="@View.HaveChildren" ValuesUser="@(User.Preference.HaveChildren.Any()?User.Preference.HaveChildren:new HaveChildren[]{User.HaveChildren.Value})" ClassIcon="fas fa-child" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.WantChildren)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.WantChildren" User="@User" Pref="@User.Preference" Value="@View.WantChildren" ValuesUser="@(User.Preference.WantChildren.Any()?User.Preference.WantChildren:new WantChildren[]{User.WantChildren.Value})" ClassIcon="fas fa-baby" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.EducationLevel)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.EducationLevel" User="@User" Pref="@User.Preference" Value="@View.EducationLevel" ValuesUser="@(User.Preference.EducationLevel.Any()?User.Preference.EducationLevel:new EducationLevel[]{User.EducationLevel.Value})" ClassIcon="fas fa-graduation-cap" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.CareerCluster)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.CareerCluster" User="@User" Pref="@User.Preference" Value="@View.CareerCluster" ValuesUser="@(User.Preference.CareerCluster.Any()?User.Preference.CareerCluster:new CareerCluster[]{User.CareerCluster.Value})" ClassIcon="fas fa-briefcase" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.TravelFrequency)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.TravelFrequency" User="@User" Pref="@User.Preference" Value="@View.TravelFrequency" ValuesUser="@(User.Preference.TravelFrequency.Any()?User.Preference.TravelFrequency:new TravelFrequency[]{User.TravelFrequency.Value})" ClassIcon="fas fa-plane" Affinities="@Affinities"></ItemDataProfile>
+}
+
+<Alert Visible="true" Color="@GetColor(Section.Personality)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+    <AlertMessage>Personality</AlertMessage>
+    <AlertDescription>(@Affinities.GetPercentAffinity(Section.Personality)%)</AlertDescription>
+</Alert>
+@if (View != null)
+{
+    <ItemDataProfile For="@(() => View.MoneyPersonality)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.MoneyPersonality" User="@User" Pref="@User.Preference" Value="@View.MoneyPersonality" ValueUser="@User.MoneyPersonality" ClassIcon="fas fa-wallet" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.SplitTheBill)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.SplitTheBill" User="@User" Pref="@User.Preference" Value="@View.SplitTheBill" ValueUser="@User.SplitTheBill" ClassIcon="fas fa-hand-holding-usd" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.RelationshipPersonality)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.RelationshipPersonality" User="@User" Pref="@User.Preference" Value="@View.RelationshipPersonality" ValueUser="@User.RelationshipPersonality" ClassIcon="fas fa-people-arrows" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.MyersBriggsTypeIndicator)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.MyersBriggsTypeIndicator" User="@User" Pref="@User.Preference" Value="@View.MyersBriggsTypeIndicator" ValueUser="@User.MyersBriggsTypeIndicator" ClassIcon="fas fa-user" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.LoveLanguage)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.LoveLanguage" User="@User" Pref="@User.Preference" Value="@View.LoveLanguage" ValueUser="@User.LoveLanguage" ClassIcon="fas fa-hand-holding-heart" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.SexPersonality)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.SexPersonality" User="@User" Pref="@User.Preference" Value="@View.SexPersonality" ValuesUser="@User.Preference.SexPersonality" ClassIcon="fas fa-heart" Affinities="@Affinities"></ItemDataProfile>
+}
+
+<Alert Visible="true" Color="@GetColor(Section.Interest)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+    <AlertMessage>Interest</AlertMessage>
+    <AlertDescription>(@Affinities.GetPercentAffinity(Section.Interest)%)</AlertDescription>
+</Alert>
+@if (View != null)
+{
+    <ItemDataProfile For="@(() => View.Food)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Food" User="@User" Pref="@User.Preference" Values="@View.Food" ValuesUser="@User.Food" ClassIcon="fas fa-pizza-slice" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Vacation)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Vacation" User="@User" Pref="@User.Preference" Values="@View.Vacation" ValuesUser="@User.Vacation" ClassIcon="fas fa-plane-departure" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.Sports)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Sports" User="@User" Pref="@User.Preference" Values="@View.Sports" ValuesUser="@User.Sports" ClassIcon="fas fa-swimmer" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.LeisureActivities)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.LeisureActivities" User="@User" Pref="@User.Preference" Values="@View.LeisureActivities" ValuesUser="@User.LeisureActivities" ClassIcon="fas fa-umbrella-beach" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.MusicGenre)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.MusicGenre" User="@User" Pref="@User.Preference" Values="@View.MusicGenre" ValuesUser="@User.MusicGenre" ClassIcon="fas fa-music" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.MovieGenre)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.MovieGenre" User="@User" Pref="@User.Preference" Values="@View.MovieGenre" ValuesUser="@User.MovieGenre" ClassIcon="fas fa-film" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.TVGenre)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.TVGenre" User="@User" Pref="@User.Preference" Values="@View.TVGenre" ValuesUser="@User.TVGenre" ClassIcon="fas fa-tv" Affinities="@Affinities"></ItemDataProfile>
+    <ItemDataProfile For="@(() => View.ReadingGenre)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.ReadingGenre" User="@User" Pref="@User.Preference" Values="@View.ReadingGenre" ValuesUser="@User.ReadingGenre" ClassIcon="fas fa-book-reader" Affinities="@Affinities"></ItemDataProfile>
+}
+
+<VerusDate.Web.Shared.modal.BasicModal @ref="help" Title="Ajuda">
+    <ul class="mr-4">
+        <li>O cálculo é baseado em pesquisas e estatísticas, podendo não refletir com precisão todos os casos e/ou contextos;</li>
+        <li>Caso tenha dúvidas e/ou sugestões de melhorias, favor abrir um ticket na nossa página de suporte;</li>
+        <li>Clique em cada um dos itens para obter mais detalhes;</li>
+    </ul>
+</VerusDate.Web.Shared.modal.BasicModal>
+
+@code {
+    [Parameter] public ProfileModel User { get; set; }
+    [Parameter] public ProfileView View { get; set; }
+    [Parameter] public List<AffinityVM> Affinities { get; set; }
+
+    private Shared.modal.BasicModal help;
+    private int totPercAff => Affinities.GetPercentAffinity(null);
+
+    public Background GetBackground(Section? category)
+    {
+        var perc = Affinities.GetPercentAffinity(category);
+
+        if (perc >= 80)
+        {
+            return Background.Success;
+        }
+        else if (perc >= 60)
+        {
+            return Background.Warning;
+        }
+        else
+        {
+            return Background.Danger;
+        }
+    }
+
+    public Color GetColor(Section? category)
+    {
+        var perc = Affinities.GetPercentAffinity(category);
+
+        if (perc >= 80)
+        {
+            return Color.Success;
+        }
+        else if (perc >= 60)
+        {
+            return Color.Warning;
+        }
+        else
+        {
+            return Color.Danger;
+        }
+    }
+}

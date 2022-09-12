@@ -156,6 +156,9 @@
   <data name="Location_Prompt" xml:space="preserve">
     <value>Please click on the button to the side</value>
   </data>
+  <data name="Modality_Name" xml:space="preserve">
+    <value>Modality</value>
+  </data>
   <data name="NickName_Name" xml:space="preserve">
     <value>Nickname</value>
   </data>

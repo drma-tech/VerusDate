@@ -117,19 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Age_Name" xml:space="preserve">
+    <value>Idade</value>
+  </data>
   <data name="BirthDate_Name" xml:space="preserve">
     <value>Data de Nascimento</value>
   </data>
   <data name="BodyMass_Name" xml:space="preserve">
     <value>Corpo</value>
   </data>
+  <data name="Disabilities_Name" xml:space="preserve">
+    <value>Deficiências</value>
+  </data>
   <data name="Height_Name" xml:space="preserve">
     <value>Altura</value>
+  </data>
+  <data name="Neurodiversity_Name" xml:space="preserve">
+    <value>Neurodiversidade</value>
   </data>
   <data name="RaceCategory_Description" xml:space="preserve">
     <value>Classificação definida por US OMB</value>
   </data>
   <data name="RaceCategory_Name" xml:space="preserve">
     <value>Raça</value>
+  </data>
+  <data name="Zodiac_Name" xml:space="preserve">
+    <value>Zodíaco</value>
   </data>
 </root>

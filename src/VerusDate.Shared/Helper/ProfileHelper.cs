@@ -56,16 +56,6 @@ namespace VerusDate.Shared.Helper
             };
         }
 
-        /// <summary>
-        /// must be in years
-        /// </summary>
-        /// <param name="age"></param>
-        /// <returns></returns>
-        public static string GetAgeExtension(int age)
-        {
-            return age + " Anos";
-        }
-
         public static double GetDistance(double lat1, double lat2, double lon1, double lon2, DistanceType type)
         {
             // The math module contains a function named toRadians which converts from degrees to radians.

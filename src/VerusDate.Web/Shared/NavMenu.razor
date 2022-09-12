@@ -16,25 +16,28 @@
                     <BarIcon IconName="FontAwesomeIcons.ThLarge" /> Home
                 </BarLink>
             </BarItem>
-           @* <BarItem>
-                <BarLink To="/Profile" Match="Match.Prefix">
-                    <BarIcon IconName="FontAwesomeIcons.AddressCard" /> Perfil
-                </BarLink>
+            @* <BarItem>
+            <BarLink To="/Profile" Match="Match.Prefix">
+            <BarIcon IconName="FontAwesomeIcons.AddressCard" /> Perfil
+            </BarLink>
             </BarItem>*@
-            <BarItem>
-                <BarLink To="/Explore" Match="Match.Prefix">
-                    <BarIcon IconName="FontAwesomeIcons.Search" /> Explorar
-                </BarLink>
-            </BarItem>
-            <BarItem>
-                <BarLink To="/Event" Match="Match.Prefix">
-                    <BarIcon IconName="FontAwesomeIcons.CalendarAlt" /> Eventos
-                </BarLink>
-            </BarItem>
-           @* <BarItem>
-                <BarLink To="/Store" Match="Match.Prefix">
-                    <BarIcon IconName="FontAwesomeIcons.ShoppingCart" /> Loja
-                </BarLink>
+            @*<BarItem>
+            <BarLink To="/Explore" Match="Match.Prefix">
+            <BarIcon IconName="FontAwesomeIcons.Search" /> Explorar
+            </BarLink>
+            </BarItem>*@
+            @if (profile?.Modality == Modality.Matchmaker)
+            {
+                <BarItem>
+                    <BarLink To="/Event" Match="Match.Prefix">
+                        <BarIcon IconName="FontAwesomeIcons.CalendarAlt" /> Eventos
+                    </BarLink>
+                </BarItem>
+            }
+            @* <BarItem>
+            <BarLink To="/Store" Match="Match.Prefix">
+            <BarIcon IconName="FontAwesomeIcons.ShoppingCart" /> Loja
+            </BarLink>
             </BarItem>*@
             <BarItem>
                 <BarLink To="/Support" Match="Match.Prefix">
@@ -47,6 +50,7 @@
 
 @code {
     private string MainPhoto = ImageHelper.GetNoUserPhoto;
+    private ProfileModel profile;
 
     protected override async Task OnInitializedAsync()
     {
@@ -67,7 +71,7 @@
     {
         if (ComponenteUtils.IsAuthenticated)
         {
-            var profile = await Http.Profile_Get(SessionStorage);
+            profile = await Http.Profile_Get(SessionStorage);
 
             if (profile != null)
             {

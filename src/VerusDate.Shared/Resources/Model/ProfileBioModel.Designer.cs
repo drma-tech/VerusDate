@@ -61,6 +61,15 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Age.
+        /// </summary>
+        internal static string Age_Name {
+            get {
+                return ResourceManager.GetString("Age_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Birth Date.
         /// </summary>
         internal static string BirthDate_Name {
@@ -79,11 +88,29 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disabilities.
+        /// </summary>
+        internal static string Disabilities_Name {
+            get {
+                return ResourceManager.GetString("Disabilities_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Height.
         /// </summary>
         internal static string Height_Name {
             get {
                 return ResourceManager.GetString("Height_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neurodiversity.
+        /// </summary>
+        internal static string Neurodiversity_Name {
+            get {
+                return ResourceManager.GetString("Neurodiversity_Name", resourceCulture);
             }
         }
         
@@ -102,6 +129,15 @@ namespace VerusDate.Shared.Resources.Model {
         internal static string RaceCategory_Name {
             get {
                 return ResourceManager.GetString("RaceCategory_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zodiac.
+        /// </summary>
+        internal static string Zodiac_Name {
+            get {
+                return ResourceManager.GetString("Zodiac_Name", resourceCulture);
             }
         }
     }

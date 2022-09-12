@@ -4,6 +4,7 @@ namespace VerusDate.Shared.Enum
 {
     /// <summary>
     /// https://aindasolteira.blogs.sapo.pt/qual-a-tua-personalidade-sexual-200268
+    /// https://www.mindbodygreen.com/articles/sex-personality-types-by-sex-therapist-vanessa-marin
     /// </summary>
     public enum SexPersonality
     {

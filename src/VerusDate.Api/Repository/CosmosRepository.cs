@@ -18,7 +18,7 @@ namespace VerusDate.Api.Repository
     {
         public Container Container { get; private set; }
 
-        private const double ru_limit_get = 2; //1
+        private const double ru_limit_get = 4; //1
         private const double ru_limit_query = 5; //3
         private const double ru_limit_save = 25; //5
 

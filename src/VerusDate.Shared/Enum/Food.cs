@@ -8,154 +8,154 @@ namespace VerusDate.Shared.Enum
     public enum Food
     {
         [Custom(Name = "ItalianFood", ResourceType = typeof(Resources.Enum.Food))]
-        ItalianFood,
+        ItalianFood = 1,
 
         [Custom(Name = "MexicanFood", ResourceType = typeof(Resources.Enum.Food))]
-        MexicanFood,
+        MexicanFood = 2,
 
         [Custom(Name = "ThaiFood", ResourceType = typeof(Resources.Enum.Food))]
-        ThaiFood,
+        ThaiFood = 3,
 
         [Custom(Name = "MediterraneanFood", ResourceType = typeof(Resources.Enum.Food))]
-        MediterraneanFood,
+        MediterraneanFood = 4,
 
         [Custom(Name = "MoroccanFood", ResourceType = typeof(Resources.Enum.Food))]
-        MoroccanFood,
+        MoroccanFood = 5,
 
         [Custom(Name = "ChineseFood", ResourceType = typeof(Resources.Enum.Food))]
-        ChineseFood,
+        ChineseFood = 6,
 
         [Custom(Name = "IndianCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        IndianCuisine,
+        IndianCuisine = 7,
 
         [Custom(Name = "JapaneseCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        JapaneseCuisine,
+        JapaneseCuisine = 8,
 
         [Custom(Name = "Seafood", ResourceType = typeof(Resources.Enum.Food))]
-        Seafood,
+        Seafood = 9,
 
         [Custom(Name = "GreekFood", ResourceType = typeof(Resources.Enum.Food))]
-        GreekFood,
+        GreekFood = 10,
 
         [Custom(Name = "AmericanFood", ResourceType = typeof(Resources.Enum.Food))]
-        AmericanFood,
+        AmericanFood = 11,
 
         [Custom(Name = "SoulFood", ResourceType = typeof(Resources.Enum.Food))]
-        SoulFood,
+        SoulFood = 12,
 
         [Custom(Name = "SouthernAmericanFood", ResourceType = typeof(Resources.Enum.Food))]
-        SouthernAmericanFood,
+        SouthernAmericanFood = 13,
 
         [Custom(Name = "SpanishCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        SpanishCuisine,
+        SpanishCuisine = 14,
 
         [Custom(Name = "VietnameseFood", ResourceType = typeof(Resources.Enum.Food))]
-        VietnameseFood,
+        VietnameseFood = 15,
 
         [Custom(Name = "TexMexFood", ResourceType = typeof(Resources.Enum.Food))]
-        TexMexFood,
+        TexMexFood = 16,
 
         [Custom(Name = "KoreanBarbecue", ResourceType = typeof(Resources.Enum.Food))]
-        KoreanBarbecue,
+        KoreanBarbecue = 17,
 
         [Custom(Name = "MiddleEasternFood", ResourceType = typeof(Resources.Enum.Food))]
-        MiddleEasternFood,
+        MiddleEasternFood = 18,
 
         [Custom(Name = "CajunFood", ResourceType = typeof(Resources.Enum.Food))]
-        CajunFood,
+        CajunFood = 19,
 
         [Custom(Name = "LebaneseFood", ResourceType = typeof(Resources.Enum.Food))]
-        LebaneseFood,
+        LebaneseFood = 20,
 
         [Custom(Name = "TexasBarbecue", ResourceType = typeof(Resources.Enum.Food))]
-        TexasBarbecue,
+        TexasBarbecue = 21,
 
         [Custom(Name = "SicilianCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        SicilianCuisine,
+        SicilianCuisine = 22,
 
         [Custom(Name = "CaribbeanFood", ResourceType = typeof(Resources.Enum.Food))]
-        CaribbeanFood,
+        CaribbeanFood = 23,
 
         [Custom(Name = "SouthKoreanFood", ResourceType = typeof(Resources.Enum.Food))]
-        SouthKoreanFood,
+        SouthKoreanFood = 24,
 
         [Custom(Name = "BrazilianBarbecue", ResourceType = typeof(Resources.Enum.Food))]
-        BrazilianBarbecue,
+        BrazilianBarbecue = 25,
 
         [Custom(Name = "FrenchFood", ResourceType = typeof(Resources.Enum.Food))]
-        FrenchFood,
+        FrenchFood = 26,
 
         [Custom(Name = "TurkishFood", ResourceType = typeof(Resources.Enum.Food))]
-        TurkishFood,
+        TurkishFood = 27,
 
         [Custom(Name = "JunkFood", ResourceType = typeof(Resources.Enum.Food))]
-        JunkFood,
+        JunkFood = 28,
 
         [Custom(Name = "MidwesternFood", ResourceType = typeof(Resources.Enum.Food))]
-        MidwesternFood,
+        MidwesternFood = 29,
 
         [Custom(Name = "PortugueseFood", ResourceType = typeof(Resources.Enum.Food))]
-        PortugueseFood,
+        PortugueseFood = 30,
 
         [Custom(Name = "GermanFood", ResourceType = typeof(Resources.Enum.Food))]
-        GermanFood,
+        GermanFood = 31,
 
         [Custom(Name = "BrazilianFood", ResourceType = typeof(Resources.Enum.Food))]
-        BrazilianFood,
+        BrazilianFood = 32,
 
         [Custom(Name = "CubanFood", ResourceType = typeof(Resources.Enum.Food))]
-        CubanFood,
+        CubanFood = 33,
 
         [Custom(Name = "IrishFood", ResourceType = typeof(Resources.Enum.Food))]
-        IrishFood,
+        IrishFood = 34,
 
         [Custom(Name = "TunisianCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        TunisianCuisine,
+        TunisianCuisine = 35,
 
         [Custom(Name = "UnitedKingdomCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        UnitedKingdomCuisine,
+        UnitedKingdomCuisine = 36,
 
         [Custom(Name = "SouthIndianCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        SouthIndianCuisine,
+        SouthIndianCuisine = 37,
 
         [Custom(Name = "JamaicanFood", ResourceType = typeof(Resources.Enum.Food))]
-        JamaicanFood,
+        JamaicanFood = 38,
 
         [Custom(Name = "CanadianCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        CanadianCuisine,
+        CanadianCuisine = 39,
 
         [Custom(Name = "VegetarianFood", ResourceType = typeof(Resources.Enum.Food))]
-        VegetarianFood,
+        VegetarianFood = 40,
 
         [Custom(Name = "FilipinoCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        FilipinoCuisine,
+        FilipinoCuisine = 41,
 
         [Custom(Name = "ArgentinianFood", ResourceType = typeof(Resources.Enum.Food))]
-        ArgentinianFood,
+        ArgentinianFood = 42,
 
         [Custom(Name = "MalaysianFood", ResourceType = typeof(Resources.Enum.Food))]
-        MalaysianFood,
+        MalaysianFood = 43,
 
         [Custom(Name = "IranianCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        IranianCuisine,
+        IranianCuisine = 44,
 
         [Custom(Name = "IndonesianCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        IndonesianCuisine,
+        IndonesianCuisine = 45,
 
         [Custom(Name = "SichuanCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        SichuanCuisine,
+        SichuanCuisine = 46,
 
         [Custom(Name = "JewishCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        JewishCuisine,
+        JewishCuisine = 47,
 
         [Custom(Name = "SwissCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        SwissCuisine,
+        SwissCuisine = 48,
 
         [Custom(Name = "ShanghaineseCuisine", ResourceType = typeof(Resources.Enum.Food))]
-        ShanghaineseCuisine,
+        ShanghaineseCuisine = 49,
 
         [Custom(Name = "SingaporeanFood", ResourceType = typeof(Resources.Enum.Food))]
-        SingaporeanFood,
+        SingaporeanFood = 50,
     }
 
     public enum FoodOld

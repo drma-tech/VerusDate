@@ -4,7 +4,7 @@
 
 <Row Gutter="(8,0)">
     <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is4.OnWidescreen.Is3.OnFullHD">
-        <Alert Visible="true" Color="Color.Dark"><AlertMessage>Seu Perfil (@profile.NickName)</AlertMessage></Alert>
+        <Alert Visible="true" Color="Color.Dark" Shadow="Shadow.Small"><AlertMessage>Seu Perfil (@profile.NickName)</AlertMessage></Alert>
         <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1"
                   ShowIndicators="imageDataUriGallery.Count() > 1" Margin="Margin.Is2.FromBottom">
             @foreach (var item in imageDataUriGallery)
@@ -178,83 +178,83 @@
         }
         else if (profile.Modality == Modality.RelationshipAnalysis)
         {
-            <Alert Visible="true" Color="Color.Dark"><AlertMessage>Seu Parceiro (@view?.NickName)</AlertMessage></Alert>
+            <Alert Visible="true" Color="Color.Dark" Shadow="Shadow.Small"><AlertMessage>Seu Parceiro (@view?.NickName)</AlertMessage></Alert>
 
-            <Row Gutter="(8,0)">
-                <Column ColumnSize="ColumnSize.IsFull.OnDesktop.Is4.OnFullHD">
-                    <Card Margin="Margin.Is2.FromBottom">
-                        <CardBody Padding="Padding.Is0">
-                            @if (view != null)
-                            {
-                                @*<Badge Color="GetColor(totPercAff)" Style="position: absolute; top: 10px; left: 10px; z-index: 2;">@(totPercAff + "%")</Badge>
-                                <Badge Color="Color.Dark" Style="position: absolute; top: 10px; right: 10px; z-index: 2;">
-                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Camera"></Blazorise.Icon> @imageDataUriGallery.Count()
-                                </Badge>*@
-                                <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1" ShowIndicators="imageDataUriGallery.Count() > 1">
-                                    @foreach (var item in imageDataUriGallery)
-                                    {
-                                        <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
-                                            <Image Source="@item" Style="max-height: 450px !important;" />
-                                        </CarouselSlide>
-                                    }
-                                </Carousel>
-                            }
-                        </CardBody>
-                        <CardBody>
-                            @if (view != null)
-                            {
-                                <Badge Color="Color.Secondary">
-                                    @view.NickName
-                                </Badge>
-                                <Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd">
-                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view?.GetLocation(ProfileModel.LocationType.City)
-                                </Badge>
-                                @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
+            if (view != null)
+            {
+                <Row Gutter="(8,0)">
+                    <Column ColumnSize="ColumnSize.IsFull.OnDesktop.Is4.OnFullHD">
+                        <Card Margin="Margin.Is2.FromBottom">
+                            <CardBody Padding="Padding.Is0">
+                                @if (view != null)
                                 {
-                                    <Badge Color="Color.Success">
-                                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado hoje
-                                    </Badge>
-                                }
-                                else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
-                                {
-                                    <Badge Color="Color.Warning">
-                                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado esta semana
-                                    </Badge>
-                                }
-                                else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
-                                {
-                                    <Badge Color="Color.Danger">
-                                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado este mês
-                                    </Badge>
-                                }
-                                else
-                                {
-                                    <Badge Color="Color.Dark">
-                                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> usuário desativado
-                                    </Badge>
-                                }
-                                @if (view.Reports.Any())
-                                {
-                                    <Paragraph Margin="Margin.Is0.FromTop.Is0.FromBottom">
-                                        @foreach (var item in view?.Reports)
+                                    <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1" ShowIndicators="imageDataUriGallery.Count() > 1">
+                                        @foreach (var item in imageDataUriGallery)
                                         {
-                                            <Badge Color="Color.Warning" Style="cursor: help;">
-                                                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon> @item.Type.GetName()
-                                            </Badge>
+                                            <CarouselSlide @key="@item" Name="@item" Style="text-align: center; background-color: black;">
+                                                <Image Source="@item" Style="max-height: 450px !important;" />
+                                            </CarouselSlide>
                                         }
-                                    </Paragraph>
+                                    </Carousel>
                                 }
-                            }
-                        </CardBody>
-                    </Card>
-                   
-                </Column>
-                <Column ColumnSize="ColumnSize.IsFull.OnDesktop.Is8.OnFullHD">
-                    <VerusDate.Web.Shared.Card.CardCompatibility User="profile" View="view" Affinities="affinities"></VerusDate.Web.Shared.Card.CardCompatibility>
-                </Column>
-            </Row>
-
-            <VerusDate.Web.Shared.modal.ProfileReport @ref="report"></VerusDate.Web.Shared.modal.ProfileReport>
+                            </CardBody>
+                            <CardBody>
+                                @if (view != null)
+                                {
+                                    <Badge Color="Color.Secondary">
+                                        @view.NickName
+                                    </Badge>
+                                    <Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd">
+                                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view?.GetLocation(ProfileModel.LocationType.City)
+                                    </Badge>
+                                    @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
+                                    {
+                                        <Badge Color="Color.Success">
+                                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado hoje
+                                        </Badge>
+                                    }
+                                    else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Week)
+                                    {
+                                        <Badge Color="Color.Warning">
+                                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado esta semana
+                                        </Badge>
+                                    }
+                                    else if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Month)
+                                    {
+                                        <Badge Color="Color.Danger">
+                                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> logado este mês
+                                        </Badge>
+                                    }
+                                    else
+                                    {
+                                        <Badge Color="Color.Dark">
+                                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> usuário desativado
+                                        </Badge>
+                                    }
+                                    @if (view.Reports.Any())
+                                    {
+                                        <Paragraph Margin="Margin.Is0.FromTop.Is0.FromBottom">
+                                            @foreach (var item in view?.Reports)
+                                            {
+                                                <Badge Color="Color.Warning" Style="cursor: help;">
+                                                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon> @item.Type.GetName()
+                                                </Badge>
+                                            }
+                                        </Paragraph>
+                                    }
+                                }
+                            </CardBody>
+                        </Card>
+                    </Column>
+                    <Column ColumnSize="ColumnSize.IsFull.OnDesktop.Is8.OnFullHD">
+                        <VerusDate.Web.Shared.Card.CardCompatibility User="profile" View="view" Affinities="affinities"></VerusDate.Web.Shared.Card.CardCompatibility>
+                    </Column>
+                </Row>
+            }
+            else
+            {
+                <Alert Visible="true" Color="Color.Info"><AlertDescription>Perfil não disponível</AlertDescription></Alert>
+            }
         }
     </Column>
 </Row>
@@ -266,12 +266,10 @@
     public PopupProfile _PopupProfile { get; set; }
 
     private ProfileModel profile = new();
-    private ProfileView view;
+    private ProfileView? view;
     private List<AffinityVM> affinities = new();
     //private ProfileGamificationModel gamification = new();
     private List<ProfileSearch> lstDestaques = new();
-
-    private Shared.modal.ProfileReport report;
 
     string selectedImage;
     string[] imageDataUriGallery = new string[] { };

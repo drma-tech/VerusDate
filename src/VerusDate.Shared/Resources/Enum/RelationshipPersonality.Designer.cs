@@ -61,7 +61,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These people have family, friends and the union with loved ones as their main value in life. They are serene, sociable and very peaceful people. They avoid getting involved in conflicts and taking risks as much as possible. (Combine with Builder).
+        ///   Looks up a localized string similar to These people have family, friends and the union with loved ones as their main value in life. They are serene, sociable and very peaceful people. They avoid getting involved in conflicts and taking risks as much as possible..
         /// </summary>
         internal static string Builders_Description {
             get {
@@ -79,7 +79,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is an analytical personality, people who prioritize logic and common sense above all else. They are very balanced and practical people, who tend to use reason to make their decisions. (Combine with Negotiator).
+        ///   Looks up a localized string similar to This is an analytical personality, people who prioritize logic and common sense above all else. They are very balanced and practical people, who tend to use reason to make their decisions..
         /// </summary>
         internal static string Directors_Description {
             get {
@@ -97,7 +97,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These people treat love as an adventure. They are impulsive and autonomous, very curious and are always focused on enjoying the moment, maintaining a “let life take me” attitude. (Combine with Explorer).
+        ///   Looks up a localized string similar to These people treat love as an adventure. They are impulsive and autonomous, very curious and are always focused on enjoying the moment, maintaining a “let life take me” attitude..
         /// </summary>
         internal static string Explorers_Description {
             get {
@@ -115,7 +115,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Negotiating people are expressive, empathetic and idealistic. They usually have very sensitive profiles, but they have a lot of imagination and a very open mind. In addition, they need to delve into their feelings and like people to satisfy their emotional needs. (Combine with Director).
+        ///   Looks up a localized string similar to Negotiating people are expressive, empathetic and idealistic. They usually have very sensitive profiles, but they have a lot of imagination and a very open mind. In addition, they need to delve into their feelings and like people to satisfy their emotional needs..
         /// </summary>
         internal static string Negotiator_Description {
             get {

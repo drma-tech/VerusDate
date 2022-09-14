@@ -4,7 +4,6 @@ namespace VerusDate.Shared.Enum
 {
     /// <summary>
     /// https://empower.me/quiz/
-    /// https://empower.me/quiz/start/
     /// </summary>
     public enum MoneyPersonality
     {

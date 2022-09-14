@@ -24,7 +24,7 @@ namespace VerusDate.Web.Core
 
         public bool IsEnabled(LogLevel logLevel) => logLevel >= LogLevel.Warning;
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
         {
             if (!IsEnabled(logLevel))
             {
@@ -39,7 +39,7 @@ namespace VerusDate.Web.Core
             var storage = ComponenteUtils.Storage;
             var list = new List<LogContainer>();
 
-            if (storage.ContainKey("LogErrosVD"))
+            if (storage != null && storage.ContainKey("LogErrosVD"))
             {
                 list = storage.GetItem<List<LogContainer>>("LogErrosVD");
             }
@@ -52,7 +52,7 @@ namespace VerusDate.Web.Core
                 StackTrace = exception?.StackTrace
             });
 
-            storage.SetItem("LogErrosVD", list);
+            storage?.SetItem("LogErrosVD", list);
         }
     }
 

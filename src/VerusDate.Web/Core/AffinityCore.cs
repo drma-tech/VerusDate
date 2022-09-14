@@ -118,22 +118,6 @@ namespace VerusDate.Web.Core
             else return Array.Empty<T>();
         }
 
-        private static int GetAgeDifference(int currentAge)
-        {
-            if (currentAge <= 25)
-                return 3;
-            if (currentAge <= 30)
-                return 4;
-            if (currentAge <= 35)
-                return 5;
-            else if (currentAge <= 40)
-                return 7;
-            else if (currentAge <= 50)
-                return 10;
-            else
-                return 15;
-        }
-
         private static bool IsMatch<T>(this IReadOnlyList<T> preferences, IReadOnlyList<T> view)
         {
             if (!preferences.Any()) return true; //if preferences are empty then accept all
@@ -284,22 +268,24 @@ namespace VerusDate.Web.Core
             else return Array.Empty<BodyMass>();
         }
 
-        public static IReadOnlyList<int> GetAge(ProfileModel user, ProfilePreferenceModel? pref = null)
+        public static IReadOnlyList<int> GetAge(ProfileModel user, ProfilePreferenceModel? pref = null, bool force = false)
         {
             int min;
             int max;
 
-            if (pref != null)
+            if (pref != null && !force)
             {
                 min = pref.MinimalAge;
                 max = pref.MaxAge;
             }
             else
             {
-                min = user.BirthDate.GetAge() - GetAgeDifference(user.BirthDate.GetAge());
+                var age = user.BirthDate.GetAge();
+
+                min = age / 2 + 7;
                 if (min < 18) min = 18;
 
-                max = user.BirthDate.GetAge() + GetAgeDifference(user.BirthDate.GetAge());
+                max = (age - 7) * 2;
                 if (max > 120) max = 120;
             }
 
@@ -326,12 +312,13 @@ namespace VerusDate.Web.Core
             };
         }
 
-        public static IReadOnlyList<Height> GetHeight(ProfileModel user, ProfilePreferenceModel? pref = null)
+        public static IReadOnlyList<Height> GetHeight(ProfileModel user, ProfilePreferenceModel? pref = null, bool force = false)
         {
             Height min;
             Height max;
+            var ratio = 1.09;
 
-            if (pref != null && pref.MinimalHeight.HasValue)
+            if (pref != null && pref.MinimalHeight.HasValue && !force)
             {
                 min = pref.MinimalHeight.Value;
             }
@@ -339,11 +326,29 @@ namespace VerusDate.Web.Core
             {
                 if (user.Height.HasValue)
                 {
-                    var list = EnumHelper.GetList<Height>();
-                    var minHeight = (int)user.Height.Value - 15;
-                    if (!list.Any(a => a.Value == minHeight)) minHeight = (int)user.Height.Value - 16;
-                    if (!list.Any(a => a.Value == minHeight)) minHeight = (int)user.Height.Value - 17;
-                    if (minHeight < (int)Height._150) minHeight = (int)Height._150;
+                    int minHeight;
+
+                    if (pref != null && pref.BiologicalSex.Any() && pref.BiologicalSex.Count == 1)
+                    {
+                        if (user.BiologicalSex == BiologicalSex.Male && pref.BiologicalSex[0] == BiologicalSex.Female)
+                        {
+                            minHeight = (int)Math.Round((int)user.Height.Value / (ratio + 0.04));
+                        }
+                        else if (user.BiologicalSex == BiologicalSex.Female && pref.BiologicalSex[0] == BiologicalSex.Male)
+                        {
+                            minHeight = (int)Math.Round((int)user.Height.Value * (ratio - 0.04));
+                        }
+                        else
+                        {
+                            minHeight = (int)user.Height.Value - 10; //if you don't have opposite biological sex, you don't have a formula for height
+                        }
+                    }
+                    else
+                    {
+                        minHeight = (int)user.Height.Value - 10; //if you don't have opposite biological sex, you don't have a formula for height
+                    }
+
+                    if (minHeight < (int)Height._140) minHeight = (int)Height._140;
                     min = (Height)minHeight;
                 }
                 else
@@ -352,7 +357,7 @@ namespace VerusDate.Web.Core
                 }
             }
 
-            if (pref != null && pref.MaxHeight.HasValue)
+            if (pref != null && pref.MaxHeight.HasValue && !force)
             {
                 max = pref.MaxHeight.Value;
             }
@@ -360,10 +365,28 @@ namespace VerusDate.Web.Core
             {
                 if (user.Height.HasValue)
                 {
-                    var list = EnumHelper.GetList<Height>();
-                    var maxHeight = (int)user.Height.Value + 15;
-                    if (!list.Any(a => a.Value == maxHeight)) maxHeight = (int)user.Height.Value + 16;
-                    if (!list.Any(a => a.Value == maxHeight)) maxHeight = (int)user.Height.Value + 17;
+                    int maxHeight;
+
+                    if (pref != null && pref.BiologicalSex.Any() && pref.BiologicalSex.Count == 1)
+                    {
+                        if (user.BiologicalSex == BiologicalSex.Male && pref.BiologicalSex[0] == BiologicalSex.Female)
+                        {
+                            maxHeight = (int)Math.Round((int)user.Height.Value / (ratio - 0.04));
+                        }
+                        else if (user.BiologicalSex == BiologicalSex.Female && pref.BiologicalSex[0] == BiologicalSex.Male)
+                        {
+                            maxHeight = (int)Math.Round((int)user.Height.Value * (ratio + 0.04));
+                        }
+                        else
+                        {
+                            maxHeight = (int)user.Height.Value + 10; //if you don't have opposite biological sex, you don't have a formula for height
+                        }
+                    }
+                    else
+                    {
+                        maxHeight = (int)user.Height.Value + 10; //if you don't have opposite biological sex, you don't have a formula for height
+                    }
+
                     if (maxHeight > (int)Height._192) maxHeight = (int)Height._192;
                     max = (Height)maxHeight;
                 }

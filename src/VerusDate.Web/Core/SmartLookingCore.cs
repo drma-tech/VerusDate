@@ -9,7 +9,7 @@ namespace VerusDate.Web.Core
         public static void PopulateFields(ProfileModel profile, ProfilePreferenceModel preference)
         {
             if (profile == null) throw new NotificationException("Preenchimento de cadastro do perfil não encontrado");
-            if (preference == null) preference = new ProfilePreferenceModel();
+            preference ??= new ProfilePreferenceModel();
 
             //BASIC
             preference.Region = Region.City;
@@ -21,10 +21,10 @@ namespace VerusDate.Web.Core
             preference.SexualOrientation = AffinityCore.GetSexualOrientation(profile);
 
             //BIO
-            var ages = AffinityCore.GetAge(profile, preference);
+            var ages = AffinityCore.GetAge(profile, preference, true);
             preference.MinimalAge = ages[0];
             preference.MaxAge = ages[1];
-            var heights = AffinityCore.GetHeight(profile, preference);
+            var heights = AffinityCore.GetHeight(profile, preference, true);
             preference.MinimalHeight = heights[0];
             preference.MaxHeight = heights[1];
             //looking.RaceCategory = null;
@@ -40,7 +40,7 @@ namespace VerusDate.Web.Core
             //preference.WantChildren = GetWantChildren(profile);
             //preference.EducationLevel = GetEducationLevel(profile);
             //preference.CareerCluster = GetCareerCluster(profile);
-            preference.TravelFrequency = AffinityCore.GetTravelFrequency(profile, preference);
+            //preference.TravelFrequency = AffinityCore.GetTravelFrequency(profile, preference);
         }
     }
 }

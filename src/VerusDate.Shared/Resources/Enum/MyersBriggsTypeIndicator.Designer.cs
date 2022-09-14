@@ -115,7 +115,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to As in other areas of their lives, commanders approach dating and relationships with a set of goals and a plan to achieve them, and they do so with impressive energy and enthusiasm. People with the Commander personality type want to win and will gladly take on leadership roles in relationships early on, taking personal responsibility for how things go and actively working to ensure a mutually rewarding experience. Romantic relationships are serious business, and commanders have been at it for a long time. (C [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to As in other areas of their lives, commanders approach dating and relationships with a set of goals and a plan to achieve them, and they do so with impressive energy and enthusiasm. People with the Commander personality type want to win and will gladly take on leadership roles in relationships early on, taking personal responsibility for how things go and actively working to ensure a mutually rewarding experience. Romantic relationships are serious business, and commanders have been at it for a long time..
         /// </summary>
         internal static string ENTJ_Description {
             get {
@@ -169,7 +169,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Valuing social validation and a sense of belonging so highly, romantic relationships hold a special level of importance for consuls. No other relationship type provides people with the Consul personality type the same level of support and devotion, and the feelings of security and stability that accompany strong romantic relationships are extremely warm. (Combine with ISFP and ISTP).
+        ///   Looks up a localized string similar to Valuing social validation and a sense of belonging so highly, romantic relationships hold a special level of importance for consuls. No other relationship type provides people with the Consul personality type the same level of support and devotion, and the feelings of security and stability that accompany strong romantic relationships are extremely warm..
         /// </summary>
         internal static string ESFJ_Description {
             get {
@@ -196,7 +196,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Entertainers are sociable, fun-loving and free-spirited people who live life in the moment and extract every bit of emotion from everything. Naturally, they spare none of that freshness and energy in dating. For people with the Entertainer personality type, relationships aren&apos;t about slowly building the groundwork for the future or planning a life - they&apos;re bubbly, unpredictable things to enjoy as long as there&apos;s pleasure to be had. (Combine with ISTJ and ISFJ).
+        ///   Looks up a localized string similar to Entertainers are sociable, fun-loving and free-spirited people who live life in the moment and extract every bit of emotion from everything. Naturally, they spare none of that freshness and energy in dating. For people with the Entertainer personality type, relationships aren&apos;t about slowly building the groundwork for the future or planning a life - they&apos;re bubbly, unpredictable things to enjoy as long as there&apos;s pleasure to be had..
         /// </summary>
         internal static string ESFP_Description {
             get {
@@ -250,7 +250,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When it comes to romantic relationships, it can hardly be said that people with the Enterprising personality type are missing their wedding day. Life is fun and full of surprises (something entrepreneurs have a knack for delivering), and they enjoy everything here and now. Entrepreneurs may not spend a lot of time planning “someday,” but their enthusiasm and unpredictability make them exciting dating partners. (Combine with ISTJ and ISFJ).
+        ///   Looks up a localized string similar to When it comes to romantic relationships, it can hardly be said that people with the Enterprising personality type are missing their wedding day. Life is fun and full of surprises (something entrepreneurs have a knack for delivering), and they enjoy everything here and now. Entrepreneurs may not spend a lot of time planning “someday,” but their enthusiasm and unpredictability make them exciting dating partners..
         /// </summary>
         internal static string ESTP_Description {
             get {
@@ -304,7 +304,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mediators (INFPs) are dreamers and idealists, especially when it comes to romance. The concept of true love resonates with them, and they are unlikely to be happy in a relationship based on anything less. People with this personality type may daydream about the perfect relationship, imagining what it would be like to share their innermost self with another person. (Combine with ENFJ and ENTJ).
+        ///   Looks up a localized string similar to Mediators (INFPs) are dreamers and idealists, especially when it comes to romance. The concept of true love resonates with them, and they are unlikely to be happy in a relationship based on anything less. People with this personality type may daydream about the perfect relationship, imagining what it would be like to share their innermost self with another person..
         /// </summary>
         internal static string INFP_Description {
             get {
@@ -331,7 +331,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Architects (INTJs) approach romance the way they do most challenges: strategically, with clear-cut goals and a plan for achieving them. In a purely rational world, this approach would be foolproof. Alas, love is rarely rational, and Architects are at risk of overlooking or misinterpreting the unpredictability of human nature and affection. (Combine with ENTP and ENFP).
+        ///   Looks up a localized string similar to Architects (INTJs) approach romance the way they do most challenges: strategically, with clear-cut goals and a plan for achieving them. In a purely rational world, this approach would be foolproof. Alas, love is rarely rational, and Architects are at risk of overlooking or misinterpreting the unpredictability of human nature and affection..
         /// </summary>
         internal static string INTJ_Description {
             get {
@@ -358,7 +358,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When it comes to romantic relationships, logicians have an interesting mix of traits that often pleasantly surprise their partners. People with this personality type are always full of ideas, but have little opportunity to explore their more romantic notions. As with any of their theories, logicians love to share with others, and when they finally meet someone where romantic thoughts are appropriate, they are excited, enthusiastic, and even playful, flirting with wordplay and intellectual play. (Combine wit [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to When it comes to romantic relationships, logicians have an interesting mix of traits that often pleasantly surprise their partners. People with this personality type are always full of ideas, but have little opportunity to explore their more romantic notions. As with any of their theories, logicians love to share with others, and when they finally meet someone where romantic thoughts are appropriate, they are excited, enthusiastic, and even playful, flirting with wordplay and intellectual play..
         /// </summary>
         internal static string INTP_Description {
             get {
@@ -385,7 +385,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When it comes to romantic relationships, the kindness of the Defenders turns into a joy that is only found in taking care of your family and home, in being there for emotional and practical support whenever needed. Home is where the heart is for people with the Defender personality type, and in no other area of their lives do they strive so hard to create the harmony and beauty they want to see in the world. (Combine with ESFP and ESTP).
+        ///   Looks up a localized string similar to When it comes to romantic relationships, the kindness of the Defenders turns into a joy that is only found in taking care of your family and home, in being there for emotional and practical support whenever needed. Home is where the heart is for people with the Defender personality type, and in no other area of their lives do they strive so hard to create the harmony and beauty they want to see in the world..
         /// </summary>
         internal static string ISFJ_Description {
             get {
@@ -412,7 +412,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Adventurers are quite mysterious and hard to get to know. Although they are very emotional individuals, they guard this sensitive core carefully, preferring to listen rather than express. People with the Adventurer personality type focus on their partners, with little interest in dictating the mood of a situation with their own feelings. While this can sometimes be frustrating, if they are accepted for what they are, Adventurers prove to be warm and enthusiastic partners. (Combine with ESTJ and ESFJ).
+        ///   Looks up a localized string similar to Adventurers are quite mysterious and hard to get to know. Although they are very emotional individuals, they guard this sensitive core carefully, preferring to listen rather than express. People with the Adventurer personality type focus on their partners, with little interest in dictating the mood of a situation with their own feelings. While this can sometimes be frustrating, if they are accepted for what they are, Adventurers prove to be warm and enthusiastic partners..
         /// </summary>
         internal static string ISFP_Description {
             get {
@@ -466,7 +466,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When it comes to romantic relationships with Virtuosos, it&apos;s a bit like nailing jelly to a tree. Dating personalities Virtuoso is a tango, complex and interesting, with alternating coldness and detachment, and passion, spontaneity and pleasure of the moment. Nothing can be forced in Virtuoso relationships, but as long as they are given the space they need to be themselves, they will be happy to enjoy the comfort of a stable partner for life. (Combine with ESFJ and ESTJ).
+        ///   Looks up a localized string similar to When it comes to romantic relationships with Virtuosos, it&apos;s a bit like nailing jelly to a tree. Dating personalities Virtuoso is a tango, complex and interesting, with alternating coldness and detachment, and passion, spontaneity and pleasure of the moment. Nothing can be forced in Virtuoso relationships, but as long as they are given the space they need to be themselves, they will be happy to enjoy the comfort of a stable partner for life..
         /// </summary>
         internal static string ISTP_Description {
             get {

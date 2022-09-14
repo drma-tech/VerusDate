@@ -118,25 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Builders_Description" xml:space="preserve">
-    <value>These people have family, friends and the union with loved ones as their main value in life. They are serene, sociable and very peaceful people. They avoid getting involved in conflicts and taking risks as much as possible. (Combine with Builder)</value>
+    <value>These people have family, friends and the union with loved ones as their main value in life. They are serene, sociable and very peaceful people. They avoid getting involved in conflicts and taking risks as much as possible.</value>
   </data>
   <data name="Builders_Name" xml:space="preserve">
     <value>Builders</value>
   </data>
   <data name="Directors_Description" xml:space="preserve">
-    <value>This is an analytical personality, people who prioritize logic and common sense above all else. They are very balanced and practical people, who tend to use reason to make their decisions. (Combine with Negotiator)</value>
+    <value>This is an analytical personality, people who prioritize logic and common sense above all else. They are very balanced and practical people, who tend to use reason to make their decisions.</value>
   </data>
   <data name="Directors_Name" xml:space="preserve">
     <value>Directors</value>
   </data>
   <data name="Explorers_Description" xml:space="preserve">
-    <value>These people treat love as an adventure. They are impulsive and autonomous, very curious and are always focused on enjoying the moment, maintaining a “let life take me” attitude. (Combine with Explorer)</value>
+    <value>These people treat love as an adventure. They are impulsive and autonomous, very curious and are always focused on enjoying the moment, maintaining a “let life take me” attitude.</value>
   </data>
   <data name="Explorers_Name" xml:space="preserve">
     <value>Explorers</value>
   </data>
   <data name="Negotiator_Description" xml:space="preserve">
-    <value>Negotiating people are expressive, empathetic and idealistic. They usually have very sensitive profiles, but they have a lot of imagination and a very open mind. In addition, they need to delve into their feelings and like people to satisfy their emotional needs. (Combine with Director)</value>
+    <value>Negotiating people are expressive, empathetic and idealistic. They usually have very sensitive profiles, but they have a lot of imagination and a very open mind. In addition, they need to delve into their feelings and like people to satisfy their emotional needs.</value>
   </data>
   <data name="Negotiator_Name" xml:space="preserve">
     <value>Negotiator</value>

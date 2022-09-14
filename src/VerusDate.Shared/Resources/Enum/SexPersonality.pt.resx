@@ -118,67 +118,78 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Decompresser_Description" xml:space="preserve">
-    <value>A que vê o sexo como uma forma de descontração, um tubo de escape para momentos em que se sente tensa, estressada ou chateada.</value>
+    <value>Esta personalidade sexual tem tudo a ver com alívio do estresse! Digamos, por exemplo, que alguém tenha um emprego de alta potência ou esteja estressado com alguma coisa. Para o Descompressor, ter um pouco de tempo sexy é exatamente o que eles procuram para desabafar, relaxar e limpar a cabeça. Muitas vezes leva a um sono bem merecido.
+Nota lateral: o orgasmo causa a liberação de hormônios agradáveis – oxitocina, vasopressina e prolactina. Eles reduzem o estresse, induzem o sono e proporcionam uma sensação geral de bem-estar.</value>
   </data>
   <data name="Decompresser_Name" xml:space="preserve">
     <value>Descompressora</value>
   </data>
   <data name="Explorer_Description" xml:space="preserve">
-    <value>A turista sexual: curiosa e ávida por aprender coisas novas. Gosta de ir além da sua zona de conforto e não leva o sexo demasiado a sério.</value>
+    <value>Para o Explorador, a intimidade física tem tudo a ver com a aventura! Esses tipos de pessoas são curiosas e prontas para experimentar coisas novas no quarto. Em geral, um Explorador adora ser empurrado para fora de sua zona de conforto e não se leva muito a sério.
+Eles provavelmente fizeram muitas pesquisas sobre sexo e conhecem o assunto, prontos para experimentar tudo em primeira mão. Na verdade, eles estão até rindo de algumas coisas estranhas que podem acontecer entre os lençóis. É tudo diversão e jogos!</value>
   </data>
   <data name="Explorer_Name" xml:space="preserve">
     <value>Exploradora</value>
   </data>
   <data name="FairTrader_Description" xml:space="preserve">
-    <value>A que dá extrema importância à equação dar-receber, de modo que esta seja equilibrada. Gosta de saber que ambos estão atentos quanto às necessidades um do outro e dispostos a trabalhar em equipe.</value>
+    <value>Para o Comerciante Justo, sexo é tudo uma questão de equilíbrio! É sobre dar e receber prazer igualmente, e estar aberto e pronto para falar sobre seus desejos, torções, gostos e desgostos.
+Uma pessoa com esse tipo de personalidade sexual está disposta a se comprometer. Eles adoram a ideia de descobrir qual é o tipo de estimulação favorito de seu parceiro e, em seguida, fornecer-lhe essa estimulação. E, claro, ter o favor retribuído!</value>
   </data>
   <data name="FairTrader_Name" xml:space="preserve">
     <value>Comerciante Justo</value>
   </data>
   <data name="Giver_Description" xml:space="preserve">
-    <value>A que dá mais do que recebe e está em sintonia com as experiências e necessidades do seu parceiro. Pessoa para quem é importante saber que consegue fazer o outro sentir-se bem.</value>
+    <value>O Doador é, bem, alguém que ativamente obtém prazer ao ver seu parceiro se contorcer em felicidade sexual! Para pessoas com esse tipo de personalidade sexual, elas não estão tão focadas em si mesmas, mas acham o bem-estar de seu parceiro mais importante.
+Isso significa que eles estão muito sintonizados com quem estão e se esforçam para fazê-los se sentir bem. Do outro lado do espectro, o doador pode realmente se sentir desconfortável em receber prazer.</value>
   </data>
   <data name="Giver_Name" xml:space="preserve">
     <value>Dadora</value>
   </data>
   <data name="Guardian_Description" xml:space="preserve">
-    <value>A que enfatiza a segurança mais do que tudo. Esta característica é típica de quem tenha sofrido algum tipo de trauma ou simplesmente precise do elo de confiança com o seu parceiro nos momentos de intimidade.</value>
+    <value>O Guardião adora uma boa sessão de sexo, mas apenas se essa sessão for segura e confortável para ambas as partes! Esse tipo de personalidade sexual sempre garantirá que seu parceiro se sinta seguro e não permitirá que nenhuma intimidade desapareça sem consentimento total.
+Esse tipo de amante pode ter essa personalidade sexual por causa de traumas passados, ou pode simplesmente adorar ser íntimo quando há um grande nível de confiança e segurança.</value>
   </data>
   <data name="Guardian_Name" xml:space="preserve">
     <value>Guardiã</value>
   </data>
   <data name="PassionPursuer_Description" xml:space="preserve">
-    <value>A que crê que a interação sexual deve trazer experiências intensas, quase animalescas, e que é preciso estar em sintonia total com a energia do seu parceiro.</value>
+    <value>Se você gosta de sessões de sexo animalesco, carnal e lascivo, então você pode muito bem ser um apaixonado(a)! Para as pessoas que têm esse tipo de estilo de personalidade sexual, sexo é trocar energia crua e apaixonada. Há uma sensação de realmente deixar ir e se perder no momento para os Passion-Purserers.
+Durante o ato de amor, é como se ambos os parceiros fossem levados a novos patamares de euforia. O tempo não existe, criando oportunidades ilimitadas para eles realmente serem quem são sem julgamento.</value>
   </data>
   <data name="PassionPursuer_Name" xml:space="preserve">
     <value>Apaixonada</value>
   </data>
   <data name="PleasureSeeker_Description" xml:space="preserve">
-    <value>A que encara o prazer físico como único objetivo, considerando o sexo um dos prazeres mais simples da vida. Gosta de contacto físico abundante, mas não sente necessidade da componente emocional para o fazer.</value>
+    <value>Esta personalidade sexual tem tudo a ver com sensações físicas! Para eles, o sexo é bom, então eles participam de todos os tipos de diversão com um parceiro ou parceiros. O pensamento e o ato de tocar e ser tocado é inteiramente erótico.
+Para quem procura prazer, o sexo não é realmente uma experiência emocional, é algo para ser apreciado pelo que é. Na verdade, as pessoas com essa personalidade sexual podem não precisar de nenhuma conexão emocional profunda para participar de todos os tipos de êxtase sexual.</value>
   </data>
   <data name="PleasureSeeker_Name" xml:space="preserve">
     <value>Prazerosa</value>
   </data>
   <data name="Prioritizer_Description" xml:space="preserve">
-    <value>A que valoriza muito a vida sexual de ambos e está disposta a fazer sacrifícios para manter uma rotina, sem desculpas.</value>
+    <value>Para o prioritário(a), o sexo é sua prioridade número um! É um ato que deve fazer parte da vida cotidiana e não ser retirado da mesa quando há inconvenientes. Por exemplo, se foi um dia agitado ou um ou ambos os parceiros se sentiram cansados, o sexo não será dispensado. Em vez disso, será priorizado. Sacrifícios são feitos e pequenas desculpas não funcionam quando se trata de pular sexo.
+As pessoas com essa personalidade sexual geralmente são focadas na rotina e querem que sua vida sexual seja consistente.</value>
   </data>
   <data name="Prioritizer_Name" xml:space="preserve">
     <value>Prioritária</value>
   </data>
   <data name="Romantic_Description" xml:space="preserve">
-    <value>A cujo sexo baseia-se numa conexão profunda entre os dois, sendo comum manter contacto visual com o parceiro ou dizer-lhe que o ama durante a relação sexual.</value>
+    <value>Conexão emocional é o nome do jogo para o romântico! Embora a intimidade física seja tão sensual e importante, sem emoção, o sexo não é muito memorável ou significativo.
+Se sua personalidade sexual é o Romântico, você gosta de contato visual, sexo mais lento, longa sessão de preliminares e palavras de afirmação.</value>
   </data>
   <data name="Romantic_Name" xml:space="preserve">
     <value>Romântica</value>
   </data>
   <data name="Spiritualist_Description" xml:space="preserve">
-    <value>A cujo sexo é mais do que aquilo que se passa no corpo, devendo ser uma experiência quase transcendente, uma comunhão de almas e não apenas de corpos.</value>
+    <value>Se esta é a sua personalidade sexual, você descobre que a intimidade não é apenas física e não é apenas emocional. É uma combinação de ambos, além de uma oportunidade de se conectar a um propósito maior! O sexo, para o espiritualista, é uma experiência transcendente. É quando duas pessoas realmente se conectam, as energias se entrelaçam e a experiência parece quase palpável.
+Um exemplo de intimidade desfrutada por esse tipo de personalidade seria o sexo tântrico.</value>
   </data>
   <data name="Spiritualist_Name" xml:space="preserve">
     <value>Espiritualista</value>
   </data>
   <data name="ThrillSeeker_Description" xml:space="preserve">
-    <value>A que encara o ato sexual como algo entusiasmante, quase interdito. Trata-se do tipo de pessoa que precisa do elemento tabu, quer isto signifique experimentar algo inusitado ou satisfazer um fetiche.</value>
+    <value>É tudo sobre o tabu, baby! Os aventureiros têm pressa de todas as coisas que são proibidas ou impertinentes. Inclui atos de BDSM, como assumir papéis dominantes ou submissos. Ou simplesmente tentar coisas na cama que alguns podem considerar intensas, estranhas ou até loucas.
+Torções, fetiches e muito mais... um aventureiro geralmente está pronto para experimentar tudo isso.</value>
   </data>
   <data name="ThrillSeeker_Name" xml:space="preserve">
     <value>Aventureira</value>

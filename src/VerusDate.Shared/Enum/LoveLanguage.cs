@@ -2,6 +2,9 @@
 
 namespace VerusDate.Shared.Enum
 {
+    /// <summary>
+    /// https://5lovelanguages.com/quizzes/love-language
+    /// </summary>
     public enum LoveLanguage
     {
         [Custom(Name = "WordsOfAffirmation_Name", Description = "WordsOfAffirmation_Description", ResourceType = typeof(Resources.Enum.LoveLanguage))]

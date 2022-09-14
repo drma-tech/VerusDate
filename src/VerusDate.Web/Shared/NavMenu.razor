@@ -1,7 +1,8 @@
 ﻿@inherits ComponenteCore<NavMenu>
 @inject HttpClient Http
 
-<Bar Mode="BarMode.VerticalInline" CollapseMode="BarCollapseMode.Hide" Breakpoint="Breakpoint.Desktop" NavigationBreakpoint="Breakpoint.Tablet" Display="Display.None.Block.OnDesktop" Background="Background.Dark" ThemeContrast="ThemeContrast.Dark">
+<Bar @ref="Sidebar" Mode="BarMode.VerticalInline" CollapseMode="BarCollapseMode.Hide" Breakpoint="Breakpoint.Desktop" NavigationBreakpoint="Breakpoint.Tablet" Display="Display.None.Block.OnDesktop" Background="Background.Dark" ThemeContrast="ThemeContrast.Dark">
+    <BarToggler Mode="BarTogglerMode.Popout" />
     <BarBrand>
         <BarItem>
             <BarLink To="/">
@@ -49,6 +50,8 @@
 </Bar>
 
 @code {
+    [Parameter] public Bar? Sidebar { get; set; }
+
     private string MainPhoto = ImageHelper.GetNoUserPhoto;
     private ProfileModel profile;
 

@@ -4,7 +4,37 @@ namespace VerusDate.Shared.Enum
 {
     public enum Height
     {
-        [Custom(Name = "< 151 cm / 5’0”")]
+        [Custom(Name = "< 140 cm / 4’6”")]
+        _140 = 140,
+
+        [Custom(Name = "141 cm")]
+        _141 = 141,
+
+        [Custom(Name = "142 cm")]
+        _142 = 142,
+
+        [Custom(Name = "143 cm / 4’7”")]
+        _143 = 143,
+
+        [Custom(Name = "144 cm")]
+        _144 = 144,
+
+        [Custom(Name = "145 cm")]
+        _145 = 145,
+
+        [Custom(Name = "146 cm / 4’8”")]
+        _146 = 146,
+
+        [Custom(Name = "147 cm")]
+        _147 = 147,
+
+        [Custom(Name = "148 cm")]
+        _148 = 148,
+
+        [Custom(Name = "149 cm / 4’9”")]
+        _149 = 149,
+
+        [Custom(Name = "150 cm")]
         _150 = 150,
 
         [Custom(Name = "151 cm")]

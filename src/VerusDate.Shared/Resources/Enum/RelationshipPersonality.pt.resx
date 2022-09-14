@@ -118,25 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Builders_Description" xml:space="preserve">
-    <value>Estas pessoas têm como principal valor na vida a família, os amigos e a união com as pessoas amadas. São pessoas serenas, sociáveis e muito pacíficas. Evitam ao máximo se envolver em conflitos e assumir riscos. (Combinam com Construtora)</value>
+    <value>Estas pessoas têm como principal valor na vida a família, os amigos e a união com as pessoas amadas. São pessoas serenas, sociáveis e muito pacíficas. Evitam ao máximo se envolver em conflitos e assumir riscos.</value>
   </data>
   <data name="Builders_Name" xml:space="preserve">
     <value>Construtora</value>
   </data>
   <data name="Directors_Description" xml:space="preserve">
-    <value>Trata-se de uma personalidade analítica, de pessoas que priorizam a lógica e o bom senso acima de tudo. São pessoas muito equilibradas e práticas, que costumam usar a razão para tomar suas decisões. (Combinam com Negociadora)</value>
+    <value>Trata-se de uma personalidade analítica, de pessoas que priorizam a lógica e o bom senso acima de tudo. São pessoas muito equilibradas e práticas, que costumam usar a razão para tomar suas decisões.</value>
   </data>
   <data name="Directors_Name" xml:space="preserve">
     <value>Diretora</value>
   </data>
   <data name="Explorers_Description" xml:space="preserve">
-    <value>Estas pessoas tratam o amor como uma aventura. São impulsivas e autônomas, muito curiosas e estão sempre focadas em aproveitar o momento, mantendo uma atitude no estilo “deixa a vida me levar”. (Combinam com Exploradora)</value>
+    <value>Estas pessoas tratam o amor como uma aventura. São impulsivas e autônomas, muito curiosas e estão sempre focadas em aproveitar o momento, mantendo uma atitude no estilo “deixa a vida me levar”.</value>
   </data>
   <data name="Explorers_Name" xml:space="preserve">
     <value>Exploradora</value>
   </data>
   <data name="Negotiator_Description" xml:space="preserve">
-    <value>As pessoas negociadoras são expressivas, empáticas e idealistas. Geralmente têm perfis muito sensíveis, mas possuem muita imaginação e a mente bem aberta. Além disso, precisam se aprofundar em seus sentimentos e gostam que as pessoas satisfaçam suas necessidades emocionais. (Combinam com Diretora)</value>
+    <value>As pessoas negociadoras são expressivas, empáticas e idealistas. Geralmente têm perfis muito sensíveis, mas possuem muita imaginação e a mente bem aberta. Além disso, precisam se aprofundar em seus sentimentos e gostam que as pessoas satisfaçam suas necessidades emocionais.</value>
   </data>
   <data name="Negotiator_Name" xml:space="preserve">
     <value>Negociadora</value>

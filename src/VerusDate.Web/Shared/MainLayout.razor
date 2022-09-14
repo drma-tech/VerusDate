@@ -6,13 +6,14 @@
         <LayoutSiderContent>
             <AuthorizeView>
                 <Authorized>
-                    <NavMenu />
+                    <NavMenu Sidebar="@sidebar" />
                 </Authorized>
             </AuthorizeView>
         </LayoutSiderContent>
     </LayoutSider>
     <Layout>
         <LayoutHeader Fixed="true">
+            @*<BarToggler Bar="@sidebar" />*@
             <HeadLayout></HeadLayout>
         </LayoutHeader>
         <LayoutContent>
@@ -52,6 +53,8 @@
                 IconType="IconType.FontAwesome" />
 
 @code{
+    private Bar? sidebar;
+
     private enum TypeButton
     {
         Home, Profile, Explore, Event, Store, Support

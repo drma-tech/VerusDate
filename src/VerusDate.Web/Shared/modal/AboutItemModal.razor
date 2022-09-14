@@ -3,7 +3,7 @@
 
 @if (!string.IsNullOrEmpty(FieldInfo))
 {
-    <Alert Visible="true" Color="Color.Info" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is3.FromBottom">
+    <Alert Visible="true" Color="Color.Info" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is1.FromBottom">
         <AlertMessage>Por que é importante:</AlertMessage>
         <AlertDescription>@FieldInfo</AlertDescription>
     </Alert>
@@ -35,11 +35,20 @@
         </Alert>
         @if (ExpectedValues.Any())
         {
-            foreach (var item in ExpectedValues)
+            if (Type == CompatibilityType.Range)
             {
-                <Badge Color="Color.Secondary" Pill="true">
-                    @item
-                </Badge>
+                <Badge Color="Color.Secondary" Pill="true">@ExpectedValues[0]</Badge>
+
+                <Blazorise.Text> - </Blazorise.Text>
+
+                <Badge Color="Color.Secondary" Pill="true">@ExpectedValues[1]</Badge>
+            }
+            else
+            {
+                foreach (var item in ExpectedValues)
+                {
+                    <Badge Color="Color.Secondary" Pill="true">@item</Badge>
+                }
             }
         }
         else
@@ -53,37 +62,89 @@
 <Alert Visible="true" Color="Color.Secondary" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
     <AlertMessage>Perfil do seu parceiro</AlertMessage>
 </Alert>
-@foreach (var item in ViewValues)
+@if (ViewValues.Any())
 {
-    if (item is Enum resultE)
+    foreach (var item in ViewValues)
     {
-        <Badge Color="Color.Secondary" Pill="true">
-            @resultE.GetName()
-        </Badge>
-        <FieldHelp Style="display: inline;">@resultE.GetCustomAttribute().Description</FieldHelp>
+        if (item is Enum resultE)
+        {
+            var desc = @resultE.GetCustomAttribute().Description;
+            var name = @resultE.GetName();
+
+            if (string.IsNullOrEmpty(desc))
+            {
+                <Alert Visible="true" Color="@GetColor(item)" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is1.FromBottom.Is2.FromEnd" Style="display: inline-block">
+                    <AlertMessage>@name</AlertMessage>
+                </Alert>
+            }
+            else
+            {
+                <Alert Visible="true" Color="@GetColor(item)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+                    <AlertMessage>@name</AlertMessage>
+                    <AlertDescription>@desc</AlertDescription>
+                </Alert>
+            }
+        }
+        else if (item != null)
+        {
+            <Alert Visible="true" Color="@GetColor(item)" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is1.FromBottom" Style="display: inline-block">
+                <AlertMessage>@item</AlertMessage>
+            </Alert>
+        }
+        else
+        {
+            <Badge Color="Color.Secondary" Pill="true">
+                Não respondido
+            </Badge>
+        }
     }
-    else if (item != null)
-    {
-        <Badge Color="Color.Secondary" Pill="true">
-            @(item)
-        </Badge>
-    }
-    else
-    {
-        <Badge Color="Color.Secondary" Pill="true">
-            Não respondido
-        </Badge>
-    }
+}
+else
+{
+    <Badge Color="Color.Secondary" Pill="true">
+        Não respondido
+    </Badge>
 }
 
 @code {
     [Parameter] public List<string> PreferenceValues { get; set; }
     [Parameter] public List<string> ExpectedValues { get; set; }
     [Parameter] public IReadOnlyList<TValue> ViewValues { get; set; }
+    [Parameter] public List<AffinityVM> Affinities { get; set; } = new();
 
     [Parameter] public CompatibilityType Type { get; set; }
     [Parameter] public CompatibilityItem Item { get; set; }
     [Parameter] public ProfileModel? User { get; set; }
     [Parameter] public ProfilePreferenceModel? Pref { get; set; }
     [Parameter] public string FieldInfo { get; set; }
+
+    private Color GetColor(TValue value)
+    {
+        if (!Affinities.Any(s => s.Item == Item)) //se o atributo não está mapeado no affinity, fica neutro
+        {
+            return Color.Secondary;
+        }
+        else if (Affinities.Single(s => s.Item == Item).HaveAffinity) //se está mapeado e tem affinity
+        {
+            if (value == null)
+            {
+                return Color.Success;
+            }
+            else if (value is Enum result && Type == CompatibilityType.Enum)
+            {
+                if (!ExpectedValues.Any() || ExpectedValues.Contains(result.GetName()))
+                    return Color.Success;
+                else
+                    return Color.Warning;
+            }
+            else
+            {
+                return Color.Success;
+            }
+        }
+        else //se mapeado mas sem afinidade
+        {
+            return Color.Danger;
+        }
+    }
 }

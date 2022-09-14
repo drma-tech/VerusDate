@@ -1,6 +1,6 @@
 ﻿@inherits ComponenteCore<CardCompatibility>
 
-<Alert Visible="true" Color="@GetColor(null)">
+<Alert Visible="true" Color="@GetColor(null)" Shadow="Shadow.Small">
     <Heading Size="HeadingSize.Is5">
         Compatibilidade Geral (@(Affinities.GetPercentAffinity(null) + "%"))
         <Button Size="Size.ExtraSmall" Color="Color.Primary" Float="Float.End" Clicked="@(()=>help.ShowModal())" title="Ajuda" Margin="Margin.Is2.FromStart">
@@ -13,7 +13,7 @@
     }
     else if (totPercAff <= 80)
     {
-        <AlertDescription>Quase lá, mas não significa que não possam dar certo. Analisem com cuidado nosso relatório e trabalhem juntos essas diferenças.</AlertDescription>
+        <AlertDescription>Não são um casal perfeito, mas não significa que não possam dar certo juntos. Analisem com cuidado nosso relatório e trabalhem juntos essas diferenças.</AlertDescription>
     }
     else
     {
@@ -21,9 +21,8 @@
     }
 </Alert>
 
-<Alert Visible="true" Color="@GetColor(Section.Basic)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
-    <AlertMessage>Basic</AlertMessage>
-    <AlertDescription>(@Affinities.GetPercentAffinity(Section.Basic)%)</AlertDescription>
+<Alert Visible="true" Color="@GetColor(Section.Basic)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom" Shadow="Shadow.Small">
+    <AlertMessage>Basic (@Affinities.GetPercentAffinity(Section.Basic)%)</AlertMessage>
 </Alert>
 @if (View != null)
 {
@@ -36,9 +35,8 @@
     <ItemDataProfile For="@(() => View.SexualOrientation)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.SexualOrientation" User="@User" Pref="@User.Preference" Value="@View.SexualOrientation" ValuesUser="@User.Preference.SexualOrientation" ClassIcon="fas fa-neuter" Affinities="@Affinities"></ItemDataProfile>
 }
 
-<Alert Visible="true" Color="@GetColor(Section.Bio)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
-    <AlertMessage>Bio</AlertMessage>
-    <AlertDescription>(@Affinities.GetPercentAffinity(Section.Bio)%)</AlertDescription>
+<Alert Visible="true" Color="@GetColor(Section.Bio)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom" Shadow="Shadow.Small">
+    <AlertMessage>Bio (@Affinities.GetPercentAffinity(Section.Bio)%)</AlertMessage>
 </Alert>
 @if (View != null)
 {
@@ -51,9 +49,8 @@
     <ItemDataProfile For="@(() => View.Disabilities)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.Disabilities" User="@User" Pref="@User.Preference" Value="@View.Disabilities" ValueUser="@User.Disabilities" ClassIcon="fas fa-wheelchair" Affinities="@Affinities"></ItemDataProfile>
 }
 
-<Alert Visible="true" Color="@GetColor(Section.Lifestyle)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
-    <AlertMessage>Lifestyle</AlertMessage>
-    <AlertDescription>(@Affinities.GetPercentAffinity(Section.Lifestyle)%)</AlertDescription>
+<Alert Visible="true" Color="@GetColor(Section.Lifestyle)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom" Shadow="Shadow.Small">
+    <AlertMessage>Lifestyle (@Affinities.GetPercentAffinity(Section.Lifestyle)%)</AlertMessage>
 </Alert>
 @if (View != null)
 {
@@ -68,9 +65,8 @@
     <ItemDataProfile For="@(() => View.TravelFrequency)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.TravelFrequency" User="@User" Pref="@User.Preference" Value="@View.TravelFrequency" ValuesUser="@(User.Preference.TravelFrequency.Any()?User.Preference.TravelFrequency:new TravelFrequency[]{User.TravelFrequency.Value})" ClassIcon="fas fa-plane" Affinities="@Affinities"></ItemDataProfile>
 }
 
-<Alert Visible="true" Color="@GetColor(Section.Personality)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
-    <AlertMessage>Personality</AlertMessage>
-    <AlertDescription>(@Affinities.GetPercentAffinity(Section.Personality)%)</AlertDescription>
+<Alert Visible="true" Color="@GetColor(Section.Personality)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom" Shadow="Shadow.Small">
+    <AlertMessage>Personality (@Affinities.GetPercentAffinity(Section.Personality)%)</AlertMessage>
 </Alert>
 @if (View != null)
 {
@@ -82,9 +78,8 @@
     <ItemDataProfile For="@(() => View.SexPersonality)" Type="@CompatibilityType.Enum" Item="@CompatibilityItem.SexPersonality" User="@User" Pref="@User.Preference" Value="@View.SexPersonality" ValuesUser="@User.Preference.SexPersonality" ClassIcon="fas fa-heart" Affinities="@Affinities"></ItemDataProfile>
 }
 
-<Alert Visible="true" Color="@GetColor(Section.Interest)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
-    <AlertMessage>Interest</AlertMessage>
-    <AlertDescription>(@Affinities.GetPercentAffinity(Section.Interest)%)</AlertDescription>
+<Alert Visible="true" Color="@GetColor(Section.Interest)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom" Shadow="Shadow.Small">
+    <AlertMessage>Interest (@Affinities.GetPercentAffinity(Section.Interest)%)</AlertMessage>
 </Alert>
 @if (View != null)
 {
@@ -102,7 +97,6 @@
     <ul class="mr-4">
         <li>O cálculo é baseado em pesquisas e estatísticas, podendo não refletir com precisão todos os casos e/ou contextos;</li>
         <li>Caso tenha dúvidas e/ou sugestões de melhorias, favor abrir um ticket na nossa página de suporte;</li>
-        <li>Clique em cada um dos itens para obter mais detalhes;</li>
     </ul>
 </VerusDate.Web.Shared.modal.BasicModal>
 
@@ -113,6 +107,14 @@
 
     private Shared.modal.BasicModal help;
     private int totPercAff => Affinities.GetPercentAffinity(null);
+
+    protected override void OnInitialized()
+    {
+        if (View != null && User.DaysInsert() < 30)
+        {
+            Toast.ShowInfo("Clique em cada um dos itens para obter mais detalhes");
+        }
+    }
 
     public Background GetBackground(Section? category)
     {

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using VerusDate.Shared.Enum;
+﻿using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared
 {
@@ -10,12 +9,10 @@ namespace VerusDate.Shared
             this.Section = section;
             this.Item = Item;
             this.HaveAffinity = HaveAffinity;
-            //this.ArrayEnums = ArrayEnums;
         }
 
         public Section Section { get; set; }
         public CompatibilityItem Item { get; set; }
         public bool HaveAffinity { get; set; }
-        //public IEnumerable<int> ArrayEnums { get; set; }
     }
 }

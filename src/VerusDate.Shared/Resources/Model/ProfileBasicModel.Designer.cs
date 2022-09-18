@@ -133,7 +133,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatically chosen according to the official languages of the country (if available).
+        ///   Looks up a localized string similar to Automatically chosen according to the languages in force in the country (if available).
         /// </summary>
         public static string Languages_Description {
             get {

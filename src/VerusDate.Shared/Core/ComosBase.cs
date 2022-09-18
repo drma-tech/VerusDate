@@ -11,7 +11,8 @@ namespace VerusDate.Shared.Core
         Chat = 4,
         Ticket = 5,
         TicketVote = 6,
-        Event = 7
+        Event = 7,
+        Invite = 8
     }
 
     public abstract class CosmosBase
@@ -49,7 +50,7 @@ namespace VerusDate.Shared.Core
         public DateTime? DtUpdate { get; set; }
 
         /// <summary>
-        /// Recupera o status dos dados atuais
+        /// Recupera o status dos dados atuais (não usar quando o id for dinâmico)
         /// </summary>
         /// <returns></returns>
         public DataStatus GetDataStatus()

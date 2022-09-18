@@ -34,12 +34,12 @@
                 </Button>
             </Column>
             <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
-                <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/Gallery">
+                <Button Color="Color.Primary" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/Gallery" Disabled="true">
                     <Blazorise.Icon Name="FontAwesomeIcons.Portrait"></Blazorise.Icon> Fotos
-                    @if (profile?.Photo == null)
+                    @*@if (profile?.Photo == null)
                     {
                         <Blazorise.Icon Name="FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Blazorise.Icon>
-                    }
+                    }*@
                 </Button>
             </Column>
             <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">

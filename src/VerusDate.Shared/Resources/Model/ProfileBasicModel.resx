@@ -142,7 +142,7 @@
     <value>Intentions</value>
   </data>
   <data name="Languages_Description" xml:space="preserve">
-    <value>Automatically chosen according to the official languages of the country (if available)</value>
+    <value>Automatically chosen according to the languages in force in the country (if available)</value>
   </data>
   <data name="Languages_Name" xml:space="preserve">
     <value>Languages</value>

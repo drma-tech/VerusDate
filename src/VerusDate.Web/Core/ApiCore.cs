@@ -57,7 +57,7 @@ namespace VerusDate.Web.Core
             return storage.GetItem<List<T>>(requestUri);
         }
 
-        public static async Task<HttpResponseMessage> Post<T>(this HttpClient http, string requestUri, T obj, ISyncSessionStorageService storage, string urlGet) where T : class
+        public static async Task<HttpResponseMessage> Post<T>(this HttpClient http, string requestUri, T obj, ISyncSessionStorageService? storage = null, string? urlGet = null) where T : class
         {
             var response = await http.PostAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
 

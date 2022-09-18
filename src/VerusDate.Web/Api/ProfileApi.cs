@@ -70,7 +70,7 @@ namespace VerusDate.Web.Api
 
         public static async Task Profile_UpdateLooking(this HttpClient http, ProfileModel obj, ProfilePreferenceModel preference, ISyncSessionStorageService storage, IToastService toast)
         {
-            var fistUpdate = obj.Preference == null;
+            //var fistUpdate = obj.Preference == null;
 
             obj.Preference = preference;
 
@@ -94,7 +94,7 @@ namespace VerusDate.Web.Api
                 storage.Session_Update_Profile(obj);
             }
 
-            await response.ProcessResponse(toast, "Definição de busca atualizada com sucesso");
+            await response.ProcessResponse(toast, "Preferências atualizadas com sucesso");
         }
     }
 }

@@ -3,6 +3,7 @@ using VerusDate.Shared;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
 using VerusDate.Shared.Model;
+using VerusDate.Shared.Model.Profile;
 using VerusDate.Web.Api;
 using VerusDate.Web.Core;
 
@@ -12,6 +13,8 @@ namespace VerusDate.Web.Pages.Profile
     {
         private ProfileModel profile = new();
         private Partner partner { get; set; } = new();
+        private List<string> NewInvites = new();
+        private List<string> RemovedInvites = new();
         private GeoLocation GPS = new();
 
         protected override async Task LoadData()
@@ -514,6 +517,17 @@ namespace VerusDate.Web.Pages.Profile
             {
                 profile.Zodiac = profile.BirthDate.GetZodiac();
 
+                if (profile.GetDataStatus() == DataStatus.New)
+                {
+                    await Http.Profile_Add(profile, SessionStorage, Toast);
+                }
+                else
+                {
+                    await Http.Profile_Update(profile, SessionStorage, Toast);
+                }
+
+                profile = await Http.Profile_Get(SessionStorage); //update id field
+
                 if (profile.Modality == Modality.Matchmaker)
                 {
                     foreach (var item in profile.Partners)
@@ -523,14 +537,34 @@ namespace VerusDate.Web.Pages.Profile
 
                     profile.Partners = new List<Partner>();
                 }
-
-                if (profile.GetDataStatus() == DataStatus.New)
-                {
-                    await Http.Profile_Add(profile, SessionStorage, Toast);
-                }
                 else
                 {
-                    await Http.Profile_Update(profile, SessionStorage, Toast);
+                    var invites = NewInvites.Except(RemovedInvites).ToList();
+
+                    foreach (var email in invites)
+                    {
+                        var invite = await Http.Invite_Get(SessionStorage, email);
+                        var newInvite = false;
+
+                        if (invite == null)
+                        {
+                            invite = new InviteModel();
+                            invite.SetIds(email);
+                            newInvite = true;
+                        }
+
+                        invite.Invites.Add(new Invite(profile.Key, InviteType.Partner));
+
+                        if (newInvite)
+                            await Http.Invite_Add(invite, Toast);
+                        else
+                            await Http.Invite_Update(invite, Toast);
+                    }
+
+                    foreach (var item in RemovedInvites)
+                    {
+                        //TODO: remove removed invites
+                    }
                 }
             }
             catch (Exception ex)
@@ -547,6 +581,9 @@ namespace VerusDate.Web.Pages.Profile
         private void AddNewPartner()
         {
             profile.Partners.Add(partner);
+
+            NewInvites.Add(partner.Email);
+
             partner = new();
         }
 
@@ -555,6 +592,8 @@ namespace VerusDate.Web.Pages.Profile
             var obj = profile.Partners.FirstOrDefault(x => x.Email == email);
 
             if (obj != null) profile.Partners.Remove(obj);
+
+            RemovedInvites.Add(partner.Email);
         }
     }
 }

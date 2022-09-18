@@ -1,28 +1,22 @@
-﻿@if (Options.Premium)
+﻿@inherits ComponenteCore<CustomVisibility>
+
+@if (Loading)
+{
+<Alert Color="Color.Warning" Visible="true" Margin="Margin.Is0.FromBottom">
+    <AlertDescription>
+        <Blazorise.Icon Class="spinner-border spinner-border-sm"></Blazorise.Icon> Carregando...
+    </AlertDescription>
+</Alert>
+}
+else if (Invalid)
 {
     <Alert Color="Color.Danger" Visible="true" Margin="Margin.Is0.FromBottom">
         <AlertDescription>
-            <Blazorise.Icon Name="FontAwesomeIcons.UserLock"></Blazorise.Icon> Recurso disponível apenas para usuário premium
+            <Blazorise.Icon Name="FontAwesomeIcons.Bug"></Blazorise.Icon> @(CustomError ?? "Operação inválida. Favor, tentar novamente.")
         </AlertDescription>
     </Alert>
 }
-else if (Options.Invalid)
-{
-    <Alert Color="Color.Danger" Visible="true" Margin="Margin.Is0.FromBottom">
-        <AlertDescription>
-            <Blazorise.Icon Name="FontAwesomeIcons.Bug"></Blazorise.Icon> Operação inválida. Favor, tentar novamente.
-        </AlertDescription>
-    </Alert>
-}
-else if (Options.Loading)
-{
-    <Alert Color="Color.Warning" Visible="true" Margin="Margin.Is0.FromBottom">
-        <AlertDescription>
-            <Blazorise.Icon Class="spinner-border spinner-border-sm"></Blazorise.Icon> Carregando...
-        </AlertDescription>
-    </Alert>
-}
-else if (Options.NoData)
+else if (NoData)
 {
     <Alert Color="Color.Primary" Visible="true" Margin="Margin.Is0.FromBottom">
         <AlertDescription>
@@ -30,7 +24,16 @@ else if (Options.NoData)
         </AlertDescription>
     </Alert>
 }
+else
+{
+    @ChildContent
+}
 
 @code {
-    [Parameter] public VisibilityOptions Options { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public bool Loading { get; set; }
+    [Parameter] public bool Invalid { get; set; }
+    [Parameter] public bool NoData { get; set; }
+    [Parameter] public string? CustomError { get; set; }
 }

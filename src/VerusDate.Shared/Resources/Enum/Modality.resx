@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Matchmaker_Description" xml:space="preserve">
-    <value>Você está em busca do seu parceiro ideal (durar a vida toda)? Com nosso exclusivo e avançado sistema de compatibilidade, garantimos uma taxa de sucesso maior que qualquer outro sistema/site/app no mundo.</value>
+    <value>Are you looking for your ideal partner (last a lifetime)? With our unique and advanced compatibility system, we guarantee a success rate higher than any other system/site/app in the world.</value>
   </data>
   <data name="Matchmaker_Name" xml:space="preserve">
     <value>Matchmaker</value>
   </data>
   <data name="RelationshipAnalysis_Description" xml:space="preserve">
-    <value>Você já está em um relacionamento sério, noivado ou casamento e quer saber o quanto vocês são compatíveis? Quais os pontos fracos que precisam trabalhar para fortalecer a relação? Saiba tudo disso e muito mais.</value>
+    <value>Are you already in a serious relationship, engagement or marriage and want to know how compatible you are? What weaknesses do you need to work on to strengthen the relationship? Learn all of this and much more.</value>
   </data>
   <data name="RelationshipAnalysis_Name" xml:space="preserve">
     <value>Relationship Analysis</value>

@@ -68,10 +68,9 @@
 <Card Margin="Margin.Is3.FromBottom">
     <CardHeader>@Resources.CardHeader.EventMyEvents</CardHeader>
     <CardBody>
-        @if (OptionsMyEvents.HasCustomVisibility)
-        {
-            <CustomVisibility Options="OptionsMyEvents"></CustomVisibility>
-        }
+        <CustomVisibility Loading="MyEventsLoading" NoData="!MyEvents.Any()">
+
+        </CustomVisibility>
     </CardBody>
 </Card>
 
@@ -83,12 +82,7 @@
         </Button>
     </CardHeader>
     <CardBody>
-        @if (OptionsEvents.HasCustomVisibility)
-        {
-            <CustomVisibility Options="OptionsEvents"></CustomVisibility>
-        }
-        else
-        {
+        <CustomVisibility Loading="AllEventsLoading" NoData="!AvailableEvents.Any()">
             <Table Hoverable="true" Responsive="true" Narrow="true" FullWidth="true" Margin="Margin.Is0.FromBottom">
                 <TableHeader ThemeContrast="ThemeContrast.Light">
                     <TableRow>
@@ -115,46 +109,42 @@
                             <TableRowCell>@item.Location</TableRowCell>
                             <TableRowCell>@item.MinimalAge-@item.MaxAge</TableRowCell>
                             <TableRowCell>@(item.SexualOrientation.Count() > 0 ? item.SexualOrientation.First().GetName() : "-")</TableRowCell>
-                            <TableRowCell>@(item.Intentions.Count() > 0 ? item.Intentions.First().GetName() : "-")</TableRowCell>
-                            <TableRowCell>
-                                <Badge Color="Color.Primary">10</Badge>
-                                <Badge Color="Color.Primary"><Blazorise.Icon Name="FontAwesomeIcons.Male"></Blazorise.Icon> 5</Badge>
-                                <Badge Color="Color.Danger"><Blazorise.Icon Name="FontAwesomeIcons.Female"></Blazorise.Icon> 5</Badge>
-                            </TableRowCell>
-                            <TableRowCell>
-                                <Button Size="Size.ExtraSmall" Color="Color.Primary" Disabled="true">
-                                    <Blazorise.Icon Name="FontAwesomeIcons.SignInAlt"></Blazorise.Icon> Inscrever
-                                </Button>
-                            </TableRowCell>
-                        </TableRow>
+                                <TableRowCell>@(item.Intentions.Count() > 0 ? item.Intentions.First().GetName() : "-")</TableRowCell>
+                                <TableRowCell>
+                                    <Badge Color="Color.Primary">10</Badge>
+                                    <Badge Color="Color.Primary"><Blazorise.Icon Name="FontAwesomeIcons.Male"></Blazorise.Icon> 5</Badge>
+                                    <Badge Color="Color.Danger"><Blazorise.Icon Name="FontAwesomeIcons.Female"></Blazorise.Icon> 5</Badge>
+                                </TableRowCell>
+                                <TableRowCell>
+                                    <Button Size="Size.ExtraSmall" Color="Color.Primary" Disabled="true">
+                                        <Blazorise.Icon Name="FontAwesomeIcons.SignInAlt"></Blazorise.Icon> Inscrever
+                                    </Button>
+                                </TableRowCell>
+                            </TableRow>
                     }
                 </TableBody>
             </Table>
-        }
+        </CustomVisibility>
     </CardBody>
 </Card>
 
 @code {
 
-    private ProfileModel profile { get; set; }
-    private List<EventModel> MyEvents { get; set; }
-    private List<EventModel> AvailableEvents { get; set; }
+    private ProfileModel? profile { get; set; }
+    private List<EventModel> MyEvents { get; set; } = new();
+    private List<EventModel> AvailableEvents { get; set; } = new();
 
-    private VisibilityOptions OptionsMyEvents => new VisibilityOptions()
-    {
-        Loading = IsLoading,
-        NoData = MyEvents == null
-    };
-
-    private VisibilityOptions OptionsEvents => new VisibilityOptions()
-    {
-        Loading = IsLoading,
-        NoData = AvailableEvents != null && !AvailableEvents.Any()
-    };
+    private bool MyEventsLoading;
+    private bool AllEventsLoading;
 
     protected override async Task LoadData()
     {
+        MyEventsLoading = true;
         profile = await Http.Profile_Get(SessionStorage);
+        MyEventsLoading = false;
+
+        AllEventsLoading = true;
         AvailableEvents = await Http.Event_GetAll(SessionStorage);
+        AllEventsLoading = false;
     }
 }

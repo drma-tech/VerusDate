@@ -3,29 +3,20 @@ using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
+using System.Diagnostics.CodeAnalysis;
 using VerusDate.Web.Api;
 
 namespace VerusDate.Web.Core
 {
-    public class VisibilityOptions
-    {
-        public bool Premium { get; set; }
-        public bool Invalid { get; set; }
-        public bool Loading { get; set; }
-        public bool NoData { get; set; }
-
-        public bool HasCustomVisibility => Premium || Invalid || Loading || NoData;
-    }
-
     public static class ComponenteUtils
     {
-        public static string IdUser { get; set; }
+        public static string? IdUser { get; set; }
         public static bool IsAuthenticated { get; set; }
-        public static ISyncSessionStorageService Storage { get; set; }
+        public static ISyncSessionStorageService Storage { get; set; } = default!;
 
         //public static string GetStorageKey(string key) => string.IsNullOrEmpty(IdUser) ? throw new ArgumentException(IdUser) : $"{key}({IdUser})";
 
-        public static string BaseApi(this HttpClient http) => http.BaseAddress.ToString().Contains("localhost") ? "http://localhost:7071/api/" : http.BaseAddress.ToString() + "api/";
+        public static string BaseApi([NotNullWhen(true)] this HttpClient http) => http.BaseAddress?.ToString().Contains("localhost") ?? true ? "http://localhost:7071/api/" : http.BaseAddress.ToString() + "api/";
     }
 
     /// <summary>
@@ -35,21 +26,19 @@ namespace VerusDate.Web.Core
     public abstract class ComponenteCore<TClass> : ComponentBase where TClass : class
     {
         [Inject]
-        protected ILogger<TClass> Logger { get; set; }
+        protected ILogger<TClass> Logger { get; set; } = default!;
 
         [Inject]
-        protected NavigationManager Navigation { get; set; }
+        protected NavigationManager Navigation { get; set; } = default!;
 
         [Inject]
-        protected IToastService Toast { get; set; }
+        protected IToastService Toast { get; set; } = default!;
 
         [Inject]
-        protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        protected AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
 
         [Inject]
-        protected ISyncSessionStorageService SessionStorage { get; set; }
-
-        public bool IsLoading { get; set; } = true;
+        protected ISyncSessionStorageService SessionStorage { get; set; } = default!;
 
         protected override async Task OnInitializedAsync()
         {
@@ -79,10 +68,10 @@ namespace VerusDate.Web.Core
     public abstract class PageCore<T> : ComponenteCore<T> where T : class
     {
         [Inject]
-        protected IJSRuntime JsRuntime { get; set; }
+        protected IJSRuntime JsRuntime { get; set; } = default!;
 
         [Inject]
-        protected HttpClient Http { get; set; }
+        protected HttpClient Http { get; set; } = default!;
 
         protected abstract Task LoadData();
 
@@ -108,10 +97,6 @@ namespace VerusDate.Web.Core
             catch (Exception ex)
             {
                 ex.ProcessException(Toast, Logger);
-            }
-            finally
-            {
-                IsLoading = false;
             }
         }
 

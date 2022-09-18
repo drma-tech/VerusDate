@@ -26,11 +26,11 @@ namespace VerusDate.Api.Core
         /// <typeparam name="O">OUT = classe de retorno</typeparam>
         /// <param name="req">HttpRequest</param>
         /// <returns></returns>
-        public static I BuildRequestQuery<I, O>(this HttpRequest req) where I : MediatorQuery<O>, new() where O : class
+        public static I BuildRequestQuery<I, O>(this HttpRequest req, string id = null) where I : MediatorQuery<O>, new() where O : class
         {
             var obj = new I();
 
-            obj.SetIds(req.GetUserId());
+            obj.SetIds(id ?? req.GetUserId());
             obj.SetParameters(req.Query);
 
             return obj;
@@ -43,14 +43,13 @@ namespace VerusDate.Api.Core
         /// <param name="req">HttpRequest</param>
         /// <param name="cancellationToken">CancellationToken</param>
         /// <returns></returns>
-        public static async Task<I> BuildRequestCommand<I>(this HttpRequest req, CancellationToken cancellationToken) where I : CosmosBase
+        public static async Task<I> BuildRequestCommand<I>(this HttpRequest req, CancellationToken cancellationToken, bool GenerateId = true) where I : CosmosBase
         {
             var obj = await JsonSerializer.DeserializeAsync<I>(req.Body, options: null, cancellationToken);
 
             //bool.TryParse(req.Query["enable_seed"], out bool enable_seed);
 
-            //if (!enable_seed)
-            obj.SetIds(req.GetUserId());
+            if (GenerateId) obj.SetIds(req.GetUserId());
 
             return obj;
         }

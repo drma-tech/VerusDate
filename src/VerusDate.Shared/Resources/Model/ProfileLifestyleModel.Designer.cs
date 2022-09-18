@@ -151,7 +151,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This field is optional (it is necessary to test on a third-party site; multi-language).
+        ///   Looks up a localized string similar to It is necessary to test on a third-party site (multi-language).
         /// </summary>
         internal static string MyersBriggsTypeIndicator_Description {
             get {

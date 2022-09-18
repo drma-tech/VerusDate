@@ -26,8 +26,10 @@ namespace VerusDate.Web.Api
             return await http.Get<ProfileModel>(ProfileEndpoint.Get, storage);
         }
 
-        public static async Task<ProfileView> Profile_GetView(this HttpClient http, ISyncSessionStorageService storage, string IdUserView)
+        public static async Task<ProfileView?> Profile_GetView(this HttpClient http, ISyncSessionStorageService storage, string? IdUserView)
         {
+            if (IdUserView == null) return default;
+
             return await http.Get<ProfileView>(ProfileEndpoint.GetView(IdUserView), storage);
         }
 
@@ -46,7 +48,7 @@ namespace VerusDate.Web.Api
             await response.ProcessResponse(toast, "Perfil criado com sucesso");
         }
 
-        public static async Task Profile_Update(this HttpClient http, ProfileModel obj, ISyncSessionStorageService storage, IToastService toast)
+        public static async Task Profile_Update(this HttpClient http, ProfileModel obj, ISyncSessionStorageService storage, IToastService? toast)
         {
             var response = await http.Put(ProfileEndpoint.Update, obj);
 

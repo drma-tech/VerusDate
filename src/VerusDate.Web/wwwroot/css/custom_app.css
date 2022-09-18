@@ -105,3 +105,57 @@
     padding: 0.5rem !important;
     margin-bottom: 0.5rem !important;
 }
+
+.alert-warning {
+    border-color: #efe696;
+}
+
+/*BLAZORIZE - BOOTSTRAP*/
+
+/*.alert-primary {
+    color: #004085 !important;
+    background-color: #cce5ff !important;
+    border-color: #b8daff !important;
+}
+
+.alert-secondary {
+    color: #383d41 !important;
+    background-color: #e2e3e5 !important;
+    border-color: #d6d8db !important;
+}
+
+.alert-success {
+    color: #155724 !important;
+    background-color: #d4edda !important;
+    border-color: #c3e6cb !important;
+}
+
+.alert-danger {
+    color: #721c24 !important;
+    background-color: #f8d7da !important;
+    border-color: #f5c6cb !important;
+}
+
+.alert-warning {
+    color: #856404 !important;
+    background-color: #fff3cd !important;
+    border-color: #ffeeba !important;
+}
+
+.alert-info {
+    color: #0c5460 !important;
+    background-color: #d1ecf1 !important;
+    border-color: #bee5eb !important;
+}
+
+.alert-light {
+    color: #818182 !important;
+    background-color: #fefefe !important;
+    border-color: #fdfdfe !important;
+}
+
+.alert-dark {
+    color: #1b1e21 !important;
+    background-color: #d6d8d9 !important;
+    border-color: #c6c8ca !important;
+}*/

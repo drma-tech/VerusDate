@@ -22,14 +22,14 @@ namespace VerusDate.Shared.Resources.Enum {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Modality {
+    internal class Neurodiversity {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Modality() {
+        internal Neurodiversity() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace VerusDate.Shared.Resources.Enum {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VerusDate.Shared.Resources.Enum.Modality", typeof(Modality).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VerusDate.Shared.Resources.Enum.Neurodiversity", typeof(Neurodiversity).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,38 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you looking for your ideal partner (last a lifetime)? With our unique and advanced compatibility system, we guarantee a success rate higher than any other system/site/app in the world..
+        ///   Looks up a localized string similar to Neurodivergence is the term for people whose brains function differently in one or more ways than is considered standard or typical. There are many different ways that neurodivergence manifests, ranging from very mild ways that most people would never notice to more obvious ways that lead to a person behaving differently than is standard in our society. Several \&quot;recognized\&quot; types of Neurodivergence, include autism, Asperger&apos;s syndrome, dyslexia, dyscalculia, epilepsy, hyperlexia, Dyspraxia, ADHD, obsessiv [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string Matchmaker_Description {
+        internal static string Neurodivergent_Description {
             get {
-                return ResourceManager.GetString("Matchmaker_Description", resourceCulture);
+                return ResourceManager.GetString("Neurodivergent_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Matchmaker.
+        ///   Looks up a localized string similar to Neurodivergent.
         /// </summary>
-        internal static string Matchmaker_Name {
+        internal static string Neurodivergent_Name {
             get {
-                return ResourceManager.GetString("Matchmaker_Name", resourceCulture);
+                return ResourceManager.GetString("Neurodivergent_Name", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you already in a serious relationship, engagement or marriage and want to know how compatible you are? What weaknesses do you need to work on to strengthen the relationship? Learn all of this and much more..
+        ///   Looks up a localized string similar to Neurotypical is a descriptor that refers to someone who has the brain functions, behaviors, and processing considered standard or typical..
         /// </summary>
-        internal static string RelationshipAnalysis_Description {
+        internal static string Neurotypical_Description {
             get {
-                return ResourceManager.GetString("RelationshipAnalysis_Description", resourceCulture);
+                return ResourceManager.GetString("Neurotypical_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Relationship Analysis.
+        ///   Looks up a localized string similar to Neurotypical.
         /// </summary>
-        internal static string RelationshipAnalysis_Name {
+        internal static string Neurotypical_Name {
             get {
-                return ResourceManager.GetString("RelationshipAnalysis_Name", resourceCulture);
+                return ResourceManager.GetString("Neurotypical_Name", resourceCulture);
             }
         }
     }

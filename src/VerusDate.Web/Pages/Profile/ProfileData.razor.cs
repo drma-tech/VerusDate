@@ -11,24 +11,24 @@ namespace VerusDate.Web.Pages.Profile
     public partial class ProfileData
     {
         private ProfileModel profile = new();
+        private Partner partner { get; set; } = new();
         private GeoLocation GPS = new();
 
         protected override async Task LoadData()
         {
+            ProfileLoading = true;
+
             profile = await Http.Profile_Get(SessionStorage);
 
-            if (profile == null) //para novos usuários
+            profile ??= new()
             {
-                profile = new()
-                {
-                    GenderIdentity = GenderIdentity.Cisgender,
-                    SexualOrientation = SexualOrientation.Heterosexual,
-                    BirthDate = DateTime.UtcNow.AddYears(-18).AddDays(1).Date,
-                    Diet = Diet.Omnivore,
-                    //Neurodiversity = Neurodiversity.Neurotypical,
-                    //Disability = Disability.NoDisability
-                };
-            }
+                GenderIdentity = GenderIdentity.Cisgender,
+                SexualOrientation = SexualOrientation.Heterosexual,
+                BirthDate = DateTime.UtcNow.AddYears(-18).AddDays(1).Date,
+                Diet = Diet.Omnivore,
+            };
+
+            ProfileLoading = false;
         }
 
         private async Task SetLocation(ProfileModel profile)
@@ -66,10 +66,10 @@ namespace VerusDate.Web.Pages.Profile
                     //profile.Longitude = GPS.Longitude;
                     //profile.Latitude = GPS.Latitude;
 
-                    if (GPS.Accuracy > 500)
-                    {
-                        Toast.ShowWarning("", $"A posição do GPS foi recuperada, mas a precisão é de apenas: {Math.Round(GPS.Accuracy / 1000, 1)} km. Tente novamente mais tarde ou use um dispositivo mais preciso.");
-                    }
+                    //if (GPS.Accuracy > 500)
+                    //{
+                    //    Toast.ShowWarning("", $"A posição do GPS foi recuperada, mas a precisão é de apenas: {Math.Round(GPS.Accuracy / 1000, 1)} km. Tente novamente mais tarde ou use um dispositivo mais preciso.");
+                    //}
                 }
                 else
                 {
@@ -514,6 +514,16 @@ namespace VerusDate.Web.Pages.Profile
             {
                 profile.Zodiac = profile.BirthDate.GetZodiac();
 
+                if (profile.Modality == Modality.Matchmaker)
+                {
+                    foreach (var item in profile.Partners)
+                    {
+                        //TODO: remove the conections on others users
+                    }
+
+                    profile.Partners = new List<Partner>();
+                }
+
                 if (profile.GetDataStatus() == DataStatus.New)
                 {
                     await Http.Profile_Add(profile, SessionStorage, Toast);
@@ -522,8 +532,6 @@ namespace VerusDate.Web.Pages.Profile
                 {
                     await Http.Profile_Update(profile, SessionStorage, Toast);
                 }
-
-                profile = await Http.Profile_Get(SessionStorage);
             }
             catch (Exception ex)
             {
@@ -534,6 +542,19 @@ namespace VerusDate.Web.Pages.Profile
         private void HandleInvalidSubmit()
         {
             Toast.ShowWarning("", "Foram detectados erros de validação");
+        }
+
+        private void AddNewPartner()
+        {
+            profile.Partners.Add(partner);
+            partner = new();
+        }
+
+        private void RemovePartner(string email)
+        {
+            var obj = profile.Partners.FirstOrDefault(x => x.Email == email);
+
+            if (obj != null) profile.Partners.Remove(obj);
         }
     }
 }

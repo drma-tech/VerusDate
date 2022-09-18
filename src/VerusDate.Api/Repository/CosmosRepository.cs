@@ -18,9 +18,9 @@ namespace VerusDate.Api.Repository
     {
         public Container Container { get; private set; }
 
-        private const double ru_limit_get = 4; //1
-        private const double ru_limit_query = 5; //3
-        private const double ru_limit_save = 25; //5
+        private const double ru_limit_get = 5; //1
+        private const double ru_limit_query = 10; //3
+        private const double ru_limit_save = 30; //5
 
         public CosmosRepository(IConfiguration config)
         {

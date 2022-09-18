@@ -148,7 +148,7 @@
     <value>Idiomas</value>
   </data>
   <data name="Location_Description" xml:space="preserve">
-    <value>Informação automática (deve-se liberar acesso a localização do aparelho)</value>
+    <value>Não armazenamos sua localização GPS, apenas sua cidade. (deve-se liberar acesso a localização do aparelho)</value>
   </data>
   <data name="Location_Name" xml:space="preserve">
     <value>Localização</value>

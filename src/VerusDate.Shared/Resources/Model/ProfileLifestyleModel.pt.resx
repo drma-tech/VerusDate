@@ -148,7 +148,7 @@
     <value>Personalidade Financeira</value>
   </data>
   <data name="MyersBriggsTypeIndicator_Description" xml:space="preserve">
-    <value>Este campo é opcional (é necessário fazer um teste em site de terceiros ; multi-idiomas)</value>
+    <value>É necessário fazer um teste em site de terceiros (multi-idiomas)</value>
   </data>
   <data name="MyersBriggsTypeIndicator_Name" xml:space="preserve">
     <value>Personalidade MBTI</value>

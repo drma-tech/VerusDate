@@ -19,7 +19,6 @@ namespace VerusDate.Web.Shared.Field
         [Parameter] public Expression<Func<TValue>> For { get; set; }
         [Parameter] public bool Disabled { get; set; }
         [Parameter] public LabelSize LabelSize { get; set; } = LabelSize.Normal;
-        [Parameter] public string PrivateInfo { get; set; }
 
         protected virtual Dictionary<string, object> GetAttributes(string customStyle)
         {

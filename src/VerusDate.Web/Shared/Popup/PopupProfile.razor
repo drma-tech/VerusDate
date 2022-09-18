@@ -8,12 +8,7 @@
             <CloseButton />
         </ModalHeader>
         <ModalBody MaxHeight="70">
-            @if (Options.HasCustomVisibility)
-            {
-                <CustomVisibility Options="Options"></CustomVisibility>
-            }
-            else
-            {
+            <CustomVisibility Loading="ProfileLoading" Invalid="IdUserView == ComponenteUtils.IdUser">
                 <Row Gutter="(8,0)">
                     <Column ColumnSize="ColumnSize.IsHalf.OnDesktop.Is4.OnWidescreen">
                         <Card Margin="Margin.Is2.FromBottom">
@@ -82,13 +77,13 @@
                             </CardBody>
                             <CardBody>
                                 @* @if (interaction != null && interaction.IsActiveInteraction())
-                            {
-                            <BtnChat IdUserView="@IdUserView"></BtnChat>
-                            }
-                            else
-                            {
-                            <BtnBlink IdUserView="@IdUserView"></BtnBlink>
-                            }*@
+                                {
+                                <BtnChat IdUserView="@IdUserView"></BtnChat>
+                                }
+                                else
+                                {
+                                <BtnBlink IdUserView="@IdUserView"></BtnBlink>
+                                }*@
                                 <Dropdown Float="Float.End" Disabled="true">
                                     <Button Color="Color.Danger" Clicked="report.ShowModal" Disabled="true">
                                         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Trash"></Blazorise.Icon> Deletar
@@ -104,26 +99,26 @@
                     <Column ColumnSize="ColumnSize.IsHalf.OnDesktop.Is8.OnWidescreen">
                         <Row Gutter="(8,0)">
                             @*<Column ColumnSize="ColumnSize.IsFull.Is8.OnFullHD">
-                        <Card Margin="Margin.Is2.FromBottom">
-                        <CardHeader>Conquistas</CardHeader>
-                        <CardBody>
-                        <Row Gutter="(8,0)">
-                        <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
-                        <ProfileBadge Type="@badge.Ranking"></ProfileBadge>
-                        </Column>
-                        <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
-                        <ProfileBadge Type="@badge.Seniority"></ProfileBadge>
-                        </Column>
-                        <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
-                        <ProfileBadge Type="@badge.VerifiedProfile"></ProfileBadge>
-                        </Column>
-                        <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
-                        <ProfileBadge Type="@badge.Popular"></ProfileBadge>
-                        </Column>
-                        </Row>
-                        </CardBody>
-                        </Card>
-                        </Column>*@
+                            <Card Margin="Margin.Is2.FromBottom">
+                            <CardHeader>Conquistas</CardHeader>
+                            <CardBody>
+                            <Row Gutter="(8,0)">
+                            <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
+                            <ProfileBadge Type="@badge.Ranking"></ProfileBadge>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
+                            <ProfileBadge Type="@badge.Seniority"></ProfileBadge>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
+                            <ProfileBadge Type="@badge.VerifiedProfile"></ProfileBadge>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.IsHalf.Is3.OnWidescreen" Margin="Margin.Is2.FromBottom">
+                            <ProfileBadge Type="@badge.Popular"></ProfileBadge>
+                            </Column>
+                            </Row>
+                            </CardBody>
+                            </Card>
+                            </Column>*@
                             <Column ColumnSize="ColumnSize.IsFull.Is4.OnFullHD">
                                 <VerusDate.Web.Shared.Card.CardCompatibility Affinities="affinities"></VerusDate.Web.Shared.Card.CardCompatibility>
                             </Column>
@@ -131,8 +126,7 @@
                     </Column>
                 </Row>
                 <VerusDate.Web.Shared.modal.ProfileReport @ref="report"></VerusDate.Web.Shared.modal.ProfileReport>
-
-            }
+            </CustomVisibility>
         </ModalBody>
         <ModalFooter>
             <Button Color="Color.Secondary" Clicked="@modal.Hide">Fechar</Button>
@@ -142,20 +136,15 @@
 
 @code {
 
-    private Modal modal;
+    private Modal? modal;
 
-    [Parameter]
-    public HttpClient Http { get; set; }
+    [Parameter] public HttpClient Http { get; set; } = default!;
 
     public async Task ShowModal(string IdUserView)
     {
-        IsLoading = true;
-
-        modal.Show();
+        modal?.Show();
         this.IdUserView = IdUserView;
         await LoadData();
-
-        IsLoading = false;
     }
 
     public string IdUserView { get; set; }
@@ -172,11 +161,7 @@
 
     private Shared.modal.ProfileReport report;
 
-    private VisibilityOptions Options => new VisibilityOptions()
-        {
-            Loading = IsLoading,
-            Invalid = IdUserView == ComponenteUtils.IdUser
-        };
+    private bool ProfileLoading;
 
     protected async Task LoadData()
     {
@@ -184,7 +169,10 @@
         {
             if (string.IsNullOrEmpty(IdUserView)) return;
 
+            ProfileLoading = true;
             user = await Http.Profile_Get(SessionStorage);
+            ProfileLoading = false;
+
             view = await Http.Profile_GetView(SessionStorage, IdUserView);
 
             if (view == null)

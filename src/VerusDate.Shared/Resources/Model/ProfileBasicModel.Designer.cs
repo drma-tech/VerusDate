@@ -151,7 +151,7 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatic information (access to device location must be released).
+        ///   Looks up a localized string similar to We don&apos;t store your GPS location, just your city. (Access to device location must be released).
         /// </summary>
         internal static string Location_Description {
             get {

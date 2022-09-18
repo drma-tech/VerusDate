@@ -29,6 +29,11 @@ namespace VerusDate.Api.Mediator
             this.IdLoggedUser = IdLoggedUser;
         }
 
+        public string GetId(string id)
+        {
+            return Type + ":" + id;
+        }
+
         public abstract void SetParameters(IQueryCollection query);
     }
 }

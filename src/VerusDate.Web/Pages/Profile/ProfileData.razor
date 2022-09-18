@@ -2,21 +2,19 @@
 @attribute [Authorize]
 @inherits PageCore<ProfileData>
 
-@if (Options.HasCustomVisibility)
-{
-    <CustomVisibility Options="Options"></CustomVisibility>
-}
-else
-{
+<CustomVisibility Loading="ProfileLoading">
     <EditForm Model="@profile" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
         <FluentValidationValidator />
-
         <Div Margin="Margin.Is2.OnY">
             <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Basic)" Clicked="(() => ChangeOrder(Tabs.Basic))">Básico</Button>
             <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Bio)" Clicked="(() => ChangeOrder(Tabs.Bio))">Bio</Button>
             <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Lifestyle)" Clicked="(() => ChangeOrder(Tabs.Lifestyle))">Lifestyle</Button>
             <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Personality)" Clicked="(() => ChangeOrder(Tabs.Personality))">Personalidades</Button>
             <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Interests)" Clicked="(() => ChangeOrder(Tabs.Interests))">Interesses</Button>
+            @if (profile.Modality == Modality.RelationshipAnalysis)
+            {
+                <Button Margin="Margin.Is1.FromBottom.Is1.FromStart" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.MyRelationship)" Clicked="(() => ChangeOrder(Tabs.MyRelationship))">Meu Relacionamento</Button>
+            }
         </Div>
 
         @if (SelectedTab == Tabs.Basic)
@@ -24,25 +22,25 @@ else
             <Row>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                     <FieldSelect For="@(() => profile.Modality)" TValue="Modality?" TEnum="Modality" @bind-SelectedValue="@profile.Modality"
-                         CssIcon="@FontAwesomeIcons.YinYang" Required="true" LabelSize="LabelSize.Short"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.YinYang" Required="true" LabelSize="LabelSize.Short"></FieldSelect>
                     <FieldText For="@(() => profile.NickName)" @bind-Value="@profile.NickName" CssIcon="@FontAwesomeIcons.User" Required="true" LabelSize="LabelSize.Short"></FieldText>
-                    <FieldText For="@(() => profile.Description)" @bind-Value="@profile.Description" CssIcon="@FontAwesomeIcons.QuoteLeft" Required="true" Rows="7" LabelSize="LabelSize.Short"></FieldText>
+                    <FieldText For="@(() => profile.Description)" @bind-Value="@profile.Description" CssIcon="@FontAwesomeIcons.QuoteLeft" Required="(profile.Modality == Modality.Matchmaker)" Visible="(profile.Modality == Modality.Matchmaker)" Rows="7" LabelSize="LabelSize.Short"></FieldText>
                     <FieldText For="@(() => profile.Location)" @bind-Value="@profile.Location" CssIcon="@FontAwesomeIcons.MapMarkerAlt" Required="true" Disabled="true"
-                       ButtomClicked="async ()=> { await SetLocation(profile); }" ButtomCssIcon="@FontAwesomeIcons.MapMarkedAlt" LabelSize="LabelSize.Short" ButtomTitle="Recuperar posição GPS" PrivateInfo="Não armazenamos sua localização GPS (apenas a county/cidade onde se encontra atualmente)."></FieldText>
+                           ButtomClicked="async ()=> { await SetLocation(profile); }" ButtomCssIcon="@FontAwesomeIcons.MapMarkedAlt" LabelSize="LabelSize.Short" ButtomTitle="Recuperar posição GPS"></FieldText>
                     <FieldSelect For="@(() => profile.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@profile.Languages"
-                         CssIcon="@FontAwesomeIcons.Language" Required="true" Multiple="true" LabelSize="LabelSize.Short"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Language" Required="true" Multiple="true" LabelSize="LabelSize.Short"></FieldSelect>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                     <FieldSelect For="@(() => profile.CurrentSituation)" TValue="CurrentSituation?" TEnum="CurrentSituation" @bind-SelectedValue="@profile.CurrentSituation"
-                         CssIcon="@FontAwesomeIcons.Heart" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Heart" Required="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.Intentions)" TValue="IReadOnlyList<Intentions>" TEnum="Intentions" @bind-SelectedValues="@profile.Intentions"
-                         CssIcon="@FontAwesomeIcons.Search" ShowGroup="true" Required="true" Multiple="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Search" ShowGroup="true" Required="true" Multiple="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.BiologicalSex)" TValue="BiologicalSex?" TEnum="BiologicalSex" @bind-SelectedValue="@profile.BiologicalSex"
-                         CssIcon="@FontAwesomeIcons.Neuter" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Neuter" Required="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.GenderIdentity)" TValue="GenderIdentity?" TEnum="GenderIdentity" @bind-SelectedValue="@profile.GenderIdentity"
-                         CssIcon="@FontAwesomeIcons.Neuter" ShowGroup="true" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Neuter" ShowGroup="true" Required="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.SexualOrientation)" TValue="SexualOrientation?" TEnum="SexualOrientation" @bind-SelectedValue="@profile.SexualOrientation"
-                         CssIcon="@FontAwesomeIcons.Neuter" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Neuter" Required="true"></FieldSelect>
                 </Column>
             </Row>
         }
@@ -51,13 +49,13 @@ else
             <Row>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                     <FieldSelect For="@(() => profile.RaceCategory)" TValue="RaceCategory?" TEnum="RaceCategory" @bind-SelectedValue="@profile.RaceCategory"
-                         CssIcon="@FontAwesomeIcons.Globe" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Globe" Required="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.BodyMass)" TValue="BodyMass?" TEnum="BodyMass" @bind-SelectedValue="@profile.BodyMass"
-                         CssIcon="@FontAwesomeIcons.Weight" Required="true" ShowHelper="false"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Weight" Required="true" ShowHelper="false"></FieldSelect>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                     <CustomDate Type="FieldType.Date" For="@(() => profile.BirthDate)" @bind-Value="@profile.BirthDate"
-                        CssIcon="@FontAwesomeIcons.BirthdayCake" Required="true"></CustomDate>
+                            CssIcon="@FontAwesomeIcons.BirthdayCake" Required="true"></CustomDate>
                     <Field Horizontal="true">
                         <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD" Display="Display.None.Block.OnFullHD">
                         </FieldLabel>
@@ -69,7 +67,7 @@ else
                         </FieldBody>
                     </Field>
                     <FieldSelect For="@(() => profile.Height)" TValue="VerusDate.Shared.Enum.Height?" TEnum="VerusDate.Shared.Enum.Height" @bind-SelectedValue="@profile.Height"
-                         CssIcon="@FontAwesomeIcons.Ruler" Required="true" ShowHelper="false"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Ruler" Required="true" ShowHelper="false"></FieldSelect>
                 </Column>
             </Row>
             <Card>
@@ -83,11 +81,11 @@ else
                     <Row>
                         <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                             <FieldSelect For="@(() => profile.Neurodiversity)" TValue="Neurodiversity?" TEnum="Neurodiversity" @bind-SelectedValue="@profile.Neurodiversity"
-                                 CssIcon="@FontAwesomeIcons.Brain"></FieldSelect>
+                                     CssIcon="@FontAwesomeIcons.Brain"></FieldSelect>
                         </Column>
                         <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                             <FieldSelect For="@(() => profile.Disabilities)" TValue="IReadOnlyList<Disability>" TEnum="Disability" @bind-SelectedValues="@profile.Disabilities"
-                                 CssIcon="@FontAwesomeIcons.Wheelchair" Multiple="true"></FieldSelect>
+                                     CssIcon="@FontAwesomeIcons.Wheelchair" Multiple="true"></FieldSelect>
                         </Column>
                     </Row>
                 </CardBody>
@@ -98,25 +96,25 @@ else
             <Row>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                     <FieldSelect For="@(() => profile.Drink)" TValue="Drink?" TEnum="Drink" @bind-SelectedValue="@profile.Drink"
-                         CssIcon="@FontAwesomeIcons.GlassCheers" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.GlassCheers" Required="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.Smoke)" TValue="Smoke?" TEnum="Smoke" @bind-SelectedValue="@profile.Smoke"
-                         CssIcon="@FontAwesomeIcons.Smoking" ShowHelper="false" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Smoking" ShowHelper="false" Required="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.Diet)" TValue="Diet?" TEnum="Diet" @bind-SelectedValue="@profile.Diet"
-                         CssIcon="@FontAwesomeIcons.Utensils" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Utensils" Required="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.Religion)" TValue="Religion?" TEnum="Religion" @bind-SelectedValue="@profile.Religion"
-                         CssIcon="@FontAwesomeIcons.PrayingHands" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.PrayingHands" Required="true"></FieldSelect>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                     <FieldSelect For="@(() => profile.HaveChildren)" TValue="HaveChildren?" TEnum="HaveChildren" @bind-SelectedValue="@profile.HaveChildren"
-                         CssIcon="@FontAwesomeIcons.Child" ShowHelper="false" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Child" ShowHelper="false" Required="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.WantChildren)" TValue="WantChildren?" TEnum="WantChildren" @bind-SelectedValue="@profile.WantChildren"
-                         CssIcon="@FontAwesomeIcons.Baby" ShowHelper="false" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Baby" ShowHelper="false" Required="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.EducationLevel)" TValue="EducationLevel?" TEnum="EducationLevel" @bind-SelectedValue="@profile.EducationLevel"
-                         CssIcon="@FontAwesomeIcons.GraduationCap" ShowHelper="false" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.GraduationCap" ShowHelper="false" Required="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.CareerCluster)" TValue="CareerCluster?" TEnum="CareerCluster" @bind-SelectedValue="@profile.CareerCluster"
-                         CssIcon="@FontAwesomeIcons.Briefcase" ShowGroup="true" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Briefcase" ShowGroup="true" Required="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.TravelFrequency)" TValue="TravelFrequency?" TEnum="TravelFrequency" @bind-SelectedValue="@profile.TravelFrequency"
-                         CssIcon="@FontAwesomeIcons.Plane" ShowGroup="true" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Plane" ShowGroup="true" Required="true"></FieldSelect>
                 </Column>
             </Row>
         }
@@ -128,19 +126,19 @@ else
             <Row>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                     <FieldSelect For="@(() => profile.MoneyPersonality)" TValue="MoneyPersonality?" TEnum="MoneyPersonality" @bind-SelectedValue="@profile.MoneyPersonality"
-                         CssIcon="@FontAwesomeIcons.Wallet" LabelSize="LabelSize.Big" HelpLink="https://empower.me/quiz/"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Wallet" LabelSize="LabelSize.Big" HelpLink="https://empower.me/quiz/"></FieldSelect>
                     <FieldSelect For="@(() => profile.SplitTheBill)" TValue="SplitTheBill?" TEnum="SplitTheBill" @bind-SelectedValue="@profile.SplitTheBill"
-                         CssIcon="@FontAwesomeIcons.HandHoldingUsd" LabelSize="LabelSize.Big"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.HandHoldingUsd" LabelSize="LabelSize.Big"></FieldSelect>
                     <FieldSelect For="@(() => profile.RelationshipPersonality)" TValue="RelationshipPersonality?" TEnum="RelationshipPersonality" @bind-SelectedValue="@profile.RelationshipPersonality"
-                         CssIcon="@FontAwesomeIcons.PeopleArrows" LabelSize="LabelSize.Big" HelpLink="https://theanatomyoflove.com/relationship-quizzes/helen-fishers-personality-test/"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.PeopleArrows" LabelSize="LabelSize.Big" HelpLink="https://theanatomyoflove.com/relationship-quizzes/helen-fishers-personality-test/"></FieldSelect>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                     <FieldSelect For="@(() => profile.MyersBriggsTypeIndicator)" TValue="MyersBriggsTypeIndicator?" TEnum="MyersBriggsTypeIndicator" @bind-SelectedValue="@profile.MyersBriggsTypeIndicator"
-                         CssIcon="@FontAwesomeIcons.User" LabelSize="LabelSize.Big" HelpLink="https://www.16personalities.com/" ShowGroup="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.User" LabelSize="LabelSize.Big" HelpLink="https://www.16personalities.com/" ShowGroup="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.LoveLanguage)" TValue="LoveLanguage?" TEnum="LoveLanguage" @bind-SelectedValue="@profile.LoveLanguage"
-                         CssIcon="@FontAwesomeIcons.HandHoldingHeart" LabelSize="LabelSize.Big" HelpLink="https://www.5lovelanguages.com/quizzes/singles-quiz/"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.HandHoldingHeart" LabelSize="LabelSize.Big" HelpLink="https://www.5lovelanguages.com/quizzes/singles-quiz/"></FieldSelect>
                     <FieldSelect For="@(() => profile.SexPersonality)" TValue="SexPersonality?" TEnum="SexPersonality" @bind-SelectedValue="@profile.SexPersonality"
-                         CssIcon="@FontAwesomeIcons.Heart" LabelSize="LabelSize.Big" HelpLink="https://www.vmtherapy.com/personality-type/"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Heart" LabelSize="LabelSize.Big" HelpLink="https://www.vmtherapy.com/personality-type/"></FieldSelect>
                 </Column>
             </Row>
         }
@@ -152,23 +150,74 @@ else
             <Row>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                     <FieldSelect For="@(() => profile.Food)" TValue="IReadOnlyList<Food>" TEnum="Food" @bind-SelectedValues="@profile.Food"
-                         CssIcon="@FontAwesomeIcons.PizzaSlice" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.PizzaSlice" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.Vacation)" TValue="IReadOnlyList<Vacation>" TEnum="Vacation" @bind-SelectedValues="@profile.Vacation"
-                         CssIcon="@FontAwesomeIcons.PlaneDeparture" LabelSize="LabelSize.Short" Multiple="true" Order="(o => o.Name)"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.PlaneDeparture" LabelSize="LabelSize.Short" Multiple="true" Order="(o => o.Name)"></FieldSelect>
                     <FieldSelect For="@(() => profile.Sports)" TValue="IReadOnlyList<Sports>" TEnum="Sports" @bind-SelectedValues="@profile.Sports"
-                         CssIcon="@FontAwesomeIcons.Swimmer" LabelSize="LabelSize.Short" Multiple="true" Order="(o => o.Name)"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Swimmer" LabelSize="LabelSize.Short" Multiple="true" Order="(o => o.Name)"></FieldSelect>
                     <FieldSelect For="@(() => profile.LeisureActivities)" TValue="IReadOnlyList<LeisureActivities>" TEnum="LeisureActivities" @bind-SelectedValues="@profile.LeisureActivities"
-                         CssIcon="@FontAwesomeIcons.UmbrellaBeach" LabelSize="LabelSize.Short" Multiple="true" Order="(o => o.Name)"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.UmbrellaBeach" LabelSize="LabelSize.Short" Multiple="true" Order="(o => o.Name)"></FieldSelect>
                 </Column>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                     <FieldSelect For="@(() => profile.MusicGenre)" TValue="IReadOnlyList<MusicGenre>" TEnum="MusicGenre" @bind-SelectedValues="@profile.MusicGenre"
-                         CssIcon="@FontAwesomeIcons.Music" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Music" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.MovieGenre)" TValue="IReadOnlyList<MovieGenre>" TEnum="MovieGenre" @bind-SelectedValues="@profile.MovieGenre"
-                         CssIcon="@FontAwesomeIcons.Film" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Film" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.TVGenre)" TValue="IReadOnlyList<TVGenre>" TEnum="TVGenre" @bind-SelectedValues="@profile.TVGenre"
-                         CssIcon="@FontAwesomeIcons.Tv" LabelSize="LabelSize.Short" Multiple="true" Order="(o => o.Name)"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Tv" LabelSize="LabelSize.Short" Multiple="true" Order="(o => o.Name)"></FieldSelect>
                     <FieldSelect For="@(() => profile.ReadingGenre)" TValue="IReadOnlyList<ReadingGenre>" TEnum="ReadingGenre" @bind-SelectedValues="@profile.ReadingGenre"
-                         CssIcon="@FontAwesomeIcons.BookReader" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.BookReader" LabelSize="LabelSize.Short" Multiple="true"></FieldSelect>
+                </Column>
+            </Row>
+        }
+        else if (SelectedTab == Tabs.MyRelationship)
+        {
+            <Row>
+                <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                    <Alert Visible="true" Color="Color.Secondary">
+                        <AlertDescription>Vínculos existentes</AlertDescription>
+                    </Alert>
+                    <ListGroup>
+                        <CustomVisibility NoData="!profile.Partners.Any()">
+                            @foreach (var item in profile.Partners)
+                            {
+                                <ListGroupItem Flex="Flex.JustifyContent.Between.AlignItems.Center">
+                                    @item.Email
+                                    @if (string.IsNullOrEmpty(item.Id))
+                                    {
+                                        <Badge Color="Color.Danger" Pill>Vínculo Inativo</Badge>
+                                    }
+                                    else
+                                    {
+                                        <Badge Color="Color.Success" Pill>Vínculo Ativo</Badge>
+                                    }
+                                    <Button Color="Color.Danger" Clicked="@(()=>{RemovePartner(item.Email);})" Float="Float.End" Size="Size.Small" title="Delete">
+                                        <Blazorise.Icon Name="FontAwesomeIcons.Trash"></Blazorise.Icon>
+                                    </Button>
+                                </ListGroupItem>
+                            }
+                        </CustomVisibility>
+                    </ListGroup>
+                </Column>
+                <Column ColumnSize="ColumnSize.Is6.OnDesktop">
+                    <Alert Visible="true" Color="Color.Secondary">
+                        <AlertDescription>Convites</AlertDescription>
+                    </Alert>
+                    <FieldText For="@(() => partner.Email)" @bind-Value="@partner.Email" LabelSize="LabelSize.Normal" ButtomCssIcon="FontAwesomeIcons.PaperPlane" 
+                        ButtomClicked="@AddNewPartner"></FieldText>
+                    <Field Horizontal="true">
+                        <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                            Parceiro já cadastrado?
+                        </FieldLabel>
+                        <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
+                            <Button Color="Color.Primary" Outline="true" Clicked="@(()=>{})" title="Buscar convites">
+                                <Blazorise.Icon Name="FontAwesomeIcons.Search"></Blazorise.Icon> Importar convite
+                            </Button>
+                        </FieldBody>
+                        <Column>
+                            <FieldHelp Style="color: #17a2b8 !important">Caso seu parceiro já tenha se cadastrado e enviado um convite</FieldHelp>
+                        </Column>
+                    </Field>
                 </Column>
             </Row>
         }
@@ -207,16 +256,15 @@ else
             <Blazorise.Icon Name="FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> Esta opção solicitará localização para seu aparelho (precisa estar habilitada esta opção)
         </Paragraph>
     </VerusDate.Web.Shared.modal.BasicModal>
-}
+</CustomVisibility>
 
 @code {
-    private Shared.modal.BasicModal privacy;
-    private Shared.modal.BasicModal help;
+    private Shared.modal.BasicModal? privacy;
+    private Shared.modal.BasicModal? help;
 
-    private VisibilityOptions Options => new VisibilityOptions()
-        {
-            Loading = IsLoading
-        };
+
+
+    private bool ProfileLoading;
 
     private enum Tabs
     {
@@ -224,7 +272,8 @@ else
         Bio,
         Lifestyle,
         Personality,
-        Interests
+        Interests,
+        MyRelationship
     }
 
     private Tabs SelectedTab = Tabs.Basic;

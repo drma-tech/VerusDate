@@ -1,32 +1,89 @@
 ﻿<CascadingAuthenticationState>
-    <Router AppAssembly="@typeof(App).Assembly">
-        <Found Context="routeData">
-            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
-                <NotAuthorized>
-                    <VerusDate.Web.Pages.LandPage.Index></VerusDate.Web.Pages.LandPage.Index>
-                </NotAuthorized>
-                <Authorizing>
-                    <div class="alert alert-warning" role="alert">
-                        <div class="spinner-border spinner-border-sm" role="status">
-                            <span class="sr-only">Authentication in progress...</span>
+    <Blazorise.ThemeProvider Theme="@theme">
+        <Router AppAssembly="@typeof(App).Assembly">
+            <Found Context="routeData">
+                <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                    <NotAuthorized>
+                        <VerusDate.Web.Pages.LandPage.Index></VerusDate.Web.Pages.LandPage.Index>
+                    </NotAuthorized>
+                    <Authorizing>
+                        <div class="alert alert-warning" role="alert">
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="sr-only">Authentication in progress...</span>
+                            </div>
+                            Authentication in progress...
                         </div>
-                        Authentication in progress...
+                    </Authorizing>
+                </AuthorizeRouteView>
+                <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+            </Found>
+            <NotFound>
+                <PageTitle>Not found</PageTitle>
+                <LayoutView Layout="@typeof(MainLayout)">
+                    <div class="alert alert-danger" role="alert">
+                        Sorry, there's nothing at this address.
                     </div>
-                </Authorizing>
-            </AuthorizeRouteView>
-            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-        </Found>
-        <NotFound>
-            <PageTitle>Not found</PageTitle>
-            <LayoutView Layout="@typeof(MainLayout)">
-                <div class="alert alert-danger" role="alert">
-                    Sorry, there's nothing at this address.
-                </div>
-            </LayoutView>
-        </NotFound>
-    </Router>
+                </LayoutView>
+            </NotFound>
+        </Router>
+    </Blazorise.ThemeProvider>
 
     <ModalProvider>
         <ModalBody MaxHeight="80"></ModalBody>
     </ModalProvider>
 </CascadingAuthenticationState>
+
+@code {
+    //private Theme theme = new Theme
+    //    {
+    //        //ColorOptions = new ThemeColorOptions
+    //        //{
+    //        //    Primary = "#9317E1",
+    //        //    Secondary = "#A5A5A5",
+    //        //    Success = "#4CAF50",
+    //        //    Danger = "#F44336",
+    //        //    Warning = "#FFEB3B",
+    //        //    Info = "#00BCD4",
+    //        //    Light = "#F5F5F5",
+    //        //    Dark = "#424242"
+    //        //}
+    //    };
+    private Theme theme = new()
+        {
+            LuminanceThreshold = 170,
+            BarOptions = new()
+            {
+                HorizontalHeight = "64px",
+                VerticalBrandHeight = "64px",
+                LightColors = new()
+                {
+                    ItemColorOptions = new()
+                    {
+                        ActiveBackgroundColor = "#dedede",
+                        ActiveColor = "#000000",
+                        HoverBackgroundColor = "#dedede",
+                        HoverColor = "#000000",
+                    },
+                }
+            },
+            ColorOptions = new()
+            {
+                //Primary = "#9317E1",
+                Secondary = "#a5a5a5",
+            },
+            BackgroundOptions = new()
+            {
+                //Primary = "#9317E1",
+                Secondary = "#a5a5a5",
+            },
+            TextColorOptions = new()
+            {
+                //Primary = "#9317E1",
+                Secondary = "#a5a5a5",
+            }
+            //InputOptions = new()
+            //{
+            //    CheckColor = "#0288D1",
+            //},
+        };
+}

@@ -47,6 +47,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Diet.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Enum\Disability.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Disability.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Enum\Drink.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -121,6 +126,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>MyersBriggsTypeIndicator.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enum\Neurodiversity.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Neurodiversity.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Enum\RaceCategory.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -233,6 +243,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Diet.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Disability.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Disability.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enum\Drink.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Drink.Designer.cs</LastGenOutput>
@@ -292,6 +306,10 @@
     <EmbeddedResource Update="Resources\Enum\MyersBriggsTypeIndicator.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MyersBriggsTypeIndicator.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enum\Neurodiversity.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Neurodiversity.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enum\RaceCategory.resx">
       <Generator>ResXFileCodeGenerator</Generator>

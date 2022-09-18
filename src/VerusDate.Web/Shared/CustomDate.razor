@@ -4,7 +4,9 @@
     <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
         <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.BirthdayCake"></Blazorise.Icon> @Label
         @if (Required)
-        {<div style="color: red; display: initial;"> *</div>}
+        {
+            <div style="color: red; display: initial;"> *</div>
+        }
     </FieldLabel>
     <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
         <Addons>
@@ -28,16 +30,16 @@
                     }
                 </InputSelect>
             </Addon>
-            <Addon AddonType="AddonType.End">
-                <Button Color="Color.Warning" Outline="true" Clicked="PrivateData" title="Políticas de privacidade">
-                    <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash"></Blazorise.Icon>
-                </Button>
-            </Addon>
+            @*<Addon AddonType="AddonType.End">
+            <Button Color="Color.Warning" Outline="true" Clicked="PrivateData" title="Políticas de privacidade">
+            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.EyeSlash"></Blazorise.Icon>
+            </Button>
+            </Addon>*@
         </Addons>
         <ValidationMessage For="@For"></ValidationMessage>
     </FieldBody>
     <Column ColumnSize="ColumnSize.IsFull">
-        <FieldHelp Style="color: #17a2b8 !important">@For.GetCustomAttribute().Description</FieldHelp>
+        <FieldHelp Style="color: #17a2b8 !important">Esta informação não será compartilhada no seu perfil, apenas sua idade</FieldHelp>
     </Column>
 </Field>
 

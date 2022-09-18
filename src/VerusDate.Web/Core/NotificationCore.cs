@@ -5,7 +5,7 @@ namespace VerusDate.Web.Core
 {
     public static class NotificationCore
     {
-        public static async Task ProcessResponse(this HttpResponseMessage response, IToastService toast, string msgSuccess = null, string msgInfo = null)
+        public static async Task ProcessResponse(this HttpResponseMessage response, IToastService? toast = null, string? msgSuccess = null, string? msgInfo = null)
         {
             var msg = await response.Content.ReadAsStringAsync();
 
@@ -15,8 +15,8 @@ namespace VerusDate.Web.Core
             }
             else if ((short)response.StatusCode >= 200 && (short)response.StatusCode <= 299) //Successful
             {
-                if (!string.IsNullOrEmpty(msgSuccess)) toast.ShowSuccess("", msgSuccess);
-                if (!string.IsNullOrEmpty(msgInfo)) toast.ShowInfo("", msgInfo);
+                if (!string.IsNullOrEmpty(msgSuccess)) toast?.ShowSuccess("", msgSuccess);
+                if (!string.IsNullOrEmpty(msgInfo)) toast?.ShowInfo("", msgInfo);
             }
             else if ((short)response.StatusCode >= 300 && (short)response.StatusCode <= 399) //Redirected
             {
@@ -28,7 +28,7 @@ namespace VerusDate.Web.Core
             }
             else //Server error
             {
-                throw new Exception(msg);
+                throw new InvalidOperationException(msg);
             }
         }
 

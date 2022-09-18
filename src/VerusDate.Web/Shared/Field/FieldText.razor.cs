@@ -11,6 +11,7 @@ namespace VerusDate.Web.Shared.Field
 
         [Parameter] public string CssIcon { get; set; }
         [Parameter] public bool Required { get; set; }
+        [Parameter] public bool Visible { get; set; } = true;
 
         [Parameter] public EventCallback ButtomClicked { get; set; }
         [Parameter] public object ButtomCssIcon { get; set; }

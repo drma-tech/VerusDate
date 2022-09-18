@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
@@ -179,6 +180,8 @@ namespace VerusDate.Shared.Model
         //public string[] ActiveInteractions { get; set; } = Array.Empty<string>();
         //public string[] PassiveInteractions { get; set; } = Array.Empty<string>();
 
+        public List<Partner> Partners { get; set; } = new();
+
         private readonly string BlobPath = "https://storageverusdate.blob.core.windows.net";
 
         public void UpList()
@@ -353,5 +356,15 @@ namespace VerusDate.Shared.Model
 
         [Custom(Name = "Age_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
         public int Age { get; set; }
+    }
+
+    public class Partner
+    {
+        [Required]
+        [EmailAddress]
+        [Custom(Name = "Convidar Parceiro", Prompt = "Email do parceiro", Description = "Precisa ser o mesmo e-mail que será usado no cadastro")]
+        public string Email { get; set; }
+
+        public string Id { get; set; }
     }
 }

@@ -117,58 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BiologicalSex_Name" xml:space="preserve">
-    <value>Biological Sex</value>
+  <data name="Hearing_Description" xml:space="preserve">
+    <value>“Surdo” descreve um indivíduo que tem perda auditiva severa a profunda. “Ensurdecido” descreve um indivíduo que adquiriu uma perda auditiva na idade adulta.</value>
   </data>
-  <data name="CurrentSituation_Name" xml:space="preserve">
-    <value>Current Situation</value>
+  <data name="Hearing_Name" xml:space="preserve">
+    <value>Audição</value>
   </data>
-  <data name="Description_Name" xml:space="preserve">
-    <value>Description</value>
+  <data name="Intellectual_Description" xml:space="preserve">
+    <value>Caracterizado por um desenvolvimento e capacidade intelectual significativamente abaixo da média. Envolve uma limitação permanente na capacidade de uma pessoa aprender.</value>
   </data>
-  <data name="Description_Prompt" xml:space="preserve">
-    <value>For your own safety, please do not include contact information (mobile, email, etc.) or your location (where you are or have been). \n\nNOTE: Promoting social networks, products, services and/or content that violates the rights of third parties will be subject to banishment from the platform.</value>
+  <data name="Intellectual_Name" xml:space="preserve">
+    <value>Intelectual</value>
   </data>
-  <data name="GenderIdentity_Description" xml:space="preserve">
-    <value>Most common option selected automatically (applicable to most people)</value>
+  <data name="Learning_Description" xml:space="preserve">
+    <value>Uma dificuldade de aprendizagem é essencialmente um distúrbio específico e persistente do sistema nervoso central de uma pessoa que afeta o processo de aprendizagem. Isso afeta a capacidade de uma pessoa de interpretar o que vê e ouve ou vincular informações de diferentes partes do cérebro.</value>
   </data>
-  <data name="GenderIdentity_Name" xml:space="preserve">
-    <value>Gender Identity</value>
+  <data name="Learning_Name" xml:space="preserve">
+    <value>Aprendizagem</value>
   </data>
-  <data name="Intentions_Description" xml:space="preserve">
-    <value>Depending on the selection, you can change the mandatory fields (choose up to 2 options)</value>
+  <data name="MentalHealth_Description" xml:space="preserve">
+    <value>As deficiências de saúde mental podem assumir muitas formas, assim como as deficiências físicas. Eles são geralmente classificados em seis categorias: Esquizofrenia, Transtornos do Humor, Transtornos de Ansiedade, Transtornos Alimentares, Transtornos da Personalidade, Transtornos Orgânicos do Cérebro.</value>
   </data>
-  <data name="Intentions_Name" xml:space="preserve">
-    <value>Intentions</value>
+  <data name="MentalHealth_Name" xml:space="preserve">
+    <value>Saúde mental</value>
   </data>
-  <data name="Languages_Description" xml:space="preserve">
-    <value>Automatically chosen according to the official languages of the country (if available)</value>
+  <data name="Physical_Description" xml:space="preserve">
+    <value>Inclui deficiências fisiológicas, funcionais e/ou de mobilidade. Pode ser flutuante ou intermitente, crônica, progressiva ou estável, visível ou invisível.</value>
   </data>
-  <data name="Languages_Name" xml:space="preserve">
-    <value>Languages</value>
+  <data name="Physical_Name" xml:space="preserve">
+    <value>Física</value>
   </data>
-  <data name="Location_Description" xml:space="preserve">
-    <value>We don't store your GPS location, just your city. (Access to device location must be released)</value>
+  <data name="Visual_Description" xml:space="preserve">
+    <value>“Legally Blind” descreve um indivíduo que tem 10% ou menos de visão normal. Apenas 10% das pessoas com deficiência visual são realmente totalmente cegas. Os outros 90% são descritos como tendo uma “deficiência visual”.</value>
   </data>
-  <data name="Location_Name" xml:space="preserve">
-    <value>Location</value>
-  </data>
-  <data name="Location_Prompt" xml:space="preserve">
-    <value>Please click on the button to the side</value>
-  </data>
-  <data name="Modality_Name" xml:space="preserve">
-    <value>Modality</value>
-  </data>
-  <data name="NickName_Name" xml:space="preserve">
-    <value>Nickname</value>
-  </data>
-  <data name="NickName_Prompt" xml:space="preserve">
-    <value>Ex: Paul</value>
-  </data>
-  <data name="SexualOrientation_Description" xml:space="preserve">
-    <value>Most common option selected automatically (applicable to most people)</value>
-  </data>
-  <data name="SexualOrientation_Name" xml:space="preserve">
-    <value>Sexual Orientation</value>
+  <data name="Visual_Name" xml:space="preserve">
+    <value>Visual</value>
   </data>
 </root>

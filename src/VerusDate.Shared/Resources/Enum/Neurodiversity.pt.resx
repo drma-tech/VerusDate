@@ -117,58 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BiologicalSex_Name" xml:space="preserve">
-    <value>Biological Sex</value>
+  <data name="Neurodivergent_Description" xml:space="preserve">
+    <value>Neurodivergência é o termo para pessoas cujos cérebros funcionam de maneira diferente em uma ou mais maneiras do que é considerado padrão ou típico. Existem muitas maneiras diferentes pelas quais a neurodivergência se manifesta, variando de maneiras muito suaves que a maioria das pessoas nunca notaria a maneiras mais óbvias que levam uma pessoa a se comportar de maneira diferente do padrão em nossa sociedade. Vários tipos \"reconhecidos\" de neurodivergência incluem autismo, síndrome de Asperger, dislexia, discalculia, epilepsia, hiperlexia, dispraxia, TDAH, transtorno obsessivo-compulsivo (TOC) e síndrome de Tourette (TS).</value>
   </data>
-  <data name="CurrentSituation_Name" xml:space="preserve">
-    <value>Current Situation</value>
+  <data name="Neurodivergent_Name" xml:space="preserve">
+    <value>Neurodivergente</value>
   </data>
-  <data name="Description_Name" xml:space="preserve">
-    <value>Description</value>
+  <data name="Neurotypical_Description" xml:space="preserve">
+    <value>Neurotípico é um descritor que se refere a alguém que tem as funções cerebrais, comportamentos e processamento considerados padrão ou típicos.</value>
   </data>
-  <data name="Description_Prompt" xml:space="preserve">
-    <value>For your own safety, please do not include contact information (mobile, email, etc.) or your location (where you are or have been). \n\nNOTE: Promoting social networks, products, services and/or content that violates the rights of third parties will be subject to banishment from the platform.</value>
-  </data>
-  <data name="GenderIdentity_Description" xml:space="preserve">
-    <value>Most common option selected automatically (applicable to most people)</value>
-  </data>
-  <data name="GenderIdentity_Name" xml:space="preserve">
-    <value>Gender Identity</value>
-  </data>
-  <data name="Intentions_Description" xml:space="preserve">
-    <value>Depending on the selection, you can change the mandatory fields (choose up to 2 options)</value>
-  </data>
-  <data name="Intentions_Name" xml:space="preserve">
-    <value>Intentions</value>
-  </data>
-  <data name="Languages_Description" xml:space="preserve">
-    <value>Automatically chosen according to the official languages of the country (if available)</value>
-  </data>
-  <data name="Languages_Name" xml:space="preserve">
-    <value>Languages</value>
-  </data>
-  <data name="Location_Description" xml:space="preserve">
-    <value>We don't store your GPS location, just your city. (Access to device location must be released)</value>
-  </data>
-  <data name="Location_Name" xml:space="preserve">
-    <value>Location</value>
-  </data>
-  <data name="Location_Prompt" xml:space="preserve">
-    <value>Please click on the button to the side</value>
-  </data>
-  <data name="Modality_Name" xml:space="preserve">
-    <value>Modality</value>
-  </data>
-  <data name="NickName_Name" xml:space="preserve">
-    <value>Nickname</value>
-  </data>
-  <data name="NickName_Prompt" xml:space="preserve">
-    <value>Ex: Paul</value>
-  </data>
-  <data name="SexualOrientation_Description" xml:space="preserve">
-    <value>Most common option selected automatically (applicable to most people)</value>
-  </data>
-  <data name="SexualOrientation_Name" xml:space="preserve">
-    <value>Sexual Orientation</value>
+  <data name="Neurotypical_Name" xml:space="preserve">
+    <value>Neurotípico</value>
   </data>
 </root>

@@ -42,12 +42,7 @@
                         </Field>
                     </Column>
                 </Row>
-                @if (OptionsFeature.HasCustomVisibility)
-                {
-                    <CustomVisibility Options="@OptionsFeature"></CustomVisibility>
-                }
-                else
-                {
+                <CustomVisibility Loading="FeatureLoading" NoData="!GetTicketList(TicketType.FeatureRequest).Any()">
                     <Row Gutter="(8,0)" Style="max-height: 330px; overflow: auto;">
                         @foreach (var item in GetTicketList(TicketType.FeatureRequest))
                         {
@@ -86,7 +81,7 @@
                             </Column>
                         }
                     </Row>
-                }
+                </CustomVisibility>
             </CardBody>
         </Card>
     </Column>
@@ -116,12 +111,7 @@
                         </Field>
                     </Column>
                 </Row>
-                @if (OptionsBug.HasCustomVisibility)
-                {
-                    <CustomVisibility Options="@OptionsBug"></CustomVisibility>
-                }
-                else
-                {
+                <CustomVisibility Loading="BugLoading" NoData="!GetTicketList(TicketType.Bug).Any()">
                     <Row Gutter="(8,0)" Style="max-height: 330px; overflow: auto;">
                         @foreach (var item in GetTicketList(TicketType.Bug))
                         {
@@ -160,7 +150,7 @@
                             </Column>
                         }
                     </Row>
-                }
+                </CustomVisibility>
             </CardBody>
         </Card>
     </Column>
@@ -175,24 +165,21 @@
     public TicketStatus? TicketStatusBug { get; set; }
     public TicketStatus? TicketStatusFeature { get; set; }
 
-    private Shared.modal.NewTicket NewTicket;
+    private Shared.modal.NewTicket? NewTicket;
 
-    private VisibilityOptions OptionsBug => new VisibilityOptions()
-        {
-            Loading = tickets == null,
-            NoData = (tickets != null && !GetTicketList(TicketType.Bug).Any())
-        };
-
-    private VisibilityOptions OptionsFeature => new VisibilityOptions()
-        {
-            Loading = tickets == null,
-            NoData = (tickets != null && !GetTicketList(TicketType.FeatureRequest).Any())
-        };
+    private bool BugLoading;
+    private bool FeatureLoading;
 
     protected override async Task LoadData()
     {
+        BugLoading = true;
+        FeatureLoading = true;
+
         tickets = await Http.Ticket_GetList(SessionStorage);
         myVotes = await Http.Ticket_GetMyVotes(SessionStorage);
+
+        BugLoading = false;
+        FeatureLoading = false;
     }
 
     private List<TicketModel> GetTicketList(TicketType ticketType)

@@ -24,7 +24,8 @@
                     <FieldSelect For="@(() => profile.Modality)" TValue="Modality?" TEnum="Modality" @bind-SelectedValue="@profile.Modality"
                              CssIcon="@FontAwesomeIcons.YinYang" Required="true" LabelSize="LabelSize.Short"></FieldSelect>
                     <FieldText For="@(() => profile.NickName)" @bind-Value="@profile.NickName" CssIcon="@FontAwesomeIcons.User" Required="true" LabelSize="LabelSize.Short"></FieldText>
-                    <FieldText For="@(() => profile.Description)" @bind-Value="@profile.Description" CssIcon="@FontAwesomeIcons.QuoteLeft" Required="(profile.Modality == Modality.Matchmaker)" Visible="(profile.Modality == Modality.Matchmaker)" Rows="7" LabelSize="LabelSize.Short"></FieldText>
+                    <FieldText For="@(() => profile.Description)" @bind-Value="@profile.Description" CssIcon="@FontAwesomeIcons.QuoteLeft" 
+                        Required="(profile.Modality == Modality.Matchmaker)" Visible="(profile.Modality == Modality.Matchmaker)" Rows="7" LabelSize="LabelSize.Short"></FieldText>
                     <FieldText For="@(() => profile.Location)" @bind-Value="@profile.Location" CssIcon="@FontAwesomeIcons.MapMarkerAlt" Required="true" Disabled="true"
                            ButtomClicked="async ()=> { await SetLocation(profile); }" ButtomCssIcon="@FontAwesomeIcons.MapMarkedAlt" LabelSize="LabelSize.Short" ButtomTitle="Recuperar posição GPS"></FieldText>
                     <FieldSelect For="@(() => profile.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@profile.Languages"
@@ -32,7 +33,7 @@
                 </Column>
                 <Column ColumnSize="ColumnSize.Is6.OnDesktop">
                     <FieldSelect For="@(() => profile.CurrentSituation)" TValue="CurrentSituation?" TEnum="CurrentSituation" @bind-SelectedValue="@profile.CurrentSituation"
-                             CssIcon="@FontAwesomeIcons.Heart" Required="true"></FieldSelect>
+                             CssIcon="@FontAwesomeIcons.Heart" Required="(profile.Modality == Modality.Matchmaker)" Visible="(profile.Modality == Modality.Matchmaker)"></FieldSelect>
                     <FieldSelect For="@(() => profile.Intentions)" TValue="IReadOnlyList<Intentions>" TEnum="Intentions" @bind-SelectedValues="@profile.Intentions"
                              CssIcon="@FontAwesomeIcons.Search" ShowGroup="true" Required="true" Multiple="true"></FieldSelect>
                     <FieldSelect For="@(() => profile.BiologicalSex)" TValue="BiologicalSex?" TEnum="BiologicalSex" @bind-SelectedValue="@profile.BiologicalSex"

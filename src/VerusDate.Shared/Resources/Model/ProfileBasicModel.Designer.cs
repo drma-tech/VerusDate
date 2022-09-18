@@ -22,7 +22,7 @@ namespace VerusDate.Shared.Resources.Model {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ProfileBasicModel {
+    public class ProfileBasicModel {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace VerusDate.Shared.Resources.Model {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VerusDate.Shared.Resources.Model.ProfileBasicModel", typeof(ProfileBasicModel).Assembly);
@@ -51,7 +51,7 @@ namespace VerusDate.Shared.Resources.Model {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Biological Sex.
         /// </summary>
-        internal static string BiologicalSex_Name {
+        public static string BiologicalSex_Name {
             get {
                 return ResourceManager.GetString("BiologicalSex_Name", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Current Situation.
         /// </summary>
-        internal static string CurrentSituation_Name {
+        public static string CurrentSituation_Name {
             get {
                 return ResourceManager.GetString("CurrentSituation_Name", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
-        internal static string Description_Name {
+        public static string Description_Name {
             get {
                 return ResourceManager.GetString("Description_Name", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to For your own safety, please do not include contact information (mobile, email, etc.) or your location (where you are or have been). \n\nNOTE: Promoting social networks, products, services and/or content that violates the rights of third parties will be subject to banishment from the platform..
         /// </summary>
-        internal static string Description_Prompt {
+        public static string Description_Prompt {
             get {
                 return ResourceManager.GetString("Description_Prompt", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Most common option selected automatically (applicable to most people).
         /// </summary>
-        internal static string GenderIdentity_Description {
+        public static string GenderIdentity_Description {
             get {
                 return ResourceManager.GetString("GenderIdentity_Description", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Gender Identity.
         /// </summary>
-        internal static string GenderIdentity_Name {
+        public static string GenderIdentity_Name {
             get {
                 return ResourceManager.GetString("GenderIdentity_Name", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Depending on the selection, you can change the mandatory fields (choose up to 2 options).
         /// </summary>
-        internal static string Intentions_Description {
+        public static string Intentions_Description {
             get {
                 return ResourceManager.GetString("Intentions_Description", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Intentions.
         /// </summary>
-        internal static string Intentions_Name {
+        public static string Intentions_Name {
             get {
                 return ResourceManager.GetString("Intentions_Name", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Automatically chosen according to the official languages of the country (if available).
         /// </summary>
-        internal static string Languages_Description {
+        public static string Languages_Description {
             get {
                 return ResourceManager.GetString("Languages_Description", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Languages.
         /// </summary>
-        internal static string Languages_Name {
+        public static string Languages_Name {
             get {
                 return ResourceManager.GetString("Languages_Name", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to We don&apos;t store your GPS location, just your city. (Access to device location must be released).
         /// </summary>
-        internal static string Location_Description {
+        public static string Location_Description {
             get {
                 return ResourceManager.GetString("Location_Description", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Location.
         /// </summary>
-        internal static string Location_Name {
+        public static string Location_Name {
             get {
                 return ResourceManager.GetString("Location_Name", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Please click on the button to the side.
         /// </summary>
-        internal static string Location_Prompt {
+        public static string Location_Prompt {
             get {
                 return ResourceManager.GetString("Location_Prompt", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Modality.
         /// </summary>
-        internal static string Modality_Name {
+        public static string Modality_Name {
             get {
                 return ResourceManager.GetString("Modality_Name", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Nickname.
         /// </summary>
-        internal static string NickName_Name {
+        public static string NickName_Name {
             get {
                 return ResourceManager.GetString("NickName_Name", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Ex: Paul.
         /// </summary>
-        internal static string NickName_Prompt {
+        public static string NickName_Prompt {
             get {
                 return ResourceManager.GetString("NickName_Prompt", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Most common option selected automatically (applicable to most people).
         /// </summary>
-        internal static string SexualOrientation_Description {
+        public static string SexualOrientation_Description {
             get {
                 return ResourceManager.GetString("SexualOrientation_Description", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Sexual Orientation.
         /// </summary>
-        internal static string SexualOrientation_Name {
+        public static string SexualOrientation_Name {
             get {
                 return ResourceManager.GetString("SexualOrientation_Name", resourceCulture);
             }

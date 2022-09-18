@@ -16,13 +16,11 @@ namespace VerusDate.Api.Mediator.Command.Profile
             RuleFor(x => x.NickName)
                 .NotEmpty()
                 .MaximumLength(20)
-                //.Matches(new Regex(@"^[a-zA-Z0-9_]+$")).WithMessage("Favor, utilizar letras e número apenas")
                 .WithName(Shared.Resources.Model.ProfileBasicModel.NickName_Name);
 
             RuleFor(x => x.Description)
-                .NotEmpty()
+                .NotEmpty().When(x => x.Modality == Shared.Enum.Modality.Matchmaker)
                 .MaximumLength(512)
-                //.Matches(new Regex(@"^[a-zA-Z0-9_]+$")).WithMessage("Favor, utilizar letras e número apenas")
                 .WithName(Shared.Resources.Model.ProfileBasicModel.Description_Name);
 
             RuleFor(x => x.Location)
@@ -30,7 +28,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
                 .WithName(Shared.Resources.Model.ProfileBasicModel.Location_Name);
 
             RuleFor(x => x.CurrentSituation)
-                .NotEmpty()
+                .NotEmpty().When(x => x.Modality == Shared.Enum.Modality.Matchmaker)
                 .WithName(Shared.Resources.Model.ProfileBasicModel.CurrentSituation_Name);
 
             RuleFor(x => x.Intentions)
@@ -108,6 +106,9 @@ namespace VerusDate.Api.Mediator.Command.Profile
             RuleFor(x => x.CareerCluster)
                 .NotEmpty()
                 .WithName(Shared.Resources.Model.ProfileLifestyleModel.CareerCluster_Name);
+
+            RuleFor(x => x.TravelFrequency)
+                .NotEmpty();
 
             //PERSONALIDADES
 

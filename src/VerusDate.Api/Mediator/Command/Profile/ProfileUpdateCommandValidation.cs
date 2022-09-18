@@ -10,38 +10,50 @@ namespace VerusDate.Api.Mediator.Command.Profile
         {
             //BASIC
 
+            RuleFor(x => x.Modality)
+                .NotEmpty();
+
             RuleFor(x => x.NickName)
-               .NotEmpty()
-               .MaximumLength(20);
+                .NotEmpty()
+                .MaximumLength(20)
+                .WithName(Shared.Resources.Model.ProfileBasicModel.NickName_Name);
 
             RuleFor(x => x.Description)
-                .NotEmpty()
-                .MaximumLength(512);
+                .NotEmpty().When(x => x.Modality == Shared.Enum.Modality.Matchmaker)
+                .MaximumLength(512)
+                .WithName(Shared.Resources.Model.ProfileBasicModel.Description_Name);
 
             RuleFor(x => x.Location)
-                .NotEmpty();
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileBasicModel.Location_Name);
 
             RuleFor(x => x.CurrentSituation)
-                .NotEmpty();
+                .NotEmpty().When(x => x.Modality == Shared.Enum.Modality.Matchmaker)
+                .WithName(Shared.Resources.Model.ProfileBasicModel.CurrentSituation_Name);
 
             RuleFor(x => x.Intentions)
                 .NotEmpty()
                 .Must((value) => value.Count <= 2)
-                .WithMessage("Escolha até no máximo duas intenções");
+                .WithMessage("Escolha até no máximo duas intenções")
+                .WithName(Shared.Resources.Model.ProfileBasicModel.Intentions_Name);
 
             RuleFor(x => x.BiologicalSex)
-                .NotEmpty();
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileBasicModel.BiologicalSex_Name);
 
             RuleFor(x => x.GenderIdentity)
-                .NotEmpty();
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileBasicModel.GenderIdentity_Name);
 
             RuleFor(x => x.SexualOrientation)
-                .NotEmpty();
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileBasicModel.SexualOrientation_Name);
 
             RuleFor(x => x.Languages)
-               .NotEmpty()
-               .Must((value) => value.Count <= 5)
-               .WithMessage("Escolha até no máximo cinco idiomas");
+                .NotEmpty()
+                .Must((value) => value.Count <= 5)
+                .WithMessage("Escolha até no máximo cinco idiomas")
+                .WithName(Shared.Resources.Model.ProfileBasicModel.Languages_Name);
 
             //BIO
 
@@ -50,38 +62,52 @@ namespace VerusDate.Api.Mediator.Command.Profile
                 .LessThanOrEqualTo(DateTime.UtcNow.AddYears(-18).Date).WithMessage("Você deve ter 18 ou mais para se registrar");
 
             RuleFor(x => x.RaceCategory)
-                .NotEmpty();
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileBioModel.RaceCategory_Name);
 
             RuleFor(x => x.Height)
-                .NotEmpty();
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileBioModel.Height_Name);
 
             RuleFor(x => x.BodyMass)
-                .NotEmpty();
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileBioModel.BodyMass_Name);
 
             //LIFESTYLE
 
             RuleFor(x => x.Drink)
-                .NotEmpty();
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileLifestyleModel.Drink_Name);
 
             RuleFor(x => x.Smoke)
-                .NotEmpty();
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileLifestyleModel.Smoke_Name);
 
             RuleFor(x => x.Diet)
-                .NotEmpty();
-
-            RuleFor(x => x.HaveChildren)
-                .NotEmpty();
-
-            RuleFor(x => x.WantChildren)
-                .NotEmpty();
-
-            RuleFor(x => x.EducationLevel)
-                .NotEmpty();
-
-            RuleFor(x => x.CareerCluster)
-               .NotEmpty();
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileLifestyleModel.Diet_Name);
 
             RuleFor(x => x.Religion)
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileLifestyleModel.Religion_Name);
+
+            RuleFor(x => x.HaveChildren)
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileLifestyleModel.HaveChildren_Name);
+
+            RuleFor(x => x.WantChildren)
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileLifestyleModel.WantChildren_Name);
+
+            RuleFor(x => x.EducationLevel)
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileLifestyleModel.EducationLevel_Name);
+
+            RuleFor(x => x.CareerCluster)
+                .NotEmpty()
+                .WithName(Shared.Resources.Model.ProfileLifestyleModel.CareerCluster_Name);
+
+            RuleFor(x => x.TravelFrequency)
                 .NotEmpty();
 
             //RuleFor(x => x.Lifestyle.MoneyPersonality)

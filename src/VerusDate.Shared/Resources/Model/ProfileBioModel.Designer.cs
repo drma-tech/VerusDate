@@ -22,7 +22,7 @@ namespace VerusDate.Shared.Resources.Model {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ProfileBioModel {
+    public class ProfileBioModel {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace VerusDate.Shared.Resources.Model {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VerusDate.Shared.Resources.Model.ProfileBioModel", typeof(ProfileBioModel).Assembly);
@@ -51,7 +51,7 @@ namespace VerusDate.Shared.Resources.Model {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Age.
         /// </summary>
-        internal static string Age_Name {
+        public static string Age_Name {
             get {
                 return ResourceManager.GetString("Age_Name", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Birth Date.
         /// </summary>
-        internal static string BirthDate_Name {
+        public static string BirthDate_Name {
             get {
                 return ResourceManager.GetString("BirthDate_Name", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Body.
         /// </summary>
-        internal static string BodyMass_Name {
+        public static string BodyMass_Name {
             get {
                 return ResourceManager.GetString("BodyMass_Name", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Disabilities.
         /// </summary>
-        internal static string Disabilities_Name {
+        public static string Disabilities_Name {
             get {
                 return ResourceManager.GetString("Disabilities_Name", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Height.
         /// </summary>
-        internal static string Height_Name {
+        public static string Height_Name {
             get {
                 return ResourceManager.GetString("Height_Name", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Neurodiversity.
         /// </summary>
-        internal static string Neurodiversity_Name {
+        public static string Neurodiversity_Name {
             get {
                 return ResourceManager.GetString("Neurodiversity_Name", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Classification defined by US OMB.
         /// </summary>
-        internal static string RaceCategory_Description {
+        public static string RaceCategory_Description {
             get {
                 return ResourceManager.GetString("RaceCategory_Description", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Race.
         /// </summary>
-        internal static string RaceCategory_Name {
+        public static string RaceCategory_Name {
             get {
                 return ResourceManager.GetString("RaceCategory_Name", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace VerusDate.Shared.Resources.Model {
         /// <summary>
         ///   Looks up a localized string similar to Zodiac.
         /// </summary>
-        internal static string Zodiac_Name {
+        public static string Zodiac_Name {
             get {
                 return ResourceManager.GetString("Zodiac_Name", resourceCulture);
             }

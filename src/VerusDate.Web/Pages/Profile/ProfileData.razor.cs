@@ -3,7 +3,6 @@ using VerusDate.Shared;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
 using VerusDate.Shared.Model;
-using VerusDate.Shared.Model.Profile;
 using VerusDate.Web.Api;
 using VerusDate.Web.Core;
 
@@ -30,6 +29,9 @@ namespace VerusDate.Web.Pages.Profile
                 BirthDate = DateTime.UtcNow.AddYears(-18).AddDays(1).Date,
                 Diet = Diet.Omnivore,
             };
+
+            var principal = await Http.Principal_Get(SessionStorage);
+            Invite = await Http.Invite_Get(SessionStorage, principal.Email);
 
             ProfileLoading = false;
         }
@@ -540,6 +542,7 @@ namespace VerusDate.Web.Pages.Profile
                 else
                 {
                     var invites = NewInvites.Except(RemovedInvites).ToList();
+                    var principal = await Http.Principal_Get(SessionStorage);
 
                     foreach (var email in invites)
                     {
@@ -553,7 +556,7 @@ namespace VerusDate.Web.Pages.Profile
                             newInvite = true;
                         }
 
-                        invite.Invites.Add(new Invite(profile.Key, InviteType.Partner));
+                        invite.Invites.Add(new Invite(profile.Key, principal.Email, InviteType.Partner));
 
                         if (newInvite)
                             await Http.Invite_Add(invite, Toast);
@@ -594,6 +597,19 @@ namespace VerusDate.Web.Pages.Profile
             if (obj != null) profile.Partners.Remove(obj);
 
             RemovedInvites.Add(partner.Email);
+        }
+
+        private void AcceptInvite(string userId)
+        {
+            var invite = Invite?.Invites.FirstOrDefault(w => w.UserId == userId && w.Type == InviteType.Partner);
+
+            if (invite != null)
+            {
+                invite.Accepted = true;
+
+                partner.Email = invite.UserEmail;
+                AddNewPartner();
+            }
         }
     }
 }

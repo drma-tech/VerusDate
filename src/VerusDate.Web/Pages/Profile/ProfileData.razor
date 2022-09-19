@@ -24,8 +24,8 @@
                     <FieldSelect For="@(() => profile.Modality)" TValue="Modality?" TEnum="Modality" @bind-SelectedValue="@profile.Modality"
                              CssIcon="@FontAwesomeIcons.YinYang" Required="true" LabelSize="LabelSize.Short"></FieldSelect>
                     <FieldText For="@(() => profile.NickName)" @bind-Value="@profile.NickName" CssIcon="@FontAwesomeIcons.User" Required="true" LabelSize="LabelSize.Short"></FieldText>
-                    <FieldText For="@(() => profile.Description)" @bind-Value="@profile.Description" CssIcon="@FontAwesomeIcons.QuoteLeft" 
-                        Required="(profile.Modality == Modality.Matchmaker)" Visible="(profile.Modality == Modality.Matchmaker)" Rows="7" LabelSize="LabelSize.Short"></FieldText>
+                    <FieldText For="@(() => profile.Description)" @bind-Value="@profile.Description" CssIcon="@FontAwesomeIcons.QuoteLeft"
+                           Required="(profile.Modality == Modality.Matchmaker)" Visible="(profile.Modality == Modality.Matchmaker)" Rows="7" LabelSize="LabelSize.Short"></FieldText>
                     <FieldText For="@(() => profile.Location)" @bind-Value="@profile.Location" CssIcon="@FontAwesomeIcons.MapMarkerAlt" Required="true" Disabled="true"
                            ButtomClicked="async ()=> { await SetLocation(profile); }" ButtomCssIcon="@FontAwesomeIcons.MapMarkedAlt" LabelSize="LabelSize.Short" ButtomTitle="Recuperar posição GPS"></FieldText>
                     <FieldSelect For="@(() => profile.Languages)" TValue="IReadOnlyList<Language>" TEnum="Language" @bind-SelectedValues="@profile.Languages"
@@ -204,22 +204,35 @@
                     <Alert Visible="true" Color="Color.Secondary">
                         <AlertDescription>Convites</AlertDescription>
                     </Alert>
-                    <FieldText For="@(() => partner.Email)" @bind-Value="@partner.Email" LabelSize="LabelSize.Normal" ButtomCssIcon="FontAwesomeIcons.PaperPlane" 
-                        ButtomClicked="@AddNewPartner"></FieldText>
+                    <FieldText For="@(() => partner.Email)" @bind-Value="@partner.Email" LabelSize="LabelSize.Normal" ButtomCssIcon="FontAwesomeIcons.PaperPlane"
+                           ButtomClicked="@AddNewPartner"></FieldText>
                     <Divider DividerType="DividerType.TextContent" Text="ou" />
-                    <Field Horizontal="true">
-                        <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
-                            Parceiro já cadastrado?
-                        </FieldLabel>
-                        <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is8.OnFullHD">
-                            <Button Color="Color.Primary" Outline="true" Clicked="@(()=>{})" title="Buscar convites">
-                                <Blazorise.Icon Name="FontAwesomeIcons.Search"></Blazorise.Icon> Importar convite
-                            </Button>
-                        </FieldBody>
-                        <Column>
-                            <FieldHelp Style="color: #17a2b8 !important">Caso seu parceiro já tenha se cadastrado e enviado um convite</FieldHelp>
-                        </Column>
-                    </Field>
+                    <ListGroup>
+                        <CustomVisibility Loading="ProfileLoading" NoData="@(Invite == null || !Invite.Invites.Any())" CustomNoData="Não existem convites pendentes">
+                            @foreach (var item in Invite?.Invites ?? new List<Invite>())
+                            {
+                                <ListGroupItem Flex="Flex.JustifyContent.Between.AlignItems.Center">
+                                    @item.DtInvite
+                                    @if (item.Accepted)
+                                    {
+                                        <Badge Color="Color.Success" Pill>Convite aceito</Badge>
+                                    }
+                                    else
+                                    {
+                                        <Badge Color="Color.Danger" Pill>Convite não aceito</Badge>
+                                    }
+                                    <Div Float="Float.End">
+                                        <Button Color="Color.Success" Clicked="@(()=>{AcceptInvite(item.UserId);})" Size="Size.Small" title="Aceitar">
+                                            <Blazorise.Icon Name="FontAwesomeIcons.ThumbsUp"></Blazorise.Icon>
+                                        </Button>
+                                        <Button Color="Color.Danger" Clicked="@(()=>{AcceptInvite(item.UserId);})" Size="Size.Small" title="Rejeitar">
+                                            <Blazorise.Icon Name="FontAwesomeIcons.ThumbsDown"></Blazorise.Icon>
+                                        </Button>
+                                    </Div>
+                                </ListGroupItem>
+                            }
+                        </CustomVisibility>
+                    </ListGroup>
                 </Column>
             </Row>
         }
@@ -264,7 +277,7 @@
     private Shared.modal.BasicModal? privacy;
     private Shared.modal.BasicModal? help;
 
-
+    private VerusDate.Shared.Model.InviteModel? Invite;
 
     private bool ProfileLoading;
 
@@ -280,7 +293,7 @@
 
     private Tabs SelectedTab = Tabs.Basic;
 
-    private async Task ChangeOrder(Tabs tab)
+    private void ChangeOrder(Tabs tab)
     {
         SelectedTab = tab;
     }

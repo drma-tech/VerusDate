@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using VerusDate.Api.Core;
 using VerusDate.Api.Mediator.Command.Profile;
 using VerusDate.Api.Mediator.Queries.Profile;
-using VerusDate.Shared.Model.Profile;
+using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Function
 {

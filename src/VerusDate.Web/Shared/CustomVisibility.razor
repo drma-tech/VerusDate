@@ -20,7 +20,7 @@ else if (NoData)
 {
     <Alert Color="Color.Primary" Visible="true" Margin="Margin.Is0.FromBottom">
         <AlertDescription>
-            <Blazorise.Icon Name="FontAwesomeIcons.ExclamationTriangle"></Blazorise.Icon> Não há dados para mostrar
+            <Blazorise.Icon Name="FontAwesomeIcons.ExclamationTriangle"></Blazorise.Icon> @(CustomNoData ?? "Não há dados para mostrar")
         </AlertDescription>
     </Alert>
 }
@@ -36,4 +36,5 @@ else
     [Parameter] public bool Invalid { get; set; }
     [Parameter] public bool NoData { get; set; }
     [Parameter] public string? CustomError { get; set; }
+    [Parameter] public string? CustomNoData { get; set; }
 }

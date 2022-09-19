@@ -1,6 +1,6 @@
 ﻿using Blazored.SessionStorage;
 using Blazored.Toast.Services;
-using VerusDate.Shared.Model.Profile;
+using VerusDate.Shared.Model;
 using VerusDate.Web.Core;
 
 namespace VerusDate.Web.Api

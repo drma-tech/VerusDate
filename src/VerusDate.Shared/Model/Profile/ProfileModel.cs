@@ -248,6 +248,8 @@ namespace VerusDate.Shared.Model
             Neurodiversity = profile.Neurodiversity;
             Disabilities = profile.Disabilities;
 
+            Partners = profile.Partners;
+
             DtUpdate = DateTime.UtcNow;
         }
 

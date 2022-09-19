@@ -2,7 +2,7 @@
   "clientPrincipal": {
     "identityProvider": "google",
     "userId": "b9a10c8be2f244c0a625b78f05e30812",
-    "userDetails": "blabla@gmail.com",
+    "userDetails": "dhiogo@localhost.com",
     "userRoles": [
       "anonymous",
       "authenticated"

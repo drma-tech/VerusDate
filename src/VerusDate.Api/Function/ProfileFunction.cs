@@ -159,5 +159,28 @@ namespace VerusDate.Api.Function
                 return new BadRequestObjectResult(ex.ProcessException());
             }
         }
+
+        [FunctionName("ProfileViewUpdatePatner")]
+        public async Task<IActionResult> UpdatePatner(
+           [HttpTrigger(AuthorizationLevel.Function, FunctionMethod.PUT, Route = "Profile/UpdatePatner")] HttpRequest req,
+           ILogger log, CancellationToken cancellationToken)
+        {
+            using var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, req.HttpContext.RequestAborted);
+
+            try
+            {
+                var request = await req.BuildRequestCommand<ProfileUpdatePartnerCommand>(source.Token, false);
+                request.LoggedUserId = req.GetUserId();
+
+                var result = await _mediator.Send(request, source.Token);
+
+                return new OkObjectResult(result);
+            }
+            catch (Exception ex)
+            {
+                log.LogError(ex, req.Query.BuildMessage(), req.Query.ToList());
+                return new BadRequestObjectResult(ex.ProcessException());
+            }
+        }
     }
 }

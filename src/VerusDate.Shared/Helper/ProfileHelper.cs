@@ -5,12 +5,6 @@ namespace VerusDate.Shared.Helper
 {
     public static class ProfileHelper
     {
-        public enum DistanceType
-        {
-            Km = 1,
-            Mile = 2
-        }
-
         public static int GetAge(this DateTime date)
         {
             int years = DateTime.UtcNow.Year - date.Year;
@@ -38,6 +32,12 @@ namespace VerusDate.Shared.Helper
             return ts.Days;
         }
 
+        public enum DistanceType
+        {
+            Km = 1,
+            Mile = 2
+        }
+
         /// <summary>
         /// must be in meters
         /// </summary>
@@ -54,6 +54,12 @@ namespace VerusDate.Shared.Helper
                 DistanceType.Mile => $"{distance} mile",
                 _ => $"null",
             };
+        }
+
+        private static double ToRadians(double angleIn10thofaDegree)
+        {
+            // Angle in 10th of a degree
+            return (angleIn10thofaDegree * Math.PI) / 180;
         }
 
         public static double GetDistance(double lat1, double lat2, double lon1, double lon2, DistanceType type)
@@ -96,35 +102,35 @@ namespace VerusDate.Shared.Helper
             double delta = Math.Abs(ts.TotalSeconds);
 
             if (delta < 1 * MINUTE)
-                return ts.Seconds <= 1 ? "Agora" : ts.Seconds + " segundos atrás";
+                return ts.Seconds <= 1 ? "Now" : ts.Seconds + " seconds ago";
 
             if (delta < 2 * MINUTE)
-                return "Um minuto atrás";
+                return "a minute ago";
 
             if (delta < 45 * MINUTE)
-                return ts.Minutes + " minutos atrás";
+                return ts.Minutes + " minutes ago";
 
             if (delta < 90 * MINUTE)
-                return "Uma hora atrás";
+                return "One hour ago";
 
             if (delta < 24 * HOUR)
-                return ts.Hours + " horas atrás";
+                return ts.Hours + " hours ago";
 
             if (delta < 48 * HOUR)
-                return "ontem";
+                return "yesterday";
 
             if (delta < 30 * DAY)
-                return ts.Days + " dias atrás";
+                return ts.Days + " days ago";
 
             if (delta < 12 * MONTH)
             {
                 int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
-                return months <= 1 ? "Um mês atrás" : months + " meses atrás";
+                return months <= 1 ? "A month ago" : months + " months ago";
             }
             else
             {
                 int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
-                return years <= 1 ? "Um ano atrás" : years + " anos atrás";
+                return years <= 1 ? "One year ago" : years + " years ago";
             }
         }
 
@@ -230,12 +236,6 @@ namespace VerusDate.Shared.Helper
             {
                 throw new InvalidOperationException("GetZodiac");
             }
-        }
-
-        private static double ToRadians(double angleIn10thofaDegree)
-        {
-            // Angle in 10th of a degree
-            return (angleIn10thofaDegree * Math.PI) / 180;
         }
     }
 }

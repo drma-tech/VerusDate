@@ -12,6 +12,7 @@ namespace VerusDate.Web.Api
         public const string Add = "Profile/Add";
         public const string Update = "Profile/Update";
         public const string UpdateLooking = "Profile/UpdateLooking";
+        public const string UpdatePartner = "Profile/UpdatePatner";
 
         public const string ListMatch = "Profile/ListMatch";
         public const string ListSearch = "Profile/ListSearch";
@@ -26,11 +27,11 @@ namespace VerusDate.Web.Api
             return await http.Get<ProfileModel>(ProfileEndpoint.Get, storage);
         }
 
-        public static async Task<ProfileView?> Profile_GetView(this HttpClient http, ISyncSessionStorageService storage, string? IdUserView)
+        public static async Task<ProfileView?> Profile_GetView(this HttpClient http, ISyncSessionStorageService storage, string? IdUserView, bool forceUpdate = false)
         {
             if (IdUserView == null) return default;
 
-            return await http.Get<ProfileView>(ProfileEndpoint.GetView(IdUserView), storage);
+            return await http.Get<ProfileView>(ProfileEndpoint.GetView(IdUserView), storage, forceUpdate);
         }
 
         public static async Task<List<ProfileSearch>> Profile_ListSearch(this HttpClient http, ISyncSessionStorageService storage)
@@ -50,20 +51,20 @@ namespace VerusDate.Web.Api
 
         public static async Task Profile_Update(this HttpClient http, ProfileModel obj, ISyncSessionStorageService storage, IToastService? toast)
         {
-            var response = await http.Put(ProfileEndpoint.Update, obj);
+            var response = await http.Put(ProfileEndpoint.Update, obj, storage, ProfileEndpoint.Get);
 
-            if (response.IsSuccessStatusCode)
-            {
-                //if (obj.DtUpdate != null) //terceira vez que atualiza
-                //{
-                //    await http.Session_RemoveXP(storage, 100);
-                //    toast.ShowWarning("", "Perdeu 100 XP");
-                //}
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    //if (obj.DtUpdate != null) //terceira vez que atualiza
+            //    //{
+            //    //    await http.Session_RemoveXP(storage, 100);
+            //    //    toast.ShowWarning("", "Perdeu 100 XP");
+            //    //}
 
-                obj.UpdateData(obj);
+            //    obj.UpdateData(obj);
 
-                storage.Session_Update_Profile(obj);
-            }
+            //    storage.Session_Update_Profile(obj);
+            //}
 
             await response.ProcessResponse(toast, "Perfil atualizado com sucesso");
         }
@@ -74,7 +75,7 @@ namespace VerusDate.Web.Api
 
             obj.Preference = preference;
 
-            var response = await http.Put(ProfileEndpoint.UpdateLooking, obj);
+            var response = await http.Put(ProfileEndpoint.UpdateLooking, obj, storage, ProfileEndpoint.Get);
 
             if (response.IsSuccessStatusCode)
             {
@@ -91,10 +92,17 @@ namespace VerusDate.Web.Api
 
                 storage.RemoveItem(ProfileEndpoint.ListMatch);
                 storage.RemoveItem(ProfileEndpoint.ListSearch);
-                storage.Session_Update_Profile(obj);
+                //storage.Session_Update_Profile(obj);
             }
 
             await response.ProcessResponse(toast, "Preferências atualizadas com sucesso");
+        }
+
+        public static async Task Profile_UpdatePartner(this HttpClient http, string id, string email)
+        {
+            var response = await http.Put(ProfileEndpoint.UpdatePartner, new { id, email }, null, null);
+
+            await response.ProcessResponse(null, "Preferências atualizadas com sucesso");
         }
     }
 }

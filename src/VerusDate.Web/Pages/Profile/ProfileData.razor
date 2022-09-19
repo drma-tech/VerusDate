@@ -183,7 +183,7 @@
                             @foreach (var item in profile.Partners)
                             {
                                 <ListGroupItem Flex="Flex.JustifyContent.Between.AlignItems.Center">
-                                    @item.Email
+                                    <Badge Color="Color.Secondary">@item.Email</Badge>
                                     @if (string.IsNullOrEmpty(item.Id))
                                     {
                                         <Badge Color="Color.Danger" Pill>Vínculo Inativo</Badge>
@@ -212,7 +212,8 @@
                             @foreach (var item in Invite?.Invites ?? new List<Invite>())
                             {
                                 <ListGroupItem Flex="Flex.JustifyContent.Between.AlignItems.Center">
-                                    @item.DtInvite
+                                    <Badge Color="Color.Secondary">@item.DtInvite.GetElapsedTime()</Badge>
+                                    <Badge Color="Color.Secondary">@item.UserEmail</Badge>
                                     @if (item.Accepted)
                                     {
                                         <Badge Color="Color.Success" Pill>Convite aceito</Badge>

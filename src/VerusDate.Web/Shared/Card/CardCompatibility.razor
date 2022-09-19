@@ -101,16 +101,16 @@
 </VerusDate.Web.Shared.modal.BasicModal>
 
 @code {
-    [Parameter] public ProfileModel User { get; set; }
-    [Parameter] public ProfileView View { get; set; }
+    [Parameter] public ProfileModel? User { get; set; }
+    [Parameter] public ProfileView? View { get; set; }
     [Parameter] public List<AffinityVM> Affinities { get; set; }
 
-    private Shared.modal.BasicModal help;
+    private Shared.modal.BasicModal? help;
     private int totPercAff => Affinities.GetPercentAffinity(null);
 
     protected override void OnInitialized()
     {
-        if (View != null && User.DaysInsert() < 30)
+        if (View != null && User.DtInsert > DateTime.Now.AddDays(-7))
         {
             Toast.ShowInfo("Clique em cada um dos itens para obter mais detalhes");
         }

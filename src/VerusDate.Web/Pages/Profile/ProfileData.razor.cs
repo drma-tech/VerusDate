@@ -543,6 +543,7 @@ namespace VerusDate.Web.Pages.Profile
                 {
                     var invites = NewInvites.Except(RemovedInvites).ToList();
                     var principal = await Http.Principal_Get(SessionStorage);
+                    var emailUser = principal.Email;
 
                     foreach (var email in invites)
                     {
@@ -556,12 +557,12 @@ namespace VerusDate.Web.Pages.Profile
                             newInvite = true;
                         }
 
-                        invite.Invites.Add(new Invite(profile.Key, principal.Email, InviteType.Partner));
+                        invite.Invites.Add(new Invite(profile.Key, emailUser, InviteType.Partner));
 
                         if (newInvite)
-                            await Http.Invite_Add(invite, Toast);
+                            await Http.Invite_Add(invite, Toast, SessionStorage);
                         else
-                            await Http.Invite_Update(invite, Toast);
+                            await Http.Invite_Update(invite, Toast, SessionStorage);
                     }
 
                     foreach (var item in RemovedInvites)
@@ -599,16 +600,50 @@ namespace VerusDate.Web.Pages.Profile
             RemovedInvites.Add(partner.Email);
         }
 
-        private void AcceptInvite(string userId)
+        private async Task AcceptInvite(string userId)
         {
-            var invite = Invite?.Invites.FirstOrDefault(w => w.UserId == userId && w.Type == InviteType.Partner);
-
-            if (invite != null)
+            try
             {
-                invite.Accepted = true;
+                var invite = Invite?.Invites.FirstOrDefault(w => w.UserId == userId && w.Type == InviteType.Partner);
 
-                partner.Email = invite.UserEmail;
-                AddNewPartner();
+                if (Invite != null && invite != null)
+                {
+                    invite.Accepted = true;
+                    await Http.Invite_Update(Invite, null, SessionStorage);
+
+                    profile.Partners.Add(new Partner() { Email = invite.UserEmail, Id = userId });
+                    await Http.Profile_Update(profile, SessionStorage, Toast);
+
+                    var principal = await Http.Principal_Get(SessionStorage);
+                    var emailUser = principal.Email;
+                    await Http.Profile_UpdatePartner(userId, emailUser);
+
+                    //var view = await Http.Profile_GetView(SessionStorage, userId, true);
+                    //if (view != null)
+                    //{
+                    //    var principal = await Http.Principal_Get(SessionStorage);
+                    //    var emailUser = principal.Email;
+
+                    //    var partnerView = view.Partners.FirstOrDefault(w => w.Email == emailUser);
+                    //    if (partnerView != null)
+                    //    {
+                    //        partnerView.Id = userId;
+                    //        await Http.Profile_Update(view, SessionStorage, Toast);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    Toast.ShowWarning("", "Não foi possível identificar o perfil do usuário");
+                    //}
+                }
+                else
+                {
+                    Toast.ShowWarning("", "Não foi possível identificar o convite");
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ProcessException(Toast, Logger);
             }
         }
     }

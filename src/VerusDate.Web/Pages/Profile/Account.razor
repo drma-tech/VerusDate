@@ -68,12 +68,20 @@
 
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
 
-            principal.UserId = authState.User.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value;
-            principal.IdentityProvider = authState.User.Identity.AuthenticationType;
-            principal.UserDetails = authState.User.Identity.Name;
-            principal.UserRoles = authState.User.Claims.Where(w => w.Type == ClaimTypes.Role)?.Select(s => s.Value).ToArray();
+            if (authState != null)
+            {
+                var user = authState.User;
 
-            principal.Email = principal.UserDetails;
+                if (user != null)
+                {
+                    principal.UserId = user.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value;
+                    principal.IdentityProvider = user.Identity?.AuthenticationType;
+                    principal.UserDetails = user.Identity?.Name;
+                    principal.UserRoles = user.Claims.Where(w => w.Type == ClaimTypes.Role)?.Select(s => s.Value).ToArray();
+                }
+
+                principal.Email = principal.UserDetails;
+            }
         }
     }
 

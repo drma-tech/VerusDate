@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Enum;
-using VerusDate.Shared.Helper;
 using static VerusDate.Shared.Helper.ImageHelper;
 
 namespace VerusDate.Shared.Model
@@ -260,6 +259,17 @@ namespace VerusDate.Shared.Model
             DtUpdate = DateTime.UtcNow;
         }
 
+        public void UpdatePartner(string userId, string email)
+        {
+            var partner = Partners.FirstOrDefault(w => w.Email == email);
+            if (partner != null)
+            {
+                partner.Id = userId;
+
+                DtUpdate = DateTime.UtcNow;
+            }
+        }
+
         //public void UpdateGamification(ProfileGamificationModel obj)
         //{
         //    Gamification = obj;
@@ -279,18 +289,6 @@ namespace VerusDate.Shared.Model
             Photo = obj;
 
             DtUpdate = DateTime.UtcNow;
-        }
-
-        public int DaysInsert()
-        {
-            return ProfileHelper.GetDaysPassed(DtInsert.Value);
-        }
-
-        public int DaysUpdate()
-        {
-            if (!DtUpdate.HasValue) return DaysInsert();
-
-            return ProfileHelper.GetDaysPassed(DtUpdate.Value);
         }
 
         public string GetMainPhoto()

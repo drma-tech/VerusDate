@@ -24,7 +24,7 @@ namespace VerusDate.Web.Core
             return new JsonSerializerOptions();
         }
 
-        public static async Task<T> Get<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage = null) where T : class
+        public static async Task<T> Get<T>(this HttpClient http, string requestUri, ISyncSessionStorageService? storage = null, bool forceUpdate = false) where T : class
         {
             if (storage == null)
             {
@@ -34,7 +34,7 @@ namespace VerusDate.Web.Core
             }
             else
             {
-                if (!storage.ContainKey(requestUri))
+                if (forceUpdate || !storage.ContainKey(requestUri))
                 {
                     var response = await http.GetAsync(http.BaseApi() + requestUri);
 
@@ -45,9 +45,9 @@ namespace VerusDate.Web.Core
             }
         }
 
-        public static async Task<List<T>> GetList<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage) where T : class
+        public static async Task<List<T>> GetList<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage, bool forceUpdate = false) where T : class
         {
-            if (!storage.ContainKey(requestUri))
+            if (forceUpdate || !storage.ContainKey(requestUri))
             {
                 var response = await http.GetAsync(http.BaseApi() + requestUri);
 
@@ -69,9 +69,16 @@ namespace VerusDate.Web.Core
             return response;
         }
 
-        public static async Task<HttpResponseMessage> Put(this HttpClient http, string requestUri, object obj)
+        public static async Task<HttpResponseMessage> Put<T>(this HttpClient http, string requestUri, T obj, ISyncSessionStorageService? storage = null, string? urlGet = null) where T : class
         {
-            return await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
+            var response = await http.PutAsJsonAsync(http.BaseApi() + requestUri, obj, GetOptions());
+
+            if (storage != null && !string.IsNullOrWhiteSpace(urlGet) && response.IsSuccessStatusCode)
+            {
+                storage.SetItem(urlGet, obj);
+            }
+
+            return response;
         }
 
         public static async Task<HttpResponseMessage> Delete(this HttpClient http, string requestUri)

@@ -1,4 +1,7 @@
 ﻿using MediatR;
+using Microsoft.Azure.Cosmos;
+using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
@@ -20,20 +23,14 @@ namespace VerusDate.Api.Mediator.Command.Profile
 
         public async Task<bool> Handle(ProfileUpdateLookingCommand request, CancellationToken cancellationToken)
         {
-            var obj = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
+            //TODO: colocar id e key nos parametros e só passar o objeto preference
 
-            //if (obj.Preference == null) //primeira vez que atualiza a busca
-            //{
-            //    obj.Gamification.AddXP(30);
-            //}
-            //else
-            //{
-            //    obj.Gamification.RemoveXP(100);
-            //}
+            var operations = new List<PatchOperation> {
+                PatchOperation.Set("/preference", request.Preference),
+                PatchOperation.Add("/dtUpdate", DateTime.UtcNow)
+            };
 
-            obj.UpdateLooking(request.Preference);
-
-            return await _repo.Update(obj, cancellationToken);
+            return await _repo.PatchItem<ProfileModel>(request.Id, request.Key, operations, cancellationToken);
         }
     }
 }

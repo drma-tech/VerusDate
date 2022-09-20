@@ -14,7 +14,7 @@ namespace VerusDate.Shared.Model
         {
         }
 
-        public DateTime? DtTopList { get; set; } = DateTime.UtcNow;
+        //public DateTime? DtTopList { get; set; } = DateTime.UtcNow;
         public DateTime? DtLastLogin { get; set; } = DateTime.UtcNow;
 
         #region BASIC
@@ -129,8 +129,8 @@ namespace VerusDate.Shared.Model
         public RelationshipPersonality? RelationshipPersonality { get; set; }
 
         //A common misconception we all make at one point or another in the dating game is assuming that our partner’s relationship needs are perfectly aligned with our own. In reality, everyone is looking for something slightly different out of a relationship. A partnership that makes one person feel stifled might make another feel liberated. What one person sees as a fling another might look at as marriage potential. Our relationship preferences are highly intertwined with our personality preferences. Each personality type looks for something a little different out of a relationship. Here’s exactly which kind of partnership you’re most likely to thrive in based on your Myers-Briggs personality type.
-        [Custom(Name = "MyersBriggsTypeIndicator_Name", Description = "MyersBriggsTypeIndicator_Description", FieldInfo = "Um equívoco comum que todos cometemos em um ponto ou outro no jogo do namoro é supor que as necessidades de relacionamento do nosso parceiro estão perfeitamente alinhadas com as nossas. Na realidade, todo mundo está procurando algo um pouco diferente de um relacionamento. Uma parceria que faz uma pessoa se sentir sufocada pode fazer outra se sentir liberada. O que uma pessoa vê como uma aventura, outra pode ver como potencial de casamento. Nossas preferências de relacionamento estão altamente entrelaçadas com nossas preferências de personalidade. Cada tipo de personalidade procura algo um pouco diferente em um relacionamento. Aqui está exatamente em qual tipo de parceria você provavelmente prosperará com base no seu tipo de personalidade Myers-Briggs.", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
-        public MyersBriggsTypeIndicator? MyersBriggsTypeIndicator { get; set; }
+        [Custom(Name = "MBTI_Name", Description = "MBTI_Description", FieldInfo = "Um equívoco comum que todos cometemos em um ponto ou outro no jogo do namoro é supor que as necessidades de relacionamento do nosso parceiro estão perfeitamente alinhadas com as nossas. Na realidade, todo mundo está procurando algo um pouco diferente de um relacionamento. Uma parceria que faz uma pessoa se sentir sufocada pode fazer outra se sentir liberada. O que uma pessoa vê como uma aventura, outra pode ver como potencial de casamento. Nossas preferências de relacionamento estão altamente entrelaçadas com nossas preferências de personalidade. Cada tipo de personalidade procura algo um pouco diferente em um relacionamento. Aqui está exatamente em qual tipo de parceria você provavelmente prosperará com base no seu tipo de personalidade Myers-Briggs.", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        public MyersBriggsTypeIndicator? MBTI { get; set; }
 
         //The five love languages describe five ways that people receive and express love in a relationship. Knowing your partner's love language and letting them know yours is a way to help you both feel loved and appreciated. Author and pastor Gary Chapman describes how to use these love languages to show your partner you care for them in a way that speaks to their heart.
         [Custom(Name = "LoveLanguage_Name", Description = "LoveLanguage_Description", FieldInfo = "As cinco linguagens do amor descrevem cinco maneiras pelas quais as pessoas recebem e expressam amor em um relacionamento. Conhecer a linguagem de amor do seu parceiro e deixá-lo conhecer a sua é uma maneira de ajudá-lo a se sentir amado e apreciado. O autor e pastor Gary Chapman descreve como usar essas linguagens do amor para mostrar ao seu parceiro que você se importa com ele de uma maneira que fala ao coração dele.", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
@@ -173,10 +173,10 @@ namespace VerusDate.Shared.Model
         public ProfilePreferenceModel Preference { get; set; }
 
         //public ProfileGamificationModel Gamification { get; set; }
-        public ProfileBadgeModel Badge { get; set; }
+        //public ProfileBadgeModel Badge { get; set; }
 
         public ProfilePhotoModel Photo { get; set; }
-        public ProfileReportModel[] Reports { get; set; } = Array.Empty<ProfileReportModel>();
+        //public ProfileReportModel[] Reports { get; set; } = Array.Empty<ProfileReportModel>();
 
         //public string[] ActiveInteractions { get; set; } = Array.Empty<string>();
         //public string[] PassiveInteractions { get; set; } = Array.Empty<string>();
@@ -185,10 +185,10 @@ namespace VerusDate.Shared.Model
 
         private readonly string BlobPath = "https://storageverusdate.blob.core.windows.net";
 
-        public void UpList()
-        {
-            DtTopList = DateTime.UtcNow;
-        }
+        //public void UpList()
+        //{
+        //    DtTopList = DateTime.UtcNow;
+        //}
 
         public void Login()
         {
@@ -231,7 +231,7 @@ namespace VerusDate.Shared.Model
             MoneyPersonality = profile.MoneyPersonality;
             SplitTheBill = profile.SplitTheBill;
             RelationshipPersonality = profile.RelationshipPersonality;
-            MyersBriggsTypeIndicator = profile.MyersBriggsTypeIndicator;
+            MBTI = profile.MBTI;
             LoveLanguage = profile.LoveLanguage;
             SexPersonality = profile.SexPersonality;
 
@@ -279,12 +279,12 @@ namespace VerusDate.Shared.Model
         //    DtUpdate = DateTime.UtcNow;
         //}
 
-        public void UpdateBadge(ProfileBadgeModel obj)
-        {
-            Badge = obj;
+        //public void UpdateBadge(ProfileBadgeModel obj)
+        //{
+        //    Badge = obj;
 
-            DtUpdate = DateTime.UtcNow;
-        }
+        //    DtUpdate = DateTime.UtcNow;
+        //}
 
         public void UpdatePhoto(ProfilePhotoModel obj)
         {

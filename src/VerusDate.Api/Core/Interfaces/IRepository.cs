@@ -22,6 +22,8 @@ namespace VerusDate.Api.Core.Interfaces
 
         Task<bool> Update<T>(T item, CancellationToken cancellationToken) where T : CosmosBase;
 
+        Task<bool> PatchItem<T>(string id, string partitionKeyValue, List<PatchOperation> operations, CancellationToken cancellationToken) where T : CosmosBase;
+
         Task<bool> Delete<T>(T item, CancellationToken cancellationToken) where T : CosmosBase;
     }
 }

@@ -20,9 +20,9 @@ namespace VerusDate.Seed.Model
                 {
                     p.SetIds(Id ?? s.Random.Guid().ToString());
                     if (profile) p.UpdateData(GetProfile());
-                    if (looking) p.UpdateLooking(GetProfileLookingVM());
+                    //if (looking) p.UpdateLooking(GetProfileLookingVM());
                     //if (gamification) p.UpdateGamification(GetProfileGamification());
-                    if (badge) p.UpdateBadge(GetProfileBadge());
+                    //if (badge) p.UpdateBadge(GetProfileBadge());
                     if (photo) p.UpdatePhoto(GetProfilePhoto());
                     //p.ActivityStatus = s.PickRandom<ActivityStatus>();
                 });
@@ -75,7 +75,7 @@ namespace VerusDate.Seed.Model
                     //PERSONALITY
                     p.MoneyPersonality = s.PickRandom<MoneyPersonality>();
                     p.RelationshipPersonality = s.PickRandom<RelationshipPersonality>();
-                    p.MyersBriggsTypeIndicator = s.PickRandom<MyersBriggsTypeIndicator>();
+                    p.MBTI = s.PickRandom<MyersBriggsTypeIndicator>();
                     p.SplitTheBill = s.PickRandom<SplitTheBill>();
                     p.LoveLanguage = s.PickRandom<LoveLanguage>();
                     p.SexPersonality = s.PickRandom<SexPersonality>();

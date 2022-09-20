@@ -133,6 +133,24 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to It is necessary to test on a third-party site (multi-language).
+        /// </summary>
+        public static string MBTI_Description {
+            get {
+                return ResourceManager.GetString("MBTI_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MBTI Personality.
+        /// </summary>
+        public static string MBTI_Name {
+            get {
+                return ResourceManager.GetString("MBTI_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If you have any doubts, you can take a test on the original website (English only).
         /// </summary>
         public static string MoneyPersonality_Description {
@@ -147,24 +165,6 @@ namespace VerusDate.Shared.Resources.Model {
         public static string MoneyPersonality_Name {
             get {
                 return ResourceManager.GetString("MoneyPersonality_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to It is necessary to test on a third-party site (multi-language).
-        /// </summary>
-        public static string MyersBriggsTypeIndicator_Description {
-            get {
-                return ResourceManager.GetString("MyersBriggsTypeIndicator_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to MBTI Personality.
-        /// </summary>
-        public static string MyersBriggsTypeIndicator_Name {
-            get {
-                return ResourceManager.GetString("MyersBriggsTypeIndicator_Name", resourceCulture);
             }
         }
         

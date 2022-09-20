@@ -141,17 +141,17 @@
   <data name="LoveLanguage_Name" xml:space="preserve">
     <value>Love Language</value>
   </data>
+  <data name="MBTI_Description" xml:space="preserve">
+    <value>It is necessary to test on a third-party site (multi-language)</value>
+  </data>
+  <data name="MBTI_Name" xml:space="preserve">
+    <value>MBTI Personality</value>
+  </data>
   <data name="MoneyPersonality_Description" xml:space="preserve">
     <value>If you have any doubts, you can take a test on the original website (English only)</value>
   </data>
   <data name="MoneyPersonality_Name" xml:space="preserve">
     <value>Financial Personality</value>
-  </data>
-  <data name="MyersBriggsTypeIndicator_Description" xml:space="preserve">
-    <value>It is necessary to test on a third-party site (multi-language)</value>
-  </data>
-  <data name="MyersBriggsTypeIndicator_Name" xml:space="preserve">
-    <value>MBTI Personality</value>
   </data>
   <data name="RelationshipPersonality_Description" xml:space="preserve">
     <value>If in doubt, you can take a test on a third-party site (English only)</value>

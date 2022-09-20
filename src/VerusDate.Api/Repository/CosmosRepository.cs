@@ -18,9 +18,9 @@ namespace VerusDate.Api.Repository
     {
         public Container Container { get; private set; }
 
-        private const double ru_limit_get = 5; //1
-        private const double ru_limit_query = 10; //3
-        private const double ru_limit_save = 30; //5
+        private const double ru_limit_get = 2;
+        private const double ru_limit_query = 3;
+        private const double ru_limit_save = 30; //15
 
         public CosmosRepository(IConfiguration config)
         {
@@ -83,12 +83,14 @@ namespace VerusDate.Api.Repository
         public async Task<T> Get<T>(QueryDefinition query, string partitionKeyValue, CancellationToken cancellationToken) where T : class
         {
             using var iterator = Container.GetItemQueryIterator<T>(query, requestOptions: CosmosRepositoryExtensions.GetDefaultOptions(partitionKeyValue));
+            double count = 0;
 
             if (iterator.HasMoreResults)
             {
                 var response = await iterator.ReadNextAsync(cancellationToken);
 
-                if (response.RequestCharge > ru_limit_get) throw new NotificationException($"RU limit exceeded get ({response.RequestCharge})");
+                count += response.RequestCharge;
+                if (count > ru_limit_get) throw new NotificationException($"RU limit exceeded get ({response.RequestCharge})");
 
                 return response.Resource.FirstOrDefault();
             }
@@ -115,12 +117,14 @@ namespace VerusDate.Api.Repository
 
             using var iterator = query.ToFeedIterator();
             var results = new List<T>();
+            double count = 0;
 
             while (iterator.HasMoreResults)
             {
                 var response = await iterator.ReadNextAsync(cancellationToken);
 
-                if (response.RequestCharge > ru_limit_query) throw new NotificationException($"RU limit exceeded query ({response.RequestCharge})");
+                count += response.RequestCharge;
+                if (count > ru_limit_query) throw new NotificationException($"RU limit exceeded query ({response.RequestCharge})");
 
                 results.AddRange(response.Resource);
             }
@@ -132,12 +136,14 @@ namespace VerusDate.Api.Repository
         {
             using var iterator = Container.GetItemQueryIterator<T>(query);
             var results = new List<T>();
+            double count = 0;
 
             while (iterator.HasMoreResults)
             {
                 var response = await iterator.ReadNextAsync(cancellationToken);
 
-                if (response.RequestCharge > ru_limit_query) throw new NotificationException($"RU limit exceeded query ({response.RequestCharge})");
+                count += response.RequestCharge;
+                if (count > ru_limit_query) throw new NotificationException($"RU limit exceeded query ({response.RequestCharge})");
 
                 results.AddRange(response.Resource);
             }
@@ -162,6 +168,17 @@ namespace VerusDate.Api.Repository
             //await Container.UpsertItemAsync<T>(item, new PartitionKey(item.Key), requestOptions: options);
 
             var response = await Container.ReplaceItemAsync(item, item.Id, new PartitionKey(item.Key), null, cancellationToken);
+
+            if (response.RequestCharge > ru_limit_save) throw new NotificationException($"RU limit exceeded save ({response.RequestCharge})");
+
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
+        public async Task<bool> PatchItem<T>(string id, string partitionKeyValue, List<PatchOperation> operations, CancellationToken cancellationToken) where T : CosmosBase
+        {
+            //https://learn.microsoft.com/en-us/azure/cosmos-db/partial-document-update-getting-started?tabs=dotnet
+
+            var response = await Container.PatchItemAsync<T>(id, new PartitionKey(partitionKeyValue), operations, null, cancellationToken);
 
             if (response.RequestCharge > ru_limit_save) throw new NotificationException($"RU limit exceeded save ({response.RequestCharge})");
 

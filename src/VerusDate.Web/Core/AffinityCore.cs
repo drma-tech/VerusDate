@@ -70,7 +70,7 @@ namespace VerusDate.Web.Core
                 new AffinityVM(Section.Personality, CompatibilityItem.MoneyPersonality, GetMoneyPersonality(user).IsMatch(view.MoneyPersonality.ToArray())),
                 new AffinityVM(Section.Personality, CompatibilityItem.SplitTheBill, GetSplitTheBill(user).IsMatch(view.SplitTheBill.ToArray())),
                 new AffinityVM(Section.Personality, CompatibilityItem.RelationshipPersonality, GetRelationshipPersonality(user).IsMatch(view.RelationshipPersonality.ToArray())),
-                new AffinityVM(Section.Personality, CompatibilityItem.MyersBriggsTypeIndicator, GetMyersBriggsTypeIndicator(user).IsMatch(view.MyersBriggsTypeIndicator.ToArray())),
+                new AffinityVM(Section.Personality, CompatibilityItem.MyersBriggsTypeIndicator, GetMyersBriggsTypeIndicator(user).IsMatch(view.MBTI.ToArray())),
                 new AffinityVM(Section.Personality, CompatibilityItem.LoveLanguage, GetLoveLanguage(user).IsMatch(view.LoveLanguage.ToArray())),
                 new AffinityVM(Section.Personality, CompatibilityItem.SexPersonality, GetSexPersonality(user, user.Preference).IsMatch(view.SexPersonality.ToArray())),
                 //new AffinityVM(Section.Personality, CompatibilityItem.MoneyPersonality, CheckEnum((int?)view.MoneyPersonality, (int?)user.MoneyPersonality, true)),
@@ -616,7 +616,7 @@ namespace VerusDate.Web.Core
             //http://www.personalityrelationships.net/
             //https://web.archive.org/web/20220322143220/http://www.personalityrelationships.net/
 
-            return user.MyersBriggsTypeIndicator switch
+            return user.MBTI switch
             {
                 MyersBriggsTypeIndicator.INTJ => new MyersBriggsTypeIndicator[] { MyersBriggsTypeIndicator.ENTP, MyersBriggsTypeIndicator.ENFP },
                 MyersBriggsTypeIndicator.INTP => new MyersBriggsTypeIndicator[] { MyersBriggsTypeIndicator.ENTJ, MyersBriggsTypeIndicator.ENFJ },

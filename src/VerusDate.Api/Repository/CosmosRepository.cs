@@ -19,7 +19,7 @@ namespace VerusDate.Api.Repository
         public Container Container { get; private set; }
 
         private const double ru_limit_get = 2;
-        private const double ru_limit_query = 3;
+        private const double ru_limit_query = 4;
         private const double ru_limit_save = 30; //15
 
         public CosmosRepository(IConfiguration config)
@@ -90,7 +90,7 @@ namespace VerusDate.Api.Repository
                 var response = await iterator.ReadNextAsync(cancellationToken);
 
                 count += response.RequestCharge;
-                if (count > ru_limit_get) throw new NotificationException($"RU limit exceeded get ({response.RequestCharge})");
+                if (count > ru_limit_query) throw new NotificationException($"RU limit exceeded get ({response.RequestCharge})");
 
                 return response.Resource.FirstOrDefault();
             }

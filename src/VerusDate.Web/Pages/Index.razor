@@ -38,7 +38,7 @@
                     <Blazorise.Icon Name="FontAwesomeIcons.Portrait"></Blazorise.Icon> Fotos
                     @*@if (profile?.Photo == null)
                     {
-                        <Blazorise.Icon Name="FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Blazorise.Icon>
+                    <Blazorise.Icon Name="FontAwesomeIcons.ExclamationCircle" Style="color: #dc3545;"></Blazorise.Icon>
                     }*@
                 </Button>
             </Column>
@@ -162,12 +162,12 @@
                                 <CardBody>
                                     @if (view != null)
                                     {
-                                        <Badge Color="Color.Secondary">
+                                        @*<Badge Color="Color.Secondary">
                                             @view.NickName
-                                        </Badge>
-                                        <Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd">
+                                        </Badge>*@
+                                        @*<Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd">
                                             <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view?.GetLocation(ProfileModel.LocationType.City)
-                                        </Badge>
+                                        </Badge>*@
                                         @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                                         {
                                             <Badge Color="Color.Success">
@@ -241,10 +241,11 @@
 
             if (profile != null)
             {
-                if (profile.Modality == Modality.Matchmaker)
+                if (profile.Modality == Modality.RelationshipAnalysis)
                 {
                     ViewLoading = true;
-                    view = await Http.Profile_GetView(SessionStorage, null);//"5e14a3bfd4be46b5a047130baabf6af9");
+                    var partner = profile.Partners.FirstOrDefault(w => !string.IsNullOrEmpty(w.Id));
+                    view = await Http.Profile_GetView(SessionStorage, partner?.Id);
                     ViewLoading = false;
                 }
                 else

@@ -35,6 +35,6 @@ else
     [Parameter] public bool Loading { get; set; }
     [Parameter] public bool Invalid { get; set; }
     [Parameter] public bool NoData { get; set; }
-    [Parameter] public string? CustomError { get; set; }
-    [Parameter] public string? CustomNoData { get; set; }
+    [Parameter] public string? CustomError { get; set; } = null;
+    [Parameter] public string? CustomNoData { get; set; } = null;
 }

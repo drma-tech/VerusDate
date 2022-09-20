@@ -67,7 +67,8 @@ namespace VerusDate.Shared.Model
         [Custom(Name = "BirthDate_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
         public DateTime BirthDate { get; set; }
 
-        [Custom(Name = "Zodiac_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
+        //First, we need to make it clear that there is no scientific basis, so it may vary from person to person or from the sources researched. Despite this, we know that astrology is a very popular area in people's daily lives.
+        [Custom(Name = "Zodiac_Name", FieldInfo = "Primeiramente, precisamos deixar claro que não existe embasamento científico, portanto pode variar de pessoa para pessoa ou das fontes pesquisadas. Apesar disso, sabemos que astrologia é uma área muito popular no dia a dia das pessoas.", ResourceType = typeof(Resources.Model.ProfileBioModel))]
         public Zodiac Zodiac { get; set; }
 
         [Custom(Name = "Height_Name", ResourceType = typeof(Resources.Model.ProfileBioModel))]
@@ -98,7 +99,8 @@ namespace VerusDate.Shared.Model
         [Custom(Name = "WantChildren_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
         public WantChildren? WantChildren { get; set; }
 
-        [Custom(Name = "EducationLevel_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
+        //The intention of this evaluation is not to judge the paths that each one takes in life, but to statistically group people who have different potentials in their professional life or most of the time have decided to lead a life focused only on studies/research.
+        [Custom(Name = "EducationLevel_Name", FieldInfo = "A intenção desta avaliação não é julgar os caminhos que cada um toma na vida, mas estatisticamente agrupar pessoas que tem potenciais diferentes na sua vida profissional ou na maioria das vezes decidiu levar uma vida voltada apenas para os estudos/pesquisas.", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
         public EducationLevel? EducationLevel { get; set; }
 
         [Custom(Name = "CareerCluster_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]

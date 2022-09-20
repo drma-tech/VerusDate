@@ -223,10 +223,10 @@
                                         <Badge Color="Color.Danger" Pill>Convite não aceito</Badge>
                                     }
                                     <Div Float="Float.End">
-                                        <Button Color="Color.Success" Clicked="@(()=>{AcceptInvite(item.UserId);})" Size="Size.Small" title="Aceitar">
+                                        <Button Color="Color.Success" Clicked="@(async()=>{await AcceptInvite(item.UserId);})" Size="Size.Small" title="Aceitar" Disabled="@item.Accepted">
                                             <Blazorise.Icon Name="FontAwesomeIcons.ThumbsUp"></Blazorise.Icon>
                                         </Button>
-                                        <Button Color="Color.Danger" Clicked="@(()=>{AcceptInvite(item.UserId);})" Size="Size.Small" title="Rejeitar">
+                                        <Button Color="Color.Danger" Clicked="@(async()=>{})" Size="Size.Small" title="Rejeitar" Disabled="true">
                                             <Blazorise.Icon Name="FontAwesomeIcons.ThumbsDown"></Blazorise.Icon>
                                         </Button>
                                     </Div>

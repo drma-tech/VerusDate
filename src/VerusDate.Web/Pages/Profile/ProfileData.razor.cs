@@ -612,29 +612,11 @@ namespace VerusDate.Web.Pages.Profile
                     await Http.Invite_Update(Invite, null, SessionStorage);
 
                     profile.Partners.Add(new Partner() { Email = invite.UserEmail, Id = userId });
-                    await Http.Profile_Update(profile, SessionStorage, Toast);
+                    await Http.Profile_Update(profile, SessionStorage);
 
                     var principal = await Http.Principal_Get(SessionStorage);
                     var emailUser = principal.Email;
                     await Http.Profile_UpdatePartner(userId, emailUser);
-
-                    //var view = await Http.Profile_GetView(SessionStorage, userId, true);
-                    //if (view != null)
-                    //{
-                    //    var principal = await Http.Principal_Get(SessionStorage);
-                    //    var emailUser = principal.Email;
-
-                    //    var partnerView = view.Partners.FirstOrDefault(w => w.Email == emailUser);
-                    //    if (partnerView != null)
-                    //    {
-                    //        partnerView.Id = userId;
-                    //        await Http.Profile_Update(view, SessionStorage, Toast);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    Toast.ShowWarning("", "Não foi possível identificar o perfil do usuário");
-                    //}
                 }
                 else
                 {

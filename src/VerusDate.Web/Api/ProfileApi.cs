@@ -49,22 +49,9 @@ namespace VerusDate.Web.Api
             await response.ProcessResponse(toast, "Perfil criado com sucesso");
         }
 
-        public static async Task Profile_Update(this HttpClient http, ProfileModel obj, ISyncSessionStorageService storage, IToastService? toast)
+        public static async Task Profile_Update(this HttpClient http, ProfileModel obj, ISyncSessionStorageService storage, IToastService? toast = null)
         {
             var response = await http.Put(ProfileEndpoint.Update, obj, storage, ProfileEndpoint.Get);
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    //if (obj.DtUpdate != null) //terceira vez que atualiza
-            //    //{
-            //    //    await http.Session_RemoveXP(storage, 100);
-            //    //    toast.ShowWarning("", "Perdeu 100 XP");
-            //    //}
-
-            //    obj.UpdateData(obj);
-
-            //    storage.Session_Update_Profile(obj);
-            //}
 
             await response.ProcessResponse(toast, "Perfil atualizado com sucesso");
         }

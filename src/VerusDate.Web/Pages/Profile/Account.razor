@@ -35,21 +35,15 @@
         <Card Margin="Margin.Is2.FromBottom">
             <CardHeader>@Resources.CardHeader.ProfileAccountActions</CardHeader>
             <CardBody>
-                <Tooltip Text="Limpar o cache local, caso esteja com problemas dos dados sendo exibidos" Placement="TooltipPlacement.Bottom" Multiline="true">
-                    <Button Color="Color.Primary" Block="true" Clicked="()=>{ ClearCache(); }">
-                        <Blazorise.Icon Name="FontAwesomeIcons.Eraser" /> Limpar Cache
-                    </Button>
-                </Tooltip>
-                <Tooltip Text="Desfaz todas as interações feitas com outros usuários (isso não afeta seus dados pessoais)" Placement="TooltipPlacement.Bottom" Multiline="true">
-                    <Button Color="Color.Warning" Block="true" Clicked="()=>{ ResetInteractions(); }" Disabled="true">
-                        <Blazorise.Icon Name="FontAwesomeIcons.FastBackward" /> Resetar Interações
-                    </Button>
-                </Tooltip>
-                <Tooltip Text="Caso queira apagar seu perfil e todas as interações feitas (seu perfil não ficará mais disponível)" Placement="TooltipPlacement.Bottom" Multiline="true">
-                    <Button Color="Color.Danger" Block="true" Clicked="()=>{ DeleteAccount(principal.IdentityProvider); }">
-                        <Blazorise.Icon Name="FontAwesomeIcons.UserSlash" /> Deletar Conta
-                    </Button>
-                </Tooltip>
+                <Button Color="Color.Primary" Clicked="()=>{ ClearCache(); }" Margin="Margin.Is1.FromEnd">
+                    <Blazorise.Icon Name="FontAwesomeIcons.Eraser" /> Limpar Cache
+                </Button>
+                <Button Color="Color.Warning" Clicked="()=>{ ResetInteractions(); }" Disabled="true" Margin="Margin.Is1.FromEnd">
+                    <Blazorise.Icon Name="FontAwesomeIcons.FastBackward" /> Resetar Interações
+                </Button>
+                <Button Color="Color.Danger" Clicked="()=>{ DeleteAccount(principal.IdentityProvider); }" Disabled="true">
+                    <Blazorise.Icon Name="FontAwesomeIcons.UserSlash" /> Deletar Conta
+                </Button>
             </CardBody>
         </Card>
     </Column>
@@ -94,6 +88,8 @@
 
     private void ResetInteractions()
     {
+        //show question: Desfaz todas as interações feitas com outros usuários (isso não afeta seus dados pessoais)
+
         //transferir para backup
 
         //deletar dados
@@ -103,6 +99,8 @@
 
     private void DeleteAccount(string provider)
     {
+        //show question: Caso queira apagar seu perfil e todas as interações feitas (seu perfil não ficará mais disponível)
+
         //transferir para backup
 
         //deletar dados

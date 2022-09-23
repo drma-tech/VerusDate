@@ -2,6 +2,7 @@
 
 namespace VerusDate.Shared.Enum
 {
+    //https://www.sosyncd.com/the-complete-guide-to-personality-type-compatibility/
     public enum MyersBriggsTypeIndicator
     {
         [Custom(Group = "INTJ_Group", Name = "INTJ_Name", Description = "INTJ_Description", ResourceType = typeof(Resources.Enum.MyersBriggsTypeIndicator))]

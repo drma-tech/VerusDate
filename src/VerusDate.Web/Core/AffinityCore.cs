@@ -615,6 +615,7 @@ namespace VerusDate.Web.Core
         {
             //http://www.personalityrelationships.net/
             //https://web.archive.org/web/20220322143220/http://www.personalityrelationships.net/
+            //https://www.sosyncd.com/the-complete-guide-to-personality-type-compatibility/
 
             return user.MBTI switch
             {

@@ -118,25 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Builders_Description" xml:space="preserve">
-    <value>Estas pessoas têm como principal valor na vida a família, os amigos e a união com as pessoas amadas. São pessoas serenas, sociáveis e muito pacíficas. Evitam ao máximo se envolver em conflitos e assumir riscos.</value>
+    <value>Os construtores são os tipos tradicionais, leais e equilibrados, alimentados pela serotonina (o hormônio calmante). Essas pessoas são muito orientadas para a rotina e altamente planejadas, valorizando autoridade, regras e precisão. Eles são tipicamente fundamentados e baseados em fatos, conscientes e cautelosos. Os construtores querem fazer um trabalho completo e querem fazer certo da primeira vez. Eles reverenciam o lar e a família e têm uma noção do que “deveriam” estar fazendo o tempo todo. Os construtores geralmente são atraídos por pessoas como eles, preferindo iniciar relacionamentos e famílias com outras pessoas que valorizam a paz e a tradição.</value>
   </data>
   <data name="Builders_Name" xml:space="preserve">
     <value>Construtora</value>
   </data>
   <data name="Directors_Description" xml:space="preserve">
-    <value>Trata-se de uma personalidade analítica, de pessoas que priorizam a lógica e o bom senso acima de tudo. São pessoas muito equilibradas e práticas, que costumam usar a razão para tomar suas decisões.</value>
+    <value>Os diretores são alimentados por testosterona. Eles são analíticos e lógicos, diretos e acessíveis. Eles são seguros de si mesmos, independentes, decididos e céticos. Os diretores são engenhosos, competitivos e do tipo A, muitas vezes tornando-se excelentes líderes. Esses tipos tendem a ser atraídos por Negociadores orientados para o estrogênio, seus opostos; a combinação complementar fornece uma combinação perfeita para a emotividade e as habilidades pessoais que faltam aos Diretores.</value>
   </data>
   <data name="Directors_Name" xml:space="preserve">
     <value>Diretora</value>
   </data>
   <data name="Explorers_Description" xml:space="preserve">
-    <value>Estas pessoas tratam o amor como uma aventura. São impulsivas e autônomas, muito curiosas e estão sempre focadas em aproveitar o momento, mantendo uma atitude no estilo “deixa a vida me levar”.</value>
+    <value>Os exploradores são os executores e são alimentados pela dopamina (um neurotransmissor envolvido na busca de prazer e motivação). Os exploradores buscam novidade e emoção e adoram aprender, viajar e conhecer novas pessoas. Eles são altamente curiosos, orientados para objetivos e valorizam sua independência. Eles vivem no momento e normalmente têm uma tonelada de energia. Os exploradores geralmente são atraídos por aqueles que pensam da mesma forma. Eles afirmam que se você quer fazer, aprender, buscar e experimentar, você não se daria bem com alguém que não compartilhasse esses desejos.</value>
   </data>
   <data name="Explorers_Name" xml:space="preserve">
     <value>Exploradora</value>
   </data>
   <data name="Negotiator_Description" xml:space="preserve">
-    <value>As pessoas negociadoras são expressivas, empáticas e idealistas. Geralmente têm perfis muito sensíveis, mas possuem muita imaginação e a mente bem aberta. Além disso, precisam se aprofundar em seus sentimentos e gostam que as pessoas satisfaçam suas necessidades emocionais.</value>
+    <value>Os negociadores são caracterizados pelo estrogênio. Eles são intuitivos, charmosos, perspicazes e atenciosos. Eles se saem bem com a ambiguidade e podem ler nas entrelinhas. Os negociadores são altamente empáticos e hábeis em organizar e conectar pessoas. Eles gostam quando todos se dão bem e também são emocionalmente expressivos. Esses tipos são frequentemente atraídos por Diretores liderados por testosterona, seus opostos; Os diretores podem emprestar as habilidades de lógica, franqueza e determinação que muitas vezes faltam aos negociadores.</value>
   </data>
   <data name="Negotiator_Name" xml:space="preserve">
     <value>Negociadora</value>

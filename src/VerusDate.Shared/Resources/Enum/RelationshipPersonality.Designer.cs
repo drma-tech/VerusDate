@@ -61,7 +61,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These people have family, friends and the union with loved ones as their main value in life. They are serene, sociable and very peaceful people. They avoid getting involved in conflicts and taking risks as much as possible..
+        ///   Looks up a localized string similar to Builders are the traditional, loyal, balanced types, powered by serotonin (the calming hormone). These people are very routine-oriented and highly planned, valuing authority, rules, and precision. They are typically grounded and fact-based, conscientious and cautious. Builders want to do a thorough job, and they want to do it right the first time. They revere home and family and have a sense of what they “should” be doing at all times. Builders are often attracted to those like themselves, preferring to sta [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Builders_Description {
             get {
@@ -79,7 +79,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is an analytical personality, people who prioritize logic and common sense above all else. They are very balanced and practical people, who tend to use reason to make their decisions..
+        ///   Looks up a localized string similar to Directors are powered by testosterone. They are analytical and logical, direct and forthcoming. They are sure of themselves, independent, decisive, and skeptical. Directors are resourceful, competitive, and type A, often making excellent leaders. These types tend to be drawn to estrogen-oriented Negotiators, their opposites; the complementary match provides a perfect pairing for the emotionality and people skills that Directors lack..
         /// </summary>
         internal static string Directors_Description {
             get {
@@ -97,7 +97,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These people treat love as an adventure. They are impulsive and autonomous, very curious and are always focused on enjoying the moment, maintaining a “let life take me” attitude..
+        ///   Looks up a localized string similar to Explorers are the doers, and they&apos;re powered by dopamine (a neurotransmitter involved in pleasure-seeking and motivation). Explorers seek novelty and excitement, and love to learn, travel, and meet new people. They are highly curious, goal-oriented, and value their independence. They live in the moment and typically have a ton of energy. Explorers are often attracted to those who similar-minded. They contend that if you want to do, learn, seek, and experience, you wouldn’t do well with someone who didn’t sh [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Explorers_Description {
             get {
@@ -115,7 +115,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Negotiating people are expressive, empathetic and idealistic. They usually have very sensitive profiles, but they have a lot of imagination and a very open mind. In addition, they need to delve into their feelings and like people to satisfy their emotional needs..
+        ///   Looks up a localized string similar to Negotiators are characterized by estrogen. They&apos;re intuitive, charming, insightful, and caring. They do well with ambiguity, and can read between the lines. Negotiators are highly empathetic, and are skilled at organizing and connecting people. They like when everyone gets along, and they are also emotionally expressive. These types are often drawn to testosterone-led Directors, their opposites; Directors can lend the logic, directness, and decisiveness skills that Negotiators often lack..
         /// </summary>
         internal static string Negotiator_Description {
             get {

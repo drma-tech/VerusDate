@@ -1,124 +1,163 @@
 ﻿@using System.Linq.Expressions;
 @typeparam TValue
 
-@if (!string.IsNullOrEmpty(FieldInfo))
+<Div Margin="Margin.Is1.OnY">
+    <Button Margin="Margin.Is1.FromBottom" Color="Color.Primary" Outline="!(SelectedTab == Tabs.Affinity)" Clicked="(() => ChangeOrder(Tabs.Affinity))">Compatibilidade</Button>
+    @if (!string.IsNullOrEmpty(FieldInfo))
+    {
+        <Button Margin="Margin.Is1.FromBottom.Is1.FromStart" Color="Color.Primary" Outline="!(SelectedTab == Tabs.WhyImportant)" Clicked="(() => ChangeOrder(Tabs.WhyImportant))">Por que é importante?</Button>
+    }
+    @if (GetTips().Any())
+    {
+        <Button Margin="Margin.Is1.FromBottom.Is1.FromStart" Color="Color.Primary" Outline="!(SelectedTab == Tabs.Tips)" Clicked="(() => ChangeOrder(Tabs.Tips))">Dicas</Button>
+    }
+</Div>
+
+@if (SelectedTab == Tabs.Affinity)
 {
-    <Alert Visible="true" Color="Color.Info" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is1.FromBottom">
-        <AlertMessage>Por que é importante:</AlertMessage>
+    <Row Gutter="(8,0)">
+        <Column>
+            <Alert Visible="true" Color="Color.Primary" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromBottom">
+                <AlertMessage>Seu perfil (ou preferências)</AlertMessage>
+            </Alert>
+            @if (PreferenceValues.Any())
+            {
+                @foreach (var item in PreferenceValues)
+                {
+                    <Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd">
+                        @item
+                    </Badge>
+                }
+            }
+            else
+            {
+                <Badge Color="Color.Secondary">
+                    Não respondido
+                </Badge>
+            }
+        </Column>
+        <Column>
+            <Alert Visible="true" Color="Color.Primary" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromBottom">
+                <AlertMessage>Compatibilidades esperadas</AlertMessage>
+            </Alert>
+            @if (ExpectedValues.Any())
+            {
+                if (Type == CompatibilityType.Range)
+                {
+                    <Badge Color="Color.Secondary">@ExpectedValues[0]</Badge>
+
+                    <Blazorise.Text> - </Blazorise.Text>
+
+                    <Badge Color="Color.Secondary">@ExpectedValues[1]</Badge>
+                }
+                else
+                {
+                    foreach (var item in ExpectedValues)
+                    {
+                        <Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd">@item</Badge>
+                    }
+                }
+            }
+            else
+            {
+                <Badge Color="Color.Secondary">
+                    Indefinido
+                </Badge>
+            }
+        </Column>
+    </Row>
+    <Alert Visible="true" Color="Color.Primary" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+        <AlertMessage>Perfil do seu parceiro</AlertMessage>
+    </Alert>
+    @if (ViewValues.Any())
+    {
+        foreach (var item in ViewValues)
+        {
+            if (item is Enum resultE)
+            {
+                var desc = @resultE.GetCustomAttribute().Description;
+                var name = @resultE.GetName();
+
+                if (string.IsNullOrEmpty(desc))
+                {
+                    <Alert Visible="true" Color="@GetColor(item)" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is1.FromBottom.Is2.FromEnd" Style="display: inline-block">
+                        <AlertMessage>@name</AlertMessage>
+                    </Alert>
+                }
+                else
+                {
+                    <Alert Visible="true" Color="@GetColor(item)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+                        <AlertMessage>@name</AlertMessage>
+                        <AlertDescription>@desc</AlertDescription>
+                    </Alert>
+                }
+            }
+            else if (item != null)
+            {
+                <Alert Visible="true" Color="@GetColor(item)" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is1.FromBottom" Style="display: inline-block">
+                    <AlertMessage>@item</AlertMessage>
+                </Alert>
+            }
+            else
+            {
+                <Alert Visible="true" Color="@GetColor(item)" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is1.FromBottom" Style="display: inline-block">
+                    <AlertMessage>Não respondido</AlertMessage>
+                </Alert>
+            }
+        }
+    }
+    else
+    {
+        <Alert Visible="true" Color="@GetColor()" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is1.FromBottom" Style="display: inline-block">
+            <AlertMessage>Não respondido</AlertMessage>
+        </Alert>
+    }
+}
+else if (SelectedTab == Tabs.WhyImportant)
+{
+    <Alert Visible="true" Color="Color.Light" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is1.FromBottom">
         <AlertDescription>@FieldInfo</AlertDescription>
     </Alert>
 }
-<Row Gutter="(8,0)">
-    <Column>
-        <Alert Visible="true" Color="Color.Secondary" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
-            <AlertMessage>Seu perfil (ou preferências)</AlertMessage>
-        </Alert>
-        @if (PreferenceValues.Any())
-        {
-            @foreach (var item in PreferenceValues)
-            {
-                <Badge Color="Color.Secondary" Pill="true">
-                    @item
-                </Badge>
-            }
-        }
-        else
-        {
-            <Badge Color="Color.Secondary" Pill="true">
-                Não respondido
-            </Badge>
-        }
-    </Column>
-    <Column>
-        <Alert Visible="true" Color="Color.Secondary" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
-            <AlertMessage>Compatibilidades esperadas</AlertMessage>
-        </Alert>
-        @if (ExpectedValues.Any())
-        {
-            if (Type == CompatibilityType.Range)
-            {
-                <Badge Color="Color.Secondary" Pill="true">@ExpectedValues[0]</Badge>
-
-                <Blazorise.Text> - </Blazorise.Text>
-
-                <Badge Color="Color.Secondary" Pill="true">@ExpectedValues[1]</Badge>
-            }
-            else
-            {
-                foreach (var item in ExpectedValues)
-                {
-                    <Badge Color="Color.Secondary" Pill="true">@item</Badge>
-                }
-            }
-        }
-        else
-        {
-            <Badge Color="Color.Secondary" Pill="true">
-                Indefinido
-            </Badge>
-        }
-    </Column>
-</Row>
-<Alert Visible="true" Color="Color.Secondary" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
-    <AlertMessage>Perfil do seu parceiro</AlertMessage>
-</Alert>
-@if (ViewValues.Any())
+else if (SelectedTab == Tabs.Tips)
 {
-    foreach (var item in ViewValues)
+    @foreach (var item in GetTips())
     {
-        if (item is Enum resultE)
-        {
-            var desc = @resultE.GetCustomAttribute().Description;
-            var name = @resultE.GetName();
-
-            if (string.IsNullOrEmpty(desc))
-            {
-                <Alert Visible="true" Color="@GetColor(item)" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is1.FromBottom.Is2.FromEnd" Style="display: inline-block">
-                    <AlertMessage>@name</AlertMessage>
-                </Alert>
-            }
-            else
-            {
-                <Alert Visible="true" Color="@GetColor(item)" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
-                    <AlertMessage>@name</AlertMessage>
-                    <AlertDescription>@desc</AlertDescription>
-                </Alert>
-            }
-        }
-        else if (item != null)
-        {
-            <Alert Visible="true" Color="@GetColor(item)" Padding="Padding.Is0.OnY" Margin="Margin.Is1.FromTop.Is1.FromBottom" Style="display: inline-block">
-                <AlertMessage>@item</AlertMessage>
-            </Alert>
-        }
-        else
-        {
-            <Badge Color="Color.Secondary" Pill="true">
-                Não respondido
-            </Badge>
-        }
+        <Alert Visible="true" Color="Color.Light" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+            <AlertMessage>@item.Key</AlertMessage>
+            <AlertDescription>@item.Value</AlertDescription>
+        </Alert>
     }
-}
-else
-{
-    <Badge Color="Color.Secondary" Pill="true">
-        Não respondido
-    </Badge>
 }
 
 @code {
-    [Parameter] public List<string> PreferenceValues { get; set; }
-    [Parameter] public List<string> ExpectedValues { get; set; }
-    [Parameter] public IReadOnlyList<TValue> ViewValues { get; set; }
+    [Parameter] public List<string> PreferenceValues { get; set; } = new();
+    [Parameter] public List<string> ExpectedValues { get; set; } = new();
+    [Parameter] public IReadOnlyList<TValue> ViewValues { get; set; } = Array.Empty<TValue>();
     [Parameter] public List<AffinityVM> Affinities { get; set; } = new();
 
     [Parameter] public CompatibilityType Type { get; set; }
     [Parameter] public CompatibilityItem Item { get; set; }
     [Parameter] public ProfileModel? User { get; set; }
     [Parameter] public ProfilePreferenceModel? Pref { get; set; }
-    [Parameter] public string FieldInfo { get; set; }
+    [Parameter] public string? FieldInfo { get; set; }
+    [Parameter] public string? Tips { get; set; }
 
-    private Color GetColor(TValue value)
+    private enum Tabs
+    {
+        Affinity,
+        WhyImportant,
+        Tips
+    }
+
+    private Tabs SelectedTab = Tabs.Affinity;
+
+    private void ChangeOrder(Tabs tab)
+    {
+        SelectedTab = tab;
+    }
+
+    private Color GetColor(TValue? value = default)
     {
         if (!Affinities.Any(s => s.Item == Item)) //se o atributo não está mapeado no affinity, fica neutro
         {
@@ -146,5 +185,19 @@ else
         {
             return Color.Danger;
         }
+    }
+
+    private Dictionary<string, string> GetTips()
+    {
+        if (string.IsNullOrEmpty(Tips)) return new Dictionary<string, string>();
+
+        var values = Tips.Split("|");
+        var result = new Dictionary<string, string>();
+        for (var i = 0; i < values.Length; i += 2)
+        {
+            result.Add(values[i], values[i + 1]);
+        }
+
+        return result;
     }
 }

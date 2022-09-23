@@ -11,14 +11,15 @@ namespace VerusDate.Shared.Core
     public class CustomAttribute : Attribute
     {
         public string Name { get; set; }
-
         public string Description { get; set; }
-
         public string Group { get; set; }
-
         public string Prompt { get; set; }
-
         public string FieldInfo { get; set; }
+
+        /// <summary>
+        /// format: Title 1|Description 1|Title 2|Description 2
+        /// </summary>
+        public string Tips { get; set; }
 
         /// <summary>
         /// Translations resource file
@@ -65,11 +66,12 @@ namespace VerusDate.Shared.Core
             {
                 var rm = new ResourceManager(attr.ResourceType.FullName ?? "", attr.ResourceType.Assembly);
 
-                if (!string.IsNullOrEmpty(attr.Name)) attr.Name = rm.GetString(attr.Name) ?? attr.Name + " (error)";
-                if (!string.IsNullOrEmpty(attr.Description)) attr.Description = rm.GetString(attr.Description) ?? attr.Description + " (error)";
+                if (!string.IsNullOrEmpty(attr.Name)) attr.Name = rm.GetString(attr.Name) ?? attr.Name + " (incomplete translation)";
+                if (!string.IsNullOrEmpty(attr.Description)) attr.Description = rm.GetString(attr.Description) ?? attr.Description + " (incomplete translation)";
                 if (!string.IsNullOrEmpty(attr.Group)) attr.Group = rm.GetString(attr.Group);
                 if (!string.IsNullOrEmpty(attr.Prompt)) attr.Prompt = rm.GetString(attr.Prompt).Replace(@"\n", Environment.NewLine);
-                if (!string.IsNullOrEmpty(attr.FieldInfo)) attr.FieldInfo = rm.GetString(attr.FieldInfo) ?? attr.FieldInfo + " (error)";
+                if (!string.IsNullOrEmpty(attr.FieldInfo)) attr.FieldInfo = rm.GetString(attr.FieldInfo)?.Replace(@"\n", Environment.NewLine) ?? attr.FieldInfo.Replace(@"\n", Environment.NewLine) + " (incomplete translation)";
+                if (!string.IsNullOrEmpty(attr.Tips)) attr.Tips = rm.GetString(attr.Tips) ?? attr.Tips + " (incomplete translation)";
             }
 
             return attr;

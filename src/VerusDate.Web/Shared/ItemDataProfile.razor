@@ -114,6 +114,7 @@ else
                 x.Add(x => x.Type, Type);
                 x.Add(x => x.Item, Item);
                 x.Add(x => x.FieldInfo, CustomAttributeHelper.GetCustomAttribute(For)?.FieldInfo);
+                x.Add(x => x.Tips, CustomAttributeHelper.GetCustomAttribute(For)?.Tips);
             },
             new ModalInstanceOptions()
                 {

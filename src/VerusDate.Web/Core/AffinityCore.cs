@@ -282,10 +282,10 @@ namespace VerusDate.Web.Core
             {
                 var age = user.BirthDate.GetAge();
 
-                min = age / 2 + 7;
+                min = age / 2 + 9;
                 if (min < 18) min = 18;
 
-                max = (age - 7) * 2;
+                max = (age - 9) * 2;
                 if (max > 120) max = 120;
             }
 

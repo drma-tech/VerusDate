@@ -127,18 +127,18 @@
     <value>Is the person who drinks at least twice a week</value>
   </data>
   <data name="YesHeavy_Name" xml:space="preserve">
-    <value>Yes, often</value>
+    <value>Yes (often)</value>
   </data>
   <data name="YesLight_Description" xml:space="preserve">
     <value>Is the person who drinks rarely and/or only on social occasions, not exceeding twice a month</value>
   </data>
   <data name="YesLight_Name" xml:space="preserve">
-    <value>Yes, socially</value>
+    <value>Yes (socially)</value>
   </data>
   <data name="YesModerate_Description" xml:space="preserve">
     <value>It is the person who drinks approximately once a week, up to six times a month</value>
   </data>
   <data name="YesModerate_Name" xml:space="preserve">
-    <value>Yes, moderately</value>
+    <value>Yes (moderately)</value>
   </data>
 </root>

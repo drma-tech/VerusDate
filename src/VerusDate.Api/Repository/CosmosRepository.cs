@@ -18,9 +18,9 @@ namespace VerusDate.Api.Repository
     {
         public Container Container { get; private set; }
 
-        private const double ru_limit_get = 2;
-        private const double ru_limit_query = 4;
-        private const double ru_limit_save = 30; //15
+        private const double ru_limit_get = 1.5;
+        private const double ru_limit_query = 3;
+        private const double ru_limit_save = 15;
 
         public CosmosRepository(IConfiguration config)
         {
@@ -75,26 +75,6 @@ namespace VerusDate.Api.Repository
                 return response.Resource;
             }
             catch (CosmosException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                return null;
-            }
-        }
-
-        public async Task<T> Get<T>(QueryDefinition query, string partitionKeyValue, CancellationToken cancellationToken) where T : class
-        {
-            using var iterator = Container.GetItemQueryIterator<T>(query, requestOptions: CosmosRepositoryExtensions.GetDefaultOptions(partitionKeyValue));
-            double count = 0;
-
-            if (iterator.HasMoreResults)
-            {
-                var response = await iterator.ReadNextAsync(cancellationToken);
-
-                count += response.RequestCharge;
-                if (count > ru_limit_query) throw new NotificationException($"RU limit exceeded get ({response.RequestCharge})");
-
-                return response.Resource.FirstOrDefault();
-            }
-            else
             {
                 return null;
             }
@@ -202,5 +182,23 @@ namespace VerusDate.Api.Repository
 
         //composite indexes
         //https://docs.microsoft.com/pt-br/learn/modules/customize-indexes-azure-cosmos-db-sql-api/3-evaluate-composite-indexes
+    }
+
+    public static class CosmosRepositoryExtensions
+    {
+        public static QueryRequestOptions GetDefaultOptions(string partitionKeyValue)
+        {
+            if (string.IsNullOrEmpty(partitionKeyValue))
+                return null;
+            else
+                return new QueryRequestOptions()
+                {
+                    PartitionKey = new PartitionKey(partitionKeyValue),
+                    //https://learn.microsoft.com/en-us/training/modules/measure-index-azure-cosmos-db-sql-api/4-measure-query-cost
+                    MaxItemCount = 10, //max itens per page
+                    //https://learn.microsoft.com/en-us/training/modules/measure-index-azure-cosmos-db-sql-api/2-enable-indexing-metrics
+                    PopulateIndexMetrics = false //enable only when analysing metrics
+                };
+        }
     }
 }

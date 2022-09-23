@@ -121,9 +121,9 @@
     <value>No</value>
   </data>
   <data name="YesOccasionally" xml:space="preserve">
-    <value>Yes, Occasionally</value>
+    <value>Yes (occasionally)</value>
   </data>
   <data name="YesOften" xml:space="preserve">
-    <value>Yes, Often</value>
+    <value>Yes (often)</value>
   </data>
 </root>

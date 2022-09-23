@@ -88,7 +88,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes, often.
+        ///   Looks up a localized string similar to Yes (often).
         /// </summary>
         internal static string YesHeavy_Name {
             get {
@@ -106,7 +106,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes, socially.
+        ///   Looks up a localized string similar to Yes (socially).
         /// </summary>
         internal static string YesLight_Name {
             get {
@@ -124,7 +124,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes, moderately.
+        ///   Looks up a localized string similar to Yes (moderately).
         /// </summary>
         internal static string YesModerate_Name {
             get {

@@ -70,7 +70,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes, Occasionally.
+        ///   Looks up a localized string similar to Yes (occasionally).
         /// </summary>
         internal static string YesOccasionally {
             get {
@@ -79,7 +79,7 @@ namespace VerusDate.Shared.Resources.Enum {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes, Often.
+        ///   Looks up a localized string similar to Yes (often).
         /// </summary>
         internal static string YesOften {
             get {

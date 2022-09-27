@@ -19,12 +19,12 @@ namespace VerusDate.Api.Core
 
         public static void AddRepositories(this IServiceCollection services, IConfiguration config)
         {
-            services.AddSingleton<IRepository>(func =>
+            services.AddScoped<IRepository>(func =>
             {
                 return new CosmosRepository(config);
             });
 
-            services.AddSingleton(func =>
+            services.AddScoped(func =>
             {
                 return new CosmosLogRepository(config);
             });

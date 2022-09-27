@@ -4,12 +4,12 @@
 
 @if (Visible)
 {
-        <Field Horizontal="true">
+    <Field Horizontal="true">
         <FieldLabel ColumnSize="@GetLabelSize()">
             <Blazorise.Icon Name="@CssIcon"></Blazorise.Icon> @For.GetCustomAttribute().Name
             @if (Required)
             {
-                    <div style="color: red; display: initial;"> *</div>
+                <div style="color: red; display: initial;"> *</div>
             }
         </FieldLabel>
         <FieldBody ColumnSize="@GetBodySize()">
@@ -17,86 +17,86 @@
                 <Addon AddonType="AddonType.Body">
                     @if (Multiple)
                     {
-                            <div @attributes="@GetAttributes("height: auto; min-height: 38px;")">
+                        <div @attributes="@GetAttributes("height: auto; min-height: 38px;")">
                             @if (SelectedValues != null)
                             {
                                 @foreach (var item in SelectedValues)
                                 {
-                                                <Badge Color="Color.Secondary" Style="font-size: 90%;" Margin="Margin.Is1.FromEnd">
+                                    <Badge Color="Color.Secondary" Style="font-size: 90%;" Margin="Margin.Is1.FromEnd">
                                         @item.GetName()
-                                                </Badge>
+                                    </Badge>
                                 }
                             }
-                            </div>
+                        </div>
                     }
                     else
                     {
-                            <Select TValue="TValue" SelectedValue="@SelectedValue" SelectedValueChanged="@SetValue" Disabled="@Disabled">
+                        <Select TValue="TValue" SelectedValue="@SelectedValue" SelectedValueChanged="@SetValue" Disabled="@Disabled">
                             @if (ShowGroup)
                             {
-                                        <SelectItem></SelectItem>
+                                <SelectItem></SelectItem>
                                 @foreach (var group in EnumHelper.GetList<TEnum>().Select(s => s.Group).Distinct())
                                 {
                                     if (string.IsNullOrEmpty(group))
                                     {
                                         @foreach (var item in EnumHelper.GetList<TEnum>().Where(w => w.Group == group))
                                         {
-                                                                <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>
+                                            <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>
                                         }
                                     }
                                     else
                                     {
-                                                        <SelectGroup Label="@group">
+                                        <SelectGroup Label="@group">
                                             @foreach (var item in EnumHelper.GetList<TEnum>().Where(w => w.Group == group))
                                             {
-                                                                    <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>
+                                                <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>
                                             }
-                                                        </SelectGroup>
+                                        </SelectGroup>
                                     }
                                 }
                             }
                             else
                             {
-                                        <SelectItem></SelectItem>
+                                <SelectItem></SelectItem>
                                 @foreach (var item in EnumHelper.GetList<TEnum>())
                                 {
-                                                <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>
+                                    <SelectItem Value="@item.ValueObject">@item.Name</SelectItem>
                                 }
                             }
-                            </Select>
+                        </Select>
                     }
                 </Addon>
                 @if (ButtomClicked.HasDelegate) //custom button
                 {
-                        <Addon AddonType="AddonType.End">
-                            <Button Color="Color.Primary" Outline="true" Clicked="@ButtomClicked" title="@ButtomTitle" Disabled="@Disabled">
-                                <Blazorise.Icon Name="@ButtomCssIcon"></Blazorise.Icon>
-                            </Button>
-                        </Addon>
+                    <Addon AddonType="AddonType.End">
+                        <Button Color="Color.Primary" Outline="true" Clicked="@ButtomClicked" title="@ButtomTitle" Disabled="@Disabled">
+                            <Blazorise.Icon Name="@ButtomCssIcon"></Blazorise.Icon>
+                        </Button>
+                    </Addon>
                 }
                 @if (ShowSwitch) //switch
                 {
-                        <Addon AddonType="AddonType.End">
-                            <AddonLabel Style="padding-right: 2px;">
-                                <Switch TValue="bool" Disabled="@Disabled"></Switch>
-                            </AddonLabel>
-                        </Addon>
+                    <Addon AddonType="AddonType.End">
+                        <AddonLabel Style="padding-right: 2px;">
+                            <Switch TValue="bool" Disabled="@Disabled"></Switch>
+                        </AddonLabel>
+                    </Addon>
                 }
                 @if (ShowHelper & !Multiple) //help
                 {
-                        <Addon AddonType="AddonType.End">
-                            <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataHelp(For)" Disabled="@Disabled">
-                                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Question"></Blazorise.Icon>
-                            </Button>
-                        </Addon>
+                    <Addon AddonType="AddonType.End">
+                        <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataHelp(For)" Disabled="@Disabled">
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Question"></Blazorise.Icon>
+                        </Button>
+                    </Addon>
                 }
                 @if (Multiple) //add
                 {
-                        <Addon AddonType="AddonType.End">
-                            <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataSelect(For)" Disabled="@Disabled">
-                                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Plus"></Blazorise.Icon>
-                            </Button>
-                        </Addon>
+                    <Addon AddonType="AddonType.End">
+                        <Button Color="Color.Primary" Outline="true" Clicked="() => UpdateDataSelect(For)" Disabled="@Disabled">
+                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.Plus"></Blazorise.Icon>
+                        </Button>
+                    </Addon>
                 }
             </Addons>
 
@@ -104,25 +104,25 @@
         </FieldBody>
         @if (!string.IsNullOrEmpty(Description) && ShowDescription)
         {
-                <Column>
-                    <FieldHelp Style="color: #17a2b8 !important">@Description</FieldHelp>
-                </Column>
+            <Column>
+                <FieldHelp Style="color: #17a2b8 !important">@Description</FieldHelp>
+            </Column>
         }
         @if (!string.IsNullOrEmpty(CustomInfo))
         {
-                <Column>
-                    <FieldHelp Style="color: #17a2b8 !important">@CustomInfo</FieldHelp>
-                </Column>
+            <Column>
+                <FieldHelp Style="color: #17a2b8 !important">@CustomInfo</FieldHelp>
+            </Column>
         }
         @if (!string.IsNullOrEmpty(HelpLink))
         {
-                <Column ColumnSize="ColumnSize.IsFull">
-                    <a href="@HelpLink" target="_blank" style="display: block; font-size: 80%;" rel="noopener">@(new Uri(@HelpLink).Host)</a>
-                </Column>
+            <Column ColumnSize="ColumnSize.IsFull">
+                <a href="@HelpLink" target="_blank" style="display: block; font-size: 80%;" rel="noopener">@(new Uri(@HelpLink).Host)</a>
+            </Column>
         }
     </Field>
 
     <ProfileDataHelp TValue="TValue" HasGroup="@ShowGroup" TEnum="TEnum" @ref="dataHelp"></ProfileDataHelp>
-    <ProfileDataSelect TValue="TValue" HasGroup="@ShowGroup" TEnum="TEnum" SelectedValues="SelectedValues" 
-    SelectedValuesChanged="SelectedValuesChanged" Order="Order" @ref="dataSelect"></ProfileDataSelect>
+    <ProfileDataSelect TValue="TValue" HasGroup="@ShowGroup" TEnum="TEnum" SelectedValues="SelectedValues"
+                   SelectedValuesChanged="SelectedValuesChanged" Order="Order" @ref="dataSelect"></ProfileDataSelect>
 }

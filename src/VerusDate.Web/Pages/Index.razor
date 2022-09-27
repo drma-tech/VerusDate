@@ -163,11 +163,11 @@
                                     @if (view != null)
                                     {
                                         @*<Badge Color="Color.Secondary">
-                                            @view.NickName
-                                        </Badge>*@
+                                @view.NickName
+                                </Badge>*@
                                         @*<Badge Color="Color.Secondary" Margin="Margin.Is1.FromEnd">
-                                            <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view?.GetLocation(ProfileModel.LocationType.City)
-                                        </Badge>*@
+                                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> @view?.GetLocation(ProfileModel.LocationType.City)
+                                </Badge>*@
                                         @if (view.ActivityStatus == VerusDate.Shared.Enum.ActivityStatus.Today)
                                         {
                                             <Badge Color="Color.Success">
@@ -192,17 +192,17 @@
                                                 <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.DotCircle"></Blazorise.Icon> usuário desativado
                                             </Badge>
                                         }
-                                       @* @if (view.Reports.Any())
-                                        {
-                                            <Paragraph Margin="Margin.Is0.FromTop.Is0.FromBottom">
-                                                @foreach (var item in view?.Reports ?? Array.Empty<ProfileReportModel>())
-                                                {
-                                                    <Badge Color="Color.Warning" Style="cursor: help;">
-                                                        <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon> @item.Type.GetName()
-                                                    </Badge>
-                                                }
-                                            </Paragraph>
-                                        }*@
+                                        @* @if (view.Reports.Any())
+                                {
+                                <Paragraph Margin="Margin.Is0.FromTop.Is0.FromBottom">
+                                @foreach (var item in view?.Reports ?? Array.Empty<ProfileReportModel>())
+                                {
+                                <Badge Color="Color.Warning" Style="cursor: help;">
+                                <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.ExclamationCircle"></Blazorise.Icon> @item.Type.GetName()
+                                </Badge>
+                                }
+                                </Paragraph>
+                                }*@
                                     }
                                 </CardBody>
                             </Card>
@@ -233,46 +233,53 @@
 
     protected override async Task LoadData()
     {
-        if (ComponenteUtils.IsAuthenticated)
+        try
         {
-            ProfileLoading = true;
-            profile = await Http.Profile_Get(SessionStorage);
-            ProfileLoading = false;
-
-            if (profile != null)
+            if (ComponenteUtils.IsAuthenticated)
             {
-                if (profile.Modality == Modality.RelationshipAnalysis)
+                ProfileLoading = true;
+                profile = await Http.Profile_Get(SessionStorage);
+                ProfileLoading = false;
+
+                if (profile != null)
                 {
-                    ViewLoading = true;
-                    var partner = profile.Partners.FirstOrDefault(w => !string.IsNullOrEmpty(w.Id));
-                    view = await Http.Profile_GetView(SessionStorage, partner?.Id);
-                    ViewLoading = false;
+                    if (profile.Modality == Modality.RelationshipAnalysis)
+                    {
+                        ViewLoading = true;
+                        var partner = profile.Partners.FirstOrDefault(w => !string.IsNullOrEmpty(w.Id));
+                        view = await Http.Profile_GetView(SessionStorage, partner?.Id);
+                        ViewLoading = false;
+                    }
+                    else
+                    {
+                        SuggestionsLoading = true;
+                        //lstDestaques = await Http.Public_ListDestaques(SessionStorage);
+                        //lstDestaques = await Http.Profile_ListSearch(SessionStorage);
+                        SuggestionsLoading = false;
+                    }
+
+                    imageDataUriGallery = new string[] { profile.GetMainPhoto() }.Concat(profile.GetGalleryPhotos()).ToArray();
+
+                    if (view != null)
+                    {
+                        affinities = AffinityCore.GetAffinity(profile, view);
+                    }
                 }
                 else
                 {
-                    SuggestionsLoading = true;
-                    //lstDestaques = await Http.Public_ListDestaques(SessionStorage);
-                    //lstDestaques = await Http.Profile_ListSearch(SessionStorage);
-                    SuggestionsLoading = false;
+                    imageDataUriGallery = new string[] { ImageHelper.GetNoUserPhoto };
                 }
 
-                imageDataUriGallery = new string[] { profile.GetMainPhoto() }.Concat(profile.GetGalleryPhotos()).ToArray();
+                selectedImage = imageDataUriGallery.First();
 
-                if (view != null)
-                {
-                    affinities = AffinityCore.GetAffinity(profile, view);
-                }
+                ProfileLoading = false;
+                ViewLoading = false;
+                SuggestionsLoading = false;
             }
-            else
-            {
-                imageDataUriGallery = new string[] { ImageHelper.GetNoUserPhoto };
-            }
-
-            selectedImage = imageDataUriGallery.First();
-
-            ProfileLoading = false;
-            ViewLoading = false;
-            SuggestionsLoading = false;
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
         }
     }
 

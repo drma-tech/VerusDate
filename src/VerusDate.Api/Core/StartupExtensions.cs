@@ -19,18 +19,18 @@ namespace VerusDate.Api.Core
 
         public static void AddRepositories(this IServiceCollection services, IConfiguration config)
         {
-            services.AddScoped<IRepository>(func =>
+            services.AddSingleton<IRepository>(func =>
             {
                 return new CosmosRepository(config);
             });
 
-            services.AddScoped(func =>
+            services.AddSingleton(func =>
             {
                 return new CosmosLogRepository(config);
             });
 
-            services.AddScoped(typeof(StorageHelper), typeof(StorageHelper));
-            services.AddScoped(typeof(FaceHelper), typeof(FaceHelper));
+            services.AddSingleton(typeof(StorageHelper), typeof(StorageHelper));
+            services.AddSingleton(typeof(FaceHelper), typeof(FaceHelper));
         }
 
         public static void AddPipelines(this IServiceCollection services)

@@ -64,12 +64,12 @@
 
 @code
 {
-    private ProfileModel _profile = new();
-    string imageDataUri = ImageHelper.GetNoUserPhoto;
+    private ProfileModel? _profile = new();
+    string? imageDataUri = ImageHelper.GetNoUserPhoto;
 
-    private Shared.modal.BasicModal helpMain;
+    private Shared.modal.BasicModal? helpMain;
 
-    string selectedImage;
+    string? selectedImage;
     string[] imageDataUriGallery = Array.Empty<string>();
 
     protected override async Task LoadData()
@@ -166,6 +166,7 @@
         try
         {
             var fileName = System.IO.Path.GetFileName(selectedImage);
+            if (string.IsNullOrEmpty(fileName)) throw new InvalidOperationException("invalid fileName");
 
             await Http.Storage_DeletePhotoGallery(fileName, SessionStorage, Toast);
 

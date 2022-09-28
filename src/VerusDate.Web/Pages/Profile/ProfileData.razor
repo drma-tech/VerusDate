@@ -58,13 +58,23 @@
                     <CustomDate Type="FieldType.Date" For="@(() => profile.BirthDate)" @bind-Value="@profile.BirthDate"
                             CssIcon="@FontAwesomeIcons.BirthdayCake" Required="true"></CustomDate>
                     <Field Horizontal="true">
-                        <FieldLabel ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD" Display="Display.None.Block.OnFullHD">
-                        </FieldLabel>
-                        <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
-                            <TextEdit Text="@(profile.BirthDate.GetAge() + " Anos")" Disabled="true"></TextEdit>
+                        <FieldBody ColumnSize="ColumnSize.IsFull.OnWidescreen.Is4.OnFullHD">
+                            <Select TValue="int">
+                                <SelectItem Value="0">Western Zodiac</SelectItem>
+                                <SelectItem Value="1" Disabled="true">Chinese Zodiac</SelectItem>
+                                <SelectItem Value="2" Disabled="true">Indian Zodiac</SelectItem>
+                                <SelectItem Value="3" Disabled="true">Tropic Zodiac</SelectItem>
+                                <SelectItem Value="4" Disabled="true">Sidereal Zodiac</SelectItem>
+                                <SelectItem Value="5" Disabled="true">Celtic Zodiac</SelectItem>
+                                <SelectItem Value="6" Disabled="true">Egyptian Zodiac</SelectItem>
+                                <SelectItem Value="7" Disabled="true">Native American Zodiac</SelectItem>
+                            </Select>
                         </FieldBody>
                         <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
                             <TextEdit Text="@profile.BirthDate.GetZodiac().GetName()" Disabled="true"></TextEdit>
+                        </FieldBody>
+                        <FieldBody ColumnSize="ColumnSize.IsHalf.Is4.OnFullHD">
+                            <TextEdit Text="@(profile.BirthDate.GetAge() + " Anos")" Disabled="true"></TextEdit>
                         </FieldBody>
                     </Field>
                     <FieldSelect For="@(() => profile.Height)" TValue="VerusDate.Shared.Enum.Height?" TEnum="VerusDate.Shared.Enum.Height" @bind-SelectedValue="@profile.Height"
@@ -259,9 +269,6 @@
     </VerusDate.Web.Shared.modal.BasicModal>
 
     <VerusDate.Web.Shared.modal.BasicModal @ref="help" Title="Ajuda">
-        <Paragraph Margin="Margin.Is2.FromBottom" Alignment="TextAlignment.Justified">
-            <Blazorise.Icon Name="FontAwesomeIcons.EyeSlash"></Blazorise.Icon> Este conteúdo é privado e não será exibido no seu perfil
-        </Paragraph>
         <Paragraph Margin="Margin.Is2.FromBottom" Alignment="TextAlignment.Justified">
             <Blazorise.Icon Name="FontAwesomeIcons.Question"></Blazorise.Icon> Esta opção terá explicações de cada um dos itens disponíveis para escolha
         </Paragraph>

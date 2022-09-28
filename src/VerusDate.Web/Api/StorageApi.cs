@@ -22,7 +22,7 @@ namespace VerusDate.Web.Api
             if (response.IsSuccessStatusCode)
             {
                 storage.RemoveItem(ProfileEndpoint.Get);
-                await http.Profile_Get(storage);
+                await http.Profile_Get(storage); //TODO ??
 
                 //RefreshCore.RefreshMenu();
             }
@@ -37,7 +37,7 @@ namespace VerusDate.Web.Api
             if (response.IsSuccessStatusCode)
             {
                 storage.RemoveItem(ProfileEndpoint.Get);
-                await http.Profile_Get(storage);
+                await http.Profile_Get(storage); //TODO ??
             }
 
             await response.ProcessResponse(toast, "Foto atualizada com sucesso!");
@@ -50,7 +50,7 @@ namespace VerusDate.Web.Api
             if (response.IsSuccessStatusCode)
             {
                 storage.RemoveItem(ProfileEndpoint.Get);
-                await http.Profile_Get(storage);
+                await http.Profile_Get(storage); //TODO ??
             }
 
             await response.ProcessResponse(toast, "Foto atualizada com sucesso!");
@@ -63,7 +63,7 @@ namespace VerusDate.Web.Api
             if (response.IsSuccessStatusCode)
             {
                 storage.RemoveItem(ProfileEndpoint.Get);
-                await http.Profile_Get(storage);
+                await http.Profile_Get(storage); //TODO ??
             }
 
             await response.ProcessResponse(toast, "Foto atualizada com sucesso!");

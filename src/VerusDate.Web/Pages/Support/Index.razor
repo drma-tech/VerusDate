@@ -175,8 +175,8 @@
         BugLoading = true;
         FeatureLoading = true;
 
-        tickets = await Http.Ticket_GetList(SessionStorage);
-        myVotes = await Http.Ticket_GetMyVotes(SessionStorage);
+        tickets = await Http.Ticket_GetList();
+        myVotes = await Http.Ticket_GetMyVotes();
 
         BugLoading = false;
         FeatureLoading = false;
@@ -221,7 +221,7 @@
                 var vote = new TicketVoteModel();
                 vote.SetKey(IdTicket);
 
-                await Http.Ticket_Vote(vote, SessionStorage, Toast);
+                await Http.Ticket_Vote(vote, Toast);
                 tickets.Single(s => s.Id == IdTicket).Vote();
 
                 myVotes.Add(vote);

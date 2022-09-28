@@ -1,5 +1,4 @@
-﻿using Blazored.SessionStorage;
-using Blazored.Toast.Services;
+﻿using Blazored.Toast.Services;
 using VerusDate.Shared.Model;
 using VerusDate.Web.Core;
 
@@ -16,41 +15,26 @@ namespace VerusDate.Web.Api
 
     public static class SupportApi
     {
-        public static async Task<List<TicketModel>> Ticket_GetList(this HttpClient http, ISyncSessionStorageService storage)
+        public static async Task<List<TicketModel>> Ticket_GetList(this HttpClient http)
         {
-            return await http.GetList<TicketModel>(SupportEndpoint.GetList, storage);
+            return await http.GetList<TicketModel>(SupportEndpoint.GetList);
         }
 
-        public static async Task<List<TicketVoteModel>> Ticket_GetMyVotes(this HttpClient http, ISyncSessionStorageService storage)
+        public static async Task<List<TicketVoteModel>> Ticket_GetMyVotes(this HttpClient http)
         {
-            return await http.GetList<TicketVoteModel>(SupportEndpoint.GetMyVotes, storage);
+            return await http.GetList<TicketVoteModel>(SupportEndpoint.GetMyVotes);
         }
 
-        public static async Task Ticket_Insert(this HttpClient http, TicketModel obj, ISyncSessionStorageService storage, IToastService toast)
+        public static async Task Ticket_Insert(this HttpClient http, TicketModel obj, IToastService toast)
         {
-            storage.RemoveItem(SupportEndpoint.GetList);
-            storage.RemoveItem(SupportEndpoint.GetMyVotes);
-
-            var response = await http.Post(SupportEndpoint.Insert, obj, storage, null);
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    await http.Session_AddXP(storage, 5);
-            //    toast.ShowSuccess("", "Ganhou 5 XP");
-            //}
+            var response = await http.Post(SupportEndpoint.Insert, obj);
 
             await response.ProcessResponse(toast, "Salvo com sucesso");
         }
 
-        public static async Task Ticket_Vote(this HttpClient http, TicketVoteModel obj, ISyncSessionStorageService storage, IToastService toast)
+        public static async Task Ticket_Vote(this HttpClient http, TicketVoteModel obj, IToastService toast)
         {
-            var response = await http.Post(SupportEndpoint.Vote, obj, storage, null);
-
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    await http.Session_AddXP(storage, 1);
-            //    toast.ShowSuccess("", "Ganhou 1 XP");
-            //}
+            var response = await http.Post(SupportEndpoint.Vote, obj);
 
             await response.ProcessResponse(toast, "Voto registrado com sucesso");
         }

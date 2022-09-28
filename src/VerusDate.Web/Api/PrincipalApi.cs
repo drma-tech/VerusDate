@@ -12,13 +12,15 @@ namespace VerusDate.Web.Api
 
     public static class PrincipalApi
     {
-        public static async Task<ClientePrincipal> Principal_Get(this HttpClient http, ISyncSessionStorageService storage)
+        public static async Task<ClientePrincipal?> Principal_Get(this HttpClient http, ISyncSessionStorageService? storage)
         {
             return await http.Get<ClientePrincipal>(PrincipalEndpoint.Get, storage);
         }
 
-        public static async Task<HttpResponseMessage> Principal_Add(this HttpClient http, ClientePrincipal obj, ISyncSessionStorageService storage)
+        public static async Task<HttpResponseMessage> Principal_Add(this HttpClient http, ClientePrincipal? obj, ISyncSessionStorageService? storage)
         {
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
+
             return await http.Post(PrincipalEndpoint.Add, obj, storage, PrincipalEndpoint.Get);
         }
     }

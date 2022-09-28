@@ -10,11 +10,11 @@ namespace VerusDate.Web.Pages.Profile
 {
     public partial class ProfileData
     {
-        private ProfileModel profile = new();
-        private Partner partner { get; set; } = new();
+        private ProfileModel? profile = new();
+        private Partner? partner { get; set; } = new();
         private List<string> NewInvites = new();
         private List<string> RemovedInvites = new();
-        private GeoLocation GPS = new();
+        private GeoLocation? GPS = new();
 
         protected override async Task LoadData()
         {
@@ -31,7 +31,7 @@ namespace VerusDate.Web.Pages.Profile
             };
 
             var principal = await Http.Principal_Get(SessionStorage);
-            Invite = await Http.Invite_Get(SessionStorage, principal.Email);
+            if (principal != null) Invite = await Http.Invite_Get(principal.Email);
 
             ProfileLoading = false;
         }
@@ -55,8 +55,8 @@ namespace VerusDate.Web.Pages.Profile
                     GPS.Accuracy = position.Location.Coords.Accuracy;
 
                     //TODO: chamar código da api
-                    var here = await Http.Map_GetLocation(SessionStorage, GPS.Latitude, GPS.Longitude);
-                    if (here.items.Any())
+                    var here = await Http.Map_GetLocation(GPS.Latitude, GPS.Longitude);
+                    if (here != null && here.items.Any())
                     {
                         var address = here.items[0].address;
                         profile.Location = address.GetLocation();
@@ -515,6 +515,8 @@ namespace VerusDate.Web.Pages.Profile
 
         private async Task HandleValidSubmit()
         {
+            if (profile == null) throw new ArgumentNullException(nameof(profile));
+
             try
             {
                 profile.Zodiac = profile.BirthDate.GetZodiac();
@@ -528,7 +530,7 @@ namespace VerusDate.Web.Pages.Profile
                     await Http.Profile_Update(profile, SessionStorage, Toast);
                 }
 
-                profile = await Http.Profile_Get(SessionStorage); //update id field
+                profile = await Http.Profile_Get(SessionStorage); //TODO update id field
 
                 if (profile.Modality == Modality.Matchmaker)
                 {
@@ -543,11 +545,11 @@ namespace VerusDate.Web.Pages.Profile
                 {
                     var invites = NewInvites.Except(RemovedInvites).ToList();
                     var principal = await Http.Principal_Get(SessionStorage);
-                    var emailUser = principal.Email;
+                    var emailUser = principal?.Email;
 
                     foreach (var email in invites)
                     {
-                        var invite = await Http.Invite_Get(SessionStorage, email);
+                        var invite = await Http.Invite_Get(email);
                         var newInvite = false;
 
                         if (invite == null)
@@ -560,9 +562,9 @@ namespace VerusDate.Web.Pages.Profile
                         invite.Invites.Add(new Invite(profile.Key, emailUser, InviteType.Partner));
 
                         if (newInvite)
-                            await Http.Invite_Add(invite, Toast, SessionStorage);
+                            await Http.Invite_Add(invite, Toast);
                         else
-                            await Http.Invite_Update(invite, Toast, SessionStorage);
+                            await Http.Invite_Update(invite, Toast);
                     }
 
                     foreach (var item in RemovedInvites)
@@ -609,13 +611,13 @@ namespace VerusDate.Web.Pages.Profile
                 if (Invite != null && invite != null)
                 {
                     invite.Accepted = true;
-                    await Http.Invite_Update(Invite, null, SessionStorage);
+                    await Http.Invite_Update(Invite, null);
 
                     profile.Partners.Add(new Partner() { Email = invite.UserEmail, Id = userId });
                     await Http.Profile_Update(profile, SessionStorage);
 
                     var principal = await Http.Principal_Get(SessionStorage);
-                    var emailUser = principal.Email;
+                    var emailUser = principal?.Email;
                     await Http.Profile_UpdatePartner(userId, emailUser);
                 }
                 else

@@ -12,9 +12,9 @@ namespace VerusDate.Web.Api
 
     public static class MapApi
     {
-        public static async Task<HereJson> Map_GetLocation(this HttpClient http, ISyncSessionStorageService storage, double Latitude, double Longitude)
+        public static async Task<HereJson?> Map_GetLocation(this HttpClient http, double Latitude, double Longitude)
         {
-            return await http.Get<HereJson>(MapEndpoint.GetLocation(Latitude, Longitude), storage);
+            return await http.Get<HereJson>(MapEndpoint.GetLocation(Latitude, Longitude));
         }
     }
 }

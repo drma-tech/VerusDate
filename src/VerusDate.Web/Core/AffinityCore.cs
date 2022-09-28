@@ -7,7 +7,7 @@ namespace VerusDate.Web.Core
 {
     public static class AffinityCore
     {
-        public static List<AffinityVM> GetAffinity(ProfileModel user, ProfileView view)
+        public static List<AffinityVM> GetAffinity(ProfileModel? user, ProfileView? view)
         {
             if (user == null) throw new NotificationException("Não foi possível identificar seu perfil");
             if (view == null) throw new NotificationException("Não foi possível identificar o perfil deste usuário");

@@ -53,7 +53,7 @@
     [Parameter] public Bar? Sidebar { get; set; }
 
     private string MainPhoto = ImageHelper.GetNoUserPhoto;
-    private ProfileModel profile;
+    private ProfileModel? profile;
 
     protected override async Task OnInitializedAsync()
     {

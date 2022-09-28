@@ -147,19 +147,19 @@
         await LoadData();
     }
 
-    public string IdUserView { get; set; }
+    public string? IdUserView { get; set; }
 
-    private ProfileModel user;
-    private ProfileView view;
+    private ProfileModel? user;
+    private ProfileView? view;
     private List<AffinityVM> affinities = new();
     //private ProfileGamificationModel gamification;
-    private ProfileBadgeModel badge = new();
+    private ProfileBadgeModel? badge = new();
     //private InteractionModel interaction;
 
-    string selectedImage;
+    string? selectedImage;
     string[] imageDataUriGallery = Array.Empty<string>();
 
-    private Shared.modal.ProfileReport report;
+    private Shared.modal.ProfileReport? report;
 
     private bool ProfileLoading;
 

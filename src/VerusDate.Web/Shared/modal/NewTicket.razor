@@ -47,7 +47,7 @@
             Ticket.TicketStatus = TicketStatus.Published;
             Ticket.SetIds(ComponenteUtils.IdUser);
 
-            await Http.Ticket_Insert(Ticket, SessionStorage, Toast);
+            await Http.Ticket_Insert(Ticket, Toast);
 
             Ticket = new();
             await modal.Hide();

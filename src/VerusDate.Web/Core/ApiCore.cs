@@ -7,11 +7,11 @@ namespace VerusDate.Web.Core
 {
     public static class ApiCore
     {
-        private static async Task<T> ReturnResponse<T>(this HttpResponseMessage response)
+        private static async Task<T?> ReturnResponse<T>(this HttpResponseMessage response)
         {
             if (response.IsSuccessStatusCode)
             {
-                return await response?.Content?.ReadFromJsonAsync<T>();
+                return await response.Content.ReadFromJsonAsync<T?>();
             }
             else
             {
@@ -24,7 +24,7 @@ namespace VerusDate.Web.Core
             return new JsonSerializerOptions();
         }
 
-        public static async Task<T> Get<T>(this HttpClient http, string requestUri, ISyncSessionStorageService? storage = null, bool forceUpdate = false) where T : class
+        public static async Task<T?> Get<T>(this HttpClient http, string requestUri, ISyncSessionStorageService? storage = null, bool forceUpdate = false) where T : class
         {
             if (storage == null)
             {
@@ -45,16 +45,25 @@ namespace VerusDate.Web.Core
             }
         }
 
-        public static async Task<List<T>> GetList<T>(this HttpClient http, string requestUri, ISyncSessionStorageService storage, bool forceUpdate = false) where T : class
+        public static async Task<List<T>> GetList<T>(this HttpClient http, string requestUri, ISyncSessionStorageService? storage = null, bool forceUpdate = false) where T : class
         {
-            if (forceUpdate || !storage.ContainKey(requestUri))
+            if (storage == null)
             {
                 var response = await http.GetAsync(http.BaseApi() + requestUri);
 
-                storage.SetItem(requestUri, await response.ReturnResponse<List<T>>());
+                return await response.ReturnResponse<List<T>>() ?? new();
             }
+            else
+            {
+                if (forceUpdate || !storage.ContainKey(requestUri))
+                {
+                    var response = await http.GetAsync(http.BaseApi() + requestUri);
 
-            return storage.GetItem<List<T>>(requestUri);
+                    storage.SetItem(requestUri, await response.ReturnResponse<List<T>>());
+                }
+
+                return storage.GetItem<List<T>>(requestUri);
+            }
         }
 
         public static async Task<HttpResponseMessage> Post<T>(this HttpClient http, string requestUri, T obj, ISyncSessionStorageService? storage = null, string? urlGet = null) where T : class

@@ -180,6 +180,9 @@
   <data name="SplitTheBill_Name" xml:space="preserve">
     <value>Splitting the Bills</value>
   </data>
+  <data name="TravelFrequency_Name" xml:space="preserve">
+    <value>Travel Frequency</value>
+  </data>
   <data name="WantChildren_Name" xml:space="preserve">
     <value>Want Kids</value>
   </data>

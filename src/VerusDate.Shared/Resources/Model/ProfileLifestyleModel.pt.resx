@@ -180,6 +180,9 @@
   <data name="SplitTheBill_Name" xml:space="preserve">
     <value>Dividindo as Contas</value>
   </data>
+  <data name="TravelFrequency_Name" xml:space="preserve">
+    <value>Frequência de Viagem</value>
+  </data>
   <data name="WantChildren_Name" xml:space="preserve">
     <value>Quer Filho(s)</value>
   </data>

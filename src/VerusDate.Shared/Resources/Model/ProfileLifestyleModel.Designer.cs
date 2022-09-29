@@ -250,6 +250,15 @@ namespace VerusDate.Shared.Resources.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Travel Frequency.
+        /// </summary>
+        public static string TravelFrequency_Name {
+            get {
+                return ResourceManager.GetString("TravelFrequency_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Want Kids.
         /// </summary>
         public static string WantChildren_Name {

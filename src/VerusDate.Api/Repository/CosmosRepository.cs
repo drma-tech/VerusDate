@@ -20,7 +20,7 @@ namespace VerusDate.Api.Repository
 
         private const double ru_limit_get = 1.5;
         private const double ru_limit_query = 3;
-        private const double ru_limit_save = 15;
+        private const double ru_limit_save = 30;
 
         public CosmosRepository(IConfiguration config)
         {

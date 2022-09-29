@@ -122,7 +122,7 @@ namespace VerusDate.Shared.Model
             ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
         public Religion? Religion { get; set; }
 
-        [Custom(Name = "Travel Frequency")]
+        [Custom(Name = "TravelFrequency_Name", ResourceType = typeof(Resources.Model.ProfileLifestyleModel))]
         public TravelFrequency? TravelFrequency { get; set; }
 
         #endregion LIFESTYLE

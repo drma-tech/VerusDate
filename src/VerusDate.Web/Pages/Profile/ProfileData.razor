@@ -1,19 +1,20 @@
 ﻿@page "/Profile/Data"
+@using VerusDate.Shared.Validation
 @attribute [Authorize]
 @inherits PageCore<ProfileData>
 
 <CustomVisibility Loading="ProfileLoading">
     <EditForm Model="@profile" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
-        <FluentValidationValidator />
+        <FluentValidationValidator @ref="_validator" />
         <Div Margin="Margin.Is2.OnY">
-            <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Basic)" Clicked="(() => ChangeOrder(Tabs.Basic))">Básico</Button>
-            <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Bio)" Clicked="(() => ChangeOrder(Tabs.Bio))">Bio</Button>
-            <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Lifestyle)" Clicked="(() => ChangeOrder(Tabs.Lifestyle))">Lifestyle</Button>
-            <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Personality)" Clicked="(() => ChangeOrder(Tabs.Personality))">Personalidades</Button>
-            <Button Margin="Margin.Is1.FromBottom" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.Interests)" Clicked="(() => ChangeOrder(Tabs.Interests))">Interesses</Button>
+            <Button Margin="Margin.Is1.FromBottom" Color="GetTabColor(Tabs.Basic)" Outline="!(SelectedTab == Tabs.Basic)" Clicked="(() => ChangeOrder(Tabs.Basic))">Básico</Button>
+            <Button Margin="Margin.Is1.FromBottom" Color="GetTabColor(Tabs.Bio)" Outline="!(SelectedTab == Tabs.Bio)" Clicked="(() => ChangeOrder(Tabs.Bio))">Bio</Button>
+            <Button Margin="Margin.Is1.FromBottom" Color="GetTabColor(Tabs.Lifestyle)" Outline="!(SelectedTab == Tabs.Lifestyle)" Clicked="(() => ChangeOrder(Tabs.Lifestyle))">Lifestyle</Button>
+            <Button Margin="Margin.Is1.FromBottom" Color="GetTabColor(Tabs.Personality)" Outline="!(SelectedTab == Tabs.Personality)" Clicked="(() => ChangeOrder(Tabs.Personality))">Personalidades</Button>
+            <Button Margin="Margin.Is1.FromBottom" Color="GetTabColor(Tabs.Interests)" Outline="!(SelectedTab == Tabs.Interests)" Clicked="(() => ChangeOrder(Tabs.Interests))">Interesses</Button>
             @if (profile.Modality == Modality.RelationshipAnalysis)
             {
-                <Button Margin="Margin.Is1.FromBottom.Is1.FromStart" Color="Color.Secondary" Outline="!(SelectedTab == Tabs.MyRelationship)" Clicked="(() => ChangeOrder(Tabs.MyRelationship))">Meu Relacionamento</Button>
+                <Button Margin="Margin.Is1.FromBottom.Is1.FromStart" Color="GetTabColor(Tabs.MyRelationship)" Outline="!(SelectedTab == Tabs.MyRelationship)" Clicked="(() => ChangeOrder(Tabs.MyRelationship))">Meu Relacionamento</Button>
             }
         </Div>
 
@@ -269,14 +270,17 @@
     </VerusDate.Web.Shared.modal.BasicModal>
 
     <VerusDate.Web.Shared.modal.BasicModal @ref="help" Title="Ajuda">
-        <Paragraph Margin="Margin.Is2.FromBottom" Alignment="TextAlignment.Justified">
-            <Blazorise.Icon Name="FontAwesomeIcons.Question"></Blazorise.Icon> Esta opção terá explicações de cada um dos itens disponíveis para escolha
+        <Paragraph Margin="Margin.Is2.FromBottom" TextAlignment="TextAlignment.Justified">
+            <Button Color="Color.Primary" Outline="true"><Blazorise.Icon Name="FontAwesomeIcons.Question"></Blazorise.Icon></Button>
+            Esta opção terá explicações de cada um dos itens disponíveis para escolha
         </Paragraph>
-        <Paragraph Margin="Margin.Is2.FromBottom" Alignment="TextAlignment.Justified">
-            <Blazorise.Icon Name="FontAwesomeIcons.Plus"></Blazorise.Icon> Esta opção abrirá um popup com múltiplas escolhas (juntamente com explicações, caso tenha)
+        <Paragraph Margin="Margin.Is2.FromBottom" TextAlignment="TextAlignment.Justified">
+            <Button Color="Color.Primary" Outline="true"><Blazorise.Icon Name="FontAwesomeIcons.Plus"></Blazorise.Icon></Button>
+            Esta opção abrirá um popup com múltiplas escolhas (juntamente com explicações, caso tenha)
         </Paragraph>
-        <Paragraph Margin="Margin.Is2.FromBottom" Alignment="TextAlignment.Justified">
-            <Blazorise.Icon Name="FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon> Esta opção solicitará localização para seu aparelho (precisa estar habilitada esta opção)
+        <Paragraph Margin="Margin.Is2.FromBottom" TextAlignment="TextAlignment.Justified">
+            <Button Color="Color.Primary" Outline="true"><Blazorise.Icon Name="FontAwesomeIcons.MapMarkedAlt"></Blazorise.Icon></Button>
+            Esta opção solicitará localização para seu aparelho (precisa estar habilitada esta opção)
         </Paragraph>
     </VerusDate.Web.Shared.modal.BasicModal>
 </CustomVisibility>
@@ -286,6 +290,7 @@
     private Shared.modal.BasicModal? help;
 
     private VerusDate.Shared.Model.InviteModel? Invite;
+    private FluentValidationValidator? _validator;
 
     private bool ProfileLoading;
 
@@ -304,5 +309,38 @@
     private void ChangeOrder(Tabs tab)
     {
         SelectedTab = tab;
+    }
+
+    private Color GetTabColor(Tabs tab)
+    {
+        var valid = false;
+
+        switch (tab)
+        {
+            case Tabs.Basic:
+                valid = _validator?.Validate(options => options.IncludeRuleSets("BASIC")) ?? false;
+                break;
+            case Tabs.Bio:
+                valid = _validator?.Validate(options => options.IncludeRuleSets("BIO")) ?? false;
+                break;
+            case Tabs.Lifestyle:
+                valid = _validator?.Validate(options => options.IncludeRuleSets("LIFESTYLE")) ?? false;
+                break;
+            case Tabs.Personality:
+                valid = _validator?.Validate(options => options.IncludeRuleSets("PERSONALITY")) ?? false;
+                break;
+            case Tabs.Interests:
+                valid = _validator?.Validate(options => options.IncludeRuleSets("INTEREST")) ?? false;
+                break;
+            case Tabs.MyRelationship:
+                valid = _validator?.Validate(options => options.IncludeRuleSets("MYRELATIONSHIP")) ?? false;
+                break;
+            default:
+                break;
+        }
+
+        _validator?.Validate(options => options.IncludeAllRuleSets());
+
+        return valid ? Color.Secondary : Color.Danger;
     }
 }

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using VerusDate.Shared.Model;
 
-namespace VerusDate.Api.Mediator.Command.Profile
+namespace VerusDate.Shared.Validation
 {
     public class ProfileLookingValidation : AbstractValidator<ProfilePreferenceModel>
     {

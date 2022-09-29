@@ -1,7 +1,6 @@
 ﻿@page "/Support"
 @attribute [Authorize]
 @inherits PageCore<Support.Index>
-@*@inject IModalService Modal*@
 
 <Alert Color="Color.Secondary" Visible="true">
     <AlertDescription>
@@ -49,7 +48,7 @@
                             <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD" Margin="Margin.Is1.FromBottom">
                                 <Card Style="background-color: #e2e3e5">
                                     <CardBody Padding="Padding.Is1">
-                                        <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Justified">
+                                        <Paragraph Margin="Margin.Is0.FromBottom" TextAlignment="TextAlignment.Justified">
                                             <MemoEdit Rows="2" Plaintext="true" Text="@item.Description.GetResume(60)" />
                                         </Paragraph>
                                         <Paragraph Margin="Margin.Is2.FromBottom">
@@ -118,7 +117,7 @@
                             <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD" Margin="Margin.Is1.FromBottom">
                                 <Card Style="background-color: #e2e3e5">
                                     <CardBody Padding="Padding.Is1">
-                                        <Paragraph Margin="Margin.Is0.FromBottom" Alignment="TextAlignment.Justified">
+                                        <Paragraph Margin="Margin.Is0.FromBottom" TextAlignment="TextAlignment.Justified">
                                             <MemoEdit Rows="2" Plaintext="true" Text="@item.Description.GetResume(60)" />
                                         </Paragraph>
                                         <Paragraph Margin="Margin.Is2.FromBottom">

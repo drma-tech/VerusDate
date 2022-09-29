@@ -1,4 +1,7 @@
-﻿using BrowserInterop.Extensions;
+﻿using Blazored.FluentValidation;
+using BrowserInterop.Extensions;
+using FluentValidation;
+using Microsoft.AspNetCore.Components.Forms;
 using VerusDate.Shared;
 using VerusDate.Shared.Enum;
 using VerusDate.Shared.Helper;
@@ -11,7 +14,7 @@ namespace VerusDate.Web.Pages.Profile
     public partial class ProfileData
     {
         private ProfileModel? profile = new();
-        private Partner? partner { get; set; } = new();
+        private Partner? partner = new();
         private List<string> NewInvites = new();
         private List<string> RemovedInvites = new();
         private GeoLocation? GPS = new();
@@ -515,7 +518,7 @@ namespace VerusDate.Web.Pages.Profile
 
         private async Task HandleValidSubmit()
         {
-            if (profile == null) throw new ArgumentNullException(nameof(profile));
+            if (profile == null) throw new InvalidOperationException("profile is null");
 
             try
             {
@@ -579,9 +582,16 @@ namespace VerusDate.Web.Pages.Profile
             }
         }
 
-        private void HandleInvalidSubmit()
+        private void HandleInvalidSubmit(EditContext context)
         {
-            Toast.ShowWarning("", "Foram detectados erros de validação");
+            if (profile == null) throw new InvalidOperationException("profile is null");
+
+            var errors = context.GetValidationMessages().ToList();
+
+            if (errors != null && errors.Count == 1)
+                Toast.ShowWarning("", errors.First());
+            else
+                Toast.ShowWarning("", "Foram detectados erros de validação");
         }
 
         private void AddNewPartner()

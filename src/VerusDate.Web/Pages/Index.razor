@@ -241,7 +241,7 @@
                     {
                         ViewLoading = true;
                         var partner = profile.Partners.FirstOrDefault(w => !string.IsNullOrEmpty(w.Id));
-                        view = await Http.Profile_GetView(SessionStorage, partner?.Id);
+                        view = await Http.Profile_GetView(partner?.Id);
                         ViewLoading = false;
                     }
                     else

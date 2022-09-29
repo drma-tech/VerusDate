@@ -11,7 +11,7 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Server.Mediator.Commands.Profile
 {
-    public class UploadPhotoFaceCommand : CosmosBase, IRequest<bool>
+    public class UploadPhotoFaceCommand : CosmosBase, IRequest<ProfileModel>
     {
         public UploadPhotoFaceCommand() : base(CosmosType.Profile)
         {
@@ -26,7 +26,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
         }
     }
 
-    public class UploadPhotoFaceHandler : IRequestHandler<UploadPhotoFaceCommand, bool>
+    public class UploadPhotoFaceHandler : IRequestHandler<UploadPhotoFaceCommand, ProfileModel>
     {
         private readonly IRepository _repo;
         private readonly StorageHelper storageHelper;
@@ -39,7 +39,7 @@ namespace VerusDate.Server.Mediator.Commands.Profile
             this.faceHelper = faceHelper;
         }
 
-        public async Task<bool> Handle(UploadPhotoFaceCommand request, CancellationToken cancellationToken)
+        public async Task<ProfileModel> Handle(UploadPhotoFaceCommand request, CancellationToken cancellationToken)
         {
             var profile = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
             if (profile == null) throw new NotificationException("Perfil não encontrado");

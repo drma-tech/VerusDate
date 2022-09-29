@@ -7,7 +7,7 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileUpdatePartnerCommand : CosmosBase, IRequest<bool>
+    public class ProfileUpdatePartnerCommand : CosmosBase, IRequest<ProfileModel>
     {
         public ProfileUpdatePartnerCommand() : base(CosmosType.Profile)
         {
@@ -24,7 +24,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
         }
     }
 
-    public class ProfilePartnerAddHandler : IRequestHandler<ProfileUpdatePartnerCommand, bool>
+    public class ProfilePartnerAddHandler : IRequestHandler<ProfileUpdatePartnerCommand, ProfileModel>
     {
         private readonly IRepository _repo;
 
@@ -33,7 +33,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
             _repo = repo;
         }
 
-        public async Task<bool> Handle(ProfileUpdatePartnerCommand request, CancellationToken cancellationToken)
+        public async Task<ProfileModel> Handle(ProfileUpdatePartnerCommand request, CancellationToken cancellationToken)
         {
             request.SetIds(request.id);
 

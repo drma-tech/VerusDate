@@ -84,7 +84,7 @@ namespace VerusDate.Web.Core
 
             if (storage != null && !string.IsNullOrWhiteSpace(urlGet) && response.IsSuccessStatusCode)
             {
-                storage.SetItem(urlGet, obj);
+                storage.SetItem(urlGet, await response.ReturnResponse<T>());
             }
 
             return response;

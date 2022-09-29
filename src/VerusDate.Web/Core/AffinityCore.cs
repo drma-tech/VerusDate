@@ -23,12 +23,6 @@ namespace VerusDate.Web.Core
                 new AffinityVM(Section.Basic, CompatibilityItem.BiologicalSex, GetBiologicalSex(user, user.Preference).IsMatch(view.BiologicalSex.ToArray())),
                 new AffinityVM(Section.Basic, CompatibilityItem.GenderIdentity, GetGenderIdentity(user, user.Preference).IsMatch(view.GenderIdentity.ToArray())),
                 new AffinityVM(Section.Basic, CompatibilityItem.SexualOrientation, GetSexualOrientation(user, user.Preference).IsMatch(view.SexualOrientation.ToArray())),
-                //new AffinityVM(Section.Basic, CompatibilityItem.Language, CheckEnumArrays(view.Languages, user.Preference.Languages), view.Languages.Intersect(user.Preference.Languages).Select(s => (int)s)),
-                //new AffinityVM(Section.Basic, CompatibilityItem.CurrentSituation, CheckEnumArray(view.CurrentSituation, user.Preference.CurrentSituation)),
-                //new AffinityVM(Section.Basic, CompatibilityItem.Intentions, CheckEnumArrays(view.Intentions, user.Intentions), view.Intentions.Intersect(user.Intentions).Select(s => (int)s)),
-                //new AffinityVM(Section.Basic, CompatibilityItem.BiologicalSex, CheckEnumArray(view.BiologicalSex, user.Preference.BiologicalSex)),
-                //new AffinityVM(Section.Basic, CompatibilityItem.GenderIdentity, CheckEnumArray(view.GenderIdentity, user.Preference.GenderIdentity)),
-                //new AffinityVM(Section.Basic, CompatibilityItem.SexualOrientation, CheckEnumArray(view.SexualOrientation, user.Preference.SexualOrientation)),
 
                 //BIO - DEFINIÇÕES DE BUSCA
                 new AffinityVM(Section.Bio, CompatibilityItem.RaceCategory, GetRaceCategory(user.Preference).IsMatch(view.RaceCategory.ToArray())),
@@ -38,13 +32,6 @@ namespace VerusDate.Web.Core
                 new AffinityVM(Section.Bio, CompatibilityItem.Height, GetHeight(user, user.Preference).Select(s => (int)s).ToArray().IsRangeMatch(((int?)view.Height).ToArray())),
                 new AffinityVM(Section.Bio, CompatibilityItem.Neurodiversity, GetNeurodiversity(user.Preference).IsMatch(view.Neurodiversity.ToArray())),
                 new AffinityVM(Section.Bio, CompatibilityItem.Disabilities, GetDisability(user.Preference).IsMatch(view.Disabilities)),
-                //new AffinityVM(Section.Bio, CompatibilityItem.RaceCategory, CheckEnumArray(view.RaceCategory, user.Preference.RaceCategory)),
-                //new AffinityVM(Section.Bio, CompatibilityItem.BodyMass, CheckEnumArray(view.BodyMass, user.Preference.BodyMass)),
-                //new AffinityVM(Section.Bio, CompatibilityItem.Age, CheckAge(view.Age, user.Preference.MinimalAge, user.Preference.MaxAge)),
-                //new AffinityVM(Section.Bio, CompatibilityItem.Zodiac, CheckEnumZodiac(view.Zodiac, user.Zodiac)),
-                //new AffinityVM(Section.Bio, CompatibilityItem.Height, CheckHeight(view.Height, user.Preference.MinimalHeight, user.Preference.MaxHeight)),
-                //new AffinityVM(Section.Bio, CompatibilityItem.Neurodiversity, CheckEnumArray(view.Neurodiversity, user.Preference.Neurodiversities)),
-                //new AffinityVM(Section.Bio, CompatibilityItem.Disabilities, CheckEnumArrays(view.Disabilities, user.Preference.Disabilities)),
 
                 //LIFESTYLE - COMPATIBILIDADE DE PERFIL OU DEFINIÇÕES DE BUSCA (SE PREENCHIDO)
                 new AffinityVM(Section.Lifestyle, CompatibilityItem.Drink, GetDrink(user, user.Preference).IsMatch(view.Drink.ToArray())),
@@ -56,29 +43,14 @@ namespace VerusDate.Web.Core
                 new AffinityVM(Section.Lifestyle, CompatibilityItem.EducationLevel, GetEducationLevel(user, user.Preference).IsMatch(view.EducationLevel.ToArray())),
                 new AffinityVM(Section.Lifestyle, CompatibilityItem.CareerCluster, GetCareerCluster(user, user.Preference).IsMatch(view.CareerCluster.ToArray())),
                 new AffinityVM(Section.Lifestyle, CompatibilityItem.TravelFrequency, GetTravelFrequency(user, user.Preference).IsMatch(view.TravelFrequency.ToArray())),
-                //new AffinityVM(Section.Lifestyle, CompatibilityItem.Drink, CheckDrink(view.Drink, user.Drink)),
-                //new AffinityVM(Section.Lifestyle, CompatibilityItem.Smoke, CheckSmoke(view.Smoke, user.Smoke)),
-                //new AffinityVM(Section.Lifestyle, CompatibilityItem.Diet, CheckDiet(view.Diet, user.Diet)),
-                //new AffinityVM(Section.Lifestyle, CompatibilityItem.Religion, CheckEnum((int?)view.Religion, (int?)user.Religion)),
-                //new AffinityVM(Section.Lifestyle, CompatibilityItem.HaveChildren, CheckHaveChildren(view.HaveChildren, user.HaveChildren)),
-                //new AffinityVM(Section.Lifestyle, CompatibilityItem.WantChildren, CheckWantChildren(view.WantChildren, user.WantChildren)),
-                //new AffinityVM(Section.Lifestyle, CompatibilityItem.EducationLevel, CheckEnum((int?)view.EducationLevel, (int?)user.EducationLevel)),
-                //new AffinityVM(Section.Lifestyle, CompatibilityItem.CareerCluster, CheckEnum((int?)view.CareerCluster, (int?)user.CareerCluster)),
-                //new AffinityVM(Section.Lifestyle, CompatibilityItem.TravelFrequency, CheckEnum((int?)view.TravelFrequency, (int?)user.TravelFrequency)),
 
                 //PERSONALITY - COMPATIBILIDADE DE PERFIL
-                new AffinityVM(Section.Personality, CompatibilityItem.MoneyPersonality, GetMoneyPersonality(user).IsMatch(view.MoneyPersonality.ToArray())),
-                new AffinityVM(Section.Personality, CompatibilityItem.SplitTheBill, GetSplitTheBill(user).IsMatch(view.SplitTheBill.ToArray())),
-                new AffinityVM(Section.Personality, CompatibilityItem.RelationshipPersonality, GetRelationshipPersonality(user).IsMatch(view.RelationshipPersonality.ToArray())),
-                new AffinityVM(Section.Personality, CompatibilityItem.MyersBriggsTypeIndicator, GetMyersBriggsTypeIndicator(user).IsMatch(view.MBTI.ToArray())),
-                new AffinityVM(Section.Personality, CompatibilityItem.LoveLanguage, GetLoveLanguage(user).IsMatch(view.LoveLanguage.ToArray())),
-                new AffinityVM(Section.Personality, CompatibilityItem.SexPersonality, GetSexPersonality(user, user.Preference).IsMatch(view.SexPersonality.ToArray())),
-                //new AffinityVM(Section.Personality, CompatibilityItem.MoneyPersonality, CheckEnum((int?)view.MoneyPersonality, (int?)user.MoneyPersonality, true)),
-                //new AffinityVM(Section.Personality, CompatibilityItem.SplitTheBill, CheckSplitTheBill(view.SplitTheBill, user.SplitTheBill)),
-                //new AffinityVM(Section.Personality, CompatibilityItem.RelationshipPersonality, CheckEnumRelationshipPersonality(view.RelationshipPersonality, user.RelationshipPersonality)),
-                //new AffinityVM(Section.Personality, CompatibilityItem.MyersBriggsTypeIndicator, CheckEnumMBTI(view.MyersBriggsTypeIndicator, user.MyersBriggsTypeIndicator)),
-                //new AffinityVM(Section.Personality, CompatibilityItem.LoveLanguage, CheckEnum((int?)view.LoveLanguage, (int?)user.LoveLanguage, true)),
-                //new AffinityVM(Section.Personality, CompatibilityItem.SexPersonality, CheckEnumArray(view.SexPersonality, user.Preference.SexPersonality, true)),
+                new AffinityVM(Section.Personality, CompatibilityItem.MoneyPersonality, GetMoneyPersonality(user).IsMatch(view.MoneyPersonality.ToArray(), true)),
+                new AffinityVM(Section.Personality, CompatibilityItem.SplitTheBill, GetSplitTheBill(user).IsMatch(view.SplitTheBill.ToArray(), true)),
+                new AffinityVM(Section.Personality, CompatibilityItem.RelationshipPersonality, GetRelationshipPersonality(user).IsMatch(view.RelationshipPersonality.ToArray(), true)),
+                new AffinityVM(Section.Personality, CompatibilityItem.MyersBriggsTypeIndicator, GetMyersBriggsTypeIndicator(user).IsMatch(view.MBTI.ToArray(), true)),
+                new AffinityVM(Section.Personality, CompatibilityItem.LoveLanguage, GetLoveLanguage(user).IsMatch(view.LoveLanguage.ToArray(), true)),
+                new AffinityVM(Section.Personality, CompatibilityItem.SexPersonality, GetSexPersonality(user, user.Preference).IsMatch(view.SexPersonality.ToArray(), true)),
 
                 //INTEREST - COMPATIBILIDADE DE PERFIL (UMA OPÇAO IGUAL JÁ INDICA COMPATIBILIDADE)
                 new AffinityVM(Section.Interest, CompatibilityItem.Food, GetFood(user).IsMatch(view.Food)),
@@ -89,14 +61,6 @@ namespace VerusDate.Web.Core
                 new AffinityVM(Section.Interest, CompatibilityItem.MovieGenre, GetMovieGenre(user).IsMatch(view.MovieGenre)),
                 new AffinityVM(Section.Interest, CompatibilityItem.TVGenre, GetTVGenre(user).IsMatch(view.TVGenre)),
                 new AffinityVM(Section.Interest, CompatibilityItem.ReadingGenre, GetReadingGenre(user).IsMatch(view.ReadingGenre)),
-                //new AffinityVM(Section.Interest, CompatibilityItem.Food, CheckEnumArrays(view.Food, user.Food), view.Food.Intersect(user.Food).Select(s => (int)s)),
-                //new AffinityVM(Section.Interest, CompatibilityItem.Vacation, CheckEnumArrays(view.Vacation, user.Vacation), view.Vacation.Intersect(user.Vacation).Select(s => (int)s)),
-                //new AffinityVM(Section.Interest, CompatibilityItem.Sports, CheckEnumArrays(view.Sports, user.Sports), view.Sports.Intersect(user.Sports).Select(s => (int)s)),
-                //new AffinityVM(Section.Interest, CompatibilityItem.LeisureActivities, CheckEnumArrays(view.LeisureActivities, user.LeisureActivities), view.LeisureActivities.Intersect(user.LeisureActivities).Select(s => (int)s)),
-                //new AffinityVM(Section.Interest, CompatibilityItem.MusicGenre, CheckEnumArrays(view.MusicGenre, user.MusicGenre), view.MusicGenre.Intersect(user.MusicGenre).Select(s => (int)s)),
-                //new AffinityVM(Section.Interest, CompatibilityItem.MovieGenre, CheckEnumArrays(view.MovieGenre, user.MovieGenre), view.MovieGenre.Intersect(user.MovieGenre).Select(s => (int)s)),
-                //new AffinityVM(Section.Interest, CompatibilityItem.TVGenre, CheckEnumArrays(view.TVGenre, user.TVGenre), view.TVGenre.Intersect(user.TVGenre).Select(s => (int)s)),
-                //new AffinityVM(Section.Interest, CompatibilityItem.ReadingGenre, CheckEnumArrays(view.ReadingGenre, user.ReadingGenre), view.ReadingGenre.Intersect(user.ReadingGenre).Select(s => (int)s)),
             };
 
             return obj;
@@ -118,8 +82,9 @@ namespace VerusDate.Web.Core
             else return Array.Empty<T>();
         }
 
-        private static bool IsMatch<T>(this IReadOnlyList<T> preferences, IReadOnlyList<T> view)
+        private static bool IsMatch<T>(this IReadOnlyList<T> preferences, IReadOnlyList<T> view, bool force = false)
         {
+            if (force && !preferences.Any()) return false; //if preferences is required
             if (!preferences.Any()) return true; //if preferences are empty then accept all
             if (!view.Any()) return false; //if the preference is not empty and the view is empty then it does not accept anything
 
@@ -704,268 +669,6 @@ namespace VerusDate.Web.Core
         }
 
         #endregion INTEREST
-
-        private static bool CheckEnum(int? view, int? looking, bool force = false)
-        {
-            if (force)
-            {
-                if (!looking.HasValue) return false;
-            }
-            else
-            {
-                if (!looking.HasValue) return true; //If the user has not defined, then it is an affinity
-            }
-
-            return view == looking;
-        }
-
-        private static bool CheckEnumArray<T>(T? view, IEnumerable<T> looking, bool force = false) where T : struct, Enum
-        {
-            if (force)
-            {
-                if (!looking.Any()) return false;
-            }
-            else
-            {
-                if (!looking.Any()) return true; //If the user has not defined, then it is an affinity
-            }
-
-            if (view.HasValue)
-                return new T[] { view.Value }.Intersect(looking).Any();
-            else
-                return true;
-        }
-
-        private static bool CheckEnumArrays<T>(IEnumerable<T> view, IEnumerable<T> looking) where T : System.Enum
-        {
-            if (!looking.Any()) return true; //if the user did not choose any, then all are an affinity
-
-            return view.Intersect(looking).Any();
-        }
-
-        #region BIO
-
-        private static bool CheckAge(int age, int? Looking_MinAge, int? Looking_MaxAge)
-        {
-            if (Looking_MinAge.HasValue && Looking_MaxAge.HasValue)
-            {
-                return Looking_MinAge <= age && Looking_MaxAge >= age;
-            }
-            else if (Looking_MinAge.HasValue)
-            {
-                return Looking_MinAge <= age;
-            }
-            else if (Looking_MaxAge.HasValue)
-            {
-                return Looking_MaxAge >= age;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        private static bool CheckEnumZodiac(Zodiac view, Zodiac user)
-        {
-            return user switch
-            {
-                Zodiac.Aries => view == Zodiac.Leo || view == Zodiac.Sagittarius,
-                Zodiac.Taurus => view == Zodiac.Virgo || view == Zodiac.Capricorn,
-                Zodiac.Gemini => view == Zodiac.Libra || view == Zodiac.Aquarius,
-                Zodiac.Cancer => view == Zodiac.Scorpio || view == Zodiac.Pisces,
-                Zodiac.Leo => view == Zodiac.Aries || view == Zodiac.Sagittarius,
-                Zodiac.Virgo => view == Zodiac.Taurus || view == Zodiac.Capricorn,
-                Zodiac.Libra => view == Zodiac.Gemini || view == Zodiac.Aquarius,
-                Zodiac.Scorpio => view == Zodiac.Cancer || view == Zodiac.Scorpio || view == Zodiac.Pisces,
-                Zodiac.Sagittarius => view == Zodiac.Aries || view == Zodiac.Leo,
-                Zodiac.Capricorn => view == Zodiac.Taurus || view == Zodiac.Virgo,
-                Zodiac.Aquarius => view == Zodiac.Gemini || view == Zodiac.Libra,
-                Zodiac.Pisces => view == Zodiac.Cancer || view == Zodiac.Scorpio,
-                _ => throw new System.NotImplementedException()
-            };
-        }
-
-        private static bool CheckHeight(Height? Height, Height? Looking_MinimalHeight, Height? Looking_MaxHeight)
-        {
-            if (Looking_MinimalHeight.HasValue && Looking_MaxHeight.HasValue)
-            {
-                return Looking_MinimalHeight <= Height && Looking_MaxHeight >= Height;
-            }
-            else if (Looking_MinimalHeight.HasValue)
-            {
-                return Looking_MinimalHeight <= Height;
-            }
-            else if (Looking_MaxHeight.HasValue)
-            {
-                return Looking_MaxHeight >= Height;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        #endregion BIO
-
-        #region LIFESTYLE
-
-        private static bool CheckSmoke(Smoke? view, Smoke? user)
-        {
-            //se um dos dois usuário não responderem, persumi-se que não tem afinidade
-            if (!user.HasValue) return false;
-            if (!view.HasValue) return false;
-
-            return user switch
-            {
-                Smoke.No => view == Smoke.No,
-                Smoke.YesOccasionally => view == Smoke.YesOccasionally || view == Smoke.YesOften,
-                Smoke.YesOften => view == Smoke.YesOccasionally || view == Smoke.YesOften,
-                _ => throw new System.NotImplementedException()
-            };
-        }
-
-        private static bool CheckDrink(Drink? view, Drink? user)
-        {
-            //se um dos dois usuário não responderem, persumi-se que não tem afinidade
-            if (!user.HasValue) return false;
-            if (!view.HasValue) return false;
-
-            return user switch
-            {
-                Drink.No => view == Drink.No || view == Drink.YesLight,
-                Drink.YesLight => view == Drink.No || view == Drink.YesLight,
-                Drink.YesModerate => view == Drink.YesModerate || view == Drink.YesHeavy,
-                Drink.YesHeavy => view == Drink.YesModerate || view == Drink.YesHeavy,
-                _ => throw new System.NotImplementedException()
-            };
-        }
-
-        private static bool CheckDiet(Diet? view, Diet? user)
-        {
-            //se um dos dois usuário não responderem, persumi-se que não tem afinidade
-            if (!user.HasValue) return false;
-            if (!view.HasValue) return false;
-
-            var group01 = view == Diet.Omnivore || view == Diet.Flexitarian || view == Diet.GlutenFree;
-            var group02 = view == Diet.Vegetarian || view == Diet.Vegan;
-            var group03 = view == Diet.RawFood || view == Diet.OrganicAllnaturalLocal;
-
-            return user switch
-            {
-                Diet.Omnivore => group01,
-                Diet.Flexitarian => group01,
-                Diet.Vegetarian => group02,
-                Diet.Vegan => group02,
-                Diet.RawFood => group03,
-                Diet.GlutenFree => group01,
-                Diet.OrganicAllnaturalLocal => group03,
-                Diet.DetoxWeightLoss => view == Diet.DetoxWeightLoss,
-                _ => throw new System.NotImplementedException()
-            };
-        }
-
-        private static bool CheckHaveChildren(HaveChildren? view, HaveChildren? user)
-        {
-            //se um dos dois usuário não responderem, persumi-se que não tem afinidade
-            if (!user.HasValue) return false;
-            if (!view.HasValue) return false;
-
-            return user switch
-            {
-                HaveChildren.No => view == HaveChildren.No || view == HaveChildren.YesNo,
-                HaveChildren.YesNo => view == HaveChildren.No || view == HaveChildren.YesNo,
-                HaveChildren.Yes => view == HaveChildren.Yes,
-                _ => throw new System.NotImplementedException()
-            };
-        }
-
-        private static bool CheckWantChildren(WantChildren? view, WantChildren? user)
-        {
-            //se um dos dois usuário não responderem, persumi-se que não tem afinidade
-            if (!user.HasValue) return false;
-            if (!view.HasValue) return false;
-
-            return user switch
-            {
-                WantChildren.No => view == WantChildren.No,
-                WantChildren.Maybe => view == WantChildren.Maybe || view == WantChildren.Yes,
-                WantChildren.Yes => view == WantChildren.Maybe || view == WantChildren.Yes,
-                _ => throw new System.NotImplementedException()
-            };
-        }
-
-        private static bool CheckSplitTheBill(SplitTheBill? view, SplitTheBill? user)
-        {
-            //invented by me (dhiogo)
-
-            //se um dos dois usuário não responderem, persumi-se que não tem afinidade
-            if (!user.HasValue) return false;
-            if (!view.HasValue) return false;
-
-            return user switch
-            {
-                SplitTheBill.Dependent => view == SplitTheBill.Provider,
-                SplitTheBill.GetGifts => view == SplitTheBill.SendGifts,
-                SplitTheBill.Balanced => view == SplitTheBill.Balanced,
-                SplitTheBill.SendGifts => view == SplitTheBill.GetGifts,
-                SplitTheBill.Provider => view == SplitTheBill.Dependent,
-                _ => throw new System.NotImplementedException()
-            };
-        }
-
-        private static bool CheckEnumMBTI(MyersBriggsTypeIndicator? view, MyersBriggsTypeIndicator? user)
-        {
-            //http://www.personalityrelationships.net/
-            //https://web.archive.org/web/20220322143220/http://www.personalityrelationships.net/
-
-            //se um dos dois usuário não responderem, persumi-se que não tem afinidade
-            if (!user.HasValue) return false;
-            if (!view.HasValue) return false;
-
-            return user switch
-            {
-                MyersBriggsTypeIndicator.INTJ => view.Value == MyersBriggsTypeIndicator.ENTP || view.Value == MyersBriggsTypeIndicator.ENFP,
-                MyersBriggsTypeIndicator.INTP => view.Value == MyersBriggsTypeIndicator.ENTJ || view.Value == MyersBriggsTypeIndicator.ENFJ,
-                MyersBriggsTypeIndicator.ENTJ => view.Value == MyersBriggsTypeIndicator.INTP || view.Value == MyersBriggsTypeIndicator.INFP,
-                MyersBriggsTypeIndicator.ENTP => view.Value == MyersBriggsTypeIndicator.INTJ || view.Value == MyersBriggsTypeIndicator.INFJ,
-
-                MyersBriggsTypeIndicator.INFJ => view.Value == MyersBriggsTypeIndicator.ENFP || view.Value == MyersBriggsTypeIndicator.ENTP || view.Value == MyersBriggsTypeIndicator.INTJ || view.Value == MyersBriggsTypeIndicator.INFJ,
-                MyersBriggsTypeIndicator.INFP => view.Value == MyersBriggsTypeIndicator.ENFJ || view.Value == MyersBriggsTypeIndicator.ENTJ,
-                MyersBriggsTypeIndicator.ENFJ => view.Value == MyersBriggsTypeIndicator.INFP || view.Value == MyersBriggsTypeIndicator.INTP,
-                MyersBriggsTypeIndicator.ENFP => view.Value == MyersBriggsTypeIndicator.INFJ || view.Value == MyersBriggsTypeIndicator.INTJ,
-
-                MyersBriggsTypeIndicator.ISTJ => view.Value == MyersBriggsTypeIndicator.ESTP || view.Value == MyersBriggsTypeIndicator.ESFP,
-                MyersBriggsTypeIndicator.ISFJ => view.Value == MyersBriggsTypeIndicator.ESFP || view.Value == MyersBriggsTypeIndicator.ESTP,
-                MyersBriggsTypeIndicator.ESTJ => view.Value == MyersBriggsTypeIndicator.ISTP || view.Value == MyersBriggsTypeIndicator.ISFP,
-                MyersBriggsTypeIndicator.ESFJ => view.Value == MyersBriggsTypeIndicator.ISFP || view.Value == MyersBriggsTypeIndicator.ISTP,
-
-                MyersBriggsTypeIndicator.ISTP => view.Value == MyersBriggsTypeIndicator.ESFJ || view.Value == MyersBriggsTypeIndicator.ESTJ,
-                MyersBriggsTypeIndicator.ISFP => view.Value == MyersBriggsTypeIndicator.ESTJ || view.Value == MyersBriggsTypeIndicator.ESFJ,
-                MyersBriggsTypeIndicator.ESTP => view.Value == MyersBriggsTypeIndicator.ISTJ || view.Value == MyersBriggsTypeIndicator.ISFJ,
-                MyersBriggsTypeIndicator.ESFP => view.Value == MyersBriggsTypeIndicator.ISTJ || view.Value == MyersBriggsTypeIndicator.ISFJ,
-                _ => throw new System.NotImplementedException()
-            };
-        }
-
-        private static bool CheckEnumRelationshipPersonality(RelationshipPersonality? view, RelationshipPersonality? user)
-        {
-            //https://helenfisher.com/downloads/articles/Article_%20We%20Have%20Chemistry.pdf
-
-            //se um dos dois usuário não responderem, persumi-se que não tem afinidade
-            if (!user.HasValue) return false;
-            if (!view.HasValue) return false;
-
-            return user switch
-            {
-                RelationshipPersonality.Explorers => view == RelationshipPersonality.Explorers,
-                RelationshipPersonality.Directors => view == RelationshipPersonality.Negotiator,
-                RelationshipPersonality.Builders => view == RelationshipPersonality.Builders,
-                RelationshipPersonality.Negotiator => view == RelationshipPersonality.Directors,
-                _ => throw new System.NotImplementedException()
-            };
-        }
-
-        #endregion LIFESTYLE
 
         public static int GetPercentAffinity(this List<AffinityVM> Affinities, Section? category = null)
         {

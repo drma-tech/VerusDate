@@ -173,7 +173,7 @@
             user = await Http.Profile_Get(SessionStorage);
             ProfileLoading = false;
 
-            view = await Http.Profile_GetView(SessionStorage, IdUserView);
+            view = await Http.Profile_GetView(IdUserView);
 
             if (view == null)
             {

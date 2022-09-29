@@ -9,10 +9,10 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileUpdateLookingCommand : ProfileModel, IRequest<bool>
+    public class ProfileUpdateLookingCommand : ProfileModel, IRequest<ProfileModel>
     { }
 
-    public class ProfileLookingAddHandler : IRequestHandler<ProfileUpdateLookingCommand, bool>
+    public class ProfileLookingAddHandler : IRequestHandler<ProfileUpdateLookingCommand, ProfileModel>
     {
         private readonly IRepository _repo;
 
@@ -21,7 +21,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
             _repo = repo;
         }
 
-        public async Task<bool> Handle(ProfileUpdateLookingCommand request, CancellationToken cancellationToken)
+        public async Task<ProfileModel> Handle(ProfileUpdateLookingCommand request, CancellationToken cancellationToken)
         {
             //TODO: colocar id e key nos parametros e só passar o objeto preference
 

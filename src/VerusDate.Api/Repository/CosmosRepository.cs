@@ -140,7 +140,7 @@ namespace VerusDate.Api.Repository
             return response.Resource;
         }
 
-        public async Task<bool> Update<T>(T item, CancellationToken cancellationToken) where T : CosmosBase
+        public async Task<T> Update<T>(T item, CancellationToken cancellationToken) where T : CosmosBase
         {
             //TODO: validate concurrent update conflicts
             //string eTag = response.ETag;
@@ -151,10 +151,10 @@ namespace VerusDate.Api.Repository
 
             if (response.RequestCharge > ru_limit_save) throw new NotificationException($"RU limit exceeded save ({response.RequestCharge})");
 
-            return response.StatusCode == System.Net.HttpStatusCode.OK;
+            return response.Resource;
         }
 
-        public async Task<bool> PatchItem<T>(string id, string partitionKeyValue, List<PatchOperation> operations, CancellationToken cancellationToken) where T : CosmosBase
+        public async Task<T> PatchItem<T>(string id, string partitionKeyValue, List<PatchOperation> operations, CancellationToken cancellationToken) where T : CosmosBase
         {
             //https://learn.microsoft.com/en-us/azure/cosmos-db/partial-document-update-getting-started?tabs=dotnet
 
@@ -162,7 +162,7 @@ namespace VerusDate.Api.Repository
 
             if (response.RequestCharge > ru_limit_save) throw new NotificationException($"RU limit exceeded save ({response.RequestCharge})");
 
-            return response.StatusCode == System.Net.HttpStatusCode.OK;
+            return response.Resource;
         }
 
         public async Task<bool> Delete<T>(T item, CancellationToken cancellationToken) where T : CosmosBase

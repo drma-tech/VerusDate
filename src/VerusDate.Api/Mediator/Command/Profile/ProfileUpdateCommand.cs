@@ -6,10 +6,10 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class ProfileUpdateCommand : ProfileModel, IRequest<bool>
+    public class ProfileUpdateCommand : ProfileModel, IRequest<ProfileModel>
     { }
 
-    public class ProfileUpdateHandler : IRequestHandler<ProfileUpdateCommand, bool>
+    public class ProfileUpdateHandler : IRequestHandler<ProfileUpdateCommand, ProfileModel>
     {
         private readonly IRepository _repo;
 
@@ -18,7 +18,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
             _repo = repo;
         }
 
-        public async Task<bool> Handle(ProfileUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<ProfileModel> Handle(ProfileUpdateCommand request, CancellationToken cancellationToken)
         {
             var obj = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
 
@@ -27,9 +27,15 @@ namespace VerusDate.Api.Mediator.Command.Profile
             //    obj.Gamification.RemoveXP(100);
             //}
 
-            obj.UpdateData(request);
-
-            return await _repo.Update(obj, cancellationToken);
+            if (obj != null)
+            {
+                obj.UpdateData(request);
+                return await _repo.Update(obj, cancellationToken);
+            }
+            else //todo: revisar isso aqui
+            {
+                return await _repo.Add(request, cancellationToken);
+            }
         }
     }
 }

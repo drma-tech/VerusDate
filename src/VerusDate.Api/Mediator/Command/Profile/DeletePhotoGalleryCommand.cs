@@ -47,7 +47,9 @@ namespace VerusDate.Server.Mediator.Commands.Profile
 
             obj.UpdatePhoto(obj.Photo);
 
-            return await _repo.Update(obj, cancellationToken);
+            await _repo.Update(obj, cancellationToken);
+
+            return true;
         }
     }
 }

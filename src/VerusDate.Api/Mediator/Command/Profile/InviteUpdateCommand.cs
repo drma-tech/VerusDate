@@ -6,11 +6,11 @@ using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Profile
 {
-    public class InviteUpdateCommand : InviteModel, IRequest<bool>
+    public class InviteUpdateCommand : InviteModel, IRequest<InviteModel>
     {
     }
 
-    public class InviteUpdateHandler : IRequestHandler<InviteUpdateCommand, bool>
+    public class InviteUpdateHandler : IRequestHandler<InviteUpdateCommand, InviteModel>
     {
         private readonly IRepository _repo;
 
@@ -19,7 +19,7 @@ namespace VerusDate.Api.Mediator.Command.Profile
             _repo = repo;
         }
 
-        public async Task<bool> Handle(InviteUpdateCommand request, CancellationToken cancellationToken)
+        public async Task<InviteModel> Handle(InviteUpdateCommand request, CancellationToken cancellationToken)
         {
             return await _repo.Update(request, cancellationToken);
         }

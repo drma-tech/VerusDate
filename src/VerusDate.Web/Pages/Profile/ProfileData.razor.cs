@@ -1,6 +1,4 @@
-﻿using Blazored.FluentValidation;
-using BrowserInterop.Extensions;
-using FluentValidation;
+﻿using BrowserInterop.Extensions;
 using Microsoft.AspNetCore.Components.Forms;
 using VerusDate.Shared;
 using VerusDate.Shared.Enum;
@@ -616,23 +614,33 @@ namespace VerusDate.Web.Pages.Profile
         {
             try
             {
-                var invite = Invite?.Invites.FirstOrDefault(w => w.UserId == userId && w.Type == InviteType.Partner);
-
-                if (Invite != null && invite != null)
+                if (_validator?.Validate(options => options.IncludeRuleSets("BASIC", "BIO", "LIFESTYLE", "PERSONALITY", "INTEREST")) ?? false)
                 {
-                    invite.Accepted = true;
-                    await Http.Invite_Update(Invite, null);
+                    //todo: metodo deve ser uma unica api
+                    var invite = Invite?.Invites.FirstOrDefault(w => w.UserId == userId && w.Type == InviteType.Partner);
 
-                    profile.Partners.Add(new Partner() { Email = invite.UserEmail, Id = userId });
-                    await Http.Profile_Update(profile, SessionStorage);
+                    if (Invite != null && invite != null)
+                    {
+                        invite.Accepted = true;
+                        await Http.Invite_Update(Invite, null);
 
-                    var principal = await Http.Principal_Get(SessionStorage);
-                    var emailUser = principal?.Email;
-                    await Http.Profile_UpdatePartner(userId, emailUser);
+                        profile.Partners.Add(new Partner() { Email = invite.UserEmail, Id = userId });
+                        await Http.Profile_Update(profile, SessionStorage);
+
+                        profile = await Http.Profile_Get(SessionStorage); //TODO update id field
+
+                        var principal = await Http.Principal_Get(SessionStorage);
+                        var emailUser = principal?.Email;
+                        await Http.Profile_UpdatePartner(userId, emailUser);
+                    }
+                    else
+                    {
+                        Toast.ShowWarning("", "Não foi possível identificar o convite");
+                    }
                 }
                 else
                 {
-                    Toast.ShowWarning("", "Não foi possível identificar o convite");
+                    Toast.ShowWarning("", "Favor, preencher seu perfil corretamente");
                 }
             }
             catch (Exception ex)

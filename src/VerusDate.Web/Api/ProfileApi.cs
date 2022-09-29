@@ -27,11 +27,11 @@ namespace VerusDate.Web.Api
             return await http.Get<ProfileModel>(ProfileEndpoint.Get, storage);
         }
 
-        public static async Task<ProfileView?> Profile_GetView(this HttpClient http, ISyncSessionStorageService? storage, string? IdUserView, bool forceUpdate = false)
+        public static async Task<ProfileView?> Profile_GetView(this HttpClient http, string? IdUserView)
         {
             if (IdUserView == null) return default;
 
-            return await http.Get<ProfileView>(ProfileEndpoint.GetView(IdUserView), storage, forceUpdate);
+            return await http.Get<ProfileView>(ProfileEndpoint.GetView(IdUserView));
         }
 
         public static async Task<List<ProfileSearch>> Profile_ListSearch(this HttpClient http, ISyncSessionStorageService? storage)

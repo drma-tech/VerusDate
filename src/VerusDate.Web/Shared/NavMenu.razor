@@ -87,5 +87,5 @@
     }
 
     //https://swharden.com/blog/2020-12-29-blazor-build-info/
-    private string BuildDateString => DateTime.Parse(Properties.Resources.BuildDate.ReplaceLineEndings("").Remove(Properties.Resources.BuildDate.ReplaceLineEndings("").Length - 3, 3)).ToString("yyyy.MM.dd");
+    private string BuildDateString => DateTime.Parse(Properties.Resources.BuildDate.ReplaceLineEndings("").Remove(Properties.Resources.BuildDate.ReplaceLineEndings("").Length - 3, 3)).ToString("yyyy.MM.dd.HH.mm");
 }

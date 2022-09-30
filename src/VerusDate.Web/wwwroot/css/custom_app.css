@@ -161,3 +161,7 @@
     background-color: #d6d8d9 !important;
     border-color: #c6c8ca !important;
 }*/
+
+body .pwa-updater[b-pwa-updater] {
+    --pwa-updater-bar-backcolor: forestgreen;
+}

@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using Toolbelt.Blazor.PWA.Updater
+@inherits LayoutComponentBase
 @inject NavigationManager Navigation
 
 <Layout Sider="true">
@@ -51,6 +52,7 @@
 
 <BlazoredToasts Position="ToastPosition.BottomRight" ShowProgressBar="true" Timeout="10"
                 IconType="IconType.FontAwesome" />
+<PWAUpdater />
 
 @code{
     private Bar? sidebar;

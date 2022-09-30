@@ -2,61 +2,35 @@
 @typeparam TValue
 @typeparam TEnum where TEnum : struct, Enum, IConvertible
 
-<Modal @ref="modal">
-    <ModalContent Centered="true" Size="ModalSize.Default">
-        <ModalHeader>
-            <ModalTitle>@label</ModalTitle>
-            <CloseButton />
-        </ModalHeader>
-        <ModalBody MaxHeight="80">
-            @if (HasGroup)
-            {
-                var previousGroup = "";
-                @foreach (var item in EnumHelper.GetList<TEnum>().OrderBy(o => o.Value))
-                {
-                    if (!string.IsNullOrEmpty(@item.Group) && previousGroup != @item.Group)
-                    {
-                        <Alert Visible="true" Color="Color.Info">
-                            <AlertMessage>@item.Group</AlertMessage>
-                        </Alert>
-                    }
-                    <Paragraph TextAlignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
-                        <Badge Color="Color.Primary">@item.Name</Badge>
-                        <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
-                    </Paragraph>
-                    previousGroup = @item.Group;
-                }
-            }
-            else
-            {
-                @foreach (var item in EnumHelper.GetList<TEnum>())
-                {
-                    <Paragraph TextAlignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
-                        <Badge Color="Color.Primary">@item.Name</Badge>
-                        <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
-                    </Paragraph>
-                }
-            }
-        </ModalBody>
-    </ModalContent>
-</Modal>
+@if (HasGroup)
+{
+    var previousGroup = "";
+    @foreach (var item in EnumHelper.GetList<TEnum>().OrderBy(o => o.Value))
+    {
+        if (!string.IsNullOrEmpty(@item.Group) && previousGroup != @item.Group)
+        {
+            <Alert Visible="true" Color="Color.Info" Padding="Padding.Is0.OnY" Margin="Margin.Is2.FromTop.Is1.FromBottom">
+                <AlertMessage>@item.Group</AlertMessage>
+            </Alert>
+        }
+        <Paragraph TextAlignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
+            <Badge Color="Color.Primary">@item.Name</Badge>
+            <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
+        </Paragraph>
+        previousGroup = @item.Group;
+    }
+}
+else
+{
+    @foreach (var item in EnumHelper.GetList<TEnum>())
+    {
+        <Paragraph TextAlignment="TextAlignment.Justified" Margin="Margin.Is1.FromBottom">
+            <Badge Color="Color.Primary">@item.Name</Badge>
+            <FieldHelp Style="display: inline;">@item.Description</FieldHelp>
+        </Paragraph>
+    }
+}
 
 @code {
-    private Modal? modal;
-    private Expression<Func<TValue>> For;
-
     [Parameter] public bool HasGroup { get; set; }
-
-    private string label => CustomAttributeHelper.GetCustomAttribute(For)?.Name;
-
-    public void ShowModal()
-    {
-        modal.Show();
-    }
-
-    public void ChangeContent(Expression<Func<TValue>> For)
-    {
-        this.For = For;
-        StateHasChanged();
-    }
 }

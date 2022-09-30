@@ -110,9 +110,10 @@
 
     protected override void OnInitialized()
     {
-        if (View != null && User.DtInsert > DateTime.Now.AddDays(-7))
+        if (View != null && User.DtInsert > DateTime.Now.AddDays(-7) && !LocalStorage.ContainKey("item_mais_detalhes"))
         {
             Toast.ShowInfo("Clique em cada um dos itens para obter mais detalhes");
+            LocalStorage.SetItem("item_mais_detalhes", true);
         }
     }
 

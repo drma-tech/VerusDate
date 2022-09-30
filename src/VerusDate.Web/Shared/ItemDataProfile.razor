@@ -33,7 +33,7 @@ else
     [Parameter] public ProfileModel? User { get; set; }
     [Parameter] public ProfilePreferenceModel? Pref { get; set; }
 
-    [Inject] public IModalService ModalService { get; set; }
+    [Inject] public IModalService ModalService { get; set; } = default!;
 
     private string GetValue(TValue value)
     {

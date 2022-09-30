@@ -10,13 +10,14 @@
     </ModalContent>
 </Modal>
 
-@code {
-    private Modal modal;
+@code {    
     [Parameter] public string Title { get; set; }
     [Parameter] public RenderFragment ChildContent { get; set; }
 
+    private Modal? modal;
+
     public void ShowModal()
     {
-        modal.Show();
+        modal?.Show();
     }
 }

@@ -14,7 +14,7 @@
     </AlertDescription>
 </Alert>
 
-<Row Gutter="(8,0)">
+<Row HorizontalGutter="8" VerticalGutter="0">
     <Column ColumnSize="ColumnSize.Is12.Is6.OnWidescreen">
         <Card Margin="Margin.Is2.FromBottom">
             <CardHeader>
@@ -24,7 +24,7 @@
                 </Button>
             </CardHeader>
             <CardBody>
-                <Row Gutter="(8,0)">
+                <Row HorizontalGutter="8" VerticalGutter="0">
                     <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD">
                         <Field Horizontal="true">
                             <FieldLabel ColumnSize="ColumnSize.Is4">
@@ -42,7 +42,7 @@
                     </Column>
                 </Row>
                 <CustomVisibility Loading="FeatureLoading" NoData="!GetTicketList(TicketType.FeatureRequest).Any()">
-                    <Row Gutter="(8,0)" Style="max-height: 330px; overflow: auto;">
+                    <Row HorizontalGutter="8" VerticalGutter="0" Style="max-height: 330px; overflow: auto;">
                         @foreach (var item in GetTicketList(TicketType.FeatureRequest))
                         {
                             <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD" Margin="Margin.Is1.FromBottom">
@@ -93,7 +93,7 @@
                 </Button>
             </CardHeader>
             <CardBody>
-                <Row Gutter="(8,0)">
+                <Row HorizontalGutter="8" VerticalGutter="0">
                     <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD">
                         <Field Horizontal="true">
                             <FieldLabel ColumnSize="ColumnSize.Is4">
@@ -111,7 +111,7 @@
                     </Column>
                 </Row>
                 <CustomVisibility Loading="BugLoading" NoData="!GetTicketList(TicketType.Bug).Any()">
-                    <Row Gutter="(8,0)" Style="max-height: 330px; overflow: auto;">
+                    <Row HorizontalGutter="8" VerticalGutter="0" Style="max-height: 330px; overflow: auto;">
                         @foreach (var item in GetTicketList(TicketType.Bug))
                         {
                             <Column ColumnSize="ColumnSize.Is12.Is6.OnFullHD" Margin="Margin.Is1.FromBottom">

@@ -1,4 +1,5 @@
 using AzureStaticWebApps.Blazor.Authentication;
+using Blazored.LocalStorage;
 using Blazored.SessionStorage;
 using Blazored.Toast;
 using Blazorise;
@@ -27,6 +28,7 @@ builder.Services
 
 builder.Services.AddBlazoredToast();
 builder.Services.AddBlazoredSessionStorage(config => config.JsonSerializerOptions.WriteIndented = true);
+builder.Services.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);
 builder.Services.AddPWAUpdater();
 
 //builder.Services.AddOidcAuthentication(options =>

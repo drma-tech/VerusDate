@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazorise;
+using Microsoft.AspNetCore.Components;
 using System.Linq.Expressions;
 using VerusDate.Shared.Core;
 using VerusDate.Shared.Helper;
+using VerusDate.Web.Shared.modal;
 
 namespace VerusDate.Web.Shared.Field
 {
@@ -30,8 +32,7 @@ namespace VerusDate.Web.Shared.Field
 
         private string Description => For.GetCustomAttribute().Description;
 
-        private modal.ProfileDataHelp<TValue, TEnum> dataHelp;
-        private modal.ProfileDataSelect<TValue, TEnum> dataSelect;
+        [Inject] public IModalService ModalService { get; set; } = default!;
 
         [Parameter] public Func<EnumObject, object> Order { get; set; } = o => o.Value;
 
@@ -46,27 +47,38 @@ namespace VerusDate.Web.Shared.Field
             }
         }
 
-        protected void UpdateDataHelp(Expression<Func<TValue>> For)
+        protected Task UpdateDataHelp(Expression<Func<TValue>> For)
         {
-            //await ModalService.Show<ProfileDataHelp<TValue, TEnum>>(CustomAttributeHelper.GetCustomAttribute(For)?.Name,
-            //    x =>
-            //    {
-            //        x.Add(x => x.HasGroup, ShowGroup);
-            //    },
-            //    new ModalInstanceOptions()
-            //    {
-            //        Centered = true,
-            //        Size = ModalSize.Default,
-            //    });
-
-            dataHelp.ChangeContent(For);
-            dataHelp.ShowModal();
+            return ModalService.Show<ProfileDataHelp<TValue, TEnum>>(CustomAttributeHelper.GetCustomAttribute(For)?.Name,
+                x =>
+                {
+                    x.Add(x => x.HasGroup, ShowGroup);
+                },
+                new ModalInstanceOptions()
+                {
+                    UseModalStructure = true,
+                    Centered = true,
+                    Size = ModalSize.Default,
+                });
         }
 
-        protected void UpdateDataSelect(Expression<Func<TValue>> For)
+        protected Task UpdateDataSelect(Expression<Func<TValue>> For)
         {
-            dataSelect.ChangeContent(For);
-            dataSelect.ShowModal();
+            return ModalService.Show<ProfileDataSelect<TValue, TEnum>>("",
+                x =>
+                {
+                    x.Add(x => x.HasGroup, ShowGroup);
+                    x.Add(x => x.SelectedValues, SelectedValues);
+                    x.Add(x => x.SelectedValuesChanged, SelectedValuesChanged);
+                    x.Add(x => x.Order, Order);
+                    x.Add(x => x.Title, CustomAttributeHelper.GetCustomAttribute(For)?.Name);
+                },
+                new ModalInstanceOptions()
+                {
+                    UseModalStructure = false,
+                    Centered = true,
+                    Size = ModalSize.Default,
+                });
         }
     }
 }

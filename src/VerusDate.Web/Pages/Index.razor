@@ -2,7 +2,7 @@
 @attribute [Authorize]
 @inherits PageCore<Index>
 
-<Row Gutter="(8,0)">
+<Row HorizontalGutter="8" VerticalGutter="0">
     <Column ColumnSize="ColumnSize.Is6.OnDesktop.Is4.OnWidescreen.Is3.OnFullHD">
         <Alert Visible="true" Color="Color.Dark" Shadow="Shadow.Small"><AlertMessage>Seu Perfil (@profile?.NickName)</AlertMessage></Alert>
         <Carousel @bind-SelectedSlide="selectedImage" Autoplay="false" ShowControls="imageDataUriGallery.Count() > 1"
@@ -14,7 +14,7 @@
                 </CarouselSlide>
             }
         </Carousel>
-        <Row Gutter="(8,0)">
+        <Row HorizontalGutter="8" VerticalGutter="0">
             <Column ColumnSize="ColumnSize.Is6" Margin="Margin.Is2.FromBottom">
                 <Button Color="@(profile?.DtInsert == null ? Color.Danger : Color.Primary)" Outline="true" Block="true" Type="ButtonType.Link" To="/Profile/Data">
                     <Blazorise.Icon Name="FontAwesomeIcons.UserEdit"></Blazorise.Icon> Perfil
@@ -53,7 +53,7 @@
                         </CardHeader>
                         <CardBody>
                             <CustomVisibility Loading="SuggestionsLoading" NoData="!lstDestaques.Any()">
-                                <Row Gutter="(8,0)">
+                                <Row HorizontalGutter="8" VerticalGutter="0">
                                     @foreach (var item in lstDestaques)
                                     {
                                         <Column ColumnSize="ColumnSize.Is2.OnFullHD.Is3.OnWidescreen.Is6.OnDesktop.Is6.OnMobile" Margin="Margin.Is1.FromBottom">
@@ -101,7 +101,7 @@
                     <Card Margin="Margin.Is2.FromBottom">
                         <CardHeader>@Resources.CardHeader.ProfileIndexInteractions</CardHeader>
                         <CardBody>
-                            <Row Gutter="(8,0)">
+                            <Row HorizontalGutter="8" VerticalGutter="0">
                                 <Column ColumnSize="ColumnSize.Is6.OnWidescreen.Is4.OnFullHD" Margin="Margin.Is2.FromBottom">
                                     <Tooltip Text="ver caixa de mensagens" Multiline="true" Fade="true" Style="display: block;">
                                         <Button Color="Color.Primary" Type="ButtonType.Link" Block="true" To="/Profile/Interactions" Disabled="true">
@@ -136,7 +136,7 @@
                     <Alert Visible="true" Color="Color.Dark" Shadow="Shadow.Small"><AlertMessage>Seu Parceiro (@(view?.NickName ?? "..."))</AlertMessage></Alert>
 
                     <CustomVisibility Loading="ViewLoading" Invalid="view == null" CustomError="Perfil indisponível. Aguarde até que o perfil do seu parceiro(a) esteja completamente cadastrado.">
-                        <Row Gutter="(8,0)">
+                        <Row HorizontalGutter="8" VerticalGutter="0">
                             <Column ColumnSize="ColumnSize.IsFull.OnDesktop.Is4.OnFullHD">
                                 <Card Margin="Margin.Is2.FromBottom">
                                     <CardBody Padding="Padding.Is0">

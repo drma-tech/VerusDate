@@ -13,6 +13,7 @@ namespace VerusDate.Shared.Validation
             {
                 RuleFor(x => x.Modality)
                     .NotEmpty()
+                    .Must((value) => value == Enum.Modality.RelationshipAnalysis).WithMessage("Modalidade Matchmaker ainda não disponível")
                     .WithName(Resources.Model.ProfileBasicModel.Modality_Name);
 
                 RuleFor(x => x.NickName)

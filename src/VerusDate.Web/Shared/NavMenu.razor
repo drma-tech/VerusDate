@@ -48,7 +48,7 @@
         </BarStart>
     </BarMenu>
     <Div Style="bottom: 10px; position: absolute; width: 100%;" TextAlignment="TextAlignment.Center">
-        <Badge Color="Color.Primary" Pill="true">@BuildDateString</Badge>
+        <Badge Color="Color.Primary" Pill="true">@BuildDateString()</Badge>
     </Div>
 </Bar>
 
@@ -75,17 +75,37 @@
 
     protected async Task LoadData()
     {
-        if (ComponenteUtils.IsAuthenticated)
+        try
         {
-            profile = await Http.Profile_Get(SessionStorage);
-
-            if (profile != null)
+            if (ComponenteUtils.IsAuthenticated)
             {
-                MainPhoto = profile.GetMainPhoto();
+                profile = await Http.Profile_Get(SessionStorage);
+
+                if (profile != null)
+                {
+                    MainPhoto = profile.GetMainPhoto();
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
         }
     }
 
     //https://swharden.com/blog/2020-12-29-blazor-build-info/
-    private string BuildDateString => DateTime.Parse(Properties.Resources.BuildDate.ReplaceLineEndings("").Remove(Properties.Resources.BuildDate.ReplaceLineEndings("").Length - 3, 3)).ToString("yyyy.MM.dd");
+    private string BuildDateString()
+    {
+        try
+        {
+            return DateTime
+               .Parse(Properties.Resources.BuildDate.ReplaceLineEndings("").Remove(Properties.Resources.BuildDate.ReplaceLineEndings("").Length - 3, 3))
+               .ToString("yyyy.MM.dd");
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
+            return "Version Error";
+        }
+    }
 }

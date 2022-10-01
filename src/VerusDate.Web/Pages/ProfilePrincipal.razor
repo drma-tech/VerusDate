@@ -65,23 +65,30 @@
 
     protected override async Task LoadData()
     {
-        if (ComponenteUtils.IsAuthenticated)
+        try
         {
-            principal = await Http.Principal_Get(SessionStorage);
-
-            if (principal == null) principal = new();
-
-            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-
-            if (authState != null)
+            if (ComponenteUtils.IsAuthenticated)
             {
-                principal.UserId = authState.User.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value;
-                principal.IdentityProvider = authState.User.Identity?.AuthenticationType;
-                principal.UserDetails = authState.User.Identity?.Name;
-                principal.UserRoles = authState.User.Claims.Where(w => w.Type == ClaimTypes.Role)?.Select(s => s.Value).ToArray();
-            }
+                principal = await Http.Principal_Get(SessionStorage);
 
-            principal.Email = principal.UserDetails;
+                if (principal == null) principal = new();
+
+                var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+                if (authState != null)
+                {
+                    principal.UserId = authState.User.Claims.FirstOrDefault(w => w.Type == ClaimTypes.NameIdentifier)?.Value;
+                    principal.IdentityProvider = authState.User.Identity?.AuthenticationType;
+                    principal.UserDetails = authState.User.Identity?.Name;
+                    principal.UserRoles = authState.User.Claims.Where(w => w.Type == ClaimTypes.Role)?.Select(s => s.Value).ToArray();
+                }
+
+                principal.Email = principal.UserDetails;
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.ProcessException(Toast, Logger);
         }
     }
 

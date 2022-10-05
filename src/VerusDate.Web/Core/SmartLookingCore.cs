@@ -6,7 +6,7 @@ namespace VerusDate.Web.Core
 {
     public static class SmartLookingCore
     {
-        public static void PopulateFields(ProfileModel profile, ProfilePreferenceModel preference)
+        public static void PopulateFields(ProfileModel? profile, ProfilePreferenceModel? preference)
         {
             if (profile == null) throw new NotificationException("Preenchimento de cadastro do perfil não encontrado");
             preference ??= new ProfilePreferenceModel();

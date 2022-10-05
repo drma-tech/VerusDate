@@ -1,6 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using Blazored.SessionStorage;
-using Blazored.Toast.Services;
+using Blazorise;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
@@ -33,7 +33,7 @@ namespace VerusDate.Web.Core
         protected NavigationManager Navigation { get; set; } = default!;
 
         [Inject]
-        protected IToastService Toast { get; set; } = default!;
+        protected INotificationService Toast { get; set; } = default!;
 
         [Inject]
         protected AuthenticationStateProvider AuthenticationStateProvider { get; set; } = default!;
@@ -106,7 +106,7 @@ namespace VerusDate.Web.Core
 
         protected void FeatureUnavailable()
         {
-            Toast.ShowWarning("", "Recurso em desenvolvimento. Aguarde novidades...");
+            Toast.Warning("Recurso em desenvolvimento. Aguarde novidades...");
         }
     }
 }

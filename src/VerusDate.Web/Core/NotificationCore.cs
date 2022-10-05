@@ -1,11 +1,11 @@
-﻿using Blazored.Toast.Services;
+﻿using Blazorise;
 using VerusDate.Shared.Helper;
 
 namespace VerusDate.Web.Core
 {
     public static class NotificationCore
     {
-        public static async Task ProcessResponse(this HttpResponseMessage response, IToastService? toast = null, string? msgSuccess = null, string? msgInfo = null)
+        public static async Task ProcessResponse(this HttpResponseMessage response, INotificationService? toast = null, string? msgSuccess = null, string? msgInfo = null)
         {
             var msg = await response.Content.ReadAsStringAsync();
 
@@ -15,8 +15,8 @@ namespace VerusDate.Web.Core
             }
             else if ((short)response.StatusCode >= 200 && (short)response.StatusCode <= 299) //Successful
             {
-                if (!string.IsNullOrEmpty(msgSuccess)) toast?.ShowSuccess("", msgSuccess);
-                if (!string.IsNullOrEmpty(msgInfo)) toast?.ShowInfo("", msgInfo);
+                if (!string.IsNullOrEmpty(msgSuccess)) toast?.Success(msgSuccess);
+                if (!string.IsNullOrEmpty(msgInfo)) toast?.Info(msgInfo);
             }
             else if ((short)response.StatusCode >= 300 && (short)response.StatusCode <= 399) //Redirected
             {
@@ -32,17 +32,17 @@ namespace VerusDate.Web.Core
             }
         }
 
-        public static void ProcessException(this Exception ex, IToastService toast, ILogger logger)
+        public static void ProcessException(this Exception ex, INotificationService toast, ILogger logger)
         {
             if (ex is NotificationException)
             {
                 logger.LogWarning(ex, null);
-                toast.ShowWarning("", ex.Message);
+                toast.Warning(ex.Message);
             }
             else
             {
                 logger.LogError(ex, null);
-                toast.ShowError("", ex.Message);
+                toast.Error( ex.Message);
             }
         }
     }

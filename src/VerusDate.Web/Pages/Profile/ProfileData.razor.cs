@@ -47,7 +47,7 @@ namespace VerusDate.Web.Pages.Profile
 
                 if (position.Error != null)
                 {
-                    Toast.ShowWarning("", position.Error.Message);
+                    await Toast.Warning(position.Error.Message);
                 }
                 else if (position.Location != null)
                 {
@@ -79,7 +79,7 @@ namespace VerusDate.Web.Pages.Profile
                 }
                 else
                 {
-                    Toast.ShowWarning("", $"Não foi possível detectar um sistema GPS no seu dispositivo. Favor, tentar novamente ou liberar acesso ao GPS do seu dispositivo.");
+                    await Toast.Warning($"Não foi possível detectar um sistema GPS no seu dispositivo. Favor, tentar novamente ou liberar acesso ao GPS do seu dispositivo.");
                 }
             }
         }
@@ -580,16 +580,16 @@ namespace VerusDate.Web.Pages.Profile
             }
         }
 
-        private void HandleInvalidSubmit(EditContext context)
+        private async Task HandleInvalidSubmit(EditContext context)
         {
             if (profile == null) throw new InvalidOperationException("profile is null");
 
             var errors = context.GetValidationMessages().ToList();
 
             if (errors != null && errors.Count == 1)
-                Toast.ShowWarning("", errors.First());
+                await Toast.Warning(errors.First());
             else
-                Toast.ShowWarning("", "Foram detectados erros de validação");
+                await Toast.Warning("Foram detectados erros de validação");
         }
 
         private void AddNewPartner()
@@ -635,12 +635,12 @@ namespace VerusDate.Web.Pages.Profile
                     }
                     else
                     {
-                        Toast.ShowWarning("", "Não foi possível identificar o convite");
+                        await Toast.Warning("Não foi possível identificar o convite");
                     }
                 }
                 else
                 {
-                    Toast.ShowWarning("", "Favor, preencher seu perfil corretamente");
+                    await Toast.Warning("Favor, preencher seu perfil corretamente");
                 }
             }
             catch (Exception ex)

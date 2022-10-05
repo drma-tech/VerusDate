@@ -107,7 +107,7 @@
                 else
                 {
                     imageDataUri = null;
-                    Toast.ShowError("", "Foto inválida, favor tentar novamente");
+                    await Toast.Error("Foto inválida, favor tentar novamente");
                 }
             }
         }
@@ -140,7 +140,7 @@
                 else
                 {
                     imageDataUriGallery = Array.Empty<string>();
-                    Toast.ShowError("", "Foto inválida, favor tentar novamente");
+                    await Toast.Error("Foto inválida, favor tentar novamente");
                 }
             }
 

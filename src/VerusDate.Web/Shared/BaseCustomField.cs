@@ -23,10 +23,5 @@ namespace VerusDate.Web.Shared
         [Parameter] public Expression<Func<TValue>> For { get; set; }
 
         public string Label => " " + For.GetCustomAttribute().Name;
-
-        protected void PrivateData()
-        {
-            Toast.ShowWarning("", "Esta informação não será compartilhada no seu perfil e em nenhum tipo de busca dentro da plataforma");
-        }
     }
 }

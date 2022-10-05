@@ -177,7 +177,7 @@
 
             if (view == null)
             {
-                Toast.ShowError("", "Perfil não encontrado. Favor, tentar novamente.");
+                await Toast.Error("Perfil não encontrado. Favor, tentar novamente.");
             }
             else
             {
@@ -192,7 +192,7 @@
         }
         catch (Exception ex)
         {
-            Toast.ShowError("", ex.Message);
+            await Toast.Error(ex.Message);
         }
     }
 

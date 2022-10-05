@@ -1,4 +1,4 @@
-﻿using Blazored.Toast.Services;
+﻿using Blazorise;
 using VerusDate.Shared.Model;
 using VerusDate.Web.Core;
 
@@ -25,14 +25,14 @@ namespace VerusDate.Web.Api
             return await http.GetList<TicketVoteModel>(SupportEndpoint.GetMyVotes);
         }
 
-        public static async Task Ticket_Insert(this HttpClient http, TicketModel obj, IToastService toast)
+        public static async Task Ticket_Insert(this HttpClient http, TicketModel obj, INotificationService toast)
         {
             var response = await http.Post(SupportEndpoint.Insert, obj);
 
             await response.ProcessResponse(toast, "Salvo com sucesso");
         }
 
-        public static async Task Ticket_Vote(this HttpClient http, TicketVoteModel obj, IToastService toast)
+        public static async Task Ticket_Vote(this HttpClient http, TicketVoteModel obj, INotificationService toast)
         {
             var response = await http.Post(SupportEndpoint.Vote, obj);
 

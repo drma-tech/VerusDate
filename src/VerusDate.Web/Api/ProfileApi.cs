@@ -1,5 +1,5 @@
 ﻿using Blazored.SessionStorage;
-using Blazored.Toast.Services;
+using Blazorise;
 using VerusDate.Shared.Model;
 using VerusDate.Shared.ModelQuery;
 using VerusDate.Web.Core;
@@ -39,21 +39,21 @@ namespace VerusDate.Web.Api
             return await http.GetList<ProfileSearch>(ProfileEndpoint.ListSearch, storage);
         }
 
-        public static async Task Profile_Add(this HttpClient http, ProfileModel obj, ISyncSessionStorageService? storage, IToastService? toast)
+        public static async Task Profile_Add(this HttpClient http, ProfileModel obj, ISyncSessionStorageService? storage, INotificationService? toast)
         {
             var response = await http.Post(ProfileEndpoint.Add, obj, storage, ProfileEndpoint.Get);
 
             await response.ProcessResponse(toast, "Perfil criado com sucesso");
         }
 
-        public static async Task Profile_Update(this HttpClient http, ProfileModel obj, ISyncSessionStorageService? storage, IToastService? toast = null)
+        public static async Task Profile_Update(this HttpClient http, ProfileModel obj, ISyncSessionStorageService? storage, INotificationService? toast = null)
         {
             var response = await http.Put(ProfileEndpoint.Update, obj, storage, ProfileEndpoint.Get);
 
             await response.ProcessResponse(toast, "Perfil atualizado com sucesso");
         }
 
-        public static async Task Profile_UpdateLooking(this HttpClient http, ProfileModel? obj, ProfilePreferenceModel? preference, ISyncSessionStorageService? storage, IToastService? toast)
+        public static async Task Profile_UpdateLooking(this HttpClient http, ProfileModel? obj, ProfilePreferenceModel? preference, ISyncSessionStorageService? storage, INotificationService? toast)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
             if (preference == null) throw new ArgumentNullException(nameof(preference));

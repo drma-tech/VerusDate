@@ -79,14 +79,14 @@
         }
     }
 
-    private void ClearCache()
+    private async Task ClearCache()
     {
         SessionStorage.Clear();
 
-        Toast.ShowSuccess("", "Operação efetuada com sucesso!");
+        await Toast.Success("Operação efetuada com sucesso!");
     }
 
-    private void ResetInteractions()
+    private async Task ResetInteractions()
     {
         //show question: Desfaz todas as interações feitas com outros usuários (isso não afeta seus dados pessoais)
 
@@ -94,7 +94,7 @@
 
         //deletar dados
 
-        Toast.ShowSuccess("", "Operação efetuada com sucesso!");
+        await Toast.Success("Operação efetuada com sucesso!");
     }
 
     private void DeleteAccount(string provider)

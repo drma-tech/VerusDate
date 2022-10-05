@@ -1,4 +1,4 @@
-﻿using Blazored.Toast.Services;
+﻿using Blazorise;
 using VerusDate.Shared.Model;
 using VerusDate.Web.Core;
 
@@ -19,14 +19,14 @@ namespace VerusDate.Web.Api
             return await http.Get<InviteModel>(InviteEndpoint.Get(email));
         }
 
-        public static async Task Invite_Add(this HttpClient http, InviteModel obj, IToastService? toast)
+        public static async Task Invite_Add(this HttpClient http, InviteModel obj, INotificationService? toast)
         {
             var response = await http.Post(InviteEndpoint.Add, obj);
 
             await response.ProcessResponse(toast, "Convite criado com sucesso");
         }
 
-        public static async Task Invite_Update(this HttpClient http, InviteModel obj, IToastService? toast)
+        public static async Task Invite_Update(this HttpClient http, InviteModel obj, INotificationService? toast)
         {
             var response = await http.Put(InviteEndpoint.Update, obj);
 

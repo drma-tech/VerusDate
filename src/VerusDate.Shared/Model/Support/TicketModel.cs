@@ -1,6 +1,5 @@
 ﻿using System;
 using VerusDate.Shared.Core;
-using VerusDate.Shared.Enum;
 
 namespace VerusDate.Shared.Model
 {
@@ -12,11 +11,14 @@ namespace VerusDate.Shared.Model
 
         public string IdUserOwner { get; set; }
 
+        [Custom(Name = "Título", Prompt = "Uma frase que resume seu feedback")]
+        public string Title { get; set; }
+
+        [Custom(Name = "Descrição", Prompt = "Descreva o mais detalhado possível para que possamos entender melhor a situação")]
+        public string Description { get; set; }
+
         [Custom(Name = "Tipo")]
         public TicketType TicketType { get; set; }
-
-        [Custom(Name = "Descrição", Prompt = "Descreva o mais detalhado possível para que possamos entender melhor o problema")]
-        public string Description { get; set; }
 
         [Custom(Name = "Status")]
         public TicketStatus TicketStatus { get; set; }
@@ -45,5 +47,35 @@ namespace VerusDate.Shared.Model
 
             DtUpdate = DateTime.UtcNow;
         }
+    }
+
+    public enum TicketType
+    {
+        [Custom(Name = "Erro")]
+        BugReport = 1,
+
+        [Custom(Name = "Idéia")]
+        Improvement = 2
+    }
+
+    public enum TicketStatus
+    {
+        [Custom(Name = "Novo")]
+        New = 1,
+
+        [Custom(Name = "Em Análise")]
+        UnderConsideration = 2,
+
+        [Custom(Name = "Planejado")]
+        Planned = 3,
+
+        [Custom(Name = "Em progresso")]
+        Progress = 4,
+
+        [Custom(Name = "Finalizado")]
+        Done = 5,
+
+        [Custom(Name = "Recusado")]
+        Declined = 6
     }
 }

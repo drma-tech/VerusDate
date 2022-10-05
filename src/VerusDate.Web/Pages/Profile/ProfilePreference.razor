@@ -181,7 +181,7 @@
 
         if (profile == null)
         {
-            Toast.ShowWarning("", "Favor, atualizar primeiro seu perfil");
+            await Toast.Warning("Favor, atualizar primeiro seu perfil");
             return;
         }
 
@@ -191,7 +191,7 @@
         {
             preference = new();
 
-            PopulateFields();
+            await PopulateFields();
         }
 
         ProfileLoading = false;
@@ -211,13 +211,13 @@
         }
     }
 
-    private void PopulateFields()
+    private async Task PopulateFields()
     {
         try
         {
             SmartLookingCore.PopulateFields(profile, preference);
 
-            Toast.ShowWarning("Este processo está em constante evolução. Caso queira informar um erro ou melhoria, favor abrir um tiket no nosso suporte.", "Campos populados automaticamente");
+            await Toast.Warning("Este processo está em constante evolução. Caso queira informar um erro ou melhoria, favor abrir um tiket no nosso suporte.", "Campos populados automaticamente");
         }
         catch (Exception ex)
         {
@@ -235,7 +235,7 @@
 
     private Tabs SelectedTab = Tabs.Basic;
 
-    private async Task ChangeOrder(Tabs tab)
+    private void ChangeOrder(Tabs tab)
     {
         SelectedTab = tab;
     }

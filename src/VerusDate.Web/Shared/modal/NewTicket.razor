@@ -1,41 +1,66 @@
 ﻿@inherits ComponenteCore<NewTicket>
 @inject HttpClient Http
 
-<Modal @ref="modal">
-    <ModalContent Centered="true">
-        <ModalHeader>
-            <ModalTitle>Novo Ticket</ModalTitle>
-            <CloseButton />
-        </ModalHeader>
-        <ModalBody>
-            <EditForm Model="@Ticket" OnValidSubmit="SubmitForm">
-                <FluentValidationValidator />
-                <div class="form-group">
-                    <MemoEdit @bind-Text="@Ticket.Description" Rows="7" MaxLength="512" Placeholder="@CustomAttributeHelper.GetCustomAttribute(()=>Ticket.Description).Prompt"></MemoEdit>
-                    <ValidationMessage For="@(()=>Ticket.Description)"></ValidationMessage>
-                </div>
-                <Button Type="ButtonType.Submit" Color="Color.Primary">Salvar</Button>
-                <Button Clicked="@modal.Hide" Color="Color.Secondary">Cancelar</Button>
-            </EditForm>
-        </ModalBody>
-    </ModalContent>
-</Modal>
+<ModalHeader>
+    <ModalTitle>Novo Ticket</ModalTitle>
+    <CloseButton />
+</ModalHeader>
+<ModalBody>
+    <EditForm Model="@Ticket" OnValidSubmit="SubmitForm">
+        <FluentValidationValidator />
+        <div class="form-group">
+            <Select TValue="TicketType" @bind-SelectedValue="@TicketType">
+                @foreach (var item in EnumHelper.GetArray<TicketType>())
+                {
+                    <SelectItem Value="@item">@item.GetName()</SelectItem>
+                }
+            </Select>
+        </div>
+        <div class="form-group">
+            <TextEdit @bind-Text="@Ticket.Title" MaxLength="100" Placeholder="@CustomAttributeHelper.GetCustomAttribute(()=>Ticket.Title).Prompt"></TextEdit>
+            <ValidationMessage For="@(()=>Ticket.Title)"></ValidationMessage>
+        </div>
+        <div class="form-group">
+            <MemoEdit @bind-Text="@Ticket.Description" Rows="7" MaxLength="512" Placeholder="@CustomAttributeHelper.GetCustomAttribute(()=>Ticket.Description).Prompt"></MemoEdit>
+            <ValidationMessage For="@(()=>Ticket.Description)"></ValidationMessage>
+        </div>
+        <Button Type="ButtonType.Submit" Color="Color.Primary">Salvar</Button>
+        <Button Clicked="@ModalService.Hide" Color="Color.Secondary">Cancelar</Button>
+        <Button Clicked="@ImportLastError" Color="Color.Danger" Float="Float.End" Disabled="(TicketType == TicketType.Improvement)">Importar último erro</Button>
+    </EditForm>
+</ModalBody>
 
 @code {
-    private Modal modal;
-    private TicketType TicketType;
+    [Parameter] public TicketType TicketType { get; set; } = TicketType.BugReport;
 
     public TicketModel Ticket { get; set; } = new();
     [Parameter] public EventCallback<bool> Inserted { get; set; }
 
-    public void ShowModal(TicketType TicketType)
-    {
-        this.TicketType = TicketType;
-        modal.Show();
+    [Inject] public IModalService ModalService { get; set; } = default!;
 
-        if (TicketType == TicketType.Bug)
+    private void ImportLastError()
+    {
+        if (TicketType == TicketType.BugReport && SessionStorage.ContainKey("LogErrosVD"))
         {
-            Ticket.Description = System.Text.Json.JsonSerializer.Serialize(SessionStorage.GetItem<List<LogContainer>>("LogErrosVD"));
+            var list = SessionStorage.GetItem<List<LogContainer>>("LogErrosVD");
+            var log = list.LastOrDefault();
+
+            if (log != null)
+            {
+                Ticket.Title = log.Message;
+                Ticket.Description = System.Text.Json.JsonSerializer.Serialize(log);
+
+                list.Remove(log);
+                SessionStorage.SetItem("LogErrosVD", list);
+            }
+            else
+            {
+                Toast.Warning("No errors found");
+            }
+        }
+        else
+        {
+            Toast.Warning("No errors found");
         }
     }
 
@@ -44,13 +69,13 @@
         try
         {
             Ticket.TicketType = TicketType;
-            Ticket.TicketStatus = TicketStatus.Published;
+            Ticket.TicketStatus = TicketStatus.New;
             Ticket.SetIds(ComponenteUtils.IdUser);
 
             await Http.Ticket_Insert(Ticket, Toast);
 
             Ticket = new();
-            await modal.Hide();
+            await ModalService.Hide();
 
             await Inserted.InvokeAsync();
         }

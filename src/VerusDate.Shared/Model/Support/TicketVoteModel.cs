@@ -12,6 +12,8 @@ namespace VerusDate.Shared.Model
 
         public string IdVotedUser { get; set; }
 
+        public VoteType VoteType { get; set; }
+
         public override void SetIds(string IdLoggedUser)
         {
             IdVotedUser = IdLoggedUser;
@@ -21,5 +23,11 @@ namespace VerusDate.Shared.Model
         {
             SetPartitionKey(IdTicket);
         }
+    }
+
+    public enum VoteType
+    {
+        MinusOne = -1,
+        PlusOne = 1
     }
 }

@@ -1,7 +1,10 @@
 ﻿using MediatR;
+using Microsoft.Azure.Cosmos;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using VerusDate.Api.Core.Interfaces;
+using VerusDate.Shared.Core;
 using VerusDate.Shared.Model;
 
 namespace VerusDate.Api.Mediator.Command.Support
@@ -20,17 +23,12 @@ namespace VerusDate.Api.Mediator.Command.Support
 
         public async Task<TicketVoteModel> Handle(TicketVoteCommand request, CancellationToken cancellationToken)
         {
-            //var query = new StringBuilder("UPDATE Ticket SET TotalVotes = TotalVotes + 1 WHERE Id = @IdTicket; INSERT INTO TicketVote (IdTicket,IdUser) VALUES (@IdTicket,@Id);");
-            //TODO: ATUALIZAR TOTAL DE TICKET POR PERIODO
+            if (request.VoteType == VoteType.PlusOne)
+                await _repo.PatchItem<TicketModel>(nameof(CosmosType.Ticket) + ":" + request.Key, request.Key, new List<PatchOperation> { PatchOperation.Increment("/totalVotes", 1) }, cancellationToken);
+            else if (request.VoteType == VoteType.MinusOne)
+                await _repo.PatchItem<TicketModel>(nameof(CosmosType.Ticket) + ":" + request.Key, request.Key, new List<PatchOperation> { PatchOperation.Increment("/totalVotes", -1) }, cancellationToken);
 
             request.SetKey(request.Key);
-
-            //var obj = await _repo.Get<ProfileModel>(request.Id, request.Key, cancellationToken);
-
-            //obj.Gamification.AddXP(1);
-
-            //await _repo.Update(obj, cancellationToken);
-
             return await _repo.Add(request, cancellationToken);
         }
     }

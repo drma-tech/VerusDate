@@ -41,9 +41,12 @@ namespace VerusDate.Shared.Model
             IdUserOwner = IdLoggedUser;
         }
 
-        public void Vote()
+        public void Vote(VoteType voteType)
         {
-            TotalVotes++;
+            if (voteType == VoteType.PlusOne)
+                TotalVotes++;
+            else
+                TotalVotes--;
 
             DtUpdate = DateTime.UtcNow;
         }

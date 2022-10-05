@@ -17,7 +17,8 @@ namespace VerusDate.Api.Core
         {
             if (ex is CosmosException cex)
             {
-                var result = JsonSerializer.Deserialize<CosmosExceptionStructure>(cex.ResponseBody);
+                //var result = JsonSerializer.Deserialize<CosmosExceptionStructure>(cex.ResponseBody);
+                var result = JsonSerializer.Deserialize<CosmosExceptionStructure>("{" + cex.ResponseBody.Replace("Errors", "\"Errors\"") + "}", options: null);
 
                 return result.Errors.FirstOrDefault();
             }

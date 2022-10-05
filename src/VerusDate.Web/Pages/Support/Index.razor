@@ -85,11 +85,11 @@
             <Row>
                 <Column ColumnSize="ColumnSize.IsAuto">
                     <Div Style="width: 50px; height: 100px;" TextAlignment="TextAlignment.Center" TextWeight="TextWeight.Bold">
-                        <Button Size=" Size.ExtraSmall" Margin="Margin.Is0" Color="Color.Primary" Block="true" Outline="true" Clicked="()=>Vote(item.Id)" Disabled="false">
+                        <Button Size=" Size.ExtraSmall" Margin="Margin.Is0" Color="Color.Primary" Block="true" Outline="true" Clicked="()=>Vote(item.Key, VoteType.PlusOne)" Disabled="anyVote(item.Key)">
                             <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleUp"></Blazorise.Icon>
                         </Button>
                         @item.TotalVotes
-                        <Button Size="Size.ExtraSmall" Margin="Margin.Is0" Color="Color.Primary" Block="true" Outline="true" Clicked="()=>Vote(item.Id)" Disabled="false">
+                        <Button Size="Size.ExtraSmall" Margin="Margin.Is0" Color="Color.Primary" Block="true" Outline="true" Clicked="()=>Vote(item.Key, VoteType.MinusOne)" Disabled="anyVote(item.Key)">
                             <Blazorise.Icon Name="Blazorise.Icons.FontAwesome.FontAwesomeIcons.AngleDown"></Blazorise.Icon>
                         </Button>
                     </Div>
@@ -258,7 +258,7 @@ else if (SelectedTab == Tabs.Announcements)
                     });
     }
 
-    private async Task Vote(string IdTicket)
+    private async Task Vote(string IdTicket, VoteType voteType)
     {
         try
         {
@@ -270,9 +270,11 @@ else if (SelectedTab == Tabs.Announcements)
             {
                 var vote = new TicketVoteModel();
                 vote.SetKey(IdTicket);
+                vote.VoteType = voteType;
+                vote.IdVotedUser = ComponenteUtils.IdUser;
 
                 await Http.Ticket_Vote(vote, Toast);
-                tickets.Single(s => s.Id == IdTicket).Vote();
+                tickets.Single(s => s.Key == IdTicket).Vote(voteType);
 
                 myVotes.Add(vote);
             }
